@@ -47,3 +47,25 @@ int ConnectionToNetwork(char* name, char* port)
     printf("Connection successfull!\n");
     return sockfd;
 }
+
+
+int GetClientData(int sockfd, struct Clientdata *clientdata, size_t clientdatasize, size_t start)
+{
+    printf("Waiting for list...\n");
+    ssize_t nb_read;
+
+    char buff[BUF_SIZE];
+
+    while ((nb_read = read(sockfd, &buff, BUF_SIZE)) != 0)
+    {
+        if (nb_read == -1)
+        {
+            printf("Error to read message.\n");
+            break;
+        }
+
+        write(STDOUT_FILENO, &buff, nb_read);
+    }
+    printf("Connection closed\n");
+    return 0;
+}

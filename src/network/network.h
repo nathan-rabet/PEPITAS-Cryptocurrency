@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+#include <sys/un.h>
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netdb.h>
@@ -16,7 +17,24 @@
 #define STATIC_PORT "29562"
 #define BUF_SIZE 256
 
+struct Clientdata
+{
+    int family; // Use AF_*
+    char* name;
+    char len_name;
+    char* port;
+    char len_port;
+};
 
-int ConnectionToNetwork(char* name, char* port);
+
+/*
+Try to connect at the name address and port.
+Return socket FD if successful -1 if not
+*/
+int ConnectionToNetwork(char *name, char *port);
+
+int GetClientData(int sockfd, struct Clientdata *clientdata, size_t clientdatasize, size_t start);
+
+int InitServer(char* name, char* port);
 
 #endif

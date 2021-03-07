@@ -2,7 +2,8 @@ CC = gcc
 CFLAGS = -Wall -Wextra -g
 
 OBJ = main_test.o
-OBJ += ../src/network/network.o
+OBJ += ../src/network/client.o
+OBJ += ../src/network/server.o
 
 all: main_test
 
@@ -12,4 +13,4 @@ main_test: ${OBJ}
 .PHONY: clean
 
 clean:
-	${RM} main_test main_test.o malloc.o
+	${RM} main_test ${OBJ}
