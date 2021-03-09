@@ -1,7 +1,7 @@
 #include "network.h"
 
 
-int InitServer(char* name, char* port)
+int init_server(char* name)
 {
     // Try to connect to the peer-to-peer network
 
@@ -22,13 +22,13 @@ int InitServer(char* name, char* port)
     hints.ai_next = NULL;
 
     // Get info
-    addrinfo_error = getaddrinfo(name, port, &hints, &result);
+    addrinfo_error = getaddrinfo(name, SERVER_PORT, &hints, &result);
     
     // Error management
     if (addrinfo_error != 0)
     {
         errx(EXIT_FAILURE, "Fail getting address fo %s on port %s: %s", 
-        name, port, gai_strerror(addrinfo_error));
+        name, SERVER_PORT, gai_strerror(addrinfo_error));
     }
 
     // result points to a linked list
@@ -63,12 +63,9 @@ int InitServer(char* name, char* port)
         }
 
         
-        struct Clientdata cl;
+        ClientData cl;
         cl.family = AF_INET6;
-        cl.len_name = 6;
-        cl.len_port = 6;
-        cl.name = "salam";
-        cl.port = "localhost";
+        cl.hostname = "salam";
         write(clientfd, &cl, sizeof(cl));
         
         close(clientfd);

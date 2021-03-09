@@ -14,27 +14,40 @@
 
 #define USER_LIST_SIZE 100
 #define STATIC_DNS "localhost"
-#define STATIC_PORT "29562"
+#define SERVER_PORT "12345"
+#define CLIENT_PORT "54321"
 #define BUF_SIZE 256
 
-struct Clientdata
+typedef struct 
 {
-    int family; // Use AF_*
-    char* name;
-    char len_name;
-    char* port;
-    char len_port;
-};
+    int family; // Use AF_* for IPv4, IPv6 or other addrinfo fields
+    char* hostname; // The adress of the client
+} ClientData;
+
+/**
+ * @brief Try to connect to the peer-to-peer network via a node in client_list
+ * 
+ * @param client_list List of potential client to connect with
+ * @return socket FD or -1 if error
+ */
+int connect_to_network(ClientData client_list[]);
 
 
-/*
-Try to connect at the name address and port.
-Return socket FD if successful -1 if not
-*/
-int ConnectionToNetwork(char *name, char *port);
+/**
+ * @brief Get the client data object from a socket
+ * 
+ * @param sockfd The socket FD
+ * @return ClientData 
+ */
+ClientData get_client_data(int sockfd);
 
-int GetClientData(int sockfd, struct Clientdata *clientdata, size_t clientdatasize, size_t start);
-
-int InitServer(char* name, char* port);
+/**
+ * @brief Launch a server instance, 
+ * connected to the peer-to-peer network 'hostname'
+ * 
+ * @param hostname
+ * @return int 
+ */
+int init_server(char* hostname);
 
 #endif
