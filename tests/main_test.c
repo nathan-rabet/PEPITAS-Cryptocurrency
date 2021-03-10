@@ -5,12 +5,12 @@ int client()
 {
     int sockfd;
 
-    sockfd = connect_to_network(STATIC_DNS);
+    ClientData cl;
+    sockfd = connect_to_network(&cl,1);
     if (sockfd == -1)
     {
         // You are the first node to the peer-to-peer network
     }
-    ClientData cl;
     get_client_data(sockfd);
 
     return 0;
@@ -31,6 +31,6 @@ int main()
     {
         /* code */
     }
-    
+
     return 0;
 }

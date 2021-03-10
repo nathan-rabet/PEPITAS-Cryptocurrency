@@ -12,42 +12,47 @@
 #include <err.h>
 #include <string.h>
 
-#define USER_LIST_SIZE 100
+#define USER_LIST_SIZE 64
 #define STATIC_DNS "localhost"
 #define SERVER_PORT "12345"
 #define CLIENT_PORT "54321"
 #define BUF_SIZE 256
 
-typedef struct 
+typedef struct Client
 {
-    int family; // Use AF_* for IPv4, IPv6 or other addrinfo fields
-    char* hostname; // The adress of the client
-} ClientData;
+    Neighbours *neighbours; // Neighbours list
+} Client;
+
+static Client client = {0};
+
+typedef struct Neighbours
+{
+    int family;     // Use AF_* for IPv4, IPv6 or other addrinfo fields
+    char *hostname; // The adress of the neighbours
+} Neighbours;
 
 /**
- * @brief Try to connect to the peer-to-peer network via a node in client_list
+ * @brief Try to connect to the peer-to-peer network 
+ * via a node in the Client structure
  * 
- * @param client_list List of potential client to connect with
  * @return socket FD or -1 if error
  */
-int connect_to_network(ClientData client_list[]);
-
+int connect_to_network();
 
 /**
- * @brief Get the client data object from a socket
+ * @brief Set the client data object from a socket 
+ * in the client->neighbours list
  * 
  * @param sockfd The socket FD
- * @return ClientData 
  */
-ClientData get_client_data(int sockfd);
+void get_client_data(int sockfd);
 
 /**
- * @brief Launch a server instance, 
+ * @brief Launch a server instance,
  * connected to the peer-to-peer network 'hostname'
  * 
- * @param hostname
- * @return int 
+ * @return 0 if sucess, -1 if not
  */
-int init_server(char* hostname);
+int init_server();
 
 #endif

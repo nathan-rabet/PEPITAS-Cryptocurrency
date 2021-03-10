@@ -1,53 +1,58 @@
 #include "network.h"
 
-int connection_to_network(char *name, char *port)
+int connect_to_network()
 {
-    struct addrinfo hints;   //
-    struct addrinfo *result; //
-    struct addrinfo *rp;     //
-    int addrinfo_error;
-    int sockfd; // File Descriptor of the socket
-
+    struct addrinfo hints;
     memset(&hints, 0, sizeof(struct addrinfo));
+    
     hints.ai_family = AF_INET;       //IPV4 only
     hints.ai_socktype = SOCK_STREAM; //TCP
 
-    // Get info
-    addrinfo_error = getaddrinfo(name, port, &hints, &result);
-
-    // Error management
-    if (addrinfo_error != 0)
+    // Foreach potential client `i` in the client_list
+    for (size_t i = 0; i < len; i++)
     {
-        errx(EXIT_FAILURE, "Fail getting address fo %s on port %s: %s",
-             name, port, gai_strerror(addrinfo_error));
-    }
+        struct addrinfo *result;
+        int addrinfo_ret;
 
-    // result points to a linked list
-    // try yo connect for each result
-    for (rp = result; rp != NULL; rp = rp->ai_next)
-    {
-        sockfd = socket(rp->ai_family, rp->ai_socktype, rp->ai_protocol);
-        if (sockfd == -1)
-            continue; // The socket is not created
-        // Try to connect
-        if (connect(sockfd, rp->ai_addr, rp->ai_addrlen) != -1)
-            break;
-        // Fail to connect
-        close(sockfd);
-    }
+        ClientData client = client_list[i];
 
-    freeaddrinfo(result);
+        // Get adress information
+        addrinfo_ret = getaddrinfo(client.hostname, CLIENT_PORT, &hints, &result);
 
-    if (rp == NULL)
-    {
-        printf("Connection failed to %s on port %s\n", name, port);
-        return -1;
+        // If adress information fetching failed
+        if (addrinfo_ret != 0)
+        {
+            errx(EXIT_FAILURE, "Fail getting address for %s on port %s: %s",
+                 client.hostname, CLIENT_PORT, gai_strerror(addrinfo_ret));
+        }
+
+        // try to connect for each result
+
+        int sockfd;
+        struct addrinfo *rp; // result points to a linked list
+        for (rp = result; rp != NULL; rp = rp->ai_next)
+        {
+            sockfd = socket(rp->ai_family, rp->ai_socktype, rp->ai_protocol);
+            if (sockfd == -1)
+                continue; // The socket is not created
+            // Try to connect
+            if (connect(sockfd, rp->ai_addr, rp->ai_addrlen) != -1)
+                break;
+            // Fail to connect
+            close(sockfd);
+        }
+
+        freeaddrinfo(result);
+
+        if (rp != NULL)
+        {
+            printf("Connection successfull!\n");
+            return sockfd;
+        }
     }
-    printf("Connection successfull!\n");
-    return sockfd;
 }
 
-ClientData get_client_data(int sockfd)
+void get_client_data(int sockfd)
 {
     printf("Waiting for list...\n");
     ssize_t nb_read;
