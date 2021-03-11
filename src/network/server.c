@@ -63,7 +63,7 @@ int init_server()
             break;
         }
 
-        ClientData cl;
+        Neighbour cl;
         cl.family = AF_INET6;
         cl.hostname = "salam";
         write(clientfd, &cl, sizeof(cl));

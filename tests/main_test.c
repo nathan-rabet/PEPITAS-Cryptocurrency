@@ -1,12 +1,12 @@
 #include <assert.h>
 #include "../src/network/network.h"
 
-int client()
+int network_test()
 {
     int sockfd;
 
-    ClientData cl;
-    sockfd = connect_to_network(&cl,1);
+    set_neighbours();
+    sockfd = connect_to_network();
     if (sockfd == -1)
     {
         // You are the first node to the peer-to-peer network
@@ -24,7 +24,7 @@ int main()
         errx(EXIT_FAILURE, "Counld not fork!");
     if (fd != 0)
     {
-        im_server();
+        network_test();
     }
     //return Client();
     while (1)

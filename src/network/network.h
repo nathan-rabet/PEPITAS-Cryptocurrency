@@ -12,24 +12,33 @@
 #include <err.h>
 #include <string.h>
 
-#define USER_LIST_SIZE 64
+#define MAX_NEIGHBOURS_NB 64
 #define STATIC_DNS "localhost"
 #define SERVER_PORT "12345"
 #define CLIENT_PORT "54321"
 #define BUF_SIZE 256
 
+typedef struct Neighbour
+{
+    int family;     // Use AF_* for IPv4, IPv6 or other addrinfo fields
+    char *hostname; // The adress of the neighbours
+} Neighbour;
+
 typedef struct Client
 {
-    Neighbours *neighbours; // Neighbours list
+    Neighbour *neighbours; // Neighbours list
 } Client;
 
 static Client client = {0};
 
-typedef struct Neighbours
-{
-    int family;     // Use AF_* for IPv4, IPv6 or other addrinfo fields
-    char *hostname; // The adress of the neighbours
-} Neighbours;
+
+
+/**
+ * @brief Sets some neighbours in the client.neightbours section
+ * 
+ * @return 0 if sucess, -1 if not 
+ */
+int set_neighbours();
 
 /**
  * @brief Try to connect to the peer-to-peer network 
