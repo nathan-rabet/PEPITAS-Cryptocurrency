@@ -14,14 +14,14 @@
 
 #define MAX_NEIGHBOURS_NB 64
 #define STATIC_DNS "localhost"
-#define SERVER_PORT "12345"
-#define CLIENT_PORT "54321"
+#define STATIC_PORT "12345"
 #define BUF_SIZE 256
+
 
 typedef struct Neighbour
 {
     int family;     // Use AF_* for IPv4, IPv6 or other addrinfo fields
-    char *hostname; // The adress of the neighbours
+    char *hostname; // The adress of the neighbours; NULL if free
 } Neighbour;
 
 typedef struct Client
@@ -31,7 +31,11 @@ typedef struct Client
 
 static Client client = {0};
 
-
+typedef struct Connection_state
+{
+    char is_connected;
+    int sockfd;
+} Connection_state;
 
 /**
  * @brief Sets some neighbours in the client.neightbours section
@@ -46,7 +50,7 @@ int set_neighbours();
  * 
  * @return socket FD or -1 if error
  */
-int connect_to_network();
+int connect_to_network(int client_to_connect_id);
 
 /**
  * @brief Set the client data object from a socket 

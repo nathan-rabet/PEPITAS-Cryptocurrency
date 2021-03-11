@@ -21,13 +21,13 @@ int init_server()
     hints.ai_next = NULL;
 
     // Get info
-    addrinfo_error = getaddrinfo(name, SERVER_PORT, &hints, &result);
+    addrinfo_error = getaddrinfo(NULL, STATIC_PORT, &hints, &result);
 
     // Error management
     if (addrinfo_error != 0)
     {
-        errx(EXIT_FAILURE, "Fail getting address fo %s on port %s: %s",
-             name, SERVER_PORT, gai_strerror(addrinfo_error));
+        errx(EXIT_FAILURE, "Fail getting address on port %s: %s",
+            STATIC_PORT, gai_strerror(addrinfo_error));
     }
 
     // result points to a linked list
@@ -38,12 +38,12 @@ int init_server()
         if (sockfd == -1)
             continue; // The socket is not created
         // Try to connect
-        if (bind(sockfd, rp->ai_addr, rp->ai_addrlen) == 0)
+        if (bind(sockfd, rp->ai_addr, rp->ai_addrlen) == -1)
         {
-            // Success
+            close(sockfd);
             break;
         }
-        close(sockfd);
+        break;
     }
 
     if (rp == NULL)
@@ -63,10 +63,7 @@ int init_server()
             break;
         }
 
-        Neighbour cl;
-        cl.family = AF_INET6;
-        cl.hostname = "salam";
-        write(clientfd, &cl, sizeof(cl));
+        write(clientfd, "coucou", 7);
 
         close(clientfd);
     }
