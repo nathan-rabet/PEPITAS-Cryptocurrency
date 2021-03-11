@@ -1,24 +1,37 @@
 #include "network.h"
 
+Client* get_client()
+{
+    static Client* client = NULL;
+    if (client == NULL)
+    {
+        client = malloc(sizeof(Client));
+        client->neighbours = malloc(MAX_NEIGHBOURS_NB * sizeof(Neighbour));
+    }
+    return client;
+}
+
 int set_neighbours()
 {
+    Client* client = get_client();
     // TODO : Set neighbours properly !
 
-    if (client.neighbours[0].hostname == NULL)
+    if (client->neighbours[0].hostname == NULL)
     {
 
         Neighbour local;
 
         local.hostname = "localhost";
-        client.neighbours[0] = local;
+        client->neighbours[0] = local;
     }
     return 0;
 }
 
 int connect_to_network(int client_to_connect_id)
 {
+    Client* client = get_client();
     struct addrinfo hints = {0};
-    Neighbour neighbour = client.neighbours[client_to_connect_id];
+    Neighbour neighbour = client->neighbours[client_to_connect_id];
     hints.ai_family = neighbour.family; //IPV4 only
     hints.ai_socktype = SOCK_STREAM;    //TCP
 
@@ -71,7 +84,6 @@ void get_client_data(int sockfd)
     // TODO : Clear Maxence's shit
     printf("Waiting for list...\n");
     ssize_t nb_read;
-    Neighbour client;
 
     char buff[BUF_SIZE];
 

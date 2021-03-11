@@ -14,9 +14,10 @@
 
 #define MAX_NEIGHBOURS_NB 64
 #define STATIC_DNS "localhost"
-#define STATIC_PORT "12345"
+#define STATIC_PORT "8080"
 #define BUF_SIZE 256
 
+#define GET_CLIENT "GET CLIENT\r\n\r\n"
 
 typedef struct Neighbour
 {
@@ -29,13 +30,13 @@ typedef struct Client
     Neighbour *neighbours; // Neighbours list
 } Client;
 
-static Client client = {0};
-
 typedef struct Connection_state
 {
     char is_connected;
     int sockfd;
 } Connection_state;
+
+Client* get_client();
 
 /**
  * @brief Sets some neighbours in the client.neightbours section

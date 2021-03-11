@@ -34,7 +34,7 @@ int init_server()
     // try yo connect for each result
     for (rp = result; rp != NULL; rp = rp->ai_next)
     {
-        sockfd = socket(rp->ai_family, rp->ai_socktype, rp->ai_protocol);
+        sockfd = socket(rp->ai_family, rp->ai_socktype, 0);
         if (sockfd == -1)
             continue; // The socket is not created
         // Try to connect
@@ -59,11 +59,10 @@ int init_server()
         clientfd = accept(sockfd, rp->ai_addr, &rp->ai_addrlen);
         if (clientfd == -1)
         {
-            printf("Error to accept\n");
-            break;
+            continue;
         }
 
-        write(clientfd, "coucou", 7);
+        write(clientfd, "coucou\r\n\r\n", 11);
 
         close(clientfd);
     }
