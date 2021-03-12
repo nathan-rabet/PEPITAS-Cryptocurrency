@@ -19,12 +19,16 @@ void *accept_connection(void *arg)
     int clientfd = *((int *)arg);
 
     struct sockaddr_in client_addr;
-    socklen_t client_addr_len;
+    socklen_t client_addr_len = sizeof(client_addr);
 
-    getsockname(clientfd, (struct sockaddr *)&client_addr, &client_addr_len);
+    if (getsockname(clientfd, (struct sockaddr * restrict) &client_addr, &client_addr_len) == -1)
+        err(EXIT_FAILURE,"Failed to recover client IP address\n");
+
 
     char ip_str[INET_ADDRSTRLEN];
-    inet_ntop(AF_INET, &(client_addr.sin_addr), ip_str, INET_ADDRSTRLEN);
+    if (inet_ntop(AF_INET, &(client_addr.sin_addr), ip_str, INET_ADDRSTRLEN) == NULL)
+        err(EXIT_FAILURE,"Failed to convert client IP address to string\n");
+
 
     printf("New connection: '%s'\n", ip_str);
 
@@ -101,7 +105,6 @@ int init_server()
             pthread_t thread;
             pthread_create(&thread, NULL, accept_connection, clientfd);
         }
-        clientfd = NULL;
     }
 
     return sockfd;
