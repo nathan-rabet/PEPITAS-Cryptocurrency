@@ -7,10 +7,31 @@
 #include <netdb.h>
 #include <err.h>
 #include <string.h>
+#include <pthread.h>
+#include <arpa/inet.h>
 
 #include "server.h"
 #include "network.h"
 #include "../misc/safe.h"
+
+void * accept_connection(void* arg) {
+        int sockfd = *((int*) arg);
+        struct sockaddr_in client_addr;
+        socklen_t client_addr_len;
+
+        getsockname(sockfd, (struct sockaddr *) &client_addr, &client_addr_len);
+        
+        char ip_str[INET_ADDRSTRLEN];
+        inet_ntop(AF_INET, &(client_addr.sin_addr), ip_str, INET_ADDRSTRLEN);
+
+        printf("New connection : '%s'\n",ip_str);
+
+        server_im_awake(sockfd);
+
+        close(sockfd);
+
+        return NULL;
+}
 
 int init_server()
 {
@@ -18,10 +39,9 @@ int init_server()
 
     struct addrinfo hints = {0}; //
     struct addrinfo *result;     //
-    struct addrinfo *rp;         //
+    struct addrinfo *rp;      //
     int addrinfo_error;
     int sockfd;   //File Descriptor of the socket
-    int clientfd; //File Descriptor of the client
 
     hints.ai_family = AF_UNSPEC;     //IPV4 only
     hints.ai_socktype = SOCK_STREAM; //TCP
@@ -67,18 +87,17 @@ int init_server()
 
     while (1)
     {
-        clientfd = accept(sockfd, rp->ai_addr, &rp->ai_addrlen);
-        if (clientfd == -1)
-            continue;
-
-        server_im_awake(clientfd);
-
-        close(clientfd);
+        int * clientfd = malloc(sizeof(int));
+        *clientfd = accept(sockfd, rp->ai_addr, &rp->ai_addrlen);
+        if (*clientfd != -1) {
+            pthread_t thread;
+            pthread_create(&thread,NULL,accept_connection,clientfd);
+        }
+        clientfd = NULL;
     }
 
     return sockfd;
 }
-
 
 int server_im_awake(int sockfd) {
     return safe_write(sockfd,"IM_AWAKE\r\n\r\n",13);

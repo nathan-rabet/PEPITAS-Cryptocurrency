@@ -1,7 +1,13 @@
 #ifndef SERVER_H
 #define SERVER_H
 
-#include <stdlib.h>
+#include <sys/socket.h>
+typedef struct client_connection
+{
+    struct addrinfo info; // Adress information
+    int socket; // The client<->server connection socket
+} client_connection;
+
 
 /**
  * @brief Launch a server instance,
