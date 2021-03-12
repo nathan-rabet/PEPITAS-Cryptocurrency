@@ -34,6 +34,20 @@ void *accept_connection(void *arg)
 
     server_im_awake(clientfd);
 
+    // Starting exchanges
+    char header[REQUEST_HEADER_SIZE];
+    while (strncmp(header,"KILL\r\n\r\n",9) != 0)
+    {
+        int r = read(clientfd,header,REQUEST_HEADER_SIZE);
+
+        if (r == -1)
+            err(EXIT_FAILURE,"Failed read client request\n");
+
+        write(STDOUT_FILENO, header, r);
+    }
+    
+    
+
     close(clientfd);
     free(arg);
 
