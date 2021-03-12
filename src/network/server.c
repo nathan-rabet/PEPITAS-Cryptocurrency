@@ -14,23 +14,26 @@
 #include "network.h"
 #include "../misc/safe.h"
 
-void * accept_connection(void* arg) {
-        int sockfd = *((int*) arg);
-        struct sockaddr_in client_addr;
-        socklen_t client_addr_len;
+void *accept_connection(void *arg)
+{
+    int clientfd = *((int *)arg);
 
-        getsockname(sockfd, (struct sockaddr *) &client_addr, &client_addr_len);
-        
-        char ip_str[INET_ADDRSTRLEN];
-        inet_ntop(AF_INET, &(client_addr.sin_addr), ip_str, INET_ADDRSTRLEN);
+    struct sockaddr_in client_addr;
+    socklen_t client_addr_len;
 
-        printf("New connection : '%s'\n",ip_str);
+    getsockname(clientfd, (struct sockaddr *)&client_addr, &client_addr_len);
 
-        server_im_awake(sockfd);
+    char ip_str[INET_ADDRSTRLEN];
+    inet_ntop(AF_INET, &(client_addr.sin_addr), ip_str, INET_ADDRSTRLEN);
 
-        close(sockfd);
+    printf("New connection: '%s'\n", ip_str);
 
-        return NULL;
+    server_im_awake(clientfd);
+
+    close(clientfd);
+    free(arg);
+
+    return NULL;
 }
 
 int init_server()
@@ -39,9 +42,9 @@ int init_server()
 
     struct addrinfo hints = {0}; //
     struct addrinfo *result;     //
-    struct addrinfo *rp;      //
+    struct addrinfo *rp;         //
     int addrinfo_error;
-    int sockfd;   //File Descriptor of the socket
+    int sockfd; //File Descriptor of the socket
 
     hints.ai_family = AF_UNSPEC;     //IPV4 only
     hints.ai_socktype = SOCK_STREAM; //TCP
@@ -68,6 +71,10 @@ int init_server()
         sockfd = socket(rp->ai_family, rp->ai_socktype, 0);
         if (sockfd == -1)
             continue; // The socket is not created
+
+        int chezpas = 1;
+        setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &chezpas, sizeof(int));
+
         // Try to connect
         if (bind(sockfd, rp->ai_addr, rp->ai_addrlen) == -1)
         {
@@ -87,11 +94,12 @@ int init_server()
 
     while (1)
     {
-        int * clientfd = malloc(sizeof(int));
+        int *clientfd = malloc(sizeof(int));
         *clientfd = accept(sockfd, rp->ai_addr, &rp->ai_addrlen);
-        if (*clientfd != -1) {
+        if (*clientfd != -1)
+        {
             pthread_t thread;
-            pthread_create(&thread,NULL,accept_connection,clientfd);
+            pthread_create(&thread, NULL, accept_connection, clientfd);
         }
         clientfd = NULL;
     }
@@ -99,6 +107,7 @@ int init_server()
     return sockfd;
 }
 
-int server_im_awake(int sockfd) {
-    return safe_write(sockfd,"IM_AWAKE\r\n\r\n",13);
+int server_im_awake(int sockfd)
+{
+    return safe_write(sockfd, "IM_AWAKE\r\n\r\n", 13);
 }
