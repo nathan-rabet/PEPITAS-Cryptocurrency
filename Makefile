@@ -8,9 +8,9 @@ OBJ += src/network/server.c
 all: main_test
 
 main_test: ${OBJ}
-	${CC} ${CFLAGS} $^ -o $@
+	${CC} ${CFLAGS} $^ -o main
 
 .PHONY: clean
 
 clean:
-	${RM} main_test
+	${RM} main
