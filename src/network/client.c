@@ -1,4 +1,16 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/un.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netdb.h>
+#include <err.h>
+#include <string.h>
+
+#include "client.h"
 #include "network.h"
+
 
 Client* get_client()
 {
@@ -6,7 +18,7 @@ Client* get_client()
     if (client == NULL)
     {
         client = malloc(sizeof(Client));
-        client->neighbours = malloc(MAX_NEIGHBOURS_NB * sizeof(Neighbour));
+        client->neighbours = malloc(MAX_NEIGHBOURS * sizeof(Neighbour));
     }
     return client;
 }
@@ -85,9 +97,8 @@ void get_client_data(int sockfd)
     printf("Waiting for list...\n");
     ssize_t nb_read;
 
-    char buff[BUF_SIZE];
-
-    while ((nb_read = read(sockfd, &buff, BUF_SIZE)) != 0)
+    char buff[256];
+    while ((nb_read = read(sockfd, &buff, 256)) != 0)
     {
         if (nb_read == -1)
         {

@@ -1,5 +1,5 @@
 #include <assert.h>
-#include "../src/network/network.h"
+#include "../src/network/client.h"
 
 int network_test()
 {

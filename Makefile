@@ -1,9 +1,9 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -g
 
-OBJ = main_test.o
-OBJ += ../src/network/client.o
-OBJ += ../src/network/server.o
+OBJ = tests/main_test.c
+OBJ += src/network/client.c
+OBJ += src/network/server.c
 
 all: main_test
 
@@ -13,4 +13,4 @@ main_test: ${OBJ}
 .PHONY: clean
 
 clean:
-	${RM} main_test ${OBJ}
+	${RM} main_test

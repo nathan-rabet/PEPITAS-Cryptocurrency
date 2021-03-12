@@ -1,17 +1,28 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/un.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netdb.h>
+#include <err.h>
+#include <string.h>
+
+#include "server.h"
 #include "network.h"
+#include "../misc/safe.h"
 
 int init_server()
 {
     // Try to connect to the peer-to-peer network
 
-    struct addrinfo hints;   //
-    struct addrinfo *result; //
-    struct addrinfo *rp;     //
+    struct addrinfo hints = {0}; //
+    struct addrinfo *result;     //
+    struct addrinfo *rp;         //
     int addrinfo_error;
     int sockfd;   //File Descriptor of the socket
     int clientfd; //File Descriptor of the client
 
-    memset(&hints, 0, sizeof(struct addrinfo));
     hints.ai_family = AF_UNSPEC;     //IPV4 only
     hints.ai_socktype = SOCK_STREAM; //TCP
     hints.ai_flags = AI_PASSIVE;     //Server
@@ -27,7 +38,7 @@ int init_server()
     if (addrinfo_error != 0)
     {
         errx(EXIT_FAILURE, "Fail getting address on port %s: %s",
-            STATIC_PORT, gai_strerror(addrinfo_error));
+             STATIC_PORT, gai_strerror(addrinfo_error));
     }
 
     // result points to a linked list
@@ -58,14 +69,17 @@ int init_server()
     {
         clientfd = accept(sockfd, rp->ai_addr, &rp->ai_addrlen);
         if (clientfd == -1)
-        {
             continue;
-        }
 
-        write(clientfd, "coucou\r\n\r\n", 11);
+        server_im_awake(clientfd);
 
         close(clientfd);
     }
 
     return sockfd;
+}
+
+
+int server_im_awake(int sockfd) {
+    return safe_write(sockfd,"IM_AWAKE\r\n\r\n",13);
 }
