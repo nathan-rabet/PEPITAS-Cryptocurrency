@@ -1,6 +1,8 @@
 #ifndef CLIENT_H
 #define CLIENT_H
 
+#include "network.h"
+
 #define MAX_NEIGHBOURS 64
 
 typedef struct Neighbour

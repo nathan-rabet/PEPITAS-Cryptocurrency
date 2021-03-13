@@ -1,6 +1,7 @@
-#include "../src/network/network.h"
 
-int init_server_test()
+#include "../../src/network/server.h"
+
+int main()
 {
     printf("Testing init_server()\n'");
     return init_server(STATIC_DNS);

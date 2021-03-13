@@ -1,13 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <sys/un.h>
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <netdb.h>
-#include <err.h>
-#include <string.h>
-
 #include "client.h"
 #include "network.h"
 
@@ -88,13 +78,13 @@ int connect_to_network(int client_to_connect_id)
     }
 
     // Connection failed
+    printf("Failed to connect at %s\n", neighbour.hostname);
     return -1;
 }
 
-void get_client_data(int sockfd)
+void wait_server_header(int sockfd)
 {
-    // TODO : Clear Maxence's shit
-    printf("Waiting for list...\n");
+    //Waiting header for server and read it
     ssize_t nb_read;
 
     char buff[256];

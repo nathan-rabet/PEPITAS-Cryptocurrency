@@ -1,15 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <sys/un.h>
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <netdb.h>
-#include <err.h>
-#include <string.h>
-#include <pthread.h>
-#include <arpa/inet.h>
-
 #include "server.h"
 #include "network.h"
 #include "../misc/safe.h"

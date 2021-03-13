@@ -2,6 +2,8 @@
 #define SERVER_H
 
 #include <sys/socket.h>
+#include "network.h"
+
 typedef struct client_connection
 {
     struct addrinfo info; // Adress information
