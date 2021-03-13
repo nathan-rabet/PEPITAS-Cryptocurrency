@@ -16,7 +16,7 @@ int main()
         // You are the first node to the peer-to-peer network
         return -1;
     }
-    wait_server_header(sockfd);
+    wait_header(sockfd);
 
     return 0;
 }

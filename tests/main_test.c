@@ -12,7 +12,7 @@ int network_test()
     {
         // You are the first node to the peer-to-peer network
     }
-    wait_server_header(sockfd);
+    wait_header(sockfd);
 
     return 0;
 }

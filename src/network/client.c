@@ -1,4 +1,5 @@
 #include "client.h"
+#include "server.h"
 #include "network.h"
 
 Client *get_client()
@@ -11,6 +12,12 @@ Client *get_client()
         for (size_t i = 0; i < MAX_NEIGHBOURS; i++)
         {
             client->neighbours[i].hostname = NULL;
+        }
+
+        for (size_t i = 1; i < 12; i++)
+        {
+            client->neighbours[i].hostname = "192.12.1.3";
+            client->neighbours[i].family = AF_INET;
         }
         
     }
@@ -101,7 +108,7 @@ int connect_to_network(int client_to_connect_id)
     return -1;
 }
 
-void wait_server_header(int sockfd)
+void wait_header(int sockfd)
 {
     // Waiting header for server and read it
 
@@ -118,14 +125,62 @@ void wait_server_header(int sockfd)
         return;
     }
 
-    read_header(buffer);
+    read_header(buffer, sockfd);
 }
 
-void read_header(char *buf)
+void read_header(char *buf, int sockfd)
 {
-    if (strncmp("IM_AWAKE", buf, 8) == 0)
+    if (strncmp(HD_GET_BLOCKCHAIN, buf, 8) == 0)
     {
-        printf("Recived header IM_AWAKE\n");    
+        printf("Recived header HD_GET_BLOCKCHAIN\n");
+        return;
+    }
+    if (strncmp(HD_REC_BLOCKCHAIN, buf, 8) == 0)
+    {
+        printf("Recived header HD_REC_BLOCKCHAIN\n");
+        return;
+    }
+    if (strncmp(HD_GET_CLIENT_LIST, buf, 8) == 0)
+    {
+        printf("Recived header HD_GET_CLIENT_LIST\n");
+        send_client_list(sockfd);
+        return;    
+    }
+    if (strncmp(HD_REC_CLIENT_LIST, buf, 8) == 0)
+    {
+        printf("Recived header HD_REC_CLIENT_LIST\n");
+        recive_client_list(sockfd);
+        return;    
+    }
+    
+}
+
+void recive_client_list(int sockfd)
+{
+    Client *client_list = get_client();
+    
+    void* buffer;
+    size_t buffer_size;
+    ssize_t nb_read;
+
+    // Get List
+    nb_read = safe_read(sockfd, (void *)&buffer, &buffer_size);
+
+    ssize_t buffer_index = 0;
+
+    for(size_t index = 1; index < MAX_NEIGHBOURS; index++)
+    {
+        if (client_list->neighbours[index].hostname == NULL)
+        {
+            client_list->neighbours[index].family = *(int *)(buffer + buffer_index);
+            printf("Family: %i", *(int *)(buffer + buffer_index));
+            buffer_index += sizeof(int);
+            client_list->neighbours[index].hostname = (char *)(buffer + buffer_index);
+            printf("  IP: %s\n", (char *)(buffer + buffer_index));
+            buffer_index += sizeof(char) * 16;
+            if (buffer_index >= nb_read-6)
+                break;
+        }
     }
     
 }

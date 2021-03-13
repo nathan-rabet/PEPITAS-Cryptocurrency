@@ -19,23 +19,6 @@ typedef struct client_connection
  */
 int init_server();
 
-
-/**
- * @brief Read a request header
- * 
- * @param sockfd The socket FD
- * @return char* 
- */
-char * read_header(int sockfd);
-
-
-/**
- * @brief Tell to the client that the server is awake
- * 
- * @param sockfd The socket FD
- * 
- * @return int
- */
-int server_im_awake(int sockfd);
+void send_client_list(int sockfd);
 
 #endif

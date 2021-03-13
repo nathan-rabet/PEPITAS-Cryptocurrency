@@ -1,4 +1,5 @@
 #include "server.h"
+#include "client.h"
 #include "network.h"
 #include "../misc/safe.h"
 
@@ -20,20 +21,7 @@ void *accept_connection(void *arg)
 
     printf("New connection: '%s'\n", ip_str);
 
-    server_im_awake(clientfd);
-
-    // Starting exchanges
-    char header[REQUEST_HEADER_SIZE];
-    while (strncmp(header,"KILL\r\n\r\n",9) != 0)
-    {
-        int r = read(clientfd,header,REQUEST_HEADER_SIZE);
-
-        if (r == -1)
-            err(EXIT_FAILURE,"Failed read client request\n");
-
-        write(STDOUT_FILENO, header, r);
-    }
-    
+    send_client_list(clientfd);
     
 
     close(clientfd);
@@ -112,7 +100,22 @@ int init_server()
     return sockfd;
 }
 
-int server_im_awake(int sockfd)
+void send_client_list(int sockfd)
 {
-    return safe_write(sockfd, "IM_AWAKE\r\n\r\n", 13);
+    Client *client_list = get_client();
+    
+    printf("Sending client list...\n");
+    safe_write(sockfd, "REC CLIENT LIST\r\n\r\n", 20);
+
+    for(size_t index = 1; index < MAX_NEIGHBOURS; index++)
+    {
+        if (client_list->neighbours[index].hostname != NULL)
+        {
+            safe_write(sockfd, (void *)&client_list->neighbours[index].family, sizeof(int));
+            safe_write(sockfd, (void *)client_list->neighbours[index].hostname, sizeof(char) * 16);
+        }
+    }
+    
+    // END SENDING
+    safe_write(sockfd, "\r\n\r\n", 5);
 }

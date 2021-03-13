@@ -45,9 +45,11 @@ int connect_to_network(int client_to_connect_id);
  * 
  * @param sockfd The socket FD
  */
-void wait_server_header(int sockfd);
+void wait_header(int sockfd);
 
 
-void read_header(char *buf);
+void read_header(char *buf, int sockfd);
+
+void recive_client_list(int sockfd);
 
 #endif
