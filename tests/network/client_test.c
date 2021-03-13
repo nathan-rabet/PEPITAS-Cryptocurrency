@@ -6,9 +6,8 @@ int main()
     printf("Testing client:\n");
 
     // Init client lists
-    Client* client = get_client();
-    client->neighbours[0].family = AF_INET;
-    client->neighbours[0].hostname = "127.0.0.1";
+    
+    set_neighbours();
 
     int sockfd;
 

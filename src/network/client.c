@@ -1,10 +1,9 @@
 #include "client.h"
 #include "network.h"
 
-
-Client* get_client()
+Client *get_client()
 {
-    static Client* client = NULL;
+    static Client *client = NULL;
     if (client == NULL)
     {
         client = malloc(sizeof(Client));
@@ -15,7 +14,7 @@ Client* get_client()
 
 int set_neighbours()
 {
-    Client* client = get_client();
+    Client *client = get_client();
     // TODO : Set neighbours properly !
 
     if (client->neighbours[0].hostname == NULL)
@@ -23,7 +22,8 @@ int set_neighbours()
 
         Neighbour local;
 
-        local.hostname = "localhost";
+        local.hostname = STATIC_DNS;
+        local.family = AF_UNSPEC;
         client->neighbours[0] = local;
     }
     return 0;
@@ -31,7 +31,7 @@ int set_neighbours()
 
 int connect_to_network(int client_to_connect_id)
 {
-    Client* client = get_client();
+    Client *client = get_client();
     struct addrinfo hints = {0};
     Neighbour neighbour = client->neighbours[client_to_connect_id];
     hints.ai_family = neighbour.family; //IPV4 only
@@ -54,7 +54,7 @@ int connect_to_network(int client_to_connect_id)
              neighbour.hostname, STATIC_PORT, gai_strerror(addrinfo_ret));
     }
 
-    // try to connect for each result
+    // Try to connect for each result
     int sockfd;
     struct addrinfo *rp; // result points to a linked list
     for (rp = result; rp != NULL; rp = rp->ai_next)
@@ -84,19 +84,29 @@ int connect_to_network(int client_to_connect_id)
 
 void wait_server_header(int sockfd)
 {
-    //Waiting header for server and read it
+    // Waiting header for server and read it
+
+    char *buffer;
+    size_t buffer_size;
     ssize_t nb_read;
 
-    char buff[256];
-    while ((nb_read = read(sockfd, &buff, 256)) != 0)
-    {
-        if (nb_read == -1)
-        {
-            printf("Error to read message.\n");
-            break;
-        }
+    // Get Header
+    nb_read = safe_read(sockfd, (void *)&buffer, &buffer_size);
 
-        write(STDOUT_FILENO, &buff, nb_read);
+    if (nb_read == -1)
+    {
+        printf("Failed to read message.\n");
+        return;
     }
-    printf("Connection closed\n");
+
+    read_header(buffer);
+}
+
+void read_header(char *buf)
+{
+    if (strncmp("IM_AWAKE", buf, 8) == 0)
+    {
+        printf("Recived header IM_AWAKE\n");    
+    }
+    
 }

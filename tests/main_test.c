@@ -1,5 +1,6 @@
 #include <assert.h>
 #include "../src/network/client.h"
+#include "../src/misc/safe.h"
 
 int network_test()
 {
@@ -11,13 +12,18 @@ int network_test()
     {
         // You are the first node to the peer-to-peer network
     }
-    get_client_data(sockfd);
+    wait_server_header(sockfd);
 
     return 0;
 }
 int main()
 {
-    init_server();
+    char *buffer;
+    size_t nb;
+    ssize_t oui = safe_read(STDIN_FILENO, (void *)&buffer, &nb);
+    if (oui == -1)
+        errx(EXIT_FAILURE, "SUCE MA QUE");
+    write(STDOUT_FILENO, buffer, oui);
 
     return 0;
 }

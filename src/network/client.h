@@ -45,14 +45,9 @@ int connect_to_network(int client_to_connect_id);
  * 
  * @param sockfd The socket FD
  */
-void get_client_data(int sockfd);
+void wait_server_header(int sockfd);
 
-/**
- * @brief Launch a server instance,
- * connected to the peer-to-peer network 'hostname'
- * 
- * @return 0 if sucess, -1 if not
- */
-int init_server();
+
+void read_header(char *buf);
 
 #endif

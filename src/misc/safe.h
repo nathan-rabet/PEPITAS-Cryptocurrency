@@ -21,7 +21,7 @@ int safe_write(int fd, const void *buf, ssize_t count);
  * 
  * @param fd The file descriptor
  * @param buf The buffer wich contains the message
- * @return The number of byte of buf in fd
+ * @return The number of byte of buf in fd; -1 for error
  */
-int safe_read(int fd, const void **buf, size_t *bufsize);
+ssize_t safe_read(int fd, const void **buf, size_t *bufsize);
 #endif

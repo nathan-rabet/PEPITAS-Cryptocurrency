@@ -15,7 +15,7 @@ int safe_write(int fd, const void *buf, ssize_t count)
 }
 
 
-int safe_read(int fd, const void **buf, size_t *bufsize)
+ssize_t safe_read(int fd, const void **buf, size_t *bufsize)
 {
 	size_t buffersize = 256;
 	size_t read_count = 0;

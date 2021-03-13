@@ -9,7 +9,8 @@
 #include <string.h>
 #include <pthread.h>
 #include <arpa/inet.h>
+#include "../misc/safe.h"
 
-#define STATIC_DNS "localhost"
+#define STATIC_DNS "127.0.0.1"
 #define STATIC_PORT "8080"
 #define REQUEST_HEADER_SIZE 256
