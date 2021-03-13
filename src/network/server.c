@@ -21,7 +21,7 @@ void *accept_connection(void *arg)
     struct sockaddr_in client_addr;
     socklen_t client_addr_len = sizeof(client_addr);
 
-    if (getsockname(clientfd, (struct sockaddr * restrict) &client_addr, &client_addr_len) == -1)
+    if (getpeername(clientfd, (struct sockaddr * restrict) &client_addr, &client_addr_len) == -1)
         err(EXIT_FAILURE,"Failed to recover client IP address\n");
 
 
