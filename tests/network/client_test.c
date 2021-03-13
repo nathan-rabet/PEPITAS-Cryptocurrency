@@ -6,12 +6,10 @@ int main()
     printf("Testing client:\n");
 
     // Init client lists
-    
-    set_neighbours();
+    set_neighbours(NULL, 0);
 
     int sockfd;
 
-    set_neighbours();
     sockfd = connect_to_network(0);
     if (sockfd == -1)
     {

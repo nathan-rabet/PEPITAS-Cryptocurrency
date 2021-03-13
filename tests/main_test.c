@@ -6,7 +6,7 @@ int network_test()
 {
     int sockfd;
 
-    set_neighbours();
+    set_neighbours(NULL, 0);
     sockfd = connect_to_network(0);
     if (sockfd == -1)
     {

@@ -29,7 +29,7 @@ Client* get_client();
  * 
  * @return 0 if sucess, -1 if not 
  */
-int set_neighbours();
+int set_neighbours(char *hostname, int family);
 
 /**
  * @brief Try to connect to the peer-to-peer network 

@@ -8,23 +8,42 @@ Client *get_client()
     {
         client = malloc(sizeof(Client));
         client->neighbours = malloc(MAX_NEIGHBOURS * sizeof(Neighbour));
+        for (size_t i = 0; i < MAX_NEIGHBOURS; i++)
+        {
+            client->neighbours[i].hostname = NULL;
+        }
+        
     }
     return client;
 }
 
-int set_neighbours()
+int set_neighbours(char *hostname, int family)
 {
     Client *client = get_client();
-    // TODO : Set neighbours properly !
 
-    if (client->neighbours[0].hostname == NULL)
+    if (hostname == NULL)
     {
-
         Neighbour local;
-
         local.hostname = STATIC_DNS;
         local.family = AF_UNSPEC;
         client->neighbours[0] = local;
+        return 0;
+    }
+
+    size_t index = 0;
+    while (index < MAX_NEIGHBOURS)
+    {
+        if (client->neighbours[index].hostname == NULL)
+        {
+            client->neighbours[index].hostname = hostname;
+            client->neighbours[index].family = family;
+            index = MAX_NEIGHBOURS;
+        }
+        index++;
+    }
+    if (index == MAX_NEIGHBOURS)
+    {
+        return -1;
     }
     return 0;
 }
