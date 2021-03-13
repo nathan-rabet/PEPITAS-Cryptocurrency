@@ -3,6 +3,7 @@ CFLAGS = -Wall -Wextra -g -pthread
 
 OBJ = src/network/client.c
 OBJ += src/network/server.c
+OBJ += src/misc/safe.c
 
 all: main_test
 
