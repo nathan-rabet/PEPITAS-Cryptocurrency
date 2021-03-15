@@ -31,7 +31,7 @@ int set_neighbours(char *hostname, int family)
     if (hostname == NULL)
     {
         Neighbour local;
-        local.hostname = STATIC_DNS;
+        local.hostname = HARD_CODED_IPS[0].hostname;
         local.family = AF_UNSPEC;
         client->neighbours[0] = local;
         return 0;
@@ -168,7 +168,7 @@ void recive_client_list(int sockfd)
 
     ssize_t buffer_index = 0;
 
-    for(size_t index = 1; index < MAX_NEIGHBOURS; index++)
+    for(size_t index = 0; index < MAX_NEIGHBOURS; index++)
     {
         if (client_list->neighbours[index].hostname == NULL)
         {
@@ -182,5 +182,7 @@ void recive_client_list(int sockfd)
                 break;
         }
     }
+
+    free(buffer);
     
 }

@@ -10,19 +10,16 @@ void *accept_connection(void *arg)
     struct sockaddr_in client_addr;
     socklen_t client_addr_len = sizeof(client_addr);
 
-    if (getpeername(clientfd, (struct sockaddr * restrict) &client_addr, &client_addr_len) == -1)
-        err(EXIT_FAILURE,"Failed to recover client IP address\n");
-
+    if (getpeername(clientfd, (struct sockaddr * restrict) & client_addr, &client_addr_len) == -1)
+        err(EXIT_FAILURE, "Failed to recover client IP address\n");
 
     char ip_str[INET_ADDRSTRLEN];
     if (inet_ntop(AF_INET, &(client_addr.sin_addr), ip_str, INET_ADDRSTRLEN) == NULL)
-        err(EXIT_FAILURE,"Failed to convert client IP address to string\n");
-
+        err(EXIT_FAILURE, "Failed to convert client IP address to string\n");
 
     printf("New connection: '%s'\n", ip_str);
 
     send_client_list(clientfd);
-    
 
     close(clientfd);
     free(arg);
@@ -103,11 +100,11 @@ int init_server()
 void send_client_list(int sockfd)
 {
     Client *client_list = get_client();
-    
-    printf("Sending client list...\n");
-    safe_write(sockfd, "REC CLIENT LIST\r\n\r\n", 20);
 
-    for(size_t index = 1; index < MAX_NEIGHBOURS; index++)
+    printf("Sending client list...\n");
+    safe_write(sockfd, HD_REC_CLIENT_LIST, 20);
+
+    for (size_t index = 0; index < MAX_NEIGHBOURS; index++)
     {
         if (client_list->neighbours[index].hostname != NULL)
         {
@@ -115,7 +112,7 @@ void send_client_list(int sockfd)
             safe_write(sockfd, (void *)client_list->neighbours[index].hostname, sizeof(char) * 16);
         }
     }
-    
+
     // END SENDING
     safe_write(sockfd, "\r\n\r\n", 5);
 }
