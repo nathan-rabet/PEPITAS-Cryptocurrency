@@ -31,7 +31,7 @@ int set_neighbours(char *hostname, int family)
     if (hostname == NULL)
     {
         Neighbour local;
-        local.hostname = HARD_CODED_IPS[0].hostname;
+        local.hostname = HARD_CODED_ADDR[0].hostname;
         local.family = AF_UNSPEC;
         client->neighbours[0] = local;
         return 0;
