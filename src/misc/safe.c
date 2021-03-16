@@ -1,4 +1,4 @@
-#include "safe.h"
+#include "misc/safe.h"
 
 int safe_write(int fd, const void *buf, ssize_t count)
 {

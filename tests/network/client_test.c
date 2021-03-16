@@ -1,5 +1,5 @@
-#include "../../src/network/network.h"
-#include "../../src/network/client.h"
+#include "network/network.h"
+#include "network/client.h"
 
 int main()
 {

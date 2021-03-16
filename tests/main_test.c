@@ -1,6 +1,6 @@
 #include <assert.h>
-#include "../src/network/client.h"
-#include "../src/misc/safe.h"
+#include "network/client.h"
+#include "misc/safe.h"
 
 int network_test()
 {
