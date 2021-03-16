@@ -1,6 +1,7 @@
 #include <assert.h>
 #include "../src/network/client.h"
 #include "../src/misc/safe.h"
+#include "../src/cryptosystem/rsa.h"
 
 int network_test()
 {
@@ -18,12 +19,7 @@ int network_test()
 }
 int main()
 {
-    char *buffer;
-    size_t nb;
-    ssize_t oui = safe_read(STDIN_FILENO, (void *)&buffer, &nb);
-    if (oui == -1)
-        errx(EXIT_FAILURE, "SUCE MA QUE");
-    write(STDOUT_FILENO, buffer, oui);
+    generate_key();
 
     return 0;
 }

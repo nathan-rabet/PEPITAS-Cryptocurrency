@@ -70,10 +70,12 @@ int init_server()
         if (bind(sockfd, rp->ai_addr, rp->ai_addrlen) == -1)
         {
             close(sockfd);
-            break;
+            continue;
         }
         break;
     }
+
+    free(result);
 
     if (rp == NULL)
     { /* No address succeeded */

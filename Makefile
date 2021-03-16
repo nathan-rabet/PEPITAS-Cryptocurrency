@@ -4,6 +4,7 @@ CFLAGS = -Wall -Wextra -g -pthread
 OBJ = src/network/client.c
 OBJ += src/network/server.c
 OBJ += src/misc/safe.c
+OBJ += src/cryptosystem/rsa.c
 
 all: main_test server client
 
