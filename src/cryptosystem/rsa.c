@@ -1,4 +1,5 @@
 #include "core/cryptosystem/rsa.h"
+#include "core/blockchain/wallet.h"
 #include <stdio.h>
 #include <time.h>
 
@@ -51,7 +52,7 @@ u_int64_t PGCD_extend(u_int64_t a, u_int64_t b)
 
 // PUBLIC KEY : (n, e)
 // PRIVATE KEY: (n, d)
-char* generate_key()
+void generate_key()
 {
     srandom(time(NULL));
     u_int64_t p;
@@ -86,6 +87,8 @@ char* generate_key()
     phi = (p - 1)*(q - 1);
     e = 65537;
     d = PGCD_extend(e, phi);
-    printf("RSA KEYS:\np: %0lx | q: %0lx | n: %lu\nphi: %lu\ne: %u\nd: %lu\n", p,q,n,phi,e,d);
-    return NULL;
+    printf("RSA KEYS:\np: %0lx | q: %0lx | n: %0lx\nphi: %lu\ne: %u\nd: %0lx\n", p,q,n,phi,e,d);
+    Wallet* wallet = get_my_wallet();
+    wallet->private_key = d;
+    wallet->public_key = n;
 }

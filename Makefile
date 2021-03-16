@@ -5,6 +5,7 @@ OBJ = src/network/client.c
 OBJ += src/network/server.c
 OBJ += src/misc/safe.c
 OBJ += src/cryptosystem/rsa.c
+OBJ += src/core/blockchain/wallet.c
 
 OBJ_TEST = tests/main_test.c
 

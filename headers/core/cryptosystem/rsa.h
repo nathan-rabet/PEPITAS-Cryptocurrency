@@ -14,6 +14,6 @@ u_int64_t PGCD(u_int64_t a, u_int64_t b);
 u_int64_t PGCD_extend(u_int64_t a, u_int64_t b);
 
 // GENERATE KEY
-char* generate_key();
+void generate_key();
 
 #endif

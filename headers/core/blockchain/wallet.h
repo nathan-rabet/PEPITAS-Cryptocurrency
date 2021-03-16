@@ -15,4 +15,4 @@ typedef struct Wallet
  * 
  * @return Wallet 
  */
-Wallet get_my_wallet();
+Wallet* get_my_wallet();
