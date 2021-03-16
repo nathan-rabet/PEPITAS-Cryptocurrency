@@ -1,7 +1,7 @@
-#include "server.h"
-#include "client.h"
-#include "network.h"
-#include "../misc/safe.h"
+#include "network/server.h"
+#include "network/client.h"
+#include "network/network.h"
+#include "misc/safe.h"
 
 void *accept_connection(void *arg)
 {
@@ -26,7 +26,6 @@ void *accept_connection(void *arg)
 
     return NULL;
 }
-
 int init_server()
 {
     // Try to connect to the peer-to-peer network

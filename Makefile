@@ -1,10 +1,12 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -g -pthread
+CFLAGS = -I"headers" -I"tests" -Wall -Wextra -g -pthread
 
 OBJ = src/network/client.c
 OBJ += src/network/server.c
 OBJ += src/misc/safe.c
 OBJ += src/cryptosystem/rsa.c
+
+OBJ_TEST = tests/main_test.c
 
 all: main_test server client
 

@@ -6,9 +6,9 @@
 typedef struct Block
 {
     // Clasical implementation
-    Block *previous_block;
+    struct Block *previous_block;
     Transaction transactions[NB_TRANSACTIONS_PER_BLOCK];
-    Block *next_block;
+    struct Block *next_block;
 
     // Validator area
     u_int64_t validator_public_key;

@@ -1,6 +1,6 @@
-#include "client.h"
-#include "server.h"
-#include "network.h"
+#include "network/client.h"
+#include "network/server.h"
+#include "network/network.h"
 
 Client *get_client()
 {
