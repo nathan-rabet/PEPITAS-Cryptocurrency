@@ -17,7 +17,7 @@
 #define STATIC_PORT "8080"
 #define REQUEST_HEADER_SIZE 256
 
-static const Neighbour HARD_CODED_IPS[] = {
+static const Neighbour HARD_CODED_ADDR[] = {
     {AF_INET, "127.0.0.1"}};
 
 // HEADERS
