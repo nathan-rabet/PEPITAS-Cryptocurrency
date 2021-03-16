@@ -1,7 +1,7 @@
 #include <assert.h>
-#include "../src/network/client.h"
-#include "../src/misc/safe.h"
-#include "../src/cryptosystem/rsa.h"
+#include "network/client.h"
+#include "misc/safe.h"
+#include "core/cryptosystem/rsa.h"
 
 int network_test()
 {
