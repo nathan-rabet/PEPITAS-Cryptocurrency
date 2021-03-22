@@ -11,7 +11,7 @@
 #include <string.h>
 #include <pthread.h>
 #include <arpa/inet.h>
-#include "../misc/safe.h"
+#include "misc/safe.h"
 #include "client.h"
 
 #define STATIC_PORT "8080"

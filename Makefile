@@ -1,16 +1,14 @@
 CC = gcc
 CFLAGS = -I"headers" -I"tests" -Wall -Wextra -g -pthread
 
-OBJ = src/network/client.c
-OBJ += src/network/server.c
-OBJ += src/misc/safe.c
+OBJ = src/network/client.c src/network/server.c src/misc/safe.c src/misc/bits_n.c
 
-OBJ_TEST = tests/main_test.c
+OBJ_TEST = tests/main_test.c tests/misc/bits_n_test.c
 
 all: main_test server client
 
-main_test: tests/main_test.c ${OBJ}
-	${CC} ${CFLAGS} $^ -o main.out
+test: ${OBJ_TEST} ${OBJ}
+	${CC} ${CFLAGS} $^ -o test.out
 
 server: tests/network/server_test.c ${OBJ}
 	${CC} ${CFLAGS} $^ -o server.out

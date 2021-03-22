@@ -6,6 +6,7 @@ typedef struct Transaction
     u_int64_t receiver_public_key;
     u_int64_t organisation_public_key;
     size_t amount;
+    uint64_t transaction_timestamp;
 
     // Organisations area
     char cause[256];
@@ -14,6 +15,11 @@ typedef struct Transaction
     // Opendata (you can put whatever you want)
     char opendata[1024];
 } Transaction;
+
+typedef struct PendingTransactionsLedger
+{
+    
+} PendingTransactionsLedger;
 
 /**
  * @brief Send 'amount' money to 'receiver_public_key'.
