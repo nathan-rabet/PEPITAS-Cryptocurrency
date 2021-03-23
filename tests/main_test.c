@@ -2,8 +2,10 @@
 #include <stdio.h>
 #include "network/client.h"
 #include "misc/safe.h"
+#include "core/cryptosystem/coding.h"
 #include "core/cryptosystem/rsa.h"
 #include "core/blockchain/wallet.h"
+#include <openssl/rsa.h>
 
 int network_test()
 {
@@ -24,6 +26,7 @@ int main()
     Wallet* w = get_my_wallet();
     generate_key();
 
-    printf("Public key:  %0lx\nPrivate key: %0lx\n", w->public_key, w->private_key);
+
+    char* msg = "Coucou bande de nouilles!";
     return 0;
 }
