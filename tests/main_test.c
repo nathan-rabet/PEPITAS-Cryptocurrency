@@ -4,7 +4,6 @@
 
 int main()
 {
-    printf("\n");
     add_bits_n_test();
     return 0;
 }
