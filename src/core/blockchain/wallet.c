@@ -6,3 +6,7 @@ Wallet get_my_wallet() {
 
     return my_account;
 }
+
+int create_account() {
+    Wallet wallet = get_my_wallet();
+}

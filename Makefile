@@ -1,9 +1,9 @@
 CC = gcc
 CFLAGS = -I"headers" -I"tests" -Wall -Wextra -g -pthread
 
-OBJ = src/network/client.c src/network/server.c src/misc/safe.c src/misc/bits_n.c
+OBJ = src/network/client.c src/network/server.c src/misc/safe.c
 
-OBJ_TEST = tests/main_test.c tests/misc/bits_n_test.c
+OBJ_TEST = tests/main_test.c
 
 all: main_test server client
 
