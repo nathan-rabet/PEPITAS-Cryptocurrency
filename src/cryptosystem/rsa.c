@@ -42,14 +42,29 @@ void generate_key()
             err(errno, "Impossible to write '.keys/rsa.pub' and .keys/rsa files");
 
         if (PEM_write_PrivateKey(rsa_private_file, pkey, NULL, NULL, 0, NULL, NULL) == -1)
-            err(errno,"Impossible to write '.keys/rsa'");
+            err(errno,"Impossible to write data in '.keys/rsa'");
         fclose(rsa_private_file);
         
         if (PEM_write_PUBKEY(rsa_public_file, pkey) ==-1) 
-            err(errno,"Impossible to write '.keys/rsa.pub'");
+            err(errno,"Impossible to write data in '.keys/rsa.pub'");
         fclose(rsa_public_file);
     }
 
+    EVP_PKEY_free(pkey);
     Wallet *wallet = get_my_wallet();
     wallet->keypair = keypair;
+}
+
+void get_keys() {
+    if (!access(".keys/rsa.pub", F_OK) == 0 && access(".keys/rsa", F_OK) == 0)
+        return generate_key();
+    
+
+    FILE *rsa_public_file = fopen("./.keys/rsa.pub","rb");
+    FILE *rsa_private_file = fopen("./.keys/rsa","rb");
+
+    Wallet *wallet = get_my_wallet();
+    wallet->keypair = PEM_read_RSAPublicKey(rsa_public_file,NULL,NULL,NULL);
+    wallet->keypair = PEM_read_RSAPrivateKey(rsa_public_file,&wallet->keypair,NULL,NULL);
+    
 }
