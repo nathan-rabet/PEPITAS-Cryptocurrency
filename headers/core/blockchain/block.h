@@ -14,7 +14,7 @@ typedef struct BlockData
 
     //* Validator area
     RSA * validator_public_key; // The public key of the validator
-    u_int64_t block_timestamp; // The block creation timestamp
+    time_t block_timestamp; // The block creation timestamp
 } BlockData;
 
 typedef struct Block

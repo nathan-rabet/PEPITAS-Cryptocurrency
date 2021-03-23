@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -I"headers" -I"tests" -Wall -Wextra -g -pthread 
+CFLAGS = -I"headers" -I"tests" -Wextra -g -pthread 
 
 LDPARAMS = -L . -lcrypto -lssl
 
@@ -10,18 +10,18 @@ OBJ += src/cryptosystem/rsa.c
 OBJ += src/core/blockchain/wallet.c
 OBJ += src/cryptosystem/coding.c
 
-OBJ_TEST = tests/main_test.c
+OBJ_TEST = tests/main_test.c tests/cryptosystem/rsa_test.c
 
-all: main_test server client
+all: test server client
 
-main_test: tests/main_test.c ${OBJ}
-	${CC} ${CFLAGS} $^ -o main.out ${LDPARAMS}
+test: $(OBJ_TEST) ${OBJ}
+	${CC} ${CFLAGS} $^ -o test ${LDPARAMS}
 
 server: tests/network/server_test.c ${OBJ}
-	${CC} ${CFLAGS} $^ -o server.out ${LDPARAMS}
+	${CC} ${CFLAGS} -Wall $^ -o server.out ${LDPARAMS}
 
 client: tests/network/client_test.c ${OBJ}
-	${CC} ${CFLAGS} $^ -o client.out ${LDPARAMS}
+	${CC} ${CFLAGS} -Wall $^ -o client.out ${LDPARAMS}
 
 .PHONY: clean
 

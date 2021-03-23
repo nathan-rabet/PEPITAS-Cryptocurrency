@@ -1,18 +1,8 @@
-#include <assert.h>
-#include <stdio.h>
-#include "network/client.h"
-#include "misc/safe.h"
-#include "core/cryptosystem/coding.h"
-#include "core/cryptosystem/rsa.h"
-#include "core/blockchain/wallet.h"
-#include <openssl/rsa.h>
+#include "cryptosystem/rsa_test.h"
 
 int main()
 {
-    Wallet* w = get_my_wallet();
-    generate_key();
+    generate_key_test();
 
-
-    char* msg = "Coucou bande de nouilles!";
     return 0;
 }

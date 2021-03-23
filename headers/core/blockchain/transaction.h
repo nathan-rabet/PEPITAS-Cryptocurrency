@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <openssl/dsa.h>
+#include <time.h>
 typedef struct Transaction
 {
     // All users area
@@ -7,7 +8,7 @@ typedef struct Transaction
     RSA *receiver_public_key; // The public key of the receiver
     RSA *organisation_public_key; // The public key of the organisation which will receive a part of the fees
     size_t amount; // The amount spent by the sender
-    uint64_t transaction_timestamp; // The time when the transaction was crafted
+    time_t transaction_timestamp; // The time when the transaction was crafted
 
     // Organisations: must indicates what you bought
     // Normal node: free 1024 bytes data
