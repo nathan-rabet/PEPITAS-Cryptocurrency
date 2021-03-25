@@ -29,14 +29,10 @@ int main()
 
     char* msg = "Coucou bande de nouilles!";
     char* signature;
-    sign_message(msg, &signature);
-    printf("Signature: ");
-    for (size_t i = 0; i < strlen(signature); i++)
-    {
-        printf("%c", signature[i]);
-    }
-    printf("\n");
-    if (verify_sign(msg, signature))
+    size_t signature_len;
+    sign_message(msg, &signature, &signature_len);
+    printf("Sign len: %lu\n", signature_len);
+    if (verify_sign(msg, signature, signature_len))
     {
         printf("Signature is true!\n");
     }
