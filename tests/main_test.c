@@ -10,13 +10,12 @@
 int main()
 {
     OpenSSL_add_all_algorithms();
-    create_account();
     Wallet* wallet = get_my_wallet();
+    get_keys();
     char* msg = "Coucou bande de nouilles!";
     char* signature;
     size_t signature_len;
     sign_message(msg, &signature, &signature_len);
-    printf("Sign len: %lu\n", signature_len);
     if (verify_sign(msg, signature, signature_len, wallet->pub_key))
     {
         printf("Signature is true!\n");
