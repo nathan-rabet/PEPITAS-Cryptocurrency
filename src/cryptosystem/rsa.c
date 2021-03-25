@@ -42,7 +42,8 @@ void generate_key()
     }
 
     Wallet *wallet = get_my_wallet();
-    wallet->keypair = keypair;
+    wallet->priv_key = keypair;
+    wallet->pub_key = keypair;
 }
 
 void get_keys()
@@ -54,7 +55,7 @@ void get_keys()
     FILE *rsa_private_file = fopen("./.keys/rsa", "rb");
 
     Wallet *wallet = get_my_wallet();
-    RSA* priv = PEM_read_RSAPrivateKey(rsa_private_file, NULL,NULL,NULL);
-    wallet->keypair = PEM_read_RSAPublicKey(rsa_public_file, &priv,NULL,NULL);
+    wallet->priv_key = PEM_read_RSAPrivateKey(rsa_private_file, NULL,NULL,NULL);
+    wallet->pub_key = PEM_read_RSA_PUBKEY(rsa_public_file, NULL,NULL,NULL);
     
 }
