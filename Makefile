@@ -8,9 +8,9 @@ OBJ += src/network/server.c
 OBJ += src/misc/safe.c
 OBJ += src/cryptosystem/rsa.c
 OBJ += src/core/blockchain/wallet.c
-OBJ += src/cryptosystem/coding.c
+OBJ += src/cryptosystem/signature.c
 
-OBJ_TEST = tests/unit_testing.c tests/cryptosystem/rsa_test.c
+OBJ_TEST = tests/unit_testing.c tests/cryptosystem/rsa_test.c tests/cryptosystem/signature_test.c
 
 all: test server client
 

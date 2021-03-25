@@ -13,5 +13,4 @@
 void sign_message(char *msg, char **signature, size_t *signature_len);
 char verify_sign(char *msg, char *signature, size_t signature_len, RSA* pub_key);
 
-
 #endif

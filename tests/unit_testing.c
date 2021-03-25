@@ -1,20 +1,21 @@
-#include <assert.h>
-#include <stdio.h>
-#include "network/client.h"
-#include "misc/safe.h"
-#include "core/cryptosystem/coding.h"
-#include "core/cryptosystem/rsa.h"
-#include "core/blockchain/wallet.h"
-#include "cryptosystem/rsa_test.h"
+#include <unistd.h>
+#include <sys/wait.h>
 #include <openssl/rsa.h>
+#include <openssl/evp.h>
+
+#include "tests_macros.h"
+#include "cryptosystem/signature_test.h"
+#include "cryptosystem/rsa_test.h"
 
 int main()
 {
     OpenSSL_add_all_algorithms();
+    DEBUG(generate_key_test);
+    DEBUG(get_keys_test);
 
-    generate_key_test();
-    get_keys_test();
     system("rm -rf ./.keys");
-    get_generate_keys_equality_test();
+    
+    DEBUG(get_generate_keys_equality_test);
+    DEBUG(verify_sign_test);
     return 0;
 }

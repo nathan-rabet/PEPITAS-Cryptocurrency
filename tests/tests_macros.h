@@ -1,5 +1,7 @@
-#define DEBUG() printf("Debugging '%s'\n", __FUNCTION__);
+#include <stdio.h>
 
-#define TEST_PASSED(name) printf("\033[0;32mTest ⟼ '%s' success [✓]\033[0m\n",name);
+#define DEBUG(function) function();
 
-#define TEST_FAILED(name, reason) printf("\033[0;31mTest '%s' failed [✗]\n\t⤷ Reason : %s\033[0m\n",name, reason); exit(1)
+#define TEST_PASSED(name) printf("\033[0;32mTEST → '%s' success [✓]\033[0m\n",name);
+
+#define TEST_FAILED(name, reason) printf("\033[0;31mTEST '%s' failed [✗]\n\t⤷ REASON : %s\033[0m\n",name, reason); exit(1)

@@ -1,4 +1,4 @@
-#include "core/cryptosystem/coding.h"
+#include "cryptosystem/signature.h"
 
 void sha256_string(char *string, char outputBuffer[65])
 {
@@ -21,7 +21,6 @@ void sign_message(char *msg, char **signature, size_t *signature_len)
     // Hash
     char *outputBuffer = malloc(65 * sizeof(char));
     sha256_string(msg, outputBuffer);
-    printf("output buffer sha256 sm: %s\n", outputBuffer);
 
     // enccrypt the message
     char *encrypt = malloc(RSA_size(wallet->priv_key));
@@ -42,7 +41,6 @@ void sign_message(char *msg, char **signature, size_t *signature_len)
         FILE *out = fopen("out.bin", "w");
         fwrite(encrypt, sizeof(*encrypt),  RSA_size(wallet->priv_key), out);
         fclose(out);
-        printf("Encrypted message written to file.\n");
     #endif
 }
 
@@ -51,7 +49,6 @@ char verify_sign(char *msg, char *signature, size_t signature_len, RSA* pub_key)
     // Hash
     char *outputBuffer = malloc(65 * sizeof(char));
     sha256_string(msg, outputBuffer);
-    printf("output buffer sha256 vs: %s\n", outputBuffer);
 
     // Decrypt the message
     char *decrypt = malloc(RSA_size(pub_key));

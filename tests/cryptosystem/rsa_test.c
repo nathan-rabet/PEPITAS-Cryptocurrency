@@ -2,8 +2,8 @@
 #include <openssl/sha.h>
 
 #include "tests_macros.h"
-#include "core/cryptosystem/coding.h"
-#include "core/cryptosystem/rsa.h"
+#include "cryptosystem/signature.h"
+#include "cryptosystem/rsa.h"
 #include "core/blockchain/wallet.h"
 #include "misc/safe.h"
 #include <fcntl.h>
@@ -103,6 +103,7 @@ void get_generate_keys_equality_test()
     {
         TEST_PASSED("Generate, then get keys equality test");
     }
-    else
+    else {
         TEST_FAILED("Generate, then get keys equality test", "The keys before and after are not equal");
+    }
 }

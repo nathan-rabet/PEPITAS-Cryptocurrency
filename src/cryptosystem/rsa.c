@@ -1,4 +1,4 @@
-#include "core/cryptosystem/rsa.h"
+#include "cryptosystem/rsa.h"
 #include "core/blockchain/wallet.h"
 #include <stdio.h>
 #include <time.h>
