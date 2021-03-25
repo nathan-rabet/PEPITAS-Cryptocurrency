@@ -22,7 +22,7 @@ int create_account() {
     generate_key();
 
     Transaction create_account_transaction = {0};
-    create_account_transaction.receiver_public_key = RSAPublicKey_dup(wallet->keypair);
+    //create_account_transaction.receiver_public_key = RSAPublicKey_dup(wallet->keypair);
     create_account_transaction.transaction_timestamp = time(NULL);
 
 
