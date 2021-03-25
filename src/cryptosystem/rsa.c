@@ -8,6 +8,8 @@
 #include <err.h>
 #include <errno.h>
 
+#define RSA_NUM_E 3
+
 // PUBLIC KEY : (n, e)
 // PRIVATE KEY: (n, d)
 void generate_key()
@@ -21,11 +23,11 @@ void generate_key()
         mkdir(".keys", 0700);
     }
 
-    if (!(access(".keys/rsa.pub", F_OK) == 0 && access(".keys/rsa", F_OK) == 0))
+    if (access(".keys/rsa.pub", F_OK) || access(".keys/rsa", F_OK))
     {
         // If there is no key
-        FILE *rsa_public_file = fopen("./.keys/rsa.pub","wb");
-        FILE *rsa_private_file = fopen("./.keys/rsa","wb");
+        FILE *rsa_public_file = fopen("./.keys/rsa.pub", "wb");
+        FILE *rsa_private_file = fopen("./.keys/rsa", "wb");
 
         if (!rsa_private_file || !rsa_public_file)
             err(errno, "Impossible to write '.keys/rsa.pub' and .keys/rsa files");
@@ -43,13 +45,13 @@ void generate_key()
     wallet->keypair = keypair;
 }
 
-void get_keys() {
+void get_keys()
+{
     if (!access(".keys/rsa.pub", F_OK) == 0 && access(".keys/rsa", F_OK) == 0)
         return generate_key();
-    
 
-    FILE *rsa_public_file = fopen("./.keys/rsa.pub","rb");
-    FILE *rsa_private_file = fopen("./.keys/rsa","rb");
+    FILE *rsa_public_file = fopen("./.keys/rsa.pub", "rb");
+    FILE *rsa_private_file = fopen("./.keys/rsa", "rb");
 
     Wallet *wallet = get_my_wallet();
     RSA* priv = PEM_read_RSAPrivateKey(rsa_private_file, NULL,NULL,NULL);

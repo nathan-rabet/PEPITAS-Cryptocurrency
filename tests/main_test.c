@@ -9,6 +9,7 @@
 
 int main()
 {
+    get_keys_test();
     OpenSSL_add_all_algorithms();
     create_account();
     char* msg = "Coucou bande de nouilles!";
@@ -25,5 +26,6 @@ int main()
         printf("Signature is false. :(\n");
     }
     
+    generate_key_test();
     return 0;
 }
