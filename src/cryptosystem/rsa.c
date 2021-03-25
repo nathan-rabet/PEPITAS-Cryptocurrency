@@ -51,8 +51,8 @@ void get_keys()
     if (!access(".keys/rsa.pub", F_OK) == 0 && access(".keys/rsa", F_OK) == 0)
         return generate_key();
 
-    FILE *rsa_public_file = fopen("./.keys/rsa.pub", "rb");
-    FILE *rsa_private_file = fopen("./.keys/rsa", "rb");
+    FILE *rsa_public_file = fopen(".keys/rsa.pub", "rb");
+    FILE *rsa_private_file = fopen(".keys/rsa", "rb");
 
     Wallet *wallet = get_my_wallet();
     wallet->priv_key = PEM_read_RSAPrivateKey(rsa_private_file, NULL,NULL,NULL);

@@ -5,6 +5,7 @@
 #include "core/cryptosystem/coding.h"
 #include "core/cryptosystem/rsa.h"
 #include "core/blockchain/wallet.h"
+#include "cryptosystem/rsa_test.h"
 #include <openssl/rsa.h>
 
 int main()

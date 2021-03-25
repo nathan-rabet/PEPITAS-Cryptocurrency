@@ -7,6 +7,9 @@
 #include "core/blockchain/wallet.h"
 #include "misc/safe.h"
 #include <fcntl.h>
+#include <math.h>
+#include <sys/stat.h>
+#include <unistd.h>
 
 void generate_key_test()
 {
@@ -23,99 +26,72 @@ void generate_key_test()
     }
 }
 
-#if 1
 void get_keys_test()
 {
     DEBUG();
 
+    struct stat st = {0};
+
+    if (stat("./~test", &st) == -1)
+    {
+        mkdir("~test", 0700);
+    }
+
+    // Generating keys
     generate_key();
-    EVP_PKEY *keys_before = EVP_PKEY_new();
-    EVP_PKEY *keys_after = EVP_PKEY_new();
 
+    FILE *rsa_generate_public_file = fopen("./~test/rsa_generate.pub", "w+");
+    FILE *rsa_generate_private_file = fopen("./~test/rsa_generate", "w+");
 
+    PEM_write_RSAPublicKey(rsa_generate_public_file, get_my_wallet()->pub_key);
+    PEM_write_RSAPrivateKey(rsa_generate_private_file, get_my_wallet()->priv_key, NULL, NULL, 0, NULL, NULL);
 
+    fseek(rsa_generate_public_file, 0, SEEK_END);
+    long rsa_generate_public_file_size = ftell(rsa_generate_public_file);
+    fseek(rsa_generate_public_file, 0, SEEK_SET);
 
+    fseek(rsa_generate_private_file, 0, SEEK_END);
+    long rsa_generate_private_file_size = ftell(rsa_generate_private_file);
+    fseek(rsa_generate_private_file, 0, SEEK_SET);
 
+    char *buff_public_generate = malloc(rsa_generate_public_file_size + 1);
+    char *buff_private_generate = malloc(rsa_generate_private_file_size + 1);
 
+    fread(buff_public_generate, 1, rsa_generate_public_file_size, rsa_generate_public_file);
+    fread(buff_private_generate, 1, rsa_generate_private_file_size, rsa_generate_private_file);
 
-
-
-
-    unsigned char pub1[0x11F11] = {0};
-    unsigned char priv1[0x11F11] = {0};
-    unsigned char pub2[0x11F11] = {0};
-    unsigned char priv2[0x11F11] = {0};
-
-    FILE * private_fd = fopen("~test/rsa", "w+");
-    FILE * public_fd = fopen("~test/rsa.pub", "w+");
-
-    if (PEM_write_RSAPrivateKey(private_fd, get_my_wallet()->keypair, NULL,0,0,NULL,NULL) == 1)
-        errx(EXIT_FAILURE,"Failed to write private key in file './test/rsa'");
-    if (PEM_write_RSAPublicKey(public_fd, get_my_wallet()->keypair) == 1)
-        errx(EXIT_FAILURE,"Failed to write public key in file './test/rsa.pub'");
-
-    safe_read(private_fd,&priv1,0x11F11);
-    safe_read(public_fd,&pub1,0x11F11);
-    fclose(private_fd);
-    fclose(public_fd);
-    
-    // Next key comp
+    // Getting keys (must be equal to generated keys)
     get_keys();
-    
-    private_fd = fopen("~test/rsa_get", "wr");
-    public_fd = fopen("~test/rsa_get.pub", "wr");
 
-    if (PEM_write_RSAPrivateKey(private_fd, get_my_wallet()->keypair, NULL,NULL,NULL,NULL,NULL) == 1)
-        errx(EXIT_FAILURE,"Failed to write private key in file './test/rsa_get'");
-    if (PEM_write_RSAPublicKey(public_fd, get_my_wallet()->keypair) == 1)
-        errx(EXIT_FAILURE,"Failed to write public key in file './test/rsa_get.pub'");
+    FILE *rsa_get_public_file = fopen("./~test/rsa_get.pub", "w+");
+    FILE *rsa_get_private_file = fopen("./~test/rsa_get", "w+");
 
-    safe_read(private_fd,&priv2,0x11F11);
-    safe_read(public_fd,&pub2,0x11F11);
-    fclose(private_fd);
-    fclose(public_fd);
+    PEM_write_RSAPublicKey(rsa_get_public_file, get_my_wallet()->pub_key);
+    PEM_write_RSAPrivateKey(rsa_get_private_file, get_my_wallet()->priv_key, NULL, NULL, 0, NULL, NULL);
 
-    if (strncmp(pub1, pub2,0x11F11) == 0 && strncmp(priv1, priv2,0x11F11) == 0)
+    fseek(rsa_get_public_file, 0, SEEK_END);
+    long rsa_get_public_file_size = ftell(rsa_get_public_file);
+    fseek(rsa_get_public_file, 0, SEEK_SET);
+
+    fseek(rsa_get_private_file, 0, SEEK_END);
+    long rsa_get_private_file_size = ftell(rsa_get_private_file);
+    fseek(rsa_get_private_file, 0, SEEK_SET);
+
+    char *buff_public_get = malloc(rsa_generate_public_file_size + 1);
+    char *buff_private_get = malloc(rsa_generate_private_file_size + 1);
+
+    fread(buff_public_get, 1, rsa_get_public_file_size, rsa_get_public_file);
+    fread(buff_private_get, 1, rsa_get_private_file_size, rsa_get_private_file);
+
+#define MAX(a, b) \
+    ({ __typeof__ (a) _a = (a); \
+       __typeof__ (b) _b = (b); \
+     _a > _b ? _a : _b; })
+
+    if (strncmp(buff_public_generate, buff_public_get, MAX(rsa_generate_public_file_size, rsa_get_public_file_size)) == 0 && strncmp(buff_private_generate, buff_private_get, MAX(rsa_generate_private_file_size, rsa_get_private_file_size)) == 0)
     {
         TEST_PASSED("GET : Check private/public keys equality");
     }
     else
         TEST_FAILED("GET : Check private/public keys equality", "The keys before and after are not equal");
 }
-
-#else
-void get_keys_test(){
-    DEBUG();
-
-    generate_key();
-    unsigned char pub1[0x11F11] = {0};
-    unsigned char priv1[0x11F11] = {0};
-    unsigned char pub2[0x11F11] = {0};
-    unsigned char priv2[0x11F11] = {0};
-
-    FILE * private_fd = fopen("~test/rsa", "w+");
-    FILE * public_fd = fopen("~test/rsa.pub", "w+");
-
-    if (PEM_write_RSAPrivateKey(private_fd, get_my_wallet()->keypair, NULL,0,0,NULL,NULL) == 1)
-        errx(EXIT_FAILURE,"Failed to write private key in file './test/rsa'");
-    if (PEM_write_RSAPublicKey(public_fd, get_my_wallet()->keypair) == 1)
-        errx(EXIT_FAILURE,"Failed to write public key in file './test/rsa.pub'");
-
-    safe_read(private_fd,&priv1,0x11F11);
-    safe_read(public_fd,&pub1,0x11F11);
-    fclose(private_fd);
-    fclose(public_fd);
-    
-    // Next key comp
-    get_keys();
-
-    private_fd = fopen("~test/rsa_get", "wr");
-    public_fd = fopen("~test/rsa_get.pub", "wr");
-
-    if (PEM_write_RSAPrivateKey(private_fd, get_my_wallet()->keypair, NULL,NULL,NULL,NULL,NULL) == 1)
-        errx(EXIT_FAILURE,"Failed to write private key in file './test/rsa_get'");
-    if (PEM_write_RSAPublicKey(public_fd, get_my_wallet()->keypair) == 1)
-        errx(EXIT_FAILURE,"Failed to write public key in file './test/rsa_get.pub'");
-
-}
-#endif
