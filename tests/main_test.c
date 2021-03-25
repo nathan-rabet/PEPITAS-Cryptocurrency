@@ -28,5 +28,22 @@ int main()
 
 
     char* msg = "Coucou bande de nouilles!";
+    char* signature;
+    sign_message(msg, &signature);
+    printf("Signature: ");
+    for (size_t i = 0; i < strlen(signature); i++)
+    {
+        printf("%c", signature[i]);
+    }
+    printf("\n");
+    if (verify_sign(msg, signature))
+    {
+        printf("Signature is true!\n");
+    }
+    else
+    {
+        printf("Signature is false. :(\n");
+    }
+    
     return 0;
 }
