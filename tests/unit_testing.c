@@ -16,5 +16,9 @@ int main()
 
     DEBUG(get_generate_keys_equality_test);
     DEBUG(verify_sign_test);
+
+    system("rm -rf ./.keys");
+    system("rm -rf ./~test");
+
     return 0;
 }
