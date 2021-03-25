@@ -18,7 +18,7 @@ Wallet* get_my_wallet() {
 
 int create_account() {
     
-    generate_key();
+    get_keys();
 
     //Transaction create_account_transaction = {0};
     //create_account_transaction.receiver_public_key = RSAPublicKey_dup(wallet->keypair);

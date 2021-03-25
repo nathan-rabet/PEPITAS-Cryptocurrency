@@ -11,20 +11,6 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-void generate_key_test()
-{
-    generate_key();
-
-    if (access(".keys/rsa.pub", F_OK) == 0 && access(".keys/rsa", F_OK) == 0 && get_my_wallet()->priv_key != NULL && get_my_wallet()->pub_key)
-    {
-        TEST_PASSED("Get private/public keys");
-    }
-    else
-    {
-        TEST_FAILED("Get private/public keys", "The files .keys/rsa and .keys/rsa.pub were not generated");
-    }
-}
-
 void get_keys_test()
 {
     get_keys();
@@ -35,11 +21,11 @@ void get_keys_test()
     }
     else
     {
-        TEST_FAILED("Generate private/public keys", "The files .keys/rsa and .keys/rsa.pub were not generated");
+        TEST_FAILED("Generate private/public keys", "The files .keys/rsa and .keys/rsa.pub were not generated or were not stored in memory while execution");
     }
 }
 
-void get_generate_keys_equality_test()
+void get_keys_equality_test()
 {
     struct stat st = {0};
 
@@ -49,7 +35,7 @@ void get_generate_keys_equality_test()
     }
 
     // Generating keys
-    generate_key();
+    get_keys();
 
     FILE *rsa_generate_public_file = fopen("./~test/rsa_generate.pub", "w+");
     FILE *rsa_generate_private_file = fopen("./~test/rsa_generate", "w+");
@@ -101,9 +87,9 @@ void get_generate_keys_equality_test()
 
     if (strncmp(buff_public_generate, buff_public_get, MAX(rsa_generate_public_file_size, rsa_get_public_file_size)) == 0 && strncmp(buff_private_generate, buff_private_get, MAX(rsa_generate_private_file_size, rsa_get_private_file_size)) == 0)
     {
-        TEST_PASSED("Generate, then get keys equality test");
+        TEST_PASSED("Generate, then get keys : equality test");
     }
     else {
-        TEST_FAILED("Generate, then get keys equality test", "The keys before and after are not equal");
+        TEST_FAILED("Generate, then get keys : equality test", "The keys before and after are not equal");
     }
 }
