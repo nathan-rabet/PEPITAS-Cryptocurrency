@@ -57,5 +57,6 @@ void get_keys()
     Wallet *wallet = get_my_wallet();
     wallet->priv_key = PEM_read_RSAPrivateKey(rsa_private_file, NULL,NULL,NULL);
     wallet->pub_key = PEM_read_RSAPublicKey(rsa_public_file, NULL,NULL,NULL);
-    
+    fclose(rsa_public_file);
+    fclose(rsa_private_file);
 }

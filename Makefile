@@ -10,11 +10,14 @@ OBJ += src/cryptosystem/rsa.c
 OBJ += src/core/blockchain/wallet.c
 OBJ += src/cryptosystem/coding.c
 
-OBJ_TEST = tests/main_test.c tests/cryptosystem/rsa_test.c
+OBJ_TEST = tests/unit_testing.c tests/cryptosystem/rsa_test.c
 
 all: test server client
 
 test: $(OBJ_TEST) ${OBJ}
+	${CC} ${CFLAGS} $^ -o test ${LDPARAMS}
+
+main_test: ${OBJ} tests/main_test.c
 	${CC} ${CFLAGS} $^ -o test ${LDPARAMS}
 
 server: tests/network/server_test.c ${OBJ}

@@ -13,10 +13,23 @@
 
 void generate_key_test()
 {
-    DEBUG();
     generate_key();
 
-    if (access(".keys/rsa.pub", F_OK) == 0 && access(".keys/rsa", F_OK) == 0)
+    if (access(".keys/rsa.pub", F_OK) == 0 && access(".keys/rsa", F_OK) == 0 && get_my_wallet()->priv_key != NULL && get_my_wallet()->pub_key)
+    {
+        TEST_PASSED("Get private/public keys");
+    }
+    else
+    {
+        TEST_FAILED("Get private/public keys", "The files .keys/rsa and .keys/rsa.pub were not generated");
+    }
+}
+
+void get_keys_test()
+{
+    get_keys();
+
+    if (access(".keys/rsa.pub", F_OK) == 0 && access(".keys/rsa", F_OK) == 0 && get_my_wallet()->priv_key != NULL && get_my_wallet()->pub_key)
     {
         TEST_PASSED("Generate private/public keys");
     }
@@ -26,10 +39,8 @@ void generate_key_test()
     }
 }
 
-void get_keys_test()
+void get_generate_keys_equality_test()
 {
-    DEBUG();
-
     struct stat st = {0};
 
     if (stat("./~test", &st) == -1)
@@ -90,8 +101,8 @@ void get_keys_test()
 
     if (strncmp(buff_public_generate, buff_public_get, MAX(rsa_generate_public_file_size, rsa_get_public_file_size)) == 0 && strncmp(buff_private_generate, buff_private_get, MAX(rsa_generate_private_file_size, rsa_get_private_file_size)) == 0)
     {
-        TEST_PASSED("GET : Check private/public keys equality");
+        TEST_PASSED("Generate, then get keys equality test");
     }
     else
-        TEST_FAILED("GET : Check private/public keys equality", "The keys before and after are not equal");
+        TEST_FAILED("Generate, then get keys equality test", "The keys before and after are not equal");
 }
