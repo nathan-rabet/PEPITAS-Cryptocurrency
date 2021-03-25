@@ -7,4 +7,6 @@
 // GENERATE KEY
 void generate_key();
 
+void get_keys();
+
 #endif
