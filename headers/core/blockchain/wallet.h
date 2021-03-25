@@ -8,7 +8,8 @@
 
 typedef struct Wallet
 {
-    RSA *keypair;
+    RSA *priv_key;
+    RSA *pub_key;
 
     size_t amount;
     bool is_validator;

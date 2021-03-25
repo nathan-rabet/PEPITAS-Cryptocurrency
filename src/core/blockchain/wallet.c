@@ -17,13 +17,12 @@ Wallet* get_my_wallet() {
 }
 
 int create_account() {
-    Wallet * wallet = get_my_wallet();
     
     generate_key();
 
-    Transaction create_account_transaction = {0};
+    //Transaction create_account_transaction = {0};
     //create_account_transaction.receiver_public_key = RSAPublicKey_dup(wallet->keypair);
-    create_account_transaction.transaction_timestamp = time(NULL);
+    //create_account_transaction.transaction_timestamp = time(NULL);
 
-
+    return 0;
 }
