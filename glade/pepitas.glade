@@ -1,0 +1,361 @@
+<?xml version="1.0"?>
+<interface>
+  <requires lib="gtk+" version="2.16"/>
+  <!-- interface-naming-policy project-wide -->
+  <object class="GtkListStore" id="liststoreTH">
+    <columns>
+      <!-- column-name Recipient -->
+      <column type="gchararray"/>
+      <!-- column-name Amount -->
+      <column type="glong"/>
+    </columns>
+  </object>
+  <object class="GtkListStore" id="liststoreCON">
+    <columns>
+      <!-- column-name contact_name -->
+      <column type="gchararray"/>
+      <!-- column-name public_key_CON -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
+  <object class="GtkWindow" id="Pepitas">
+    <child>
+      <object class="GtkNotebook" id="notebook1">
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <property name="show_border">False</property>
+        <child>
+          <object class="GtkFixed" id="fixed2">
+            <property name="visible">True</property>
+            <child>
+              <object class="GtkDrawingArea" id="drawingarea1">
+                <property name="width_request">303</property>
+                <property name="height_request">253</property>
+                <property name="visible">True</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label2">
+                <property name="width_request">116</property>
+                <property name="height_request">43</property>
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Balance:</property>
+              </object>
+              <packing>
+                <property name="x">360</property>
+                <property name="y">48</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="balance_2">
+                <property name="width_request">178</property>
+                <property name="height_request">37</property>
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">0</property>
+              </object>
+              <packing>
+                <property name="x">429</property>
+                <property name="y">47</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label3">
+                <property name="width_request">126</property>
+                <property name="height_request">31</property>
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Public key:</property>
+              </object>
+              <packing>
+                <property name="x">388</property>
+                <property name="y">144</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="public_key_label">
+                <property name="width_request">194</property>
+                <property name="height_request">32</property>
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">pkey</property>
+              </object>
+              <packing>
+                <property name="x">450</property>
+                <property name="y">139</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label7">
+                <property name="width_request">111</property>
+                <property name="height_request">38</property>
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Private key:</property>
+              </object>
+              <packing>
+                <property name="x">366</property>
+                <property name="y">204</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="private_key_label">
+                <property name="width_request">150</property>
+                <property name="height_request">38</property>
+                <property name="visible">True</property>
+                <property name="xalign">0.50999999046325684</property>
+                <property name="label" translatable="yes">privatekey</property>
+              </object>
+              <packing>
+                <property name="x">475</property>
+                <property name="y">203</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkToggleButton" id="show_pkey_but">
+                <property name="label" translatable="yes">Show key</property>
+                <property name="width_request">104</property>
+                <property name="height_request">34</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="xalign">0.50999999046325684</property>
+                <property name="yalign">0.52999997138977051</property>
+              </object>
+              <packing>
+                <property name="x">550</property>
+                <property name="y">267</property>
+              </packing>
+            </child>
+          </object>
+        </child>
+        <child type="tab">
+          <object class="GtkLabel" id="page1">
+            <property name="visible">True</property>
+            <property name="yalign">0.43999999761581421</property>
+            <property name="label" translatable="yes">Wallet</property>
+          </object>
+          <packing>
+            <property name="tab_fill">False</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkFixed" id="fixed1">
+            <property name="visible">True</property>
+            <child>
+              <object class="GtkEntry" id="transa_amount">
+                <property name="width_request">104</property>
+                <property name="height_request">28</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="invisible_char">&#x25CF;</property>
+              </object>
+              <packing>
+                <property name="x">139</property>
+                <property name="y">220</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label1">
+                <property name="width_request">140</property>
+                <property name="height_request">43</property>
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Amount of transaction:</property>
+                <property name="width_chars">11</property>
+              </object>
+              <packing>
+                <property name="x">122</property>
+                <property name="y">175</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="transa_but">
+                <property name="label" translatable="yes">Send Pepitas</property>
+                <property name="width_request">106</property>
+                <property name="height_request">35</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+              </object>
+              <packing>
+                <property name="x">311</property>
+                <property name="y">344</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label4">
+                <property name="width_request">106</property>
+                <property name="height_request">33</property>
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Recipient:</property>
+              </object>
+              <packing>
+                <property name="x">502</property>
+                <property name="y">61</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkEntry" id="recipient_key">
+                <property name="width_request">219</property>
+                <property name="height_request">31</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="invisible_char">&#x25CF;</property>
+              </object>
+              <packing>
+                <property name="x">454</property>
+                <property name="y">133</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label5">
+                <property name="width_request">87</property>
+                <property name="height_request">32</property>
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">By key:</property>
+              </object>
+              <packing>
+                <property name="x">367</property>
+                <property name="y">132</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label6">
+                <property name="width_request">96</property>
+                <property name="height_request">35</property>
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">From contacts:</property>
+              </object>
+              <packing>
+                <property name="x">353</property>
+                <property name="y">215</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkComboBox" id="combobox1">
+                <property name="width_request">218</property>
+                <property name="height_request">33</property>
+                <property name="visible">True</property>
+              </object>
+              <packing>
+                <property name="x">455</property>
+                <property name="y">221</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label">
+                <property name="width_request">140</property>
+                <property name="height_request">34</property>
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Balance:</property>
+              </object>
+              <packing>
+                <property name="x">69</property>
+                <property name="y">80</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="balance_1">
+                <property name="width_request">120</property>
+                <property name="height_request">28</property>
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">0</property>
+              </object>
+              <packing>
+                <property name="x">157</property>
+                <property name="y">84</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="error_label">
+                <property name="width_request">273</property>
+                <property name="height_request">39</property>
+                <property name="visible">True</property>
+              </object>
+              <packing>
+                <property name="x">226</property>
+                <property name="y">286</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child type="tab">
+          <object class="GtkLabel" id="page2">
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">Transaction</property>
+          </object>
+          <packing>
+            <property name="position">1</property>
+            <property name="tab_fill">False</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkFixed" id="fixed3">
+            <property name="visible">True</property>
+            <child>
+              <object class="GtkTreeView" id="treeview1">
+                <property name="width_request">612</property>
+                <property name="height_request">368</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="model">liststoreTH</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="position">2</property>
+          </packing>
+        </child>
+        <child type="tab">
+          <object class="GtkLabel" id="page4">
+            <property name="visible">True</property>
+            <property name="xpad">4</property>
+            <property name="label" translatable="yes">Transaction history</property>
+          </object>
+          <packing>
+            <property name="position">3</property>
+            <property name="tab_fill">False</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkFixed" id="fixed4">
+            <property name="visible">True</property>
+            <child>
+              <object class="GtkTreeView" id="treeview2">
+                <property name="width_request">669</property>
+                <property name="height_request">379</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="model">liststoreCON</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="position">3</property>
+          </packing>
+        </child>
+        <child type="tab">
+          <object class="GtkLabel" id="page3">
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">Contacts</property>
+          </object>
+          <packing>
+            <property name="position">3</property>
+            <property name="tab_fill">False</property>
+          </packing>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+        <child type="tab">
+          <placeholder/>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+        <child type="tab">
+          <placeholder/>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>
