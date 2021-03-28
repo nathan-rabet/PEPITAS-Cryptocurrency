@@ -20,8 +20,8 @@
 #define NB_HARD_CODED_ADDR 1
 static const Neighbour HARD_CODED_ADDR[] =
     {
-        {AF_INET, "34.72.117.116", 0, 0},
-        {AF_INET, "127.0.0.1", 0, 0}};
+        {AF_INET, "34.72.117.116", 0, 0}, // GCP SERVER
+        {AF_INET, "127.0.0.1", 0, 0}}; // LOCAL HOST
 
 // REQUESTS
 #define HD_GET_CLIENT_LIST "GET CLIENT LIST\r\n\r\n"
