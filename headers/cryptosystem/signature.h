@@ -18,7 +18,7 @@
  * @param len_data The len of the buffer
  * @return char[97] (on heap)
  */
-char * sha384_data(void *data, size_t len_data);
+char *sha384_data(void *data, size_t len_data);
 
 /**
  * @brief encrypt(SHA284(msg,len_data),priv_key)
@@ -58,6 +58,5 @@ int verify_block(Block block);
  * @return 1 if valid, 0 if not  
  */
 int verify_transaction(Transaction transaction);
-
 
 #endif
