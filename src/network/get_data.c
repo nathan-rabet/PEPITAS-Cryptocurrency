@@ -18,15 +18,14 @@ int process_header(char *header, int sockfd)
     if (strncmp(HD_GET_CLIENT_LIST, header, strlen(HD_GET_CLIENT_LIST)) == 0)
     {
         printf("Recived header HD_GET_CLIENT_LIST\n");
-        send_client_list(sockfd);
-        return 0;
+        return send_client_list(sockfd);
     }
     if (strncmp(HD_SEND_CLIENT_LIST, header, 8) == 0)
     {
         printf("Recived header HD_SEND_CLIENT_LIST\n");
-        fetch_client_list(sockfd);
-        return 0;
+        return fetch_client_list(sockfd);
     }
+    return 0;
 }
 
 int fetch_client_list(int neighbour_id)

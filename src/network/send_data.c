@@ -1,16 +1,18 @@
 #include "network/network.h"
 
-void send_client_list(int sockfd)
+int send_client_list(int sockfd)
 {
     Node *client_list = get_my_node();
 
-    safe_write(sockfd, HD_SEND_CLIENT_LIST, strlen(HD_SEND_CLIENT_LIST));
+    if (safe_write(sockfd, HD_SEND_CLIENT_LIST, strlen(HD_SEND_CLIENT_LIST)) == -1)
+        return -1;
 
     for (size_t index = 0; index < MAX_NEIGHBOURS; index++)
     {
         if (client_list->neighbours[index].hostname != NULL)
         {
-            safe_write(sockfd, (void *)&client_list->neighbours[index].family, sizeof(int));
+            if (safe_write(sockfd, (void *)&client_list->neighbours[index].family, sizeof(int)) == -1)
+                return -1;
 
             int hostname_size;
 
@@ -21,10 +23,12 @@ void send_client_list(int sockfd)
             // IPv6
             else
                 hostname_size = 39;
-            safe_write(sockfd, (void *)client_list->neighbours[index].hostname, hostname_size);
+            if (safe_write(sockfd, (void *)client_list->neighbours[index].hostname, hostname_size) == -1)
+                return -1;
         }
     }
 
     // END SENDING
-    safe_write(sockfd, "\r\n\r\n", 5);
+    return safe_write(sockfd, "\r\n\r\n", 5);
+    
 }

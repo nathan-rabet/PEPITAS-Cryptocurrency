@@ -33,4 +33,4 @@ client: src/client.c ${OBJ}
 .PHONY: clean test
 
 clean:
-	${RM} *.out test
+	${RM} *.out *.bin test

@@ -25,7 +25,7 @@ int init_server();
  * 
  * @param sockfd The socket FD
  */
-void send_client_list(int sockfd);
+int send_client_list(int sockfd);
 
 /**
  * @brief Send a block to a user via a socket FD
