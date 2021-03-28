@@ -51,5 +51,13 @@ int verify_sign(void *data, size_t data_len, char *signature, size_t signature_l
  */
 int verify_block(Block block);
 
+/**
+ * @brief Verify if a transaction signature is valid
+ * 
+ * @param transaction The transaction to verify
+ * @return 1 if valid, 0 if not  
+ */
+int verify_transaction(Transaction transaction);
+
 
 #endif
