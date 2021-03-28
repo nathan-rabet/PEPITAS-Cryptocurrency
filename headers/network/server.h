@@ -36,13 +36,4 @@ int send_client_list(int sockfd);
  */
 int send_block(Block block,int sockfd);
 
-/**
- * @brief Ping the server side of 'neighbour_id'
- * and delete it from struct Node if no response
- * 
- * @param neighbour_id 
- * @return 0 if sucess, -1 if not 
- */
-int ping_server(size_t neighbour_id);
-
 #endif

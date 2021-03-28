@@ -3,25 +3,19 @@
 #include "network/server.h"
 #include "network/send_data.h"
 #include "network/get_data.h"
+#include <thread.h>
 
+
+void * server_handler(void * arg) {
+    return (void *) init_server();
+}
 
 int main()
 {
-    // // Init client lists
-    // get_my_node();
-
-    // //
-    // set_neighbour(NULL, 0);
-
     get_my_node();
 
-    for (size_t i = 0; i < 10; i++)
-    {
-        get_my_node()->neighbours[i].hostname = "192.168.1.1";
-        get_my_node()->neighbours[i].family = AF_INET;
-    }    
-
-    init_server();
+    pthread_t server_instance;
+    pthread_create(&server_instance, NULL, server_handler, NULL);
 
     return 0;
 }

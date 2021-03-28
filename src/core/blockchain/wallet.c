@@ -21,8 +21,8 @@ int create_account() {
     get_keys();
 
     Transaction create_account_transaction = {0};
-    create_account_transaction.receiver_public_key = RSAPublicKey_dup(get_my_wallet()->pub_key);
-    create_account_transaction.transaction_timestamp = time(NULL);
+    create_account_transaction.transaction_data.receiver_public_key = RSAPublicKey_dup(get_my_wallet()->pub_key);
+    create_account_transaction.transaction_data.transaction_timestamp = time(NULL);
 
     return 0;
 }

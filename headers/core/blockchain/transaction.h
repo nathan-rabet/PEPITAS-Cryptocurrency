@@ -1,25 +1,29 @@
 #include <stdlib.h>
-#include <openssl/dsa.h>
+#include <openssl/rsa.h>
+#include <openssl/sha.h>
 #include <time.h>
-typedef struct Transaction
+typedef struct TransactionData
 {
     // All users area
-    RSA *sender_public_key; // The public key of the sender
-    RSA *receiver_public_key; // The public key of the receiver
+    RSA *sender_public_key;       // The public key of the sender
+    RSA *receiver_public_key;     // The public key of the receiver
     RSA *organisation_public_key; // The public key of the organisation which will receive a part of the fees
-    size_t amount; // The amount spent by the sender
+    size_t amount;                // The amount spent by the sender
     time_t transaction_timestamp; // The time when the transaction was crafted
 
     // Organisations: must indicates what you bought
     // Normal node: free 1024 bytes data
     char cause[512];
     char asset[512];
-} Transaction;
+} TransactionData;
 
-typedef struct PendingTransactionsLedger
+typedef struct Transaction
 {
+    TransactionData transaction_data; // Exclude the signature
 
-} PendingTransactionsLedger;
+    size_t signature_len;
+    char *transaction_signature; // SHA384 signature
+} Transaction;
 
 /**
  * @brief Send 'amount' money to 'receiver_public_key'.

@@ -1,67 +1,85 @@
+#include "core/blockchain/block.h"
 #include "cryptosystem/signature.h"
 
-void sha256_string(char *string, char outputBuffer[65])
+char *sha384_data(void *data, size_t len_data)
 {
-    unsigned char hash[SHA256_DIGEST_LENGTH];
-    SHA256_CTX sha256;
-    SHA256_Init(&sha256);
-    SHA256_Update(&sha256, string, strlen(string));
-    SHA256_Final(hash, &sha256);
+    unsigned char hash[SHA384_DIGEST_LENGTH];
+    SHA512_CTX sha384;
+    SHA384_Init(&sha384);
+    SHA384_Update(&sha384, data, len_data);
+    SHA384_Final(hash, &sha384);
+
+    char *output_buffer = malloc((2 * SHA384_DIGEST_LENGTH + 1) * sizeof(char));
     int i = 0;
-    for (i = 0; i < SHA256_DIGEST_LENGTH; i++)
+    for (i = 0; i < SHA384_DIGEST_LENGTH; i++)
     {
-        sprintf(outputBuffer + (i * 2), "%02x", hash[i]);
+        sprintf(output_buffer + (i * 2), "%02x", hash[i]);
     }
-    outputBuffer[64] = 0;
+    output_buffer[2 * SHA384_DIGEST_LENGTH] = '\0';
+    return output_buffer;
 }
 
-void sign_message(char *msg, char **signature, size_t *signature_len)
+char *sign_message(char *data, size_t len_data, size_t *signature_len)
 {
     Wallet *wallet = get_my_wallet();
     // Hash
-    char *outputBuffer = malloc(65 * sizeof(char));
-    sha256_string(msg, outputBuffer);
+    char *output_buffer = sha384_data(data, len_data);
 
-    // enccrypt the message
+    // encrypt the message
     char *encrypt = malloc(RSA_size(wallet->priv_key));
     ssize_t encrypt_len;
-    char *errmsg = malloc(130);
-    if ((encrypt_len = RSA_private_encrypt(strlen(outputBuffer) + 1, (unsigned char *)outputBuffer,
+    char errmsg[130];
+    if ((encrypt_len = RSA_private_encrypt(strlen(output_buffer) + 1, (unsigned char *)output_buffer,
                                            (unsigned char *)encrypt, wallet->priv_key, RSA_PKCS1_PADDING)) == -1)
     {
         ERR_load_crypto_strings();
         ERR_error_string(ERR_get_error(), errmsg);
         err(EXIT_FAILURE, "Error encrypting message: %s\n", errmsg);
     }
-    *signature = encrypt;
     *signature_len = encrypt_len;
-    free(errmsg);
-    #ifndef WRITE_TO_FILE
+#ifndef WRITE_TO_FILE
     // Write the encrypted message to a file
-        FILE *out = fopen("out.bin", "w");
-        fwrite(encrypt, sizeof(*encrypt),  RSA_size(wallet->priv_key), out);
-        fclose(out);
-    #endif
+    FILE *out = fopen("out.bin", "w");
+    fwrite(encrypt, sizeof(*encrypt), RSA_size(wallet->priv_key), out);
+    fclose(out);
+#endif
+    return encrypt;
 }
 
-char verify_sign(char *msg, char *signature, size_t signature_len, RSA* pub_key)
+int verify_sign(void *data, size_t data_len, char *signature, size_t signature_len, RSA *pub_key)
 {
     // Hash
-    char *outputBuffer = malloc(65 * sizeof(char));
-    sha256_string(msg, outputBuffer);
+    char *output_buffer = sha384_data(data, data_len);
 
     // Decrypt the message
     char *decrypt = malloc(RSA_size(pub_key));
-    char *errmsg = malloc(130);
+    char errmsg[130];
 
     if (RSA_public_decrypt(signature_len, (unsigned char *)signature, (unsigned char *)decrypt,
-                            pub_key, RSA_PKCS1_PADDING) == -1)
+                           pub_key, RSA_PKCS1_PADDING) == -1)
     {
         ERR_load_crypto_strings();
         ERR_error_string(ERR_get_error(), errmsg);
         err(EXIT_FAILURE, "Error decrypting message: %s\n", errmsg);
     }
-    free(errmsg);
 
-    return !strcmp(outputBuffer, decrypt);
+    return !strncmp(output_buffer, decrypt, SHA384_DIGEST_LENGTH * 2);
+}
+
+int verify_block(Block block)
+{
+    return verify_sign(&block.block_data,
+                       sizeof(BlockData),
+                       block.block_signature,
+                       block.signature_len,
+                       block.block_data.validator_public_key);
+}
+
+int verify_transaction(Transaction transaction)
+{
+    return verify_sign(&transaction.transaction_data,
+                       sizeof(Transaction),
+                       transaction.transaction_signature,
+                       transaction.signature_len,
+                       transaction.transaction_data.sender_public_key);
 }

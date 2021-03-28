@@ -94,15 +94,3 @@ int init_server()
 
     return sockfd;
 }
-
-int ping_server(size_t neighbour_id)
-{
-    if (send(
-            get_my_node()->neighbours[neighbour_id].server_sockfd,
-            HD_PING,
-            sizeof(HD_PING), 0
-            ) != -1)
-        return 0;
-    else 
-        return -1;
-}
