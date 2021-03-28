@@ -27,5 +27,5 @@ void network_test()
     {
         TEST_FAILED("Connect to server", "listen_to(0) returned -1");
     }
-    read_header(get_my_node()->neighbours->client_sockfd);
+    fetch_client_list(0);
 }

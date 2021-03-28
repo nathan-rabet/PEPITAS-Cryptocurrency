@@ -24,10 +24,10 @@ test: $(OBJ_TEST) ${OBJ}
 main_test: ${OBJ} tests/main_test.c
 	${CC} ${CFLAGS} $^ -o test ${LDPARAMS}
 
-server: tests/network/server_test.c ${OBJ}
+server: src/server.c ${OBJ}
 	${CC} ${CFLAGS} -Wall $^ -o server.out ${LDPARAMS}
 
-client: tests/network/client_test.c ${OBJ}
+client: src/client.c ${OBJ}
 	${CC} ${CFLAGS} -Wall $^ -o client.out ${LDPARAMS}
 
 .PHONY: clean test
