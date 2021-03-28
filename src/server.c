@@ -4,8 +4,9 @@
 
 int main()
 {
-    if (set_neighbour(NULL, 0) != 0)
-        errx(EXIT_FAILURE,"Failed to load neighbours\n");
+    set_neighbour(NULL, 0);
+    get_my_node()->neighbours->hostname = "192.168.1.1";
+    get_my_node()->neighbours->family = AF_INET;
     
     return init_server();
 }
