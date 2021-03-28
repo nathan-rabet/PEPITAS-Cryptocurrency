@@ -25,8 +25,8 @@ static const Neighbour HARD_CODED_ADDR[] =
 
 // REQUESTS
 #define HD_GET_CLIENT_LIST "GET CLIENT LIST\r\n\r\n"
-#define HD_SEND_CLIENT_LIST "SEND CLIENT LIST\r\n\r\n"
+#define HD_SEND_CLIENT_LIST "SEND CLIENT LIST\n"
 #define HD_GET_BLOCKCHAIN "GET BLOCKCHAIN\r\n\r\n"
-#define HD_SEND_BLOCKCHAIN "SEND BLOCKCHAIN\r\n\r\n"
+#define HD_SEND_BLOCKCHAIN "SEND BLOCKCHAIN\n"
 #define HD_PING "PING \r\n\r\n"
 #endif

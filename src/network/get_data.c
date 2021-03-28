@@ -48,15 +48,12 @@ int fetch_client_list(int neighbour_id)
     // Get the list
     nb_read = safe_read(my_node->neighbours[neighbour_id].client_sockfd, (void *)&buffer, &buffer_size);
 
-    if (nb_read == -1)
-    {
-        dprintf(STDERR_FILENO, "Error while reading socket data");
+    if (nb_read == -1 || strncmp(HD_SEND_CLIENT_LIST,buffer,strlen(HD_SEND_CLIENT_LIST)) != 0)
         return -1;
-    }
 
-    ssize_t buffer_index = 0;
+    ssize_t buffer_index = strlen(HD_SEND_CLIENT_LIST);
 
-    for (size_t index = 0; index < MAX_NEIGHBOURS; index++)
+    for (size_t index = 0; index < MAX_NEIGHBOURS && strncmp("\r\n\r\n",buffer + buffer_index, 4); index++)
     {
         if (my_node->neighbours[index].hostname == NULL)
         {
