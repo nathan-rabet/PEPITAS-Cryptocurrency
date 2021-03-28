@@ -82,6 +82,7 @@ int fetch_client_list(int neighbour_id)
     }
 
     free(buffer);
+    return 0;
 }
 
 int read_header(int sockfd)
