@@ -1,3 +1,5 @@
+#include <stddef.h>
+
 #ifndef CLIENT_H
 #define CLIENT_H
 
@@ -7,47 +9,45 @@ typedef struct Neighbour
 {
     int family;     // Use AF_* for IPv4, IPv6 or other addrinfo fields
     char *hostname; // The adress of the neighbours; NULL if free
+    int server_sockfd; // The socket to SEND data
+    int client_sockfd; // The socket to GET data
 } Neighbour;
 
-typedef struct Client
+typedef struct Node
 {
     Neighbour *neighbours; // Neighbours list
-} Client;
-
-typedef struct Connection_state
-{
-    char is_connected;
-    int sockfd;
-} Connection_state;
-
-Client* get_client();
+} Node;
 
 /**
- * @brief Sets some neighbours in the client.neightbours section
+ * @brief Get the my node object
+ * 
+ * @return Node* 
+ */
+Node* get_my_node();
+
+/**
+ * @brief Sets a neighbour in the client.neightbours section
  * 
  * @return 0 if sucess, -1 if not 
  */
-int set_neighbours(char *hostname, int family);
+int set_neighbour(char *hostname, int family);
 
 /**
  * @brief Try to connect to the peer-to-peer network 
- * via a node in the Client structure
+ * via a node in the Node structure
  * 
+ * @param neighbour_id The neighbour index (in struct Node) to connect with
  * @return socket FD or -1 if error
  */
-int connect_to_network(int client_to_connect_id);
+int listen_to(size_t neighbour_id);
 
 /**
- * @brief Set the client data object from a socket 
- * in the client->neighbours list
+ * @brief Ping the client side of 'neighbour_id'
+ * and delete it from struct Node if no response
  * 
- * @param sockfd The socket FD
+ * @param neighbour_id 
+ * @return 0 if sucess, -1 if not
  */
-void wait_header(int sockfd);
-
-
-void read_header(char *buf, int sockfd);
-
-void recive_client_list(int sockfd);
+int ping_client(size_t neighbour_id);
 
 #endif

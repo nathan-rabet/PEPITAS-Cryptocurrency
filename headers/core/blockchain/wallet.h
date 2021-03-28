@@ -12,7 +12,7 @@ typedef struct Wallet
     RSA *pub_key;
 
     size_t amount;
-    bool is_validator;
+    char is_validator;
 } Wallet;
 
 /**
@@ -21,5 +21,13 @@ typedef struct Wallet
  * @return Wallet 
  */
 Wallet* get_my_wallet();
+
+/**
+ * @brief Create a account in local 
+ * and broadcast the creation to the network
+ * 
+ * @return 0 if the broadcast succeed, else 1
+ */
+int create_account();
 
 #endif

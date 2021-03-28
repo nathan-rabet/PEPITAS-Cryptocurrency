@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -I"headers" -I"tests" -Wextra -g -pthread 
+CFLAGS = -I"headers" -I"tests" -Wextra -g -pthread
 
 LDPARAMS = -L . -lcrypto -lssl
 
@@ -9,6 +9,9 @@ OBJ += src/misc/safe.c
 OBJ += src/cryptosystem/rsa.c
 OBJ += src/core/blockchain/wallet.c
 OBJ += src/cryptosystem/signature.c
+OBJ += src/network/send_data.c
+OBJ += src/network/get_data.c
+
 
 OBJ_TEST = tests/unit_testing.c tests/cryptosystem/rsa_test.c tests/cryptosystem/signature_test.c
 

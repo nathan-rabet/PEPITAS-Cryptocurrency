@@ -17,12 +17,16 @@
 #define STATIC_PORT "8080"
 #define REQUEST_HEADER_SIZE 256
 
-static const Neighbour HARD_CODED_ADDR[] = {
-    {AF_INET, "127.0.0.1"}};
+#define NB_HARD_CODED_ADDR 1
+static const Neighbour HARD_CODED_ADDR[] =
+    {
+        {AF_INET, "34.72.117.116", 0, 0},
+        {AF_INET, "127.0.0.1", 0, 0}};
 
-// HEADERS
+// REQUESTS
 #define HD_GET_CLIENT_LIST "GET CLIENT LIST\r\n\r\n"
-#define HD_REC_CLIENT_LIST "REC CLIENT LIST\r\n\r\n"
+#define HD_SEND_CLIENT_LIST "SEND CLIENT LIST\r\n\r\n"
 #define HD_GET_BLOCKCHAIN "GET BLOCKCHAIN\r\n\r\n"
-#define HD_REC_BLOCKCHAIN "REC BLOCKCHAIN\r\n\r\n"
+#define HD_SEND_BLOCKCHAIN "SEND BLOCKCHAIN\r\n\r\n"
+#define HD_PING "PING \r\n\r\n"
 #endif

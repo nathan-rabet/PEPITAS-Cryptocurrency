@@ -39,10 +39,6 @@ int init_server()
     hints.ai_family = AF_UNSPEC;     //IPV4 only
     hints.ai_socktype = SOCK_STREAM; //TCP
     hints.ai_flags = AI_PASSIVE;     //Server
-    hints.ai_protocol = 0;
-    hints.ai_canonname = NULL;
-    hints.ai_addr = NULL;
-    hints.ai_next = NULL;
 
     // Get info
     addrinfo_error = getaddrinfo(NULL, STATIC_PORT, &hints, &result);
@@ -98,22 +94,14 @@ int init_server()
     return sockfd;
 }
 
-void send_client_list(int sockfd)
+int ping_server(size_t neighbour_id)
 {
-    Client *client_list = get_client();
-
-    printf("Sending client list...\n");
-    safe_write(sockfd, HD_REC_CLIENT_LIST, 20);
-
-    for (size_t index = 0; index < MAX_NEIGHBOURS; index++)
-    {
-        if (client_list->neighbours[index].hostname != NULL)
-        {
-            safe_write(sockfd, (void *)&client_list->neighbours[index].family, sizeof(int));
-            safe_write(sockfd, (void *)client_list->neighbours[index].hostname, sizeof(char) * 16);
-        }
-    }
-
-    // END SENDING
-    safe_write(sockfd, "\r\n\r\n", 5);
+    if (send(
+            get_my_node()->neighbours[neighbour_id].server_sockfd,
+            HD_PING,
+            sizeof(HD_PING), 0
+            ) != -1)
+        return 0;
+    else 
+        return -1;
 }

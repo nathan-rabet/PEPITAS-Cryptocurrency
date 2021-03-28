@@ -89,7 +89,8 @@ void get_keys_equality_test()
     {
         TEST_PASSED("Generate, then get keys : equality test");
     }
-    else {
+    else
+    {
         TEST_FAILED("Generate, then get keys : equality test", "The keys before and after are not equal");
     }
 }

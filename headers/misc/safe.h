@@ -17,7 +17,7 @@
 int safe_write(int fd, const void *buf, ssize_t count);
 
 /**
- * @brief Read safely in a file descriptor until \r\n\r\n
+ * @brief Read safely in a file descriptor until '\\r\\n\\r\\n'
  * 
  * @param fd The file descriptor
  * @param buf The buffer which contains the message
