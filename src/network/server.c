@@ -1,5 +1,6 @@
 #include "network/server.h"
 #include "network/client.h"
+#include "network/get_data.h"
 #include "network/network.h"
 #include "misc/safe.h"
 
@@ -19,7 +20,7 @@ void *accept_connection(void *arg)
 
     printf("New connection: '%s'\n", ip_str);
 
-    send_client_list(clientfd);
+    read_header(clientfd);
 
     close(clientfd);
     free(arg);
