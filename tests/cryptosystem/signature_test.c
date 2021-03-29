@@ -6,7 +6,7 @@ void verify_sign_test()
     char *msg = "Coucou bande de nouilles!";
     size_t signature_len;
     char *signature = sign_message(msg, strlen(msg), &signature_len);
-    if (verify_sign(msg, strlen(msg), signature, signature_len, get_my_wallet()->pub_key))
+    if (verify_signature(msg, strlen(msg), signature, signature_len, get_my_wallet()->pub_key))
     {
         TEST_PASSED("Message verification");
     }
@@ -16,7 +16,7 @@ void verify_sign_test()
     }
 
     char *wrong_msg = "Mauvaise signature, celà doit retourner";
-    if (!verify_sign(wrong_msg, strlen(wrong_msg), signature, signature_len, get_my_wallet()->pub_key))
+    if (!verify_signature(wrong_msg, strlen(wrong_msg), signature, signature_len, get_my_wallet()->pub_key))
     {
         TEST_PASSED("Wrong message non-validation");
     }

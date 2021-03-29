@@ -41,7 +41,7 @@ char *sign_message(char *data, size_t len_data, size_t *signature_len);
  * @param pub_key The RSA public key used for the decryption
  * @return int 
  */
-int verify_sign(void *data, size_t data_len, char *signature, size_t signature_len, RSA *pub_key);
+int verify_signature(void *data, size_t data_len, char *signature, size_t signature_len, RSA *pub_key);
 
 /**
  * @brief Verify if a block signature is valid
@@ -49,7 +49,7 @@ int verify_sign(void *data, size_t data_len, char *signature, size_t signature_l
  * @param block The block to verify
  * @return 1 if valid, 0 if not  
  */
-int verify_block(Block block);
+int verify_block_signature(Block block);
 
 /**
  * @brief Verify if a transaction signature is valid
@@ -57,6 +57,6 @@ int verify_block(Block block);
  * @param transaction The transaction to verify
  * @return 1 if valid, 0 if not  
  */
-int verify_transaction(Transaction transaction);
+int verify_transaction_signature(Transaction transaction);
 
 #endif

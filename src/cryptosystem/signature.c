@@ -46,7 +46,7 @@ char *sign_message(char *data, size_t len_data, size_t *signature_len)
     return encrypt;
 }
 
-int verify_sign(void *data, size_t data_len, char *signature, size_t signature_len, RSA *pub_key)
+int verify_signature(void *data, size_t data_len, char *signature, size_t signature_len, RSA *pub_key)
 {
     // Hash
     char *output_buffer = sha384_data(data, data_len);
@@ -66,18 +66,18 @@ int verify_sign(void *data, size_t data_len, char *signature, size_t signature_l
     return !strncmp(output_buffer, decrypt, SHA384_DIGEST_LENGTH * 2);
 }
 
-int verify_block(Block block)
+int verify_block_signature(Block block)
 {
-    return verify_sign(&block.block_data,
+    return verify_signature(&block.block_data,
                        sizeof(BlockData),
                        block.block_signature,
                        block.signature_len,
                        block.block_data.validator_public_key);
 }
 
-int verify_transaction(Transaction transaction)
+int verify_transaction_signature(Transaction transaction)
 {
-    return verify_sign(&transaction.transaction_data,
+    return verify_signature(&transaction.transaction_data,
                        sizeof(Transaction),
                        transaction.transaction_signature,
                        transaction.signature_len,
