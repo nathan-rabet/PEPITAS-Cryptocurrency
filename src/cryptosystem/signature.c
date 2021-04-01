@@ -125,7 +125,7 @@ char *convert_blockdata_to_data(Block block, size_t *index)
     }
 
 #if TEST
-    printf("Buffer: %li\nIndex:  %lu\n", BLOCK_SIZE + RSA_size(block.block_data.validator_public_key) + block.block_data.nb_transactions * (TRANSACTION_SIZE + RSA_size(block.block_data.transactions[0].transaction_data.organisation_public_key) + RSA_size(block.block_data.transactions[0].transaction_data.receiver_public_key) + RSA_size(block.block_data.transactions[0].transaction_data.sender_public_key)), *index);
+    printf("Buffer: %li\nIndex:  %lu\n", BLOCK_DATA_SIZE + RSA_size(block.block_data.validator_public_key) + block.block_data.nb_transactions * (TRANSACTION_SIZE + RSA_size(block.block_data.transactions[0].transaction_data.organisation_public_key) + RSA_size(block.block_data.transactions[0].transaction_data.receiver_public_key) + RSA_size(block.block_data.transactions[0].transaction_data.sender_public_key)), *index);
 #endif
 
     return blockdata;
@@ -148,7 +148,7 @@ int verify_transaction_signature(Transaction transaction)
 {
     size_t size = 0;
     char *buf = NULL;
-    convert_transactiondata_to_data(&transaction, buf, &size);
+    convert_transactiondata_to_data(&transaction.transaction_data, buf, &size);
     int ret = verify_signature(&transaction.transaction_data,
                             size,
                             transaction.transaction_signature,
@@ -156,4 +156,37 @@ int verify_transaction_signature(Transaction transaction)
                             transaction.transaction_data.sender_public_key);
     free(buf);
     return ret;
+}
+
+void sign_block(Block *block)
+{
+    if (block->block_signature != NULL)
+    {
+        printf("ERROR: Block already sign\n");
+        return;
+    }
+    size_t size = 0;
+    char *buf = convert_blockdata_to_data(*block, &size);
+    block->block_signature = sign_message(buf, size, &block->signature_len);
+}
+
+void sign_transaction(Transaction *transaction)
+{
+    if (transaction->transaction_signature != NULL)
+    {
+        printf("ERROR: Transaction already sign\n");
+        return;
+    }
+    size_t size = 0;
+    char *buf = malloc(TRANSACTION_DATA_SIZE + RSA_size(transaction->transaction_data.organisation_public_key) + RSA_size(transaction->transaction_data.receiver_public_key) + RSA_size(transaction->transaction_data.sender_public_key));
+    convert_transactiondata_to_data(&transaction->transaction_data, buf, &size);
+    transaction->transaction_signature = sign_message(buf, size, &transaction->signature_len);
+}
+
+void sign_block_transactions(Block *block)
+{
+    for (size_t i = 0; i < block->block_data.nb_transactions; i++)
+    {
+        sign_transaction(block->block_data.transactions);
+    }
 }

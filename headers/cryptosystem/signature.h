@@ -52,26 +52,12 @@ int verify_signature(void *data, size_t data_len, char *signature, size_t signat
 int verify_block_signature(Block block);
 
 /**
- * @brief Sign a block
- * 
- * @param block The block to sign
- */
-void sign_block(Block block);
-
-/**
  * @brief Verify if a transaction signature is valid
  * 
  * @param transaction The transaction to verify
  * @return 1 if valid, 0 if not  
  */
 int verify_transaction_signature(Transaction transaction);
-
-/**
- * @brief Sign a block
- * 
- * @param block The block to sign
- */
-void sign_transaction(Block block);
 
 /**
  * @brief Convert transactions to char * buffer
@@ -92,4 +78,25 @@ char *convert_transactions_to_data(Transaction *transactions, size_t nb_trans);
  * @return The buffer allocated (Must free)
  */
 char *convert_blockdata_to_data(Block block, size_t *index);
+
+/**
+ * @brief Sign a block
+ * 
+ * @param block The block to sign
+ */
+void sign_block(Block *block);
 #endif
+
+/**
+ * @brief Sign a transaction
+ * 
+ * @param transaction The transaction to sign
+ */
+void sign_transaction(Transaction *transaction);
+
+/**
+ * @brief Sign transactions of a bloxk
+ * 
+ * @param block The block to sign
+ */
+void sign_block_transactions(Block *block);
