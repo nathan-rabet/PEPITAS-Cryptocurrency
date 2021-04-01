@@ -85,7 +85,6 @@ char *convert_blockdata_to_data(Block block, size_t *index);
  * @param block The block to sign
  */
 void sign_block(Block *block);
-#endif
 
 /**
  * @brief Sign a transaction
@@ -100,3 +99,4 @@ void sign_transaction(Transaction *transaction);
  * @param block The block to sign
  */
 void sign_block_transactions(Block *block);
+#endif
