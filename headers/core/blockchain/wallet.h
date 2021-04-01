@@ -30,4 +30,5 @@ Wallet* get_my_wallet();
  */
 int create_account();
 
+#define malloc(x) malloc(x/8)
 #endif
