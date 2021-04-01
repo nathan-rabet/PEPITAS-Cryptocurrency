@@ -73,4 +73,23 @@ int verify_transaction_signature(Transaction transaction);
  */
 void sign_transaction(Block block);
 
+/**
+ * @brief Convert transactions to char * buffer
+ * 
+ * @param transactions The transaction array
+ * @param nb_trans The number of transactions in the array
+ *
+ * @return The buffer allocated (Must free)
+ */
+char *convert_transactions_to_data(Transaction *transactions, size_t nb_trans);
+
+/**
+ * @brief Convert a blockdata to char * buffer
+ * 
+ * @param block The block to convert
+ * @param index return the size of the buff
+ *
+ * @return The buffer allocated (Must free)
+ */
+char *convert_blockdata_to_data(Block block, size_t *index);
 #endif
