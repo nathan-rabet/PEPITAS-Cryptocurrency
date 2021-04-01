@@ -5,6 +5,9 @@
 #include <openssl/sha.h>
 #include "transaction.h"
 
+#define BLOCK_DATA_SIZE (SHA384_DIGEST_LENGTH * 2 + 1) + sizeof(size_t) + sizeof(uint16_t) + sizeof(time_t)
+#define BLOCK_SIZE 2048 + sizeof(size_t) + BLOCK_DATA_SIZE + SHA384_DIGEST_LENGTH * 2 + 1
+
 #define MAX_TRANSACTIONS_PER_BLOCK 65535
 #define NB_BLOCK_PER_CHUNK 10000
 

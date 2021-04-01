@@ -8,8 +8,8 @@
 #include <openssl/ssl3.h>
 #include <openssl/rsa.h>
 #include <openssl/err.h>
-#include "core/blockchain/wallet.h"
-#include "core/blockchain/block.h"
+#include "../core/blockchain/wallet.h"
+#include "../core/blockchain/block.h"
 
 /**
  * @brief Apply the SHA384 algorithm on a 'data' of size 'len_data'
@@ -52,11 +52,25 @@ int verify_signature(void *data, size_t data_len, char *signature, size_t signat
 int verify_block_signature(Block block);
 
 /**
+ * @brief Sign a block
+ * 
+ * @param block The block to sign
+ */
+void sign_block(Block block);
+
+/**
  * @brief Verify if a transaction signature is valid
  * 
  * @param transaction The transaction to verify
  * @return 1 if valid, 0 if not  
  */
 int verify_transaction_signature(Transaction transaction);
+
+/**
+ * @brief Sign a block
+ * 
+ * @param block The block to sign
+ */
+void sign_transaction(Block block);
 
 #endif

@@ -2,6 +2,10 @@
 #include <openssl/rsa.h>
 #include <openssl/sha.h>
 #include <time.h>
+
+#define TRANSACTION_DATA_SIZE sizeof(size_t) + sizeof(time_t) + (512*2)
+#define TRANSACTION_SIZE sizeof(size_t) + 2048 + TRANSACTION_DATA_SIZE
+
 typedef struct TransactionData
 {
     // All users area

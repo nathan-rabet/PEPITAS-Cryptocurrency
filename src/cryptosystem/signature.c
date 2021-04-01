@@ -1,5 +1,6 @@
 #include "core/blockchain/block.h"
 #include "cryptosystem/signature.h"
+#include <string.h>
 
 char *sha384_data(void *data, size_t len_data)
 {
@@ -37,7 +38,7 @@ char *sign_message(char *data, size_t len_data, size_t *signature_len)
         err(EXIT_FAILURE, "Error encrypting message: %s\n", errmsg);
     }
     *signature_len = encrypt_len;
-#ifndef WRITE_TO_FILE
+#if TEST
     // Write the encrypted message to a file
     FILE *out = fopen("out.bin", "w");
     fwrite(encrypt, sizeof(*encrypt), RSA_size(wallet->priv_key), out);
@@ -65,21 +66,83 @@ int verify_signature(void *data, size_t data_len, char *signature, size_t signat
 
     return !strncmp(output_buffer, decrypt, SHA384_DIGEST_LENGTH * 2);
 }
+void convert_transaction_data_to_data(TransactionData *transaction, char *buffer, size_t *index)
+{
+    memcpy(buffer + *index, transaction->sender_public_key, RSA_size(transaction->sender_public_key));
+    *index += RSA_size(transaction->sender_public_key);
+    memcpy(buffer + *index, transaction->receiver_public_key, RSA_size(transaction->receiver_public_key));
+    *index += RSA_size(transaction->receiver_public_key);
+    memcpy(buffer + *index, transaction->organisation_public_key, RSA_size(transaction->organisation_public_key));
+    *index += RSA_size(transaction->organisation_public_key);
+    memcpy(buffer + *index, &transaction->amount, sizeof(size_t));
+    *index += sizeof(size_t);
+    memcpy(buffer + *index, &transaction->transaction_timestamp, sizeof(time_t));
+    *index += sizeof(time_t);
+    memcpy(buffer + *index, transaction->cause, 512);
+    *index += 512;
+    memcpy(buffer + *index, transaction->asset, 512);
+    *index += 512;
+}
+void convert_transaction_to_data(Transaction *transaction, char *buffer, size_t *index)
+{
+    buffer = realloc(buffer, *index + TRANSACTION_SIZE + RSA_size(transaction->transaction_data.organisation_public_key) + RSA_size(transaction->transaction_data.receiver_public_key) + RSA_size(transaction->transaction_data.sender_public_key));
+    convert_transaction_data_to_data(&transaction->transaction_data, buffer, index);
+    memcpy(buffer + *index, &transaction->signature_len, sizeof(size_t));
+    *index += sizeof(size_t);
+    memcpy(buffer + *index, transaction->transaction_signature, transaction->signature_len);
+    *index += transaction->signature_len;
+}
+
+char *convert_block_to_data(Block block)
+{
+    // IGNORE BLOCK PREV AND NEXT BECAUSE RECUP ADDR AT PARSING
+    char *blockdata = malloc(BLOCK_SIZE + RSA_size(block.block_data.validator_public_key));
+    size_t index = 0;
+    // Block
+    memcpy(blockdata + index, block.next_block_hash, 97);
+    index += 97;
+    memcpy(blockdata + index, &block.signature_len, sizeof(size_t));
+    index += sizeof(size_t);
+    memcpy(blockdata + index, block.block_signature, block.signature_len);
+    index += block.signature_len;
+    // Blockdata
+    memcpy(blockdata + index, block.block_data.previous_block_hash, 97);
+    index += 97;
+    memcpy(blockdata + index, &block.block_data.height, sizeof(size_t));
+    index += sizeof(size_t);
+    memcpy(blockdata + index, &block.block_data.nb_transactions, sizeof(uint16_t));
+    index += sizeof(uint16_t);
+    memcpy(blockdata + index, block.block_data.validator_public_key, RSA_size(block.block_data.validator_public_key));
+    index += RSA_size(block.block_data.validator_public_key);
+    memcpy(blockdata + index, &block.block_data.block_timestamp, sizeof(time_t));
+    index += sizeof(time_t);
+    for (size_t i = 0; i < block.block_data.nb_transactions; i++)
+    {
+        convert_transaction_to_data(block.block_data.transactions + i, blockdata, &index);
+    }
+
+#if TEST
+    printf("Buffer: %li\nIndex:  %lu\n", BLOCK_SIZE + RSA_size(block.block_data.validator_public_key) + block.block_data.nb_transactions * (TRANSACTION_SIZE + RSA_size(block.block_data.transactions[0].transaction_data.organisation_public_key) + RSA_size(block.block_data.transactions[0].transaction_data.receiver_public_key) + RSA_size(block.block_data.transactions[0].transaction_data.sender_public_key)), index);
+#endif
+
+    return NULL;
+}
 
 int verify_block_signature(Block block)
 {
+    convert_block_to_data(block);
     return verify_signature(&block.block_data,
-                       sizeof(BlockData),
-                       block.block_signature,
-                       block.signature_len,
-                       block.block_data.validator_public_key);
+                            sizeof(BlockData),
+                            block.block_signature,
+                            block.signature_len,
+                            block.block_data.validator_public_key);
 }
 
 int verify_transaction_signature(Transaction transaction)
 {
     return verify_signature(&transaction.transaction_data,
-                       sizeof(Transaction),
-                       transaction.transaction_signature,
-                       transaction.signature_len,
-                       transaction.transaction_data.sender_public_key);
+                            sizeof(Transaction),
+                            transaction.transaction_signature,
+                            transaction.signature_len,
+                            transaction.transaction_data.sender_public_key);
 }
