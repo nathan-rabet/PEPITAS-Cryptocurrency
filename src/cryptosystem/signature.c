@@ -187,6 +187,7 @@ void sign_block_transactions(Block *block)
 {
     for (size_t i = 0; i < block->block_data.nb_transactions; i++)
     {
+        
         sign_transaction(block->block_data.transactions);
     }
 }

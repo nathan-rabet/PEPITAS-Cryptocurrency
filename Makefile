@@ -25,7 +25,7 @@ main_test: ${OBJ} tests/main_test.c
 	${CC} ${CFLAGS} $^ -o test ${LDPARAMS}
 
 server: src/server.c ${OBJ}
-	${CC} ${CFLAGS} -Wall $^ -o server.out ${LDPARAMS} -D TEST
+	${CC} ${CFLAGS} -Wall $^ -o server.out ${LDPARAMS}
 
 client: src/client.c ${OBJ}
 	${CC} ${CFLAGS} -Wall $^ -o client.out ${LDPARAMS}

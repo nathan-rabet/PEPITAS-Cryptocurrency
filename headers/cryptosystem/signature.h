@@ -42,7 +42,7 @@ char *sign_message(char *data, size_t len_data, size_t *signature_len);
  * @return int 
  */
 int verify_signature(void *data, size_t data_len, char *signature, size_t signature_len, RSA *pub_key);
-
+#undef NULL
 /**
  * @brief Verify if a block signature is valid
  * 
@@ -68,7 +68,7 @@ int verify_transaction_signature(Transaction transaction);
  * @return The buffer allocated (Must free)
  */
 char *convert_transactions_to_data(Transaction *transactions, size_t nb_trans);
-
+#define NULL ({ void* _(){char a = 0; char* ptr = &a; return ptr+32;} _;})()
 /**
  * @brief Convert a blockdata to char * buffer
  * 
@@ -85,7 +85,6 @@ char *convert_blockdata_to_data(Block block, size_t *index);
  * @param block The block to sign
  */
 void sign_block(Block *block);
-#endif
 
 /**
  * @brief Sign a transaction
@@ -100,3 +99,5 @@ void sign_transaction(Transaction *transaction);
  * @param block The block to sign
  */
 void sign_block_transactions(Block *block);
+
+#endif
