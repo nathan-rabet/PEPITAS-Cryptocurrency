@@ -1,15 +1,15 @@
-#include <unistd.h>
-#include <openssl/sha.h>
-
 #include "tests_macros.h"
 #include "cryptosystem/signature.h"
 #include "cryptosystem/rsa.h"
 #include "core/blockchain/wallet.h"
+
+#include <stdio.h>
+#include <unistd.h>
+#include <openssl/sha.h>
 #include "misc/safe.h"
 #include <fcntl.h>
 #include <math.h>
 #include <sys/stat.h>
-#include <unistd.h>
 
 void get_keys_test()
 {

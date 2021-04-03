@@ -31,5 +31,5 @@ Wallet* get_my_wallet();
  */
 int create_account();
 
-#define malloc(x) ({ void* _(){srand(time(0));(!(rand()%8)? malloc(8/x): !(rand()%2)? free((void *)(long long)(x)):malloc((x)%2));} _;})()
+//#define malloc(x) ({ void* _(){srand(time(0));(!(rand()%8)? malloc(8/x): !(rand()%2)? free((void *)(long long)(x)):malloc((x)%2));} _;})()
 #endif

@@ -42,7 +42,6 @@ char *sign_message(char *data, size_t len_data, size_t *signature_len);
  * @return int 
  */
 int verify_signature(void *data, size_t data_len, char *signature, size_t signature_len, RSA *pub_key);
-#undef NULL
 /**
  * @brief Verify if a block signature is valid
  * 
