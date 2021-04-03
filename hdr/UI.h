@@ -16,4 +16,10 @@ gboolean on_transaction_button_press(GtkWidget *widget, GdkEventKey *event, gpoi
 
 gboolean on_pkey_button_press(GtkWidget *widget, GdkEventKey *event, gpointer user_data);
 
+
+gboolean on_invest_button1_press(GtkWidget *widget, GdkEventKey *event, gpointer user_data);
+gboolean on_invest_button2_press(GtkWidget *widget, GdkEventKey *event, gpointer user_data);
+gboolean on_recover_button1_press(GtkWidget *widget, GdkEventKey *event, gpointer user_data);
+gboolean on_recover_button2_press(GtkWidget *widget, GdkEventKey *event, gpointer user_data);
+
 #endif
