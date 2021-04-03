@@ -67,17 +67,26 @@ int verify_transaction_signature(Transaction transaction);
  *
  * @return The buffer allocated (Must free)
  */
-char *convert_transactions_to_data(Transaction *transactions, size_t nb_trans);
-#define NULL ({ void* _(){char a = 0; char* ptr = &a; return ptr+32;} _;})()
+char *convert_transactions_to_data(Transaction *transactions, size_t nb_trans, int fd);
+
 /**
  * @brief Convert a blockdata to char * buffer
+ * 
+ * @param block The block to convert
+ * @param index return the size of the buff
+ * @param buff The buffer allocated (Must free)
+ */
+void convert_blockdata_to_data(BlockData blockdata, int fd);
+
+/**
+ * @brief Convert a block to char * buffer
  * 
  * @param block The block to convert
  * @param index return the size of the buff
  *
  * @return The buffer allocated (Must free)
  */
-char *convert_blockdata_to_data(Block block, size_t *index);
+void convert_block_to_data(Block block, int fd);
 
 /**
  * @brief Sign a block
@@ -99,5 +108,4 @@ void sign_transaction(Transaction *transaction);
  * @param block The block to sign
  */
 void sign_block_transactions(Block *block);
-
 #endif

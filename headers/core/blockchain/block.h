@@ -53,4 +53,13 @@ typedef struct ChunkBlockchain
  * @return ChunkBlockchain 
  */
 ChunkBlockchain get_blockchain(size_t nb_chunk);
+
+/**
+ * @brief Write block to file
+ * 
+ * @param block block to write
+ */
+void write_block_file(Block block);
+
+Block get_block();
 #endif

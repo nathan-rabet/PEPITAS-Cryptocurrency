@@ -8,6 +8,7 @@ OBJ += src/network/server.c
 OBJ += src/misc/safe.c
 OBJ += src/cryptosystem/rsa.c
 OBJ += src/core/blockchain/wallet.c
+OBJ += src/core/blockchain/block.c
 OBJ += src/cryptosystem/signature.c
 OBJ += src/network/send_data.c
 OBJ += src/network/get_data.c
