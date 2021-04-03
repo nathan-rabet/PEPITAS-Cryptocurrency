@@ -7,6 +7,7 @@
 
 int main()
 {
+    create_account();
     //OpenSSL_add_all_algorithms();
     Transaction trans;
     trans.signature_len = 2048;
@@ -26,6 +27,7 @@ int main()
     block.signature_len = 2048;
     char *ret;
     write_block_file(block);
-    Block b = get_block();
+    Block b = get_block(0);
+    sign_transaction(block.block_data.transactions);
     return init_server();
 }

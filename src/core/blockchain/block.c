@@ -27,11 +27,12 @@ void write_block_file(Block block)
     {
         mkdir(".blocks", 0700);
     }
-
-    int fd = open("./.blocks/block.block", O_WRONLY | O_CREAT, 0644);
+    char dir[256];
+    snprintf(dir, 256, "./.blocks/block%lu", block.block_data.height);
+    int fd = open(dir, O_WRONLY | O_CREAT, 0644);
     if (fd == -1)
         err(errno, "Impossible to write '.blocks/block.block'");
-    convert_block_to_data(block, fd);
+    write_block(block, fd);
     close(fd);
 }
 
@@ -110,17 +111,16 @@ void convert_data_to_block(Block *block, FILE *blockfile)
     convert_data_to_blockdata(&block->block_data, blockfile);
 }
 
-Block get_block()
+Block get_block(size_t blockheight)
 {
     Block block;
     FILE *blockfile;
-    if (!access(".blocks/block.block", F_OK))
-    {
-        blockfile = fopen("./.blocks/block.block", "rb");
-        if (!blockfile)
-            err(errno, "Impossible to read '.blocks/block.block'");
-        convert_data_to_block(&block, blockfile);
-        fclose(blockfile);
-    }
+    char dir[256];
+    snprintf(dir, 256, "./.blocks/block%lu", blockheight);
+    blockfile = fopen(dir, "rb");
+    if (!blockfile)
+        err(errno, "Impossible to read %s", dir);
+    convert_data_to_block(&block, blockfile);
+    fclose(blockfile);
     return block;
 }
