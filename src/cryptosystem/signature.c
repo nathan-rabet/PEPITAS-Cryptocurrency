@@ -1,6 +1,8 @@
 #include "core/blockchain/block.h"
 #include "cryptosystem/signature.h"
 #include <string.h>
+#include <stdio.h>
+#include <unistd.h>
 
 char *sha384_data(void *data, size_t len_data)
 {
@@ -66,75 +68,92 @@ int verify_signature(void *data, size_t data_len, char *signature, size_t signat
 
     return !strncmp(output_buffer, decrypt, SHA384_DIGEST_LENGTH * 2);
 }
-void convert_transactiondata_to_data(TransactionData *transaction, char *buffer, size_t *index)
+void convert_transactiondata_to_data(TransactionData *transaction, int fd)
 {
-    memcpy(buffer + *index, transaction->sender_public_key, RSA_size(transaction->sender_public_key));
-    *index += RSA_size(transaction->sender_public_key);
-    memcpy(buffer + *index, transaction->receiver_public_key, RSA_size(transaction->receiver_public_key));
-    *index += RSA_size(transaction->receiver_public_key);
-    memcpy(buffer + *index, transaction->organisation_public_key, RSA_size(transaction->organisation_public_key));
-    *index += RSA_size(transaction->organisation_public_key);
-    memcpy(buffer + *index, &transaction->amount, sizeof(size_t));
-    *index += sizeof(size_t);
-    memcpy(buffer + *index, &transaction->transaction_timestamp, sizeof(time_t));
-    *index += sizeof(time_t);
-    memcpy(buffer + *index, transaction->cause, 512);
-    *index += 512;
-    memcpy(buffer + *index, transaction->asset, 512);
-    *index += 512;
-}
-void convert_transaction_to_data(Transaction *transaction, char *buffer, size_t *index)
-{
-    buffer = realloc(buffer, *index + TRANSACTION_SIZE + RSA_size(transaction->transaction_data.organisation_public_key) + RSA_size(transaction->transaction_data.receiver_public_key) + RSA_size(transaction->transaction_data.sender_public_key));
-    convert_transactiondata_to_data(&transaction->transaction_data, buffer, index);
-    memcpy(buffer + *index, &transaction->signature_len, sizeof(size_t));
-    *index += sizeof(size_t);
-    memcpy(buffer + *index, transaction->transaction_signature, transaction->signature_len);
-    *index += transaction->signature_len;
+    BIO *pubkey = BIO_new(BIO_s_mem());
+    PEM_write_bio_RSAPublicKey(pubkey, transaction->sender_public_key);
+    int rsa_size = BIO_pending(pubkey);
+    write(fd, &rsa_size, sizeof(int));
+    char temp[1000];
+    BIO_read(pubkey, temp, rsa_size);
+    write(fd, temp, rsa_size);
+
+    PEM_write_bio_RSAPublicKey(pubkey, transaction->receiver_public_key);
+    rsa_size = BIO_pending(pubkey);
+    write(fd, &rsa_size, sizeof(int));
+    BIO_read(pubkey, temp, rsa_size);
+    write(fd, temp, rsa_size);
+
+    PEM_write_bio_RSAPublicKey(pubkey, transaction->organisation_public_key);
+    rsa_size = BIO_pending(pubkey);
+    write(fd, &rsa_size, sizeof(int));
+    BIO_read(pubkey, temp, rsa_size);
+    write(fd, temp, rsa_size);
+
+    BIO_free_all(pubkey);
+
+    write(fd, &transaction->amount, sizeof(size_t));
+    write(fd, &transaction->transaction_timestamp, sizeof(time_t));
+    write(fd, transaction->cause, 512);
+    write(fd, transaction->asset, 512);
 }
 
-char *convert_transactions_to_data(Transaction *transactions, size_t nb_trans)
+void convert_transaction_to_data(Transaction *transaction, int fd)
+{
+    convert_transactiondata_to_data(&transaction->transaction_data, fd);
+    write(fd, &transaction->signature_len, sizeof(size_t));
+    write(fd, transaction->transaction_signature, transaction->signature_len);
+}
+
+char *convert_transactions_to_data(Transaction *transactions, size_t nb_trans, int fd)
 {
     char *buffer = NULL;
     size_t index = 0;
     for (size_t i = 0; i < nb_trans; i++)
     {
-        convert_transaction_to_data(transactions + i, buffer, &index);
+        convert_transaction_to_data(transactions + i, fd);
     }
     return buffer;
 }
 
-char *convert_blockdata_to_data(Block block, size_t *index)
+void convert_blockdata_to_data(BlockData blockdata, int fd)
 {
     // IGNORE BLOCK PREV AND NEXT BECAUSE RECUP ADDR AT PARSING
-    char *blockdata = malloc(BLOCK_DATA_SIZE + RSA_size(block.block_data.validator_public_key));
-    *index = 0;
-    memcpy(blockdata + *index, block.block_data.previous_block_hash, 97);
-    *index += 97;
-    memcpy(blockdata + *index, &block.block_data.height, sizeof(size_t));
-    *index += sizeof(size_t);
-    memcpy(blockdata + *index, &block.block_data.nb_transactions, sizeof(uint16_t));
-    *index += sizeof(uint16_t);
-    memcpy(blockdata + *index, block.block_data.validator_public_key, RSA_size(block.block_data.validator_public_key));
-    *index += RSA_size(block.block_data.validator_public_key);
-    memcpy(blockdata + *index, &block.block_data.block_timestamp, sizeof(time_t));
-    *index += sizeof(time_t);
-    for (size_t i = 0; i < block.block_data.nb_transactions; i++)
+    write(fd, blockdata.previous_block_hash, 97);
+    write(fd, &blockdata.height, sizeof(size_t));
+    write(fd, &blockdata.nb_transactions, sizeof(uint16_t));
+
+    BIO *pubkey = BIO_new(BIO_s_mem());
+    PEM_write_bio_RSAPublicKey(pubkey, blockdata.validator_public_key);
+    int rsa_size = BIO_pending(pubkey);
+    write(fd, &rsa_size, sizeof(int));
+    char temp[1000];
+    BIO_read(pubkey, temp, rsa_size);
+    write(fd, &temp, rsa_size);
+    
+    write(fd, &blockdata.block_timestamp, sizeof(time_t));
+    for (size_t i = 0; i < blockdata.nb_transactions; i++)
     {
-        convert_transaction_to_data(block.block_data.transactions + i, blockdata, index);
+        convert_transaction_to_data(blockdata.transactions + i, fd);
     }
 
-#if TEST
-    printf("Buffer: %li\nIndex:  %lu\n", BLOCK_DATA_SIZE + RSA_size(block.block_data.validator_public_key) + block.block_data.nb_transactions * (TRANSACTION_SIZE + RSA_size(block.block_data.transactions[0].transaction_data.organisation_public_key) + RSA_size(block.block_data.transactions[0].transaction_data.receiver_public_key) + RSA_size(block.block_data.transactions[0].transaction_data.sender_public_key)), *index);
-#endif
-
-    return blockdata;
+    BIO_free_all(pubkey);
 }
 
+void convert_block_to_data(Block block, int fd)
+{
+    // IGNORE BLOCK PREV AND NEXT BECAUSE RECUP ADDR AT PARSING
+    write(fd, block.next_block_hash, 97);
+    write(fd, &block.signature_len, sizeof(size_t));
+    write(fd, block.block_signature, block.signature_len);
+    convert_blockdata_to_data(block.block_data, fd);
+}
+/*
 int verify_block_signature(Block block)
 {
     size_t size = 0;
-    char *buf = convert_blockdata_to_data(block, &size);
+    char *buf;
+    convert_blockdata_to_data(block, &size, &buf);
     int ret = verify_signature( buf,
                                 size,
                                 block.block_signature,
@@ -166,8 +185,9 @@ void sign_block(Block *block)
         return;
     }
     size_t size = 0;
-    char *buf = convert_blockdata_to_data(*block, &size);
-    block->block_signature = sign_message(buf, size, &block->signature_len);
+    char *buff;
+    convert_blockdata_to_data(*block, &size, &buff);
+    block->block_signature = sign_message(buff, size, &block->signature_len);
 }
 
 void sign_transaction(Transaction *transaction)
@@ -190,3 +210,4 @@ void sign_block_transactions(Block *block)
         sign_transaction(block->block_data.transactions);
     }
 }
+*/
