@@ -67,7 +67,8 @@ int verify_transaction_signature(Transaction transaction);
  *
  * @return The buffer allocated (Must free)
  */
-char *convert_transactions_to_data(Transaction *transactions, size_t nb_trans, int fd);
+void get_transaction_data(Transaction *trans, char **buff, size_t *size);
+char *get_blockdata_data(Block *block, size_t *size);
 
 /**
  * @brief Convert a blockdata to char * buffer
@@ -76,7 +77,7 @@ char *convert_transactions_to_data(Transaction *transactions, size_t nb_trans, i
  * @param index return the size of the buff
  * @param buff The buffer allocated (Must free)
  */
-void convert_blockdata_to_data(BlockData blockdata, int fd);
+void write_blockdata(BlockData blockdata, int fd);
 
 /**
  * @brief Convert a block to char * buffer
@@ -86,7 +87,7 @@ void convert_blockdata_to_data(BlockData blockdata, int fd);
  *
  * @return The buffer allocated (Must free)
  */
-void convert_block_to_data(Block block, int fd);
+void write_block(Block block, int fd);
 
 /**
  * @brief Sign a block

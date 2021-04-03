@@ -61,5 +61,5 @@ ChunkBlockchain get_blockchain(size_t nb_chunk);
  */
 void write_block_file(Block block);
 
-Block get_block();
+Block get_block(size_t blockheight);
 #endif
