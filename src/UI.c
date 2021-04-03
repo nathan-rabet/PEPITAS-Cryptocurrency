@@ -70,7 +70,7 @@ int setup()
     g_signal_connect(recover_but1, "clicked", G_CALLBACK(on_recover_button1_press), NULL);
     g_signal_connect(recover_but2, "clicked", G_CALLBACK(on_recover_button2_press), NULL);
 
-
+    g_signal_connect(window, "destroy", G_CALLBACK(on_main_window_destroy), NULL);
     gtk_builder_connect_signals(builder, NULL);
 
     g_object_unref(G_OBJECT(builder));
