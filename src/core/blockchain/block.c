@@ -9,14 +9,18 @@
 #include <fcntl.h>
 #include <sys/types.h>
 
-ChunkBlockchain get_blockchain(size_t nb_chunk) {
-    static ChunkBlockchain blockchain = {0};
+ChunkBlockchain get_blockchain(size_t nb_chunk, char blockchain_flag) {
+    static ChunkBlockchain general_blockchain = {0};
+    static ChunkBlockchain validator_blockchain = {0};
 
-    if (nb_chunk == 0 && blockchain.chunk_nb != 0)
-        return blockchain;
+    if (general_blockchain.chunk == NULL)
+        general_blockchain.chunk = calloc(NB_BLOCK_PER_CHUNK,sizeof(Block));
+
+    if (nb_chunk == 0 && general_blockchain.chunk_nb != 0)
+        return general_blockchain;
     
     // TODO load blockchain
-    return blockchain;
+    get_block(block->block_data.height + 1, blockchain_flag)
 }
 
 void write_block_file(Block block, char blockchain)
@@ -116,15 +120,13 @@ void convert_data_to_blockdata(BlockData *blockdata, FILE *blockfile)
     blockdata->transactions = malloc(blockdata->nb_transactions * sizeof(Transaction *));
     for (size_t i = 0; i < blockdata->nb_transactions; i++)
     {
-        Transaction *trans = malloc(sizeof(Transaction));
-        convert_data_to_transaction(trans, blockfile);
-        blockdata->transactions[i] = trans;
+        convert_data_to_transaction(&blockdata->transactions[i], blockfile);
     }
 }
 
 void convert_data_to_block(Block *block, FILE *blockfile)
 {
-    fread(block->next_block_hash, 97, 1, blockfile);
+    fread(block->next_block_hash, SHA384_DIGEST_LENGTH * 2 + 1, 1, blockfile);
     fread(&block->signature_len, sizeof(size_t), 1, blockfile);
     block->block_signature = malloc(block->signature_len);
     fread(block->block_signature, block->signature_len, 1, blockfile);
@@ -152,20 +154,38 @@ Block *get_block(size_t block_height, char blockchain)
         err(errno, "Impossible to read %s", dir);
     convert_data_to_block(block, blockfile);
     fclose(blockfile);
+    
     return block;
 }
 
-void free_block(Block *block)
+Block * free_block(Block *block)
 {
-    
+    free(block->block_signature);
+
+    // Transaction
+    for (size_t i = 0; i < block->block_data.nb_transactions; i++)
+    {
+        RSA_free(block->block_data.transactions[i]->transaction_data->organisation_public_key);
+        RSA_free(block->block_data.transactions[i]->transaction_data->receiver_public_key);
+        RSA_free(block->block_data.transactions[i]->transaction_data->sender_public_key);
+        free(block->block_data.transactions[i]->transaction_signature);
+    }
+    free(block->block_data.transactions);
+    Block *next_block = block->next_block;
+
+    return next_block;
 }
 
 Block *get_next_block(Block *block, char blockchain)
 {
-    return get_block(block->.block_data.height + 1, blockchain);
+    if (block->next_block == NULL)
+        return get_block(block->block_data.height + 1, blockchain);
+    return block->next_block;
 }
 
 Block *get_prev_block(Block *block, char blockchain)
 {
-    return get_block(block->block_data.height - 1, blockchain);
+    if (block->previous_block == NULL)
+        return get_block(block->block_data.height - 1, blockchain);
+    return block->previous_block;
 }
