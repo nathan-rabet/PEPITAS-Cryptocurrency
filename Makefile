@@ -19,10 +19,6 @@ SRC_TEST = tests/unit_testing.c tests/cryptosystem/rsa_test.c tests/cryptosystem
 
 all: test server client
 
-test: $(SRC_TEST) ${SRC}
-	${CC} ${CFLAGS} $^ -o test ${LDPARAMS}
-	./test
-
 main_test: ${SRC} tests/main_test.c
 	${CC} ${CFLAGS} $^ -o test ${LDPARAMS}
 
@@ -31,6 +27,11 @@ server: src/server.c ${SRC}
 
 client: src/client.c ${SRC}
 	${CC} ${CFLAGS} -Wall $^ -o client.out ${LDPARAMS}
+
+test: $(SRC_TEST) ${SRC}
+	${CC} ${CFLAGS} $^ -o test ${LDPARAMS}
+	./test
+	rm -rf ./~test
 
 .PHONY: clean test
 

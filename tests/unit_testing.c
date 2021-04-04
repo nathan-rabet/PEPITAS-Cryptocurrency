@@ -15,7 +15,5 @@ int main()
     DEBUG(verify_sign_test);
     DEBUG(network_test);
 
-    system("rm -rf ./~test");
-
     return 0;
 }
