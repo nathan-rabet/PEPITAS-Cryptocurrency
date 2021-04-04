@@ -581,8 +581,83 @@ therefore gaining more Pepitas</property>
           </packing>
         </child>
         <child>
-          <object class="GtkFixed" id="fixed5">
+          <object class="GtkFixed" id="fixed9">
             <property name="visible">True</property>
+            <child>
+              <object class="GtkViewport" id="viewport2">
+                <property name="width_request">621</property>
+                <property name="height_request">324</property>
+                <property name="visible">True</property>
+                <property name="resize_mode">queue</property>
+                <child>
+                  <object class="GtkTreeView" id="treeviewTH">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="model">treestoreTH</property>
+                    <child>
+                      <object class="GtkTreeViewColumn" id="Amount">
+                        <property name="title">Amount</property>
+                        <child>
+                          <object class="GtkCellRendererText" id="cellrenderertext3">
+                            <property name="background_gdk">#ffffffffffff</property>
+                            <property name="font">Normal</property>
+                            <property name="foreground_gdk">#000000000000</property>
+                          </object>
+                          <attributes>
+                            <attribute name="text">0</attribute>
+                          </attributes>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkTreeViewColumn" id="public_key_th">
+                        <property name="title">Public key</property>
+                        <child>
+                          <object class="GtkCellRendererText" id="cellrenderertext4">
+                            <property name="background_gdk">#ffffffffffff</property>
+                            <property name="font">Normal</property>
+                            <property name="foreground_gdk">#000000000000</property>
+                          </object>
+                          <attributes>
+                            <attribute name="text">1</attribute>
+                          </attributes>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkTreeViewColumn" id="Date">
+                        <property name="title">Date</property>
+                        <child>
+                          <object class="GtkCellRendererText" id="cellrenderertext5">
+                            <property name="background_gdk">#ffffffffffff</property>
+                            <property name="font">Normal</property>
+                            <property name="foreground_gdk">#000000000000</property>
+                          </object>
+                          <attributes>
+                            <attribute name="text">2</attribute>
+                          </attributes>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkTreeViewColumn" id="Validated">
+                        <property name="title">Validated</property>
+                        <child>
+                          <object class="GtkCellRendererText" id="cellrenderertext6">
+                            <property name="background_gdk">#ffffffffffff</property>
+                            <property name="font">Normal</property>
+                            <property name="foreground_gdk">#000000000000</property>
+                          </object>
+                          <attributes>
+                            <attribute name="text">3</attribute>
+                          </attributes>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
           </object>
           <packing>
             <property name="position">4</property>
@@ -602,13 +677,24 @@ therefore gaining more Pepitas</property>
       </object>
     </child>
   </object>
-  <object class="GtkTreeStore" id="treestoreTH"/>
   <object class="GtkTreeStore" id="treestoreCON">
     <columns>
       <!-- column-name Name -->
       <column type="gchararray"/>
       <!-- column-name Public key -->
       <column type="gchararray"/>
+    </columns>
+  </object>
+  <object class="GtkTreeStore" id="treestoreTH">
+    <columns>
+      <!-- column-name Amount -->
+      <column type="glong"/>
+      <!-- column-name Public key -->
+      <column type="gchararray"/>
+      <!-- column-name Date -->
+      <column type="gchararray"/>
+      <!-- column-name Validated -->
+      <column type="gboolean"/>
     </columns>
   </object>
   <object class="GtkWindow" id="add_contact_window">

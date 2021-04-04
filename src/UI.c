@@ -30,7 +30,17 @@ GtkTreeViewColumn *cx1_con;
 GtkTreeViewColumn *cx2_con;
 GtkCellRenderer *cr1_con;
 GtkCellRenderer *cr2_con;
-GtkTreeSelection *select_con;
+GtkTreeView *tv_th;
+GtkTreeStore *ts_th;
+GtkTreeViewColumn *cx1_th;
+GtkTreeViewColumn *cx2_th;
+GtkTreeViewColumn *cx3_th;
+GtkTreeViewColumn *cx4_th;
+GtkCellRenderer *cr1_th;
+GtkCellRenderer *cr2_th;
+GtkCellRenderer *cr3_th;
+GtkCellRenderer *cr4_th;
+
 
 int setup()
 {
@@ -76,6 +86,17 @@ int setup()
     add_contact_but2 = GTK_BUTTON(gtk_builder_get_object(builder, "add_contact_but2"));
     name_entry_con = GTK_ENTRY(gtk_builder_get_object(builder, "name_entry_con"));
     public_key_entry_con = GTK_ENTRY(gtk_builder_get_object(builder, "public_key_entry_con"));
+
+    tv_th = GTK_TREE_VIEW(gtk_builder_get_object(builder, "treeviewTH"));
+    ts_th = GTK_TREE_STORE(gtk_builder_get_object(builder, "treestoreTH"));
+    cx1_th = GTK_TREE_VIEW_COLUMN(gtk_builder_get_object(builder, "Amount"));
+    cx2_th = GTK_TREE_VIEW_COLUMN(gtk_builder_get_object(builder, "public_key_th"));
+    cx3_th = GTK_TREE_VIEW_COLUMN(gtk_builder_get_object(builder, "Date"));
+    cx4_th = GTK_TREE_VIEW_COLUMN(gtk_builder_get_object(builder, "Validated"));
+    cr1_th = GTK_CELL_RENDERER(gtk_builder_get_object(builder, "cellrenderertext3"));
+    cr2_th = GTK_CELL_RENDERER(gtk_builder_get_object(builder, "cellrenderertext4"));
+    cr3_th = GTK_CELL_RENDERER(gtk_builder_get_object(builder, "cellrenderertext5"));
+    cr4_th = GTK_CELL_RENDERER(gtk_builder_get_object(builder, "cellrenderertext6"));
 
     private_key_label = GTK_LABEL(gtk_builder_get_object(builder, "private_key_label"));
     gtk_widget_hide(GTK_WIDGET(private_key_label));
