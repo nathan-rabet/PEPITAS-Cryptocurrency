@@ -45,8 +45,8 @@ typedef struct Block
 typedef struct ChunkBlockchain
 {
     char blockchain_flag; // GENERAL_BLOCKCHAIN or VALIDATOR_BLOCKCHAIN
-    size_t chunk_nb; // The split offset
-    Block *chunk;    // The splited blocks
+    size_t chunk_nb;      // The split offset
+    Block **chunk;        // The splited blocks
 } ChunkBlockchain;
 
 /**
@@ -56,10 +56,10 @@ typedef struct ChunkBlockchain
  * if 0 : return the current blockchain object without modification
  * @param blockchain_flag The blockchain flag
  *  GENERAL_BLOCKCHAIN or VALIDATOR_BLOCKCHAIN
- * @return ChunkBlockchain 
+ * @return ChunkBlockchain*
  */
-ChunkBlockchain get_blockchain(size_t nb_chunk, char blockchain_flag);
 
+ChunkBlockchain *get_blockchain(size_t nb_chunk, char blockchain_flag);
 /**
  * @brief Write struct block to file
  * 
@@ -73,9 +73,8 @@ Block *get_block(size_t block_height, char blockchain);
  * @brief Free a struct block
  * 
  * @param block The block to free
- * @return The `block->next` field (NULL if doesn't exists)
  */
-Block *free_block(Block *block);
+void free_block(Block *block);
 
 /**
  * @brief For a block of height `h`, return the block of height `h+1`

@@ -9,18 +9,26 @@
 #include <fcntl.h>
 #include <sys/types.h>
 
-ChunkBlockchain get_blockchain(size_t nb_chunk, char blockchain_flag) {
-    static ChunkBlockchain general_blockchain = {0};
-    static ChunkBlockchain validator_blockchain = {0};
+ChunkBlockchain * get_blockchain(size_t nb_chunk, char blockchain_flag)
+{
+    static ChunkBlockchain blockchain_chunk = {0};
 
-    if (general_blockchain.chunk == NULL)
-        general_blockchain.chunk = calloc(NB_BLOCK_PER_CHUNK,sizeof(Block));
+    if (blockchain_chunk.chunk == NULL)
+        blockchain_chunk.chunk = calloc(NB_BLOCK_PER_CHUNK, sizeof(Block *));
 
-    if (nb_chunk == 0 && general_blockchain.chunk_nb != 0)
-        return general_blockchain;
-    
+    if (nb_chunk == 0 && blockchain_chunk.blockchain_flag == blockchain_flag)
+        return &blockchain_chunk;
+
     // TODO load blockchain
-    get_block(block->block_data.height + 1, blockchain_flag)
+    for (size_t i = 0; i < NB_BLOCK_PER_CHUNK; i++)
+    {
+        if (&blockchain_chunk.chunk[i] != NULL)
+            free_block(&blockchain_chunk.chunk[i]);
+
+        blockchain_chunk.chunk[i] = get_block((nb_chunk - 1) * NB_BLOCK_PER_CHUNK + i, blockchain_flag);
+    }
+
+    return &blockchain_chunk;
 }
 
 void write_block_file(Block block, char blockchain)
@@ -45,7 +53,7 @@ void write_block_file(Block block, char blockchain)
             mkdir(".general", 0700);
         }
         snprintf(dir, 256, "./.general/block%lu", block.block_data.height);
-    
+
         break;
     }
     int fd = open(dir, O_WRONLY | O_CREAT, 0644);
@@ -75,7 +83,7 @@ void convert_data_to_transactiondata(TransactionData *transactiondata, FILE *blo
     transactiondata->receiver_public_key = RSA_new();
     PEM_read_bio_RSAPublicKey(pubkey1, &transactiondata->receiver_public_key, NULL, NULL);
     BIO_free(pubkey1);
-    
+
     fread(&RSAsize, sizeof(int), 1, blockfile);
     fread(temp, RSAsize, 1, blockfile);
     BIO *pubkey2 = BIO_new(BIO_s_mem());
@@ -83,8 +91,10 @@ void convert_data_to_transactiondata(TransactionData *transactiondata, FILE *blo
     transactiondata->organisation_public_key = RSA_new();
     PEM_read_bio_RSAPublicKey(pubkey2, &transactiondata->organisation_public_key, NULL, NULL);
     BIO_free(pubkey2);
-    
+
     fread(&transactiondata->amount, sizeof(size_t), 1, blockfile);
+    fread(&transactiondata->receiver_remaining_money, sizeof(size_t), 1, blockfile);
+    fread(&transactiondata->sender_remaining_money, sizeof(size_t), 1, blockfile);
     fread(&transactiondata->transaction_timestamp, sizeof(time_t), 1, blockfile);
     fread(transactiondata->cause, 512, 1, blockfile);
     fread(transactiondata->asset, 512, 1, blockfile);
@@ -143,7 +153,7 @@ Block *get_block(size_t block_height, char blockchain)
     case VALIDATOR_BLOCKCHAIN:
         snprintf(dir, 256, "./.validator/block%lu", block_height);
         break;
-    
+
     case GENERAL_BLOCKCHAIN:
     default:
         snprintf(dir, 256, "./.general/block%lu", block_height);
@@ -154,11 +164,11 @@ Block *get_block(size_t block_height, char blockchain)
         err(errno, "Impossible to read %s", dir);
     convert_data_to_block(block, blockfile);
     fclose(blockfile);
-    
+
     return block;
 }
 
-Block * free_block(Block *block)
+void free_block(Block *block)
 {
     free(block->block_signature);
 
@@ -171,21 +181,27 @@ Block * free_block(Block *block)
         free(block->block_data.transactions[i]->transaction_signature);
     }
     free(block->block_data.transactions);
-    Block *next_block = block->next_block;
-
-    return next_block;
+    free(block);
 }
 
 Block *get_next_block(Block *block, char blockchain)
 {
     if (block->next_block == NULL)
-        return get_block(block->block_data.height + 1, blockchain);
+    {
+        size_t h = block->block_data.height;
+        free_block(block);
+        return get_block(h + 1, blockchain);
+    }
     return block->next_block;
 }
 
 Block *get_prev_block(Block *block, char blockchain)
 {
     if (block->previous_block == NULL)
-        return get_block(block->block_data.height - 1, blockchain);
+    {
+        size_t h = block->block_data.height;
+        free_block(block);
+        return get_block(h - 1, blockchain);
+    }
     return block->previous_block;
 }

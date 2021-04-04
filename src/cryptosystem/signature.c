@@ -1,7 +1,7 @@
 #include "core/blockchain/block.h"
 #include "cryptosystem/signature.h"
-#include<openssl/bio.h>
-#include<openssl/rsa.h>
+#include <openssl/bio.h>
+#include <openssl/rsa.h>
 #include <string.h>
 #include <stdio.h>
 #include <unistd.h>
@@ -31,10 +31,10 @@ char *sign_message(char *data, size_t len_data, size_t *signature_len)
     char *output_buffer = sha384_data(data, len_data);
 
     // encrypt the message
-    char *encrypt = malloc(RSA_size(wallet->priv_key)*2);
+    char *encrypt = malloc(RSA_size(wallet->priv_key) * 2);
     ssize_t encrypt_len;
     char errmsg[130];
-    if ((encrypt_len = RSA_private_encrypt((2 * SHA384_DIGEST_LENGTH)+1, (unsigned char *)output_buffer,
+    if ((encrypt_len = RSA_private_encrypt((2 * SHA384_DIGEST_LENGTH) + 1, (unsigned char *)output_buffer,
                                            (unsigned char *)encrypt, wallet->priv_key, RSA_PKCS1_PADDING)) == -1)
     {
         ERR_load_crypto_strings();
@@ -114,7 +114,7 @@ void get_transaction_data(Transaction *trans, char **buff, size_t *index)
 {
     *buff = realloc(*buff, *index + TRANSACTION_DATA_SIZE + 3000);
     BIO *pubkey = BIO_new(BIO_s_mem());
-    PEM_write_bio_RSAPublicKey(pubkey, trans->transaction_data.sender_public_key);
+    PEM_write_bio_RSAPublicKey(pubkey, trans->transaction_data->sender_public_key);
     int rsa_size = BIO_pending(pubkey);
     memcpy(*buff + *index, &rsa_size, sizeof(int));
     *index += sizeof(int);
@@ -124,7 +124,7 @@ void get_transaction_data(Transaction *trans, char **buff, size_t *index)
     *index += rsa_size;
 
     BIO *pubkey2 = BIO_new(BIO_s_mem());
-    PEM_write_bio_RSAPublicKey(pubkey2, trans->transaction_data.receiver_public_key);
+    PEM_write_bio_RSAPublicKey(pubkey2, trans->transaction_data->receiver_public_key);
     rsa_size = BIO_pending(pubkey2);
     memcpy(*buff + *index, &rsa_size, sizeof(int));
     *index += sizeof(int);
@@ -132,9 +132,8 @@ void get_transaction_data(Transaction *trans, char **buff, size_t *index)
     memcpy(*buff + *index, temp, rsa_size);
     *index += rsa_size;
 
-
     BIO *pubkey3 = BIO_new(BIO_s_mem());
-    PEM_write_bio_RSAPublicKey(pubkey3, trans->transaction_data.organisation_public_key);
+    PEM_write_bio_RSAPublicKey(pubkey3, trans->transaction_data->organisation_public_key);
     rsa_size = BIO_pending(pubkey3);
     memcpy(*buff + *index, &rsa_size, sizeof(int));
     *index += sizeof(int);
@@ -145,13 +144,20 @@ void get_transaction_data(Transaction *trans, char **buff, size_t *index)
     BIO_free(pubkey2);
     BIO_free(pubkey3);
 
-    memcpy(*buff + *index, &trans->transaction_data.amount, sizeof(size_t));
+    memcpy(*buff + *index, &trans->transaction_data->amount, sizeof(size_t));
     *index += sizeof(size_t);
-    memcpy(*buff + *index, &trans->transaction_data.transaction_timestamp, sizeof(time_t));
+
+    memcpy(*buff + *index, &trans->transaction_data->receiver_remaining_money, sizeof(size_t));
+    *index += sizeof(size_t);
+
+    memcpy(*buff + *index, &trans->transaction_data->sender_public_key, sizeof(size_t));
+    *index += sizeof(size_t);
+
+    memcpy(*buff + *index, &trans->transaction_data->transaction_timestamp, sizeof(time_t));
     *index += sizeof(time_t);
-    memcpy(*buff + *index, trans->transaction_data.cause, sizeof(512));
+    memcpy(*buff + *index, trans->transaction_data->cause, sizeof(512));
     *index += 512;
-    memcpy(*buff + *index, trans->transaction_data.asset, sizeof(512));
+    memcpy(*buff + *index, trans->transaction_data->asset, sizeof(512));
     *index += 512;
 }
 
@@ -240,7 +246,7 @@ int verify_transaction_signature(Transaction transaction)
                                size,
                                transaction.transaction_signature,
                                transaction.signature_len,
-                               transaction.transaction_data.sender_public_key);
+                               transaction.transaction_data->sender_public_key);
     free(buf);
     return ret;
 }
