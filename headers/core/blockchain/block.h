@@ -21,7 +21,7 @@ typedef struct BlockData
     size_t height;                                          // The height of the block inside the blockchain
 
     uint16_t nb_transactions;  // The number of validated transactions inside the current block
-    Transaction *transactions; // Transactions vector
+    Transaction **transactions; // Transactions vector
 
     //* Validator area
     RSA *validator_public_key; // The public key of the validator
@@ -45,7 +45,7 @@ typedef struct Block
 typedef struct ChunkBlockchain
 {
     size_t chunk_nb;                 // The split offset
-    Block chunk[NB_BLOCK_PER_CHUNK]; // The splited blocks
+    Block *chunk; // The splited blocks
 } ChunkBlockchain;
 
 /**
@@ -64,8 +64,9 @@ ChunkBlockchain get_blockchain(size_t nb_chunk);
  */
 void write_block_file(Block block, char blockchain);
 
-Block get_block(size_t blockheight, char blockchain);
+Block *get_block(size_t block_height, char blockchain);
 
-Block get_next_block(Block block, char blockchain);
-Block get_prev_block(Block block, char blockchain);
+void free_block(Block *block);
+Block *get_next_block(Block *block, char blockchain);
+Block *get_prev_block(Block *block, char blockchain);
 #endif

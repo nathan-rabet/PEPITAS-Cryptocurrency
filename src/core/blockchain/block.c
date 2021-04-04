@@ -88,8 +88,8 @@ void convert_data_to_transactiondata(TransactionData *transactiondata, FILE *blo
 
 void convert_data_to_transaction(Transaction *transaction, FILE *blockfile)
 {
-    TransactionData transdata;
-    convert_data_to_transactiondata(&transdata, blockfile);
+    TransactionData *transdata = malloc(sizeof(TransactionData));
+    convert_data_to_transactiondata(transdata, blockfile);
     transaction->transaction_data = transdata;
     fread(&transaction->signature_len, sizeof(size_t), 1, blockfile);
     transaction->transaction_signature = malloc(transaction->signature_len);
@@ -116,8 +116,8 @@ void convert_data_to_blockdata(BlockData *blockdata, FILE *blockfile)
     blockdata->transactions = malloc(blockdata->nb_transactions * sizeof(Transaction *));
     for (size_t i = 0; i < blockdata->nb_transactions; i++)
     {
-        Transaction trans;
-        convert_data_to_transaction(&trans, blockfile);
+        Transaction *trans = malloc(sizeof(Transaction));
+        convert_data_to_transaction(trans, blockfile);
         blockdata->transactions[i] = trans;
     }
 }
@@ -131,36 +131,41 @@ void convert_data_to_block(Block *block, FILE *blockfile)
     convert_data_to_blockdata(&block->block_data, blockfile);
 }
 
-Block get_block(size_t blockheight, char blockchain)
+Block *get_block(size_t block_height, char blockchain)
 {
-    Block block;
+    Block *block = malloc(sizeof(Block));
     FILE *blockfile;
     char dir[256];
     switch (blockchain)
     {
     case VALIDATOR_BLOCKCHAIN:
-        snprintf(dir, 256, "./.validator/block%lu", blockheight);
+        snprintf(dir, 256, "./.validator/block%lu", block_height);
         break;
     
     case GENERAL_BLOCKCHAIN:
     default:
-        snprintf(dir, 256, "./.general/block%lu", blockheight);
+        snprintf(dir, 256, "./.general/block%lu", block_height);
         break;
     }
     blockfile = fopen(dir, "rb");
     if (!blockfile)
         err(errno, "Impossible to read %s", dir);
-    convert_data_to_block(&block, blockfile);
+    convert_data_to_block(block, blockfile);
     fclose(blockfile);
     return block;
 }
 
-
-Block get_next_block(Block block, char blockchain)
+void free_block(Block *block)
 {
-    return get_block(block.block_data.height + 1, blockchain);
+    
 }
-Block get_prev_block(Block block, char blockchain)
+
+Block *get_next_block(Block *block, char blockchain)
 {
-    return get_block(block.block_data.height - 1, blockchain);
+    return get_block(block->.block_data.height + 1, blockchain);
+}
+
+Block *get_prev_block(Block *block, char blockchain)
+{
+    return get_block(block->block_data.height - 1, blockchain);
 }
