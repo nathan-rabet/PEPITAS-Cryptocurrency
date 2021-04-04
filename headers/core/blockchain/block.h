@@ -5,6 +5,9 @@
 #include <openssl/sha.h>
 #include "transaction.h"
 
+#define GENERAL_BLOCKCHAIN 0
+#define VALIDATOR_BLOCKCHAIN 1
+
 #define BLOCK_DATA_SIZE (SHA384_DIGEST_LENGTH * 2 + 1) + sizeof(size_t) + sizeof(uint16_t) + sizeof(time_t)
 #define BLOCK_SIZE 2048 + sizeof(size_t) + BLOCK_DATA_SIZE + SHA384_DIGEST_LENGTH * 2 + 1
 
@@ -59,7 +62,10 @@ ChunkBlockchain get_blockchain(size_t nb_chunk);
  * 
  * @param block block to write
  */
-void write_block_file(Block block);
+void write_block_file(Block block, char blockchain);
 
-Block get_block(size_t blockheight);
+Block get_block(size_t blockheight, char blockchain);
+
+Block get_next_block(Block block, char blockchain);
+Block get_prev_block(Block block, char blockchain);
 #endif

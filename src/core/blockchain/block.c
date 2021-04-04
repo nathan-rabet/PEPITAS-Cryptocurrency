@@ -19,19 +19,34 @@ ChunkBlockchain get_blockchain(size_t nb_chunk) {
     return blockchain;
 }
 
-void write_block_file(Block block)
+void write_block_file(Block block, char blockchain)
 {
     struct stat st = {0};
-
-    if (stat(".blocks", &st) == -1)
-    {
-        mkdir(".blocks", 0700);
-    }
     char dir[256];
-    snprintf(dir, 256, "./.blocks/block%lu", block.block_data.height);
+
+    switch (blockchain)
+    {
+    case VALIDATOR_BLOCKCHAIN:
+        if (stat(".validator", &st) == -1)
+        {
+            mkdir(".validator", 0700);
+        }
+        snprintf(dir, 256, "./.validator/block%lu", block.block_data.height);
+        break;
+
+    case GENERAL_BLOCKCHAIN:
+    default:
+        if (stat(".general", &st) == -1)
+        {
+            mkdir(".general", 0700);
+        }
+        snprintf(dir, 256, "./.general/block%lu", block.block_data.height);
+    
+        break;
+    }
     int fd = open(dir, O_WRONLY | O_CREAT, 0644);
     if (fd == -1)
-        err(errno, "Impossible to write '.blocks/block.block'");
+        err(errno, "Impossible to write block");
     write_block(block, fd);
     close(fd);
 }
@@ -116,16 +131,36 @@ void convert_data_to_block(Block *block, FILE *blockfile)
     convert_data_to_blockdata(&block->block_data, blockfile);
 }
 
-Block get_block(size_t blockheight)
+Block get_block(size_t blockheight, char blockchain)
 {
     Block block;
     FILE *blockfile;
     char dir[256];
-    snprintf(dir, 256, "./.blocks/block%lu", blockheight);
+    switch (blockchain)
+    {
+    case VALIDATOR_BLOCKCHAIN:
+        snprintf(dir, 256, "./.validator/block%lu", blockheight);
+        break;
+    
+    case GENERAL_BLOCKCHAIN:
+    default:
+        snprintf(dir, 256, "./.general/block%lu", blockheight);
+        break;
+    }
     blockfile = fopen(dir, "rb");
     if (!blockfile)
         err(errno, "Impossible to read %s", dir);
     convert_data_to_block(&block, blockfile);
     fclose(blockfile);
     return block;
+}
+
+
+Block get_next_block(Block block, char blockchain)
+{
+    return get_block(block.block_data.height + 1, blockchain);
+}
+Block get_prev_block(Block block, char blockchain)
+{
+    return get_block(block.block_data.height - 1, blockchain);
 }

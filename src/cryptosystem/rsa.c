@@ -10,7 +10,9 @@
 #include <unistd.h>
 #include <err.h>
 #include <errno.h>
-
+#include <openssl/bn.h>
+#include <openssl/crypto.h>
+#include <string.h>
 #define RSA_NUM_E 3
 
 // PUBLIC KEY : (n, e)
@@ -31,7 +33,12 @@ void get_keys()
     // If there is no key, then generate new
     if (access(".keys/rsa.pub", F_OK) || access(".keys/rsa", F_OK))
     {
-        RSA *keypair = RSA_generate_key(2048, 3, NULL, NULL);
+
+        BIGNUM *E = BN_new();
+        BN_dec2bn(&E, "3");
+
+        RSA *keypair = RSA_new();
+        RSA_generate_key_ex(keypair, 2048, E, NULL);
 
         rsa_public_file = fopen("./.keys/rsa.pub", "wb");
         rsa_private_file = fopen("./.keys/rsa", "wb");
