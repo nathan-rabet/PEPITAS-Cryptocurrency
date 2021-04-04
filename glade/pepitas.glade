@@ -2,22 +2,6 @@
 <interface>
   <requires lib="gtk+" version="2.16"/>
   <!-- interface-naming-policy project-wide -->
-  <object class="GtkListStore" id="liststoreTH">
-    <columns>
-      <!-- column-name Recipient -->
-      <column type="gchararray"/>
-      <!-- column-name Amount -->
-      <column type="glong"/>
-    </columns>
-  </object>
-  <object class="GtkListStore" id="liststoreCON">
-    <columns>
-      <!-- column-name contact_name -->
-      <column type="gchararray"/>
-      <!-- column-name public_key_CON -->
-      <column type="gchararray"/>
-    </columns>
-  </object>
   <object class="GtkWindow" id="invest_window">
     <property name="resizable">False</property>
     <property name="modal">True</property>
@@ -522,6 +506,65 @@ therefore gaining more Pepitas</property>
         <child>
           <object class="GtkFixed" id="fixed4">
             <property name="visible">True</property>
+            <child>
+              <object class="GtkViewport" id="viewport1">
+                <property name="width_request">528</property>
+                <property name="height_request">325</property>
+                <property name="visible">True</property>
+                <property name="resize_mode">queue</property>
+                <child>
+                  <object class="GtkTreeView" id="treeviewCON">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="model">treestoreCON</property>
+                    <property name="level_indentation">3</property>
+                    <child>
+                      <object class="GtkTreeViewColumn" id="Name">
+                        <property name="title">Name</property>
+                        <child>
+                          <object class="GtkCellRendererText" id="cellrenderertext1">
+                            <property name="background_gdk">#ffffffffffff</property>
+                            <property name="font">Normal</property>
+                            <property name="foreground_gdk">#000000000000</property>
+                          </object>
+                          <attributes>
+                            <attribute name="text">0</attribute>
+                          </attributes>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkTreeViewColumn" id="Public key">
+                        <property name="title">Public key</property>
+                        <child>
+                          <object class="GtkCellRendererText" id="cellrenderertext2">
+                            <property name="background_gdk">#ffffffffffff</property>
+                            <property name="font">Normal</property>
+                            <property name="foreground_gdk">#000000000000</property>
+                          </object>
+                          <attributes>
+                            <attribute name="text">1</attribute>
+                          </attributes>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkButton" id="add_contact_but1">
+                <property name="label" translatable="yes">Add contact</property>
+                <property name="width_request">93</property>
+                <property name="height_request">37</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+              </object>
+              <packing>
+                <property name="x">529</property>
+              </packing>
+            </child>
           </object>
           <packing>
             <property name="position">3</property>
@@ -554,6 +597,101 @@ therefore gaining more Pepitas</property>
           <packing>
             <property name="position">4</property>
             <property name="tab_fill">False</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="GtkTreeStore" id="treestoreTH"/>
+  <object class="GtkTreeStore" id="treestoreCON">
+    <columns>
+      <!-- column-name Name -->
+      <column type="gchararray"/>
+      <!-- column-name Public key -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
+  <object class="GtkWindow" id="add_contact_window">
+    <property name="resizable">False</property>
+    <property name="modal">True</property>
+    <property name="window_position">center</property>
+    <child>
+      <object class="GtkFixed" id="fixed8">
+        <property name="visible">True</property>
+        <child>
+          <object class="GtkEntry" id="name_entry_con">
+            <property name="width_request">171</property>
+            <property name="height_request">30</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="invisible_char">&#x25CF;</property>
+          </object>
+          <packing>
+            <property name="x">26</property>
+            <property name="y">121</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkEntry" id="public_key_entry_con">
+            <property name="width_request">171</property>
+            <property name="height_request">31</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="invisible_char">&#x25CF;</property>
+          </object>
+          <packing>
+            <property name="x">252</property>
+            <property name="y">120</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="label16">
+            <property name="width_request">164</property>
+            <property name="height_request">49</property>
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">Contact name:</property>
+          </object>
+          <packing>
+            <property name="x">25</property>
+            <property name="y">60</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="label17">
+            <property name="width_request">121</property>
+            <property name="height_request">38</property>
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">Contact public key:</property>
+          </object>
+          <packing>
+            <property name="x">274</property>
+            <property name="y">69</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="label18">
+            <property name="width_request">190</property>
+            <property name="height_request">47</property>
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">Add a new contact to your list:</property>
+          </object>
+          <packing>
+            <property name="x">129</property>
+            <property name="y">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="add_contact_but2">
+            <property name="label" translatable="yes">Add contact</property>
+            <property name="width_request">128</property>
+            <property name="height_request">35</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+          </object>
+          <packing>
+            <property name="x">163</property>
+            <property name="y">174</property>
           </packing>
         </child>
       </object>
