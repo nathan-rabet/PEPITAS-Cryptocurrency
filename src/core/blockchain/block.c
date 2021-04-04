@@ -9,7 +9,7 @@
 #include <fcntl.h>
 #include <sys/types.h>
 
-ChunkBlockchain * get_blockchain(size_t nb_chunk, char blockchain_flag)
+ChunkBlockchain *get_blockchain(size_t nb_chunk, char blockchain_flag)
 {
     static ChunkBlockchain blockchain_chunk = {0};
 
@@ -19,13 +19,13 @@ ChunkBlockchain * get_blockchain(size_t nb_chunk, char blockchain_flag)
     if (nb_chunk == 0 && blockchain_chunk.blockchain_flag == blockchain_flag)
         return &blockchain_chunk;
 
-    // TODO load blockchain
     for (size_t i = 0; i < NB_BLOCK_PER_CHUNK; i++)
     {
         if (&blockchain_chunk.chunk[i] != NULL)
             free_block(&blockchain_chunk.chunk[i]);
 
         blockchain_chunk.chunk[i] = get_block((nb_chunk - 1) * NB_BLOCK_PER_CHUNK + i, blockchain_flag);
+        blockchain_chunk.chunk[i]->chunk_id = i;
     }
 
     return &blockchain_chunk;
@@ -186,22 +186,20 @@ void free_block(Block *block)
 
 Block *get_next_block(Block *block, char blockchain)
 {
-    if (block->next_block == NULL)
+    if (block->chunk_id == NB_BLOCK_PER_CHUNK - 1)
     {
-        size_t h = block->block_data.height;
-        free_block(block);
-        return get_block(h + 1, blockchain);
+        size_t next_chunk_nb = get_blockchain(0, blockchain)->chunk_nb + 1;
+        return get_blockchain(next_chunk_nb, blockchain)->chunk[0];
     }
-    return block->next_block;
+    return get_blockchain(CURRENT_CHUNK, blockchain)->chunk[block->chunk_id + 1];
 }
 
 Block *get_prev_block(Block *block, char blockchain)
 {
-    if (block->previous_block == NULL)
+    if (block->chunk_id == 0)
     {
-        size_t h = block->block_data.height;
-        free_block(block);
-        return get_block(h - 1, blockchain);
+        size_t next_chunk_nb = get_blockchain(0, blockchain)->chunk_nb - 1;
+        return get_blockchain(next_chunk_nb, blockchain)->chunk[NB_BLOCK_PER_CHUNK - 1];
     }
-    return block->previous_block;
+    return get_blockchain(CURRENT_CHUNK, blockchain)->chunk[block->chunk_id - 1];
 }

@@ -7,6 +7,7 @@
 
 #define GENERAL_BLOCKCHAIN 0
 #define VALIDATOR_BLOCKCHAIN 1
+#define CURRENT_CHUNK 0
 
 #define BLOCK_DATA_SIZE (SHA384_DIGEST_LENGTH * 2 + 1) + sizeof(size_t) + sizeof(uint16_t) + sizeof(time_t)
 #define BLOCK_SIZE 2048 + sizeof(size_t) + BLOCK_DATA_SIZE + SHA384_DIGEST_LENGTH * 2 + 1
@@ -30,9 +31,7 @@ typedef struct BlockData
 
 typedef struct Block
 {
-    struct Block *previous_block; // Previous block pointer
-    struct Block *next_block;     // Next block pointer
-
+    uint16_t chunk_id;
     BlockData block_data; // The block distributed data, excluding the block signature
 
     char next_block_hash[SHA384_DIGEST_LENGTH * 2 + 1]; // Next block SHA384 hash
