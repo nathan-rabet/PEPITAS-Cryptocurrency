@@ -9,7 +9,10 @@
     printf(str);          \
     printf("\033[0m")
 
-#define TEST_PASSED(name) printf("\033[0;32mTEST → '%s' success [✓]\033[0m\n", name)
+#define TEST_PASSED(name...)         \
+    printf("\033[0;32mTEST → '"); \
+    printf(name);                 \
+    printf("' success [✓]\033[0m\n")
 
 #define TEST_FAILED(name, reason...)                               \
     printf("\033[0;31mTEST '%s' failed [✗]\n\t⤷ REASON : ", name); \
@@ -17,9 +20,9 @@
     printf("\033[0m\n");                                           \
     exit(1)
 
-#define TEST_WARNING(name, reason...)                               \
+#define TEST_WARNING(name, reason...)                          \
     printf("\033[0;33mWARNING '%s' [!]\n\t⤷ REASON : ", name); \
-    printf(reason);                                                \
+    printf(reason);                                            \
     printf("\033[0m\n")
 
 #endif

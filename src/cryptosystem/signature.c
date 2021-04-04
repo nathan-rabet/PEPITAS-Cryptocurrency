@@ -99,13 +99,16 @@ void write_transactiondata(TransactionData *transaction, int fd)
 
     write(fd, &transaction->amount, sizeof(size_t));
     write(fd, &transaction->transaction_timestamp, sizeof(time_t));
+    write(fd, &transaction->receiver_remaining_money, sizeof(time_t));
+    write(fd, &transaction->sender_remaining_money, sizeof(time_t));
+    
     write(fd, transaction->cause, 512);
     write(fd, transaction->asset, 512);
 }
 
 void write_transaction(Transaction *transaction, int fd)
 {
-    write_transactiondata(&transaction->transaction_data, fd);
+    write_transactiondata(transaction->transaction_data, fd);
     write(fd, &transaction->signature_len, sizeof(size_t));
     write(fd, transaction->transaction_signature, transaction->signature_len);
 }
@@ -150,7 +153,7 @@ void get_transaction_data(Transaction *trans, char **buff, size_t *index)
     memcpy(*buff + *index, &trans->transaction_data->receiver_remaining_money, sizeof(size_t));
     *index += sizeof(size_t);
 
-    memcpy(*buff + *index, &trans->transaction_data->sender_public_key, sizeof(size_t));
+    memcpy(*buff + *index, &trans->transaction_data->sender_remaining_money, sizeof(size_t));
     *index += sizeof(size_t);
 
     memcpy(*buff + *index, &trans->transaction_data->transaction_timestamp, sizeof(time_t));
@@ -185,7 +188,7 @@ char *get_blockdata_data(Block *block, size_t *size)
     memcpy(buffer + index, &block->block_data.block_timestamp, sizeof(time_t));
     for (size_t i = 0; i < block->block_data.nb_transactions; i++)
     {
-        get_transaction_data((block->block_data.transactions + i), &buffer, &index);
+        get_transaction_data(block->block_data.transactions[i], &buffer, &index);
     }
     *size = index;
     return buffer;
@@ -209,7 +212,7 @@ void write_blockdata(BlockData blockdata, int fd)
     write(fd, &blockdata.block_timestamp, sizeof(time_t));
     for (size_t i = 0; i < blockdata.nb_transactions; i++)
     {
-        write_transaction(blockdata.transactions + i, fd);
+        write_transaction(blockdata.transactions[i], fd);
     }
 
     BIO_free_all(pubkey);
@@ -217,8 +220,6 @@ void write_blockdata(BlockData blockdata, int fd)
 
 void write_block(Block block, int fd)
 {
-    // IGNORE BLOCK PREV AND NEXT BECAUSE RECUP ADDR AT PARSING
-    write(fd, block.next_block_hash, 97);
     write(fd, &block.signature_len, sizeof(size_t));
     write(fd, block.block_signature, block.signature_len);
     write_blockdata(block.block_data, fd);
@@ -280,6 +281,6 @@ void sign_block_transactions(Block *block)
 {
     for (size_t i = 0; i < block->block_data.nb_transactions; i++)
     {
-        sign_transaction(block->block_data.transactions);
+        sign_transaction(block->block_data.transactions[i]);
     }
 }

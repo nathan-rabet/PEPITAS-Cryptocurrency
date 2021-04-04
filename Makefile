@@ -13,9 +13,13 @@ SRC += src/cryptosystem/signature.c
 SRC += src/network/send_data.c
 SRC += src/network/get_data.c
 SRC += src/network/network.c
+SRC += tests/core/blockchain/block_test.c
 
 
-SRC_TEST = tests/unit_testing.c tests/cryptosystem/rsa_test.c tests/cryptosystem/signature_test.c
+SRC_TEST =  tests/unit_testing.c 
+SRC_TEST += tests/cryptosystem/rsa_test.c 
+SRC_TEST += tests/cryptosystem/signature_test.c
+SRC_TEST += tests/core/blockchain/block_test.c
 
 all: test server client
 
@@ -32,6 +36,8 @@ test: $(SRC_TEST) ${SRC}
 	${CC} ${CFLAGS} $^ -o test ${LDPARAMS}
 	./test
 	rm -rf ./~test
+	rm -rf ./.keys
+	rm -rf ./.general
 
 .PHONY: clean test
 

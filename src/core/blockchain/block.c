@@ -9,6 +9,7 @@
 #include <fcntl.h>
 #include <sys/types.h>
 
+
 ChunkBlockchain *get_blockchain(size_t nb_chunk, char blockchain_flag)
 {
     static ChunkBlockchain blockchain_chunk = {0};
@@ -21,13 +22,19 @@ ChunkBlockchain *get_blockchain(size_t nb_chunk, char blockchain_flag)
 
     for (size_t i = 0; i < NB_BLOCK_PER_CHUNK; i++)
     {
-        if (&blockchain_chunk.chunk[i] != NULL)
-            free_block(&blockchain_chunk.chunk[i]);
+        if (blockchain_chunk.chunk[i] != NULL)
+            free_block(blockchain_chunk.chunk[i]);
+
+        struct stat buffer;
+        char path[256] = {0};
+        snprintf(path, 256, "./.general/block%lu",i);
+        if (stat(path, &buffer) != 0)
+            break;
 
         blockchain_chunk.chunk[i] = get_block((nb_chunk - 1) * NB_BLOCK_PER_CHUNK + i, blockchain_flag);
         blockchain_chunk.chunk[i]->chunk_id = i;
     }
-
+    blockchain_chunk.chunk_nb = nb_chunk;
     return &blockchain_chunk;
 }
 
@@ -130,13 +137,13 @@ void convert_data_to_blockdata(BlockData *blockdata, FILE *blockfile)
     blockdata->transactions = malloc(blockdata->nb_transactions * sizeof(Transaction *));
     for (size_t i = 0; i < blockdata->nb_transactions; i++)
     {
-        convert_data_to_transaction(&blockdata->transactions[i], blockfile);
+        blockdata->transactions[i] = malloc(sizeof(Transaction));
+        convert_data_to_transaction(blockdata->transactions[i], blockfile);
     }
 }
 
 void convert_data_to_block(Block *block, FILE *blockfile)
 {
-    fread(block->next_block_hash, SHA384_DIGEST_LENGTH * 2 + 1, 1, blockfile);
     fread(&block->signature_len, sizeof(size_t), 1, blockfile);
     block->block_signature = malloc(block->signature_len);
     fread(block->block_signature, block->signature_len, 1, blockfile);

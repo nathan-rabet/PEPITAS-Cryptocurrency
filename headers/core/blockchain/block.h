@@ -13,7 +13,7 @@
 #define BLOCK_SIZE 2048 + sizeof(size_t) + BLOCK_DATA_SIZE + SHA384_DIGEST_LENGTH * 2 + 1
 
 #define MAX_TRANSACTIONS_PER_BLOCK 0x4000
-#define NB_BLOCK_PER_CHUNK 0x2000
+#define NB_BLOCK_PER_CHUNK 0x100
 
 // Standard implementation
 typedef struct BlockData
@@ -33,9 +33,7 @@ typedef struct Block
 {
     uint16_t chunk_id;
     BlockData block_data; // The block distributed data, excluding the block signature
-
-    char next_block_hash[SHA384_DIGEST_LENGTH * 2 + 1]; // Next block SHA384 hash
-
+    
     size_t signature_len;  // The length of the signature
     char *block_signature; // SHA384 signature
 
