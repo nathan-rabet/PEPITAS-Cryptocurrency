@@ -42,23 +42,28 @@ void convert_data_to_transactiondata(TransactionData *transactiondata, FILE *blo
     fread(&RSAsize, sizeof(int), 1, blockfile);
 
     char temp[1000];
-    BIO *pubkey = BIO_new(BIO_s_mem());
     fread(temp, RSAsize, 1, blockfile);
+    BIO *pubkey = BIO_new(BIO_s_mem());
     BIO_write(pubkey, temp, RSAsize);
     transactiondata->sender_public_key = RSA_new();
     PEM_read_bio_RSAPublicKey(pubkey, &transactiondata->sender_public_key, NULL, NULL);
+    BIO_free(pubkey);
 
     fread(&RSAsize, sizeof(int), 1, blockfile);
     fread(temp, RSAsize, 1, blockfile);
-    BIO_write(pubkey, temp, RSAsize);
+    BIO *pubkey1 = BIO_new(BIO_s_mem());
+    BIO_write(pubkey1, temp, RSAsize);
     transactiondata->receiver_public_key = RSA_new();
-    PEM_read_bio_RSAPublicKey(pubkey, &transactiondata->receiver_public_key, NULL, NULL);
-
+    PEM_read_bio_RSAPublicKey(pubkey1, &transactiondata->receiver_public_key, NULL, NULL);
+    BIO_free(pubkey1);
+    
     fread(&RSAsize, sizeof(int), 1, blockfile);
     fread(temp, RSAsize, 1, blockfile);
-    BIO_write(pubkey, temp, RSAsize);
+    BIO *pubkey2 = BIO_new(BIO_s_mem());
+    BIO_write(pubkey2, temp, RSAsize);
     transactiondata->organisation_public_key = RSA_new();
-    PEM_read_bio_RSAPublicKey(pubkey, &transactiondata->organisation_public_key, NULL, NULL);
+    PEM_read_bio_RSAPublicKey(pubkey2, &transactiondata->organisation_public_key, NULL, NULL);
+    BIO_free(pubkey2);
     
     fread(&transactiondata->amount, sizeof(size_t), 1, blockfile);
     fread(&transactiondata->transaction_timestamp, sizeof(time_t), 1, blockfile);

@@ -1,5 +1,7 @@
 #include "core/blockchain/block.h"
 #include "cryptosystem/signature.h"
+#include<openssl/bio.h>
+#include<openssl/rsa.h>
 #include <string.h>
 #include <stdio.h>
 #include <unistd.h>
@@ -29,10 +31,10 @@ char *sign_message(char *data, size_t len_data, size_t *signature_len)
     char *output_buffer = sha384_data(data, len_data);
 
     // encrypt the message
-    char *encrypt = malloc(RSA_size(wallet->priv_key));
+    char *encrypt = malloc(RSA_size(wallet->priv_key)*2);
     ssize_t encrypt_len;
     char errmsg[130];
-    if ((encrypt_len = RSA_private_encrypt(strlen(output_buffer) + 1, (unsigned char *)output_buffer,
+    if ((encrypt_len = RSA_private_encrypt((2 * SHA384_DIGEST_LENGTH)+1, (unsigned char *)output_buffer,
                                            (unsigned char *)encrypt, wallet->priv_key, RSA_PKCS1_PADDING)) == -1)
     {
         ERR_load_crypto_strings();
@@ -77,20 +79,23 @@ void write_transactiondata(TransactionData *transaction, int fd)
     char temp[1000];
     BIO_read(pubkey, temp, rsa_size);
     write(fd, temp, rsa_size);
+    BIO_free(pubkey);
 
-    PEM_write_bio_RSAPublicKey(pubkey, transaction->receiver_public_key);
-    rsa_size = BIO_pending(pubkey);
+    BIO *pubkey2 = BIO_new(BIO_s_mem());
+    PEM_write_bio_RSAPublicKey(pubkey2, transaction->receiver_public_key);
+    rsa_size = BIO_pending(pubkey2);
     write(fd, &rsa_size, sizeof(int));
-    BIO_read(pubkey, temp, rsa_size);
+    BIO_read(pubkey2, temp, rsa_size);
     write(fd, temp, rsa_size);
+    BIO_free(pubkey2);
 
-    PEM_write_bio_RSAPublicKey(pubkey, transaction->organisation_public_key);
-    rsa_size = BIO_pending(pubkey);
+    BIO *pubkey3 = BIO_new(BIO_s_mem());
+    PEM_write_bio_RSAPublicKey(pubkey3, transaction->organisation_public_key);
+    rsa_size = BIO_pending(pubkey3);
     write(fd, &rsa_size, sizeof(int));
-    BIO_read(pubkey, temp, rsa_size);
+    BIO_read(pubkey3, temp, rsa_size);
     write(fd, temp, rsa_size);
-
-    BIO_free_all(pubkey);
+    BIO_free(pubkey3);
 
     write(fd, &transaction->amount, sizeof(size_t));
     write(fd, &transaction->transaction_timestamp, sizeof(time_t));
@@ -118,23 +123,27 @@ void get_transaction_data(Transaction *trans, char **buff, size_t *index)
     memcpy(*buff + *index, temp, rsa_size);
     *index += rsa_size;
 
-    pubkey = BIO_new(BIO_s_mem());
-    PEM_write_bio_RSAPublicKey(pubkey, trans->transaction_data.receiver_public_key);
-    rsa_size = BIO_pending(pubkey);
+    BIO *pubkey2 = BIO_new(BIO_s_mem());
+    PEM_write_bio_RSAPublicKey(pubkey2, trans->transaction_data.receiver_public_key);
+    rsa_size = BIO_pending(pubkey2);
     memcpy(*buff + *index, &rsa_size, sizeof(int));
     *index += sizeof(int);
-    BIO_read(pubkey, temp, rsa_size);
+    BIO_read(pubkey2, temp, rsa_size);
     memcpy(*buff + *index, temp, rsa_size);
     *index += rsa_size;
 
-    pubkey = BIO_new(BIO_s_mem());
-    PEM_write_bio_RSAPublicKey(pubkey, trans->transaction_data.organisation_public_key);
-    rsa_size = BIO_pending(pubkey);
+
+    BIO *pubkey3 = BIO_new(BIO_s_mem());
+    PEM_write_bio_RSAPublicKey(pubkey3, trans->transaction_data.organisation_public_key);
+    rsa_size = BIO_pending(pubkey3);
     memcpy(*buff + *index, &rsa_size, sizeof(int));
     *index += sizeof(int);
-    BIO_read(pubkey, temp, rsa_size);
+    BIO_read(pubkey3, temp, rsa_size);
     memcpy(*buff + *index, temp, rsa_size);
     *index += rsa_size;
+    BIO_free(pubkey);
+    BIO_free(pubkey2);
+    BIO_free(pubkey3);
 
     memcpy(*buff + *index, &trans->transaction_data.amount, sizeof(size_t));
     *index += sizeof(size_t);
