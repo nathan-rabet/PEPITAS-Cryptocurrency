@@ -1,7 +1,8 @@
-#include "server.h"
-#include "client.h"
-#include "network.h"
-#include "../misc/safe.h"
+#include "network/server.h"
+#include "network/client.h"
+#include "network/get_data.h"
+#include "network/network.h"
+#include "misc/safe.h"
 
 void *accept_connection(void *arg)
 {
@@ -19,14 +20,13 @@ void *accept_connection(void *arg)
 
     printf("New connection: '%s'\n", ip_str);
 
-    send_client_list(clientfd);
+    read_header(clientfd);
 
     close(clientfd);
     free(arg);
 
     return NULL;
 }
-
 int init_server()
 {
     // Try to connect to the peer-to-peer network
@@ -40,10 +40,6 @@ int init_server()
     hints.ai_family = AF_UNSPEC;     //IPV4 only
     hints.ai_socktype = SOCK_STREAM; //TCP
     hints.ai_flags = AI_PASSIVE;     //Server
-    hints.ai_protocol = 0;
-    hints.ai_canonname = NULL;
-    hints.ai_addr = NULL;
-    hints.ai_next = NULL;
 
     // Get info
     addrinfo_error = getaddrinfo(NULL, STATIC_PORT, &hints, &result);
@@ -70,10 +66,12 @@ int init_server()
         if (bind(sockfd, rp->ai_addr, rp->ai_addrlen) == -1)
         {
             close(sockfd);
-            break;
+            continue;
         }
         break;
     }
+
+    free(result);
 
     if (rp == NULL)
     { /* No address succeeded */
@@ -95,24 +93,4 @@ int init_server()
     }
 
     return sockfd;
-}
-
-void send_client_list(int sockfd)
-{
-    Client *client_list = get_client();
-
-    printf("Sending client list...\n");
-    safe_write(sockfd, HD_REC_CLIENT_LIST, 20);
-
-    for (size_t index = 0; index < MAX_NEIGHBOURS; index++)
-    {
-        if (client_list->neighbours[index].hostname != NULL)
-        {
-            safe_write(sockfd, (void *)&client_list->neighbours[index].family, sizeof(int));
-            safe_write(sockfd, (void *)client_list->neighbours[index].hostname, sizeof(char) * 16);
-        }
-    }
-
-    // END SENDING
-    safe_write(sockfd, "\r\n\r\n", 5);
 }

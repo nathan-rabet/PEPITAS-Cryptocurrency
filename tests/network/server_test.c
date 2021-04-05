@@ -1,5 +1,5 @@
 
-#include "../../src/network/server.h"
+#include "network/server.h"
 
 int main()
 {

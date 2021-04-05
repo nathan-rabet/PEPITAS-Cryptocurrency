@@ -11,18 +11,18 @@
 #include <string.h>
 #include <pthread.h>
 #include <arpa/inet.h>
-#include "../misc/safe.h"
+#include "misc/safe.h"
 #include "client.h"
 
-#define STATIC_PORT "8080"
-#define REQUEST_HEADER_SIZE 256
+#define NB_HARD_CODED_ADDR 2
+extern const Neighbour HARD_CODED_ADDR[];
 
-static const Neighbour HARD_CODED_IPS[] = {
-    {AF_INET, "127.0.0.1"}};
+#define STATIC_PORT "4242"
 
-// HEADERS
+// REQUESTS
 #define HD_GET_CLIENT_LIST "GET CLIENT LIST\r\n\r\n"
-#define HD_REC_CLIENT_LIST "REC CLIENT LIST\r\n\r\n"
+#define HD_SEND_CLIENT_LIST "SEND CLIENT LIST\n"
 #define HD_GET_BLOCKCHAIN "GET BLOCKCHAIN\r\n\r\n"
-#define HD_REC_BLOCKCHAIN "REC BLOCKCHAIN\r\n\r\n"
+#define HD_SEND_BLOCKCHAIN "SEND BLOCKCHAIN\n"
+
 #endif

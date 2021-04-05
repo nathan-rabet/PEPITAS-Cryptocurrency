@@ -3,6 +3,7 @@
 
 #include <sys/socket.h>
 #include "network.h"
+#include "core/blockchain/block.h"
 
 typedef struct client_connection
 {
@@ -19,6 +20,20 @@ typedef struct client_connection
  */
 int init_server();
 
-void send_client_list(int sockfd);
+/**
+ * @brief Send neighbours list to a user via a socket FD
+ * 
+ * @param sockfd The socket FD
+ */
+int send_client_list(int sockfd);
+
+/**
+ * @brief Send a block to a user via a socket FD
+ * 
+ * @param sockfd The socket FD
+ * @param block The block to send
+ * @return int 
+ */
+int send_block(Block block,int sockfd);
 
 #endif

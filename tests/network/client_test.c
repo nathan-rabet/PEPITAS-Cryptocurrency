@@ -1,22 +1,35 @@
-#include "../../src/network/network.h"
-#include "../../src/network/client.h"
+#include <signal.h>
+#include "tests_macros.h"
 
-int main()
+#include "network/network.h"
+#include "network/client.h"
+#include "network/server.h"
+#include "network/send_data.h"
+#include "network/get_data.h"
+
+void network_test()
 {
-    printf("Testing client:\n");
-
     // Init client lists
-    set_neighbours(NULL, 0);
-
-    int sockfd;
-
-    sockfd = connect_to_network(0);
-    if (sockfd == -1)
+    char areDown = 0;
+    if (set_neighbour(NULL, 0) == 0)
     {
-        // You are the first node to the peer-to-peer network
-        return -1;
+        TEST_PASSED("Init hard coded addresses");
     }
-    wait_header(sockfd);
+    else
+    {
+        areDown = 1;
+        TEST_WARNING("Init hard coded addresses", "All hard-coded servers are down");
+    }
 
-    return 0;
+    if (!areDown)
+    {
+        if (listen_to(0) == 0)
+        {
+            TEST_PASSED("Connect to server");
+        }
+        else
+        {
+            TEST_FAILED("Connect to server", "listen_to(0) returned -1");
+        }
+    }
 }

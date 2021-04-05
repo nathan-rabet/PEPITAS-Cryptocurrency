@@ -1,29 +1,21 @@
-#include <assert.h>
-#include "../src/network/client.h"
-#include "../src/misc/safe.h"
+#include "network/network.h"
+#include "network/client.h"
+#include "network/server.h"
+#include "network/send_data.h"
+#include "network/get_data.h"
+#include <thread.h>
 
-int network_test()
-{
-    int sockfd;
 
-    set_neighbours(NULL, 0);
-    sockfd = connect_to_network(0);
-    if (sockfd == -1)
-    {
-        // You are the first node to the peer-to-peer network
-    }
-    wait_header(sockfd);
-
-    return 0;
+void * server_handler(void * arg) {
+    return (void *) init_server();
 }
+
 int main()
 {
-    char *buffer;
-    size_t nb;
-    ssize_t oui = safe_read(STDIN_FILENO, (void *)&buffer, &nb);
-    if (oui == -1)
-        errx(EXIT_FAILURE, "SUCE MA QUE");
-    write(STDOUT_FILENO, buffer, oui);
+    get_my_node();
+
+    pthread_t server_instance;
+    pthread_create(&server_instance, NULL, server_handler, NULL);
 
     return 0;
 }

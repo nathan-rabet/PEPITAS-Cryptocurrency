@@ -1,66 +1,65 @@
-#include "client.h"
-#include "server.h"
-#include "network.h"
+#include "network/client.h"
+#include "network/server.h"
+#include "network/network.h"
 
-Client *get_client()
+Node *get_my_node()
 {
-    static Client *client = NULL;
-    if (client == NULL)
-    {
-        client = malloc(sizeof(Client));
-        client->neighbours = malloc(MAX_NEIGHBOURS * sizeof(Neighbour));
-        for (size_t i = 0; i < MAX_NEIGHBOURS; i++)
-        {
-            client->neighbours[i].hostname = NULL;
-        }
+    static Node node = {0};
+    if (node.neighbours == NULL)
+        node.neighbours = calloc(MAX_NEIGHBOURS, sizeof(Neighbour));
 
-        for (size_t i = 1; i < 12; i++)
-        {
-            client->neighbours[i].hostname = "192.12.1.3";
-            client->neighbours[i].family = AF_INET;
-        }
-        
-    }
-    return client;
+    return &node;
 }
 
-int set_neighbours(char *hostname, int family)
+int set_neighbour(char *hostname, int family)
 {
-    Client *client = get_client();
+    Node *node = get_my_node();
 
     if (hostname == NULL)
     {
-        Neighbour local;
-        local.hostname = HARD_CODED_IPS[0].hostname;
-        local.family = AF_UNSPEC;
-        client->neighbours[0] = local;
-        return 0;
-    }
-
-    size_t index = 0;
-    while (index < MAX_NEIGHBOURS)
-    {
-        if (client->neighbours[index].hostname == NULL)
+        size_t index = 0;
+        while (node->neighbours[index].hostname != NULL && index < MAX_NEIGHBOURS)
+            index++;
+        if (index < MAX_NEIGHBOURS && node->neighbours[index].hostname == NULL)
         {
-            client->neighbours[index].hostname = hostname;
-            client->neighbours[index].family = family;
-            index = MAX_NEIGHBOURS;
+            for (size_t i = 0; i < NB_HARD_CODED_ADDR; i++)
+            {
+                node->neighbours[index].hostname = HARD_CODED_ADDR[i].hostname;
+                node->neighbours[index].family = HARD_CODED_ADDR[i].family;
+
+                if (listen_to(index) == -1)
+                    memset(&node->neighbours[index], 0, sizeof(Neighbour));
+                else
+                    return 0;
+            }
         }
-        index++;
-    }
-    if (index == MAX_NEIGHBOURS)
-    {
+
         return -1;
     }
-    return 0;
+
+    else
+    {
+        size_t index = 0;
+        while (index < MAX_NEIGHBOURS)
+        {
+            if (node->neighbours[index].hostname == NULL)
+            {
+                node->neighbours[index].hostname = hostname;
+                node->neighbours[index].family = family;
+                return listen_to(index);
+            }
+            index++;
+        }
+        return -1;
+    }
 }
 
-int connect_to_network(int client_to_connect_id)
+int listen_to(size_t neighbour_id)
 {
-    Client *client = get_client();
     struct addrinfo hints = {0};
-    Neighbour neighbour = client->neighbours[client_to_connect_id];
-    hints.ai_family = neighbour.family; //IPV4 only
+    Neighbour neighbour = get_my_node()->neighbours[neighbour_id];
+
+    hints.ai_family = neighbour.family; //IPV4 or maybe IPV6
     hints.ai_socktype = SOCK_STREAM;    //TCP
 
     struct addrinfo *result;
@@ -76,8 +75,9 @@ int connect_to_network(int client_to_connect_id)
     // If adress information fetching failed
     if (addrinfo_ret != 0)
     {
-        errx(EXIT_FAILURE, "Fail getting information for address '%s' on port %s: %s",
-             neighbour.hostname, STATIC_PORT, gai_strerror(addrinfo_ret));
+        dprintf(STDERR_FILENO, "Fail getting information for address '%s' on port %s: %s",
+                neighbour.hostname, STATIC_PORT, gai_strerror(addrinfo_ret));
+        return -1;
     }
 
     // Try to connect for each result
@@ -86,13 +86,14 @@ int connect_to_network(int client_to_connect_id)
     for (rp = result; rp != NULL; rp = rp->ai_next)
     {
         sockfd = socket(rp->ai_family, rp->ai_socktype, rp->ai_protocol);
-        if (sockfd == -1)
-            continue; // The socket is not created
-        // Try to connect
-        if (connect(sockfd, rp->ai_addr, rp->ai_addrlen) != -1)
-            break;
-        // Fail to connect
-        close(sockfd);
+        if (sockfd != -1)
+        {
+            // Try to connect
+            if (connect(sockfd, rp->ai_addr, rp->ai_addrlen) != -1)
+                break;
+            // Fail to connect
+            close(sockfd);
+        }
     }
 
     freeaddrinfo(result);
@@ -100,89 +101,10 @@ int connect_to_network(int client_to_connect_id)
     if (rp != NULL)
     {
         // Connection success
-        return sockfd;
+        get_my_node()->neighbours[neighbour_id].client_sockfd = sockfd;
+        return 0;
     }
 
     // Connection failed
-    printf("Failed to connect at %s\n", neighbour.hostname);
     return -1;
-}
-
-void wait_header(int sockfd)
-{
-    // Waiting header for server and read it
-
-    char *buffer;
-    size_t buffer_size;
-    ssize_t nb_read;
-
-    // Get Header
-    nb_read = safe_read(sockfd, (void *)&buffer, &buffer_size);
-
-    if (nb_read == -1)
-    {
-        printf("Failed to read message.\n");
-        return;
-    }
-
-    read_header(buffer, sockfd);
-}
-
-void read_header(char *buf, int sockfd)
-{
-    if (strncmp(HD_GET_BLOCKCHAIN, buf, 8) == 0)
-    {
-        printf("Recived header HD_GET_BLOCKCHAIN\n");
-        return;
-    }
-    if (strncmp(HD_REC_BLOCKCHAIN, buf, 8) == 0)
-    {
-        printf("Recived header HD_REC_BLOCKCHAIN\n");
-        return;
-    }
-    if (strncmp(HD_GET_CLIENT_LIST, buf, 8) == 0)
-    {
-        printf("Recived header HD_GET_CLIENT_LIST\n");
-        send_client_list(sockfd);
-        return;    
-    }
-    if (strncmp(HD_REC_CLIENT_LIST, buf, 8) == 0)
-    {
-        printf("Recived header HD_REC_CLIENT_LIST\n");
-        recive_client_list(sockfd);
-        return;    
-    }
-    
-}
-
-void recive_client_list(int sockfd)
-{
-    Client *client_list = get_client();
-    
-    void* buffer;
-    size_t buffer_size;
-    ssize_t nb_read;
-
-    // Get List
-    nb_read = safe_read(sockfd, (void *)&buffer, &buffer_size);
-
-    ssize_t buffer_index = 0;
-
-    for(size_t index = 0; index < MAX_NEIGHBOURS; index++)
-    {
-        if (client_list->neighbours[index].hostname == NULL)
-        {
-            client_list->neighbours[index].family = *(int *)(buffer + buffer_index);
-            printf("Family: %i", *(int *)(buffer + buffer_index));
-            buffer_index += sizeof(int);
-            client_list->neighbours[index].hostname = (char *)(buffer + buffer_index);
-            printf("  IP: %s\n", (char *)(buffer + buffer_index));
-            buffer_index += sizeof(char) * 16;
-            if (buffer_index >= nb_read-6)
-                break;
-        }
-    }
-
-    free(buffer);
-    
 }
