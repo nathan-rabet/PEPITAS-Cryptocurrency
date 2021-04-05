@@ -33,13 +33,13 @@ client: src/client.c ${SRC}
 	${CC} ${CFLAGS} -Wall $^ -o client.out ${LDPARAMS}
 
 test: test_build
-	./test
+	@./test
 	rm -rf ./~test
 	rm -rf ./.keys
 	rm -rf ./.general
 
 test_build: $(SRC_TEST) ${SRC}
-	${CC} ${CFLAGS} $^ -o test ${LDPARAMS} -D TEST
+	@${CC} ${CFLAGS} $^ -o test ${LDPARAMS} -D TEST
 
 .PHONY: clean test
 
