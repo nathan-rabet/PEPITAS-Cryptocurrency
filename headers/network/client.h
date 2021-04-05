@@ -28,25 +28,25 @@ Node* get_my_node();
 /**
  * @brief Sets a neighbour in the client.neightbours section
  * 
- * @return 0 if sucess, -1 if not 
+ * @return 0 if sucess, -1 otherwise 
  */
 int set_neighbour(char *hostname, int family);
 
 /**
- * @brief Try to connect to the peer-to-peer network 
+ * @brief Tries to connect to the peer-to-peer network 
  * via a node in the Node structure
  * 
- * @param neighbour_id The neighbour index (in struct Node) to connect with
- * @return socket FD or -1 if error
+ * @param neighbour_id The neighbour's index (in struct Node) to connect with
+ * @return socket FD or -1 if an error occurs
  */
 int listen_to(size_t neighbour_id);
 
 /**
- * @brief Ping the client side of 'neighbour_id'
- * and delete it from struct Node if no response
+ * @brief Pings the client side of 'neighbour_id'
+ * and deletes it from struct Node if there is no response
  * 
  * @param neighbour_id 
- * @return 0 if sucess, -1 if not
+ * @return 0 if sucess, -1 otherwise
  */
 int ping_client(size_t neighbour_id);
 

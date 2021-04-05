@@ -13,22 +13,16 @@ typedef struct client_connection
 
 
 /**
- * @brief Launch a server instance,
+ * @brief Launches a server instance,
  * connected to the peer-to-peer network 'hostname'
  * 
- * @return 0 if sucess, -1 if not
+ * @return 0 if success, -1 otherwise
  */
 int init_server();
 
-/**
- * @brief Send neighbours list to a user via a socket FD
- * 
- * @param sockfd The socket FD
- */
-int send_client_list(int sockfd);
 
 /**
- * @brief Send a block to a user via a socket FD
+ * @brief Sends a block to a user via a socket FD
  * 
  * @param sockfd The socket FD
  * @param block The block to send

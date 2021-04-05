@@ -1,6 +1,7 @@
 #include "network/client.h"
 #include "network/server.h"
 #include "network/network.h"
+#include "network/send_data.h"
 #include "network/get_data.h"
 
 int process_header(char *header, int sockfd)

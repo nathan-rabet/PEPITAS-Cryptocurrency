@@ -17,6 +17,7 @@
 
 // PUBLIC KEY : (n, e)
 // PRIVATE KEY: (n, d)
+
 void get_keys()
 {
     Wallet *wallet = get_my_wallet();

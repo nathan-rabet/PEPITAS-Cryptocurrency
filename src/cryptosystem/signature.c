@@ -1,28 +1,11 @@
 #include "core/blockchain/block.h"
 #include "cryptosystem/signature.h"
+#include "cryptosystem/hash.h"
 #include <openssl/bio.h>
 #include <openssl/rsa.h>
 #include <string.h>
 #include <stdio.h>
 #include <unistd.h>
-
-char *sha384_data(void *data, size_t len_data)
-{
-    unsigned char hash[SHA384_DIGEST_LENGTH];
-    SHA512_CTX sha384;
-    SHA384_Init(&sha384);
-    SHA384_Update(&sha384, data, len_data);
-    SHA384_Final(hash, &sha384);
-
-    char *output_buffer = malloc((2 * SHA384_DIGEST_LENGTH + 1) * sizeof(char));
-    int i = 0;
-    for (i = 0; i < SHA384_DIGEST_LENGTH; i++)
-    {
-        sprintf(output_buffer + (i * 2), "%02x", hash[i]);
-    }
-    output_buffer[2 * SHA384_DIGEST_LENGTH] = '\0';
-    return output_buffer;
-}
 
 char *sign_message(char *data, size_t len_data, size_t *signature_len)
 {

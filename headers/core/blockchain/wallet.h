@@ -24,10 +24,10 @@ typedef struct Wallet
 Wallet* get_my_wallet();
 
 /**
- * @brief Create a account in local 
- * and broadcast the creation to the network
+ * @brief Creates an account in local 
+ * and broadcasts the creation to the network
  * 
- * @return 0 if the broadcast succeed, else 1
+ * @return 0 if the broadcast succeeds, otherwise 1
  */
 int create_account();
 

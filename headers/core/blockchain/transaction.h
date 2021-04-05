@@ -38,6 +38,6 @@ typedef struct Transaction
  * 
  * @param amount The amount to send
  * @param receiver_public_key The receiver public key
- * @return return 0 if the broadcast succeed, -1 if not
+ * @return returns 0 if the broadcast succeeds, -1 otherwise
  */
 int send_money(size_t amount, u_int64_t receiver_public_key);
