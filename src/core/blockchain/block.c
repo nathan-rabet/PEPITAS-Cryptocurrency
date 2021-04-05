@@ -9,9 +9,13 @@
 #include <fcntl.h>
 #include <sys/types.h>
 
-
 ChunkBlockchain *get_blockchain(size_t nb_chunk, char blockchain_flag)
 {
+#ifdef TEST
+#undef NB_BLOCK_PER_CHUNK
+#define NB_BLOCK_PER_CHUNK 10
+#endif
+
     static ChunkBlockchain blockchain_chunk = {0};
 
     if (blockchain_chunk.chunk == NULL)
@@ -22,14 +26,20 @@ ChunkBlockchain *get_blockchain(size_t nb_chunk, char blockchain_flag)
 
     for (size_t i = 0; i < NB_BLOCK_PER_CHUNK; i++)
     {
-        if (blockchain_chunk.chunk[i] != NULL)
+        if (blockchain_chunk.chunk[i] != NULL) {
             free_block(blockchain_chunk.chunk[i]);
+            blockchain_chunk.chunk[i] = NULL;
+        }
 
         struct stat buffer;
-        char path[256] = {0};
-        snprintf(path, 256, "./.general/block%lu",i);
+        char path[32] = {0};
+        snprintf(path, 256, "./.general/block%lu", (nb_chunk - 1) * NB_BLOCK_PER_CHUNK + i);
         if (stat(path, &buffer) != 0)
+        {
+            if (i == 0)
+                return NULL;
             break;
+        }
 
         blockchain_chunk.chunk[i] = get_block((nb_chunk - 1) * NB_BLOCK_PER_CHUNK + i, blockchain_flag);
         blockchain_chunk.chunk[i]->chunk_id = i;

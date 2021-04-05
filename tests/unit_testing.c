@@ -17,7 +17,6 @@ int main()
     DEBUG(network_test);
     DEBUG(genererate_random_blocks_test);
     DEBUG(block_test);
-    
 
     return 0;
 }

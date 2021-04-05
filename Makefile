@@ -32,12 +32,14 @@ server: src/server.c ${SRC}
 client: src/client.c ${SRC}
 	${CC} ${CFLAGS} -Wall $^ -o client.out ${LDPARAMS}
 
-test: $(SRC_TEST) ${SRC}
-	${CC} ${CFLAGS} $^ -o test ${LDPARAMS}
+test: test_build
 	./test
 	rm -rf ./~test
 	rm -rf ./.keys
 	rm -rf ./.general
+
+test_build: $(SRC_TEST) ${SRC}
+	${CC} ${CFLAGS} $^ -o test ${LDPARAMS} -D TEST
 
 .PHONY: clean test
 

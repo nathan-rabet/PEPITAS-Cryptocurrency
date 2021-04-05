@@ -42,12 +42,6 @@ char *sign_message(char *data, size_t len_data, size_t *signature_len)
         err(EXIT_FAILURE, "Error encrypting message: %s\n", errmsg);
     }
     *signature_len = encrypt_len;
-#if TEST
-    // Write the encrypted message to a file
-    FILE *out = fopen("out.bin", "w");
-    fwrite(encrypt, sizeof(*encrypt), RSA_size(wallet->priv_key), out);
-    fclose(out);
-#endif
     return encrypt;
 }
 

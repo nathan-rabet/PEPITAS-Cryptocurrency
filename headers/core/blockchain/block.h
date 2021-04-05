@@ -13,7 +13,7 @@
 #define BLOCK_SIZE 2048 + sizeof(size_t) + BLOCK_DATA_SIZE + SHA384_DIGEST_LENGTH * 2 + 1
 
 #define MAX_TRANSACTIONS_PER_BLOCK 0x4000
-#define NB_BLOCK_PER_CHUNK 0x100
+#define NB_BLOCK_PER_CHUNK 10000
 
 // Standard implementation
 typedef struct BlockData
@@ -53,9 +53,8 @@ typedef struct ChunkBlockchain
  * if 0 : return the current blockchain object without modification
  * @param blockchain_flag The blockchain flag
  *  GENERAL_BLOCKCHAIN or VALIDATOR_BLOCKCHAIN
- * @return ChunkBlockchain*
+ * @return ChunkBlockchain*, NULL if the ChunkBlockchain is empty after switching
  */
-
 ChunkBlockchain *get_blockchain(size_t nb_chunk, char blockchain_flag);
 /**
  * @brief Write struct block to file
