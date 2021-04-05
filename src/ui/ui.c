@@ -1,4 +1,4 @@
-#include "../hdr/UI.h"
+#include "ui/ui.h"
 
 static GtkWidget *window;
 static GtkWidget *invest_window;
@@ -48,7 +48,7 @@ int setup()
     GError *err = NULL;
 
     builder = gtk_builder_new();
-    if(gtk_builder_add_from_file(builder, "../glade/pepitas.glade", &err) == 0)
+    if(gtk_builder_add_from_file(builder, "pepitas.glade", &err) == 0)
     {
         fprintf(stderr, "Error adding build from file. Error: %s\n", err->message);
         return 1;

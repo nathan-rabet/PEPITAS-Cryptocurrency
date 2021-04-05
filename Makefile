@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -I"headers" -I"tests" -Wall -Wextra -g -pthread
+CFLAGS = -I"headers" -I"tests" `pkg-config --cflags gtk+-3.0` -Wall -Wextra -g -pthread
 
 LDPARAMS = -L . -lcrypto -lssl
 
@@ -14,7 +14,7 @@ SRC += src/network/send_data.c
 SRC += src/network/get_data.c
 SRC += src/network/network.c
 SRC += tests/core/blockchain/block_test.c
-
+SRC += src/ui/ui.c
 
 SRC_TEST =  tests/unit_testing.c 
 SRC_TEST += tests/cryptosystem/rsa_test.c 
@@ -27,10 +27,14 @@ main_test: ${SRC} tests/main_test.c
 	${CC} ${CFLAGS} $^ -o test ${LDPARAMS}
 
 server: src/server.c ${SRC}
-	${CC} ${CFLAGS} -Wall $^ -o server.out ${LDPARAMS} -D TEST
+	${CC} ${CFLAGS} -Wall $^ -o server ${LDPARAMS} -D TEST
 
 client: src/client.c ${SRC}
-	${CC} ${CFLAGS} -Wall $^ -o client.out ${LDPARAMS}
+	${CC} ${CFLAGS} -Wall $^ -o client ${LDPARAMS}
+
+ui: src/gui.c ${SRC}
+	${CC} ${CFLAGS} -Wall $^ `pkg-config --libs gtk+-3.0` -o ui ${LDPARAMS}
+	cp src/ui/pepitas.glade ./pepitas.glade
 
 test: test_build
 	@./test
@@ -44,4 +48,4 @@ test_build: $(SRC_TEST) ${SRC}
 .PHONY: clean test
 
 clean:
-	${RM} *.out *.bin test
+	${RM} test server client ui pepitas.glade
