@@ -15,10 +15,7 @@
 #include "client.h"
 
 #define NB_HARD_CODED_ADDR 2
-static const Neighbour HARD_CODED_ADDR[] =
-    {
-        {AF_INET, "34.72.117.116", 0, 0}, // GCP SERVER
-        {AF_INET, "127.0.0.1", 0, 0}};    // LOCAL HOST
+extern const Neighbour HARD_CODED_ADDR[];
 
 #define STATIC_PORT "4242"
 
@@ -27,4 +24,5 @@ static const Neighbour HARD_CODED_ADDR[] =
 #define HD_SEND_CLIENT_LIST "SEND CLIENT LIST\n"
 #define HD_GET_BLOCKCHAIN "GET BLOCKCHAIN\r\n\r\n"
 #define HD_SEND_BLOCKCHAIN "SEND BLOCKCHAIN\n"
+
 #endif
