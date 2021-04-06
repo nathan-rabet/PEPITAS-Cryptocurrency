@@ -1,5 +1,8 @@
 # PEPITAS
+
 C cryptocurrency.
+
+[![Unit testing](https://github.com/nathan-rabet/PEPITAS-Cryptocurrency/actions/workflows/c-cpp.yml/badge.svg)](https://github.com/nathan-rabet/PEPITAS-Cryptocurrency/actions/workflows/c-cpp.yml)
 
 ## CODING STYLE
 ### Coding case
