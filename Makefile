@@ -28,28 +28,30 @@ SRC_TEST += tests/core/blockchain/block_test.c
 all: test server client
 
 main_test: ${SRC} tests/main_test.c
-	${CC} ${CFLAGS} $^ ${PCFLAGS} -o test ${LDPARAMS}
+	${CC} ${CFLAGS} $^ ${PCFLAGS} -o bin/test ${LDPARAMS}
 
 server: src/server.c ${SRC}
-	${CC} ${CFLAGS} -Wall $^ ${PCFLAGS} -o server ${LDPARAMS} -D TEST
+	${CC} ${CFLAGS} -Wall $^ ${PCFLAGS} -o bin/server ${LDPARAMS} -D TEST
 
 client: src/client.c ${SRC}
-	${CC} ${CFLAGS} -Wall $^ ${PCFLAGS} -o client ${LDPARAMS}
+	${CC} ${CFLAGS} -Wall $^ ${PCFLAGS} -o bin/client ${LDPARAMS}
 
 ui: src/gui.c ${SRC}
-	${CC} ${CFLAGS} -Wall $^ ${PCFLAGS} -o ui ${LDPARAMS}
+	${CC} ${CFLAGS} -Wall $^ ${PCFLAGS} -o bin/ui ${LDPARAMS}
 	cp src/ui/pepitas.glade ./pepitas.glade
 
-test: test_build
-	@./test
-	rm -rf ./~test
-	rm -rf ./.keys
-	rm -rf ./.general
+test: .test_build
+	@(cd bin ; ./test)
+	rm -rf ./bin/~test
+	rm -rf ./bin/.keys
+	rm -rf ./bin/.general
+	@cd ..
 
-test_build: $(SRC_TEST) ${SRC}
-	@${CC} ${CFLAGS} $^ ${PCFLAGS} -o test ${LDPARAMS} -D TEST
+.test_build: $(SRC_TEST) ${SRC}
+	@mkdir -p bin
+	@${CC} ${CFLAGS} $^ ${PCFLAGS} -o bin/test ${LDPARAMS} -D TEST
 
-.PHONY: clean test
+.PHONY: clean test .test_build
 
 clean:
-	${RM} test server client ui pepitas.glade
+	${RM} -r bin
