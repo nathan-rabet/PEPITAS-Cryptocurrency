@@ -7,8 +7,14 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
+  install-dependencies:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install GTK
+      run: sudo apt install libgtk-3-dev
 
+  test:
     runs-on: ubuntu-latest
 
     steps:
@@ -17,3 +23,4 @@ jobs:
       run: make test
     - name: make clean
       run: make clean
+    
