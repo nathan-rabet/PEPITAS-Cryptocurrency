@@ -42,7 +42,7 @@ client: src/client.c ${SRC}
 ui: src/gui.c ${SRC}
 	@mkdir -p bin
 	${CC} ${CFLAGS} -Wall $^ ${PCFLAGS} -o bin/ui ${LDPARAMS}
-	cp src/ui/pepitas.glade ./pepitas.glade
+	cp src/ui/pepitas.glade ./bin/pepitas.glade
 
 test: .test_build
 	@(cd bin ; ./test)
