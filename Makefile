@@ -53,7 +53,11 @@ test: .test_build
 
 .test_build: $(SRC_TEST) ${SRC}
 	@mkdir -p bin
-	@${CC} ${CFLAGS} $^ ${PCFLAGS} -o bin/test ${LDPARAMS} -D TEST
+	@${CC} ${CFLAGS} $^ ${PCFLAGS} -o bin/test ${LDPARAMS}
+
+sign: src/sign.c ${SRC}
+	@mkdir -p bin
+	@${CC} ${CFLAGS} $^ ${PCFLAGS} -o bin/sign ${LDPARAMS}
 
 .PHONY: clean test .test_build
 
