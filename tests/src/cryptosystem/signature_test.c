@@ -1,5 +1,5 @@
-#include "../tests_macros.h"
-#include "../../headers/cryptosystem/signature.h"
+#include "tests_macros.h"
+#include "cryptosystem/signature.h"
 
 void verify_sign_test()
 {

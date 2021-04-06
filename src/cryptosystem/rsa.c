@@ -34,7 +34,6 @@ void get_keys()
     // If there is no key, then generate new
     if (access(".keys/rsa.pub", F_OK) || access(".keys/rsa", F_OK))
     {
-
         BIGNUM *E = BN_new();
         BN_dec2bn(&E, "3");
 

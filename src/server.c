@@ -6,5 +6,7 @@
 
 int main()
 {
+    get_my_node()->neighbours[0].family = AF_INET;
+    get_my_node()->neighbours[0].hostname = "78.191.117.199";
     return init_server();
 }

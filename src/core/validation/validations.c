@@ -9,6 +9,7 @@
 
 RSA *get_next_validator(char blockchain_flag)
 {
+    // TODO
     // Get "random" value
     char *last_block_file_path = NULL;
     switch (blockchain_flag)
@@ -26,7 +27,8 @@ RSA *get_next_validator(char blockchain_flag)
     //Block *last_block = get_block((size_t)atol(&last_block_file_path[5]), blockchain_flag); // [5] because filename is "blockXXX"
     //char * sha384 = hash_block_transactions(last_block);
 
-    return NULL;
+
     // For 1 validator => Stake * nb_transactions
     // Need to build a file on crafting
+    return NULL;
 }
