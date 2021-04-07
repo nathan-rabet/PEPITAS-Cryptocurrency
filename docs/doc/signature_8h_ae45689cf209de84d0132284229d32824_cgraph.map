@@ -1,0 +1,6 @@
+<map id="verify_transaction_signature" name="verify_transaction_signature">
+<area shape="rect" id="node1" title="Verifies if a transaction signature is valid." alt="" coords="5,23,144,65"/>
+<area shape="rect" id="node2" href="$signature_8c.html#a16588449d977a2d5052be7b3639768a8" title="Convert transactions to char * buffer." alt="" coords="192,5,351,32"/>
+<area shape="rect" id="node3" href="$signature_8c.html#a03bc161fe8675e7bf8763cdcee6a3ac2" title="Apply the SHA384 algorithm on a &#39;data&#39; of size &#39;len_data&#39; and verifies if SHA384(data,..." alt="" coords="208,56,335,83"/>
+<area shape="rect" id="node4" href="$hash_8h.html#a67d06acefe39c395887f87d76bed5ba3" title="Apply the SHA384 algorithm on a &#39;data&#39; of size &#39;len_data&#39;." alt="" coords="399,56,504,83"/>
+</map>

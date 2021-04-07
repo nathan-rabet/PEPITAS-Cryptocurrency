@@ -1,0 +1,8 @@
+<map id="sign_block_transactions" name="sign_block_transactions">
+<area shape="rect" id="node1" title="Signs transactions of a block." alt="" coords="5,31,184,57"/>
+<area shape="rect" id="node2" href="$signature_8c.html#afc30cc798edd88f7749c81431cc12684" title="Sign a transaction." alt="" coords="232,31,361,57"/>
+<area shape="rect" id="node3" href="$signature_8c.html#a16588449d977a2d5052be7b3639768a8" title="Convert transactions to char * buffer." alt="" coords="409,5,568,32"/>
+<area shape="rect" id="node4" href="$signature_8c.html#a31fa447711840b3c0932cfe068d8cc65" title="encrypt(SHA284(msg,len_data),priv_key)" alt="" coords="431,56,546,83"/>
+<area shape="rect" id="node5" href="$wallet_8h.html#a993fb7ec0c86c7a2d8ff68363e9f5304" title="Get my wallet object." alt="" coords="616,31,735,57"/>
+<area shape="rect" id="node6" href="$hash_8h.html#a67d06acefe39c395887f87d76bed5ba3" title="Apply the SHA384 algorithm on a &#39;data&#39; of size &#39;len_data&#39;." alt="" coords="623,81,728,108"/>
+</map>

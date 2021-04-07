@@ -1,0 +1,8 @@
+<map id="verify_signature" name="verify_signature">
+<area shape="rect" id="node1" title="Apply the SHA384 algorithm on a &#39;data&#39; of size &#39;len_data&#39; and verifies if SHA384(data,..." alt="" coords="325,81,452,108"/>
+<area shape="rect" id="node2" href="$sign_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="165,5,220,32"/>
+<area shape="rect" id="node3" href="$signature_8c.html#a197fbff013d305c63a9699922eb438f6" title="Verifies if a block signature is valid." alt="" coords="108,56,277,83"/>
+<area shape="rect" id="node4" href="$signature__test_8h.html#a1a567e3415b0bcb5531f72f29d571dac" title=" " alt="" coords="130,107,255,133"/>
+<area shape="rect" id="node6" href="$signature_8c.html#ae45689cf209de84d0132284229d32824" title="Verifies if a transaction signature is valid." alt="" coords="123,158,262,199"/>
+<area shape="rect" id="node5" href="$unit__testing_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,107,60,133"/>
+</map>

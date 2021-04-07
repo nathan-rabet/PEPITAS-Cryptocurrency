@@ -1,0 +1,79 @@
+@import url('http://fonts.googleapis.com/css?family=Ubuntu+Mono:400,500,700');
+
+*, *::before, *::after{
+    box-sizing:border-box;
+}
+
+body{
+    padding: 0;
+    margin: 0;
+    background-color: #B7BAC2;
+    font-family: Ubuntu+Mono,sans-serif;
+    color: white;
+}
+
+.ddlWindow{
+
+    position: absolute;
+    width: 700px;
+    height: 324px;
+    left: 290px;
+    top: 216px;
+    
+    background: #686A6E;
+    border-radius: 30px;
+    border: 1px solid #000000;
+}
+
+.ddlTextBubble{
+
+    position: absolute;
+    width: 604px;
+    height: 72px;
+    left: 338px;
+    top: 270px;
+    
+    font-family: Ubuntu Mono;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 36px;
+    line-height: 36px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    
+    color: #FFFFFF;
+}
+
+.ddlButton{
+    position: absolute;
+    width: 371.21px;
+    height: 113.21px;
+    left: 454px;
+    top: 378px;
+    
+    background: rgba(232, 0, 0, 0.5);
+    border-radius: 20px;
+    border: 1px solid #000000;
+}
+
+.ddlTextButton{
+    position: absolute;
+    width: 144px;
+    height: 36px;
+    left: 566.79px;
+    top: 416.07px;
+    
+    font-family: Ubuntu Mono;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 36px;
+    line-height: 36px;
+    /* identical to box height */
+    
+    display: flex;
+    align-items: center;
+    text-align: center;
+    
+    color: #FFFFFF;
+}

@@ -1,0 +1,227 @@
+@import url('http://fonts.googleapis.com/css?family=Ubuntu+Mono:400,500,700');
+
+*, *::before, *::after{
+    box-sizing:border-box;
+}
+
+body{
+    padding: 0;
+    margin: 0;
+    background-color: #B7BAC2;
+    font-family: Ubuntu+Mono,sans-serif;
+    color: white;
+}
+
+.Title{
+    position: absolute;
+    width: 355px;
+    height: 46px;
+    left: 50px;
+    top: 100px;
+    
+    font-family: Ubuntu Mono;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 48px;
+    line-height: 48px;
+    display: flex;
+    align-items: center;
+    
+    color: #000000;
+}
+
+.CadreOS{
+    position: absolute;
+    width: 544px;
+    height: 106px;
+    left: 336px;
+    top: 525px;
+    
+    background: #EFEFEF;
+    border-radius: 25px;
+}
+
+.CadreGL{
+    position: absolute;
+    width: 344px;
+    height: 106px;
+    left: 50px;
+    top: 354px;
+    
+    background: #EFEFEF;
+    border-radius: 25px;
+}
+
+.CadreGI{
+    position: absolute;
+    width: 344px;
+    height: 106px;
+    left: 50px;
+    top: 184px;
+    
+    background: #EFEFEF;
+    border-radius: 25px;
+}
+
+.CadreFI{
+    position: absolute;
+    width: 344px;
+    height: 106px;
+    left: 831px;
+    top: 187px;
+    
+    background: #EFEFEF;
+    border-radius: 25px;
+}
+
+.CadreGT{
+    position: absolute;
+    width: 344px;
+    height: 106px;
+    left: 831px;
+    top: 354px;
+    
+    background: #EFEFEF;
+    border-radius: 25px;
+}
+
+.PhotoGI{
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    left: 56px;
+    top: 190px;
+}
+
+.PhotoGL{
+    position: absolute;
+    width: 142.22px;
+    height: 100px;
+    left: 56px;
+    top: 363px;
+}
+
+.PhotoGT{
+    position: absolute;
+    width: 92.74px;
+    height: 100px;
+    left: 858px;
+    top: 360px;
+}
+
+.PhotoFI{
+    position: absolute;
+    width: 66.23px;
+    height: 100px;
+    left: 858px;
+    top: 190px;
+}
+
+.PhotoOS{
+    position: absolute;
+    width: 331.38px;
+    height: 75px;
+    left: 342px;
+    top: 540px;
+}
+
+.Figma{
+    position: absolute;
+    width: 120px;
+    height: 48px;
+    left: 984px;
+    top: 213px;
+    
+    font-family: Ubuntu Mono;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 48px;
+    line-height: 48px;
+    /* identical to box height */
+    
+    display: flex;
+    align-items: center;
+    
+    color: #000000;
+}
+
+.GitHub{
+    position: absolute;
+    width: 144px;
+    height: 48px;
+    left: 198px;
+    top: 213px;
+    
+    font-family: Ubuntu Mono;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 48px;
+    line-height: 48px;
+    /* identical to box height */
+    
+    display: flex;
+    align-items: center;
+    
+    color: #000000;
+}
+.OpenSSL{
+    position: absolute;
+    width: 168px;
+    height: 48px;
+    left: 690px;
+    top: 554px;
+    
+    font-family: Ubuntu Mono;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 48px;
+    line-height: 48px;
+    /* identical to box height */
+    
+    display: flex;
+    align-items: center;
+    
+    color: #000000;
+}
+.Glade{
+    position: absolute;
+    width: 120px;
+    height: 48px;
+    left: 210px;
+    top: 383px;
+    
+    font-family: Ubuntu Mono;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 48px;
+    line-height: 48px;
+    /* identical to box height */
+    
+    display: flex;
+    align-items: center;
+    
+    color: #000000;
+}
+.GTK3{
+    position: absolute;
+    width: 96px;
+    height: 48px;
+    left: 984px;
+    top: 383px;
+    
+    font-family: Ubuntu Mono;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 48px;
+    line-height: 48px;
+    /* identical to box height */
+    
+    display: flex;
+    align-items: center;
+    
+    color: #000000;
+}
+
+.list a:hover{
+    color: gray;
+}
