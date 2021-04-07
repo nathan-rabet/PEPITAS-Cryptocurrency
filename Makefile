@@ -25,7 +25,7 @@ SRC_TEST += tests/src/cryptosystem/signature_test.c
 SRC_TEST += tests/src/core/blockchain/block_test.c
 SRC_TEST += tests/src/core/blockchain/block_test.c
 
-all: test server client
+all: test server client sign ui
 
 main_test: ${SRC} tests/main_test.c
 	@mkdir -p bin
