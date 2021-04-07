@@ -36,8 +36,6 @@ void gen_validators_file(char path[])
         fseek(temp, RSA_BEGIN_SIZE + 1, SEEK_SET);
         fread(key_buff, sizeof(char), RSA_KEY_SIZE, temp);
         fwrite(key_buff, sizeof(char), RSA_KEY_SIZE, validators_file);
-        // Rule for power : linear combination
-        // For one stake transaction, power += amount / block_height
         size_t power = (size_t)rand() % 1000;
 
         fwrite(&power, sizeof(size_t), 1, validators_file);

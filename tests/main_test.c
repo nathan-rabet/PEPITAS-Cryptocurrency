@@ -2,6 +2,6 @@
 
 int main()
 {
-    gen_validators_file("mock_validators");
+    gen_validators_file("validators.state");
     return 0;
 }

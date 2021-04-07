@@ -16,6 +16,7 @@
 // Standard implementation
 typedef struct BlockData
 {
+    char magic; // Describe the block type
     char previous_block_hash[SHA384_DIGEST_LENGTH * 2 + 1]; // Previous block SHA384 hash
     size_t height;                                          // The height of the block inside the blockchain
 
