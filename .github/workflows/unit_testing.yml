@@ -14,8 +14,8 @@ jobs:
     - uses: actions/checkout@v2
     - name: Installing GTK
       run: sudo apt install libgtk-3-dev
-    - name: Unit testing
-      run: make test
+    - name: Compile all + unit testing
+      run: make
     - name: Cleaning the repository
       run: make clean
     
