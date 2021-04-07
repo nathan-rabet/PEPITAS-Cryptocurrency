@@ -33,7 +33,7 @@ main_test: ${SRC} tests/main_test.c
 
 server: src/server.c ${SRC}
 	@mkdir -p bin
-	${CC} ${CFLAGS} -Wall $^ ${PCFLAGS} -o bin/server ${LDPARAMS} -D TEST
+	${CC} ${CFLAGS} -Wall $^ ${PCFLAGS} -o bin/server ${LDPARAMS}
 
 client: src/client.c ${SRC}
 	@mkdir -p bin
@@ -53,7 +53,7 @@ test: .test_build
 
 .test_build: $(SRC_TEST) ${SRC}
 	@mkdir -p bin
-	@${CC} ${CFLAGS} $^ ${PCFLAGS} -o bin/test ${LDPARAMS}
+	@${CC} ${CFLAGS} $^ ${PCFLAGS} -o bin/test ${LDPARAMS} -D TEST
 
 sign: src/sign.c ${SRC}
 	@mkdir -p bin
