@@ -5,7 +5,7 @@
 #define DEBUG(function) function()
 
 #define LOG(str...)           \
-    printf("\033[0;34m[?] "); \
+    printf("\033[0;34m[-] "); \
     printf(str);              \
     printf("\033[0m\n")
 
@@ -15,7 +15,7 @@
     printf("' success\033[0m\n")
 
 #define TEST_FAILED(name, reason...)                               \
-    printf("\033[0;31m[x] TEST '%s' failed\n\t-> REASON : ", name); \
+    printf("\033[0;31m[X] TEST '%s' failed\n\t-> REASON : ", name); \
     printf(reason);                                                \
     printf("\033[0m\n");                                           \
     exit(1)

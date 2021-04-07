@@ -33,7 +33,7 @@ ChunkBlockchain *get_blockchain(size_t nb_chunk)
 
         struct stat buffer;
         char path[32] = {0};
-        snprintf(path, 256, "./blockcahin/block%lu", (nb_chunk - 1) * NB_BLOCK_PER_CHUNK + i);
+        snprintf(path, 256, "./blockchain/block%lu", (nb_chunk - 1) * NB_BLOCK_PER_CHUNK + i);
         if (stat(path, &buffer) != 0)
         {
             if (i == 0)
