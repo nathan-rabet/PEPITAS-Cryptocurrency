@@ -9,7 +9,7 @@
 #include <fcntl.h>
 #include <sys/types.h>
 
-ChunkBlockchain *get_blockchain(size_t nb_chunk, char blockchain_flag)
+ChunkBlockchain *get_blockchain(size_t nb_chunk)
 {
 #ifdef TEST
 #undef NB_BLOCK_PER_CHUNK
@@ -21,7 +21,7 @@ ChunkBlockchain *get_blockchain(size_t nb_chunk, char blockchain_flag)
     if (blockchain_chunk.chunk == NULL)
         blockchain_chunk.chunk = calloc(NB_BLOCK_PER_CHUNK, sizeof(Block *));
 
-    if (nb_chunk == 0 && blockchain_chunk.blockchain_flag == blockchain_flag)
+    if (nb_chunk == 0)
         return &blockchain_chunk;
 
     for (size_t i = 0; i < NB_BLOCK_PER_CHUNK; i++)
@@ -33,7 +33,7 @@ ChunkBlockchain *get_blockchain(size_t nb_chunk, char blockchain_flag)
 
         struct stat buffer;
         char path[32] = {0};
-        snprintf(path, 256, "./.general/block%lu", (nb_chunk - 1) * NB_BLOCK_PER_CHUNK + i);
+        snprintf(path, 256, "./blockcahin/block%lu", (nb_chunk - 1) * NB_BLOCK_PER_CHUNK + i);
         if (stat(path, &buffer) != 0)
         {
             if (i == 0)
@@ -41,38 +41,24 @@ ChunkBlockchain *get_blockchain(size_t nb_chunk, char blockchain_flag)
             break;
         }
 
-        blockchain_chunk.chunk[i] = get_block((nb_chunk - 1) * NB_BLOCK_PER_CHUNK + i, blockchain_flag);
+        blockchain_chunk.chunk[i] = get_block((nb_chunk - 1) * NB_BLOCK_PER_CHUNK + i);
         blockchain_chunk.chunk[i]->chunk_id = i;
     }
     blockchain_chunk.chunk_nb = nb_chunk;
     return &blockchain_chunk;
 }
 
-void write_block_file(Block block, char blockchain)
+void write_block_file(Block block)
 {
     struct stat st = {0};
     char dir[256];
 
-    switch (blockchain)
-    {
-    case VALIDATOR_BLOCKCHAIN:
-        if (stat(".validator", &st) == -1)
+            if (stat("blockchain", &st) == -1)
         {
-            mkdir(".validator", 0700);
+            mkdir("blockchain", 0700);
         }
-        snprintf(dir, 256, "./.validator/block%lu", block.block_data.height);
-        break;
+        snprintf(dir, 256, "blockchain/block%lu", block.block_data.height);
 
-    case GENERAL_BLOCKCHAIN:
-    default:
-        if (stat(".general", &st) == -1)
-        {
-            mkdir(".general", 0700);
-        }
-        snprintf(dir, 256, "./.general/block%lu", block.block_data.height);
-
-        break;
-    }
     int fd = open(dir, O_WRONLY | O_CREAT, 0644);
     if (fd == -1)
         err(errno, "Impossible to write block");
@@ -160,22 +146,15 @@ void convert_data_to_block(Block *block, FILE *blockfile)
     convert_data_to_blockdata(&block->block_data, blockfile);
 }
 
-Block *get_block(size_t block_height, char blockchain)
+Block *get_block(size_t block_height)
 {
     Block *block = malloc(sizeof(Block));
     FILE *blockfile;
     char dir[256];
-    switch (blockchain)
-    {
-    case VALIDATOR_BLOCKCHAIN:
-        snprintf(dir, 256, "./.validator/block%lu", block_height);
-        break;
 
-    case GENERAL_BLOCKCHAIN:
-    default:
-        snprintf(dir, 256, "./.general/block%lu", block_height);
-        break;
-    }
+    snprintf(dir, 256, "blockchain/block%lu", block_height);
+
+
     blockfile = fopen(dir, "rb");
     if (!blockfile)
         err(errno, "Impossible to read %s", dir);
@@ -201,22 +180,22 @@ void free_block(Block *block)
     free(block);
 }
 
-Block *get_next_block(Block *block, char blockchain)
+Block *get_next_block(Block *block)
 {
     if (block->chunk_id == NB_BLOCK_PER_CHUNK - 1)
     {
-        size_t next_chunk_nb = get_blockchain(0, blockchain)->chunk_nb + 1;
-        return get_blockchain(next_chunk_nb, blockchain)->chunk[0];
+        size_t next_chunk_nb = get_blockchain(0)->chunk_nb + 1;
+        return get_blockchain(next_chunk_nb)->chunk[0];
     }
-    return get_blockchain(CURRENT_CHUNK, blockchain)->chunk[block->chunk_id + 1];
+    return get_blockchain(CURRENT_CHUNK)->chunk[block->chunk_id + 1];
 }
 
-Block *get_prev_block(Block *block, char blockchain)
+Block *get_prev_block(Block *block)
 {
     if (block->chunk_id == 0)
     {
-        size_t next_chunk_nb = get_blockchain(0, blockchain)->chunk_nb - 1;
-        return get_blockchain(next_chunk_nb, blockchain)->chunk[NB_BLOCK_PER_CHUNK - 1];
+        size_t next_chunk_nb = get_blockchain(0)->chunk_nb - 1;
+        return get_blockchain(next_chunk_nb)->chunk[NB_BLOCK_PER_CHUNK - 1];
     }
-    return get_blockchain(CURRENT_CHUNK, blockchain)->chunk[block->chunk_id - 1];
+    return get_blockchain(CURRENT_CHUNK)->chunk[block->chunk_id - 1];
 }

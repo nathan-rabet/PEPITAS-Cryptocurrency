@@ -5,8 +5,6 @@
 #include <openssl/sha.h>
 #include "transaction.h"
 
-#define GENERAL_BLOCKCHAIN 0
-#define VALIDATOR_BLOCKCHAIN 1
 #define CURRENT_CHUNK 0
 
 #define BLOCK_DATA_SIZE (SHA384_DIGEST_LENGTH * 2 + 1) + sizeof(size_t) + sizeof(uint16_t) + sizeof(time_t)
@@ -41,7 +39,6 @@ typedef struct Block
 
 typedef struct ChunkBlockchain
 {
-    char blockchain_flag; // GENERAL_BLOCKCHAIN or VALIDATOR_BLOCKCHAIN
     size_t chunk_nb;      // The split offset
     Block **chunk;        // The splited blocks
 } ChunkBlockchain;
@@ -51,21 +48,17 @@ typedef struct ChunkBlockchain
  * 
  * @param nb_chunk The chunk nb, 
  * if 0 : return the current blockchain object without modification
- * @param blockchain_flag The blockchain flag,
- * GENERAL_BLOCKCHAIN or VALIDATOR_BLOCKCHAIN
  * @return ChunkBlockchain*, NULL if the ChunkBlockchain is empty after switching
  */
-ChunkBlockchain *get_blockchain(size_t nb_chunk, char blockchain_flag);
+ChunkBlockchain *get_blockchain(size_t nb_chunk);
 /**
  * @brief Writes a block struct in a file
  * 
  * @param block The block to write
- * @param blockchain_flag The blockchain flag,
- * GENERAL_BLOCKCHAIN or VALIDATOR_BLOCKCHAIN
  */
-void write_block_file(Block block, char blockchain_flag);
+void write_block_file(Block block);
 
-Block *get_block(size_t block_height, char blockchain_flag);
+Block *get_block(size_t block_height);
 
 /**
  * @brief Free a block struct
@@ -78,17 +71,15 @@ void free_block(Block *block);
  * @brief For a block of height `h`, returns the block of height `h+1`
  * 
  * @param block The base block
- * @param blockchain The blockchain flag (GENERAL_BLOCKCHAIN or VALIDATOR_BLOCKCHAIN)
  * @return The next Block* 
  */
-Block *get_next_block(Block *block, char blockchain_flag);
+Block *get_next_block(Block *block);
 
 /**
  * @brief For a block of height `h`, return the block of height `h-1`
  * 
  * @param block The base block
- * @param blockchain The blockchain flag (GENERAL_BLOCKCHAIN or VALIDATOR_BLOCKCHAIN)
  * @return The next Block* 
  */
-Block *get_prev_block(Block *block, char blockchain_flag);
+Block *get_prev_block(Block *block);
 #endif

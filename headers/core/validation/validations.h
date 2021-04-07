@@ -2,15 +2,12 @@
 #include <openssl/rsa.h>
 
 /**
- * @brief Get the 'next block' validator RSA public key
+ * @brief Get the 'next block' validators RSA public keys
  * @see The 'next block' is referring to block after 
  * the last block available OFFLINE
- * 
- * @param blockchain_flag The blockchain flag,
- * GENERAL_BLOCKCHAIN or VALIDATOR_BLOCKCHAIN
- * @return RSA*
+ * @return [*RSA]
  */
-RSA* get_next_validator(char blockchain_flag);
+RSA** get_next_validators();
 
 /**
  * @brief Searches how much money 'public_key' has

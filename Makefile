@@ -48,7 +48,7 @@ test: .test_build
 	@(cd bin ; ./test)
 	rm -rf ./bin/~test
 	rm -rf ./bin/.keys
-	rm -rf ./bin/.general
+	rm -rf ./bin/blockchain
 	@cd ..
 
 .test_build: $(SRC_TEST) ${SRC}

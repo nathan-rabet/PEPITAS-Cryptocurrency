@@ -7,14 +7,18 @@
 #include <math.h>
 
 #define NB_FAKE_VALIDATORS 10
+#define str(x) #x
 
 void gen_validators_file(char path[])
 {
     FILE *validators_file = fopen(path, "w+");
     FILE *temp = fopen(".temp_validators", "w+");
 
+    size_t nb_validators[] = {NB_FAKE_VALIDATORS};
+
     srand(time(NULL));
-    size_t max_factor = 0;
+    fwrite(&nb_validators, sizeof(size_t), 1, validators_file);
+
     for (size_t i = 0; i < NB_FAKE_VALIDATORS; i++)
     {
 
@@ -32,17 +36,11 @@ void gen_validators_file(char path[])
         fseek(temp, RSA_BEGIN_SIZE + 1, SEEK_SET);
         fread(key_buff, sizeof(char), RSA_KEY_SIZE, temp);
         fwrite(key_buff, sizeof(char), RSA_KEY_SIZE, validators_file);
+        // Rule for power : linear combination
+        // For one stake transaction, power += amount / block_height
+        size_t power = (size_t)rand() % 1000;
 
-        // Validator power
-        size_t nb_transactions = (size_t)rand() % 1000;
-        size_t amount = (size_t)rand() % 10000;
-
-        if (nb_transactions * amount < max_factor)
-            max_factor = nb_transactions * amount;
-
-        fwrite(&nb_transactions, sizeof(size_t), 1, validators_file);
-        fwrite(&amount, sizeof(size_t), 1, validators_file);
-        fwrite("\n", sizeof(char), 1, validators_file);
+        fwrite(&power, sizeof(size_t), 1, validators_file);
         fseek(temp, 0, SEEK_SET);
     }
 

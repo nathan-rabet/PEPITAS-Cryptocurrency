@@ -7,28 +7,18 @@
 
 #define NB_VALIDATOR_PER_BLOCK 50
 
-RSA *get_next_validator(char blockchain_flag)
+RSA **get_next_validators()
 {
     // TODO
     // Get "random" value
-    char *last_block_file_path = NULL;
-    switch (blockchain_flag)
-    {
-    case GENERAL_BLOCKCHAIN:
-        last_block_file_path = last_file_in_folder(".general");
-        break;
-    case VALIDATOR_BLOCKCHAIN:
-        last_block_file_path = last_file_in_folder(".validator");
-        break;
-    }
-    if (last_block_file_path == NULL)
-        return NULL;
+    char *last_block_file_path = last_file_in_folder("blockchain");
 
-    //Block *last_block = get_block((size_t)atol(&last_block_file_path[5]), blockchain_flag); // [5] because filename is "blockXXX"
-    //char * sha384 = hash_block_transactions(last_block);
+    Block *last_block = get_block((size_t)atol(&last_block_file_path[5])); // [5] because filename is "blockXXX"
+    char * sha384 = hash_block_transactions(last_block);
 
 
-    // For 1 validator => Stake * nb_transactions
     // Need to build a file on crafting
+    FILE* validators_states = fopen("validators.state","r");
+
     return NULL;
 }
