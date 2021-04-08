@@ -1,3 +1,6 @@
+#ifndef VALIDATIONS_H
+#define VALIDATIONS_H
+
 #include <stdlib.h>
 #include <openssl/rsa.h>
 
@@ -16,3 +19,5 @@ RSA** get_next_validators();
  * @return The amount, or -1 in case of an error 
  */
 ssize_t get_amount(RSA* public_key);
+
+#endif

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef TRANSACTION_H
+#define TRANSACTION_H
 
 #include <stdlib.h>
 #include <openssl/rsa.h>
@@ -41,3 +42,5 @@ typedef struct Transaction
  * @return returns 0 if the broadcast succeeds, -1 otherwise
  */
 int send_money(size_t amount, u_int64_t receiver_public_key);
+
+#endif

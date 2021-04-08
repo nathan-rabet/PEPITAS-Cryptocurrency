@@ -1,3 +1,6 @@
+#ifndef STAKE_H
+#define STAKE_H
+
 #include <stdlib.h>
 
 
@@ -24,3 +27,5 @@ int push_stake(size_t amount);
  * @return 0 if the broadcast succeeds, else returns -1
  */
 int pop_stake(size_t amount);
+
+#endif
