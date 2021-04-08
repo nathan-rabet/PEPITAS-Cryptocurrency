@@ -115,7 +115,7 @@ void convert_data_to_transaction(Transaction *transaction, FILE *blockfile)
 
 void convert_data_to_blockdata(BlockData *blockdata, FILE *blockfile)
 {
-    fread(blockdata->magic, sizeof(char), 1, blockfile);
+    fread(&blockdata->magic, sizeof(char), 1, blockfile);
     fread(blockdata->previous_block_hash, 97, 1, blockfile);
     fread(&blockdata->height, sizeof(size_t), 1, blockfile);
     fread(&blockdata->nb_transactions, sizeof(uint16_t), 1, blockfile);
