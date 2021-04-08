@@ -1,6 +1,12 @@
 #include "network/client.h"
 #include "network/server.h"
 #include "network/network.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+#include <err.h>
 
 Node *get_my_node()
 {
@@ -57,7 +63,7 @@ int set_neighbour(char *hostname, int family)
         if (min_null != -1)
         {
             node->neighbours[min_null].hostname = malloc(sizeof(char) * 39);
-            snprintf(node->neighbours[min_null].hostname, 39, "%s", hostname);
+            snprintf(node->neighbours[min_null].hostname, SIZE_OF_HOSTNAME, "%s", hostname);
             node->neighbours[min_null].family = family;
             return 0;
         }
@@ -75,6 +81,61 @@ void print_neighbours()
         printf("%02lu: hostname \"%s\", family \"%i\"\n", i ,node->neighbours[i].hostname, node->neighbours[i].family);
     }
 
+}
+
+void save_neighbours()
+{
+    Node *node = get_my_node();
+
+    struct stat st = {0};
+
+    if (stat(".neighbours", &st) == -1)
+    {
+        mkdir(".neighbours", 0700);
+    }
+
+    FILE *nfile = fopen("./.neighbours/neighbours", "wb");
+    if (!nfile)
+        err(errno, "Impossible to write '.neighbours/neighbours'");
+    char *temp = calloc(SIZE_OF_HOSTNAME + sizeof(int), 1);
+    for (size_t i = 0; i < MAX_NEIGHBOURS; i++)
+    {
+        if (node->neighbours[i].hostname != NULL)
+        {
+            fwrite(node->neighbours[i].hostname, SIZE_OF_HOSTNAME, 1, nfile);
+            fwrite((void *)&node->neighbours[i].family, sizeof(int), 1, nfile);
+        }
+        else
+        {
+            fwrite(temp, SIZE_OF_HOSTNAME + sizeof(int), 1, nfile);
+        }
+    }
+    free(temp);
+    fclose(nfile);
+}
+
+void load_neighbours()
+{
+    Node *node = get_my_node();
+    if (access(".neighbours/neighbours", F_OK))
+    {
+        return;
+    }
+    FILE *nfile = fopen("./.neighbours/neighbours", "rb");
+    if (!nfile)
+        err(errno, "Impossible to write '.neighbours/neighbours'");
+    char temp[SIZE_OF_HOSTNAME + sizeof(int)];
+    for (size_t i = 0; i < MAX_NEIGHBOURS; i++)
+    {
+        fread(temp, SIZE_OF_HOSTNAME + sizeof(int), 1, nfile);
+        if (strncmp(temp, "\0\0\0\0\0\0\0\0\0\0", 10))
+        {
+            node->neighbours[i].hostname = malloc(SIZE_OF_HOSTNAME);
+            snprintf(node->neighbours[i].hostname, SIZE_OF_HOSTNAME, "%s", temp);
+            node->neighbours[i].family = *(int *)(temp + SIZE_OF_HOSTNAME);
+        }
+    }
+    fclose(nfile);
 }
 
 int listen_to(size_t neighbour_id)

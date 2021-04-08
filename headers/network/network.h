@@ -14,6 +14,7 @@
 #include "misc/safe.h"
 #include "client.h"
 
+#define SIZE_OF_HOSTNAME 39
 #define NB_HARD_CODED_ADDR 2
 extern const Neighbour HARD_CODED_ADDR[];
 

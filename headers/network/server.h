@@ -24,14 +24,4 @@ typedef struct client_connection
  */
 int init_server(char type);
 
-
-/**
- * @brief Sends a block to a user via a socket FD
- * 
- * @param sockfd The socket FD
- * @param block The block to send
- * @return int 
- */
-int send_block(Block block,int sockfd);
-
 #endif

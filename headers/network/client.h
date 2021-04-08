@@ -38,6 +38,16 @@ int set_neighbour(char *hostname, int family);
 void print_neighbours();
 
 /**
+ * @brief Save neighbours list in .neighbours/neighbours
+ */
+void save_neighbours();
+
+/**
+ * @brief Load neighbours list from .neighbours/neighbours
+ */
+void load_neighbours();
+
+/**
  * @brief Tries to connect to the peer-to-peer network 
  * via a node in the Node structure
  * 

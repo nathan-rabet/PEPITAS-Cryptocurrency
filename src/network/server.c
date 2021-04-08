@@ -49,6 +49,7 @@ void *redirect_connection(void *arg)
     send_client_list(clientfd);
 
     set_neighbour(ip_str, AF_INET);
+    save_neighbours();
     print_neighbours();
 
     close(clientfd);

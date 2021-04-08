@@ -10,6 +10,7 @@
 int main()
 {
     printf("Starting door server\n");
-    get_my_node();
+    load_neighbours();
+    print_neighbours();
     return init_server(DOORSERVER);
 }

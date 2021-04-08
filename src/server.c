@@ -6,10 +6,10 @@
 
 int main()
 {
-    get_my_node()->neighbours[0].family = AF_INET;
-    get_my_node()->neighbours[0].hostname = "78.191.117.199";
-
-    //get_my_node()->neighbours[1].family = AF_INET6;
-    //get_my_node()->neighbours[1].hostname = "2a02:842a:222:701:6a5:b521:f6bd:996b";
+    set_neighbour("2a02:842a:222:701:6a5:b521:f6bd:996b", AF_INET6);
+    set_neighbour("2a02:842a:222:701:6a5:b521:f6bd:996b", AF_INET6);
+    set_neighbour("2a02:842a:222:701:6a5:b521:f6bd:996b", AF_INET6);
+    set_neighbour("2a02:842a:222:701:6a5:b521:f6bd:996b", AF_INET6);
+    print_neighbours();
     return init_server(NODESERVER);
 }
