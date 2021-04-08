@@ -40,18 +40,41 @@ int set_neighbour(char *hostname, int family)
     else
     {
         size_t index = 0;
+        ssize_t min_null = -1;
         while (index < MAX_NEIGHBOURS)
         {
-            if (node->neighbours[index].hostname == NULL)
+            if (min_null == -1 && node->neighbours[index].hostname == NULL)
             {
-                node->neighbours[index].hostname = hostname;
-                node->neighbours[index].family = family;
-                return listen_to(index);
+                min_null = index;
             }
+            if (node->neighbours[index].hostname != NULL && !strncmp(node->neighbours[index].hostname, hostname, strlen(hostname)))
+            {
+                return 0;
+            }
+            
             index++;
+        }
+        if (min_null != -1)
+        {
+            node->neighbours[min_null].hostname = malloc(sizeof(char) * 39);
+            snprintf(node->neighbours[min_null].hostname, 39, "%s", hostname);
+            node->neighbours[min_null].family = family;
+            return 0;
         }
         return -1;
     }
+}
+
+void print_neighbours()
+{
+
+    Node *node = get_my_node();
+    printf("Neighbour list:\n");
+    for (size_t i = 0; i < MAX_NEIGHBOURS; i++)
+    {
+        printf("%02lu: hostname \"%s\", family \"%i\"\n", i ,node->neighbours[i].hostname, node->neighbours[i].family);
+    }
+
 }
 
 int listen_to(size_t neighbour_id)

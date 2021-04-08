@@ -28,9 +28,14 @@ Node* get_my_node();
 /**
  * @brief Sets a neighbour in the client.neightbours section
  * 
- * @return 0 if sucess, -1 otherwise 
+ * @return 0 if sucess, -1 otherwise if full
  */
 int set_neighbour(char *hostname, int family);
+
+/**
+ * @brief Print neighbours list
+ */
+void print_neighbours();
 
 /**
  * @brief Tries to connect to the peer-to-peer network 

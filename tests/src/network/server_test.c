@@ -4,5 +4,5 @@
 int main()
 {
     printf("Testing init_server()\n");
-    return init_server();
+    return init_server(NODESERVER);
 }

@@ -25,7 +25,7 @@ SRC_TEST += tests/src/cryptosystem/signature_test.c
 SRC_TEST += tests/src/core/blockchain/block_test.c
 SRC_TEST += tests/src/core/blockchain/block_test.c
 
-all: test server client sign ui
+all: test server client sign ui doorserver
 
 main_test: ${SRC} tests/main_test.c
 	@mkdir -p bin
@@ -34,6 +34,10 @@ main_test: ${SRC} tests/main_test.c
 server: src/server.c ${SRC}
 	@mkdir -p bin
 	${CC} ${CFLAGS} -Wall $^ ${PCFLAGS} -o bin/server ${LDPARAMS}
+
+doorserver: src/serverdoor.c ${SRC}
+	@mkdir -p bin
+	${CC} ${CFLAGS} -Wall $^ ${PCFLAGS} -o bin/serverdoor ${LDPARAMS}
 
 client: src/client.c ${SRC}
 	@mkdir -p bin

@@ -11,5 +11,5 @@ int main()
 
     //get_my_node()->neighbours[1].family = AF_INET6;
     //get_my_node()->neighbours[1].hostname = "2a02:842a:222:701:6a5:b521:f6bd:996b";
-    return init_server();
+    return init_server(NODESERVER);
 }

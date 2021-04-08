@@ -5,6 +5,9 @@
 #include "network.h"
 #include "core/blockchain/block.h"
 
+#define NODESERVER 0
+#define DOORSERVER 1
+
 typedef struct client_connection
 {
     struct addrinfo info; // Adress information
@@ -16,9 +19,10 @@ typedef struct client_connection
  * @brief Launches a server instance,
  * connected to the peer-to-peer network 'hostname'
  * 
+ * @param type Type of the server
  * @return 0 if success, -1 otherwise
  */
-int init_server();
+int init_server(char type);
 
 
 /**
