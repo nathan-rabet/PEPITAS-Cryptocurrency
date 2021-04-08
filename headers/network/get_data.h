@@ -1,3 +1,6 @@
+#ifndef GET_DATA_H
+#define GET_DATA_H
+
 /**
  * @brief Waits a header in 'sockfd', reads it and processes it
  * 
@@ -14,3 +17,5 @@ int read_header(int sockfd);
  * @return 0 if sucess, -1 otherwise
  */
 int fetch_client_list(int neighbour_id);
+
+#endif

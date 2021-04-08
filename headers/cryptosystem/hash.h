@@ -1,3 +1,6 @@
+#ifndef HASH_H
+#define HASH_H
+
 #include <stdlib.h>
 #include "core/blockchain/block.h"
 
@@ -16,3 +19,5 @@ char *sha384_data(void *data, size_t len_data);
  * @return sha384[SHA384_DIGEST_LENGTH]
  */
 char*  hash_block_transactions(Block *block);
+
+#endif

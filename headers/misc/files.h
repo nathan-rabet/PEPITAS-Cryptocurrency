@@ -1,3 +1,6 @@
+#ifndef FILES_H
+#define FILES_H
+
 /**
  * @brief Return the last file (reverse alphabetical order)
  * of a folder path
@@ -6,3 +9,5 @@
  * @return char*, return NULL if any error, must be freed !
  */
 char *last_file_in_folder(char folder_path[]);
+
+#endif
