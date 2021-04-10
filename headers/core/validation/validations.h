@@ -6,11 +6,12 @@
 
 /**
  * @brief Get the 'next block' validators RSA public keys
+ * @param nb_validators return value, the number of selected validators
  * @see The 'next block' is referring to block after 
  * the last block available OFFLINE
  * @return [*RSA]
  */
-RSA** get_next_validators();
+RSA **get_next_committee(size_t *nb_validators);
 
 /**
  * @brief Searches how much money 'public_key' has

@@ -26,4 +26,15 @@ int safe_write(int fd, const void *buf, ssize_t count);
  * @return The number of byte the file 'fd', if -1 error
  */
 ssize_t safe_read(int fd, const void **buf, size_t *bufsize);
+
+/**
+ * @brief Calls 'fread' but safely !
+ * 
+ * @param buffer The buffer to write on
+ * @param size The size of 1 read element
+ * @param n The number of elements to read
+ * @param file The IO FILE
+ * @return ssize_t, -1 if error  or the number of read items
+ */
+ssize_t safe_fread(void *buffer, const size_t size, const size_t n, FILE *file);
 #endif

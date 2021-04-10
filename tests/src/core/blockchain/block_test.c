@@ -6,10 +6,11 @@
 #undef NB_BLOCK_PER_CHUNK
 #define NB_BLOCK_PER_CHUNK 10
 
+#define NB_MOCK_BLOCKS 13
+
 void block_test(void)
 {
-    gen_blockhain(12);
-
+    gen_blockhain(NB_MOCK_BLOCKS);
     if (get_blockchain(1) != NULL && get_blockchain(0)->chunk_nb == 1)
     {
         TEST_PASSED("Loading chunk 1");

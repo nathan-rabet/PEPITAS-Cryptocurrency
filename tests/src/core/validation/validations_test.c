@@ -6,12 +6,13 @@ void validations_test()
 {
     gen_validators_file("validators.state");
 
-    if (get_next_validators() != NULL)
+    size_t nb_validators;
+    if (get_next_committee(&nb_validators) != NULL && nb_validators != 0)
     {
         TEST_PASSED("Getting next validators");
     }
     else
     {
-        TEST_FAILED("Getting next validators", "get_next_validators() returned NULL (error)");
+        TEST_FAILED("Getting next validators", "get_next_validators() returned NULL (error) or nb_validators == 0");
     }
 }
