@@ -93,7 +93,7 @@ void print_neighbours(char mask)
     printf("Neighbour list:\n");
     for (size_t i = 0; i < MAX_NEIGHBOURS; i++)
     {
-        if (!(!mask || node->neighbours[i].hostname == NULL))
+        if (!(!mask && node->neighbours[i].hostname == NULL))
             printf("%02lu: hostname \"%s\", family \"%i\"\n", i ,node->neighbours[i].hostname, node->neighbours[i].family);
     }
 

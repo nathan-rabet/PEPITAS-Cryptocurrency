@@ -44,12 +44,9 @@ int fetch_client_list(char *buffer, size_t buffer_size)
     int family = 0;
     char *hostname = malloc(SIZE_OF_HOSTNAME);
 
-    printf("%lu\n", buffer_size);
-
     while (buffer_index < buffer_size - 5)
     {
         family = *(int *)(buffer + buffer_index);
-        printf("Family: %i", family);
 
         buffer_index += sizeof(int);
 
@@ -62,20 +59,10 @@ int fetch_client_list(char *buffer, size_t buffer_size)
             hostname_size = 39;
 
         memcpy(hostname, buffer + buffer_index, hostname_size);
-        printf("\tIP: %s\n", hostname);
-        
+
         buffer_index += hostname_size;
         
         set_neighbour(hostname, family);
-    }
-    
-
-
-    for (size_t index = 0; index < MAX_NEIGHBOURS && buffer_index < buffer_size; index++)
-    {
-        if (my_node->neighbours[index].hostname == NULL)
-        {
-        }
     }
 
     free(buffer);
