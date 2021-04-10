@@ -53,6 +53,7 @@ test: .test_build
 	rm -rf ./bin/~test
 	rm -rf ./bin/.keys
 	rm -rf ./bin/blockchain
+	rm -rf ./bin/validators.state
 	@cd ..
 
 .test_build: $(SRC_TEST) ${SRC}

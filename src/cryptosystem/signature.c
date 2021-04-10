@@ -174,6 +174,7 @@ char *get_blockdata_data(Block *block, size_t *size)
 void write_blockdata(BlockData blockdata, int fd)
 {
     // IGNORE BLOCK PREV AND NEXT BECAUSE RECUP ADDR AT PARSING
+    write(fd, &blockdata.magic, sizeof(char));
     write(fd, blockdata.previous_block_hash, 97);
     write(fd, &blockdata.height, sizeof(size_t));
     write(fd, &blockdata.nb_transactions, sizeof(uint16_t));
