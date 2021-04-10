@@ -1,4 +1,4 @@
-name: Unit testing
+name: Build
 
 on:
   push:
@@ -14,12 +14,16 @@ jobs:
     - uses: actions/checkout@v2
     - name: Installing doxygen
       run: sudo apt-get install doxygen
-    - name: Generating HTML documentation
-      run: cd docs ; doxygen doxygen.conf
+    - name: Removing old documentation
+      run: cd docs ; rm -rf documentation ; rm manual.pdf
+    - name: Generating man & HTML documentation
+      run: doxygen doxygen.conf
+    - name: Moving 'man' folder
+      run: mv man documentation/man
     - name: Generating PDF documentation
       run: cd latex ; make pdf ; cp refman.pdf ../manual.pdf
     - name: Cleaning useless files
-      run: rm -r latex
+      run: cd .. ; rm -r latex
 
   test:
     runs-on: ubuntu-latest
