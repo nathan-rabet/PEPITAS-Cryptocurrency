@@ -12,7 +12,6 @@ int main()
     DEBUG(verify_sign_test);
     DEBUG(network_test);
     DEBUG(block_test);
-    DEBUG(block_test);
     DEBUG(validations_test);
 
     return 0;

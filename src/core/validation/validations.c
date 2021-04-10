@@ -28,7 +28,7 @@ uint16_t define_nb_validators(size_t n)
     sqroot = 10 * (sqroot - 1);
     if (sqroot > n)
         return n;
-    return MAX(sqroot,1000);
+    return MAX(sqroot, 1000);
 }
 
 RSA **get_next_validators()
@@ -46,7 +46,7 @@ RSA **get_next_validators()
     /// Foreach stake withdraw, power *= withdraw_stake / total_stake
     FILE *validators_states = fopen("validators.state", "r");
     size_t nb_validators;
-    if (fread(&nb_validators, sizeof(size_t), 1, validators_states) <= sizeof(size_t))
+    if (fread(&nb_validators, sizeof(size_t), 1, validators_states) < 1)
         return NULL;
 
     uint16_t def_nb_validators = define_nb_validators(nb_validators);
@@ -56,16 +56,14 @@ RSA **get_next_validators()
     RSA **rsa_keys = malloc(nb_validators * sizeof(RSA *));
     for (uint16_t v = 0; v < def_nb_validators; v++)
     {
-        size_t random = ((size_t*)sha384)[i] * ((size_t*)sha384)[j];
+        size_t random = ((size_t *)sha384)[i] * ((size_t *)sha384)[j];
         char is_next_validator = 0;
 
         char next_validator_pk[RSA_KEY_SIZE];
         size_t next_validator_power = 0;
         while (!is_next_validator)
         {
-            if (fread(&next_validator_pk, sizeof(char), RSA_KEY_SIZE, validators_states) < RSA_KEY_SIZE)
-                return NULL;
-            if (fread(&next_validator_power, sizeof(size_t), 1, validators_states) < sizeof(size_t))
+            if (fread(&next_validator_pk, sizeof(char), RSA_KEY_SIZE, validators_states) < RSA_KEY_SIZE || fread(&next_validator_power, sizeof(size_t), 1, validators_states) < 1)
             {
                 fseek(validators_states, sizeof(size_t), SEEK_SET);
                 continue;
