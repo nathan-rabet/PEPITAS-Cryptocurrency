@@ -143,14 +143,17 @@ void save_neighbours(char who)
 void load_neighbours(char who)
 {
     Node *node = get_my_node(who);
-    if (access(".neighbours/neighbours", F_OK)) {
-        return;
-    }
     FILE *nfile;
     if (who == IM_CLIENT) {
+        if (access(".neighbours/client_neighbours", F_OK)) {
+            return;
+        }
         nfile = fopen("./.neighbours/client_neighbours", "rb");
     }
     else {
+        if (access(".neighbours/server_neighbours", F_OK)) {
+            return;
+        }
         nfile = fopen("./.neighbours/server_neighbours", "rb");
     }
     if (!nfile)
