@@ -43,7 +43,7 @@ int number_neighbours();
 /**
  * @brief Print neighbours list
  */
-void print_neighbours();
+void print_neighbours(char mask);
 
 /**
  * @brief Save neighbours list in .neighbours/neighbours

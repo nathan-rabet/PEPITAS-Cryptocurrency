@@ -86,14 +86,15 @@ void remove_neighbour(int index)
     }
 }
 
-void print_neighbours()
+void print_neighbours(char mask)
 {
 
     Node *node = get_my_node();
     printf("Neighbour list:\n");
     for (size_t i = 0; i < MAX_NEIGHBOURS; i++)
     {
-        printf("%02lu: hostname \"%s\", family \"%i\"\n", i ,node->neighbours[i].hostname, node->neighbours[i].family);
+        if (!mask && node->neighbours[i].hostname != NULL)
+            printf("%02lu: hostname \"%s\", family \"%i\"\n", i ,node->neighbours[i].hostname, node->neighbours[i].family);
     }
 
 }
