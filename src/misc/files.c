@@ -1,3 +1,4 @@
+#define _GNU_SOURCE
 #include "misc/files.h"
 #include <dirent.h>
 #include <string.h>
@@ -6,7 +7,7 @@
 char *last_file_in_folder(char folder_path[])
 {
     struct dirent **files;
-    int n = scandir(folder_path, &files, 0, alphasort);
+    int n = scandir(folder_path, &files, 0, versionsort);
     if (n==-1)
         return NULL;
 
