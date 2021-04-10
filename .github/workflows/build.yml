@@ -21,7 +21,7 @@ jobs:
     - name: Moving 'man' folder
       run: mv docs/man docs/documentation/man
     - name: Installing pdflatex
-      run: sudo apt-get install texlive-latex-base
+      run: sudo apt-get install texlive-latex-base texlive-latex-extra
     - name: Generating PDF documentation
       run: cd docs/latex ; make pdf ; cp refman.pdf ../manual.pdf
     - name: Cleaning useless files
