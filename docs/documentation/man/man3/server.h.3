@@ -1,0 +1,81 @@
+.TH "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/headers/network/server.h" 3 "Sat Apr 10 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/headers/network/server.h
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <sys/socket\&.h>\fP
+.br
+\fC#include 'network\&.h'\fP
+.br
+\fC#include 'core/blockchain/block\&.h'\fP
+.br
+
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fBclient_connection\fP"
+.br
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef struct \fBclient_connection\fP \fBclient_connection\fP"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBinit_server\fP ()"
+.br
+.RI "Launches a server instance, connected to the peer-to-peer network 'hostname'\&. "
+.ti -1c
+.RI "int \fBsend_block\fP (\fBBlock\fP block, int sockfd)"
+.br
+.RI "Sends a block to a user via a socket FD\&. "
+.in -1c
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef struct \fBclient_connection\fP \fBclient_connection\fP"
+
+.SH "Function Documentation"
+.PP 
+.SS "int init_server ()"
+
+.PP
+Launches a server instance, connected to the peer-to-peer network 'hostname'\&. 
+.PP
+\fBReturns\fP
+.RS 4
+0 if success, -1 otherwise 
+.RE
+.PP
+
+.PP
+Definition at line 30 of file server\&.c\&.
+.SS "int send_block (\fBBlock\fP block, int sockfd)"
+
+.PP
+Sends a block to a user via a socket FD\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIsockfd\fP The socket FD 
+.br
+\fIblock\fP The block to send 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+int 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for PEPITAS CRYPTOCURRENCY from the source code\&.

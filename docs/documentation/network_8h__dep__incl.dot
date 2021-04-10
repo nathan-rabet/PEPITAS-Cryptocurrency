@@ -1,0 +1,35 @@
+digraph "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/headers/network/network.h"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="/home/runner/work/PEPITAS\l-Cryptocurrency/PEPITAS\l-Cryptocurrency/headers\l/network/network.h",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="/home/runner/work/PEPITAS\l-Cryptocurrency/PEPITAS\l-Cryptocurrency/headers\l/network/server.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$server_8h.html",tooltip=" "];
+  Node2 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="/home/runner/work/PEPITAS\l-Cryptocurrency/PEPITAS\l-Cryptocurrency/src/client.c",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$client_8c.html",tooltip=" "];
+  Node2 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="/home/runner/work/PEPITAS\l-Cryptocurrency/PEPITAS\l-Cryptocurrency/src/network\l/client.c",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$network_2client_8c.html",tooltip=" "];
+  Node2 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="/home/runner/work/PEPITAS\l-Cryptocurrency/PEPITAS\l-Cryptocurrency/src/network\l/get_data.c",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$get__data_8c.html",tooltip=" "];
+  Node2 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="/home/runner/work/PEPITAS\l-Cryptocurrency/PEPITAS\l-Cryptocurrency/src/network\l/server.c",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$network_2server_8c.html",tooltip=" "];
+  Node2 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="/home/runner/work/PEPITAS\l-Cryptocurrency/PEPITAS\l-Cryptocurrency/src/server.c",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$server_8c.html",tooltip=" "];
+  Node2 -> Node8 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="/home/runner/work/PEPITAS\l-Cryptocurrency/PEPITAS\l-Cryptocurrency/src/sign.c",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$sign_8c.html",tooltip=" "];
+  Node2 -> Node9 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 [label="/home/runner/work/PEPITAS\l-Cryptocurrency/PEPITAS\l-Cryptocurrency/tests/src\l/network/client_test.c",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$client__test_8c.html",tooltip=" "];
+  Node9 -> Node10 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node10 [label="/home/runner/work/PEPITAS\l-Cryptocurrency/PEPITAS\l-Cryptocurrency/tests/unit\l_testing.c",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$unit__testing_8c.html",tooltip=" "];
+  Node2 -> Node11 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node11 [label="/home/runner/work/PEPITAS\l-Cryptocurrency/PEPITAS\l-Cryptocurrency/tests/src\l/network/server_test.c",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$server__test_8c.html",tooltip=" "];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node12 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node12 [label="/home/runner/work/PEPITAS\l-Cryptocurrency/PEPITAS\l-Cryptocurrency/src/network\l/send_data.c",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$send__data_8c.html",tooltip=" "];
+  Node1 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node8 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node9 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+}

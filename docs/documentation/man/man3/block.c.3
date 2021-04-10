@@ -1,0 +1,173 @@
+.TH "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/src/core/blockchain/block.c" 3 "Sat Apr 10 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/src/core/blockchain/block.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'core/blockchain/block\&.h'\fP
+.br
+\fC#include 'cryptosystem/signature\&.h'\fP
+.br
+\fC#include <sys/stat\&.h>\fP
+.br
+\fC#include <unistd\&.h>\fP
+.br
+\fC#include <err\&.h>\fP
+.br
+\fC#include <errno\&.h>\fP
+.br
+\fC#include <openssl/rsa\&.h>\fP
+.br
+\fC#include <openssl/crypto\&.h>\fP
+.br
+\fC#include <fcntl\&.h>\fP
+.br
+\fC#include <sys/types\&.h>\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBChunkBlockchain\fP * \fBget_blockchain\fP (size_t nb_chunk)"
+.br
+.RI "Loads a blockchain object with a padding of 'nb_chunk'\&. "
+.ti -1c
+.RI "void \fBwrite_block_file\fP (\fBBlock\fP block)"
+.br
+.RI "Writes a block struct in a file\&. "
+.ti -1c
+.RI "void \fBconvert_data_to_transactiondata\fP (\fBTransactionData\fP *transactiondata, FILE *blockfile)"
+.br
+.ti -1c
+.RI "void \fBconvert_data_to_transaction\fP (\fBTransaction\fP *transaction, FILE *blockfile)"
+.br
+.ti -1c
+.RI "void \fBconvert_data_to_blockdata\fP (\fBBlockData\fP *blockdata, FILE *blockfile)"
+.br
+.ti -1c
+.RI "void \fBconvert_data_to_block\fP (\fBBlock\fP *block, FILE *blockfile)"
+.br
+.ti -1c
+.RI "\fBBlock\fP * \fBget_block\fP (size_t block_height)"
+.br
+.ti -1c
+.RI "void \fBfree_block\fP (\fBBlock\fP *block)"
+.br
+.RI "Free a block struct\&. "
+.ti -1c
+.RI "\fBBlock\fP * \fBget_next_block\fP (\fBBlock\fP *block)"
+.br
+.RI "For a block of height \fCh\fP, returns the block of height \fCh+1\fP "
+.ti -1c
+.RI "\fBBlock\fP * \fBget_prev_block\fP (\fBBlock\fP *block)"
+.br
+.RI "For a block of height \fCh\fP, return the block of height \fCh-1\fP "
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "void convert_data_to_block (\fBBlock\fP * block, FILE * blockfile)"
+
+.PP
+Definition at line 142 of file block\&.c\&.
+.SS "void convert_data_to_blockdata (\fBBlockData\fP * blockdata, FILE * blockfile)"
+
+.PP
+Definition at line 116 of file block\&.c\&.
+.SS "void convert_data_to_transaction (\fBTransaction\fP * transaction, FILE * blockfile)"
+
+.PP
+Definition at line 106 of file block\&.c\&.
+.SS "void convert_data_to_transactiondata (\fBTransactionData\fP * transactiondata, FILE * blockfile)"
+
+.PP
+Definition at line 69 of file block\&.c\&.
+.SS "void free_block (\fBBlock\fP * block)"
+
+.PP
+Free a block struct\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIblock\fP The block to free 
+.RE
+.PP
+
+.PP
+Definition at line 168 of file block\&.c\&.
+.SS "\fBBlock\fP* get_block (size_t block_height)"
+
+.PP
+Definition at line 150 of file block\&.c\&.
+.SS "\fBChunkBlockchain\fP* get_blockchain (size_t nb_chunk)"
+
+.PP
+Loads a blockchain object with a padding of 'nb_chunk'\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fInb_chunk\fP The chunk nb, if 0 : return the current blockchain object without modification 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+ChunkBlockchain*, NULL if the \fBChunkBlockchain\fP is empty after switching 
+.RE
+.PP
+
+.PP
+Definition at line 12 of file block\&.c\&.
+.SS "\fBBlock\fP* get_next_block (\fBBlock\fP * block)"
+
+.PP
+For a block of height \fCh\fP, returns the block of height \fCh+1\fP 
+.PP
+\fBParameters\fP
+.RS 4
+\fIblock\fP The base block 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+The next Block* 
+.RE
+.PP
+
+.PP
+Definition at line 184 of file block\&.c\&.
+.SS "\fBBlock\fP* get_prev_block (\fBBlock\fP * block)"
+
+.PP
+For a block of height \fCh\fP, return the block of height \fCh-1\fP 
+.PP
+\fBParameters\fP
+.RS 4
+\fIblock\fP The base block 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+The next Block* 
+.RE
+.PP
+
+.PP
+Definition at line 194 of file block\&.c\&.
+.SS "void write_block_file (\fBBlock\fP block)"
+
+.PP
+Writes a block struct in a file\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIblock\fP The block to write 
+.RE
+.PP
+
+.PP
+Definition at line 51 of file block\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for PEPITAS CRYPTOCURRENCY from the source code\&.

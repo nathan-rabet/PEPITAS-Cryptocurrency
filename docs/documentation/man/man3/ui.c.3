@@ -1,0 +1,310 @@
+.TH "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/src/ui/ui.c" 3 "Sat Apr 10 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/src/ui/ui.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'ui/ui\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBsetup\fP ()"
+.br
+.RI "Setups the gtk widgets for the GUI\&. "
+.ti -1c
+.RI "gboolean \fBon_main_window_delete\fP (GtkWidget *widget, __attribute__((unused)) gpointer data)"
+.br
+.RI "Destroys the window when it is closed\&. "
+.ti -1c
+.RI "void \fBon_main_window_destroy\fP (__attribute__((unused)) GtkWidget *widget, __attribute__((unused)) gpointer data)"
+.br
+.ti -1c
+.RI "gboolean \fBon_transaction_button_press\fP (__attribute__((unused)) GtkWidget *widget, __attribute__((unused)) GdkEventKey *event, __attribute__((unused)) gpointer user_data)"
+.br
+.ti -1c
+.RI "gboolean \fBon_pkey_button_press\fP (__attribute__((unused)) GtkWidget *widget, __attribute__((unused)) GdkEventKey *event, __attribute__((unused)) gpointer user_data)"
+.br
+.ti -1c
+.RI "gboolean \fBon_invest_button1_press\fP (__attribute__((unused)) GtkWidget *widget, __attribute__((unused)) GdkEventKey *event, __attribute__((unused)) gpointer user_data)"
+.br
+.ti -1c
+.RI "gboolean \fBon_invest_button2_press\fP (__attribute__((unused)) GtkWidget *widget, __attribute__((unused)) GdkEventKey *event, __attribute__((unused)) gpointer user_data)"
+.br
+.ti -1c
+.RI "gboolean \fBon_recover_button1_press\fP (__attribute__((unused)) GtkWidget *widget, __attribute__((unused)) GdkEventKey *event, __attribute__((unused)) gpointer user_data)"
+.br
+.ti -1c
+.RI "gboolean \fBon_recover_button2_press\fP (__attribute__((unused)) GtkWidget *widget, __attribute__((unused)) GdkEventKey *event, __attribute__((unused)) gpointer user_data)"
+.br
+.ti -1c
+.RI "gboolean \fBon_add_contact_button1_press\fP (__attribute__((unused)) GtkWidget *widget, __attribute__((unused)) GdkEventKey *event, __attribute__((unused)) gpointer user_data)"
+.br
+.ti -1c
+.RI "gboolean \fBadd_contact\fP (__attribute__((unused)) GtkWidget *widget, __attribute__((unused)) GdkEventKey *event, __attribute__((unused)) gpointer user_data)"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "GtkLabel * \fBprivate_key_label\fP"
+.br
+.ti -1c
+.RI "GtkLabel * \fBstake_label1\fP"
+.br
+.ti -1c
+.RI "GtkLabel * \fBstake_label2\fP"
+.br
+.ti -1c
+.RI "GtkLabel * \fBstake_label3\fP"
+.br
+.ti -1c
+.RI "GtkEntry * \fBtransa_amount\fP"
+.br
+.ti -1c
+.RI "GtkEntry * \fBrecipient_key\fP"
+.br
+.ti -1c
+.RI "GtkEntry * \fBinvest_entry\fP"
+.br
+.ti -1c
+.RI "GtkEntry * \fBrecover_entry\fP"
+.br
+.ti -1c
+.RI "GtkEntry * \fBname_entry_con\fP"
+.br
+.ti -1c
+.RI "GtkEntry * \fBpublic_key_entry_con\fP"
+.br
+.ti -1c
+.RI "GtkTreeView * \fBtv_con\fP"
+.br
+.ti -1c
+.RI "GtkTreeStore * \fBts_con\fP"
+.br
+.ti -1c
+.RI "GtkTreeViewColumn * \fBcx1_con\fP"
+.br
+.ti -1c
+.RI "GtkTreeViewColumn * \fBcx2_con\fP"
+.br
+.ti -1c
+.RI "GtkCellRenderer * \fBcr1_con\fP"
+.br
+.ti -1c
+.RI "GtkCellRenderer * \fBcr2_con\fP"
+.br
+.ti -1c
+.RI "GtkTreeView * \fBtv_th\fP"
+.br
+.ti -1c
+.RI "GtkTreeStore * \fBts_th\fP"
+.br
+.ti -1c
+.RI "GtkTreeViewColumn * \fBcx1_th\fP"
+.br
+.ti -1c
+.RI "GtkTreeViewColumn * \fBcx2_th\fP"
+.br
+.ti -1c
+.RI "GtkTreeViewColumn * \fBcx3_th\fP"
+.br
+.ti -1c
+.RI "GtkTreeViewColumn * \fBcx4_th\fP"
+.br
+.ti -1c
+.RI "GtkCellRenderer * \fBcr1_th\fP"
+.br
+.ti -1c
+.RI "GtkCellRenderer * \fBcr2_th\fP"
+.br
+.ti -1c
+.RI "GtkCellRenderer * \fBcr3_th\fP"
+.br
+.ti -1c
+.RI "GtkCellRenderer * \fBcr4_th\fP"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "gboolean add_contact (__attribute__((unused)) GtkWidget * widget, __attribute__((unused)) GdkEventKey * event, __attribute__((unused)) gpointer user_data)"
+
+.PP
+Definition at line 215 of file ui\&.c\&.
+.SS "gboolean on_add_contact_button1_press (__attribute__((unused)) GtkWidget * widget, __attribute__((unused)) GdkEventKey * event, __attribute__((unused)) gpointer user_data)"
+
+.PP
+Definition at line 206 of file ui\&.c\&.
+.SS "gboolean on_invest_button1_press (__attribute__((unused)) GtkWidget * widget, __attribute__((unused)) GdkEventKey * event, __attribute__((unused)) gpointer user_data)"
+
+.PP
+Definition at line 167 of file ui\&.c\&.
+.SS "gboolean on_invest_button2_press (__attribute__((unused)) GtkWidget * widget, __attribute__((unused)) GdkEventKey * event, __attribute__((unused)) gpointer user_data)"
+
+.PP
+Definition at line 176 of file ui\&.c\&.
+.SS "gboolean on_main_window_delete (GtkWidget * widget, __attribute__((unused)) gpointer data)"
+
+.PP
+Destroys the window when it is closed\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIwidget\fP The main window of the GUI 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+gboolean Error code 
+.RE
+.PP
+
+.PP
+Definition at line 126 of file ui\&.c\&.
+.SS "void on_main_window_destroy (__attribute__((unused)) GtkWidget * widget, __attribute__((unused)) gpointer data)"
+
+.PP
+Definition at line 135 of file ui\&.c\&.
+.SS "gboolean on_pkey_button_press (__attribute__((unused)) GtkWidget * widget, __attribute__((unused)) GdkEventKey * event, __attribute__((unused)) gpointer user_data)"
+
+.PP
+Definition at line 149 of file ui\&.c\&.
+.SS "gboolean on_recover_button1_press (__attribute__((unused)) GtkWidget * widget, __attribute__((unused)) GdkEventKey * event, __attribute__((unused)) gpointer user_data)"
+
+.PP
+Definition at line 186 of file ui\&.c\&.
+.SS "gboolean on_recover_button2_press (__attribute__((unused)) GtkWidget * widget, __attribute__((unused)) GdkEventKey * event, __attribute__((unused)) gpointer user_data)"
+
+.PP
+Definition at line 195 of file ui\&.c\&.
+.SS "gboolean on_transaction_button_press (__attribute__((unused)) GtkWidget * widget, __attribute__((unused)) GdkEventKey * event, __attribute__((unused)) gpointer user_data)"
+
+.PP
+Definition at line 142 of file ui\&.c\&.
+.SS "int setup ()"
+
+.PP
+Setups the gtk widgets for the GUI\&. 
+.PP
+\fBReturns\fP
+.RS 4
+int Returns 1 if there is an error, 0 otherwise 
+.RE
+.PP
+
+.PP
+Definition at line 45 of file ui\&.c\&.
+.SH "Variable Documentation"
+.PP 
+.SS "GtkCellRenderer* cr1_con"
+
+.PP
+Definition at line 31 of file ui\&.c\&.
+.SS "GtkCellRenderer* cr1_th"
+
+.PP
+Definition at line 39 of file ui\&.c\&.
+.SS "GtkCellRenderer* cr2_con"
+
+.PP
+Definition at line 32 of file ui\&.c\&.
+.SS "GtkCellRenderer* cr2_th"
+
+.PP
+Definition at line 40 of file ui\&.c\&.
+.SS "GtkCellRenderer* cr3_th"
+
+.PP
+Definition at line 41 of file ui\&.c\&.
+.SS "GtkCellRenderer* cr4_th"
+
+.PP
+Definition at line 42 of file ui\&.c\&.
+.SS "GtkTreeViewColumn* cx1_con"
+
+.PP
+Definition at line 29 of file ui\&.c\&.
+.SS "GtkTreeViewColumn* cx1_th"
+
+.PP
+Definition at line 35 of file ui\&.c\&.
+.SS "GtkTreeViewColumn* cx2_con"
+
+.PP
+Definition at line 30 of file ui\&.c\&.
+.SS "GtkTreeViewColumn* cx2_th"
+
+.PP
+Definition at line 36 of file ui\&.c\&.
+.SS "GtkTreeViewColumn* cx3_th"
+
+.PP
+Definition at line 37 of file ui\&.c\&.
+.SS "GtkTreeViewColumn* cx4_th"
+
+.PP
+Definition at line 38 of file ui\&.c\&.
+.SS "GtkEntry* invest_entry"
+
+.PP
+Definition at line 23 of file ui\&.c\&.
+.SS "GtkEntry* name_entry_con"
+
+.PP
+Definition at line 25 of file ui\&.c\&.
+.SS "GtkLabel* private_key_label"
+
+.PP
+Definition at line 17 of file ui\&.c\&.
+.SS "GtkEntry* public_key_entry_con"
+
+.PP
+Definition at line 26 of file ui\&.c\&.
+.SS "GtkEntry* recipient_key"
+
+.PP
+Definition at line 22 of file ui\&.c\&.
+.SS "GtkEntry* recover_entry"
+
+.PP
+Definition at line 24 of file ui\&.c\&.
+.SS "GtkLabel* stake_label1"
+
+.PP
+Definition at line 18 of file ui\&.c\&.
+.SS "GtkLabel* stake_label2"
+
+.PP
+Definition at line 19 of file ui\&.c\&.
+.SS "GtkLabel* stake_label3"
+
+.PP
+Definition at line 20 of file ui\&.c\&.
+.SS "GtkEntry* transa_amount"
+
+.PP
+Definition at line 21 of file ui\&.c\&.
+.SS "GtkTreeStore* ts_con"
+
+.PP
+Definition at line 28 of file ui\&.c\&.
+.SS "GtkTreeStore* ts_th"
+
+.PP
+Definition at line 34 of file ui\&.c\&.
+.SS "GtkTreeView* tv_con"
+
+.PP
+Definition at line 27 of file ui\&.c\&.
+.SS "GtkTreeView* tv_th"
+
+.PP
+Definition at line 33 of file ui\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for PEPITAS CRYPTOCURRENCY from the source code\&.

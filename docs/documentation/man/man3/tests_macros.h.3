@@ -1,0 +1,85 @@
+.TH "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/tests/tests_macros.h" 3 "Sat Apr 10 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/tests/tests_macros.h
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdio\&.h>\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBDEBUG\fP(function)"
+.br
+.ti -1c
+.RI "#define \fBLOG\fP(str\&.\&.\&.)"
+.br
+.ti -1c
+.RI "#define \fBTEST_PASSED\fP(name\&.\&.\&.)"
+.br
+.ti -1c
+.RI "#define \fBTEST_FAILED\fP(name,  reason\&.\&.\&.)"
+.br
+.ti -1c
+.RI "#define \fBTEST_WARNING\fP(name,  reason\&.\&.\&.)"
+.br
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define DEBUG(function)"
+\fBValue:\fP
+.PP
+.nf
+    printf("Testing '%s'\&.\&.\&.\n", #function); \
+    function()
+.fi
+.PP
+Definition at line 5 of file tests_macros\&.h\&.
+.SS "#define LOG(str\&.\&.\&.)"
+\fBValue:\fP
+.PP
+.nf
+    printf("\033[0;34m[-]  "); \
+    printf(str);              \
+    printf("\033[0m\n")
+.fi
+.PP
+Definition at line 9 of file tests_macros\&.h\&.
+.SS "#define TEST_FAILED(name, reason\&.\&.\&.)"
+\fBValue:\fP
+.PP
+.nf
+    printf("\033[0;31m[X] TEST '%s' failed\n\t-> REASON : ", name); \
+    printf(reason);                                                 \
+    printf("\033[0m\n");                                            \
+    exit(1)
+.fi
+.PP
+Definition at line 19 of file tests_macros\&.h\&.
+.SS "#define TEST_PASSED(name\&.\&.\&.)"
+\fBValue:\fP
+.PP
+.nf
+    printf("\033[0;32m[OK] TEST -> '"); \
+    printf(name);                       \
+    printf("' success\033[0m\n")
+.fi
+.PP
+Definition at line 14 of file tests_macros\&.h\&.
+.SS "#define TEST_WARNING(name, reason\&.\&.\&.)"
+\fBValue:\fP
+.PP
+.nf
+    printf("\033[0;33m[!] WARNING '%s'\n\t-> BECAUSE : ", name); \
+    printf(reason);                                              \
+    printf("\033[0m\n")
+.fi
+.PP
+Definition at line 25 of file tests_macros\&.h\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for PEPITAS CRYPTOCURRENCY from the source code\&.

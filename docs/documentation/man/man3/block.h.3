@@ -1,0 +1,206 @@
+.TH "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/headers/core/blockchain/block.h" 3 "Sat Apr 10 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/headers/core/blockchain/block.h
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <openssl/sha\&.h>\fP
+.br
+\fC#include 'transaction\&.h'\fP
+.br
+
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fBBlockData\fP"
+.br
+.ti -1c
+.RI "struct \fBBlock\fP"
+.br
+.ti -1c
+.RI "struct \fBChunkBlockchain\fP"
+.br
+.in -1c
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBCURRENT_CHUNK\fP   0"
+.br
+.ti -1c
+.RI "#define \fBBLOCK_DATA_SIZE\fP   (SHA384_DIGEST_LENGTH * 2 + 1) + sizeof(size_t) + sizeof(uint16_t) + sizeof(time_t)"
+.br
+.ti -1c
+.RI "#define \fBBLOCK_SIZE\fP   2048 + sizeof(size_t) + \fBBLOCK_DATA_SIZE\fP + SHA384_DIGEST_LENGTH * 2 + 1"
+.br
+.ti -1c
+.RI "#define \fBMAX_TRANSACTIONS_PER_BLOCK\fP   16384"
+.br
+.ti -1c
+.RI "#define \fBNB_BLOCK_PER_CHUNK\fP   10000"
+.br
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef struct \fBBlockData\fP \fBBlockData\fP"
+.br
+.ti -1c
+.RI "typedef struct \fBBlock\fP \fBBlock\fP"
+.br
+.ti -1c
+.RI "typedef struct \fBChunkBlockchain\fP \fBChunkBlockchain\fP"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBChunkBlockchain\fP * \fBget_blockchain\fP (size_t nb_chunk)"
+.br
+.RI "Loads a blockchain object with a padding of 'nb_chunk'\&. "
+.ti -1c
+.RI "void \fBwrite_block_file\fP (\fBBlock\fP block)"
+.br
+.RI "Writes a block struct in a file\&. "
+.ti -1c
+.RI "\fBBlock\fP * \fBget_block\fP (size_t block_height)"
+.br
+.ti -1c
+.RI "void \fBfree_block\fP (\fBBlock\fP *block)"
+.br
+.RI "Free a block struct\&. "
+.ti -1c
+.RI "\fBBlock\fP * \fBget_next_block\fP (\fBBlock\fP *block)"
+.br
+.RI "For a block of height \fCh\fP, returns the block of height \fCh+1\fP "
+.ti -1c
+.RI "\fBBlock\fP * \fBget_prev_block\fP (\fBBlock\fP *block)"
+.br
+.RI "For a block of height \fCh\fP, return the block of height \fCh-1\fP "
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define BLOCK_DATA_SIZE   (SHA384_DIGEST_LENGTH * 2 + 1) + sizeof(size_t) + sizeof(uint16_t) + sizeof(time_t)"
+
+.PP
+Definition at line 10 of file block\&.h\&.
+.SS "#define BLOCK_SIZE   2048 + sizeof(size_t) + \fBBLOCK_DATA_SIZE\fP + SHA384_DIGEST_LENGTH * 2 + 1"
+
+.PP
+Definition at line 11 of file block\&.h\&.
+.SS "#define CURRENT_CHUNK   0"
+
+.PP
+Definition at line 8 of file block\&.h\&.
+.SS "#define MAX_TRANSACTIONS_PER_BLOCK   16384"
+
+.PP
+Definition at line 13 of file block\&.h\&.
+.SS "#define NB_BLOCK_PER_CHUNK   10000"
+
+.PP
+Definition at line 14 of file block\&.h\&.
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef struct \fBBlock\fP \fBBlock\fP"
+
+.SS "typedef struct \fBBlockData\fP \fBBlockData\fP"
+
+.SS "typedef struct \fBChunkBlockchain\fP \fBChunkBlockchain\fP"
+
+.SH "Function Documentation"
+.PP 
+.SS "void free_block (\fBBlock\fP * block)"
+
+.PP
+Free a block struct\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIblock\fP The block to free 
+.RE
+.PP
+
+.PP
+Definition at line 168 of file block\&.c\&.
+.SS "\fBBlock\fP* get_block (size_t block_height)"
+
+.PP
+Definition at line 150 of file block\&.c\&.
+.SS "\fBChunkBlockchain\fP* get_blockchain (size_t nb_chunk)"
+
+.PP
+Loads a blockchain object with a padding of 'nb_chunk'\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fInb_chunk\fP The chunk nb, if 0 : return the current blockchain object without modification 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+ChunkBlockchain*, NULL if the \fBChunkBlockchain\fP is empty after switching 
+.RE
+.PP
+
+.PP
+Definition at line 12 of file block\&.c\&.
+.SS "\fBBlock\fP* get_next_block (\fBBlock\fP * block)"
+
+.PP
+For a block of height \fCh\fP, returns the block of height \fCh+1\fP 
+.PP
+\fBParameters\fP
+.RS 4
+\fIblock\fP The base block 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+The next Block* 
+.RE
+.PP
+
+.PP
+Definition at line 184 of file block\&.c\&.
+.SS "\fBBlock\fP* get_prev_block (\fBBlock\fP * block)"
+
+.PP
+For a block of height \fCh\fP, return the block of height \fCh-1\fP 
+.PP
+\fBParameters\fP
+.RS 4
+\fIblock\fP The base block 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+The next Block* 
+.RE
+.PP
+
+.PP
+Definition at line 194 of file block\&.c\&.
+.SS "void write_block_file (\fBBlock\fP block)"
+
+.PP
+Writes a block struct in a file\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIblock\fP The block to write 
+.RE
+.PP
+
+.PP
+Definition at line 51 of file block\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for PEPITAS CRYPTOCURRENCY from the source code\&.

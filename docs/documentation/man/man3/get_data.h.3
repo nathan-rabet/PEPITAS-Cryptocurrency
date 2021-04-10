@@ -1,0 +1,61 @@
+.TH "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/headers/network/get_data.h" 3 "Sat Apr 10 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/headers/network/get_data.h
+.SH SYNOPSIS
+.br
+.PP
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBread_header\fP (int sockfd)"
+.br
+.RI "Waits a header in 'sockfd', reads it and processes it\&. "
+.ti -1c
+.RI "int \fBfetch_client_list\fP (int neighbour_id)"
+.br
+.RI "Merges my neighbours list with the one sent by 'neighbour_id'\&. "
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "int fetch_client_list (int neighbour_id)"
+
+.PP
+Merges my neighbours list with the one sent by 'neighbour_id'\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIneighbour_id\fP The id of the neighbour list to merge
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+0 if sucess, -1 otherwise 
+.RE
+.PP
+
+.PP
+Definition at line 32 of file get_data\&.c\&.
+.SS "int read_header (int sockfd)"
+
+.PP
+Waits a header in 'sockfd', reads it and processes it\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIsockfd\fP The sock FD 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+0 if sucess, -1 otherwise 
+.RE
+.PP
+
+.PP
+Definition at line 86 of file get_data\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for PEPITAS CRYPTOCURRENCY from the source code\&.

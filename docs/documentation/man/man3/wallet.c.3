@@ -1,0 +1,60 @@
+.TH "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/src/core/blockchain/wallet.c" 3 "Sat Apr 10 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/src/core/blockchain/wallet.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <time\&.h>\fP
+.br
+\fC#include 'core/blockchain/wallet\&.h'\fP
+.br
+\fC#include 'cryptosystem/rsa\&.h'\fP
+.br
+\fC#include 'core/blockchain/transaction\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBWallet\fP * \fBget_my_wallet\fP ()"
+.br
+.RI "Get my wallet object\&. "
+.ti -1c
+.RI "int \fBcreate_account\fP ()"
+.br
+.RI "Creates an account in local and broadcasts the creation to the network\&. "
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "int create_account ()"
+
+.PP
+Creates an account in local and broadcasts the creation to the network\&. 
+.PP
+\fBReturns\fP
+.RS 4
+0 if the broadcast succeeds, otherwise 1 
+.RE
+.PP
+
+.PP
+Definition at line 19 of file wallet\&.c\&.
+.SS "\fBWallet\fP* get_my_wallet ()"
+
+.PP
+Get my wallet object\&. 
+.PP
+\fBReturns\fP
+.RS 4
+\fBWallet\fP 
+.RE
+.PP
+
+.PP
+Definition at line 7 of file wallet\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for PEPITAS CRYPTOCURRENCY from the source code\&.

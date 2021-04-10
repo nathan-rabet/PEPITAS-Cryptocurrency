@@ -1,0 +1,23 @@
+digraph "read_header"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="read_header",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Waits a header in 'sockfd', reads it and processes it."];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="process_header",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$get__data_8c.html#a56fe14e6f01f9d30d47882381d50d1f1",tooltip=" "];
+  Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="fetch_client_list",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$get__data_8c.html#ad45197fe0e164a777849753c436479ea",tooltip="Merges my neighbours list with the one sent by 'neighbour_id'."];
+  Node3 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="get_my_node",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$client_8h.html#a4ea1881daff49eeaf17c8600631e7cf0",tooltip="Get the my node object."];
+  Node3 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="safe_read",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$safe_8h.html#a5cdb8f1fd0a2b177164e88074639a648",tooltip="Reads safely in a file descriptor until '\\r\\n\\r\\n'."];
+  Node3 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="safe_write",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$safe_8h.html#a405edff38f586c79822927a3b981e504",tooltip="Writes safely to a file descriptor."];
+  Node2 -> Node7 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="send_client_list",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$send__data_8h.html#a70da282508006ff2f6b07d7b410ce8be",tooltip="Sends my client list to a node via 'sockfd'."];
+  Node7 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+}

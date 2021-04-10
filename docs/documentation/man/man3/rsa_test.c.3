@@ -1,0 +1,71 @@
+.TH "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/tests/src/cryptosystem/rsa_test.c" 3 "Sat Apr 10 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/tests/src/cryptosystem/rsa_test.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'tests_macros\&.h'\fP
+.br
+\fC#include 'cryptosystem/signature\&.h'\fP
+.br
+\fC#include 'cryptosystem/rsa\&.h'\fP
+.br
+\fC#include 'core/blockchain/wallet\&.h'\fP
+.br
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <unistd\&.h>\fP
+.br
+\fC#include <openssl/sha\&.h>\fP
+.br
+\fC#include 'misc/safe\&.h'\fP
+.br
+\fC#include <fcntl\&.h>\fP
+.br
+\fC#include <math\&.h>\fP
+.br
+\fC#include <sys/stat\&.h>\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBMAX\fP(a,  b)"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBget_keys_test\fP ()"
+.br
+.ti -1c
+.RI "void \fBget_keys_equality_test\fP ()"
+.br
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define MAX(a, b)"
+\fBValue:\fP
+.PP
+.nf
+    ({ __typeof__ (a) _a = (a); \
+       __typeof__ (b) _b = (b); \
+     _a > _b ? _a : _b; })
+.fi
+.SH "Function Documentation"
+.PP 
+.SS "void get_keys_equality_test ()"
+
+.PP
+Definition at line 28 of file rsa_test\&.c\&.
+.SS "void get_keys_test ()"
+
+.PP
+Definition at line 14 of file rsa_test\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for PEPITAS CRYPTOCURRENCY from the source code\&.

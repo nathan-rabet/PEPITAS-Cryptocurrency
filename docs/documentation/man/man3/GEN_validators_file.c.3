@@ -1,0 +1,80 @@
+.TH "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/tests/gen/GEN_validators_file.c" 3 "Sat Apr 10 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/tests/gen/GEN_validators_file.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <openssl/rsa\&.h>\fP
+.br
+\fC#include <openssl/pem\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+\fC#include <time\&.h>\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <math\&.h>\fP
+.br
+\fC#include 'cryptosystem/rsa\&.h'\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBNB_FAKE_VALIDATORS\fP   10"
+.br
+.ti -1c
+.RI "#define \fBstr\fP(x)   #x"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBgen_validators_file\fP (char path[])"
+.br
+.RI "Generate a mock validators states file\&. "
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define NB_FAKE_VALIDATORS   10"
+
+.PP
+Definition at line 11 of file GEN_validators_file\&.c\&.
+.SS "#define str(x)   #x"
+
+.PP
+Definition at line 12 of file GEN_validators_file\&.c\&.
+.SH "Function Documentation"
+.PP 
+.SS "void gen_validators_file (char path[])"
+
+.PP
+Generate a mock validators states file\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIpath\fP The path of the output file
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+For one stake transaction, power += amount / block_height + amount Foreach stake withdraw, power -= power * withdraw_stake / user_total_stake
+.RE
+.PP
+validators states file description Header : nb_validators[sizeof(size_t)], total_stake[sizeof(size_t)], block_height_validity[sizeof(size_t)] '
+.br
+'[sizeof(char)] For each 'nb_validators' : validator_pkey[RSA_KEY_SIZE], user_stake[sizeof(size_t)] ,validator_power[sizeof(size_t)], '
+.br
+'[sizeof(char)] 
+.PP
+Definition at line 28 of file GEN_validators_file\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for PEPITAS CRYPTOCURRENCY from the source code\&.
