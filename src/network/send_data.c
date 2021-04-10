@@ -1,8 +1,8 @@
 #include "network/network.h"
 
-int send_client_list(int sockfd, char *sockip)
+int send_client_list(char who, int sockfd, char *sockip)
 {
-    Node *client_list = get_my_node();
+    Node *client_list = get_my_node(who);
 
     if (safe_write(sockfd, HD_SEND_CLIENT_LIST, strlen(HD_SEND_CLIENT_LIST)) == -1)
         return -1;

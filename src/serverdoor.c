@@ -10,7 +10,7 @@
 int main()
 {
     printf("Starting door server\n");
-    load_neighbours();
-    print_neighbours(1);
+    load_neighbours(IM_SERVER);
+    print_neighbours(IM_SERVER, 0);
     return init_server(DOORSERVER);
 }

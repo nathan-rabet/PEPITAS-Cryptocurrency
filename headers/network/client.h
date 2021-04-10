@@ -21,39 +21,39 @@ typedef struct Node
  * 
  * @return Node* 
  */
-Node* get_my_node();
+Node* get_my_node(char who);
 
 /**
  * @brief Sets a neighbour in the client.neightbours section
  * 
  * @return 0 if sucess, -1 otherwise if full
  */
-int set_neighbour(char *hostname, int family);
+int set_neighbour(char who, char *hostname, int family);
 
 /**
  * @brief Remove a neighbour in the client.neightbours section
  */
-void remove_neighbour(int index);
+void remove_neighbour(char who, int index);
 
 /**
  * @brief return the nb of neighbour in the client.neightbours section
  */
-int number_neighbours();
+int number_neighbours(char who);
 
 /**
  * @brief Print neighbours list
  */
-void print_neighbours(char mask);
+void print_neighbours(char who, char mask);
 
 /**
  * @brief Save neighbours list in .neighbours/neighbours
  */
-void save_neighbours();
+void save_neighbours(char who);
 
 /**
  * @brief Load neighbours list from .neighbours/neighbours
  */
-void load_neighbours();
+void load_neighbours(char who);
 
 /**
  * @brief Tries to connect to the peer-to-peer network 

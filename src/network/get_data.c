@@ -28,12 +28,12 @@ int process_header(char *header, size_t size, int sockfd)
         char ip_str[39];
         if (inet_ntop(AF_INET, &(client_addr.sin_addr), ip_str, INET_ADDRSTRLEN) == NULL)
             err(EXIT_FAILURE, "Failed to convert client IP address to string\n");
-        return send_client_list(sockfd, ip_str);
+        return send_client_list(IM_SERVER, sockfd, ip_str);
     }
     if (strncmp(HD_SEND_CLIENT_LIST, header, 8) == 0)
     {
         printf("Recived header HD_SEND_CLIENT_LIST\n");
-        return fetch_client_list(header, size);
+        return fetch_client_list(IM_CLIENT, header, size);
     }
 
     if (strncmp(HD_CONNECTION_TO_NETWORK, header, strlen(HD_CONNECTION_TO_NETWORK)) == 0)
@@ -44,7 +44,7 @@ int process_header(char *header, size_t size, int sockfd)
     return 0;
 }
 
-int fetch_client_list(char *buffer, size_t buffer_size)
+int fetch_client_list(char who, char *buffer, size_t buffer_size)
 {
     size_t buffer_index = strlen(HD_SEND_CLIENT_LIST);
 
@@ -69,7 +69,7 @@ int fetch_client_list(char *buffer, size_t buffer_size)
 
         buffer_index += hostname_size;
         
-        set_neighbour(hostname, family);
+        set_neighbour(who, hostname, family);
     }
 
     free(buffer);

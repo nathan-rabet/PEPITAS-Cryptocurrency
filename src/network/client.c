@@ -12,18 +12,22 @@
 
 int connection_fd = 0;
 
-Node *get_my_node()
+Node *get_my_node(char who)
 {
-    static Node node = {0};
-    if (node.neighbours == NULL)
-        node.neighbours = calloc(MAX_NEIGHBOURS, sizeof(Neighbour));
-
-    return &node;
+    static Node node_server = {0};
+    static Node node_client = {0};
+    if (node_server.neighbours == NULL)
+        node_server.neighbours = calloc(MAX_NEIGHBOURS, sizeof(Neighbour));
+    if (node_client.neighbours == NULL)
+        node_client.neighbours = calloc(MAX_NEIGHBOURS, sizeof(Neighbour));
+    if (who == IM_SERVER)
+        return &node_server;
+    return &node_client;
 }
 
-int set_neighbour(char *hostname, int family)
+int set_neighbour(char who, char *hostname, int family)
 {
-    Node *node = get_my_node();
+    Node *node = get_my_node(who);
 
     if (hostname == NULL)
     {
@@ -75,9 +79,9 @@ int set_neighbour(char *hostname, int family)
     }
 }
 
-void remove_neighbour(int index)
+void remove_neighbour(char who, int index)
 {
-    Node *node = get_my_node();
+    Node *node = get_my_node(who);
     if (index < MAX_NEIGHBOURS && index >= 0)
     {
         if (node->neighbours[index].hostname == NULL)
@@ -86,10 +90,10 @@ void remove_neighbour(int index)
     }
 }
 
-void print_neighbours(char mask)
+void print_neighbours(char who, char mask)
 {
 
-    Node *node = get_my_node();
+    Node *node = get_my_node(who);
     printf("Neighbour list:\n");
     for (size_t i = 0; i < MAX_NEIGHBOURS; i++)
     {
@@ -99,9 +103,9 @@ void print_neighbours(char mask)
 
 }
 
-void save_neighbours()
+void save_neighbours(char who)
 {
-    Node *node = get_my_node();
+    Node *node = get_my_node(who);
 
     struct stat st = {0};
 
@@ -110,7 +114,13 @@ void save_neighbours()
         mkdir(".neighbours", 0700);
     }
 
-    FILE *nfile = fopen("./.neighbours/neighbours", "wb");
+    FILE *nfile;
+    if (who == IM_CLIENT) {
+        nfile = fopen("./.neighbours/client_neighbours", "wb");
+    }
+    else {
+        nfile = fopen("./.neighbours/server_neighbours", "wb");
+    }
     if (!nfile)
         err(errno, "Impossible to write '.neighbours/neighbours'");
     char *temp = calloc(SIZE_OF_HOSTNAME + sizeof(int), 1);
@@ -130,14 +140,19 @@ void save_neighbours()
     fclose(nfile);
 }
 
-void load_neighbours()
+void load_neighbours(char who)
 {
-    Node *node = get_my_node();
-    if (access(".neighbours/neighbours", F_OK))
-    {
+    Node *node = get_my_node(who);
+    if (access(".neighbours/neighbours", F_OK)) {
         return;
     }
-    FILE *nfile = fopen("./.neighbours/neighbours", "rb");
+    FILE *nfile;
+    if (who == IM_CLIENT) {
+        nfile = fopen("./.neighbours/client_neighbours", "rb");
+    }
+    else {
+        nfile = fopen("./.neighbours/server_neighbours", "rb");
+    }
     if (!nfile)
         err(errno, "Impossible to write '.neighbours/neighbours'");
     char temp[SIZE_OF_HOSTNAME + sizeof(int)];
@@ -147,17 +162,17 @@ void load_neighbours()
         if (strncmp(temp, "\0\0\0\0\0\0\0\0\0\0", 10))
         {
             node->neighbours[i].hostname = malloc(SIZE_OF_HOSTNAME);
-            snprintf(node->neighbours[i].hostname, SIZE_OF_HOSTNAME, "%s", temp);
+            memcpy(node->neighbours[i].hostname, temp, SIZE_OF_HOSTNAME);
             node->neighbours[i].family = *(int *)(temp + SIZE_OF_HOSTNAME);
         }
     }
     fclose(nfile);
 }
 
-int number_neighbours()
+int number_neighbours(char who)
 {
     int nb_neigbours = 0;
-    Node *node = get_my_node();
+    Node *node = get_my_node(who);
     for (size_t i = 0; i < MAX_NEIGHBOURS; i++)
     {
         if (node->neighbours[i].hostname != NULL)

@@ -20,6 +20,9 @@ extern const Neighbour HARD_CODED_ADDR[];
 
 #define STATIC_PORT "4242"
 
+#define IM_SERVER 0
+#define IM_CLIENT 1
+
 // REQUESTS
 #define HD_GET_CLIENT_LIST "GET CLIENT LIST\r\n\r\n"
 #define HD_SEND_CLIENT_LIST "SEND CLIENT LIST\n"

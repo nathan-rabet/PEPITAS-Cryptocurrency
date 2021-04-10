@@ -6,10 +6,6 @@
 
 int main()
 {
-    set_neighbour("2a02:842a:222:701:6a5:b521:f6bd:996b", AF_INET6);
-    set_neighbour("2a02:842a:222:701:6a5:b521:f6bd:996b", AF_INET6);
-    set_neighbour("2a02:842a:222:701:6a5:b521:f6bd:996b", AF_INET6);
-    set_neighbour("2a02:842a:222:701:6a5:b521:f6bd:996b", AF_INET6);
-    print_neighbours(1);
+    print_neighbours(IM_SERVER, 1);
     return init_server(NODESERVER);
 }

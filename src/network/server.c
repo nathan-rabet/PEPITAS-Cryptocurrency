@@ -49,12 +49,12 @@ void *redirect_connection(void *arg)
     if (read_header(clientfd) == 1)
     {
         printf("Accept connection: '%s'\n", ip_str);
-        set_neighbour(ip_str, AF_INET);
-        save_neighbours();
-        print_neighbours(1);
+        set_neighbour(IM_SERVER, ip_str, AF_INET);
+        save_neighbours(IM_SERVER);
+        print_neighbours(IM_SERVER, 1);
         
         //send client list
-        send_client_list(clientfd, ip_str);
+        send_client_list(IM_SERVER, clientfd, ip_str);
     }
 
 

@@ -23,15 +23,15 @@ void join_network_door(){
     safe_write(connection_fd, HD_CONNECTION_TO_NETWORK, strlen(HD_CONNECTION_TO_NETWORK));
 
     read_header(connection_fd);
-    print_neighbours(0);
+    print_neighbours(IM_CLIENT, 0);
 }
 
 int main()
 {
     connection_fd = 0;
     printf("Starting client...\n");
-    load_neighbours();
-    if (number_neighbours() == 0)
+    load_neighbours(IM_CLIENT);
+    if (number_neighbours(IM_CLIENT) == 0)
     {
         printf("No last node for the network :(\nSearch on doors...\n");
         join_network_door();
