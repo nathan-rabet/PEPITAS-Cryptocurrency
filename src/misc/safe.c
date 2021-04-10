@@ -23,6 +23,12 @@ ssize_t safe_read(int fd, const void **buf, size_t *bufsize)
 	do
 	{
 		ssize_t nb_read = read(fd, buffer + read_count, buffersize - read_count);
+		if (nb_read == 0)
+		{
+			printf("Aye fini\n");
+			break;
+		}
+		
 		if (nb_read == -1)
 			return -1;
 		read_count += nb_read;
