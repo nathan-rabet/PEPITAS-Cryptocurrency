@@ -16,6 +16,6 @@ int read_header(int sockfd);
  * 
  * @return 0 if sucess, -1 otherwise
  */
-int fetch_client_list(int sockfd);
+int fetch_client_list(char *buff, size_t buffer_size);
 
 #endif

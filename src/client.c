@@ -23,7 +23,7 @@ void join_network_door(){
     safe_write(connection_fd, HD_CONNECTION_TO_NETWORK, strlen(HD_CONNECTION_TO_NETWORK));
 
     read_header(connection_fd);
-    print_neighbours(1);
+    print_neighbours(0);
 }
 
 int main()

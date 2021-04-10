@@ -4,7 +4,7 @@
 #include "network/send_data.h"
 #include "network/get_data.h"
 
-int process_header(char *header, int sockfd)
+int process_header(char *header, size_t size, int sockfd)
 {
     if (strncmp(HD_GET_BLOCKCHAIN, header, strlen(HD_GET_BLOCKCHAIN)) == 0)
     {
@@ -24,7 +24,7 @@ int process_header(char *header, int sockfd)
     if (strncmp(HD_SEND_CLIENT_LIST, header, 8) == 0)
     {
         printf("Recived header HD_SEND_CLIENT_LIST\n");
-        return fetch_client_list(sockfd);
+        return fetch_client_list(header, size);
     }
 
     if (strncmp(HD_CONNECTION_TO_NETWORK, header, strlen(HD_CONNECTION_TO_NETWORK)) == 0)
@@ -35,44 +35,46 @@ int process_header(char *header, int sockfd)
     return 0;
 }
 
-int fetch_client_list(int sockfd)
+int fetch_client_list(char *buffer, size_t buffer_size)
 {
     Node *my_node = get_my_node();
 
-    void *buffer;
-    size_t buffer_size;
-    ssize_t nb_read;
+    size_t buffer_index = strlen(HD_SEND_CLIENT_LIST);
 
-    // Get the list
-    nb_read = safe_read(sockfd, (void *)&buffer, &buffer_size);
+    int family = 0;
+    char *hostname = malloc(SIZE_OF_HOSTNAME);
 
-    if (nb_read == -1 || strncmp(HD_SEND_CLIENT_LIST,buffer,strlen(HD_SEND_CLIENT_LIST)) != 0)
-        return -1;
+    printf("%lu\n", buffer_size);
 
-    ssize_t buffer_index = strlen(HD_SEND_CLIENT_LIST);
+    while (buffer_index < buffer_size - 5)
+    {
+        family = *(int *)(buffer + buffer_index);
+        printf("Family: %i", family);
 
-    for (size_t index = 0; index < MAX_NEIGHBOURS && strncmp("\r\n\r\n",buffer + buffer_index, 4); index++)
+        buffer_index += sizeof(int);
+
+        int hostname_size;
+        // IPv4
+        if (family == AF_INET)
+            hostname_size = 15;
+        // IPv6
+        else
+            hostname_size = 39;
+
+        memcpy(hostname, buffer + buffer_index, hostname_size);
+        printf("\tIP: %s\n", hostname);
+        
+        buffer_index += hostname_size;
+        
+        set_neighbour(hostname, family);
+    }
+    
+
+
+    for (size_t index = 0; index < MAX_NEIGHBOURS && buffer_index < buffer_size; index++)
     {
         if (my_node->neighbours[index].hostname == NULL)
         {
-            my_node->neighbours[index].family = *(int *)(buffer + buffer_index);
-            printf("Family: %i", *(int *)(buffer + buffer_index));
-
-            buffer_index += sizeof(int);
-
-            my_node->neighbours[index].hostname = (char *)(buffer + buffer_index);
-            printf("\tIP: %s\n", (char *)(buffer + buffer_index));
-
-            int hostname_size_plus_one;
-            // IPv4 + 1
-            if (my_node->neighbours[index].family == INET_ADDRSTRLEN)
-                hostname_size_plus_one = 16;
-            // IPv6 + 1
-            else
-                hostname_size_plus_one = 40;
-            buffer_index += sizeof(char) * hostname_size_plus_one;
-            if (buffer_index >= nb_read - 6)
-                break;
         }
     }
 
@@ -92,6 +94,6 @@ int read_header(int sockfd)
     nb_read = safe_read(sockfd, (void *)&buffer, &buffer_size);
 
     if (nb_read != -1)
-        return process_header(buffer, sockfd);
+        return process_header(buffer, nb_read, sockfd);
     return -1;
 }

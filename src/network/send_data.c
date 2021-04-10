@@ -17,7 +17,7 @@ int send_client_list(int sockfd)
             int hostname_size;
 
             // IPv4
-            if (client_list->neighbours[index].family == INET_ADDRSTRLEN)
+            if (client_list->neighbours[index].family == AF_INET)
                 hostname_size = 15;
 
             // IPv6
