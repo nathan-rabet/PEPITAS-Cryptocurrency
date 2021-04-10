@@ -7,7 +7,7 @@
 #include "network/send_data.h"
 #include "network/get_data.h"
 
-int connection_fd = 0;
+extern int connection_fd;
 
 
 void join_network_door(){

@@ -10,7 +10,7 @@
 #include <unistd.h>
 #include <err.h>
 
-extern int connection_fd;
+int connection_fd = 0;
 
 Node *get_my_node()
 {
@@ -211,7 +211,6 @@ int listen_to(Neighbour neighbour)
     if (rp != NULL)
     {
         // Connection success
-        extern int connection_fd;
         connection_fd = sockfd;
         return 0;
     }
