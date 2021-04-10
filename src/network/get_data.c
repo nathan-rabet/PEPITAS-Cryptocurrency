@@ -19,7 +19,16 @@ int process_header(char *header, size_t size, int sockfd)
     if (strncmp(HD_GET_CLIENT_LIST, header, strlen(HD_GET_CLIENT_LIST)) == 0)
     {
         printf("Recived header HD_GET_CLIENT_LIST\n");
-        return send_client_list(sockfd);
+        struct sockaddr_in client_addr;
+        socklen_t client_addr_len = sizeof(client_addr);
+
+        if (getpeername(sockfd, (struct sockaddr * restrict) & client_addr, &client_addr_len) == -1)
+            err(EXIT_FAILURE, "Failed to recover client IP address\n");
+
+        char ip_str[39];
+        if (inet_ntop(AF_INET, &(client_addr.sin_addr), ip_str, INET_ADDRSTRLEN) == NULL)
+            err(EXIT_FAILURE, "Failed to convert client IP address to string\n");
+        return send_client_list(sockfd, ip_str);
     }
     if (strncmp(HD_SEND_CLIENT_LIST, header, 8) == 0)
     {
@@ -37,8 +46,6 @@ int process_header(char *header, size_t size, int sockfd)
 
 int fetch_client_list(char *buffer, size_t buffer_size)
 {
-    Node *my_node = get_my_node();
-
     size_t buffer_index = strlen(HD_SEND_CLIENT_LIST);
 
     int family = 0;

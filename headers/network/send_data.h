@@ -7,6 +7,6 @@
  * @param sockfd The sock FD
  * @return 0 if success, -1 otherwise
  */
-int send_client_list(int sockfd);
+int send_client_list(int sockfd, char *sockip);
 
 #endif

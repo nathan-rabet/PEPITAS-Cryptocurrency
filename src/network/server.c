@@ -39,7 +39,7 @@ void *redirect_connection(void *arg)
     if (getpeername(clientfd, (struct sockaddr * restrict) & client_addr, &client_addr_len) == -1)
         err(EXIT_FAILURE, "Failed to recover client IP address\n");
 
-    char ip_str[INET_ADDRSTRLEN];
+    char ip_str[39];
     if (inet_ntop(AF_INET, &(client_addr.sin_addr), ip_str, INET_ADDRSTRLEN) == NULL)
         err(EXIT_FAILURE, "Failed to convert client IP address to string\n");
 
@@ -54,7 +54,7 @@ void *redirect_connection(void *arg)
         print_neighbours(1);
         
         //send client list
-        send_client_list(clientfd);
+        send_client_list(clientfd, ip_str);
     }
 
 

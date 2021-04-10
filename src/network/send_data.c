@@ -1,6 +1,6 @@
 #include "network/network.h"
 
-int send_client_list(int sockfd)
+int send_client_list(int sockfd, char *sockip)
 {
     Node *client_list = get_my_node();
 
@@ -9,20 +9,20 @@ int send_client_list(int sockfd)
 
     for (size_t index = 0; index < MAX_NEIGHBOURS; index++)
     {
-        if (client_list->neighbours[index].hostname != NULL)
+        int hostname_size;
+
+        // IPv4
+        if (client_list->neighbours[index].family == AF_INET)
+            hostname_size = 15;
+
+        // IPv6
+        else
+            hostname_size = 39;
+        if (client_list->neighbours[index].hostname != NULL && strncmp(sockip, client_list->neighbours[index].hostname, hostname_size))
         {
             if (safe_write(sockfd, (void *)&client_list->neighbours[index].family, sizeof(int)) == -1)
                 return -1;
 
-            int hostname_size;
-
-            // IPv4
-            if (client_list->neighbours[index].family == AF_INET)
-                hostname_size = 15;
-
-            // IPv6
-            else
-                hostname_size = 39;
             if (safe_write(sockfd, (void *)client_list->neighbours[index].hostname, hostname_size) == -1)
                 return -1;
         }
