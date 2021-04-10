@@ -7,7 +7,7 @@
     function()
 
 #define LOG(str...)           \
-    printf("\033[0;34m[-] "); \
+    printf("\033[0;34m[-]  "); \
     printf(str);              \
     printf("\033[0m\n")
 

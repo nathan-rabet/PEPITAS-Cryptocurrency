@@ -11,17 +11,35 @@
 #define NB_FAKE_VALIDATORS 10
 #define str(x) #x
 
+/**
+ * @brief Generate a mock validators states file
+ * 
+ * @param path The path of the output file
+ * 
+ * 
+ * @see 
+ * For one stake transaction, power += amount / block_height + amount
+ * Foreach stake withdraw, power -= power * withdraw_stake / user_total_stake
+ * 
+ * validators states file description
+ * Header : nb_validators[sizeof(size_t)], total_stake[sizeof(size_t)], block_height_validity[sizeof(size_t)] '\n'[sizeof(char)]
+ * For each 'nb_validators' : validator_pkey[RSA_KEY_SIZE], user_stake[sizeof(size_t)] ,validator_power[sizeof(size_t)], '\n'[sizeof(char)]
+ */
 void gen_validators_file(char path[])
 {
+    LOG("Creating mock validators states file");
     FILE *validators_file = fopen(path, "w+");
     FILE *temp = fopen(".temp_validators", "w+");
 
     size_t nb_validators = NB_FAKE_VALIDATORS;
     size_t total_stake = 10000;
+    size_t block_height_validity = 42;
 
     srand(time(NULL));
     fwrite(&nb_validators, sizeof(size_t), 1, validators_file);
     fwrite(&total_stake, sizeof(size_t), 1, validators_file);
+    fwrite(&block_height_validity, sizeof(size_t), 1, validators_file);
+    fwrite("\n", sizeof(char), 1, validators_file);
 
     for (size_t i = 0; i < NB_FAKE_VALIDATORS; i++)
     {
@@ -36,9 +54,13 @@ void gen_validators_file(char path[])
         fseek(temp, RSA_BEGIN_SIZE, SEEK_SET);
         fread(key_buff, sizeof(char), RSA_KEY_SIZE, temp);
         fwrite(key_buff, sizeof(char), RSA_KEY_SIZE, validators_file);
+        size_t user_stake = (size_t)rand() % 1000;
         size_t power = (size_t)rand() % 1000;
 
+        fwrite(&user_stake, sizeof(size_t), 1, validators_file);
         fwrite(&power, sizeof(size_t), 1, validators_file);
+        fwrite("\n", sizeof(char), 1, validators_file);
+
         fseek(temp, 0, SEEK_SET);
     }
 
