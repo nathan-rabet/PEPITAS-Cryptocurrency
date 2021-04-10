@@ -10,6 +10,8 @@
 #include <unistd.h>
 #include <err.h>
 
+extern int connection_fd;
+
 Node *get_my_node()
 {
     static Node node = {0};
@@ -35,7 +37,7 @@ int set_neighbour(char *hostname, int family)
                 node->neighbours[index].hostname = HARD_CODED_ADDR[i].hostname;
                 node->neighbours[index].family = HARD_CODED_ADDR[i].family;
 
-                if (listen_to(index) == -1)
+                if (listen_to(node->neighbours[index]) == -1)
                     memset(&node->neighbours[index], 0, sizeof(Neighbour));
                 else
                     return 0;
@@ -151,10 +153,21 @@ void load_neighbours()
     fclose(nfile);
 }
 
-int listen_to(size_t neighbour_id)
+int number_neighbours()
+{
+    int nb_neigbours = 0;
+    Node *node = get_my_node();
+    for (size_t i = 0; i < MAX_NEIGHBOURS; i++)
+    {
+        if (node->neighbours[i].hostname != NULL)
+            nb_neigbours++;
+    }
+    return nb_neigbours;
+}
+
+int listen_to(Neighbour neighbour)
 {
     struct addrinfo hints = {0};
-    Neighbour neighbour = get_my_node()->neighbours[neighbour_id];
 
     hints.ai_family = neighbour.family; //IPV4 or maybe IPV6
     hints.ai_socktype = SOCK_STREAM;    //TCP
@@ -198,7 +211,8 @@ int listen_to(size_t neighbour_id)
     if (rp != NULL)
     {
         // Connection success
-        get_my_node()->neighbours[neighbour_id].client_sockfd = sockfd;
+        extern int connection_fd;
+        connection_fd = sockfd;
         return 0;
     }
 

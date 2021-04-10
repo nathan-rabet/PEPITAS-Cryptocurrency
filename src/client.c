@@ -7,12 +7,30 @@
 #include "network/send_data.h"
 #include "network/get_data.h"
 
+int connection_fd = 0;
+
+
+void join_network_door(){
+    for (size_t i = 0; i < NB_HARD_CODED_ADDR; i++)
+    {
+        if (listen_to(HARD_CODED_ADDR[i]) == 0)
+            break;
+    }
+    if (connection_fd == 0)
+        err(EXIT_FAILURE, "Aie aie aie pas de réseau mon reuf :(\nHave a great day\n");
+    
+}
+
 int main()
 {
-    if (set_neighbour(NULL, 0) != 0)
+    connection_fd = 0;
+    printf("Starting client...\n");
+    load_neighbours();
+    if (number_neighbours() == 0)
     {
-        errx(EXIT_FAILURE,"All servers are down");
+        printf("No last node for the network :(\nSearch on doors...\n");
+        join_network_door();
     }
-    fetch_client_list(0);
+    
     return 0;
 }
