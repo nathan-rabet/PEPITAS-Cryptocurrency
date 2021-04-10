@@ -153,11 +153,11 @@ void load_neighbours()
 
 int listen_to(size_t neighbour_id)
 {
-    struct addrinfo *hints = {0};
+    struct addrinfo hints = {0};
     Neighbour neighbour = get_my_node()->neighbours[neighbour_id];
 
-    hints->ai_family = neighbour.family; //IPV4 or maybe IPV6
-    hints->ai_socktype = SOCK_STREAM;    //TCP
+    hints.ai_family = neighbour.family; //IPV4 or maybe IPV6
+    hints.ai_socktype = SOCK_STREAM;    //TCP
 
     struct addrinfo *result;
     int addrinfo_ret;
@@ -167,7 +167,7 @@ int listen_to(size_t neighbour_id)
         return -1;
 
     // Get adress information
-    addrinfo_ret = getaddrinfo(neighbour.hostname, STATIC_PORT, hints, &result);
+    addrinfo_ret = getaddrinfo(neighbour.hostname, STATIC_PORT, &hints, &result);
 
     // If adress information fetching failed
     if (addrinfo_ret != 0)
