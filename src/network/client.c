@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/types.h>
+#include <sys/socket.h>
+#include <netdb.h>
 #include <sys/stat.h>
 #include <unistd.h>
 #include <err.h>
@@ -68,6 +70,17 @@ int set_neighbour(char *hostname, int family)
             return 0;
         }
         return -1;
+    }
+}
+
+void remove_neighbour(int index)
+{
+    Node *node = get_my_node();
+    if (index < MAX_NEIGHBOURS && index >= 0)
+    {
+        if (node->neighbours[index].hostname == NULL)
+            free(node->neighbours[index].hostname);
+        node->neighbours[index].family = 0;
     }
 }
 
@@ -140,11 +153,11 @@ void load_neighbours()
 
 int listen_to(size_t neighbour_id)
 {
-    struct addrinfo hints = {0};
+    struct addrinfo *hints = {0};
     Neighbour neighbour = get_my_node()->neighbours[neighbour_id];
 
-    hints.ai_family = neighbour.family; //IPV4 or maybe IPV6
-    hints.ai_socktype = SOCK_STREAM;    //TCP
+    hints->ai_family = neighbour.family; //IPV4 or maybe IPV6
+    hints->ai_socktype = SOCK_STREAM;    //TCP
 
     struct addrinfo *result;
     int addrinfo_ret;
@@ -154,7 +167,7 @@ int listen_to(size_t neighbour_id)
         return -1;
 
     // Get adress information
-    addrinfo_ret = getaddrinfo(neighbour.hostname, STATIC_PORT, &hints, &result);
+    addrinfo_ret = getaddrinfo(neighbour.hostname, STATIC_PORT, hints, &result);
 
     // If adress information fetching failed
     if (addrinfo_ret != 0)

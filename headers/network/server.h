@@ -2,6 +2,9 @@
 #define SERVER_H
 
 #include <sys/socket.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netdb.h>
 #include "network.h"
 #include "core/blockchain/block.h"
 
@@ -10,7 +13,7 @@
 
 typedef struct client_connection
 {
-    struct addrinfo info; // Adress information
+    struct addrinfo *info; // Adress information
     int socket; // The client<->server connection socket
 } client_connection;
 

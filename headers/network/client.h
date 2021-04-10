@@ -31,7 +31,10 @@ Node* get_my_node();
  * @return 0 if sucess, -1 otherwise if full
  */
 int set_neighbour(char *hostname, int family);
-
+/**
+ * @brief Remove a neighbour in the client.neightbours section
+ */
+void remove_neighbour(int index);
 /**
  * @brief Print neighbours list
  */
