@@ -19,11 +19,11 @@
  * 
  * @see 
  * For one stake transaction, power += amount / block_height + amount
- * Foreach stake withdraw, power *= withdraw_stake / user_total_stake
+ * Foreach stake withdraw, power -= power * withdraw_stake / user_total_stake
  * 
  * validators states file description
  * Header : nb_validators[sizeof(size_t)], total_stake[sizeof(size_t)], block_height_validity[sizeof(size_t)] '\n'[sizeof(char)]
- * For each 'nb_validators' : validator_pkey[RSA_KEY_SIZE], validator_power[sizeof(size_t)], '\n'[sizeof(char)]
+ * For each 'nb_validators' : validator_pkey[RSA_KEY_SIZE], user_stake[sizeof(size_t)] ,validator_power[sizeof(size_t)], '\n'[sizeof(char)]
  */
 void gen_validators_file(char path[])
 {
@@ -54,8 +54,10 @@ void gen_validators_file(char path[])
         fseek(temp, RSA_BEGIN_SIZE, SEEK_SET);
         fread(key_buff, sizeof(char), RSA_KEY_SIZE, temp);
         fwrite(key_buff, sizeof(char), RSA_KEY_SIZE, validators_file);
+        size_t user_stake = (size_t)rand() % 1000;
         size_t power = (size_t)rand() % 1000;
 
+        fwrite(&user_stake, sizeof(size_t), 1, validators_file);
         fwrite(&power, sizeof(size_t), 1, validators_file);
         fwrite("\n", sizeof(char), 1, validators_file);
 

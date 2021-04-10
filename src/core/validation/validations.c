@@ -44,7 +44,8 @@ RSA **get_next_committee(size_t *nb_validators)
     if (safe_fread(&total_stake, sizeof(size_t), 1, validators_states) < 1)
         return NULL;
 
-    while (fseek(validators_states, 3 * sizeof(size_t) + sizeof(char), SEEK_SET) != 0); // escape block_height_validity[sizeof(size_t)] '\n'[sizeof(char)]
+    while (fseek(validators_states, 3 * sizeof(size_t) + sizeof(char), SEEK_SET) != 0)
+        ; // escape block_height_validity[sizeof(size_t)] '\n'[sizeof(char)]
 
     // Deterministic algorithm for setting the next committee size
     *nb_validators = define_nb_validators(nb_total_validators);
@@ -55,9 +56,10 @@ RSA **get_next_committee(size_t *nb_validators)
     size_t j = 1;
     for (size_t v = 0; v < nb_total_validators; v++)
     {
-        size_t random_offset = 3 * sizeof(size_t) + sizeof(char) + sha384[i] * (RSA_KEY_SIZE + sizeof(size_t) + sizeof(char)) % nb_total_validators;
-        while(fseek(validators_states, random_offset, SEEK_SET) !=0 ); // Setting random starting point
-        size_t random_power = ((size_t *)sha384)[j] % total_stake;                                                                                                      // Setting random power value
+        size_t random_offset = 3 * sizeof(size_t) + sizeof(char) + (((size_t *)sha384)[i] % nb_total_validators) * (RSA_KEY_SIZE + 2 * sizeof(size_t) + sizeof(char));
+        while (fseek(validators_states, random_offset, SEEK_SET) != 0)
+            ;                                                      // Setting random starting point
+        size_t random_power = ((size_t *)sha384)[j] % total_stake; // Setting random power value
 
         char next_validator_pk[RSA_KEY_SIZE];
 
@@ -65,14 +67,22 @@ RSA **get_next_committee(size_t *nb_validators)
         size_t current_validator = 0;
         while (!is_next_validator)
         {
+            
             size_t next_validator_power;
-            if (safe_fread(&next_validator_pk, sizeof(char), RSA_KEY_SIZE, validators_states) < RSA_KEY_SIZE || safe_fread(&next_validator_power, sizeof(size_t), 1, validators_states) < 1)
+
+            ssize_t rsa_fread = safe_fread(&next_validator_pk, sizeof(char), RSA_KEY_SIZE, validators_states);
+            while (fseek(validators_states, sizeof(size_t), SEEK_CUR) != 0)
+                ; // 'user_stake' escape
+
+            if (rsa_fread < RSA_KEY_SIZE || safe_fread(&next_validator_power, sizeof(size_t), 1, validators_states) < 1)
             {
-                while (fseek(validators_states, sizeof(size_t) * 3 + sizeof(char), SEEK_SET) != 0); // escape nb_validators[sizeof(size_t)], total_stake[sizeof(size_t)], '\n'[sizeof(char)]
+                while (fseek(validators_states, sizeof(size_t) * 3 + sizeof(char), SEEK_SET) != 0)
+                    ; // escape nb_validators[sizeof(size_t)], total_stake[sizeof(size_t)], '\n'[sizeof(char)]
                 continue;
             }
             is_next_validator = __builtin_usubl_overflow(random_power, next_validator_power, &random_power);
-            while (fseek(validators_states, sizeof(char), SEEK_CUR) != 0); // '\n' escape
+            while (fseek(validators_states, sizeof(char), SEEK_CUR) != 0)
+                ; // '\n' escape
 
             current_validator++;
         }
