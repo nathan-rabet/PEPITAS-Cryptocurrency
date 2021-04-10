@@ -51,6 +51,9 @@ RSA **get_next_validators()
     uint16_t def_nb_validators = define_nb_validators(nb_validators);
 
     RSA **rsa_keys = malloc(nb_validators * sizeof(RSA *));
+
+    // TODO : Deal with duplicates
+
     for (uint16_t v = 0; v < def_nb_validators; v++)
     {
         for (size_t i = 0; i < NB_RSA_CHUNK; i++)
