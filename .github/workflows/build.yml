@@ -17,13 +17,13 @@ jobs:
     - name: Removing old documentation
       run: cd docs ; rm -rf documentation ; rm manual.pdf
     - name: Generating man & HTML documentation
-      run: doxygen doxygen.conf
+      run: cd docs ; doxygen doxygen.conf
     - name: Moving 'man' folder
       run: mv man documentation/man
     - name: Generating PDF documentation
-      run: cd latex ; make pdf ; cp refman.pdf ../manual.pdf
+      run: cd docs/latex ; make pdf ; cp refman.pdf ../manual.pdf
     - name: Cleaning useless files
-      run: cd .. ; rm -r latex
+      run: cd docs ; rm -r latex
 
   test:
     runs-on: ubuntu-latest
