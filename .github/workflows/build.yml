@@ -19,7 +19,7 @@ jobs:
     - name: Generating man & HTML documentation
       run: cd docs ; doxygen doxygen.conf
     - name: Moving 'man' folder
-      run: mv man documentation/man
+      run: mv docs/man docs/documentation/man
     - name: Generating PDF documentation
       run: cd docs/latex ; make pdf ; cp refman.pdf ../manual.pdf
     - name: Cleaning useless files
