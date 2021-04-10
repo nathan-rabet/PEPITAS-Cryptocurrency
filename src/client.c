@@ -18,7 +18,8 @@ void join_network_door(){
     }
     if (connection_fd == 0)
         err(EXIT_FAILURE, "Aie aie aie pas de réseau mon reuf :(\nHave a great day\n");
-    
+    read_header(connection_fd);
+    print_neighbours();
 }
 
 int main()

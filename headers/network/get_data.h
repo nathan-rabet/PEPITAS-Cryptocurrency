@@ -12,10 +12,10 @@ int read_header(int sockfd);
 /**
  * @brief Merges my neighbours list with the one sent by 'neighbour_id'. 
  * 
- * @param neighbour_id The id of the neighbour list to merge
+ * @param sockfd The sockfd to read
  * 
  * @return 0 if sucess, -1 otherwise
  */
-int fetch_client_list(int neighbour_id);
+int fetch_client_list(int sockfd);
 
 #endif

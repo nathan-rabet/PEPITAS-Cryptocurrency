@@ -43,14 +43,20 @@ void *redirect_connection(void *arg)
     if (inet_ntop(AF_INET, &(client_addr.sin_addr), ip_str, INET_ADDRSTRLEN) == NULL)
         err(EXIT_FAILURE, "Failed to convert client IP address to string\n");
 
+
     printf("New connection: '%s'\n", ip_str);
 
-    //send client list
-    send_client_list(clientfd);
+    if (read_header(clientfd) == 1)
+    {
+        printf("Accept connection: '%s'\n", ip_str);
+        set_neighbour(ip_str, AF_INET);
+        save_neighbours();
+        print_neighbours();
+        
+        //send client list
+        send_client_list(clientfd);
+    }
 
-    set_neighbour(ip_str, AF_INET);
-    save_neighbours();
-    print_neighbours();
 
     close(clientfd);
     free(arg);

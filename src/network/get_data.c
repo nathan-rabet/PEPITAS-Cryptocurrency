@@ -24,12 +24,18 @@ int process_header(char *header, int sockfd)
     if (strncmp(HD_SEND_CLIENT_LIST, header, 8) == 0)
     {
         printf("Recived header HD_SEND_CLIENT_LIST\n");
-//        return fetch_client_list(sockfd);
+        return fetch_client_list(sockfd);
+    }
+
+    if (strncmp(HD_CONNECTION_TO_NETWORK, header, strlen(HD_CONNECTION_TO_NETWORK)) == 0)
+    {
+        printf("Recived header HD_CONNECTION_TO_NETWORK\n");
+        return 1;
     }
     return 0;
 }
-/*
-int fetch_client_list(int neighbour_id)
+
+int fetch_client_list(int sockfd)
 {
     Node *my_node = get_my_node();
 
@@ -37,17 +43,8 @@ int fetch_client_list(int neighbour_id)
     size_t buffer_size;
     ssize_t nb_read;
 
-    // Ask for client list
-    if (safe_write(my_node->neighbours[neighbour_id].client_sockfd,
-                   HD_GET_CLIENT_LIST, sizeof(HD_GET_CLIENT_LIST)) == -1)
-    {
-        dprintf(STDERR_FILENO, "Failed to ask for the client list to node '%d', deleting it...", neighbour_id);
-        memset(&my_node->neighbours[neighbour_id], 0, sizeof(Neighbour));
-        return -1;
-    }
-
     // Get the list
-    nb_read = safe_read(my_node->neighbours[neighbour_id].client_sockfd, (void *)&buffer, &buffer_size);
+    nb_read = safe_read(sockfd, (void *)&buffer, &buffer_size);
 
     if (nb_read == -1 || strncmp(HD_SEND_CLIENT_LIST,buffer,strlen(HD_SEND_CLIENT_LIST)) != 0)
         return -1;
@@ -82,7 +79,7 @@ int fetch_client_list(int neighbour_id)
     free(buffer);
     return 0;
 }
-*/
+
 
 int read_header(int sockfd)
 {
