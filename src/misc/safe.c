@@ -23,7 +23,6 @@ ssize_t safe_read(int fd, const void **buf, size_t *bufsize)
 	do
 	{
 		ssize_t nb_read = read(fd, buffer + read_count, buffersize - read_count);
-		printf("%s", buffer);
 		if (nb_read == 0)
 		{
 			break;
