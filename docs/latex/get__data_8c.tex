@@ -1,0 +1,122 @@
+\hypertarget{get__data_8c}{}\doxysection{src/network/get\+\_\+data.c File Reference}
+\label{get__data_8c}\index{src/network/get\_data.c@{src/network/get\_data.c}}
+{\ttfamily \#include \char`\"{}network/client.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}network/server.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}network/network.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}network/send\+\_\+data.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}network/get\+\_\+data.\+h\char`\"{}}\newline
+Include dependency graph for get\+\_\+data.\+c\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{get__data_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{get__data_8c_a56fe14e6f01f9d30d47882381d50d1f1}{process\+\_\+header}} (char $\ast$header, int sockfd)
+\item 
+int \mbox{\hyperlink{get__data_8c_ad45197fe0e164a777849753c436479ea}{fetch\+\_\+client\+\_\+list}} (int neighbour\+\_\+id)
+\begin{DoxyCompactList}\small\item\em Merges my neighbours list with the one sent by \textquotesingle{}neighbour\+\_\+id\textquotesingle{}. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{get__data_8c_a764b554b18055697e4032f0a173185e4}{read\+\_\+header}} (int sockfd)
+\begin{DoxyCompactList}\small\item\em Waits a header in \textquotesingle{}sockfd\textquotesingle{}, reads it and processes it. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{get__data_8c_ad45197fe0e164a777849753c436479ea}\label{get__data_8c_ad45197fe0e164a777849753c436479ea}} 
+\index{get\_data.c@{get\_data.c}!fetch\_client\_list@{fetch\_client\_list}}
+\index{fetch\_client\_list@{fetch\_client\_list}!get\_data.c@{get\_data.c}}
+\doxysubsubsection{\texorpdfstring{fetch\_client\_list()}{fetch\_client\_list()}}
+{\footnotesize\ttfamily int fetch\+\_\+client\+\_\+list (\begin{DoxyParamCaption}\item[{int}]{neighbour\+\_\+id }\end{DoxyParamCaption})}
+
+
+
+Merges my neighbours list with the one sent by \textquotesingle{}neighbour\+\_\+id\textquotesingle{}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em neighbour\+\_\+id} & The id of the neighbour list to merge\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if sucess, -\/1 otherwise 
+\end{DoxyReturn}
+
+
+Definition at line 32 of file get\+\_\+data.\+c.
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=293pt]{get__data_8c_ad45197fe0e164a777849753c436479ea_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{get__data_8c_ad45197fe0e164a777849753c436479ea_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{get__data_8c_a56fe14e6f01f9d30d47882381d50d1f1}\label{get__data_8c_a56fe14e6f01f9d30d47882381d50d1f1}} 
+\index{get\_data.c@{get\_data.c}!process\_header@{process\_header}}
+\index{process\_header@{process\_header}!get\_data.c@{get\_data.c}}
+\doxysubsubsection{\texorpdfstring{process\_header()}{process\_header()}}
+{\footnotesize\ttfamily int process\+\_\+header (\begin{DoxyParamCaption}\item[{char $\ast$}]{header,  }\item[{int}]{sockfd }\end{DoxyParamCaption})}
+
+
+
+Definition at line 7 of file get\+\_\+data.\+c.
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{get__data_8c_a56fe14e6f01f9d30d47882381d50d1f1_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{get__data_8c_a56fe14e6f01f9d30d47882381d50d1f1_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{get__data_8c_a764b554b18055697e4032f0a173185e4}\label{get__data_8c_a764b554b18055697e4032f0a173185e4}} 
+\index{get\_data.c@{get\_data.c}!read\_header@{read\_header}}
+\index{read\_header@{read\_header}!get\_data.c@{get\_data.c}}
+\doxysubsubsection{\texorpdfstring{read\_header()}{read\_header()}}
+{\footnotesize\ttfamily int read\+\_\+header (\begin{DoxyParamCaption}\item[{int}]{sockfd }\end{DoxyParamCaption})}
+
+
+
+Waits a header in \textquotesingle{}sockfd\textquotesingle{}, reads it and processes it. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sockfd} & The sock FD \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if sucess, -\/1 otherwise 
+\end{DoxyReturn}
+
+
+Definition at line 86 of file get\+\_\+data.\+c.
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{get__data_8c_a764b554b18055697e4032f0a173185e4_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{get__data_8c_a764b554b18055697e4032f0a173185e4_icgraph}
+\end{center}
+\end{figure}

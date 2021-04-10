@@ -1,6 +1,0 @@
-<map id="write_block" name="write_block">
-<area shape="rect" id="node1" title="Writes a block in a file." alt="" coords="5,5,103,32"/>
-<area shape="rect" id="node2" href="$signature_8c.html#a0e5ff1f119568fb8566981cf7da11d7f" title="Writes blockdata in a file." alt="" coords="151,5,277,32"/>
-<area shape="rect" id="node3" href="$signature_8c.html#a5bff0131aa50faf1cd0236e0b44169eb" title=" " alt="" coords="325,5,460,32"/>
-<area shape="rect" id="node4" href="$signature_8c.html#a0bd00440f3c97bf7dace6c4e26ea17be" title=" " alt="" coords="508,5,672,32"/>
-</map>

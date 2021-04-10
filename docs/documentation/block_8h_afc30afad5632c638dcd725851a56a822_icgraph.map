@@ -1,5 +1,0 @@
-<map id="get_next_block" name="get_next_block">
-<area shape="rect" id="node1" title="For a block of height h, returns the block of height h+1" alt="" coords="245,5,367,32"/>
-<area shape="rect" id="node2" href="$block__test_8h.html#ad83790a3d08aff3d0de25b9a76e474c4" title=" " alt="" coords="108,5,197,32"/>
-<area shape="rect" id="node3" href="$unit__testing_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,5,60,32"/>
-</map>

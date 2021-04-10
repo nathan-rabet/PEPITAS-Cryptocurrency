@@ -1,0 +1,85 @@
+\hypertarget{validations_8h}{}\doxysection{headers/core/validation/validations.h File Reference}
+\label{validations_8h}\index{headers/core/validation/validations.h@{headers/core/validation/validations.h}}
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$openssl/rsa.\+h$>$}\newline
+Include dependency graph for validations.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=232pt]{validations_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=340pt]{validations_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+R\+SA $\ast$$\ast$ \mbox{\hyperlink{validations_8h_a96d9964840289a425328257dd9a4c106}{get\+\_\+next\+\_\+committee}} (size\+\_\+t $\ast$nb\+\_\+validators)
+\begin{DoxyCompactList}\small\item\em Get the \textquotesingle{}next block\textquotesingle{} validators R\+SA public keys. \end{DoxyCompactList}\item 
+ssize\+\_\+t \mbox{\hyperlink{validations_8h_a689f119eae86a33365e456a2acd5952a}{get\+\_\+amount}} (R\+SA $\ast$public\+\_\+key)
+\begin{DoxyCompactList}\small\item\em Searches how much money \textquotesingle{}public\+\_\+key\textquotesingle{} has. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{validations_8h_a689f119eae86a33365e456a2acd5952a}\label{validations_8h_a689f119eae86a33365e456a2acd5952a}} 
+\index{validations.h@{validations.h}!get\_amount@{get\_amount}}
+\index{get\_amount@{get\_amount}!validations.h@{validations.h}}
+\doxysubsubsection{\texorpdfstring{get\_amount()}{get\_amount()}}
+{\footnotesize\ttfamily ssize\+\_\+t get\+\_\+amount (\begin{DoxyParamCaption}\item[{R\+SA $\ast$}]{public\+\_\+key }\end{DoxyParamCaption})}
+
+
+
+Searches how much money \textquotesingle{}public\+\_\+key\textquotesingle{} has. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em public\+\_\+key} & The R\+SA public key \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The amount, or -\/1 in case of an error 
+\end{DoxyReturn}
+\mbox{\Hypertarget{validations_8h_a96d9964840289a425328257dd9a4c106}\label{validations_8h_a96d9964840289a425328257dd9a4c106}} 
+\index{validations.h@{validations.h}!get\_next\_committee@{get\_next\_committee}}
+\index{get\_next\_committee@{get\_next\_committee}!validations.h@{validations.h}}
+\doxysubsubsection{\texorpdfstring{get\_next\_committee()}{get\_next\_committee()}}
+{\footnotesize\ttfamily R\+SA$\ast$$\ast$ get\+\_\+next\+\_\+committee (\begin{DoxyParamCaption}\item[{size\+\_\+t $\ast$}]{nb\+\_\+validators }\end{DoxyParamCaption})}
+
+
+
+Get the \textquotesingle{}next block\textquotesingle{} validators R\+SA public keys. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nb\+\_\+validators} & return value, the number of selected validators \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+The \textquotesingle{}next block\textquotesingle{} is referring to block after the last block available O\+F\+F\+L\+I\+NE 
+\end{DoxySeeAlso}
+\begin{DoxyReturn}{Returns}
+\mbox{[}$\ast$\+R\+SA\mbox{]} 
+\end{DoxyReturn}
+
+
+Definition at line 31 of file validations.\+c.
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{validations_8h_a96d9964840289a425328257dd9a4c106_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{validations_8h_a96d9964840289a425328257dd9a4c106_icgraph}
+\end{center}
+\end{figure}

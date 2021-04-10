@@ -1,0 +1,68 @@
+\hypertarget{files_8c}{}\doxysection{src/misc/files.c File Reference}
+\label{files_8c}\index{src/misc/files.c@{src/misc/files.c}}
+{\ttfamily \#include \char`\"{}misc/files.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$dirent.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+Include dependency graph for files.\+c\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{files_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{files_8c_a369266c24eacffb87046522897a570d5}{\+\_\+\+G\+N\+U\+\_\+\+S\+O\+U\+R\+CE}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+char $\ast$ \mbox{\hyperlink{files_8c_af7f19b3a3e64c414589ae92109adda1e}{last\+\_\+file\+\_\+in\+\_\+folder}} (char folder\+\_\+path\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Return the last file (reverse alphabetical order) of a folder path. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{files_8c_a369266c24eacffb87046522897a570d5}\label{files_8c_a369266c24eacffb87046522897a570d5}} 
+\index{files.c@{files.c}!\_GNU\_SOURCE@{\_GNU\_SOURCE}}
+\index{\_GNU\_SOURCE@{\_GNU\_SOURCE}!files.c@{files.c}}
+\doxysubsubsection{\texorpdfstring{\_GNU\_SOURCE}{\_GNU\_SOURCE}}
+{\footnotesize\ttfamily \#define \+\_\+\+G\+N\+U\+\_\+\+S\+O\+U\+R\+CE}
+
+
+
+Definition at line 1 of file files.\+c.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{files_8c_af7f19b3a3e64c414589ae92109adda1e}\label{files_8c_af7f19b3a3e64c414589ae92109adda1e}} 
+\index{files.c@{files.c}!last\_file\_in\_folder@{last\_file\_in\_folder}}
+\index{last\_file\_in\_folder@{last\_file\_in\_folder}!files.c@{files.c}}
+\doxysubsubsection{\texorpdfstring{last\_file\_in\_folder()}{last\_file\_in\_folder()}}
+{\footnotesize\ttfamily char$\ast$ last\+\_\+file\+\_\+in\+\_\+folder (\begin{DoxyParamCaption}\item[{char}]{folder\+\_\+path\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Return the last file (reverse alphabetical order) of a folder path. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em folder\+\_\+path} & The path of the folder \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+char$\ast$, return N\+U\+LL if any error, must be freed ! 
+\end{DoxyReturn}
+
+
+Definition at line 7 of file files.\+c.
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{files_8c_af7f19b3a3e64c414589ae92109adda1e_icgraph}
+\end{center}
+\end{figure}

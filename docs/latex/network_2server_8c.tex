@@ -1,0 +1,79 @@
+\hypertarget{network_2server_8c}{}\doxysection{src/network/server.c File Reference}
+\label{network_2server_8c}\index{src/network/server.c@{src/network/server.c}}
+{\ttfamily \#include \char`\"{}network/server.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}network/client.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}network/get\+\_\+data.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}network/network.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}misc/safe.\+h\char`\"{}}\newline
+Include dependency graph for server.\+c\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{network_2server_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void $\ast$ \mbox{\hyperlink{network_2server_8c_a873dc571b495b7da48951acc844a7b0b}{accept\+\_\+connection}} (void $\ast$arg)
+\item 
+int \mbox{\hyperlink{network_2server_8c_ad7de155004abd1b0a8577003348ba464}{init\+\_\+server}} ()
+\begin{DoxyCompactList}\small\item\em Launches a server instance, connected to the peer-\/to-\/peer network \textquotesingle{}hostname\textquotesingle{}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{network_2server_8c_a873dc571b495b7da48951acc844a7b0b}\label{network_2server_8c_a873dc571b495b7da48951acc844a7b0b}} 
+\index{server.c@{server.c}!accept\_connection@{accept\_connection}}
+\index{accept\_connection@{accept\_connection}!server.c@{server.c}}
+\doxysubsubsection{\texorpdfstring{accept\_connection()}{accept\_connection()}}
+{\footnotesize\ttfamily void$\ast$ accept\+\_\+connection (\begin{DoxyParamCaption}\item[{void $\ast$}]{arg }\end{DoxyParamCaption})}
+
+
+
+Definition at line 7 of file server.\+c.
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{network_2server_8c_a873dc571b495b7da48951acc844a7b0b_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{network_2server_8c_a873dc571b495b7da48951acc844a7b0b_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{network_2server_8c_ad7de155004abd1b0a8577003348ba464}\label{network_2server_8c_ad7de155004abd1b0a8577003348ba464}} 
+\index{server.c@{server.c}!init\_server@{init\_server}}
+\index{init\_server@{init\_server}!server.c@{server.c}}
+\doxysubsubsection{\texorpdfstring{init\_server()}{init\_server()}}
+{\footnotesize\ttfamily int init\+\_\+server (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Launches a server instance, connected to the peer-\/to-\/peer network \textquotesingle{}hostname\textquotesingle{}. 
+
+\begin{DoxyReturn}{Returns}
+0 if success, -\/1 otherwise 
+\end{DoxyReturn}
+
+
+Definition at line 30 of file server.\+c.
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{network_2server_8c_ad7de155004abd1b0a8577003348ba464_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=225pt]{network_2server_8c_ad7de155004abd1b0a8577003348ba464_icgraph}
+\end{center}
+\end{figure}

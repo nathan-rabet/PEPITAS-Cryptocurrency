@@ -1,0 +1,115 @@
+\hypertarget{network_2client_8c}{}\doxysection{src/network/client.c File Reference}
+\label{network_2client_8c}\index{src/network/client.c@{src/network/client.c}}
+{\ttfamily \#include \char`\"{}network/client.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}network/server.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}network/network.\+h\char`\"{}}\newline
+Include dependency graph for client.\+c\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{network_2client_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{struct_node}{Node}} $\ast$ \mbox{\hyperlink{network_2client_8c_a4ea1881daff49eeaf17c8600631e7cf0}{get\+\_\+my\+\_\+node}} ()
+\begin{DoxyCompactList}\small\item\em Get the my node object. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{network_2client_8c_ad4c0b3eb4c921ebd7bd170a9081065df}{set\+\_\+neighbour}} (char $\ast$hostname, int family)
+\begin{DoxyCompactList}\small\item\em Sets a neighbour in the client.\+neightbours section. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{network_2client_8c_adbe3c438ad6697293ab73147fd262b0b}{listen\+\_\+to}} (size\+\_\+t neighbour\+\_\+id)
+\begin{DoxyCompactList}\small\item\em Tries to connect to the peer-\/to-\/peer network via a node in the \mbox{\hyperlink{struct_node}{Node}} structure. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{network_2client_8c_a4ea1881daff49eeaf17c8600631e7cf0}\label{network_2client_8c_a4ea1881daff49eeaf17c8600631e7cf0}} 
+\index{client.c@{client.c}!get\_my\_node@{get\_my\_node}}
+\index{get\_my\_node@{get\_my\_node}!client.c@{client.c}}
+\doxysubsubsection{\texorpdfstring{get\_my\_node()}{get\_my\_node()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_node}{Node}}$\ast$ get\+\_\+my\+\_\+node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get the my node object. 
+
+\begin{DoxyReturn}{Returns}
+Node$\ast$ 
+\end{DoxyReturn}
+
+
+Definition at line 5 of file client.\+c.
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{network_2client_8c_a4ea1881daff49eeaf17c8600631e7cf0_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{network_2client_8c_adbe3c438ad6697293ab73147fd262b0b}\label{network_2client_8c_adbe3c438ad6697293ab73147fd262b0b}} 
+\index{client.c@{client.c}!listen\_to@{listen\_to}}
+\index{listen\_to@{listen\_to}!client.c@{client.c}}
+\doxysubsubsection{\texorpdfstring{listen\_to()}{listen\_to()}}
+{\footnotesize\ttfamily int listen\+\_\+to (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{neighbour\+\_\+id }\end{DoxyParamCaption})}
+
+
+
+Tries to connect to the peer-\/to-\/peer network via a node in the \mbox{\hyperlink{struct_node}{Node}} structure. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em neighbour\+\_\+id} & The neighbour\textquotesingle{}s index (in struct \mbox{\hyperlink{struct_node}{Node}}) to connect with \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+socket FD or -\/1 if an error occurs 
+\end{DoxyReturn}
+
+
+Definition at line 57 of file client.\+c.
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=258pt]{network_2client_8c_adbe3c438ad6697293ab73147fd262b0b_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{network_2client_8c_adbe3c438ad6697293ab73147fd262b0b_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{network_2client_8c_ad4c0b3eb4c921ebd7bd170a9081065df}\label{network_2client_8c_ad4c0b3eb4c921ebd7bd170a9081065df}} 
+\index{client.c@{client.c}!set\_neighbour@{set\_neighbour}}
+\index{set\_neighbour@{set\_neighbour}!client.c@{client.c}}
+\doxysubsubsection{\texorpdfstring{set\_neighbour()}{set\_neighbour()}}
+{\footnotesize\ttfamily int set\+\_\+neighbour (\begin{DoxyParamCaption}\item[{char $\ast$}]{hostname,  }\item[{int}]{family }\end{DoxyParamCaption})}
+
+
+
+Sets a neighbour in the client.\+neightbours section. 
+
+\begin{DoxyReturn}{Returns}
+0 if sucess, -\/1 otherwise 
+\end{DoxyReturn}
+
+
+Definition at line 14 of file client.\+c.
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{network_2client_8c_ad4c0b3eb4c921ebd7bd170a9081065df_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{network_2client_8c_ad4c0b3eb4c921ebd7bd170a9081065df_icgraph}
+\end{center}
+\end{figure}

@@ -1,0 +1,122 @@
+\hypertarget{safe_8c}{}\doxysection{src/misc/safe.c File Reference}
+\label{safe_8c}\index{src/misc/safe.c@{src/misc/safe.c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}misc/safe.\+h\char`\"{}}\newline
+Include dependency graph for safe.\+c\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{safe_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{safe_8c_a405edff38f586c79822927a3b981e504}{safe\+\_\+write}} (int fd, const void $\ast$buf, ssize\+\_\+t count)
+\begin{DoxyCompactList}\small\item\em Writes safely to a file descriptor. \end{DoxyCompactList}\item 
+ssize\+\_\+t \mbox{\hyperlink{safe_8c_a5cdb8f1fd0a2b177164e88074639a648}{safe\+\_\+read}} (int fd, const void $\ast$$\ast$buf, size\+\_\+t $\ast$bufsize)
+\begin{DoxyCompactList}\small\item\em Reads safely in a file descriptor until \textquotesingle{}\textbackslash{}r\textbackslash{}n\textbackslash{}r\textbackslash{}n\textquotesingle{}. \end{DoxyCompactList}\item 
+ssize\+\_\+t \mbox{\hyperlink{safe_8c_ac4bf776335d7193068afa656b91a8827}{safe\+\_\+fread}} (void $\ast$buffer, const size\+\_\+t size, const size\+\_\+t n, F\+I\+LE $\ast$file)
+\begin{DoxyCompactList}\small\item\em Calls \textquotesingle{}fread\textquotesingle{} but safely ! \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{safe_8c_ac4bf776335d7193068afa656b91a8827}\label{safe_8c_ac4bf776335d7193068afa656b91a8827}} 
+\index{safe.c@{safe.c}!safe\_fread@{safe\_fread}}
+\index{safe\_fread@{safe\_fread}!safe.c@{safe.c}}
+\doxysubsubsection{\texorpdfstring{safe\_fread()}{safe\_fread()}}
+{\footnotesize\ttfamily ssize\+\_\+t safe\+\_\+fread (\begin{DoxyParamCaption}\item[{void $\ast$}]{buffer,  }\item[{const size\+\_\+t}]{size,  }\item[{const size\+\_\+t}]{n,  }\item[{F\+I\+LE $\ast$}]{file }\end{DoxyParamCaption})}
+
+
+
+Calls \textquotesingle{}fread\textquotesingle{} but safely ! 
+
+
+\begin{DoxyParams}{Parameters}
+{\em buffer} & The buffer to write on \\
+\hline
+{\em size} & The size of 1 read element \\
+\hline
+{\em n} & The number of elements to read \\
+\hline
+{\em file} & The IO F\+I\+LE \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+ssize\+\_\+t, -\/1 if error or the number of read items 
+\end{DoxyReturn}
+
+
+Definition at line 40 of file safe.\+c.
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{safe_8c_ac4bf776335d7193068afa656b91a8827_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{safe_8c_a5cdb8f1fd0a2b177164e88074639a648}\label{safe_8c_a5cdb8f1fd0a2b177164e88074639a648}} 
+\index{safe.c@{safe.c}!safe\_read@{safe\_read}}
+\index{safe\_read@{safe\_read}!safe.c@{safe.c}}
+\doxysubsubsection{\texorpdfstring{safe\_read()}{safe\_read()}}
+{\footnotesize\ttfamily ssize\+\_\+t safe\+\_\+read (\begin{DoxyParamCaption}\item[{int}]{fd,  }\item[{const void $\ast$$\ast$}]{buf,  }\item[{size\+\_\+t $\ast$}]{bufsize }\end{DoxyParamCaption})}
+
+
+
+Reads safely in a file descriptor until \textquotesingle{}\textbackslash{}r\textbackslash{}n\textbackslash{}r\textbackslash{}n\textquotesingle{}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fd} & The file descriptor \\
+\hline
+{\em buf} & The buffer which contains the message \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The number of byte the file \textquotesingle{}fd\textquotesingle{}, if -\/1 error 
+\end{DoxyReturn}
+
+
+Definition at line 18 of file safe.\+c.
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{safe_8c_a5cdb8f1fd0a2b177164e88074639a648_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{safe_8c_a405edff38f586c79822927a3b981e504}\label{safe_8c_a405edff38f586c79822927a3b981e504}} 
+\index{safe.c@{safe.c}!safe\_write@{safe\_write}}
+\index{safe\_write@{safe\_write}!safe.c@{safe.c}}
+\doxysubsubsection{\texorpdfstring{safe\_write()}{safe\_write()}}
+{\footnotesize\ttfamily int safe\+\_\+write (\begin{DoxyParamCaption}\item[{int}]{fd,  }\item[{const void $\ast$}]{buf,  }\item[{ssize\+\_\+t}]{count }\end{DoxyParamCaption})}
+
+
+
+Writes safely to a file descriptor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fd} & The file descriptor \\
+\hline
+{\em buf} & The buffer to write \\
+\hline
+{\em count} & The number of byte to write in fd\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 4 of file safe.\+c.
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{safe_8c_a405edff38f586c79822927a3b981e504_icgraph}
+\end{center}
+\end{figure}

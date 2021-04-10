@@ -1,0 +1,325 @@
+\hypertarget{block_8c}{}\doxysection{src/core/blockchain/block.c File Reference}
+\label{block_8c}\index{src/core/blockchain/block.c@{src/core/blockchain/block.c}}
+{\ttfamily \#include \char`\"{}core/blockchain/block.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}cryptosystem/signature.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$sys/stat.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$err.\+h$>$}\newline
+{\ttfamily \#include $<$errno.\+h$>$}\newline
+{\ttfamily \#include $<$openssl/rsa.\+h$>$}\newline
+{\ttfamily \#include $<$openssl/crypto.\+h$>$}\newline
+{\ttfamily \#include $<$fcntl.\+h$>$}\newline
+{\ttfamily \#include $<$sys/types.\+h$>$}\newline
+Include dependency graph for block.\+c\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{block_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{struct_chunk_blockchain}{Chunk\+Blockchain}} $\ast$ \mbox{\hyperlink{block_8c_af572e8ef23f600c0a62f716e780c813b}{get\+\_\+blockchain}} (size\+\_\+t nb\+\_\+chunk)
+\begin{DoxyCompactList}\small\item\em Loads a blockchain object with a padding of \textquotesingle{}nb\+\_\+chunk\textquotesingle{}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{block_8c_a31943025b7c5be568f87a90fcdcaf8c2}{write\+\_\+block\+\_\+file}} (\mbox{\hyperlink{struct_block}{Block}} block)
+\begin{DoxyCompactList}\small\item\em Writes a block struct in a file. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{block_8c_a68ddf0ad8385c2f03a418264ad5ba7ed}{convert\+\_\+data\+\_\+to\+\_\+transactiondata}} (\mbox{\hyperlink{struct_transaction_data}{Transaction\+Data}} $\ast$transactiondata, F\+I\+LE $\ast$blockfile)
+\item 
+void \mbox{\hyperlink{block_8c_a2093f169febc7a7d1bd0fbf024f94555}{convert\+\_\+data\+\_\+to\+\_\+transaction}} (\mbox{\hyperlink{struct_transaction}{Transaction}} $\ast$transaction, F\+I\+LE $\ast$blockfile)
+\item 
+void \mbox{\hyperlink{block_8c_ae583c8db9c8e372296a4393e257c3917}{convert\+\_\+data\+\_\+to\+\_\+blockdata}} (\mbox{\hyperlink{struct_block_data}{Block\+Data}} $\ast$blockdata, F\+I\+LE $\ast$blockfile)
+\item 
+void \mbox{\hyperlink{block_8c_ac5e925fca9d00c2b763065e4efecb334}{convert\+\_\+data\+\_\+to\+\_\+block}} (\mbox{\hyperlink{struct_block}{Block}} $\ast$block, F\+I\+LE $\ast$blockfile)
+\item 
+\mbox{\hyperlink{struct_block}{Block}} $\ast$ \mbox{\hyperlink{block_8c_a32140266e4b385f64860944a5edd0153}{get\+\_\+block}} (size\+\_\+t block\+\_\+height)
+\item 
+void \mbox{\hyperlink{block_8c_a3eb417f7cce88e8ec69d6974cd25e49f}{free\+\_\+block}} (\mbox{\hyperlink{struct_block}{Block}} $\ast$block)
+\begin{DoxyCompactList}\small\item\em Free a block struct. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_block}{Block}} $\ast$ \mbox{\hyperlink{block_8c_a5a63c778922af92cc7cca82db0aa7642}{get\+\_\+next\+\_\+block}} (\mbox{\hyperlink{struct_block}{Block}} $\ast$block)
+\begin{DoxyCompactList}\small\item\em For a block of height {\ttfamily h}, returns the block of height {\ttfamily h+1} \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_block}{Block}} $\ast$ \mbox{\hyperlink{block_8c_afa89e120ede17e486633e4005ccf44f1}{get\+\_\+prev\+\_\+block}} (\mbox{\hyperlink{struct_block}{Block}} $\ast$block)
+\begin{DoxyCompactList}\small\item\em For a block of height {\ttfamily h}, return the block of height {\ttfamily h-\/1} \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{block_8c_ac5e925fca9d00c2b763065e4efecb334}\label{block_8c_ac5e925fca9d00c2b763065e4efecb334}} 
+\index{block.c@{block.c}!convert\_data\_to\_block@{convert\_data\_to\_block}}
+\index{convert\_data\_to\_block@{convert\_data\_to\_block}!block.c@{block.c}}
+\doxysubsubsection{\texorpdfstring{convert\_data\_to\_block()}{convert\_data\_to\_block()}}
+{\footnotesize\ttfamily void convert\+\_\+data\+\_\+to\+\_\+block (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_block}{Block}} $\ast$}]{block,  }\item[{F\+I\+LE $\ast$}]{blockfile }\end{DoxyParamCaption})}
+
+
+
+Definition at line 142 of file block.\+c.
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{block_8c_ac5e925fca9d00c2b763065e4efecb334_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{block_8c_ac5e925fca9d00c2b763065e4efecb334_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{block_8c_ae583c8db9c8e372296a4393e257c3917}\label{block_8c_ae583c8db9c8e372296a4393e257c3917}} 
+\index{block.c@{block.c}!convert\_data\_to\_blockdata@{convert\_data\_to\_blockdata}}
+\index{convert\_data\_to\_blockdata@{convert\_data\_to\_blockdata}!block.c@{block.c}}
+\doxysubsubsection{\texorpdfstring{convert\_data\_to\_blockdata()}{convert\_data\_to\_blockdata()}}
+{\footnotesize\ttfamily void convert\+\_\+data\+\_\+to\+\_\+blockdata (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_block_data}{Block\+Data}} $\ast$}]{blockdata,  }\item[{F\+I\+LE $\ast$}]{blockfile }\end{DoxyParamCaption})}
+
+
+
+Definition at line 116 of file block.\+c.
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{block_8c_ae583c8db9c8e372296a4393e257c3917_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{block_8c_ae583c8db9c8e372296a4393e257c3917_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{block_8c_a2093f169febc7a7d1bd0fbf024f94555}\label{block_8c_a2093f169febc7a7d1bd0fbf024f94555}} 
+\index{block.c@{block.c}!convert\_data\_to\_transaction@{convert\_data\_to\_transaction}}
+\index{convert\_data\_to\_transaction@{convert\_data\_to\_transaction}!block.c@{block.c}}
+\doxysubsubsection{\texorpdfstring{convert\_data\_to\_transaction()}{convert\_data\_to\_transaction()}}
+{\footnotesize\ttfamily void convert\+\_\+data\+\_\+to\+\_\+transaction (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_transaction}{Transaction}} $\ast$}]{transaction,  }\item[{F\+I\+LE $\ast$}]{blockfile }\end{DoxyParamCaption})}
+
+
+
+Definition at line 106 of file block.\+c.
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{block_8c_a2093f169febc7a7d1bd0fbf024f94555_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{block_8c_a2093f169febc7a7d1bd0fbf024f94555_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{block_8c_a68ddf0ad8385c2f03a418264ad5ba7ed}\label{block_8c_a68ddf0ad8385c2f03a418264ad5ba7ed}} 
+\index{block.c@{block.c}!convert\_data\_to\_transactiondata@{convert\_data\_to\_transactiondata}}
+\index{convert\_data\_to\_transactiondata@{convert\_data\_to\_transactiondata}!block.c@{block.c}}
+\doxysubsubsection{\texorpdfstring{convert\_data\_to\_transactiondata()}{convert\_data\_to\_transactiondata()}}
+{\footnotesize\ttfamily void convert\+\_\+data\+\_\+to\+\_\+transactiondata (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_transaction_data}{Transaction\+Data}} $\ast$}]{transactiondata,  }\item[{F\+I\+LE $\ast$}]{blockfile }\end{DoxyParamCaption})}
+
+
+
+Definition at line 69 of file block.\+c.
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{block_8c_a68ddf0ad8385c2f03a418264ad5ba7ed_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{block_8c_a3eb417f7cce88e8ec69d6974cd25e49f}\label{block_8c_a3eb417f7cce88e8ec69d6974cd25e49f}} 
+\index{block.c@{block.c}!free\_block@{free\_block}}
+\index{free\_block@{free\_block}!block.c@{block.c}}
+\doxysubsubsection{\texorpdfstring{free\_block()}{free\_block()}}
+{\footnotesize\ttfamily void free\+\_\+block (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_block}{Block}} $\ast$}]{block }\end{DoxyParamCaption})}
+
+
+
+Free a block struct. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em block} & The block to free \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 168 of file block.\+c.
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{block_8c_a3eb417f7cce88e8ec69d6974cd25e49f_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{block_8c_a32140266e4b385f64860944a5edd0153}\label{block_8c_a32140266e4b385f64860944a5edd0153}} 
+\index{block.c@{block.c}!get\_block@{get\_block}}
+\index{get\_block@{get\_block}!block.c@{block.c}}
+\doxysubsubsection{\texorpdfstring{get\_block()}{get\_block()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_block}{Block}}$\ast$ get\+\_\+block (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{block\+\_\+height }\end{DoxyParamCaption})}
+
+
+
+Definition at line 150 of file block.\+c.
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{block_8c_a32140266e4b385f64860944a5edd0153_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{block_8c_a32140266e4b385f64860944a5edd0153_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{block_8c_af572e8ef23f600c0a62f716e780c813b}\label{block_8c_af572e8ef23f600c0a62f716e780c813b}} 
+\index{block.c@{block.c}!get\_blockchain@{get\_blockchain}}
+\index{get\_blockchain@{get\_blockchain}!block.c@{block.c}}
+\doxysubsubsection{\texorpdfstring{get\_blockchain()}{get\_blockchain()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_chunk_blockchain}{Chunk\+Blockchain}}$\ast$ get\+\_\+blockchain (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{nb\+\_\+chunk }\end{DoxyParamCaption})}
+
+
+
+Loads a blockchain object with a padding of \textquotesingle{}nb\+\_\+chunk\textquotesingle{}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nb\+\_\+chunk} & The chunk nb, if 0 \+: return the current blockchain object without modification \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Chunk\+Blockchain$\ast$, N\+U\+LL if the \mbox{\hyperlink{struct_chunk_blockchain}{Chunk\+Blockchain}} is empty after switching 
+\end{DoxyReturn}
+
+
+Definition at line 12 of file block.\+c.
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{block_8c_af572e8ef23f600c0a62f716e780c813b_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{block_8c_af572e8ef23f600c0a62f716e780c813b_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{block_8c_a5a63c778922af92cc7cca82db0aa7642}\label{block_8c_a5a63c778922af92cc7cca82db0aa7642}} 
+\index{block.c@{block.c}!get\_next\_block@{get\_next\_block}}
+\index{get\_next\_block@{get\_next\_block}!block.c@{block.c}}
+\doxysubsubsection{\texorpdfstring{get\_next\_block()}{get\_next\_block()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_block}{Block}}$\ast$ get\+\_\+next\+\_\+block (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_block}{Block}} $\ast$}]{block }\end{DoxyParamCaption})}
+
+
+
+For a block of height {\ttfamily h}, returns the block of height {\ttfamily h+1} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em block} & The base block \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The next Block$\ast$ 
+\end{DoxyReturn}
+
+
+Definition at line 184 of file block.\+c.
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{block_8c_a5a63c778922af92cc7cca82db0aa7642_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{block_8c_a5a63c778922af92cc7cca82db0aa7642_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{block_8c_afa89e120ede17e486633e4005ccf44f1}\label{block_8c_afa89e120ede17e486633e4005ccf44f1}} 
+\index{block.c@{block.c}!get\_prev\_block@{get\_prev\_block}}
+\index{get\_prev\_block@{get\_prev\_block}!block.c@{block.c}}
+\doxysubsubsection{\texorpdfstring{get\_prev\_block()}{get\_prev\_block()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_block}{Block}}$\ast$ get\+\_\+prev\+\_\+block (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_block}{Block}} $\ast$}]{block }\end{DoxyParamCaption})}
+
+
+
+For a block of height {\ttfamily h}, return the block of height {\ttfamily h-\/1} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em block} & The base block \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The next Block$\ast$ 
+\end{DoxyReturn}
+
+
+Definition at line 194 of file block.\+c.
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{block_8c_afa89e120ede17e486633e4005ccf44f1_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{block_8c_afa89e120ede17e486633e4005ccf44f1_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{block_8c_a31943025b7c5be568f87a90fcdcaf8c2}\label{block_8c_a31943025b7c5be568f87a90fcdcaf8c2}} 
+\index{block.c@{block.c}!write\_block\_file@{write\_block\_file}}
+\index{write\_block\_file@{write\_block\_file}!block.c@{block.c}}
+\doxysubsubsection{\texorpdfstring{write\_block\_file()}{write\_block\_file()}}
+{\footnotesize\ttfamily void write\+\_\+block\+\_\+file (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_block}{Block}}}]{block }\end{DoxyParamCaption})}
+
+
+
+Writes a block struct in a file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em block} & The block to write \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 51 of file block.\+c.
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{block_8c_a31943025b7c5be568f87a90fcdcaf8c2_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{block_8c_a31943025b7c5be568f87a90fcdcaf8c2_icgraph}
+\end{center}
+\end{figure}

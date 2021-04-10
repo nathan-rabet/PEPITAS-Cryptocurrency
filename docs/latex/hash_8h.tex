@@ -1,0 +1,95 @@
+\hypertarget{hash_8h}{}\doxysection{headers/cryptosystem/hash.h File Reference}
+\label{hash_8h}\index{headers/cryptosystem/hash.h@{headers/cryptosystem/hash.h}}
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}core/blockchain/block.\+h\char`\"{}}\newline
+Include dependency graph for hash.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{hash_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{hash_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+char $\ast$ \mbox{\hyperlink{hash_8h_a67d06acefe39c395887f87d76bed5ba3}{sha384\+\_\+data}} (void $\ast$data, size\+\_\+t len\+\_\+data)
+\begin{DoxyCompactList}\small\item\em Apply the S\+H\+A384 algorithm on a \textquotesingle{}data\textquotesingle{} of size \textquotesingle{}len\+\_\+data\textquotesingle{}. \end{DoxyCompactList}\item 
+char $\ast$ \mbox{\hyperlink{hash_8h_a1a0c4c7a5b69d66d29782dfc45e625ec}{hash\+\_\+block\+\_\+transactions}} (\mbox{\hyperlink{struct_block}{Block}} $\ast$block)
+\begin{DoxyCompactList}\small\item\em Apply the S\+H\+A384 to all block transactions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{hash_8h_a1a0c4c7a5b69d66d29782dfc45e625ec}\label{hash_8h_a1a0c4c7a5b69d66d29782dfc45e625ec}} 
+\index{hash.h@{hash.h}!hash\_block\_transactions@{hash\_block\_transactions}}
+\index{hash\_block\_transactions@{hash\_block\_transactions}!hash.h@{hash.h}}
+\doxysubsubsection{\texorpdfstring{hash\_block\_transactions()}{hash\_block\_transactions()}}
+{\footnotesize\ttfamily char$\ast$ hash\+\_\+block\+\_\+transactions (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_block}{Block}} $\ast$}]{block }\end{DoxyParamCaption})}
+
+
+
+Apply the S\+H\+A384 to all block transactions. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em block} & The block to deal with \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+sha384\mbox{[}S\+H\+A384\+\_\+\+D\+I\+G\+E\+S\+T\+\_\+\+L\+E\+N\+G\+TH\mbox{]} 
+\end{DoxyReturn}
+
+
+Definition at line 24 of file hash.\+c.
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{hash_8h_a1a0c4c7a5b69d66d29782dfc45e625ec_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{hash_8h_a1a0c4c7a5b69d66d29782dfc45e625ec_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{hash_8h_a67d06acefe39c395887f87d76bed5ba3}\label{hash_8h_a67d06acefe39c395887f87d76bed5ba3}} 
+\index{hash.h@{hash.h}!sha384\_data@{sha384\_data}}
+\index{sha384\_data@{sha384\_data}!hash.h@{hash.h}}
+\doxysubsubsection{\texorpdfstring{sha384\_data()}{sha384\_data()}}
+{\footnotesize\ttfamily char$\ast$ sha384\+\_\+data (\begin{DoxyParamCaption}\item[{void $\ast$}]{data,  }\item[{size\+\_\+t}]{len\+\_\+data }\end{DoxyParamCaption})}
+
+
+
+Apply the S\+H\+A384 algorithm on a \textquotesingle{}data\textquotesingle{} of size \textquotesingle{}len\+\_\+data\textquotesingle{}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The buffer to hash \\
+\hline
+{\em len\+\_\+data} & The length of the buffer \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+char\mbox{[}97\mbox{]} (on heap) 
+\end{DoxyReturn}
+
+
+Definition at line 6 of file hash.\+c.
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{hash_8h_a67d06acefe39c395887f87d76bed5ba3_icgraph}
+\end{center}
+\end{figure}

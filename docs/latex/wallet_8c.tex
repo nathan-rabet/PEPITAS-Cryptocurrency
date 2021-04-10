@@ -1,0 +1,71 @@
+\hypertarget{wallet_8c}{}\doxysection{src/core/blockchain/wallet.c File Reference}
+\label{wallet_8c}\index{src/core/blockchain/wallet.c@{src/core/blockchain/wallet.c}}
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}core/blockchain/wallet.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}cryptosystem/rsa.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}core/blockchain/transaction.\+h\char`\"{}}\newline
+Include dependency graph for wallet.\+c\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{wallet_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{struct_wallet}{Wallet}} $\ast$ \mbox{\hyperlink{wallet_8c_a993fb7ec0c86c7a2d8ff68363e9f5304}{get\+\_\+my\+\_\+wallet}} ()
+\begin{DoxyCompactList}\small\item\em Get my wallet object. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{wallet_8c_a26c6f56037df4dbfb58855db1633a7df}{create\+\_\+account}} ()
+\begin{DoxyCompactList}\small\item\em Creates an account in local and broadcasts the creation to the network. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{wallet_8c_a26c6f56037df4dbfb58855db1633a7df}\label{wallet_8c_a26c6f56037df4dbfb58855db1633a7df}} 
+\index{wallet.c@{wallet.c}!create\_account@{create\_account}}
+\index{create\_account@{create\_account}!wallet.c@{wallet.c}}
+\doxysubsubsection{\texorpdfstring{create\_account()}{create\_account()}}
+{\footnotesize\ttfamily int create\+\_\+account (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Creates an account in local and broadcasts the creation to the network. 
+
+\begin{DoxyReturn}{Returns}
+0 if the broadcast succeeds, otherwise 1 
+\end{DoxyReturn}
+
+
+Definition at line 19 of file wallet.\+c.
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{wallet_8c_a26c6f56037df4dbfb58855db1633a7df_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{wallet_8c_a993fb7ec0c86c7a2d8ff68363e9f5304}\label{wallet_8c_a993fb7ec0c86c7a2d8ff68363e9f5304}} 
+\index{wallet.c@{wallet.c}!get\_my\_wallet@{get\_my\_wallet}}
+\index{get\_my\_wallet@{get\_my\_wallet}!wallet.c@{wallet.c}}
+\doxysubsubsection{\texorpdfstring{get\_my\_wallet()}{get\_my\_wallet()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_wallet}{Wallet}}$\ast$ get\+\_\+my\+\_\+wallet (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get my wallet object. 
+
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{struct_wallet}{Wallet}} 
+\end{DoxyReturn}
+
+
+Definition at line 7 of file wallet.\+c.
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{wallet_8c_a993fb7ec0c86c7a2d8ff68363e9f5304_icgraph}
+\end{center}
+\end{figure}

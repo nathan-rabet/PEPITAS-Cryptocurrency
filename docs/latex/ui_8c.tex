@@ -1,0 +1,492 @@
+\hypertarget{ui_8c}{}\doxysection{src/ui/ui.c File Reference}
+\label{ui_8c}\index{src/ui/ui.c@{src/ui/ui.c}}
+{\ttfamily \#include \char`\"{}ui/ui.\+h\char`\"{}}\newline
+Include dependency graph for ui.\+c\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=280pt]{ui_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{ui_8c_a099d48038e444c2f3e69904477527798}{setup}} ()
+\begin{DoxyCompactList}\small\item\em Setups the gtk widgets for the G\+UI. \end{DoxyCompactList}\item 
+gboolean \mbox{\hyperlink{ui_8c_a6f90e7dead0868fb0ea2deccc1868aba}{on\+\_\+main\+\_\+window\+\_\+delete}} (Gtk\+Widget $\ast$widget, \+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)) gpointer data)
+\begin{DoxyCompactList}\small\item\em Destroys the window when it is closed. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{ui_8c_a349d73cd99b37cff7f14d3269fae4057}{on\+\_\+main\+\_\+window\+\_\+destroy}} (\+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)) Gtk\+Widget $\ast$widget, \+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)) gpointer data)
+\item 
+gboolean \mbox{\hyperlink{ui_8c_a5e22e78adc3ccb25f63ee84836cc83e4}{on\+\_\+transaction\+\_\+button\+\_\+press}} (\+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)) Gtk\+Widget $\ast$widget, \+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)) Gdk\+Event\+Key $\ast$event, \+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)) gpointer user\+\_\+data)
+\item 
+gboolean \mbox{\hyperlink{ui_8c_aab9a63a1a805e0c4622482546df6bba4}{on\+\_\+pkey\+\_\+button\+\_\+press}} (\+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)) Gtk\+Widget $\ast$widget, \+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)) Gdk\+Event\+Key $\ast$event, \+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)) gpointer user\+\_\+data)
+\item 
+gboolean \mbox{\hyperlink{ui_8c_a7abe8e8c8f8674c6d9e0f4a9f33d2b3a}{on\+\_\+invest\+\_\+button1\+\_\+press}} (\+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)) Gtk\+Widget $\ast$widget, \+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)) Gdk\+Event\+Key $\ast$event, \+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)) gpointer user\+\_\+data)
+\item 
+gboolean \mbox{\hyperlink{ui_8c_ae8893501fa8a537ec50cc272353fca19}{on\+\_\+invest\+\_\+button2\+\_\+press}} (\+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)) Gtk\+Widget $\ast$widget, \+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)) Gdk\+Event\+Key $\ast$event, \+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)) gpointer user\+\_\+data)
+\item 
+gboolean \mbox{\hyperlink{ui_8c_a1513831bd850ea1b552ef70538afb16d}{on\+\_\+recover\+\_\+button1\+\_\+press}} (\+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)) Gtk\+Widget $\ast$widget, \+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)) Gdk\+Event\+Key $\ast$event, \+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)) gpointer user\+\_\+data)
+\item 
+gboolean \mbox{\hyperlink{ui_8c_ad8f99ac51861be5da7d885cdd2e26ea0}{on\+\_\+recover\+\_\+button2\+\_\+press}} (\+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)) Gtk\+Widget $\ast$widget, \+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)) Gdk\+Event\+Key $\ast$event, \+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)) gpointer user\+\_\+data)
+\item 
+gboolean \mbox{\hyperlink{ui_8c_a399dcb9da92a8915352bb0f96df00bc9}{on\+\_\+add\+\_\+contact\+\_\+button1\+\_\+press}} (\+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)) Gtk\+Widget $\ast$widget, \+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)) Gdk\+Event\+Key $\ast$event, \+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)) gpointer user\+\_\+data)
+\item 
+gboolean \mbox{\hyperlink{ui_8c_ad00b3507b4bb09e32b88b8c4e015c7bf}{add\+\_\+contact}} (\+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)) Gtk\+Widget $\ast$widget, \+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)) Gdk\+Event\+Key $\ast$event, \+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)) gpointer user\+\_\+data)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+Gtk\+Label $\ast$ \mbox{\hyperlink{ui_8c_ad8381a6084abf1920354514475732b69}{private\+\_\+key\+\_\+label}}
+\item 
+Gtk\+Label $\ast$ \mbox{\hyperlink{ui_8c_a4722da076b88ed9d7695ae3d38945692}{stake\+\_\+label1}}
+\item 
+Gtk\+Label $\ast$ \mbox{\hyperlink{ui_8c_a16f98e00efbcc9f5356cd26ddde7cc53}{stake\+\_\+label2}}
+\item 
+Gtk\+Label $\ast$ \mbox{\hyperlink{ui_8c_ac7f6d61c5f9e17e359513909d01dbbd0}{stake\+\_\+label3}}
+\item 
+Gtk\+Entry $\ast$ \mbox{\hyperlink{ui_8c_a5a64b67ddec08a9b9d81b4facd94047a}{transa\+\_\+amount}}
+\item 
+Gtk\+Entry $\ast$ \mbox{\hyperlink{ui_8c_a9856845eebffe4f02ca0b6c491816d1b}{recipient\+\_\+key}}
+\item 
+Gtk\+Entry $\ast$ \mbox{\hyperlink{ui_8c_a1cd59d712f0351edfa00b753656b486a}{invest\+\_\+entry}}
+\item 
+Gtk\+Entry $\ast$ \mbox{\hyperlink{ui_8c_a30b512f884b7c54ff9bfe3f8b42a665f}{recover\+\_\+entry}}
+\item 
+Gtk\+Entry $\ast$ \mbox{\hyperlink{ui_8c_af7c418915599a0feee638b616aca25ec}{name\+\_\+entry\+\_\+con}}
+\item 
+Gtk\+Entry $\ast$ \mbox{\hyperlink{ui_8c_a1232a61f99830b200a87137da4ad0232}{public\+\_\+key\+\_\+entry\+\_\+con}}
+\item 
+Gtk\+Tree\+View $\ast$ \mbox{\hyperlink{ui_8c_a7d4f1acd200f42ce8a25b24bdcd11f6e}{tv\+\_\+con}}
+\item 
+Gtk\+Tree\+Store $\ast$ \mbox{\hyperlink{ui_8c_a3d023a78babb0df3470dc81314feadd5}{ts\+\_\+con}}
+\item 
+Gtk\+Tree\+View\+Column $\ast$ \mbox{\hyperlink{ui_8c_a1314aeece37cb7bdf2dcbb8e84f5ab27}{cx1\+\_\+con}}
+\item 
+Gtk\+Tree\+View\+Column $\ast$ \mbox{\hyperlink{ui_8c_a59e5b21a4ef99d9045be23eb799cf84d}{cx2\+\_\+con}}
+\item 
+Gtk\+Cell\+Renderer $\ast$ \mbox{\hyperlink{ui_8c_a9d55d9709838a1f8953fd269241b363d}{cr1\+\_\+con}}
+\item 
+Gtk\+Cell\+Renderer $\ast$ \mbox{\hyperlink{ui_8c_aae06d88c1cae92d5d3bbc333ee45cdbb}{cr2\+\_\+con}}
+\item 
+Gtk\+Tree\+View $\ast$ \mbox{\hyperlink{ui_8c_a61df27324bc5fa1509abd1ef234f0368}{tv\+\_\+th}}
+\item 
+Gtk\+Tree\+Store $\ast$ \mbox{\hyperlink{ui_8c_a25a91552d8574c51a2b6e9a15663eeee}{ts\+\_\+th}}
+\item 
+Gtk\+Tree\+View\+Column $\ast$ \mbox{\hyperlink{ui_8c_abc67495e5ecb1386fead3eec50be64eb}{cx1\+\_\+th}}
+\item 
+Gtk\+Tree\+View\+Column $\ast$ \mbox{\hyperlink{ui_8c_a2121cdc7aa51459e7c0b5e09364d58df}{cx2\+\_\+th}}
+\item 
+Gtk\+Tree\+View\+Column $\ast$ \mbox{\hyperlink{ui_8c_a02d08d31202ad6ef53ebda0f019fd823}{cx3\+\_\+th}}
+\item 
+Gtk\+Tree\+View\+Column $\ast$ \mbox{\hyperlink{ui_8c_af3ae97a085cfc5394c829395c4df1233}{cx4\+\_\+th}}
+\item 
+Gtk\+Cell\+Renderer $\ast$ \mbox{\hyperlink{ui_8c_a295a9203dbc00bdeefacfa4172450feb}{cr1\+\_\+th}}
+\item 
+Gtk\+Cell\+Renderer $\ast$ \mbox{\hyperlink{ui_8c_a472629946cf5a35483eb1d4a4c79822f}{cr2\+\_\+th}}
+\item 
+Gtk\+Cell\+Renderer $\ast$ \mbox{\hyperlink{ui_8c_ac4332ccbf3c460b27425ee2c46a976df}{cr3\+\_\+th}}
+\item 
+Gtk\+Cell\+Renderer $\ast$ \mbox{\hyperlink{ui_8c_ac3f7fdfbb8c57086c823f7ba5c8775b0}{cr4\+\_\+th}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{ui_8c_ad00b3507b4bb09e32b88b8c4e015c7bf}\label{ui_8c_ad00b3507b4bb09e32b88b8c4e015c7bf}} 
+\index{ui.c@{ui.c}!add\_contact@{add\_contact}}
+\index{add\_contact@{add\_contact}!ui.c@{ui.c}}
+\doxysubsubsection{\texorpdfstring{add\_contact()}{add\_contact()}}
+{\footnotesize\ttfamily gboolean add\+\_\+contact (\begin{DoxyParamCaption}\item[{\+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)) Gtk\+Widget $\ast$}]{widget,  }\item[{\+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)) Gdk\+Event\+Key $\ast$}]{event,  }\item[{\+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)) gpointer}]{user\+\_\+data }\end{DoxyParamCaption})}
+
+
+
+Definition at line 215 of file ui.\+c.
+
+\mbox{\Hypertarget{ui_8c_a399dcb9da92a8915352bb0f96df00bc9}\label{ui_8c_a399dcb9da92a8915352bb0f96df00bc9}} 
+\index{ui.c@{ui.c}!on\_add\_contact\_button1\_press@{on\_add\_contact\_button1\_press}}
+\index{on\_add\_contact\_button1\_press@{on\_add\_contact\_button1\_press}!ui.c@{ui.c}}
+\doxysubsubsection{\texorpdfstring{on\_add\_contact\_button1\_press()}{on\_add\_contact\_button1\_press()}}
+{\footnotesize\ttfamily gboolean on\+\_\+add\+\_\+contact\+\_\+button1\+\_\+press (\begin{DoxyParamCaption}\item[{\+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)) Gtk\+Widget $\ast$}]{widget,  }\item[{\+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)) Gdk\+Event\+Key $\ast$}]{event,  }\item[{\+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)) gpointer}]{user\+\_\+data }\end{DoxyParamCaption})}
+
+
+
+Definition at line 206 of file ui.\+c.
+
+\mbox{\Hypertarget{ui_8c_a7abe8e8c8f8674c6d9e0f4a9f33d2b3a}\label{ui_8c_a7abe8e8c8f8674c6d9e0f4a9f33d2b3a}} 
+\index{ui.c@{ui.c}!on\_invest\_button1\_press@{on\_invest\_button1\_press}}
+\index{on\_invest\_button1\_press@{on\_invest\_button1\_press}!ui.c@{ui.c}}
+\doxysubsubsection{\texorpdfstring{on\_invest\_button1\_press()}{on\_invest\_button1\_press()}}
+{\footnotesize\ttfamily gboolean on\+\_\+invest\+\_\+button1\+\_\+press (\begin{DoxyParamCaption}\item[{\+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)) Gtk\+Widget $\ast$}]{widget,  }\item[{\+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)) Gdk\+Event\+Key $\ast$}]{event,  }\item[{\+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)) gpointer}]{user\+\_\+data }\end{DoxyParamCaption})}
+
+
+
+Definition at line 167 of file ui.\+c.
+
+\mbox{\Hypertarget{ui_8c_ae8893501fa8a537ec50cc272353fca19}\label{ui_8c_ae8893501fa8a537ec50cc272353fca19}} 
+\index{ui.c@{ui.c}!on\_invest\_button2\_press@{on\_invest\_button2\_press}}
+\index{on\_invest\_button2\_press@{on\_invest\_button2\_press}!ui.c@{ui.c}}
+\doxysubsubsection{\texorpdfstring{on\_invest\_button2\_press()}{on\_invest\_button2\_press()}}
+{\footnotesize\ttfamily gboolean on\+\_\+invest\+\_\+button2\+\_\+press (\begin{DoxyParamCaption}\item[{\+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)) Gtk\+Widget $\ast$}]{widget,  }\item[{\+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)) Gdk\+Event\+Key $\ast$}]{event,  }\item[{\+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)) gpointer}]{user\+\_\+data }\end{DoxyParamCaption})}
+
+
+
+Definition at line 176 of file ui.\+c.
+
+\mbox{\Hypertarget{ui_8c_a6f90e7dead0868fb0ea2deccc1868aba}\label{ui_8c_a6f90e7dead0868fb0ea2deccc1868aba}} 
+\index{ui.c@{ui.c}!on\_main\_window\_delete@{on\_main\_window\_delete}}
+\index{on\_main\_window\_delete@{on\_main\_window\_delete}!ui.c@{ui.c}}
+\doxysubsubsection{\texorpdfstring{on\_main\_window\_delete()}{on\_main\_window\_delete()}}
+{\footnotesize\ttfamily gboolean on\+\_\+main\+\_\+window\+\_\+delete (\begin{DoxyParamCaption}\item[{Gtk\+Widget $\ast$}]{widget,  }\item[{\+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)) gpointer}]{data }\end{DoxyParamCaption})}
+
+
+
+Destroys the window when it is closed. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em widget} & The main window of the G\+UI \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+gboolean Error code 
+\end{DoxyReturn}
+
+
+Definition at line 126 of file ui.\+c.
+
+\mbox{\Hypertarget{ui_8c_a349d73cd99b37cff7f14d3269fae4057}\label{ui_8c_a349d73cd99b37cff7f14d3269fae4057}} 
+\index{ui.c@{ui.c}!on\_main\_window\_destroy@{on\_main\_window\_destroy}}
+\index{on\_main\_window\_destroy@{on\_main\_window\_destroy}!ui.c@{ui.c}}
+\doxysubsubsection{\texorpdfstring{on\_main\_window\_destroy()}{on\_main\_window\_destroy()}}
+{\footnotesize\ttfamily void on\+\_\+main\+\_\+window\+\_\+destroy (\begin{DoxyParamCaption}\item[{\+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)) Gtk\+Widget $\ast$}]{widget,  }\item[{\+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)) gpointer}]{data }\end{DoxyParamCaption})}
+
+
+
+Definition at line 135 of file ui.\+c.
+
+\mbox{\Hypertarget{ui_8c_aab9a63a1a805e0c4622482546df6bba4}\label{ui_8c_aab9a63a1a805e0c4622482546df6bba4}} 
+\index{ui.c@{ui.c}!on\_pkey\_button\_press@{on\_pkey\_button\_press}}
+\index{on\_pkey\_button\_press@{on\_pkey\_button\_press}!ui.c@{ui.c}}
+\doxysubsubsection{\texorpdfstring{on\_pkey\_button\_press()}{on\_pkey\_button\_press()}}
+{\footnotesize\ttfamily gboolean on\+\_\+pkey\+\_\+button\+\_\+press (\begin{DoxyParamCaption}\item[{\+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)) Gtk\+Widget $\ast$}]{widget,  }\item[{\+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)) Gdk\+Event\+Key $\ast$}]{event,  }\item[{\+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)) gpointer}]{user\+\_\+data }\end{DoxyParamCaption})}
+
+
+
+Definition at line 149 of file ui.\+c.
+
+\mbox{\Hypertarget{ui_8c_a1513831bd850ea1b552ef70538afb16d}\label{ui_8c_a1513831bd850ea1b552ef70538afb16d}} 
+\index{ui.c@{ui.c}!on\_recover\_button1\_press@{on\_recover\_button1\_press}}
+\index{on\_recover\_button1\_press@{on\_recover\_button1\_press}!ui.c@{ui.c}}
+\doxysubsubsection{\texorpdfstring{on\_recover\_button1\_press()}{on\_recover\_button1\_press()}}
+{\footnotesize\ttfamily gboolean on\+\_\+recover\+\_\+button1\+\_\+press (\begin{DoxyParamCaption}\item[{\+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)) Gtk\+Widget $\ast$}]{widget,  }\item[{\+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)) Gdk\+Event\+Key $\ast$}]{event,  }\item[{\+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)) gpointer}]{user\+\_\+data }\end{DoxyParamCaption})}
+
+
+
+Definition at line 186 of file ui.\+c.
+
+\mbox{\Hypertarget{ui_8c_ad8f99ac51861be5da7d885cdd2e26ea0}\label{ui_8c_ad8f99ac51861be5da7d885cdd2e26ea0}} 
+\index{ui.c@{ui.c}!on\_recover\_button2\_press@{on\_recover\_button2\_press}}
+\index{on\_recover\_button2\_press@{on\_recover\_button2\_press}!ui.c@{ui.c}}
+\doxysubsubsection{\texorpdfstring{on\_recover\_button2\_press()}{on\_recover\_button2\_press()}}
+{\footnotesize\ttfamily gboolean on\+\_\+recover\+\_\+button2\+\_\+press (\begin{DoxyParamCaption}\item[{\+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)) Gtk\+Widget $\ast$}]{widget,  }\item[{\+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)) Gdk\+Event\+Key $\ast$}]{event,  }\item[{\+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)) gpointer}]{user\+\_\+data }\end{DoxyParamCaption})}
+
+
+
+Definition at line 195 of file ui.\+c.
+
+\mbox{\Hypertarget{ui_8c_a5e22e78adc3ccb25f63ee84836cc83e4}\label{ui_8c_a5e22e78adc3ccb25f63ee84836cc83e4}} 
+\index{ui.c@{ui.c}!on\_transaction\_button\_press@{on\_transaction\_button\_press}}
+\index{on\_transaction\_button\_press@{on\_transaction\_button\_press}!ui.c@{ui.c}}
+\doxysubsubsection{\texorpdfstring{on\_transaction\_button\_press()}{on\_transaction\_button\_press()}}
+{\footnotesize\ttfamily gboolean on\+\_\+transaction\+\_\+button\+\_\+press (\begin{DoxyParamCaption}\item[{\+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)) Gtk\+Widget $\ast$}]{widget,  }\item[{\+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)) Gdk\+Event\+Key $\ast$}]{event,  }\item[{\+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)) gpointer}]{user\+\_\+data }\end{DoxyParamCaption})}
+
+
+
+Definition at line 142 of file ui.\+c.
+
+\mbox{\Hypertarget{ui_8c_a099d48038e444c2f3e69904477527798}\label{ui_8c_a099d48038e444c2f3e69904477527798}} 
+\index{ui.c@{ui.c}!setup@{setup}}
+\index{setup@{setup}!ui.c@{ui.c}}
+\doxysubsubsection{\texorpdfstring{setup()}{setup()}}
+{\footnotesize\ttfamily int setup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Setups the gtk widgets for the G\+UI. 
+
+\begin{DoxyReturn}{Returns}
+int Returns 1 if there is an error, 0 otherwise 
+\end{DoxyReturn}
+
+
+Definition at line 45 of file ui.\+c.
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=201pt]{ui_8c_a099d48038e444c2f3e69904477527798_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{ui_8c_a9d55d9709838a1f8953fd269241b363d}\label{ui_8c_a9d55d9709838a1f8953fd269241b363d}} 
+\index{ui.c@{ui.c}!cr1\_con@{cr1\_con}}
+\index{cr1\_con@{cr1\_con}!ui.c@{ui.c}}
+\doxysubsubsection{\texorpdfstring{cr1\_con}{cr1\_con}}
+{\footnotesize\ttfamily Gtk\+Cell\+Renderer$\ast$ cr1\+\_\+con}
+
+
+
+Definition at line 31 of file ui.\+c.
+
+\mbox{\Hypertarget{ui_8c_a295a9203dbc00bdeefacfa4172450feb}\label{ui_8c_a295a9203dbc00bdeefacfa4172450feb}} 
+\index{ui.c@{ui.c}!cr1\_th@{cr1\_th}}
+\index{cr1\_th@{cr1\_th}!ui.c@{ui.c}}
+\doxysubsubsection{\texorpdfstring{cr1\_th}{cr1\_th}}
+{\footnotesize\ttfamily Gtk\+Cell\+Renderer$\ast$ cr1\+\_\+th}
+
+
+
+Definition at line 39 of file ui.\+c.
+
+\mbox{\Hypertarget{ui_8c_aae06d88c1cae92d5d3bbc333ee45cdbb}\label{ui_8c_aae06d88c1cae92d5d3bbc333ee45cdbb}} 
+\index{ui.c@{ui.c}!cr2\_con@{cr2\_con}}
+\index{cr2\_con@{cr2\_con}!ui.c@{ui.c}}
+\doxysubsubsection{\texorpdfstring{cr2\_con}{cr2\_con}}
+{\footnotesize\ttfamily Gtk\+Cell\+Renderer$\ast$ cr2\+\_\+con}
+
+
+
+Definition at line 32 of file ui.\+c.
+
+\mbox{\Hypertarget{ui_8c_a472629946cf5a35483eb1d4a4c79822f}\label{ui_8c_a472629946cf5a35483eb1d4a4c79822f}} 
+\index{ui.c@{ui.c}!cr2\_th@{cr2\_th}}
+\index{cr2\_th@{cr2\_th}!ui.c@{ui.c}}
+\doxysubsubsection{\texorpdfstring{cr2\_th}{cr2\_th}}
+{\footnotesize\ttfamily Gtk\+Cell\+Renderer$\ast$ cr2\+\_\+th}
+
+
+
+Definition at line 40 of file ui.\+c.
+
+\mbox{\Hypertarget{ui_8c_ac4332ccbf3c460b27425ee2c46a976df}\label{ui_8c_ac4332ccbf3c460b27425ee2c46a976df}} 
+\index{ui.c@{ui.c}!cr3\_th@{cr3\_th}}
+\index{cr3\_th@{cr3\_th}!ui.c@{ui.c}}
+\doxysubsubsection{\texorpdfstring{cr3\_th}{cr3\_th}}
+{\footnotesize\ttfamily Gtk\+Cell\+Renderer$\ast$ cr3\+\_\+th}
+
+
+
+Definition at line 41 of file ui.\+c.
+
+\mbox{\Hypertarget{ui_8c_ac3f7fdfbb8c57086c823f7ba5c8775b0}\label{ui_8c_ac3f7fdfbb8c57086c823f7ba5c8775b0}} 
+\index{ui.c@{ui.c}!cr4\_th@{cr4\_th}}
+\index{cr4\_th@{cr4\_th}!ui.c@{ui.c}}
+\doxysubsubsection{\texorpdfstring{cr4\_th}{cr4\_th}}
+{\footnotesize\ttfamily Gtk\+Cell\+Renderer$\ast$ cr4\+\_\+th}
+
+
+
+Definition at line 42 of file ui.\+c.
+
+\mbox{\Hypertarget{ui_8c_a1314aeece37cb7bdf2dcbb8e84f5ab27}\label{ui_8c_a1314aeece37cb7bdf2dcbb8e84f5ab27}} 
+\index{ui.c@{ui.c}!cx1\_con@{cx1\_con}}
+\index{cx1\_con@{cx1\_con}!ui.c@{ui.c}}
+\doxysubsubsection{\texorpdfstring{cx1\_con}{cx1\_con}}
+{\footnotesize\ttfamily Gtk\+Tree\+View\+Column$\ast$ cx1\+\_\+con}
+
+
+
+Definition at line 29 of file ui.\+c.
+
+\mbox{\Hypertarget{ui_8c_abc67495e5ecb1386fead3eec50be64eb}\label{ui_8c_abc67495e5ecb1386fead3eec50be64eb}} 
+\index{ui.c@{ui.c}!cx1\_th@{cx1\_th}}
+\index{cx1\_th@{cx1\_th}!ui.c@{ui.c}}
+\doxysubsubsection{\texorpdfstring{cx1\_th}{cx1\_th}}
+{\footnotesize\ttfamily Gtk\+Tree\+View\+Column$\ast$ cx1\+\_\+th}
+
+
+
+Definition at line 35 of file ui.\+c.
+
+\mbox{\Hypertarget{ui_8c_a59e5b21a4ef99d9045be23eb799cf84d}\label{ui_8c_a59e5b21a4ef99d9045be23eb799cf84d}} 
+\index{ui.c@{ui.c}!cx2\_con@{cx2\_con}}
+\index{cx2\_con@{cx2\_con}!ui.c@{ui.c}}
+\doxysubsubsection{\texorpdfstring{cx2\_con}{cx2\_con}}
+{\footnotesize\ttfamily Gtk\+Tree\+View\+Column$\ast$ cx2\+\_\+con}
+
+
+
+Definition at line 30 of file ui.\+c.
+
+\mbox{\Hypertarget{ui_8c_a2121cdc7aa51459e7c0b5e09364d58df}\label{ui_8c_a2121cdc7aa51459e7c0b5e09364d58df}} 
+\index{ui.c@{ui.c}!cx2\_th@{cx2\_th}}
+\index{cx2\_th@{cx2\_th}!ui.c@{ui.c}}
+\doxysubsubsection{\texorpdfstring{cx2\_th}{cx2\_th}}
+{\footnotesize\ttfamily Gtk\+Tree\+View\+Column$\ast$ cx2\+\_\+th}
+
+
+
+Definition at line 36 of file ui.\+c.
+
+\mbox{\Hypertarget{ui_8c_a02d08d31202ad6ef53ebda0f019fd823}\label{ui_8c_a02d08d31202ad6ef53ebda0f019fd823}} 
+\index{ui.c@{ui.c}!cx3\_th@{cx3\_th}}
+\index{cx3\_th@{cx3\_th}!ui.c@{ui.c}}
+\doxysubsubsection{\texorpdfstring{cx3\_th}{cx3\_th}}
+{\footnotesize\ttfamily Gtk\+Tree\+View\+Column$\ast$ cx3\+\_\+th}
+
+
+
+Definition at line 37 of file ui.\+c.
+
+\mbox{\Hypertarget{ui_8c_af3ae97a085cfc5394c829395c4df1233}\label{ui_8c_af3ae97a085cfc5394c829395c4df1233}} 
+\index{ui.c@{ui.c}!cx4\_th@{cx4\_th}}
+\index{cx4\_th@{cx4\_th}!ui.c@{ui.c}}
+\doxysubsubsection{\texorpdfstring{cx4\_th}{cx4\_th}}
+{\footnotesize\ttfamily Gtk\+Tree\+View\+Column$\ast$ cx4\+\_\+th}
+
+
+
+Definition at line 38 of file ui.\+c.
+
+\mbox{\Hypertarget{ui_8c_a1cd59d712f0351edfa00b753656b486a}\label{ui_8c_a1cd59d712f0351edfa00b753656b486a}} 
+\index{ui.c@{ui.c}!invest\_entry@{invest\_entry}}
+\index{invest\_entry@{invest\_entry}!ui.c@{ui.c}}
+\doxysubsubsection{\texorpdfstring{invest\_entry}{invest\_entry}}
+{\footnotesize\ttfamily Gtk\+Entry$\ast$ invest\+\_\+entry}
+
+
+
+Definition at line 23 of file ui.\+c.
+
+\mbox{\Hypertarget{ui_8c_af7c418915599a0feee638b616aca25ec}\label{ui_8c_af7c418915599a0feee638b616aca25ec}} 
+\index{ui.c@{ui.c}!name\_entry\_con@{name\_entry\_con}}
+\index{name\_entry\_con@{name\_entry\_con}!ui.c@{ui.c}}
+\doxysubsubsection{\texorpdfstring{name\_entry\_con}{name\_entry\_con}}
+{\footnotesize\ttfamily Gtk\+Entry$\ast$ name\+\_\+entry\+\_\+con}
+
+
+
+Definition at line 25 of file ui.\+c.
+
+\mbox{\Hypertarget{ui_8c_ad8381a6084abf1920354514475732b69}\label{ui_8c_ad8381a6084abf1920354514475732b69}} 
+\index{ui.c@{ui.c}!private\_key\_label@{private\_key\_label}}
+\index{private\_key\_label@{private\_key\_label}!ui.c@{ui.c}}
+\doxysubsubsection{\texorpdfstring{private\_key\_label}{private\_key\_label}}
+{\footnotesize\ttfamily Gtk\+Label$\ast$ private\+\_\+key\+\_\+label}
+
+
+
+Definition at line 17 of file ui.\+c.
+
+\mbox{\Hypertarget{ui_8c_a1232a61f99830b200a87137da4ad0232}\label{ui_8c_a1232a61f99830b200a87137da4ad0232}} 
+\index{ui.c@{ui.c}!public\_key\_entry\_con@{public\_key\_entry\_con}}
+\index{public\_key\_entry\_con@{public\_key\_entry\_con}!ui.c@{ui.c}}
+\doxysubsubsection{\texorpdfstring{public\_key\_entry\_con}{public\_key\_entry\_con}}
+{\footnotesize\ttfamily Gtk\+Entry$\ast$ public\+\_\+key\+\_\+entry\+\_\+con}
+
+
+
+Definition at line 26 of file ui.\+c.
+
+\mbox{\Hypertarget{ui_8c_a9856845eebffe4f02ca0b6c491816d1b}\label{ui_8c_a9856845eebffe4f02ca0b6c491816d1b}} 
+\index{ui.c@{ui.c}!recipient\_key@{recipient\_key}}
+\index{recipient\_key@{recipient\_key}!ui.c@{ui.c}}
+\doxysubsubsection{\texorpdfstring{recipient\_key}{recipient\_key}}
+{\footnotesize\ttfamily Gtk\+Entry$\ast$ recipient\+\_\+key}
+
+
+
+Definition at line 22 of file ui.\+c.
+
+\mbox{\Hypertarget{ui_8c_a30b512f884b7c54ff9bfe3f8b42a665f}\label{ui_8c_a30b512f884b7c54ff9bfe3f8b42a665f}} 
+\index{ui.c@{ui.c}!recover\_entry@{recover\_entry}}
+\index{recover\_entry@{recover\_entry}!ui.c@{ui.c}}
+\doxysubsubsection{\texorpdfstring{recover\_entry}{recover\_entry}}
+{\footnotesize\ttfamily Gtk\+Entry$\ast$ recover\+\_\+entry}
+
+
+
+Definition at line 24 of file ui.\+c.
+
+\mbox{\Hypertarget{ui_8c_a4722da076b88ed9d7695ae3d38945692}\label{ui_8c_a4722da076b88ed9d7695ae3d38945692}} 
+\index{ui.c@{ui.c}!stake\_label1@{stake\_label1}}
+\index{stake\_label1@{stake\_label1}!ui.c@{ui.c}}
+\doxysubsubsection{\texorpdfstring{stake\_label1}{stake\_label1}}
+{\footnotesize\ttfamily Gtk\+Label$\ast$ stake\+\_\+label1}
+
+
+
+Definition at line 18 of file ui.\+c.
+
+\mbox{\Hypertarget{ui_8c_a16f98e00efbcc9f5356cd26ddde7cc53}\label{ui_8c_a16f98e00efbcc9f5356cd26ddde7cc53}} 
+\index{ui.c@{ui.c}!stake\_label2@{stake\_label2}}
+\index{stake\_label2@{stake\_label2}!ui.c@{ui.c}}
+\doxysubsubsection{\texorpdfstring{stake\_label2}{stake\_label2}}
+{\footnotesize\ttfamily Gtk\+Label$\ast$ stake\+\_\+label2}
+
+
+
+Definition at line 19 of file ui.\+c.
+
+\mbox{\Hypertarget{ui_8c_ac7f6d61c5f9e17e359513909d01dbbd0}\label{ui_8c_ac7f6d61c5f9e17e359513909d01dbbd0}} 
+\index{ui.c@{ui.c}!stake\_label3@{stake\_label3}}
+\index{stake\_label3@{stake\_label3}!ui.c@{ui.c}}
+\doxysubsubsection{\texorpdfstring{stake\_label3}{stake\_label3}}
+{\footnotesize\ttfamily Gtk\+Label$\ast$ stake\+\_\+label3}
+
+
+
+Definition at line 20 of file ui.\+c.
+
+\mbox{\Hypertarget{ui_8c_a5a64b67ddec08a9b9d81b4facd94047a}\label{ui_8c_a5a64b67ddec08a9b9d81b4facd94047a}} 
+\index{ui.c@{ui.c}!transa\_amount@{transa\_amount}}
+\index{transa\_amount@{transa\_amount}!ui.c@{ui.c}}
+\doxysubsubsection{\texorpdfstring{transa\_amount}{transa\_amount}}
+{\footnotesize\ttfamily Gtk\+Entry$\ast$ transa\+\_\+amount}
+
+
+
+Definition at line 21 of file ui.\+c.
+
+\mbox{\Hypertarget{ui_8c_a3d023a78babb0df3470dc81314feadd5}\label{ui_8c_a3d023a78babb0df3470dc81314feadd5}} 
+\index{ui.c@{ui.c}!ts\_con@{ts\_con}}
+\index{ts\_con@{ts\_con}!ui.c@{ui.c}}
+\doxysubsubsection{\texorpdfstring{ts\_con}{ts\_con}}
+{\footnotesize\ttfamily Gtk\+Tree\+Store$\ast$ ts\+\_\+con}
+
+
+
+Definition at line 28 of file ui.\+c.
+
+\mbox{\Hypertarget{ui_8c_a25a91552d8574c51a2b6e9a15663eeee}\label{ui_8c_a25a91552d8574c51a2b6e9a15663eeee}} 
+\index{ui.c@{ui.c}!ts\_th@{ts\_th}}
+\index{ts\_th@{ts\_th}!ui.c@{ui.c}}
+\doxysubsubsection{\texorpdfstring{ts\_th}{ts\_th}}
+{\footnotesize\ttfamily Gtk\+Tree\+Store$\ast$ ts\+\_\+th}
+
+
+
+Definition at line 34 of file ui.\+c.
+
+\mbox{\Hypertarget{ui_8c_a7d4f1acd200f42ce8a25b24bdcd11f6e}\label{ui_8c_a7d4f1acd200f42ce8a25b24bdcd11f6e}} 
+\index{ui.c@{ui.c}!tv\_con@{tv\_con}}
+\index{tv\_con@{tv\_con}!ui.c@{ui.c}}
+\doxysubsubsection{\texorpdfstring{tv\_con}{tv\_con}}
+{\footnotesize\ttfamily Gtk\+Tree\+View$\ast$ tv\+\_\+con}
+
+
+
+Definition at line 27 of file ui.\+c.
+
+\mbox{\Hypertarget{ui_8c_a61df27324bc5fa1509abd1ef234f0368}\label{ui_8c_a61df27324bc5fa1509abd1ef234f0368}} 
+\index{ui.c@{ui.c}!tv\_th@{tv\_th}}
+\index{tv\_th@{tv\_th}!ui.c@{ui.c}}
+\doxysubsubsection{\texorpdfstring{tv\_th}{tv\_th}}
+{\footnotesize\ttfamily Gtk\+Tree\+View$\ast$ tv\+\_\+th}
+
+
+
+Definition at line 33 of file ui.\+c.
+

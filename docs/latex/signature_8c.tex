@@ -1,0 +1,460 @@
+\hypertarget{signature_8c}{}\doxysection{src/cryptosystem/signature.c File Reference}
+\label{signature_8c}\index{src/cryptosystem/signature.c@{src/cryptosystem/signature.c}}
+{\ttfamily \#include \char`\"{}core/blockchain/block.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}cryptosystem/signature.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}cryptosystem/hash.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$openssl/bio.\+h$>$}\newline
+{\ttfamily \#include $<$openssl/rsa.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+Include dependency graph for signature.\+c\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{signature_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+char $\ast$ \mbox{\hyperlink{signature_8c_a31fa447711840b3c0932cfe068d8cc65}{sign\+\_\+message}} (char $\ast$data, size\+\_\+t len\+\_\+data, size\+\_\+t $\ast$signature\+\_\+len)
+\begin{DoxyCompactList}\small\item\em encrypt(\+S\+H\+A284(msg,len\+\_\+data),priv\+\_\+key) \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{signature_8c_a03bc161fe8675e7bf8763cdcee6a3ac2}{verify\+\_\+signature}} (void $\ast$data, size\+\_\+t data\+\_\+len, char $\ast$signature, size\+\_\+t signature\+\_\+len, R\+SA $\ast$pub\+\_\+key)
+\begin{DoxyCompactList}\small\item\em Apply the S\+H\+A384 algorithm on a \textquotesingle{}data\textquotesingle{} of size \textquotesingle{}len\+\_\+data\textquotesingle{} and verifies if S\+H\+A384(data, len\+\_\+data) == \textquotesingle{}signature\textquotesingle{}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{signature_8c_a0bd00440f3c97bf7dace6c4e26ea17be}{write\+\_\+transactiondata}} (\mbox{\hyperlink{struct_transaction_data}{Transaction\+Data}} $\ast$transaction, int fd)
+\item 
+void \mbox{\hyperlink{signature_8c_a5bff0131aa50faf1cd0236e0b44169eb}{write\+\_\+transaction}} (\mbox{\hyperlink{struct_transaction}{Transaction}} $\ast$transaction, int fd)
+\item 
+void \mbox{\hyperlink{signature_8c_a16588449d977a2d5052be7b3639768a8}{get\+\_\+transaction\+\_\+data}} (\mbox{\hyperlink{struct_transaction}{Transaction}} $\ast$trans, char $\ast$$\ast$buff, size\+\_\+t $\ast$index)
+\begin{DoxyCompactList}\small\item\em Convert transactions to char $\ast$ buffer. \end{DoxyCompactList}\item 
+char $\ast$ \mbox{\hyperlink{signature_8c_af656af2c0f2bf2ea38d4fba26b50f5d6}{get\+\_\+blockdata\+\_\+data}} (\mbox{\hyperlink{struct_block}{Block}} $\ast$block, size\+\_\+t $\ast$size)
+\begin{DoxyCompactList}\small\item\em Get the blockdata data object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{signature_8c_a0e5ff1f119568fb8566981cf7da11d7f}{write\+\_\+blockdata}} (\mbox{\hyperlink{struct_block_data}{Block\+Data}} blockdata, int fd)
+\begin{DoxyCompactList}\small\item\em Writes blockdata in a file. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{signature_8c_a58b3466ce733938859f0651b2a756e95}{write\+\_\+block}} (\mbox{\hyperlink{struct_block}{Block}} block, int fd)
+\begin{DoxyCompactList}\small\item\em Writes a block in a file. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{signature_8c_a197fbff013d305c63a9699922eb438f6}{verify\+\_\+block\+\_\+signature}} (\mbox{\hyperlink{struct_block}{Block}} block)
+\begin{DoxyCompactList}\small\item\em Verifies if a block signature is valid. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{signature_8c_ae45689cf209de84d0132284229d32824}{verify\+\_\+transaction\+\_\+signature}} (\mbox{\hyperlink{struct_transaction}{Transaction}} transaction)
+\begin{DoxyCompactList}\small\item\em Verifies if a transaction signature is valid. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{signature_8c_a5fc24af7af2e6c9cd4de2efcbd26ffb9}{sign\+\_\+block}} (\mbox{\hyperlink{struct_block}{Block}} $\ast$block)
+\begin{DoxyCompactList}\small\item\em Signs a block. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{signature_8c_afc30cc798edd88f7749c81431cc12684}{sign\+\_\+transaction}} (\mbox{\hyperlink{struct_transaction}{Transaction}} $\ast$transaction)
+\begin{DoxyCompactList}\small\item\em Sign a transaction. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{signature_8c_a885aee9c6a53f767ed991b0a2496e37e}{sign\+\_\+block\+\_\+transactions}} (\mbox{\hyperlink{struct_block}{Block}} $\ast$block)
+\begin{DoxyCompactList}\small\item\em Signs transactions of a block. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{signature_8c_af656af2c0f2bf2ea38d4fba26b50f5d6}\label{signature_8c_af656af2c0f2bf2ea38d4fba26b50f5d6}} 
+\index{signature.c@{signature.c}!get\_blockdata\_data@{get\_blockdata\_data}}
+\index{get\_blockdata\_data@{get\_blockdata\_data}!signature.c@{signature.c}}
+\doxysubsubsection{\texorpdfstring{get\_blockdata\_data()}{get\_blockdata\_data()}}
+{\footnotesize\ttfamily char$\ast$ get\+\_\+blockdata\+\_\+data (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_block}{Block}} $\ast$}]{block,  }\item[{size\+\_\+t $\ast$}]{size }\end{DoxyParamCaption})}
+
+
+
+Get the blockdata data object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em block} & The block \\
+\hline
+{\em size} & The size of the block \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+char$\ast$ 
+\end{DoxyReturn}
+
+
+Definition at line 144 of file signature.\+c.
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=348pt]{signature_8c_af656af2c0f2bf2ea38d4fba26b50f5d6_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{signature_8c_af656af2c0f2bf2ea38d4fba26b50f5d6_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{signature_8c_a16588449d977a2d5052be7b3639768a8}\label{signature_8c_a16588449d977a2d5052be7b3639768a8}} 
+\index{signature.c@{signature.c}!get\_transaction\_data@{get\_transaction\_data}}
+\index{get\_transaction\_data@{get\_transaction\_data}!signature.c@{signature.c}}
+\doxysubsubsection{\texorpdfstring{get\_transaction\_data()}{get\_transaction\_data()}}
+{\footnotesize\ttfamily void get\+\_\+transaction\+\_\+data (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_transaction}{Transaction}} $\ast$}]{trans,  }\item[{char $\ast$$\ast$}]{buff,  }\item[{size\+\_\+t $\ast$}]{size }\end{DoxyParamCaption})}
+
+
+
+Convert transactions to char $\ast$ buffer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em transactions} & The transaction array \\
+\hline
+{\em buff} & The buffer that receives the transactions \\
+\hline
+{\em size} & The number of transactions in the array\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The buffer allocated (Must be freed) 
+\end{DoxyReturn}
+
+
+Definition at line 93 of file signature.\+c.
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{signature_8c_a16588449d977a2d5052be7b3639768a8_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{signature_8c_a5fc24af7af2e6c9cd4de2efcbd26ffb9}\label{signature_8c_a5fc24af7af2e6c9cd4de2efcbd26ffb9}} 
+\index{signature.c@{signature.c}!sign\_block@{sign\_block}}
+\index{sign\_block@{sign\_block}!signature.c@{signature.c}}
+\doxysubsubsection{\texorpdfstring{sign\_block()}{sign\_block()}}
+{\footnotesize\ttfamily void sign\+\_\+block (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_block}{Block}} $\ast$}]{block }\end{DoxyParamCaption})}
+
+
+
+Signs a block. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em block} & The block to sign \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 233 of file signature.\+c.
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{signature_8c_a5fc24af7af2e6c9cd4de2efcbd26ffb9_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{signature_8c_a885aee9c6a53f767ed991b0a2496e37e}\label{signature_8c_a885aee9c6a53f767ed991b0a2496e37e}} 
+\index{signature.c@{signature.c}!sign\_block\_transactions@{sign\_block\_transactions}}
+\index{sign\_block\_transactions@{sign\_block\_transactions}!signature.c@{signature.c}}
+\doxysubsubsection{\texorpdfstring{sign\_block\_transactions()}{sign\_block\_transactions()}}
+{\footnotesize\ttfamily void sign\+\_\+block\+\_\+transactions (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_block}{Block}} $\ast$}]{block }\end{DoxyParamCaption})}
+
+
+
+Signs transactions of a block. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em block} & The block to sign \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 258 of file signature.\+c.
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{signature_8c_a885aee9c6a53f767ed991b0a2496e37e_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{signature_8c_a31fa447711840b3c0932cfe068d8cc65}\label{signature_8c_a31fa447711840b3c0932cfe068d8cc65}} 
+\index{signature.c@{signature.c}!sign\_message@{sign\_message}}
+\index{sign\_message@{sign\_message}!signature.c@{signature.c}}
+\doxysubsubsection{\texorpdfstring{sign\_message()}{sign\_message()}}
+{\footnotesize\ttfamily char$\ast$ sign\+\_\+message (\begin{DoxyParamCaption}\item[{char $\ast$}]{data,  }\item[{size\+\_\+t}]{len\+\_\+data,  }\item[{size\+\_\+t $\ast$}]{signature\+\_\+len }\end{DoxyParamCaption})}
+
+
+
+encrypt(\+S\+H\+A284(msg,len\+\_\+data),priv\+\_\+key) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The data to sign \\
+\hline
+{\em len\+\_\+data} & The length of the data \\
+\hline
+{\em signature\+\_\+len} & The length of the data signature \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+char$\ast$ 
+\end{DoxyReturn}
+
+
+Definition at line 10 of file signature.\+c.
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=291pt]{signature_8c_a31fa447711840b3c0932cfe068d8cc65_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{signature_8c_a31fa447711840b3c0932cfe068d8cc65_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{signature_8c_afc30cc798edd88f7749c81431cc12684}\label{signature_8c_afc30cc798edd88f7749c81431cc12684}} 
+\index{signature.c@{signature.c}!sign\_transaction@{sign\_transaction}}
+\index{sign\_transaction@{sign\_transaction}!signature.c@{signature.c}}
+\doxysubsubsection{\texorpdfstring{sign\_transaction()}{sign\_transaction()}}
+{\footnotesize\ttfamily void sign\+\_\+transaction (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_transaction}{Transaction}} $\ast$}]{transaction }\end{DoxyParamCaption})}
+
+
+
+Sign a transaction. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em transaction} & The transaction to sign \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 245 of file signature.\+c.
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{signature_8c_afc30cc798edd88f7749c81431cc12684_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=347pt]{signature_8c_afc30cc798edd88f7749c81431cc12684_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{signature_8c_a197fbff013d305c63a9699922eb438f6}\label{signature_8c_a197fbff013d305c63a9699922eb438f6}} 
+\index{signature.c@{signature.c}!verify\_block\_signature@{verify\_block\_signature}}
+\index{verify\_block\_signature@{verify\_block\_signature}!signature.c@{signature.c}}
+\doxysubsubsection{\texorpdfstring{verify\_block\_signature()}{verify\_block\_signature()}}
+{\footnotesize\ttfamily int verify\+\_\+block\+\_\+signature (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_block}{Block}}}]{block }\end{DoxyParamCaption})}
+
+
+
+Verifies if a block signature is valid. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em block} & The block to verify \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if valid, 0 otherwise ~\newline
+ 
+\end{DoxyReturn}
+
+
+Definition at line 206 of file signature.\+c.
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{signature_8c_a197fbff013d305c63a9699922eb438f6_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{signature_8c_a03bc161fe8675e7bf8763cdcee6a3ac2}\label{signature_8c_a03bc161fe8675e7bf8763cdcee6a3ac2}} 
+\index{signature.c@{signature.c}!verify\_signature@{verify\_signature}}
+\index{verify\_signature@{verify\_signature}!signature.c@{signature.c}}
+\doxysubsubsection{\texorpdfstring{verify\_signature()}{verify\_signature()}}
+{\footnotesize\ttfamily int verify\+\_\+signature (\begin{DoxyParamCaption}\item[{void $\ast$}]{data,  }\item[{size\+\_\+t}]{data\+\_\+len,  }\item[{char $\ast$}]{signature,  }\item[{size\+\_\+t}]{signature\+\_\+len,  }\item[{R\+SA $\ast$}]{pub\+\_\+key }\end{DoxyParamCaption})}
+
+
+
+Apply the S\+H\+A384 algorithm on a \textquotesingle{}data\textquotesingle{} of size \textquotesingle{}len\+\_\+data\textquotesingle{} and verifies if S\+H\+A384(data, len\+\_\+data) == \textquotesingle{}signature\textquotesingle{}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The buffer to verify \\
+\hline
+{\em data\+\_\+len} & The length of the buffer \\
+\hline
+{\em signature} & The signature to compare with S\+H\+A384(data, len\+\_\+data) \\
+\hline
+{\em signature\+\_\+len} & The length of the signature \\
+\hline
+{\em pub\+\_\+key} & The R\+SA public key used for the decryption \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
+
+
+Definition at line 31 of file signature.\+c.
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=290pt]{signature_8c_a03bc161fe8675e7bf8763cdcee6a3ac2_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{signature_8c_a03bc161fe8675e7bf8763cdcee6a3ac2_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{signature_8c_ae45689cf209de84d0132284229d32824}\label{signature_8c_ae45689cf209de84d0132284229d32824}} 
+\index{signature.c@{signature.c}!verify\_transaction\_signature@{verify\_transaction\_signature}}
+\index{verify\_transaction\_signature@{verify\_transaction\_signature}!signature.c@{signature.c}}
+\doxysubsubsection{\texorpdfstring{verify\_transaction\_signature()}{verify\_transaction\_signature()}}
+{\footnotesize\ttfamily int verify\+\_\+transaction\+\_\+signature (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_transaction}{Transaction}}}]{transaction }\end{DoxyParamCaption})}
+
+
+
+Verifies if a transaction signature is valid. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em transaction} & The transaction to verify \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if valid, 0 otherwise ~\newline
+ 
+\end{DoxyReturn}
+
+
+Definition at line 219 of file signature.\+c.
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{signature_8c_ae45689cf209de84d0132284229d32824_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{signature_8c_a58b3466ce733938859f0651b2a756e95}\label{signature_8c_a58b3466ce733938859f0651b2a756e95}} 
+\index{signature.c@{signature.c}!write\_block@{write\_block}}
+\index{write\_block@{write\_block}!signature.c@{signature.c}}
+\doxysubsubsection{\texorpdfstring{write\_block()}{write\_block()}}
+{\footnotesize\ttfamily void write\+\_\+block (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_block}{Block}}}]{block,  }\item[{int}]{fd }\end{DoxyParamCaption})}
+
+
+
+Writes a block in a file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em block} & The block to write \\
+\hline
+{\em fd} & the file descriptor of the file in which the block is written \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 199 of file signature.\+c.
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{signature_8c_a58b3466ce733938859f0651b2a756e95_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{signature_8c_a58b3466ce733938859f0651b2a756e95_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{signature_8c_a0e5ff1f119568fb8566981cf7da11d7f}\label{signature_8c_a0e5ff1f119568fb8566981cf7da11d7f}} 
+\index{signature.c@{signature.c}!write\_blockdata@{write\_blockdata}}
+\index{write\_blockdata@{write\_blockdata}!signature.c@{signature.c}}
+\doxysubsubsection{\texorpdfstring{write\_blockdata()}{write\_blockdata()}}
+{\footnotesize\ttfamily void write\+\_\+blockdata (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_block_data}{Block\+Data}}}]{blockdata,  }\item[{int}]{fd }\end{DoxyParamCaption})}
+
+
+
+Writes blockdata in a file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em blockdata} & The blockdata to write \\
+\hline
+{\em fd} & The file descriptor of the file in which the blockdata is written \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 174 of file signature.\+c.
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{signature_8c_a0e5ff1f119568fb8566981cf7da11d7f_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{signature_8c_a0e5ff1f119568fb8566981cf7da11d7f_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{signature_8c_a5bff0131aa50faf1cd0236e0b44169eb}\label{signature_8c_a5bff0131aa50faf1cd0236e0b44169eb}} 
+\index{signature.c@{signature.c}!write\_transaction@{write\_transaction}}
+\index{write\_transaction@{write\_transaction}!signature.c@{signature.c}}
+\doxysubsubsection{\texorpdfstring{write\_transaction()}{write\_transaction()}}
+{\footnotesize\ttfamily void write\+\_\+transaction (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_transaction}{Transaction}} $\ast$}]{transaction,  }\item[{int}]{fd }\end{DoxyParamCaption})}
+
+
+
+Definition at line 86 of file signature.\+c.
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=340pt]{signature_8c_a5bff0131aa50faf1cd0236e0b44169eb_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{signature_8c_a5bff0131aa50faf1cd0236e0b44169eb_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{signature_8c_a0bd00440f3c97bf7dace6c4e26ea17be}\label{signature_8c_a0bd00440f3c97bf7dace6c4e26ea17be}} 
+\index{signature.c@{signature.c}!write\_transactiondata@{write\_transactiondata}}
+\index{write\_transactiondata@{write\_transactiondata}!signature.c@{signature.c}}
+\doxysubsubsection{\texorpdfstring{write\_transactiondata()}{write\_transactiondata()}}
+{\footnotesize\ttfamily void write\+\_\+transactiondata (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_transaction_data}{Transaction\+Data}} $\ast$}]{transaction,  }\item[{int}]{fd }\end{DoxyParamCaption})}
+
+
+
+Definition at line 50 of file signature.\+c.
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{signature_8c_a0bd00440f3c97bf7dace6c4e26ea17be_icgraph}
+\end{center}
+\end{figure}
