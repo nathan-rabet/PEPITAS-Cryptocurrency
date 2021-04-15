@@ -2,6 +2,9 @@ var ui_8c =
 [
     [ "add_contact", "ui_8c.html#ad00b3507b4bb09e32b88b8c4e015c7bf", null ],
     [ "on_add_contact_button1_press", "ui_8c.html#a399dcb9da92a8915352bb0f96df00bc9", null ],
+    [ "on_connect_but_press", "ui_8c.html#aa118feebec7cfa09ac8e958107872c47", null ],
+    [ "on_create_key_but1_press", "ui_8c.html#ac37428318289fb0254b3cd9a9dec6b6e", null ],
+    [ "on_create_key_but2_press", "ui_8c.html#ab865e6138c061d47b274af99c574af03", null ],
     [ "on_invest_button1_press", "ui_8c.html#a7abe8e8c8f8674c6d9e0f4a9f33d2b3a", null ],
     [ "on_invest_button2_press", "ui_8c.html#ae8893501fa8a537ec50cc272353fca19", null ],
     [ "on_main_window_delete", "ui_8c.html#a6f90e7dead0868fb0ea2deccc1868aba", null ],
@@ -25,6 +28,8 @@ var ui_8c =
     [ "cx4_th", "ui_8c.html#af3ae97a085cfc5394c829395c4df1233", null ],
     [ "invest_entry", "ui_8c.html#a1cd59d712f0351edfa00b753656b486a", null ],
     [ "name_entry_con", "ui_8c.html#af7c418915599a0feee638b616aca25ec", null ],
+    [ "password_entry1", "ui_8c.html#ad339cc79acfe1685a9cc695347628fed", null ],
+    [ "password_entry2", "ui_8c.html#aa345dbc39b26d7892d6b987c3b7dd280", null ],
     [ "private_key_label", "ui_8c.html#ad8381a6084abf1920354514475732b69", null ],
     [ "public_key_entry_con", "ui_8c.html#a1232a61f99830b200a87137da4ad0232", null ],
     [ "recipient_key", "ui_8c.html#a9856845eebffe4f02ca0b6c491816d1b", null ],
