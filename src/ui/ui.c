@@ -4,6 +4,8 @@ static GtkWidget *window;
 static GtkWidget *invest_window;
 static GtkWidget *recover_window;
 static GtkWidget *add_contact_window;
+static GtkWidget *connection_window;
+static GtkWidget *create_key_window;
 
 static GtkButton *transa_but;
 static GtkButton *pkey_but;
@@ -13,6 +15,10 @@ static GtkButton *recover_but1;
 static GtkButton *recover_but2;
 static GtkButton *add_contact_but1;
 static GtkButton *add_contact_but2;
+static GtkButton *create_key_but1;
+static GtkButton *create_key_but2;
+static GtkButton *connect_but;
+static GtkCheckButton *password_rem_but;
 
 GtkLabel *private_key_label;
 GtkLabel *stake_label1;
@@ -24,6 +30,8 @@ GtkEntry *invest_entry;
 GtkEntry *recover_entry;
 GtkEntry *name_entry_con;
 GtkEntry *public_key_entry_con;
+GtkEntry *password_entry1;
+GtkEntry *password_entry2;
 GtkTreeView *tv_con;
 GtkTreeStore *ts_con;
 GtkTreeViewColumn *cx1_con;
@@ -58,6 +66,8 @@ int setup()
     invest_window = GTK_WIDGET(gtk_builder_get_object(builder, "invest_window"));
     recover_window = GTK_WIDGET(gtk_builder_get_object(builder, "recover_window"));
     add_contact_window = GTK_WIDGET(gtk_builder_get_object(builder, "add_contact_window"));
+    connection_window = GTK_WIDGET(gtk_builder_get_object(builder, "connection_window"));
+    create_key_window = GTK_WIDGET(gtk_builder_get_object(builder, "create_key_window"));
 
     transa_but = GTK_BUTTON(gtk_builder_get_object(builder, "transa_but"));
 
@@ -98,11 +108,21 @@ int setup()
     cr3_th = GTK_CELL_RENDERER(gtk_builder_get_object(builder, "cellrenderertext5"));
     cr4_th = GTK_CELL_RENDERER(gtk_builder_get_object(builder, "cellrenderertext6"));
 
+    password_entry1 = GTK_ENTRY(gtk_builder_get_object(builder, "password_entry1"));
+    password_entry2 = GTK_ENTRY(gtk_builder_get_object(builder, "password_entry2"));
+
+    password_rem_but = GTK_CHECK_BUTTON(gtk_builder_get_object(builder, "password_rem_but"));
+    create_key_but1 = GTK_BUTTON(gtk_builder_get_object(builder, "create_key_but1"));
+    create_key_but2 = GTK_BUTTON(gtk_builder_get_object(builder, "create_key_but2"));
+    connect_but = GTK_BUTTON(gtk_builder_get_object(builder, "connect_but"));
+
     private_key_label = GTK_LABEL(gtk_builder_get_object(builder, "private_key_label"));
     gtk_widget_hide(GTK_WIDGET(private_key_label));
     gtk_widget_hide(invest_window);
     gtk_widget_hide(recover_window);
     gtk_widget_hide(add_contact_window);
+    gtk_widget_hide(window);
+    gtk_widget_hide(create_key_window);
 
     g_signal_connect(transa_but, "clicked", G_CALLBACK(on_transaction_button_press), NULL);
     g_signal_connect(pkey_but, "clicked", G_CALLBACK(on_pkey_button_press), NULL);
@@ -112,13 +132,16 @@ int setup()
     g_signal_connect(recover_but2, "clicked", G_CALLBACK(on_recover_button2_press), NULL);
     g_signal_connect(add_contact_but1, "clicked", G_CALLBACK(on_add_contact_button1_press), NULL);
     g_signal_connect(add_contact_but2, "clicked", G_CALLBACK(add_contact), NULL);
+    g_signal_connect(create_key_but1, "clicked", G_CALLBACK(on_create_key_but1_press), NULL);
+    g_signal_connect(create_key_but2, "clicked", G_CALLBACK(on_create_key_but2_press), NULL);
+    g_signal_connect(connect_but, "clicked", G_CALLBACK(on_connect_but_press), NULL);
 
     g_signal_connect(window, "destroy", G_CALLBACK(on_main_window_destroy), NULL);
     gtk_builder_connect_signals(builder, NULL);
 
     g_object_unref(G_OBJECT(builder));
 
-    gtk_widget_show(window);
+    gtk_widget_show(connection_window);
 
     return 0;
 }
@@ -230,5 +253,36 @@ gboolean add_contact(__attribute__ ((unused)) GtkWidget *widget,
     }
 
     gtk_widget_hide(add_contact_window);
+    return TRUE;
+}
+
+gboolean on_create_key_but1_press(__attribute__ ((unused)) GtkWidget *widget,
+                    __attribute__ ((unused)) GdkEventKey *event,
+                    __attribute__ ((unused)) gpointer user_data)
+{
+    gtk_widget_show(create_key_window);
+
+    return TRUE;
+
+}
+
+gboolean on_create_key_but2_press(__attribute__ ((unused)) GtkWidget *widget,
+                    __attribute__ ((unused)) GdkEventKey *event,
+                    __attribute__ ((unused)) gpointer user_data)
+{
+
+
+    gtk_widget_hide(create_key_window);
+    return TRUE;
+}
+
+gboolean on_connect_but_press(__attribute__ ((unused)) GtkWidget *widget,
+                    __attribute__ ((unused)) GdkEventKey *event,
+                    __attribute__ ((unused)) gpointer user_data)
+{
+    gtk_widget_hide(connection_window);
+    gtk_widget_show(window);
+
+
     return TRUE;
 }

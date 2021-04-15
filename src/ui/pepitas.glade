@@ -148,6 +148,26 @@
       </object>
     </child>
   </object>
+  <object class="GtkTreeStore" id="treestoreCON">
+    <columns>
+      <!-- column-name Name -->
+      <column type="gchararray"/>
+      <!-- column-name Public -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
+  <object class="GtkTreeStore" id="treestoreTH">
+    <columns>
+      <!-- column-name Amount -->
+      <column type="glong"/>
+      <!-- column-name Public -->
+      <column type="gchararray"/>
+      <!-- column-name Date -->
+      <column type="gchararray"/>
+      <!-- column-name Validated -->
+      <column type="gboolean"/>
+    </columns>
+  </object>
   <object class="GtkWindow" id="Pepitas">
     <property name="resizable">False</property>
     <child>
@@ -522,11 +542,7 @@ therefore gaining more Pepitas</property>
                       <object class="GtkTreeViewColumn" id="Name">
                         <property name="title">Name</property>
                         <child>
-                          <object class="GtkCellRendererText" id="cellrenderertext1">
-                            <property name="background_gdk">#ffffffffffff</property>
-                            <property name="font">Normal</property>
-                            <property name="foreground_gdk">#000000000000</property>
-                          </object>
+                          <object class="GtkCellRendererText" id="cellrenderertext1"/>
                           <attributes>
                             <attribute name="text">0</attribute>
                           </attributes>
@@ -537,11 +553,7 @@ therefore gaining more Pepitas</property>
                       <object class="GtkTreeViewColumn" id="Public key">
                         <property name="title">Public key</property>
                         <child>
-                          <object class="GtkCellRendererText" id="cellrenderertext2">
-                            <property name="background_gdk">#ffffffffffff</property>
-                            <property name="font">Normal</property>
-                            <property name="foreground_gdk">#000000000000</property>
-                          </object>
+                          <object class="GtkCellRendererText" id="cellrenderertext2"/>
                           <attributes>
                             <attribute name="text">1</attribute>
                           </attributes>
@@ -598,11 +610,7 @@ therefore gaining more Pepitas</property>
                       <object class="GtkTreeViewColumn" id="Amount">
                         <property name="title">Amount</property>
                         <child>
-                          <object class="GtkCellRendererText" id="cellrenderertext3">
-                            <property name="background_gdk">#ffffffffffff</property>
-                            <property name="font">Normal</property>
-                            <property name="foreground_gdk">#000000000000</property>
-                          </object>
+                          <object class="GtkCellRendererText" id="cellrenderertext3"/>
                           <attributes>
                             <attribute name="text">0</attribute>
                           </attributes>
@@ -613,11 +621,7 @@ therefore gaining more Pepitas</property>
                       <object class="GtkTreeViewColumn" id="public_key_th">
                         <property name="title">Public key</property>
                         <child>
-                          <object class="GtkCellRendererText" id="cellrenderertext4">
-                            <property name="background_gdk">#ffffffffffff</property>
-                            <property name="font">Normal</property>
-                            <property name="foreground_gdk">#000000000000</property>
-                          </object>
+                          <object class="GtkCellRendererText" id="cellrenderertext4"/>
                           <attributes>
                             <attribute name="text">1</attribute>
                           </attributes>
@@ -628,11 +632,7 @@ therefore gaining more Pepitas</property>
                       <object class="GtkTreeViewColumn" id="Date">
                         <property name="title">Date</property>
                         <child>
-                          <object class="GtkCellRendererText" id="cellrenderertext5">
-                            <property name="background_gdk">#ffffffffffff</property>
-                            <property name="font">Normal</property>
-                            <property name="foreground_gdk">#000000000000</property>
-                          </object>
+                          <object class="GtkCellRendererText" id="cellrenderertext5"/>
                           <attributes>
                             <attribute name="text">2</attribute>
                           </attributes>
@@ -643,11 +643,7 @@ therefore gaining more Pepitas</property>
                       <object class="GtkTreeViewColumn" id="Validated">
                         <property name="title">Validated</property>
                         <child>
-                          <object class="GtkCellRendererText" id="cellrenderertext6">
-                            <property name="background_gdk">#ffffffffffff</property>
-                            <property name="font">Normal</property>
-                            <property name="foreground_gdk">#000000000000</property>
-                          </object>
+                          <object class="GtkCellRendererText" id="cellrenderertext6"/>
                           <attributes>
                             <attribute name="text">3</attribute>
                           </attributes>
@@ -676,26 +672,6 @@ therefore gaining more Pepitas</property>
         </child>
       </object>
     </child>
-  </object>
-  <object class="GtkTreeStore" id="treestoreCON">
-    <columns>
-      <!-- column-name Name -->
-      <column type="gchararray"/>
-      <!-- column-name Public key -->
-      <column type="gchararray"/>
-    </columns>
-  </object>
-  <object class="GtkTreeStore" id="treestoreTH">
-    <columns>
-      <!-- column-name Amount -->
-      <column type="glong"/>
-      <!-- column-name Public key -->
-      <column type="gchararray"/>
-      <!-- column-name Date -->
-      <column type="gchararray"/>
-      <!-- column-name Validated -->
-      <column type="gboolean"/>
-    </columns>
   </object>
   <object class="GtkWindow" id="add_contact_window">
     <property name="resizable">False</property>
@@ -778,6 +754,166 @@ therefore gaining more Pepitas</property>
           <packing>
             <property name="x">163</property>
             <property name="y">174</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="GtkWindow" id="connection_window">
+    <child>
+      <object class="GtkFixed" id="fixed10">
+        <property name="visible">True</property>
+        <child>
+          <object class="GtkLabel" id="label19">
+            <property name="width_request">175</property>
+            <property name="height_request">58</property>
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">Connection:</property>
+            <property name="use_underline">True</property>
+          </object>
+          <packing>
+            <property name="x">197</property>
+            <property name="y">22</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkEntry" id="password_entry1">
+            <property name="width_request">198</property>
+            <property name="height_request">25</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="invisible_char">&#x25CF;</property>
+          </object>
+          <packing>
+            <property name="x">36</property>
+            <property name="y">205</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="label20">
+            <property name="width_request">175</property>
+            <property name="height_request">29</property>
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">Password</property>
+            <property name="use_markup">True</property>
+          </object>
+          <packing>
+            <property name="x">44</property>
+            <property name="y">165</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkCheckButton" id="password_rem_but">
+            <property name="label" translatable="yes">Remember password</property>
+            <property name="width_request">191</property>
+            <property name="height_request">56</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">False</property>
+            <property name="draw_indicator">True</property>
+          </object>
+          <packing>
+            <property name="x">46</property>
+            <property name="y">226</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="label21">
+            <property name="width_request">195</property>
+            <property name="height_request">33</property>
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">You don't have a key?</property>
+          </object>
+          <packing>
+            <property name="x">365</property>
+            <property name="y">162</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="create_key_but1">
+            <property name="label" translatable="yes">Create a key</property>
+            <property name="width_request">126</property>
+            <property name="height_request">31</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+          </object>
+          <packing>
+            <property name="x">399</property>
+            <property name="y">202</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="connect_but">
+            <property name="label" translatable="yes">Connect</property>
+            <property name="width_request">138</property>
+            <property name="height_request">35</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+          </object>
+          <packing>
+            <property name="x">60</property>
+            <property name="y">282</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="GtkWindow" id="create_key_window">
+    <child>
+      <object class="GtkFixed" id="fixed11">
+        <property name="visible">True</property>
+        <child>
+          <object class="GtkLabel" id="label22">
+            <property name="width_request">169</property>
+            <property name="height_request">62</property>
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">Key creation:</property>
+            <property name="use_markup">True</property>
+          </object>
+          <packing>
+            <property name="x">139</property>
+            <property name="y">4</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkEntry" id="password_entry2">
+            <property name="width_request">187</property>
+            <property name="height_request">35</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="invisible_char">&#x25CF;</property>
+          </object>
+          <packing>
+            <property name="x">133</property>
+            <property name="y">124</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="label23">
+            <property name="width_request">143</property>
+            <property name="height_request">35</property>
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">Password:</property>
+          </object>
+          <packing>
+            <property name="x">153</property>
+            <property name="y">90</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="create_key_but2">
+            <property name="label" translatable="yes">Create key</property>
+            <property name="width_request">130</property>
+            <property name="height_request">35</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+          </object>
+          <packing>
+            <property name="x">163</property>
+            <property name="y">185</property>
           </packing>
         </child>
       </object>
