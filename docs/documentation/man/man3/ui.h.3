@@ -60,6 +60,18 @@
 .RI "gboolean \fBadd_contact\fP (GtkWidget *widget, GdkEventKey *event, gpointer user_data)"
 .br
 .RI "Adds a contact to the treeview if the entrys weren't empty, and closes the contact window\&. "
+.ti -1c
+.RI "gboolean \fBon_create_key_but1_press\fP (GtkWidget *widget, GdkEventKey *event, gpointer user_data)"
+.br
+.ti -1c
+.RI "gboolean \fBon_create_key_but2_press\fP (GtkWidget *widget, GdkEventKey *event, gpointer user_data)"
+.br
+.ti -1c
+.RI "gboolean \fBon_connect_but_press\fP (GtkWidget *widget, GdkEventKey *event, gpointer user_data)"
+.br
+.ti -1c
+.RI "gbooelan \fBupdate_labels\fP (GtkWidget *widget, GdkEventKey *event, gpointer user_data)"
+.br
 .in -1c
 .SH "Function Documentation"
 .PP 
@@ -102,6 +114,12 @@ Opens the contact window\&.
 gboolean Error code 
 .RE
 .PP
+
+.SS "gboolean on_connect_but_press (GtkWidget * widget, GdkEventKey * event, gpointer user_data)"
+
+.SS "gboolean on_create_key_but1_press (GtkWidget * widget, GdkEventKey * event, gpointer user_data)"
+
+.SS "gboolean on_create_key_but2_press (GtkWidget * widget, GdkEventKey * event, gpointer user_data)"
 
 .SS "gboolean on_invest_button1_press (GtkWidget * widget, GdkEventKey * event, gpointer user_data)"
 
@@ -160,7 +178,7 @@ gboolean Error code
 .PP
 
 .PP
-Definition at line 149 of file ui\&.c\&.
+Definition at line 157 of file ui\&.c\&.
 .SS "void on_main_window_destroy (__attribute((unused)) GtkWidget * widget, __attribute__((unused)) gpointer data)"
 
 .PP
@@ -257,7 +275,9 @@ int Returns 1 if there is an error, 0 otherwise
 .PP
 
 .PP
-Definition at line 53 of file ui\&.c\&.
+Definition at line 55 of file ui\&.c\&.
+.SS "gbooelan update_labels (GtkWidget * widget, GdkEventKey * event, gpointer user_data)"
+
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for PEPITAS CRYPTOCURRENCY from the source code\&.
