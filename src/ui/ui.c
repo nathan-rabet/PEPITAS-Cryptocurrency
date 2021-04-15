@@ -20,6 +20,8 @@ static GtkButton *create_key_but2;
 static GtkButton *connect_but;
 static GtkCheckButton *password_rem_but;
 
+GtkLabel *balance_1;
+GtkLabel *balance_2;
 GtkLabel *private_key_label;
 GtkLabel *stake_label1;
 GtkLabel *stake_label2;
@@ -117,6 +119,12 @@ int setup()
     connect_but = GTK_BUTTON(gtk_builder_get_object(builder, "connect_but"));
 
     private_key_label = GTK_LABEL(gtk_builder_get_object(builder, "private_key_label"));
+    balance_1 = GTK_LABEL(gtk_builder_get_object(builder, "balance_1");
+    balance_2 = GTK_LABEL(gtk_builder_get_object(builder, "balance_2");
+    stake_label1 = GTK_LABEL(gtk_builder_get_object(builder, "stake_label1");
+    stake_label2 = GTK_LABEL(gtk_builder_get_object(builder, "stake_label2");
+    stake_label3 = GTK_LABEL(gtk_builder_get_object(builder, "stake_label3");
+
     gtk_widget_hide(GTK_WIDGET(private_key_label));
     gtk_widget_hide(invest_window);
     gtk_widget_hide(recover_window);
@@ -166,6 +174,7 @@ gboolean on_transaction_button_press(__attribute__ ((unused)) GtkWidget *widget,
                     __attribute__ ((unused)) GdkEventKey *event,
                     __attribute__ ((unused))gpointer user_data)
 {
+     //Call to transaction function
      return TRUE;
 }
 
@@ -219,7 +228,7 @@ gboolean on_recover_button2_press(__attribute__ ((unused)) GtkWidget *widget,
                     __attribute__ ((unused)) GdkEventKey *event,
                     __attribute__ ((unused)) gpointer user_data)
 {
-    //Call to the invest function
+    //Call to the recover function
     gtk_widget_hide(recover_window);
     gtk_entry_set_text(recover_entry, "");
 
@@ -261,7 +270,6 @@ gboolean on_create_key_but1_press(__attribute__ ((unused)) GtkWidget *widget,
                     __attribute__ ((unused)) gpointer user_data)
 {
     gtk_widget_show(create_key_window);
-
     return TRUE;
 
 }
@@ -271,7 +279,7 @@ gboolean on_create_key_but2_press(__attribute__ ((unused)) GtkWidget *widget,
                     __attribute__ ((unused)) gpointer user_data)
 {
 
-
+    //create key function
     gtk_widget_hide(create_key_window);
     return TRUE;
 }
@@ -280,9 +288,35 @@ gboolean on_connect_but_press(__attribute__ ((unused)) GtkWidget *widget,
                     __attribute__ ((unused)) GdkEventKey *event,
                     __attribute__ ((unused)) gpointer user_data)
 {
+    //if(strcmp(gtk_entry_get_text(password_entry1), key_hash_function)
+    update_labels();
     gtk_widget_hide(connection_window);
     gtk_widget_show(window);
 
 
+    return TRUE;
+}
+
+gboolean update_labels(__attribute__ ((unused)) GtkWidget *widget,
+                    __attribute__ ((unused)) GdkEventKey *event,
+                    __attribute__ ((unused)) gpointer user_data)
+{
+    /*
+    if(atol(gtk_label_get_text(balance_1)) != Get_Balance)
+    {
+        char buff1[30];
+        sprintf(buff, "%lu",Get_Balance);
+        gtk_label_set_text(balance_1, buff1);
+        gtk_label_set_text(balance_2, buff1);
+    }
+    if(atol(gtk_label_get_text(stake_label1)) != Get_Stake)
+    {
+        char buff2[30];
+        sprintf(buff, "%lu",Get_Stake);
+        gtk_label_set_text(stake_label1, buff2);
+        gtk_label_set_text(stake_label2, buff2);
+        gtk_label_set_text(stake_label3, buff2);
+    }
+    */
     return TRUE;
 }
