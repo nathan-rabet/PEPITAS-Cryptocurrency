@@ -12,5 +12,6 @@ int main()
     printf("Starting door server\n");
     load_neighbours(IM_SERVER);
     print_neighbours(IM_SERVER, 0);
-    return init_server(DOORSERVER);
+    init_server((void *)DOORSERVER);
+    return 0;
 }

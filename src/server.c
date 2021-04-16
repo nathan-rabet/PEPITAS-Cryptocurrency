@@ -7,5 +7,6 @@
 int main()
 {
     print_neighbours(IM_SERVER, 1);
-    return init_server(NODESERVER);
+    init_server(NODESERVER);
+    return 0;
 }
