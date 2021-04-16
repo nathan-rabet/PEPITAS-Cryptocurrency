@@ -11,10 +11,12 @@
 #define NODESERVER 0
 #define DOORSERVER 1
 
+#define MAX_SERVER 20
+
 typedef struct client_connection
 {
-    struct addrinfo *info; // Adress information
-    int socket; // The client<->server connection socket
+    pthread_t thread; // Adress information
+    int clientfd; // The client<->server connection socket
 } client_connection;
 
 
@@ -25,6 +27,6 @@ typedef struct client_connection
  * @param type Type of the server
  * @return 0 if success, -1 otherwise
  */
-int init_server(char type);
+void *init_server(void *args);
 
 #endif

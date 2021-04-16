@@ -4,7 +4,7 @@
 #include "network/send_data.h"
 #include "network/get_data.h"
 
-int process_header(char *header, size_t size, int sockfd)
+int process_header(char *header, size_t size, int sockfd, char type)
 {
     if (strncmp(HD_GET_BLOCKCHAIN, header, strlen(HD_GET_BLOCKCHAIN)) == 0)
     {
@@ -33,7 +33,7 @@ int process_header(char *header, size_t size, int sockfd)
     if (strncmp(HD_SEND_CLIENT_LIST, header, 8) == 0)
     {
         printf("Recived header HD_SEND_CLIENT_LIST\n");
-        return fetch_client_list(IM_CLIENT, header, size);
+        return fetch_client_list(IM_CLIENT, header, size, type);
     }
 
     if (strncmp(HD_CONNECTION_TO_NETWORK, header, strlen(HD_CONNECTION_TO_NETWORK)) == 0)
@@ -41,10 +41,15 @@ int process_header(char *header, size_t size, int sockfd)
         printf("Recived header HD_CONNECTION_TO_NETWORK\n");
         return 1;
     }
+    if (strncmp(HD_CONNECTION_TO_NODE, header, strlen(HD_CONNECTION_TO_NODE)) == 0)
+    {
+        printf("Recived header HD_CONNECTION_TO_NODE\n");
+        return 1;
+    }
     return 0;
 }
 
-int fetch_client_list(char who, char *buffer, size_t buffer_size)
+int fetch_client_list(char who, char *buffer, size_t buffer_size, char type)
 {
     size_t buffer_index = strlen(HD_SEND_CLIENT_LIST);
 
@@ -88,6 +93,6 @@ int read_header(int sockfd)
     nb_read = safe_read(sockfd, (void *)&buffer, &buffer_size);
 
     if (nb_read != -1)
-        return process_header(buffer, nb_read, sockfd);
+        return process_header(buffer, nb_read, sockfd, NODESERVER);
     return -1;
 }

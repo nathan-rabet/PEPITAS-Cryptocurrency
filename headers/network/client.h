@@ -9,6 +9,7 @@ typedef struct Neighbour
 {
     int family;     // Use AF_* for IPv4, IPv6 or other addrinfo fields
     char *hostname; // The adress of the neighbours; NULL if free
+    int accept;     // Is ready to listen to you
 } Neighbour;
 
 typedef struct Node

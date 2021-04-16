@@ -7,12 +7,12 @@
 
 void *accept_connection(void *arg)
 {
-    int clientfd = *((int *)arg);
+    client_connection *cl_c = (client_connection *)arg;
 
     struct sockaddr_in client_addr;
     socklen_t client_addr_len = sizeof(client_addr);
 
-    if (getpeername(clientfd, (struct sockaddr * restrict) & client_addr, &client_addr_len) == -1)
+    if (getpeername(cl_c->clientfd, (struct sockaddr * restrict) & client_addr, &client_addr_len) == -1)
         err(EXIT_FAILURE, "Failed to recover client IP address\n");
 
     char ip_str[INET_ADDRSTRLEN];
@@ -21,12 +21,12 @@ void *accept_connection(void *arg)
 
     printf("New connection: '%s'\n", ip_str);
 
-    read_header(clientfd);
+    read_header(cl_c->clientfd);
 
-    close(clientfd);
-    free(arg);
+    close(cl_c->clientfd);
+    cl_c->clientfd = 0;
 
-    return NULL;
+    pthread_exit(NULL);
 }
 
 void *redirect_connection(void *arg)
@@ -64,9 +64,10 @@ void *redirect_connection(void *arg)
     pthread_exit(NULL);
 }
 
-int init_server(char type)
+void *init_server(void *args)
 {
-    // Try to connect to the peer-to-peer network
+    char type = *(char *)args;
+    printf("Opening client server...\n");
 
     struct addrinfo hints = {0}; //
     struct addrinfo *result;     //
@@ -118,26 +119,32 @@ int init_server(char type)
 
     listen(sockfd, 5);
 
+    client_connection *client_connections = calloc(MAX_SERVER, sizeof(client_connection));
+
     while (1)
     {
-        int *clientfd = calloc(1, sizeof(int));
-        *clientfd = accept(sockfd, rp->ai_addr, &rp->ai_addrlen);
-        if (*clientfd != -1)
+        if (type == DOORSERVER)
         {
             pthread_t thread;
-            switch (type)
-            {
-            case DOORSERVER:
-                pthread_create(&thread, NULL, redirect_connection, clientfd);
-                break;
-            
-            case NODESERVER:
-            default:
-                pthread_create(&thread, NULL, accept_connection, clientfd);
-                break;
-            }
+            int *clientfd = calloc(1, sizeof(int));
+            *clientfd = accept(sockfd, rp->ai_addr, &rp->ai_addrlen);
+            pthread_create(&thread, NULL, redirect_connection, clientfd);
+        }
+        
+        if (type == NODESERVER)
+        {
+        
+            int index = 0;
+            while (client_connections[index].clientfd != 0)
+                if (index < MAX_SERVER)
+                    index++;
+                else
+                    index = 0;
+            client_connections[index].clientfd = accept(sockfd, rp->ai_addr, &rp->ai_addrlen);
+            if (client_connections[index].clientfd != -1)
+                pthread_create(&client_connections->thread, NULL, accept_connection, &client_connections[index]);
+            else
+                client_connections[index].clientfd = 0;
         }
     }
-
-    return sockfd;
 }

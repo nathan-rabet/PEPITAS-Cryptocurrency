@@ -8,6 +8,7 @@
 #include "network/get_data.h"
 
 extern int connection_fd;
+static pthread_t server_t;
 
 
 void join_network_door(){
@@ -24,18 +25,43 @@ void join_network_door(){
 
     read_header(connection_fd);
     print_neighbours(IM_CLIENT, 0);
+
+    // Close connection to door server
+    close(connection_fd);
+    connection_fd = 0;
+
 }
 
 int main()
 {
     connection_fd = 0;
     printf("Starting client...\n");
+
+    printf("Try to load last client list\n");
     load_neighbours(IM_CLIENT);
+
     if (number_neighbours(IM_CLIENT) == 0)
     {
         printf("No last node for the network :(\nSearch on doors...\n");
         join_network_door();
     }
+    // Try Load Old blockchain
+
+    // Open server
+    char type = NODESERVER;
+    pthread_create(&server_t, NULL, init_server, &type);
+
+    // TEST LEN LIST
+    if (number_neighbours(IM_CLIENT) == 0)
+    {
+        printf("I'am the first node on the network\n");
+
+    }
+    else
+    {
+        printf("Update blockchain...\n");
+
+    }
     
-    return 0;
+    while (1);
 }
