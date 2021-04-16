@@ -14,5 +14,5 @@ var ui_8h =
     [ "on_recover_button2_press", "ui_8h.html#a88345e96de309a724612eabb17889636", null ],
     [ "on_transaction_button_press", "ui_8h.html#a1439f12ede3d5dde4cabb1cf9684eed7", null ],
     [ "setup", "ui_8h.html#a099d48038e444c2f3e69904477527798", null ],
-    [ "update_labels", "ui_8h.html#a8ba6fa04d7b83a4be0059953a1546381", null ]
+    [ "update_labels", "ui_8h.html#ac5df05729effbe70b2ed0e3198492a00", null ]
 ];
