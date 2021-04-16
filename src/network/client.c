@@ -100,7 +100,6 @@ void print_neighbours(char who, char mask)
         if (!(!mask && node->neighbours[i].hostname == NULL))
             printf("%02lu: hostname \"%s\", family \"%i\"\n", i ,node->neighbours[i].hostname, node->neighbours[i].family);
     }
-
 }
 
 void save_neighbours(char who)
