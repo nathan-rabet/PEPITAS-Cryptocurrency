@@ -111,6 +111,6 @@ gboolean add_contact(GtkWidget *widget, GdkEventKey *event, gpointer user_data);
 gboolean on_create_key_but1_press(GtkWidget *widget, GdkEventKey *event, gpointer user_data);
 gboolean on_create_key_but2_press(GtkWidget *widget, GdkEventKey *event, gpointer user_data);
 gboolean on_connect_but_press(GtkWidget *widget, GdkEventKey *event, gpointer user_data);
-gbooelan update_labels(GtkWidget *widget, GdkEventKey *event, gpointer user_data);
+gboolean update_labels(GtkWidget *widget, GdkEventKey *event, gpointer user_data);
 
 #endif

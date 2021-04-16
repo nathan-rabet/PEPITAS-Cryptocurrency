@@ -119,11 +119,11 @@ int setup()
     connect_but = GTK_BUTTON(gtk_builder_get_object(builder, "connect_but"));
 
     private_key_label = GTK_LABEL(gtk_builder_get_object(builder, "private_key_label"));
-    balance_1 = GTK_LABEL(gtk_builder_get_object(builder, "balance_1");
-    balance_2 = GTK_LABEL(gtk_builder_get_object(builder, "balance_2");
-    stake_label1 = GTK_LABEL(gtk_builder_get_object(builder, "stake_label1");
-    stake_label2 = GTK_LABEL(gtk_builder_get_object(builder, "stake_label2");
-    stake_label3 = GTK_LABEL(gtk_builder_get_object(builder, "stake_label3");
+    balance_1 = GTK_LABEL(gtk_builder_get_object(builder, "balance_1"));
+    balance_2 = GTK_LABEL(gtk_builder_get_object(builder, "balance_2"));
+    stake_label1 = GTK_LABEL(gtk_builder_get_object(builder, "stake_label1"));
+    stake_label2 = GTK_LABEL(gtk_builder_get_object(builder, "stake_label2"));
+    stake_label3 = GTK_LABEL(gtk_builder_get_object(builder, "stake_label3"));
 
     gtk_widget_hide(GTK_WIDGET(private_key_label));
     gtk_widget_hide(invest_window);
@@ -289,7 +289,7 @@ gboolean on_connect_but_press(__attribute__ ((unused)) GtkWidget *widget,
                     __attribute__ ((unused)) gpointer user_data)
 {
     //if(strcmp(gtk_entry_get_text(password_entry1), key_hash_function)
-    update_labels();
+    //update_labels();
     gtk_widget_hide(connection_window);
     gtk_widget_show(window);
 
