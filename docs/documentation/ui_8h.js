@@ -2,6 +2,9 @@ var ui_8h =
 [
     [ "add_contact", "ui_8h.html#a7d043349856d2b80a23d2dbe3d59735d", null ],
     [ "on_add_contact_button1_press", "ui_8h.html#a5b92cf6ae0979b3c006e00782588829b", null ],
+    [ "on_connect_but_press", "ui_8h.html#a9701dfc71a53e17b0796207efacf7cf3", null ],
+    [ "on_create_key_but1_press", "ui_8h.html#a0e9026a91a87b08fa5f6f04227565895", null ],
+    [ "on_create_key_but2_press", "ui_8h.html#aa98b162fce8b7169cab09ee15dde4acf", null ],
     [ "on_invest_button1_press", "ui_8h.html#a012280f123425ad955f347f1d3e60ecd", null ],
     [ "on_invest_button2_press", "ui_8h.html#a6c1f6075694a76c006e9d3ac97a9b418", null ],
     [ "on_main_window_delete", "ui_8h.html#a6f90e7dead0868fb0ea2deccc1868aba", null ],
@@ -10,5 +13,6 @@ var ui_8h =
     [ "on_recover_button1_press", "ui_8h.html#ae60110e8f39036449f62d0a22734f50c", null ],
     [ "on_recover_button2_press", "ui_8h.html#a88345e96de309a724612eabb17889636", null ],
     [ "on_transaction_button_press", "ui_8h.html#a1439f12ede3d5dde4cabb1cf9684eed7", null ],
-    [ "setup", "ui_8h.html#a099d48038e444c2f3e69904477527798", null ]
+    [ "setup", "ui_8h.html#a099d48038e444c2f3e69904477527798", null ],
+    [ "update_labels", "ui_8h.html#a8ba6fa04d7b83a4be0059953a1546381", null ]
 ];
