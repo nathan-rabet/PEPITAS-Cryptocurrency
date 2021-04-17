@@ -16,6 +16,7 @@
 
 #define SIZE_OF_HOSTNAME 39
 #define NB_HARD_CODED_ADDR 2
+#define MAX_CONNECTION 5
 extern const Neighbour HARD_CODED_ADDR[];
 
 #define STATIC_PORT "4242"

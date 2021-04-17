@@ -8,6 +8,8 @@
 #include "network/get_data.h"
 
 extern int connection_fd;
+extern int nb_connection;
+extern client_connection *client_connections;
 static pthread_t server_t;
 
 
@@ -32,9 +34,36 @@ void join_network_door(){
 
 }
 
+void connection_to_others(){
+    Node *node = get_my_node(IM_CLIENT);
+    for (size_t i = 0; i < MAX_NEIGHBOURS && nb_connection < MAX_CONNECTION; i++)
+    {
+        if (node->neighbours[i].hostname != NULL)
+        {
+            listen_to(node->neighbours[i]);
+        }
+    }
+    printf("Connected to %i clients! \n", nb_connection);
+}
+
+void askfornewblockchain()
+{
+    Node *node = get_my_node(IM_CLIENT);
+    for (size_t i = 0; i < MAX_NEIGHBOURS; i++)
+    {
+        if (node->neighbours[i].hostname != NULL)
+        {
+        }
+    }
+    
+}
+
 int main()
 {
+
+    client_connections = calloc(MAX_SERVER, sizeof(client_connection));
     connection_fd = 0;
+    nb_connection = 0;
     printf("Starting client...\n");
 
     printf("Try to load last client list\n");
@@ -59,6 +88,8 @@ int main()
     }
     else
     {
+        printf("Connection to others...\n");
+        connection_to_others();
         printf("Update blockchain...\n");
 
     }

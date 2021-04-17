@@ -11,6 +11,8 @@
 #include <err.h>
 
 int connection_fd = 0;
+int nb_connection = 0;
+client_connection *client_connections = NULL;
 
 Node *get_my_node(char who)
 {
@@ -230,9 +232,23 @@ int listen_to(Neighbour neighbour)
     {
         // Connection success
         connection_fd = sockfd;
+        nb_connection += 1;
+        int index = find_empty_connection(MAX_CONNECTION);
+        if (index != -1)
+            client_connections[index].clientfd = sockfd;
         return 0;
     }
 
     // Connection failed
+    return -1;
+}
+
+int find_empty_connection(int max)
+{
+    for (int i = 0; i < max; i++)
+    {
+        if (client_connections[i].clientfd == 0)
+            return i;
+    }
     return -1;
 }

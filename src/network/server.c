@@ -134,12 +134,7 @@ void *init_server(void *args)
         if (type == NODESERVER)
         {
         
-            int index = 0;
-            while (client_connections[index].clientfd != 0)
-                if (index < MAX_SERVER)
-                    index++;
-                else
-                    index = 0;
+            int index = find_empty_connection(MAX_SERVER);
             client_connections[index].clientfd = accept(sockfd, rp->ai_addr, &rp->ai_addrlen);
             if (client_connections[index].clientfd != -1)
                 pthread_create(&client_connections->thread, NULL, accept_connection, &client_connections[index]);

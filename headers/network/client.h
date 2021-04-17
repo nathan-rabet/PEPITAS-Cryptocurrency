@@ -65,4 +65,6 @@ void load_neighbours(char who);
  */
 int listen_to(Neighbour neighbour);
 
+int find_empty_connection(int max);
+
 #endif
