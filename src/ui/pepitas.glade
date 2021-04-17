@@ -853,8 +853,19 @@ therefore gaining more Pepitas</property>
             <property name="receives_default">True</property>
           </object>
           <packing>
-            <property name="x">60</property>
-            <property name="y">282</property>
+            <property name="x">58</property>
+            <property name="y">309</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="password_error_label">
+            <property name="width_request">146</property>
+            <property name="height_request">35</property>
+            <property name="visible">True</property>
+          </object>
+          <packing>
+            <property name="x">54</property>
+            <property name="y">268</property>
           </packing>
         </child>
       </object>
