@@ -26,6 +26,7 @@ GtkLabel *private_key_label;
 GtkLabel *stake_label1;
 GtkLabel *stake_label2;
 GtkLabel *stake_label3;
+GtkLabel *password_error_label;
 GtkEntry *transa_amount;
 GtkEntry *recipient_key;
 GtkEntry *invest_entry;
@@ -124,6 +125,7 @@ int setup()
     stake_label1 = GTK_LABEL(gtk_builder_get_object(builder, "stake_label1"));
     stake_label2 = GTK_LABEL(gtk_builder_get_object(builder, "stake_label2"));
     stake_label3 = GTK_LABEL(gtk_builder_get_object(builder, "stake_label3"));
+    password_error_label = GTK_LABEL(gtk_builder_get_object(builder, "password_error_label"));
 
     gtk_widget_hide(GTK_WIDGET(private_key_label));
     gtk_widget_hide(invest_window);
@@ -248,22 +250,63 @@ gboolean add_contact(__attribute__ ((unused)) GtkWidget *widget,
                     __attribute__ ((unused)) GdkEventKey *event,
                     __attribute__ ((unused)) gpointer user_data)
 {
-    if(strcmp(gtk_entry_get_text(public_key_entry_con),"") != 0 && 
-       strcmp(gtk_entry_get_text(name_entry_con),"") != 0)
+    const char *name = gtk_entry_get_text(name_entry_con);
+    const char *public_key = gtk_entry_get_text(public_key_entry_con);
+    if(strcmp(name, "") != 0 && strcmp(public_key ,"") != 0)
     {
+        FILE *contacts_f = fopen(".contacts", "a");
+        if(contacts_f == NULL)
+            err(-1, "Couldn't open contacts file");
+
         GtkTreeIter iter;
 
         gtk_tree_store_append(ts_con, &iter, NULL);
-        gtk_tree_store_set(ts_con, &iter, 0, gtk_entry_get_text(name_entry_con), -1);
-        gtk_tree_store_set(ts_con, &iter, 1, gtk_entry_get_text(public_key_entry_con), -1);
-
+        gtk_tree_store_set(ts_con, &iter, 0, name, -1);
+        gtk_tree_store_set(ts_con, &iter, 1, public_key, -1);
+        fprintf(contacts_f, "%s\n", name);
+        fprintf(contacts_f, "%s\n", public_key);
         gtk_entry_set_text(name_entry_con, "");
         gtk_entry_set_text(public_key_entry_con, "");
+
+        fclose(contacts_f);
     }
 
     gtk_widget_hide(add_contact_window);
     return TRUE;
 }
+
+
+void add_contacts_from_file(char *name, char *public_key)
+{
+    GtkTreeIter iter;
+
+    gtk_tree_store_append(ts_con, &iter, NULL);
+    gtk_tree_store_set(ts_con, &iter, 0, name, -1);
+    gtk_tree_store_set(ts_con, &iter, 1, public_key, -1);
+}
+
+void load_contacts_from_file()
+{
+    char buff[128];
+    FILE *contacts_f = fopen(".contacts", "r");
+    if(contacts_f == NULL)
+        err(-1, "Couldn't open contacts file");
+
+    while(fgets(buff, 128, contacts_f) != NULL)
+    {
+        char *name = malloc(sizeof(buff));
+        strcpy(name, buff);
+        fgets(buff, 128, contacts_f);
+        char *public_key = malloc(sizeof(buff));
+        strcpy(public_key, buff);
+        add_contacts_from_file(name, public_key);
+
+        free(name);
+        free(public_key);
+    }
+    fclose(contacts_f);
+}
+
 
 gboolean on_create_key_but1_press(__attribute__ ((unused)) GtkWidget *widget,
                     __attribute__ ((unused)) GdkEventKey *event,
@@ -278,8 +321,19 @@ gboolean on_create_key_but2_press(__attribute__ ((unused)) GtkWidget *widget,
                     __attribute__ ((unused)) GdkEventKey *event,
                     __attribute__ ((unused)) gpointer user_data)
 {
-
-    //create key function
+    /*
+    char *buff = malloc(sizeof(char) * strlen(gtk_entry_get_text(password_entry2)));
+    sprintf(buff, gtk_entry_get_text(password_entry2));
+    */
+    get_keys();
+    //char *hashed = sha384_data(buff, strlen(buff));
+    //FILE *password_f = fopen("../../.password", "wb");
+    //if(password_f == NULL)
+    //    err(-1, "Couldn't open password file");
+    //fwrite(hashed, 1, sizeof(hashed), password_f);
+    //free(buff);
+    //free(hashed);
+    //fclose(password_f);
     gtk_widget_hide(create_key_window);
     return TRUE;
 }
@@ -287,29 +341,50 @@ gboolean on_create_key_but2_press(__attribute__ ((unused)) GtkWidget *widget,
 gboolean on_connect_but_press(__attribute__ ((unused)) GtkWidget *widget,
                     __attribute__ ((unused)) GdkEventKey *event,
                     __attribute__ ((unused)) gpointer user_data)
-{
-    //if(strcmp(gtk_entry_get_text(password_entry1), key_hash_function)
-    //update_labels();
-    gtk_widget_hide(connection_window);
-    gtk_widget_show(window);
-
-
+{/*
+    FILE *password_f = fopen("../../.password", "r");
+    if(password_f == NULL)
+        err(-1, "Couldn't open password file");
+    char *buff = malloc(sizeof(char) * strlen(gtk_entry_get_text(password_entry1)));
+    sprintf(buff, gtk_entry_get_text(password_entry1));
+    char *hashed = sha384_data(buff, strlen(buff));
+    char *buff_hashed = malloc(strlen(hashed) * sizeof(char));
+    fread(buff_hashed, 1, strlen(hashed), password_f);
+    if(strcmp(buff_hashed, hashed) != 0)
+    {
+        free(buff_hashed);
+        free(hashed);
+        free(buff);
+        fclose(password_f);
+        gtk_label_set_text(password_error_label, "Wrong password");
+    }
+    else
+    {
+        free(buff_hashed);
+        free(hashed);
+        free(buff);
+        fclose(password_f);*/
+        update_labels();
+        load_contacts_from_file();
+        gtk_widget_hide(connection_window);
+        gtk_widget_show(window);
+    //}
     return TRUE;
 }
 
-gboolean update_labels(__attribute__ ((unused)) GtkWidget *widget,
-                    __attribute__ ((unused)) GdkEventKey *event,
-                    __attribute__ ((unused)) gpointer user_data)
+void update_labels()
 {
-    /*
-    if(atol(gtk_label_get_text(balance_1)) != Get_Balance)
+
+    Wallet *wallet = get_my_wallet();
+    double money = wallet->amount / 100000000.0f;
+    if(atol(gtk_label_get_text(balance_1)) != money)
     {
         char buff1[30];
-        sprintf(buff, "%lu",Get_Balance);
+        sprintf(buff1, "%lf", money);
         gtk_label_set_text(balance_1, buff1);
         gtk_label_set_text(balance_2, buff1);
     }
-    if(atol(gtk_label_get_text(stake_label1)) != Get_Stake)
+    /*if(atol(gtk_label_get_text(stake_label1)) != Get_Stake)
     {
         char buff2[30];
         sprintf(buff, "%lu",Get_Stake);
@@ -318,5 +393,4 @@ gboolean update_labels(__attribute__ ((unused)) GtkWidget *widget,
         gtk_label_set_text(stake_label3, buff2);
     }
     */
-    return TRUE;
 }
