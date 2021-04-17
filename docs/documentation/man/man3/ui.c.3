@@ -48,6 +48,12 @@
 .RI "gboolean \fBadd_contact\fP (__attribute__((unused)) GtkWidget *widget, __attribute__((unused)) GdkEventKey *event, __attribute__((unused)) gpointer user_data)"
 .br
 .ti -1c
+.RI "void \fBadd_contacts_from_file\fP (char *name, char *public_key)"
+.br
+.ti -1c
+.RI "void \fBload_contacts_from_file\fP ()"
+.br
+.ti -1c
 .RI "gboolean \fBon_create_key_but1_press\fP (__attribute__((unused)) GtkWidget *widget, __attribute__((unused)) GdkEventKey *event, __attribute__((unused)) gpointer user_data)"
 .br
 .ti -1c
@@ -57,7 +63,7 @@
 .RI "gboolean \fBon_connect_but_press\fP (__attribute__((unused)) GtkWidget *widget, __attribute__((unused)) GdkEventKey *event, __attribute__((unused)) gpointer user_data)"
 .br
 .ti -1c
-.RI "gboolean \fBupdate_labels\fP (__attribute__((unused)) GtkWidget *widget, __attribute__((unused)) GdkEventKey *event, __attribute__((unused)) gpointer user_data)"
+.RI "void \fBupdate_labels\fP ()"
 .br
 .in -1c
 .SS "Variables"
@@ -80,6 +86,9 @@
 .br
 .ti -1c
 .RI "GtkLabel * \fBstake_label3\fP"
+.br
+.ti -1c
+.RI "GtkLabel * \fBpassword_error_label\fP"
 .br
 .ti -1c
 .RI "GtkEntry * \fBtransa_amount\fP"
@@ -159,31 +168,39 @@
 .SS "gboolean add_contact (__attribute__((unused)) GtkWidget * widget, __attribute__((unused)) GdkEventKey * event, __attribute__((unused)) gpointer user_data)"
 
 .PP
-Definition at line 247 of file ui\&.c\&.
+Definition at line 249 of file ui\&.c\&.
+.SS "void add_contacts_from_file (char * name, char * public_key)"
+
+.PP
+Definition at line 279 of file ui\&.c\&.
+.SS "void load_contacts_from_file ()"
+
+.PP
+Definition at line 288 of file ui\&.c\&.
 .SS "gboolean on_add_contact_button1_press (__attribute__((unused)) GtkWidget * widget, __attribute__((unused)) GdkEventKey * event, __attribute__((unused)) gpointer user_data)"
 
 .PP
-Definition at line 238 of file ui\&.c\&.
+Definition at line 240 of file ui\&.c\&.
 .SS "gboolean on_connect_but_press (__attribute__((unused)) GtkWidget * widget, __attribute__((unused)) GdkEventKey * event, __attribute__((unused)) gpointer user_data)"
 
 .PP
-Definition at line 287 of file ui\&.c\&.
+Definition at line 341 of file ui\&.c\&.
 .SS "gboolean on_create_key_but1_press (__attribute__((unused)) GtkWidget * widget, __attribute__((unused)) GdkEventKey * event, __attribute__((unused)) gpointer user_data)"
 
 .PP
-Definition at line 268 of file ui\&.c\&.
+Definition at line 311 of file ui\&.c\&.
 .SS "gboolean on_create_key_but2_press (__attribute__((unused)) GtkWidget * widget, __attribute__((unused)) GdkEventKey * event, __attribute__((unused)) gpointer user_data)"
 
 .PP
-Definition at line 277 of file ui\&.c\&.
+Definition at line 320 of file ui\&.c\&.
 .SS "gboolean on_invest_button1_press (__attribute__((unused)) GtkWidget * widget, __attribute__((unused)) GdkEventKey * event, __attribute__((unused)) gpointer user_data)"
 
 .PP
-Definition at line 199 of file ui\&.c\&.
+Definition at line 201 of file ui\&.c\&.
 .SS "gboolean on_invest_button2_press (__attribute__((unused)) GtkWidget * widget, __attribute__((unused)) GdkEventKey * event, __attribute__((unused)) gpointer user_data)"
 
 .PP
-Definition at line 208 of file ui\&.c\&.
+Definition at line 210 of file ui\&.c\&.
 .SS "gboolean on_main_window_delete (GtkWidget * widget, __attribute__((unused)) gpointer data)"
 
 .PP
@@ -201,27 +218,27 @@ gboolean Error code
 .PP
 
 .PP
-Definition at line 157 of file ui\&.c\&.
+Definition at line 159 of file ui\&.c\&.
 .SS "void on_main_window_destroy (__attribute__((unused)) GtkWidget * widget, __attribute__((unused)) gpointer data)"
 
 .PP
-Definition at line 166 of file ui\&.c\&.
+Definition at line 168 of file ui\&.c\&.
 .SS "gboolean on_pkey_button_press (__attribute__((unused)) GtkWidget * widget, __attribute__((unused)) GdkEventKey * event, __attribute__((unused)) gpointer user_data)"
 
 .PP
-Definition at line 181 of file ui\&.c\&.
+Definition at line 183 of file ui\&.c\&.
 .SS "gboolean on_recover_button1_press (__attribute__((unused)) GtkWidget * widget, __attribute__((unused)) GdkEventKey * event, __attribute__((unused)) gpointer user_data)"
 
 .PP
-Definition at line 218 of file ui\&.c\&.
+Definition at line 220 of file ui\&.c\&.
 .SS "gboolean on_recover_button2_press (__attribute__((unused)) GtkWidget * widget, __attribute__((unused)) GdkEventKey * event, __attribute__((unused)) gpointer user_data)"
 
 .PP
-Definition at line 227 of file ui\&.c\&.
+Definition at line 229 of file ui\&.c\&.
 .SS "gboolean on_transaction_button_press (__attribute__((unused)) GtkWidget * widget, __attribute__((unused)) GdkEventKey * event, __attribute__((unused)) gpointer user_data)"
 
 .PP
-Definition at line 173 of file ui\&.c\&.
+Definition at line 175 of file ui\&.c\&.
 .SS "int setup ()"
 
 .PP
@@ -234,11 +251,11 @@ int Returns 1 if there is an error, 0 otherwise
 .PP
 
 .PP
-Definition at line 55 of file ui\&.c\&.
-.SS "gboolean update_labels (__attribute__((unused)) GtkWidget * widget, __attribute__((unused)) GdkEventKey * event, __attribute__((unused)) gpointer user_data)"
+Definition at line 56 of file ui\&.c\&.
+.SS "void update_labels ()"
 
 .PP
-Definition at line 300 of file ui\&.c\&.
+Definition at line 375 of file ui\&.c\&.
 .SH "Variable Documentation"
 .PP 
 .SS "GtkLabel* balance_1"
@@ -252,67 +269,71 @@ Definition at line 24 of file ui\&.c\&.
 .SS "GtkCellRenderer* cr1_con"
 
 .PP
-Definition at line 41 of file ui\&.c\&.
+Definition at line 42 of file ui\&.c\&.
 .SS "GtkCellRenderer* cr1_th"
 
 .PP
-Definition at line 49 of file ui\&.c\&.
+Definition at line 50 of file ui\&.c\&.
 .SS "GtkCellRenderer* cr2_con"
 
 .PP
-Definition at line 42 of file ui\&.c\&.
+Definition at line 43 of file ui\&.c\&.
 .SS "GtkCellRenderer* cr2_th"
 
 .PP
-Definition at line 50 of file ui\&.c\&.
+Definition at line 51 of file ui\&.c\&.
 .SS "GtkCellRenderer* cr3_th"
 
 .PP
-Definition at line 51 of file ui\&.c\&.
+Definition at line 52 of file ui\&.c\&.
 .SS "GtkCellRenderer* cr4_th"
 
 .PP
-Definition at line 52 of file ui\&.c\&.
+Definition at line 53 of file ui\&.c\&.
 .SS "GtkTreeViewColumn* cx1_con"
 
 .PP
-Definition at line 39 of file ui\&.c\&.
+Definition at line 40 of file ui\&.c\&.
 .SS "GtkTreeViewColumn* cx1_th"
 
 .PP
-Definition at line 45 of file ui\&.c\&.
+Definition at line 46 of file ui\&.c\&.
 .SS "GtkTreeViewColumn* cx2_con"
 
 .PP
-Definition at line 40 of file ui\&.c\&.
+Definition at line 41 of file ui\&.c\&.
 .SS "GtkTreeViewColumn* cx2_th"
 
 .PP
-Definition at line 46 of file ui\&.c\&.
+Definition at line 47 of file ui\&.c\&.
 .SS "GtkTreeViewColumn* cx3_th"
 
 .PP
-Definition at line 47 of file ui\&.c\&.
+Definition at line 48 of file ui\&.c\&.
 .SS "GtkTreeViewColumn* cx4_th"
 
 .PP
-Definition at line 48 of file ui\&.c\&.
+Definition at line 49 of file ui\&.c\&.
 .SS "GtkEntry* invest_entry"
 
 .PP
-Definition at line 31 of file ui\&.c\&.
+Definition at line 32 of file ui\&.c\&.
 .SS "GtkEntry* name_entry_con"
 
 .PP
-Definition at line 33 of file ui\&.c\&.
+Definition at line 34 of file ui\&.c\&.
 .SS "GtkEntry* password_entry1"
 
 .PP
-Definition at line 35 of file ui\&.c\&.
+Definition at line 36 of file ui\&.c\&.
 .SS "GtkEntry* password_entry2"
 
 .PP
-Definition at line 36 of file ui\&.c\&.
+Definition at line 37 of file ui\&.c\&.
+.SS "GtkLabel* password_error_label"
+
+.PP
+Definition at line 29 of file ui\&.c\&.
 .SS "GtkLabel* private_key_label"
 
 .PP
@@ -320,15 +341,15 @@ Definition at line 25 of file ui\&.c\&.
 .SS "GtkEntry* public_key_entry_con"
 
 .PP
-Definition at line 34 of file ui\&.c\&.
+Definition at line 35 of file ui\&.c\&.
 .SS "GtkEntry* recipient_key"
 
 .PP
-Definition at line 30 of file ui\&.c\&.
+Definition at line 31 of file ui\&.c\&.
 .SS "GtkEntry* recover_entry"
 
 .PP
-Definition at line 32 of file ui\&.c\&.
+Definition at line 33 of file ui\&.c\&.
 .SS "GtkLabel* stake_label1"
 
 .PP
@@ -344,23 +365,23 @@ Definition at line 28 of file ui\&.c\&.
 .SS "GtkEntry* transa_amount"
 
 .PP
-Definition at line 29 of file ui\&.c\&.
+Definition at line 30 of file ui\&.c\&.
 .SS "GtkTreeStore* ts_con"
 
 .PP
-Definition at line 38 of file ui\&.c\&.
+Definition at line 39 of file ui\&.c\&.
 .SS "GtkTreeStore* ts_th"
 
 .PP
-Definition at line 44 of file ui\&.c\&.
+Definition at line 45 of file ui\&.c\&.
 .SS "GtkTreeView* tv_con"
 
 .PP
-Definition at line 37 of file ui\&.c\&.
+Definition at line 38 of file ui\&.c\&.
 .SS "GtkTreeView* tv_th"
 
 .PP
-Definition at line 43 of file ui\&.c\&.
+Definition at line 44 of file ui\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for PEPITAS CRYPTOCURRENCY from the source code\&.

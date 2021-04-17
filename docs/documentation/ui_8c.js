@@ -1,6 +1,8 @@
 var ui_8c =
 [
     [ "add_contact", "ui_8c.html#ad00b3507b4bb09e32b88b8c4e015c7bf", null ],
+    [ "add_contacts_from_file", "ui_8c.html#a3cce6cef71ccb6ae5dd4c9ca852eb31f", null ],
+    [ "load_contacts_from_file", "ui_8c.html#a73fe931a2fbeb2086428ad91c0cbc05e", null ],
     [ "on_add_contact_button1_press", "ui_8c.html#a399dcb9da92a8915352bb0f96df00bc9", null ],
     [ "on_connect_but_press", "ui_8c.html#aa118feebec7cfa09ac8e958107872c47", null ],
     [ "on_create_key_but1_press", "ui_8c.html#ac37428318289fb0254b3cd9a9dec6b6e", null ],
@@ -14,7 +16,7 @@ var ui_8c =
     [ "on_recover_button2_press", "ui_8c.html#ad8f99ac51861be5da7d885cdd2e26ea0", null ],
     [ "on_transaction_button_press", "ui_8c.html#a5e22e78adc3ccb25f63ee84836cc83e4", null ],
     [ "setup", "ui_8c.html#a099d48038e444c2f3e69904477527798", null ],
-    [ "update_labels", "ui_8c.html#a2042c05e0501bd2462d1f5eec71efb9c", null ],
+    [ "update_labels", "ui_8c.html#af1854ec5ff4099ed69a1b51a3fd3b3df", null ],
     [ "balance_1", "ui_8c.html#ab43804688ba42c6200ce731eb35c5dc8", null ],
     [ "balance_2", "ui_8c.html#a868e43b57c30e358fe58e0deb101f42a", null ],
     [ "cr1_con", "ui_8c.html#a9d55d9709838a1f8953fd269241b363d", null ],
@@ -33,6 +35,7 @@ var ui_8c =
     [ "name_entry_con", "ui_8c.html#af7c418915599a0feee638b616aca25ec", null ],
     [ "password_entry1", "ui_8c.html#ad339cc79acfe1685a9cc695347628fed", null ],
     [ "password_entry2", "ui_8c.html#aa345dbc39b26d7892d6b987c3b7dd280", null ],
+    [ "password_error_label", "ui_8c.html#a8b12d0127ba1f869e04b7c403ea82ff2", null ],
     [ "private_key_label", "ui_8c.html#ad8381a6084abf1920354514475732b69", null ],
     [ "public_key_entry_con", "ui_8c.html#a1232a61f99830b200a87137da4ad0232", null ],
     [ "recipient_key", "ui_8c.html#a9856845eebffe4f02ca0b6c491816d1b", null ],
