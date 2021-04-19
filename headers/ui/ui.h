@@ -4,7 +4,11 @@
 #include <gtk/gtk.h>
 #include <stdio.h>
 #include <string.h>
-
+#include <err.h>
+#include <time.h>
+#include "../cryptosystem/rsa.h"
+#include "../cryptosystem/hash.h"
+#include "../core/blockchain/wallet.h"
 
 /**
  * @brief Setups the gtk widgets for the GUI
@@ -111,6 +115,13 @@ gboolean add_contact(GtkWidget *widget, GdkEventKey *event, gpointer user_data);
 gboolean on_create_key_but1_press(GtkWidget *widget, GdkEventKey *event, gpointer user_data);
 gboolean on_create_key_but2_press(GtkWidget *widget, GdkEventKey *event, gpointer user_data);
 gboolean on_connect_but_press(GtkWidget *widget, GdkEventKey *event, gpointer user_data);
-gboolean update_labels(GtkWidget *widget, GdkEventKey *event, gpointer user_data);
+void add_contacts_from_file(char *name, char *public_key);
+void load_contacts_from_file();
+void add_contact_to_combobox(char *name);
+void update_labels();
+void add_transaction(double amount, char *public_key, char *date);
+void add_transaction_from_file(double amount, char *public_key, char *date);
+void load_transaction_from_file();
+char *get_public_key_from_contacts(const char *name);
 
 #endif

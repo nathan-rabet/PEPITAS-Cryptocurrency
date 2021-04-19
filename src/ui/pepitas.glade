@@ -159,13 +159,17 @@
   <object class="GtkTreeStore" id="treestoreTH">
     <columns>
       <!-- column-name Amount -->
-      <column type="glong"/>
+      <column type="gdouble"/>
       <!-- column-name Public -->
       <column type="gchararray"/>
       <!-- column-name Date -->
       <column type="gchararray"/>
-      <!-- column-name Validated -->
-      <column type="gboolean"/>
+    </columns>
+  </object>
+  <object class="GtkListStore" id="liststoreCON">
+    <columns>
+      <!-- column-name name -->
+      <column type="gchararray"/>
     </columns>
   </object>
   <object class="GtkWindow" id="Pepitas">
@@ -379,10 +383,25 @@
               </packing>
             </child>
             <child>
-              <object class="GtkComboBox" id="combobox1">
+              <object class="GtkComboBox" id="contacts_combo">
                 <property name="width_request">196</property>
                 <property name="height_request">25</property>
                 <property name="visible">True</property>
+                <property name="model">liststoreCON</property>
+                <child>
+                  <object class="GtkCellRendererText" id="cellrenderertext6">
+                    <property name="cell_background_gdk">#ffffffffffff</property>
+                    <property name="xpad">2</property>
+                    <property name="ypad">2</property>
+                    <property name="xalign">0</property>
+                    <property name="background_gdk">#ffffffffffff</property>
+                    <property name="font">Normal</property>
+                    <property name="foreground_gdk">#000000000000</property>
+                  </object>
+                  <attributes>
+                    <attribute name="text">0</attribute>
+                  </attributes>
+                </child>
               </object>
               <packing>
                 <property name="x">409</property>
@@ -403,14 +422,14 @@
             </child>
             <child>
               <object class="GtkLabel" id="balance_1">
-                <property name="width_request">120</property>
-                <property name="height_request">28</property>
+                <property name="width_request">112</property>
+                <property name="height_request">30</property>
                 <property name="visible">True</property>
                 <property name="label" translatable="yes">0</property>
               </object>
               <packing>
-                <property name="x">167</property>
-                <property name="y">85</property>
+                <property name="x">179</property>
+                <property name="y">80</property>
               </packing>
             </child>
             <child>
@@ -635,17 +654,6 @@ therefore gaining more Pepitas</property>
                           <object class="GtkCellRendererText" id="cellrenderertext5"/>
                           <attributes>
                             <attribute name="text">2</attribute>
-                          </attributes>
-                        </child>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkTreeViewColumn" id="Validated">
-                        <property name="title">Validated</property>
-                        <child>
-                          <object class="GtkCellRendererText" id="cellrenderertext6"/>
-                          <attributes>
-                            <attribute name="text">3</attribute>
                           </attributes>
                         </child>
                       </object>
