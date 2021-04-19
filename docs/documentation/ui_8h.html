@@ -92,6 +92,11 @@ $(document).ready(function(){initNavTree('ui_8h.html',''); initResizable(); });
 <div class="textblock"><code>#include &lt;gtk/gtk.h&gt;</code><br />
 <code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
+<code>#include &lt;err.h&gt;</code><br />
+<code>#include &lt;time.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="rsa_8h_source.html">../cryptosystem/rsa.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="hash_8h_source.html">../cryptosystem/hash.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="wallet_8h_source.html">../core/blockchain/wallet.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for ui.h:</div>
 <div class="dyncontent">
@@ -148,8 +153,22 @@ Functions</h2></td></tr>
 <tr class="separator:aa98b162fce8b7169cab09ee15dde4acf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9701dfc71a53e17b0796207efacf7cf3"><td class="memItemLeft" align="right" valign="top">gboolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8h.html#a9701dfc71a53e17b0796207efacf7cf3">on_connect_but_press</a> (GtkWidget *widget, GdkEventKey *event, gpointer user_data)</td></tr>
 <tr class="separator:a9701dfc71a53e17b0796207efacf7cf3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac5df05729effbe70b2ed0e3198492a00"><td class="memItemLeft" align="right" valign="top">gboolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8h.html#ac5df05729effbe70b2ed0e3198492a00">update_labels</a> (GtkWidget *widget, GdkEventKey *event, gpointer user_data)</td></tr>
-<tr class="separator:ac5df05729effbe70b2ed0e3198492a00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3cce6cef71ccb6ae5dd4c9ca852eb31f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8h.html#a3cce6cef71ccb6ae5dd4c9ca852eb31f">add_contacts_from_file</a> (char *name, char *public_key)</td></tr>
+<tr class="separator:a3cce6cef71ccb6ae5dd4c9ca852eb31f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73fe931a2fbeb2086428ad91c0cbc05e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8h.html#a73fe931a2fbeb2086428ad91c0cbc05e">load_contacts_from_file</a> ()</td></tr>
+<tr class="separator:a73fe931a2fbeb2086428ad91c0cbc05e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acfeb1c1504a9c8dab16b48f4ee0a8324"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8h.html#acfeb1c1504a9c8dab16b48f4ee0a8324">add_contact_to_combobox</a> (char *name)</td></tr>
+<tr class="separator:acfeb1c1504a9c8dab16b48f4ee0a8324"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1854ec5ff4099ed69a1b51a3fd3b3df"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8h.html#af1854ec5ff4099ed69a1b51a3fd3b3df">update_labels</a> ()</td></tr>
+<tr class="separator:af1854ec5ff4099ed69a1b51a3fd3b3df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8aad46e2f9e2078aaedfc1d301416dd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8h.html#ab8aad46e2f9e2078aaedfc1d301416dd">add_transaction</a> (double amount, char *public_key, char *date)</td></tr>
+<tr class="separator:ab8aad46e2f9e2078aaedfc1d301416dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:addfd36df97e95e6d913426e07a659057"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8h.html#addfd36df97e95e6d913426e07a659057">add_transaction_from_file</a> (double amount, char *public_key, char *date)</td></tr>
+<tr class="separator:addfd36df97e95e6d913426e07a659057"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aafd81ce434d4f1abdba55e0ffc6b719f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8h.html#aafd81ce434d4f1abdba55e0ffc6b719f">load_transaction_from_file</a> ()</td></tr>
+<tr class="separator:aafd81ce434d4f1abdba55e0ffc6b719f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ff6af24bc9be5261b9ef9f6169c91da"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8h.html#a0ff6af24bc9be5261b9ef9f6169c91da">get_public_key_from_contacts</a> (const char *name)</td></tr>
+<tr class="separator:a0ff6af24bc9be5261b9ef9f6169c91da"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="a7d043349856d2b80a23d2dbe3d59735d"></a>
@@ -194,6 +213,226 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>gboolean Error code </dd></dl>
+
+</div>
+</div>
+<a id="acfeb1c1504a9c8dab16b48f4ee0a8324"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acfeb1c1504a9c8dab16b48f4ee0a8324">&#9670;&nbsp;</a></span>add_contact_to_combobox()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void add_contact_to_combobox </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00362">362</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="ui_8h_acfeb1c1504a9c8dab16b48f4ee0a8324_icgraph.png" border="0" usemap="#ui_8h_acfeb1c1504a9c8dab16b48f4ee0a8324_icgraph" alt=""/></div>
+<!-- MAP 2 -->
+</div>
+
+</div>
+</div>
+<a id="a3cce6cef71ccb6ae5dd4c9ca852eb31f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3cce6cef71ccb6ae5dd4c9ca852eb31f">&#9670;&nbsp;</a></span>add_contacts_from_file()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void add_contacts_from_file </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>public_key</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00370">370</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="ui_8h_a3cce6cef71ccb6ae5dd4c9ca852eb31f_icgraph.png" border="0" usemap="#ui_8h_a3cce6cef71ccb6ae5dd4c9ca852eb31f_icgraph" alt=""/></div>
+<!-- MAP 3 -->
+</div>
+
+</div>
+</div>
+<a id="ab8aad46e2f9e2078aaedfc1d301416dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8aad46e2f9e2078aaedfc1d301416dd">&#9670;&nbsp;</a></span>add_transaction()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void add_transaction </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>amount</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>public_key</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>date</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00205">205</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="ui_8h_ab8aad46e2f9e2078aaedfc1d301416dd_icgraph.png" border="0" usemap="#ui_8h_ab8aad46e2f9e2078aaedfc1d301416dd_icgraph" alt=""/></div>
+<!-- MAP 4 -->
+</div>
+
+</div>
+</div>
+<a id="addfd36df97e95e6d913426e07a659057"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#addfd36df97e95e6d913426e07a659057">&#9670;&nbsp;</a></span>add_transaction_from_file()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void add_transaction_from_file </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>amount</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>public_key</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>date</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00224">224</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="ui_8h_addfd36df97e95e6d913426e07a659057_icgraph.png" border="0" usemap="#ui_8h_addfd36df97e95e6d913426e07a659057_icgraph" alt=""/></div>
+<!-- MAP 5 -->
+</div>
+
+</div>
+</div>
+<a id="a0ff6af24bc9be5261b9ef9f6169c91da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ff6af24bc9be5261b9ef9f6169c91da">&#9670;&nbsp;</a></span>get_public_key_from_contacts()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char* get_public_key_from_contacts </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00401">401</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="ui_8h_a0ff6af24bc9be5261b9ef9f6169c91da_icgraph.png" border="0" usemap="#ui_8h_a0ff6af24bc9be5261b9ef9f6169c91da_icgraph" alt=""/></div>
+<!-- MAP 6 -->
+</div>
+
+</div>
+</div>
+<a id="a73fe931a2fbeb2086428ad91c0cbc05e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73fe931a2fbeb2086428ad91c0cbc05e">&#9670;&nbsp;</a></span>load_contacts_from_file()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void load_contacts_from_file </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00379">379</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="ui_8h_a73fe931a2fbeb2086428ad91c0cbc05e_cgraph.png" border="0" usemap="#ui_8h_a73fe931a2fbeb2086428ad91c0cbc05e_cgraph" alt=""/></div>
+<!-- MAP 7 -->
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="ui_8h_a73fe931a2fbeb2086428ad91c0cbc05e_icgraph.png" border="0" usemap="#ui_8h_a73fe931a2fbeb2086428ad91c0cbc05e_icgraph" alt=""/></div>
+<!-- MAP 8 -->
+</div>
+
+</div>
+</div>
+<a id="aafd81ce434d4f1abdba55e0ffc6b719f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aafd81ce434d4f1abdba55e0ffc6b719f">&#9670;&nbsp;</a></span>load_transaction_from_file()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void load_transaction_from_file </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -701,47 +940,44 @@ Functions</h2></td></tr>
 <p>Setups the gtk widgets for the GUI. </p>
 <dl class="section return"><dt>Returns</dt><dd>int Returns 1 if there is an error, 0 otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00056">56</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00057">57</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="ui_8h_a099d48038e444c2f3e69904477527798_icgraph.png" border="0" usemap="#ui_8h_a099d48038e444c2f3e69904477527798_icgraph" alt=""/></div>
-<!-- MAP 2 -->
+<!-- MAP 9 -->
 </div>
 
 </div>
 </div>
-<a id="ac5df05729effbe70b2ed0e3198492a00"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac5df05729effbe70b2ed0e3198492a00">&#9670;&nbsp;</a></span>update_labels()</h2>
+<a id="af1854ec5ff4099ed69a1b51a3fd3b3df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af1854ec5ff4099ed69a1b51a3fd3b3df">&#9670;&nbsp;</a></span>update_labels()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">gboolean update_labels </td>
+          <td class="memname">void update_labels </td>
           <td>(</td>
-          <td class="paramtype">GtkWidget *&#160;</td>
-          <td class="paramname"><em>widget</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
-          <td class="paramtype">GdkEventKey *&#160;</td>
-          <td class="paramname"><em>event</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">gpointer&#160;</td>
-          <td class="paramname"><em>user_data</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00496">496</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="ui_8h_af1854ec5ff4099ed69a1b51a3fd3b3df_cgraph.png" border="0" usemap="#ui_8h_af1854ec5ff4099ed69a1b51a3fd3b3df_cgraph" alt=""/></div>
+<!-- MAP 10 -->
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="ui_8h_af1854ec5ff4099ed69a1b51a3fd3b3df_icgraph.png" border="0" usemap="#ui_8h_af1854ec5ff4099ed69a1b51a3fd3b3df_icgraph" alt=""/></div>
+<!-- MAP 11 -->
+</div>
 
 </div>
 </div>

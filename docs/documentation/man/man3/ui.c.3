@@ -1,4 +1,4 @@
-.TH "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/src/ui/ui.c" 3 "Sat Apr 17 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
+.TH "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/src/ui/ui.c" 3 "Mon Apr 19 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -27,6 +27,15 @@
 .RI "gboolean \fBon_transaction_button_press\fP (__attribute__((unused)) GtkWidget *widget, __attribute__((unused)) GdkEventKey *event, __attribute__((unused)) gpointer user_data)"
 .br
 .ti -1c
+.RI "void \fBadd_transaction\fP (double amount, char *public_key, char *date)"
+.br
+.ti -1c
+.RI "void \fBadd_transaction_from_file\fP (double amount, char *public_key, char *date)"
+.br
+.ti -1c
+.RI "void \fBload_transactions_from_file\fP ()"
+.br
+.ti -1c
 .RI "gboolean \fBon_pkey_button_press\fP (__attribute__((unused)) GtkWidget *widget, __attribute__((unused)) GdkEventKey *event, __attribute__((unused)) gpointer user_data)"
 .br
 .ti -1c
@@ -48,10 +57,16 @@
 .RI "gboolean \fBadd_contact\fP (__attribute__((unused)) GtkWidget *widget, __attribute__((unused)) GdkEventKey *event, __attribute__((unused)) gpointer user_data)"
 .br
 .ti -1c
+.RI "void \fBadd_contact_to_combobox\fP (char *name)"
+.br
+.ti -1c
 .RI "void \fBadd_contacts_from_file\fP (char *name, char *public_key)"
 .br
 .ti -1c
 .RI "void \fBload_contacts_from_file\fP ()"
+.br
+.ti -1c
+.RI "char * \fBget_public_key_from_contacts\fP (const char *name)"
 .br
 .ti -1c
 .RI "gboolean \fBon_create_key_but1_press\fP (__attribute__((unused)) GtkWidget *widget, __attribute__((unused)) GdkEventKey *event, __attribute__((unused)) gpointer user_data)"
@@ -148,9 +163,6 @@
 .RI "GtkTreeViewColumn * \fBcx3_th\fP"
 .br
 .ti -1c
-.RI "GtkTreeViewColumn * \fBcx4_th\fP"
-.br
-.ti -1c
 .RI "GtkCellRenderer * \fBcr1_th\fP"
 .br
 .ti -1c
@@ -160,7 +172,13 @@
 .RI "GtkCellRenderer * \fBcr3_th\fP"
 .br
 .ti -1c
-.RI "GtkCellRenderer * \fBcr4_th\fP"
+.RI "GtkComboBox * \fBcontacts_combo\fP"
+.br
+.ti -1c
+.RI "GtkListStore * \fBls_combo\fP"
+.br
+.ti -1c
+.RI "GtkCellRenderer * \fBcr1_combo\fP"
 .br
 .in -1c
 .SH "Function Documentation"
@@ -168,39 +186,59 @@
 .SS "gboolean add_contact (__attribute__((unused)) GtkWidget * widget, __attribute__((unused)) GdkEventKey * event, __attribute__((unused)) gpointer user_data)"
 
 .PP
-Definition at line 249 of file ui\&.c\&.
+Definition at line 333 of file ui\&.c\&.
+.SS "void add_contact_to_combobox (char * name)"
+
+.PP
+Definition at line 362 of file ui\&.c\&.
 .SS "void add_contacts_from_file (char * name, char * public_key)"
 
 .PP
-Definition at line 279 of file ui\&.c\&.
+Definition at line 370 of file ui\&.c\&.
+.SS "void add_transaction (double amount, char * public_key, char * date)"
+
+.PP
+Definition at line 205 of file ui\&.c\&.
+.SS "void add_transaction_from_file (double amount, char * public_key, char * date)"
+
+.PP
+Definition at line 224 of file ui\&.c\&.
+.SS "char* get_public_key_from_contacts (const char * name)"
+
+.PP
+Definition at line 401 of file ui\&.c\&.
 .SS "void load_contacts_from_file ()"
 
 .PP
-Definition at line 288 of file ui\&.c\&.
+Definition at line 379 of file ui\&.c\&.
+.SS "void load_transactions_from_file ()"
+
+.PP
+Definition at line 234 of file ui\&.c\&.
 .SS "gboolean on_add_contact_button1_press (__attribute__((unused)) GtkWidget * widget, __attribute__((unused)) GdkEventKey * event, __attribute__((unused)) gpointer user_data)"
 
 .PP
-Definition at line 240 of file ui\&.c\&.
+Definition at line 324 of file ui\&.c\&.
 .SS "gboolean on_connect_but_press (__attribute__((unused)) GtkWidget * widget, __attribute__((unused)) GdkEventKey * event, __attribute__((unused)) gpointer user_data)"
 
 .PP
-Definition at line 341 of file ui\&.c\&.
+Definition at line 461 of file ui\&.c\&.
 .SS "gboolean on_create_key_but1_press (__attribute__((unused)) GtkWidget * widget, __attribute__((unused)) GdkEventKey * event, __attribute__((unused)) gpointer user_data)"
 
 .PP
-Definition at line 311 of file ui\&.c\&.
+Definition at line 431 of file ui\&.c\&.
 .SS "gboolean on_create_key_but2_press (__attribute__((unused)) GtkWidget * widget, __attribute__((unused)) GdkEventKey * event, __attribute__((unused)) gpointer user_data)"
 
 .PP
-Definition at line 320 of file ui\&.c\&.
+Definition at line 440 of file ui\&.c\&.
 .SS "gboolean on_invest_button1_press (__attribute__((unused)) GtkWidget * widget, __attribute__((unused)) GdkEventKey * event, __attribute__((unused)) gpointer user_data)"
 
 .PP
-Definition at line 201 of file ui\&.c\&.
+Definition at line 285 of file ui\&.c\&.
 .SS "gboolean on_invest_button2_press (__attribute__((unused)) GtkWidget * widget, __attribute__((unused)) GdkEventKey * event, __attribute__((unused)) gpointer user_data)"
 
 .PP
-Definition at line 210 of file ui\&.c\&.
+Definition at line 294 of file ui\&.c\&.
 .SS "gboolean on_main_window_delete (GtkWidget * widget, __attribute__((unused)) gpointer data)"
 
 .PP
@@ -226,15 +264,15 @@ Definition at line 168 of file ui\&.c\&.
 .SS "gboolean on_pkey_button_press (__attribute__((unused)) GtkWidget * widget, __attribute__((unused)) GdkEventKey * event, __attribute__((unused)) gpointer user_data)"
 
 .PP
-Definition at line 183 of file ui\&.c\&.
+Definition at line 267 of file ui\&.c\&.
 .SS "gboolean on_recover_button1_press (__attribute__((unused)) GtkWidget * widget, __attribute__((unused)) GdkEventKey * event, __attribute__((unused)) gpointer user_data)"
 
 .PP
-Definition at line 220 of file ui\&.c\&.
+Definition at line 304 of file ui\&.c\&.
 .SS "gboolean on_recover_button2_press (__attribute__((unused)) GtkWidget * widget, __attribute__((unused)) GdkEventKey * event, __attribute__((unused)) gpointer user_data)"
 
 .PP
-Definition at line 229 of file ui\&.c\&.
+Definition at line 313 of file ui\&.c\&.
 .SS "gboolean on_transaction_button_press (__attribute__((unused)) GtkWidget * widget, __attribute__((unused)) GdkEventKey * event, __attribute__((unused)) gpointer user_data)"
 
 .PP
@@ -251,11 +289,11 @@ int Returns 1 if there is an error, 0 otherwise
 .PP
 
 .PP
-Definition at line 56 of file ui\&.c\&.
+Definition at line 57 of file ui\&.c\&.
 .SS "void update_labels ()"
 
 .PP
-Definition at line 375 of file ui\&.c\&.
+Definition at line 496 of file ui\&.c\&.
 .SH "Variable Documentation"
 .PP 
 .SS "GtkLabel* balance_1"
@@ -266,6 +304,14 @@ Definition at line 23 of file ui\&.c\&.
 
 .PP
 Definition at line 24 of file ui\&.c\&.
+.SS "GtkComboBox* contacts_combo"
+
+.PP
+Definition at line 52 of file ui\&.c\&.
+.SS "GtkCellRenderer* cr1_combo"
+
+.PP
+Definition at line 54 of file ui\&.c\&.
 .SS "GtkCellRenderer* cr1_con"
 
 .PP
@@ -273,7 +319,7 @@ Definition at line 42 of file ui\&.c\&.
 .SS "GtkCellRenderer* cr1_th"
 
 .PP
-Definition at line 50 of file ui\&.c\&.
+Definition at line 49 of file ui\&.c\&.
 .SS "GtkCellRenderer* cr2_con"
 
 .PP
@@ -281,15 +327,11 @@ Definition at line 43 of file ui\&.c\&.
 .SS "GtkCellRenderer* cr2_th"
 
 .PP
-Definition at line 51 of file ui\&.c\&.
+Definition at line 50 of file ui\&.c\&.
 .SS "GtkCellRenderer* cr3_th"
 
 .PP
-Definition at line 52 of file ui\&.c\&.
-.SS "GtkCellRenderer* cr4_th"
-
-.PP
-Definition at line 53 of file ui\&.c\&.
+Definition at line 51 of file ui\&.c\&.
 .SS "GtkTreeViewColumn* cx1_con"
 
 .PP
@@ -310,14 +352,14 @@ Definition at line 47 of file ui\&.c\&.
 
 .PP
 Definition at line 48 of file ui\&.c\&.
-.SS "GtkTreeViewColumn* cx4_th"
-
-.PP
-Definition at line 49 of file ui\&.c\&.
 .SS "GtkEntry* invest_entry"
 
 .PP
 Definition at line 32 of file ui\&.c\&.
+.SS "GtkListStore* ls_combo"
+
+.PP
+Definition at line 53 of file ui\&.c\&.
 .SS "GtkEntry* name_entry_con"
 
 .PP
