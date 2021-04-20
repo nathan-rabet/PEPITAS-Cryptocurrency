@@ -190,7 +190,11 @@ gboolean on_transaction_button_press(__attribute__ ((unused)) GtkWidget *widget,
         }
         else if(gtk_combo_box_get_active(contacts_combo) != -1)
         {
-            const char *name = gtk_combo_box_get_active_id(contacts_combo);
+            char *name = "";
+            GtkTreeModel *p_model = gtk_combo_box_get_model(contacts_combo);
+            GtkTreeIter iter;
+            if(gtk_combo_box_get_active_iter(contacts_combo, &iter))
+                gtk_tree_model_get(p_model, &iter, 0, &name, -1);
             char *public_key = get_public_key_from_contacts(name);
             add_transaction(amount, public_key, time_str);
             free(public_key);
@@ -419,6 +423,7 @@ char *get_public_key_from_contacts(const char *name)
             fclose(contacts_f);
             return public_key;
         }
+
         free(cont_name);
         free(public_key);
     }
