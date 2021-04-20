@@ -1,6 +1,13 @@
 var ui_8h =
 [
     [ "add_contact", "ui_8h.html#a7d043349856d2b80a23d2dbe3d59735d", null ],
+    [ "add_contact_to_combobox", "ui_8h.html#acfeb1c1504a9c8dab16b48f4ee0a8324", null ],
+    [ "add_contacts_from_file", "ui_8h.html#a3cce6cef71ccb6ae5dd4c9ca852eb31f", null ],
+    [ "add_transaction", "ui_8h.html#ab8aad46e2f9e2078aaedfc1d301416dd", null ],
+    [ "add_transaction_from_file", "ui_8h.html#addfd36df97e95e6d913426e07a659057", null ],
+    [ "get_public_key_from_contacts", "ui_8h.html#a0ff6af24bc9be5261b9ef9f6169c91da", null ],
+    [ "load_contacts_from_file", "ui_8h.html#a73fe931a2fbeb2086428ad91c0cbc05e", null ],
+    [ "load_transaction_from_file", "ui_8h.html#aafd81ce434d4f1abdba55e0ffc6b719f", null ],
     [ "on_add_contact_button1_press", "ui_8h.html#a5b92cf6ae0979b3c006e00782588829b", null ],
     [ "on_connect_but_press", "ui_8h.html#a9701dfc71a53e17b0796207efacf7cf3", null ],
     [ "on_create_key_but1_press", "ui_8h.html#a0e9026a91a87b08fa5f6f04227565895", null ],
@@ -14,5 +21,5 @@ var ui_8h =
     [ "on_recover_button2_press", "ui_8h.html#a88345e96de309a724612eabb17889636", null ],
     [ "on_transaction_button_press", "ui_8h.html#a1439f12ede3d5dde4cabb1cf9684eed7", null ],
     [ "setup", "ui_8h.html#a099d48038e444c2f3e69904477527798", null ],
-    [ "update_labels", "ui_8h.html#ac5df05729effbe70b2ed0e3198492a00", null ]
+    [ "update_labels", "ui_8h.html#af1854ec5ff4099ed69a1b51a3fd3b3df", null ]
 ];

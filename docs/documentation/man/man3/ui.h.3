@@ -1,4 +1,4 @@
-.TH "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/headers/ui/ui.h" 3 "Sat Apr 17 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
+.TH "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/headers/ui/ui.h" 3 "Mon Apr 19 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -11,6 +11,16 @@
 \fC#include <stdio\&.h>\fP
 .br
 \fC#include <string\&.h>\fP
+.br
+\fC#include <err\&.h>\fP
+.br
+\fC#include <time\&.h>\fP
+.br
+\fC#include '\&.\&./cryptosystem/rsa\&.h'\fP
+.br
+\fC#include '\&.\&./cryptosystem/hash\&.h'\fP
+.br
+\fC#include '\&.\&./core/blockchain/wallet\&.h'\fP
 .br
 
 .SS "Functions"
@@ -70,7 +80,28 @@
 .RI "gboolean \fBon_connect_but_press\fP (GtkWidget *widget, GdkEventKey *event, gpointer user_data)"
 .br
 .ti -1c
-.RI "gboolean \fBupdate_labels\fP (GtkWidget *widget, GdkEventKey *event, gpointer user_data)"
+.RI "void \fBadd_contacts_from_file\fP (char *name, char *public_key)"
+.br
+.ti -1c
+.RI "void \fBload_contacts_from_file\fP ()"
+.br
+.ti -1c
+.RI "void \fBadd_contact_to_combobox\fP (char *name)"
+.br
+.ti -1c
+.RI "void \fBupdate_labels\fP ()"
+.br
+.ti -1c
+.RI "void \fBadd_transaction\fP (double amount, char *public_key, char *date)"
+.br
+.ti -1c
+.RI "void \fBadd_transaction_from_file\fP (double amount, char *public_key, char *date)"
+.br
+.ti -1c
+.RI "void \fBload_transaction_from_file\fP ()"
+.br
+.ti -1c
+.RI "char * \fBget_public_key_from_contacts\fP (const char *name)"
 .br
 .in -1c
 .SH "Function Documentation"
@@ -94,6 +125,32 @@ Adds a contact to the treeview if the entrys weren't empty, and closes the conta
 gboolean Error code 
 .RE
 .PP
+
+.SS "void add_contact_to_combobox (char * name)"
+
+.PP
+Definition at line 362 of file ui\&.c\&.
+.SS "void add_contacts_from_file (char * name, char * public_key)"
+
+.PP
+Definition at line 370 of file ui\&.c\&.
+.SS "void add_transaction (double amount, char * public_key, char * date)"
+
+.PP
+Definition at line 205 of file ui\&.c\&.
+.SS "void add_transaction_from_file (double amount, char * public_key, char * date)"
+
+.PP
+Definition at line 224 of file ui\&.c\&.
+.SS "char* get_public_key_from_contacts (const char * name)"
+
+.PP
+Definition at line 401 of file ui\&.c\&.
+.SS "void load_contacts_from_file ()"
+
+.PP
+Definition at line 379 of file ui\&.c\&.
+.SS "void load_transaction_from_file ()"
 
 .SS "gboolean on_add_contact_button1_press (GtkWidget * widget, GdkEventKey * event, gpointer user_data)"
 
@@ -275,9 +332,11 @@ int Returns 1 if there is an error, 0 otherwise
 .PP
 
 .PP
-Definition at line 56 of file ui\&.c\&.
-.SS "gboolean update_labels (GtkWidget * widget, GdkEventKey * event, gpointer user_data)"
+Definition at line 57 of file ui\&.c\&.
+.SS "void update_labels ()"
 
+.PP
+Definition at line 496 of file ui\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for PEPITAS CRYPTOCURRENCY from the source code\&.
