@@ -53,7 +53,7 @@ void write_block_file(Block block)
     struct stat st = {0};
     char dir[256];
 
-            if (stat("blockchain", &st) == -1)
+        if (stat("blockchain", &st) == -1)
         {
             mkdir("blockchain", 0700);
         }
@@ -158,7 +158,7 @@ Block *get_block(size_t block_height)
 
     blockfile = fopen(dir, "rb");
     if (!blockfile)
-        err(errno, "Impossible to read %s", dir);
+        return NULL;
     convert_data_to_block(block, blockfile);
     fclose(blockfile);
 

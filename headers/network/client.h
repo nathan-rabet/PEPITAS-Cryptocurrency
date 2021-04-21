@@ -9,7 +9,6 @@ typedef struct Neighbour
 {
     int family;     // Use AF_* for IPv4, IPv6 or other addrinfo fields
     char *hostname; // The adress of the neighbours; NULL if free
-    int accept;     // Is ready to listen to you
 } Neighbour;
 
 typedef struct Node
@@ -66,5 +65,7 @@ void load_neighbours(char who);
 int listen_to(Neighbour neighbour);
 
 int find_empty_connection(int max);
+
+void *client_thread(void *args);
 
 #endif

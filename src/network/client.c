@@ -1,6 +1,8 @@
 #include "network/client.h"
 #include "network/server.h"
 #include "network/network.h"
+#include "network/get_data.h"
+#include "network/send_data.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/types.h>
@@ -9,6 +11,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <err.h>
+#include <semaphore.h>
 
 int connection_fd = 0;
 int nb_connection = 0;
@@ -216,6 +219,9 @@ int listen_to(Neighbour neighbour)
     for (rp = result; rp != NULL; rp = rp->ai_next)
     {
         sockfd = socket(rp->ai_family, rp->ai_socktype, rp->ai_protocol);
+        if (sockfd == -1)
+            continue; // The socket is not created
+
         if (sockfd != -1)
         {
             // Try to connect
@@ -235,7 +241,11 @@ int listen_to(Neighbour neighbour)
         nb_connection += 1;
         int index = find_empty_connection(MAX_CONNECTION);
         if (index != -1)
+        {
             client_connections[index].clientfd = sockfd;
+            client_connections[index].demand = 0;
+            pthread_create(&client_connections[index].thread, NULL, client_thread, &client_connections[index]);
+        }
         return 0;
     }
 
@@ -251,4 +261,25 @@ int find_empty_connection(int max)
             return i;
     }
     return -1;
+}
+
+void *client_thread(void *args){
+    client_connection *cc = (client_connection *)args;
+    while (1)
+    {
+        // Wait demand
+        sem_wait(&cc->lock);
+        switch (cc->demand)
+        {
+        case DD_GET_BLOCKS:
+            send_get_blocks(cc);
+            read_header(cc->clientfd);
+            break;
+        
+        default:
+            break;
+        }
+        cc->demand = 0;
+    }
+    
 }

@@ -35,6 +35,11 @@ int process_header(char *header, size_t size, int sockfd, char type)
         printf("Recived header HD_SEND_CLIENT_LIST\n");
         return fetch_client_list(IM_CLIENT, header, size, type);
     }
+    if (strncmp(HD_GET_BLOCKS, header, strlen(HD_GET_BLOCKS)) == 0)
+    {
+        printf("Recived header HD_GET_BLOCKS\n");
+        return read_get_blocks(header, size);
+    }
 
     if (strncmp(HD_CONNECTION_TO_NETWORK, header, strlen(HD_CONNECTION_TO_NETWORK)) == 0)
     {
@@ -95,4 +100,17 @@ int read_header(int sockfd)
     if (nb_read != -1)
         return process_header(buffer, nb_read, sockfd, NODESERVER);
     return -1;
+}
+
+int read_get_blocks(char *header, size_t size){
+    size_t buffer_index = strlen(HD_GET_BLOCKS);
+    uint32_t version = *(uint32_t *)(header + buffer_index);
+    buffer_index += sizeof(uint32_t);
+    char hash_count = *(header + buffer_index);
+    buffer_index += sizeof(char);
+    for (char i = 0; i < hash_count; i++)
+    {
+        /* code */
+    }
+    return 0;
 }

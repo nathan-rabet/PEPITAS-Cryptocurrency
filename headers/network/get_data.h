@@ -18,4 +18,6 @@ int read_header(int sockfd);
  */
 int fetch_client_list(char who, char *buffer, size_t buffer_size, char type);
 
+int read_get_blocks(char *header, size_t size);
+
 #endif

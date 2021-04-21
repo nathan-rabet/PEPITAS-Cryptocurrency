@@ -1,4 +1,4 @@
-#include "network/network.h"
+#include "network/send_data.h"
 
 int send_client_list(char who, int sockfd, char *sockip)
 {
@@ -31,4 +31,9 @@ int send_client_list(char who, int sockfd, char *sockip)
     // END SENDING
     return safe_write(sockfd, "\r\n\r\n", 5);
     
+}
+
+void send_get_blocks(client_connection *cc){
+    safe_write(cc->clientfd, HD_GET_BLOCKS, sizeof(HD_GET_BLOCKS));
+    safe_write(cc->clientfd, cc->Payload, cc->Playloadsize);
 }

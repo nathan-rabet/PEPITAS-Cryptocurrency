@@ -4,6 +4,7 @@
 #include <sys/socket.h>
 #include <sys/types.h>
 #include <sys/socket.h>
+#include <semaphore.h>
 #include <netdb.h>
 #include "network.h"
 #include "core/blockchain/block.h"
@@ -16,7 +17,11 @@
 typedef struct client_connection
 {
     pthread_t thread; // Adress information
+    sem_t lock;
+    int demand;
     int clientfd; // The client<->server connection socket
+    size_t Playloadsize;
+    void *Payload;
 } client_connection;
 
 

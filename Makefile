@@ -10,6 +10,7 @@ SRC += src/misc/safe.c
 SRC += src/cryptosystem/rsa.c
 SRC += src/core/blockchain/wallet.c
 SRC += src/core/blockchain/block.c
+SRC += src/core/blockchain/blockchain_header.c
 SRC += src/cryptosystem/signature.c
 SRC += src/network/send_data.c
 SRC += src/network/get_data.c
