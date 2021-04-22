@@ -174,6 +174,7 @@
   </object>
   <object class="GtkWindow" id="Pepitas">
     <property name="resizable">False</property>
+    <property name="default_width">600</property>
     <child>
       <object class="GtkNotebook" id="notebook1">
         <property name="visible">True</property>
@@ -378,7 +379,7 @@
                 <property name="label" translatable="yes">From contacts:</property>
               </object>
               <packing>
-                <property name="x">309</property>
+                <property name="x">308</property>
                 <property name="y">203</property>
               </packing>
             </child>
@@ -389,15 +390,7 @@
                 <property name="visible">True</property>
                 <property name="model">liststoreCON</property>
                 <child>
-                  <object class="GtkCellRendererText" id="cellrenderertext6">
-                    <property name="cell_background_gdk">#ffffffffffff</property>
-                    <property name="xpad">2</property>
-                    <property name="ypad">2</property>
-                    <property name="xalign">0</property>
-                    <property name="background_gdk">#ffffffffffff</property>
-                    <property name="font">Normal</property>
-                    <property name="foreground_gdk">#000000000000</property>
-                  </object>
+                  <object class="GtkCellRendererText" id="cellrenderertext6"/>
                   <attributes>
                     <attribute name="text">0</attribute>
                   </attributes>
@@ -477,15 +470,15 @@ therefore gaining more Pepitas</property>
             <child>
               <object class="GtkButton" id="invest_but1">
                 <property name="label" translatable="yes">Invest</property>
-                <property name="width_request">138</property>
-                <property name="height_request">37</property>
+                <property name="width_request">63</property>
+                <property name="height_request">35</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
               </object>
               <packing>
-                <property name="x">69</property>
-                <property name="y">178</property>
+                <property name="x">74</property>
+                <property name="y">175</property>
               </packing>
             </child>
             <child>
@@ -497,7 +490,7 @@ therefore gaining more Pepitas</property>
               </object>
               <packing>
                 <property name="x">333</property>
-                <property name="y">224</property>
+                <property name="y">225</property>
               </packing>
             </child>
             <child>
@@ -515,15 +508,15 @@ therefore gaining more Pepitas</property>
             <child>
               <object class="GtkButton" id="recover_but1">
                 <property name="label" translatable="yes">Recover invested Pepitas</property>
-                <property name="width_request">145</property>
-                <property name="height_request">36</property>
+                <property name="width_request">140</property>
+                <property name="height_request">34</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
               </object>
               <packing>
-                <property name="x">67</property>
-                <property name="y">266</property>
+                <property name="x">62</property>
+                <property name="y">250</property>
               </packing>
             </child>
           </object>
@@ -768,6 +761,7 @@ therefore gaining more Pepitas</property>
     </child>
   </object>
   <object class="GtkWindow" id="connection_window">
+    <property name="resizable">False</property>
     <child>
       <object class="GtkFixed" id="fixed10">
         <property name="visible">True</property>
@@ -880,6 +874,8 @@ therefore gaining more Pepitas</property>
     </child>
   </object>
   <object class="GtkWindow" id="create_key_window">
+    <property name="resizable">False</property>
+    <property name="default_width">200</property>
     <child>
       <object class="GtkFixed" id="fixed11">
         <property name="visible">True</property>

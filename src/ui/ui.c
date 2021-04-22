@@ -146,6 +146,8 @@ int setup()
     g_signal_connect(create_key_but2, "clicked", G_CALLBACK(on_create_key_but2_press), NULL);
     g_signal_connect(connect_but, "clicked", G_CALLBACK(on_connect_but_press), NULL);
 
+    gtk_window_set_resizable(GTK_WINDOW(window), FALSE);
+
     g_signal_connect(window, "destroy", G_CALLBACK(on_main_window_destroy), NULL);
     gtk_builder_connect_signals(builder, NULL);
 
@@ -155,6 +157,7 @@ int setup()
 
     return 0;
 }
+
 
 gboolean on_main_window_delete(
             GtkWidget *widget, __attribute__((unused)) gpointer data)
@@ -186,7 +189,7 @@ gboolean on_transaction_button_press(__attribute__ ((unused)) GtkWidget *widget,
         if(strcmp(gtk_entry_get_text(recipient_key), "") != 0)
         {
             char *public_key = (char *)gtk_entry_get_text(recipient_key);
-            add_transaction(amount, public_key, time_str);
+            add_transaction_with_pkey(amount, public_key, time_str);
         }
         else if(gtk_combo_box_get_active(contacts_combo) != -1)
         {
@@ -196,7 +199,7 @@ gboolean on_transaction_button_press(__attribute__ ((unused)) GtkWidget *widget,
             if(gtk_combo_box_get_active_iter(contacts_combo, &iter))
                 gtk_tree_model_get(p_model, &iter, 0, &name, -1);
             char *public_key = get_public_key_from_contacts(name);
-            add_transaction(amount, public_key, time_str);
+            add_transaction_with_contact(amount, public_key, time_str);
             free(public_key);
         }
      }
@@ -206,7 +209,7 @@ gboolean on_transaction_button_press(__attribute__ ((unused)) GtkWidget *widget,
      return TRUE;
 }
 
-void add_transaction(double amount, char *public_key, char *date)
+void add_transaction_with_pkey(double amount, char *public_key, char *date)
 {
         FILE *th_f = fopen("src/ui/.transa_history", "a");
         if(th_f == NULL)
@@ -218,8 +221,30 @@ void add_transaction(double amount, char *public_key, char *date)
         gtk_tree_store_set(ts_th, &iter, 0, amount, -1);
         gtk_tree_store_set(ts_th, &iter, 1, public_key, -1);
         gtk_tree_store_set(ts_th, &iter, 2, date, -1);
-        fprintf(th_f, "%lf\n", amount);
-        fprintf(th_f, "%s\n", public_key);
+        fprintf(th_f, "%lf", amount);
+        fprintf(th_f, "\n");
+        fprintf(th_f, "%s", public_key);
+        fprintf(th_f, "\n");
+        fprintf(th_f, "%s", date);
+
+        fclose(th_f);
+}
+
+void add_transaction_with_contact(double amount, char *public_key, char *date)
+{
+        FILE *th_f = fopen("src/ui/.transa_history", "a");
+        if(th_f == NULL)
+            err(-1, "Couldn't open transaction history file");
+
+        GtkTreeIter iter;
+
+        gtk_tree_store_append(ts_th, &iter, NULL);
+        gtk_tree_store_set(ts_th, &iter, 0, amount, -1);
+        gtk_tree_store_set(ts_th, &iter, 1, public_key, -1);
+        gtk_tree_store_set(ts_th, &iter, 2, date, -1);
+        fprintf(th_f, "%lf", amount);
+        fprintf(th_f, "\n");
+        fprintf(th_f, "%s", public_key);
         fprintf(th_f, "%s", date);
 
         fclose(th_f);
@@ -265,8 +290,6 @@ void load_transactions_from_file()
     }
     fclose(th_f);
 }
-
-
 
 gboolean on_pkey_button_press(__attribute__ ((unused)) GtkWidget *widget,
                     __attribute__ ((unused)) GdkEventKey *event,
@@ -338,7 +361,7 @@ gboolean add_contact(__attribute__ ((unused)) GtkWidget *widget,
                     __attribute__ ((unused)) GdkEventKey *event,
                     __attribute__ ((unused)) gpointer user_data)
 {
-    const char *name = gtk_entry_get_text(name_entry_con);
+    char *name = (char *) gtk_entry_get_text(name_entry_con);
     const char *public_key = gtk_entry_get_text(public_key_entry_con);
     if(strcmp(name, "") != 0 && strcmp(public_key ,"") != 0)
     {
@@ -346,17 +369,17 @@ gboolean add_contact(__attribute__ ((unused)) GtkWidget *widget,
         if(contacts_f == NULL)
             err(-1, "Couldn't open contacts file");
 
-        GtkTreeIter iter;
 
-        gtk_tree_store_append(ts_con, &iter, NULL);
-        gtk_tree_store_set(ts_con, &iter, 0, name, -1);
-        gtk_tree_store_set(ts_con, &iter, 1, public_key, -1);
         fprintf(contacts_f, "%s\n", name);
         fprintf(contacts_f, "%s\n", public_key);
+
+        fclose(contacts_f);
+
+        gtk_tree_store_clear(ts_con);
+        load_contacts_from_file();
         gtk_entry_set_text(name_entry_con, "");
         gtk_entry_set_text(public_key_entry_con, "");
 
-        fclose(contacts_f);
     }
 
     gtk_widget_hide(add_contact_window);
