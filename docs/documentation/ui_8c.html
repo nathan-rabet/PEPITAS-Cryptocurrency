@@ -112,8 +112,10 @@ Functions</h2></td></tr>
 <tr class="separator:a349d73cd99b37cff7f14d3269fae4057"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e22e78adc3ccb25f63ee84836cc83e4"><td class="memItemLeft" align="right" valign="top">gboolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8c.html#a5e22e78adc3ccb25f63ee84836cc83e4">on_transaction_button_press</a> (__attribute__((unused)) GtkWidget *widget, __attribute__((unused)) GdkEventKey *event, __attribute__((unused)) gpointer user_data)</td></tr>
 <tr class="separator:a5e22e78adc3ccb25f63ee84836cc83e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab8aad46e2f9e2078aaedfc1d301416dd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8c.html#ab8aad46e2f9e2078aaedfc1d301416dd">add_transaction</a> (double amount, char *public_key, char *date)</td></tr>
-<tr class="separator:ab8aad46e2f9e2078aaedfc1d301416dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf3736e772d266218ca1c9c0e4b38ac3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8c.html#adf3736e772d266218ca1c9c0e4b38ac3">add_transaction_with_pkey</a> (double amount, char *public_key, char *date)</td></tr>
+<tr class="separator:adf3736e772d266218ca1c9c0e4b38ac3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f9ada2bfa01c401df766ed824f0fdfd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8c.html#a9f9ada2bfa01c401df766ed824f0fdfd">add_transaction_with_contact</a> (double amount, char *public_key, char *date)</td></tr>
+<tr class="separator:a9f9ada2bfa01c401df766ed824f0fdfd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:addfd36df97e95e6d913426e07a659057"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8c.html#addfd36df97e95e6d913426e07a659057">add_transaction_from_file</a> (double amount, char *public_key, char *date)</td></tr>
 <tr class="separator:addfd36df97e95e6d913426e07a659057"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8909bf913522e177fc1629b07c32420c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8c.html#a8909bf913522e177fc1629b07c32420c">load_transactions_from_file</a> ()</td></tr>
@@ -249,7 +251,13 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00337">337</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00360">360</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="ui_8c_ad00b3507b4bb09e32b88b8c4e015c7bf_cgraph.png" border="0" usemap="#ui_8c_ad00b3507b4bb09e32b88b8c4e015c7bf_cgraph" alt=""/></div>
+<!-- MAP 1 -->
+</div>
 
 </div>
 </div>
@@ -269,12 +277,12 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00366">366</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00389">389</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="ui_8c_acfeb1c1504a9c8dab16b48f4ee0a8324_icgraph.png" border="0" usemap="#ui_8c_acfeb1c1504a9c8dab16b48f4ee0a8324_icgraph" alt=""/></div>
-<!-- MAP 1 -->
+<!-- MAP 2 -->
 </div>
 
 </div>
@@ -305,53 +313,11 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00374">374</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00397">397</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="ui_8c_a3cce6cef71ccb6ae5dd4c9ca852eb31f_icgraph.png" border="0" usemap="#ui_8c_a3cce6cef71ccb6ae5dd4c9ca852eb31f_icgraph" alt=""/></div>
-<!-- MAP 2 -->
-</div>
-
-</div>
-</div>
-<a id="ab8aad46e2f9e2078aaedfc1d301416dd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab8aad46e2f9e2078aaedfc1d301416dd">&#9670;&nbsp;</a></span>add_transaction()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void add_transaction </td>
-          <td>(</td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>amount</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>public_key</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>date</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00209">209</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="ui_8c_ab8aad46e2f9e2078aaedfc1d301416dd_icgraph.png" border="0" usemap="#ui_8c_ab8aad46e2f9e2078aaedfc1d301416dd_icgraph" alt=""/></div>
 <!-- MAP 3 -->
 </div>
 
@@ -389,12 +355,96 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00228">228</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00253">253</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="ui_8c_addfd36df97e95e6d913426e07a659057_icgraph.png" border="0" usemap="#ui_8c_addfd36df97e95e6d913426e07a659057_icgraph" alt=""/></div>
 <!-- MAP 4 -->
+</div>
+
+</div>
+</div>
+<a id="a9f9ada2bfa01c401df766ed824f0fdfd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f9ada2bfa01c401df766ed824f0fdfd">&#9670;&nbsp;</a></span>add_transaction_with_contact()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void add_transaction_with_contact </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>amount</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>public_key</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>date</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00233">233</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="ui_8c_a9f9ada2bfa01c401df766ed824f0fdfd_icgraph.png" border="0" usemap="#ui_8c_a9f9ada2bfa01c401df766ed824f0fdfd_icgraph" alt=""/></div>
+<!-- MAP 5 -->
+</div>
+
+</div>
+</div>
+<a id="adf3736e772d266218ca1c9c0e4b38ac3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf3736e772d266218ca1c9c0e4b38ac3">&#9670;&nbsp;</a></span>add_transaction_with_pkey()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void add_transaction_with_pkey </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>amount</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>public_key</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>date</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00212">212</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="ui_8c_adf3736e772d266218ca1c9c0e4b38ac3_icgraph.png" border="0" usemap="#ui_8c_adf3736e772d266218ca1c9c0e4b38ac3_icgraph" alt=""/></div>
+<!-- MAP 6 -->
 </div>
 
 </div>
@@ -415,12 +465,12 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00405">405</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00428">428</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="ui_8c_a0ff6af24bc9be5261b9ef9f6169c91da_icgraph.png" border="0" usemap="#ui_8c_a0ff6af24bc9be5261b9ef9f6169c91da_icgraph" alt=""/></div>
-<!-- MAP 5 -->
+<!-- MAP 7 -->
 </div>
 
 </div>
@@ -440,18 +490,18 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00383">383</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00406">406</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="ui_8c_a73fe931a2fbeb2086428ad91c0cbc05e_cgraph.png" border="0" usemap="#ui_8c_a73fe931a2fbeb2086428ad91c0cbc05e_cgraph" alt=""/></div>
-<!-- MAP 6 -->
+<!-- MAP 8 -->
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="ui_8c_a73fe931a2fbeb2086428ad91c0cbc05e_icgraph.png" border="0" usemap="#ui_8c_a73fe931a2fbeb2086428ad91c0cbc05e_icgraph" alt=""/></div>
-<!-- MAP 7 -->
+<!-- MAP 9 -->
 </div>
 
 </div>
@@ -471,18 +521,18 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00238">238</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00263">263</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="ui_8c_a8909bf913522e177fc1629b07c32420c_cgraph.png" border="0" usemap="#ui_8c_a8909bf913522e177fc1629b07c32420c_cgraph" alt=""/></div>
-<!-- MAP 8 -->
+<!-- MAP 10 -->
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="ui_8c_a8909bf913522e177fc1629b07c32420c_icgraph.png" border="0" usemap="#ui_8c_a8909bf913522e177fc1629b07c32420c_icgraph" alt=""/></div>
-<!-- MAP 9 -->
+<!-- MAP 11 -->
 </div>
 
 </div>
@@ -519,7 +569,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00328">328</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00351">351</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
 
 </div>
 </div>
@@ -555,12 +605,12 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00466">466</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00489">489</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="ui_8c_aa118feebec7cfa09ac8e958107872c47_cgraph.png" border="0" usemap="#ui_8c_aa118feebec7cfa09ac8e958107872c47_cgraph" alt=""/></div>
-<!-- MAP 10 -->
+<!-- MAP 12 -->
 </div>
 
 </div>
@@ -597,7 +647,7 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00436">436</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00459">459</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
 
 </div>
 </div>
@@ -633,12 +683,12 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00445">445</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00468">468</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="ui_8c_ab865e6138c061d47b274af99c574af03_cgraph.png" border="0" usemap="#ui_8c_ab865e6138c061d47b274af99c574af03_cgraph" alt=""/></div>
-<!-- MAP 11 -->
+<!-- MAP 13 -->
 </div>
 
 </div>
@@ -675,7 +725,7 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00289">289</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00312">312</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
 
 </div>
 </div>
@@ -711,7 +761,7 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00298">298</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00321">321</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
 
 </div>
 </div>
@@ -750,7 +800,7 @@ Here is the call graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>gboolean Error code </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00159">159</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00162">162</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
 
 </div>
 </div>
@@ -780,7 +830,7 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00168">168</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00171">171</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
 
 </div>
 </div>
@@ -816,7 +866,7 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00271">271</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00294">294</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
 
 </div>
 </div>
@@ -852,7 +902,7 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00308">308</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00331">331</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
 
 </div>
 </div>
@@ -888,7 +938,7 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00317">317</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00340">340</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
 
 </div>
 </div>
@@ -924,12 +974,12 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00175">175</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00178">178</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="ui_8c_a5e22e78adc3ccb25f63ee84836cc83e4_cgraph.png" border="0" usemap="#ui_8c_a5e22e78adc3ccb25f63ee84836cc83e4_cgraph" alt=""/></div>
-<!-- MAP 12 -->
+<!-- MAP 14 -->
 </div>
 
 </div>
@@ -957,7 +1007,7 @@ Here is the call graph for this function:</div>
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="ui_8c_a099d48038e444c2f3e69904477527798_icgraph.png" border="0" usemap="#ui_8c_a099d48038e444c2f3e69904477527798_icgraph" alt=""/></div>
-<!-- MAP 13 -->
+<!-- MAP 15 -->
 </div>
 
 </div>
@@ -977,18 +1027,18 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00501">501</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00524">524</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="ui_8c_af1854ec5ff4099ed69a1b51a3fd3b3df_cgraph.png" border="0" usemap="#ui_8c_af1854ec5ff4099ed69a1b51a3fd3b3df_cgraph" alt=""/></div>
-<!-- MAP 14 -->
+<!-- MAP 16 -->
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="ui_8c_af1854ec5ff4099ed69a1b51a3fd3b3df_icgraph.png" border="0" usemap="#ui_8c_af1854ec5ff4099ed69a1b51a3fd3b3df_icgraph" alt=""/></div>
-<!-- MAP 15 -->
+<!-- MAP 17 -->
 </div>
 
 </div>

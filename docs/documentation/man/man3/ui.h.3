@@ -1,4 +1,4 @@
-.TH "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/headers/ui/ui.h" 3 "Tue Apr 20 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
+.TH "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/headers/ui/ui.h" 3 "Thu Apr 22 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -92,7 +92,10 @@
 .RI "void \fBupdate_labels\fP ()"
 .br
 .ti -1c
-.RI "void \fBadd_transaction\fP (double amount, char *public_key, char *date)"
+.RI "void \fBadd_transaction_with_pkey\fP (double amount, char *public_key, char *date)"
+.br
+.ti -1c
+.RI "void \fBadd_transaction_with_contact\fP (double amount, char *public_key, char *date)"
 .br
 .ti -1c
 .RI "void \fBadd_transaction_from_file\fP (double amount, char *public_key, char *date)"
@@ -129,27 +132,31 @@ gboolean Error code
 .SS "void add_contact_to_combobox (char * name)"
 
 .PP
-Definition at line 366 of file ui\&.c\&.
+Definition at line 389 of file ui\&.c\&.
 .SS "void add_contacts_from_file (char * name, char * public_key)"
 
 .PP
-Definition at line 374 of file ui\&.c\&.
-.SS "void add_transaction (double amount, char * public_key, char * date)"
-
-.PP
-Definition at line 209 of file ui\&.c\&.
+Definition at line 397 of file ui\&.c\&.
 .SS "void add_transaction_from_file (double amount, char * public_key, char * date)"
 
 .PP
-Definition at line 228 of file ui\&.c\&.
+Definition at line 253 of file ui\&.c\&.
+.SS "void add_transaction_with_contact (double amount, char * public_key, char * date)"
+
+.PP
+Definition at line 233 of file ui\&.c\&.
+.SS "void add_transaction_with_pkey (double amount, char * public_key, char * date)"
+
+.PP
+Definition at line 212 of file ui\&.c\&.
 .SS "char* get_public_key_from_contacts (const char * name)"
 
 .PP
-Definition at line 405 of file ui\&.c\&.
+Definition at line 428 of file ui\&.c\&.
 .SS "void load_contacts_from_file ()"
 
 .PP
-Definition at line 383 of file ui\&.c\&.
+Definition at line 406 of file ui\&.c\&.
 .SS "void load_transaction_from_file ()"
 
 .SS "gboolean on_add_contact_button1_press (GtkWidget * widget, GdkEventKey * event, gpointer user_data)"
@@ -235,7 +242,7 @@ gboolean Error code
 .PP
 
 .PP
-Definition at line 159 of file ui\&.c\&.
+Definition at line 162 of file ui\&.c\&.
 .SS "void on_main_window_destroy (__attribute((unused)) GtkWidget * widget, __attribute__((unused)) gpointer data)"
 
 .PP
@@ -336,7 +343,7 @@ Definition at line 57 of file ui\&.c\&.
 .SS "void update_labels ()"
 
 .PP
-Definition at line 501 of file ui\&.c\&.
+Definition at line 524 of file ui\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for PEPITAS CRYPTOCURRENCY from the source code\&.

@@ -1,4 +1,4 @@
-.TH "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/src/ui/ui.c" 3 "Tue Apr 20 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
+.TH "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/src/ui/ui.c" 3 "Thu Apr 22 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -27,7 +27,10 @@
 .RI "gboolean \fBon_transaction_button_press\fP (__attribute__((unused)) GtkWidget *widget, __attribute__((unused)) GdkEventKey *event, __attribute__((unused)) gpointer user_data)"
 .br
 .ti -1c
-.RI "void \fBadd_transaction\fP (double amount, char *public_key, char *date)"
+.RI "void \fBadd_transaction_with_pkey\fP (double amount, char *public_key, char *date)"
+.br
+.ti -1c
+.RI "void \fBadd_transaction_with_contact\fP (double amount, char *public_key, char *date)"
 .br
 .ti -1c
 .RI "void \fBadd_transaction_from_file\fP (double amount, char *public_key, char *date)"
@@ -186,59 +189,63 @@
 .SS "gboolean add_contact (__attribute__((unused)) GtkWidget * widget, __attribute__((unused)) GdkEventKey * event, __attribute__((unused)) gpointer user_data)"
 
 .PP
-Definition at line 337 of file ui\&.c\&.
+Definition at line 360 of file ui\&.c\&.
 .SS "void add_contact_to_combobox (char * name)"
 
 .PP
-Definition at line 366 of file ui\&.c\&.
+Definition at line 389 of file ui\&.c\&.
 .SS "void add_contacts_from_file (char * name, char * public_key)"
 
 .PP
-Definition at line 374 of file ui\&.c\&.
-.SS "void add_transaction (double amount, char * public_key, char * date)"
-
-.PP
-Definition at line 209 of file ui\&.c\&.
+Definition at line 397 of file ui\&.c\&.
 .SS "void add_transaction_from_file (double amount, char * public_key, char * date)"
 
 .PP
-Definition at line 228 of file ui\&.c\&.
+Definition at line 253 of file ui\&.c\&.
+.SS "void add_transaction_with_contact (double amount, char * public_key, char * date)"
+
+.PP
+Definition at line 233 of file ui\&.c\&.
+.SS "void add_transaction_with_pkey (double amount, char * public_key, char * date)"
+
+.PP
+Definition at line 212 of file ui\&.c\&.
 .SS "char* get_public_key_from_contacts (const char * name)"
 
 .PP
-Definition at line 405 of file ui\&.c\&.
+Definition at line 428 of file ui\&.c\&.
 .SS "void load_contacts_from_file ()"
 
 .PP
-Definition at line 383 of file ui\&.c\&.
+Definition at line 406 of file ui\&.c\&.
 .SS "void load_transactions_from_file ()"
 
 .PP
-Definition at line 238 of file ui\&.c\&.
+Definition at line 263 of file ui\&.c\&.
 .SS "gboolean on_add_contact_button1_press (__attribute__((unused)) GtkWidget * widget, __attribute__((unused)) GdkEventKey * event, __attribute__((unused)) gpointer user_data)"
 
 .PP
-Definition at line 328 of file ui\&.c\&.
+Definition at line 351 of file ui\&.c\&.
 .SS "gboolean on_connect_but_press (__attribute__((unused)) GtkWidget * widget, __attribute__((unused)) GdkEventKey * event, __attribute__((unused)) gpointer user_data)"
 
 .PP
-Definition at line 466 of file ui\&.c\&.
+Definition at line 489 of file ui\&.c\&.
 .SS "gboolean on_create_key_but1_press (__attribute__((unused)) GtkWidget * widget, __attribute__((unused)) GdkEventKey * event, __attribute__((unused)) gpointer user_data)"
 
 .PP
-Definition at line 436 of file ui\&.c\&.
+Definition at line 459 of file ui\&.c\&.
 .SS "gboolean on_create_key_but2_press (__attribute__((unused)) GtkWidget * widget, __attribute__((unused)) GdkEventKey * event, __attribute__((unused)) gpointer user_data)"
 
 .PP
-Definition at line 445 of file ui\&.c\&.
+Definition at line 468 of file ui\&.c\&.
 .SS "gboolean on_invest_button1_press (__attribute__((unused)) GtkWidget * widget, __attribute__((unused)) GdkEventKey * event, __attribute__((unused)) gpointer user_data)"
 
 .PP
-Definition at line 289 of file ui\&.c\&.
+Definition at line 312 of file ui\&.c\&.
 .SS "gboolean on_invest_button2_press (__attribute__((unused)) GtkWidget * widget, __attribute__((unused)) GdkEventKey * event, __attribute__((unused)) gpointer user_data)"
 
 .PP
-Definition at line 298 of file ui\&.c\&.
+Definition at line 321 of file ui\&.c\&.
 .SS "gboolean on_main_window_delete (GtkWidget * widget, __attribute__((unused)) gpointer data)"
 
 .PP
@@ -256,27 +263,27 @@ gboolean Error code
 .PP
 
 .PP
-Definition at line 159 of file ui\&.c\&.
+Definition at line 162 of file ui\&.c\&.
 .SS "void on_main_window_destroy (__attribute__((unused)) GtkWidget * widget, __attribute__((unused)) gpointer data)"
 
 .PP
-Definition at line 168 of file ui\&.c\&.
+Definition at line 171 of file ui\&.c\&.
 .SS "gboolean on_pkey_button_press (__attribute__((unused)) GtkWidget * widget, __attribute__((unused)) GdkEventKey * event, __attribute__((unused)) gpointer user_data)"
 
 .PP
-Definition at line 271 of file ui\&.c\&.
+Definition at line 294 of file ui\&.c\&.
 .SS "gboolean on_recover_button1_press (__attribute__((unused)) GtkWidget * widget, __attribute__((unused)) GdkEventKey * event, __attribute__((unused)) gpointer user_data)"
 
 .PP
-Definition at line 308 of file ui\&.c\&.
+Definition at line 331 of file ui\&.c\&.
 .SS "gboolean on_recover_button2_press (__attribute__((unused)) GtkWidget * widget, __attribute__((unused)) GdkEventKey * event, __attribute__((unused)) gpointer user_data)"
 
 .PP
-Definition at line 317 of file ui\&.c\&.
+Definition at line 340 of file ui\&.c\&.
 .SS "gboolean on_transaction_button_press (__attribute__((unused)) GtkWidget * widget, __attribute__((unused)) GdkEventKey * event, __attribute__((unused)) gpointer user_data)"
 
 .PP
-Definition at line 175 of file ui\&.c\&.
+Definition at line 178 of file ui\&.c\&.
 .SS "int setup ()"
 
 .PP
@@ -293,7 +300,7 @@ Definition at line 57 of file ui\&.c\&.
 .SS "void update_labels ()"
 
 .PP
-Definition at line 501 of file ui\&.c\&.
+Definition at line 524 of file ui\&.c\&.
 .SH "Variable Documentation"
 .PP 
 .SS "GtkLabel* balance_1"
