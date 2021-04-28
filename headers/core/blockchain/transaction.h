@@ -29,8 +29,7 @@ typedef struct Transaction
 {
     TransactionData *transaction_data; // Exclude the signature
 
-    size_t signature_len;
-    char *transaction_signature; // SHA384 signature
+    char transaction_signature[256]; // SHA384 signature
 } Transaction;
 
 /**
