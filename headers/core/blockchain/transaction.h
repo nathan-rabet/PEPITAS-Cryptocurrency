@@ -8,8 +8,16 @@
 
 #define TRANSACTION_DATA_SIZE sizeof(size_t) * 3 + sizeof(time_t) + (512 * 2)
 #define TRANSACTION_SIZE sizeof(size_t) + 2048 + TRANSACTION_DATA_SIZE
+
+#define T_TYPE_DEFAULT 0
+#define T_TYPE_ADD_STAKE 1
+#define T_TYPE_WITHDRAW_STAKE 2
+#define T_TYPE_STAKE_TO_STAKE 3
+
 typedef struct TransactionData
 {
+    char magic;
+    char type;
     // All users area
     RSA *sender_public_key;          // The public key of the sender
     RSA *receiver_public_key;        // The public key of the receiver

@@ -11,8 +11,6 @@
 #include <openssl/bio.h>
 
 #define NB_RSA_CHUNK 2048 / 64
-#define MAX_VALIDATORS_PER_BLOCK 10000
-
 uint16_t define_nb_validators(size_t n)
 {
     if (n <= 1)
