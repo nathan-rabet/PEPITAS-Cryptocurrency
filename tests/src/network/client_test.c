@@ -23,13 +23,13 @@ void network_test()
 
     if (!areDown)
     {
-        if (listen_to(get_my_node()->neighbours[0]) == 0)
-        {
-            TEST_PASSED("Connect to server");
-        }
-        else
-        {
-            TEST_FAILED("Connect to server", "listen_to(0) returned -1");
-        }
+        // if (listen_to(get_my_node()->neighbours[0]) == 0)
+        // {
+        //     TEST_PASSED("Connect to server");
+        // }
+        // else
+        // {
+        //     TEST_FAILED("Connect to server", "listen_to(0) returned -1");
+        // }
     }
 }

@@ -68,6 +68,8 @@ void write_block_file(Block block)
 
 void convert_data_to_transactiondata(TransactionData *transactiondata, FILE *blockfile)
 {
+    fread(&transactiondata->magic, sizeof(char), 1, blockfile);
+    fread(&transactiondata->type, sizeof(char), 1, blockfile);
     uint16_t RSAsize;
     fread(&RSAsize, sizeof(int), 1, blockfile);
 
@@ -108,27 +110,33 @@ void convert_data_to_transaction(Transaction *transaction, FILE *blockfile)
     TransactionData *transdata = malloc(sizeof(TransactionData));
     convert_data_to_transactiondata(transdata, blockfile);
     transaction->transaction_data = transdata;
-    fread(&transaction->signature_len, sizeof(size_t), 1, blockfile);
-    transaction->transaction_signature = malloc(transaction->signature_len);
-    fread(transaction->transaction_signature, transaction->signature_len, 1, blockfile);
+    fread(transaction->transaction_signature, 256, 1, blockfile);
 }
 
 void convert_data_to_blockdata(BlockData *blockdata, FILE *blockfile)
 {
     fread(&blockdata->magic, sizeof(char), 1, blockfile);
+    fread(&blockdata->epoch_id, sizeof(int), 1, blockfile);
+    fread(&blockdata->is_prev_block_valid, sizeof(char), 1, blockfile);
     fread(blockdata->previous_block_hash, 97, 1, blockfile);
     fread(&blockdata->height, sizeof(size_t), 1, blockfile);
     fread(&blockdata->nb_transactions, sizeof(uint16_t), 1, blockfile);
+    fread(blockdata->prev_validators_votes, MAX_VALIDATORS_PER_BLOCK / 8, 1, blockfile);
 
-    uint16_t RSAsize;
-    fread(&RSAsize, sizeof(int), 1, blockfile);
 
-    char temp[1000];
-    BIO *pubkey = BIO_new(BIO_s_mem());
-    fread(temp, RSAsize, 1, blockfile);
-    BIO_write(pubkey, temp, RSAsize);
-    blockdata->validator_public_key = RSA_new();
-    PEM_read_bio_RSAPublicKey(pubkey, &blockdata->validator_public_key, NULL, NULL);
+    //Load validators
+    for (size_t i = 0; i < MAX_VALIDATORS_PER_BLOCK; i++)
+    {
+        uint16_t RSAsize;
+        fread(&RSAsize, sizeof(int), 1, blockfile);
+        char temp[1000];
+        BIO *pubkey = BIO_new(BIO_s_mem());
+        fread(temp, RSAsize, 1, blockfile);
+        BIO_write(pubkey, temp, RSAsize);
+        blockdata->validator_public_key[i] = RSA_new();
+        PEM_read_bio_RSAPublicKey(pubkey, &blockdata->validator_public_key[i], NULL, NULL);
+    }
+    
 
     fread(&blockdata->block_timestamp, sizeof(time_t), 1, blockfile);
     blockdata->transactions = malloc(blockdata->nb_transactions * sizeof(Transaction *));
@@ -141,9 +149,9 @@ void convert_data_to_blockdata(BlockData *blockdata, FILE *blockfile)
 
 void convert_data_to_block(Block *block, FILE *blockfile)
 {
-    fread(&block->signature_len, sizeof(size_t), 1, blockfile);
-    block->block_signature = malloc(block->signature_len);
-    fread(block->block_signature, block->signature_len, 1, blockfile);
+    fread(block->block_signature, 256, 1, blockfile);
+    fread(block->validators_votes, MAX_VALIDATORS_PER_BLOCK / 8, 1, blockfile);
+    fread(block->vote_signature, 256 * (MAX_VALIDATORS_PER_BLOCK - 1), 1, blockfile);
     convert_data_to_blockdata(&block->block_data, blockfile);
 }
 
@@ -167,16 +175,19 @@ Block *get_block(size_t block_height)
 
 void free_block(Block *block)
 {
-    free(block->block_signature);
-
     // Transaction
     for (size_t i = 0; i < block->block_data.nb_transactions; i++)
     {
         RSA_free(block->block_data.transactions[i]->transaction_data->organisation_public_key);
         RSA_free(block->block_data.transactions[i]->transaction_data->receiver_public_key);
         RSA_free(block->block_data.transactions[i]->transaction_data->sender_public_key);
-        free(block->block_data.transactions[i]->transaction_signature);
     }
+    // Validators
+    for (size_t i = 0; i < MAX_VALIDATORS_PER_BLOCK; i++)
+    {
+        RSA_free(block->block_data.validator_public_key[i]);
+    }
+    
     free(block->block_data.transactions);
     free(block);
 }

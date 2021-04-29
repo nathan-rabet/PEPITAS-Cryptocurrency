@@ -28,7 +28,7 @@ typedef struct BlockData
 
     //* Validator area
     RSA *validator_public_key[MAX_VALIDATORS_PER_BLOCK];            // The public key of the validators
-    char prev_validators_votes[(MAX_VALIDATORS_PER_BLOCK / 8) - 1]; // BITMAP
+    char prev_validators_votes[MAX_VALIDATORS_PER_BLOCK / 8]; // BITMAP
     time_t block_timestamp;                                         // The block creation timestamp
 } BlockData;
 
@@ -40,7 +40,7 @@ typedef struct Block
     char block_signature[256]; // SHA384 signature EPOCHMAN
 
     //Validator Vote
-    char validators_votes[(MAX_VALIDATORS_PER_BLOCK / 8) - 1]; // BITMAP
+    char validators_votes[MAX_VALIDATORS_PER_BLOCK / 8]; // BITMAP
     char vote_signature[MAX_VALIDATORS_PER_BLOCK - 1][256];
 } Block;
 

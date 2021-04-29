@@ -49,6 +49,9 @@ int verify_signature(void *data, size_t data_len, char *signature, size_t signat
 }
 void write_transactiondata(TransactionData *transaction, int fd)
 {
+    write(fd, &transaction->magic, sizeof(char));
+    write(fd, &transaction->type, sizeof(char));
+
     BIO *pubkey = BIO_new(BIO_s_mem());
     PEM_write_bio_RSAPublicKey(pubkey, transaction->sender_public_key);
     int rsa_size = BIO_pending(pubkey);
@@ -86,8 +89,7 @@ void write_transactiondata(TransactionData *transaction, int fd)
 void write_transaction(Transaction *transaction, int fd)
 {
     write_transactiondata(transaction->transaction_data, fd);
-    write(fd, &transaction->signature_len, sizeof(size_t));
-    write(fd, transaction->transaction_signature, transaction->signature_len);
+    write(fd, transaction->transaction_signature, 256);
 }
 
 void get_transaction_data(Transaction *trans, char **buff, size_t *index)
@@ -175,17 +177,25 @@ void write_blockdata(BlockData blockdata, int fd)
 {
     // IGNORE BLOCK PREV AND NEXT BECAUSE RECUP ADDR AT PARSING
     write(fd, &blockdata.magic, sizeof(char));
+    write(fd, &blockdata.epoch_id, sizeof(int));
+    write(fd, &blockdata.is_prev_block_valid, sizeof(char));
     write(fd, blockdata.previous_block_hash, 97);
     write(fd, &blockdata.height, sizeof(size_t));
     write(fd, &blockdata.nb_transactions, sizeof(uint16_t));
+    write(fd, &blockdata.prev_validators_votes, MAX_VALIDATORS_PER_BLOCK / 8);
 
-    BIO *pubkey = BIO_new(BIO_s_mem());
-    PEM_write_bio_RSAPublicKey(pubkey, blockdata.validator_public_key);
-    int rsa_size = BIO_pending(pubkey);
-    write(fd, &rsa_size, sizeof(int));
-    char temp[1000];
-    BIO_read(pubkey, temp, rsa_size);
-    write(fd, &temp, rsa_size);
+    // Write validators
+    for (size_t i = 0; i < MAX_VALIDATORS_PER_BLOCK; i++)
+    {
+        BIO *pubkey = BIO_new(BIO_s_mem());
+        PEM_write_bio_RSAPublicKey(pubkey, blockdata.validator_public_key[i]);
+        int rsa_size = BIO_pending(pubkey);
+        write(fd, &rsa_size, sizeof(int));
+        char temp[1000];
+        BIO_read(pubkey, temp, rsa_size);
+        write(fd, &temp, rsa_size);
+        BIO_free_all(pubkey);
+    }
 
     write(fd, &blockdata.block_timestamp, sizeof(time_t));
     for (size_t i = 0; i < blockdata.nb_transactions; i++)
@@ -193,13 +203,13 @@ void write_blockdata(BlockData blockdata, int fd)
         write_transaction(blockdata.transactions[i], fd);
     }
 
-    BIO_free_all(pubkey);
 }
 
 void write_block(Block block, int fd)
 {
-    write(fd, &block.signature_len, sizeof(size_t));
-    write(fd, block.block_signature, block.signature_len);
+    write(fd, block.block_signature, 256);
+    write(fd, block.validators_votes, MAX_VALIDATORS_PER_BLOCK / 8);
+    write(fd, block.vote_signature, 256 * (MAX_VALIDATORS_PER_BLOCK - 1));
     write_blockdata(block.block_data, fd);
 }
 
@@ -210,7 +220,7 @@ int verify_block_signature(Block block)
     int ret = verify_signature(buf,
                                size,
                                block.block_signature,
-                               block.signature_len,
+                               256,
                                block.block_data.validator_public_key);
     free(buf);
     return ret;
@@ -224,7 +234,7 @@ int verify_transaction_signature(Transaction transaction)
     int ret = verify_signature(&transaction.transaction_data,
                                size,
                                transaction.transaction_signature,
-                               transaction.signature_len,
+                               256,
                                transaction.transaction_data->sender_public_key);
     free(buf);
     return ret;

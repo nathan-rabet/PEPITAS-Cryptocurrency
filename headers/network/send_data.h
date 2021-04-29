@@ -12,11 +12,23 @@
 int send_client_list(char who, int sockfd, char *sockip);
 
 /**
- * @brief Sends get blocks header
+ * @brief Sends blocks header
+ * 
+ */
+void send_get_headers(client_connection *cc);
+
+/**
+ * @brief Sends get blocks
  * 
  */
 void send_get_blocks(client_connection *cc);
 
-void send_inv()
+void send_actual_height(int fd);
+
+void send_reject_demand(int fd);
+
+void send_send_block(int fd, size_t height);
+
+void send_pending_transaction_list(header, sockfd);
 
 #endif

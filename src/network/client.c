@@ -1,19 +1,5 @@
 #include "network/client.h"
-#include "network/server.h"
-#include "network/network.h"
-#include "network/get_data.h"
-#include "network/send_data.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <netdb.h>
-#include <sys/stat.h>
-#include <unistd.h>
-#include <err.h>
-#include <semaphore.h>
 
-int connection_fd = 0;
 int nb_connection = 0;
 client_connection *client_connections = NULL;
 
@@ -33,55 +19,29 @@ Node *get_my_node(char who)
 int set_neighbour(char who, char *hostname, int family)
 {
     Node *node = get_my_node(who);
-
-    if (hostname == NULL)
+    size_t index = 0;
+    ssize_t min_null = -1;
+    while (index < MAX_NEIGHBOURS)
     {
-        size_t index = 0;
-        while (node->neighbours[index].hostname != NULL && index < MAX_NEIGHBOURS)
-            index++;
-        if (index < MAX_NEIGHBOURS && node->neighbours[index].hostname == NULL)
+        if (min_null == -1 && node->neighbours[index].hostname == NULL)
         {
-            for (size_t i = 0; i < NB_HARD_CODED_ADDR; i++)
-            {
-                node->neighbours[index].hostname = HARD_CODED_ADDR[i].hostname;
-                node->neighbours[index].family = HARD_CODED_ADDR[i].family;
-
-                if (listen_to(node->neighbours[index]) == -1)
-                    memset(&node->neighbours[index], 0, sizeof(Neighbour));
-                else
-                    return 0;
-            }
+            min_null = index;
         }
-
-        return -1;
-    }
-
-    else
-    {
-        size_t index = 0;
-        ssize_t min_null = -1;
-        while (index < MAX_NEIGHBOURS)
+        if (node->neighbours[index].hostname != NULL && !strncmp(node->neighbours[index].hostname, hostname, strlen(hostname)))
         {
-            if (min_null == -1 && node->neighbours[index].hostname == NULL)
-            {
-                min_null = index;
-            }
-            if (node->neighbours[index].hostname != NULL && !strncmp(node->neighbours[index].hostname, hostname, strlen(hostname)))
-            {
-                return 0;
-            }
-            
-            index++;
-        }
-        if (min_null != -1)
-        {
-            node->neighbours[min_null].hostname = malloc(sizeof(char) * 39);
-            snprintf(node->neighbours[min_null].hostname, SIZE_OF_HOSTNAME, "%s", hostname);
-            node->neighbours[min_null].family = family;
             return 0;
         }
-        return -1;
+        
+        index++;
     }
+    if (min_null != -1)
+    {
+        node->neighbours[min_null].hostname = malloc(sizeof(char) * 39);
+        snprintf(node->neighbours[min_null].hostname, SIZE_OF_HOSTNAME, "%s", hostname);
+        node->neighbours[min_null].family = family;
+        return 0;
+    }
+    return -1;
 }
 
 void remove_neighbour(char who, int index)
@@ -188,7 +148,7 @@ int number_neighbours(char who)
     return nb_neigbours;
 }
 
-int listen_to(Neighbour neighbour)
+int listen_to(infos_st *infos, Neighbour neighbour)
 {
     struct addrinfo hints = {0};
 
@@ -237,16 +197,18 @@ int listen_to(Neighbour neighbour)
     if (rp != NULL)
     {
         // Connection success
-        connection_fd = sockfd;
         nb_connection += 1;
         int index = find_empty_connection(MAX_CONNECTION);
         if (index != -1)
         {
             client_connections[index].clientfd = sockfd;
             client_connections[index].demand = 0;
-            pthread_create(&client_connections[index].thread, NULL, client_thread, &client_connections[index]);
+            th_arg *args = malloc(sizeof(th_arg));
+            args->infos = infos;
+            args->client_con = &client_connections[index];
+            pthread_create(&client_connections[index].thread, NULL, client_thread, args);
         }
-        return 0;
+        return sockfd;
     }
 
     // Connection failed
@@ -264,7 +226,11 @@ int find_empty_connection(int max)
 }
 
 void *client_thread(void *args){
-    client_connection *cc = (client_connection *)args;
+    th_arg *a = (th_arg *)args;
+    client_connection *cc = a->client_con;
+    infos_st *infos = a->infos;
+    free(args);
+
     while (1)
     {
         // Wait demand
@@ -273,7 +239,11 @@ void *client_thread(void *args){
         {
         case DD_GET_BLOCKS:
             send_get_blocks(cc);
-            read_header(cc->clientfd);
+            read_header(cc->clientfd, infos);
+            break;
+        case DD_GET_BLOCKS_HEADERS:
+            send_get_headers(cc);
+            read_header(cc->clientfd, infos);
             break;
         
         default:

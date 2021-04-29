@@ -1,20 +1,21 @@
-#include <stddef.h>
-
 #ifndef CLIENT_H
 #define CLIENT_H
 
-#define MAX_NEIGHBOURS 64
-
-typedef struct Neighbour
-{
-    int family;     // Use AF_* for IPv4, IPv6 or other addrinfo fields
-    char *hostname; // The adress of the neighbours; NULL if free
-} Neighbour;
-
-typedef struct Node
-{
-    Neighbour *neighbours; // Neighbours list
-} Node;
+#include "network/network.h"
+#include "network/server.h"
+#include "network/get_data.h"
+#include "network/send_data.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netdb.h>
+#include <sys/stat.h>
+#include <unistd.h>
+#include <err.h>
+#include <errno.h>
+#include <semaphore.h>
+#include <stddef.h>
 
 /**
  * @brief Get the my node object
@@ -62,7 +63,7 @@ void load_neighbours(char who);
  * @param neighbour The neighbour to connect with
  * @return socket FD or -1 if an error occurs
  */
-int listen_to(Neighbour neighbour);
+int listen_to(infos_st *infos, Neighbour neighbour);
 
 int find_empty_connection(int max);
 

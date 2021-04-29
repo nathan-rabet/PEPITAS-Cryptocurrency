@@ -1,7 +1,8 @@
-#include "gen/GEN_validators_file.c"
+#include "core/blockchain/wallet.h"
 
 int main()
 {
-    gen_validators_file("validators.state");
+    get_keys();
+    printf("%d",RSA_size(get_my_wallet()->pub_key));
     return 0;
 }

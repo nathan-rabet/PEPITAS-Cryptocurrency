@@ -5,9 +5,12 @@
 #include "network/network.h"
 #include "misc/safe.h"
 
-void *accept_connection(void *arg)
+void *accept_connection(void *args)
 {
-    client_connection *cl_c = (client_connection *)arg;
+    th_arg *a = (th_arg *)args;
+    client_connection *cl_c = a->client_con;
+    infos_st *infos = a->infos;
+    free(args);
 
     struct sockaddr_in client_addr;
     socklen_t client_addr_len = sizeof(client_addr);
@@ -21,7 +24,12 @@ void *accept_connection(void *arg)
 
     printf("New connection: '%s'\n", ip_str);
 
-    read_header(cl_c->clientfd);
+    // SERVER ROUTINE
+    while (1)
+    {
+        read_header(cl_c->clientfd, infos);
+    }
+    
 
     close(cl_c->clientfd);
     cl_c->clientfd = 0;
@@ -46,7 +54,7 @@ void *redirect_connection(void *arg)
 
     printf("New connection: '%s'\n", ip_str);
 
-    if (read_header(clientfd) == 1)
+    if (read_header(clientfd, NULL) == 1)
     {
         printf("Accept connection: '%s'\n", ip_str);
         set_neighbour(IM_SERVER, ip_str, AF_INET);
@@ -66,7 +74,7 @@ void *redirect_connection(void *arg)
 
 void *init_server(void *args)
 {
-    char type = *(char *)args;
+    infos_st *infos = (infos_st *)args;
     printf("Opening client server...\n");
 
     struct addrinfo hints = {0}; //
@@ -123,7 +131,7 @@ void *init_server(void *args)
 
     while (1)
     {
-        if (type == DOORSERVER)
+        if (infos->serv_type == DOORSERVER)
         {
             pthread_t thread;
             int *clientfd = calloc(1, sizeof(int));
@@ -131,13 +139,18 @@ void *init_server(void *args)
             pthread_create(&thread, NULL, redirect_connection, clientfd);
         }
         
-        if (type == NODESERVER)
+        if (infos->serv_type == NODESERVER)
         {
         
             int index = find_empty_connection(MAX_SERVER);
             client_connections[index].clientfd = accept(sockfd, rp->ai_addr, &rp->ai_addrlen);
             if (client_connections[index].clientfd != -1)
-                pthread_create(&client_connections->thread, NULL, accept_connection, &client_connections[index]);
+            {
+                th_arg *args = malloc(sizeof(th_arg));
+                args->infos = infos;
+                args->client_con = &client_connections[index];
+                pthread_create(&client_connections->thread, NULL, accept_connection, args);
+            }
             else
                 client_connections[index].clientfd = 0;
         }

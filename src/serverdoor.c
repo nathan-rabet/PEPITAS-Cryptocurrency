@@ -12,7 +12,8 @@ int main()
     printf("Starting door server\n");
     load_neighbours(IM_SERVER);
     print_neighbours(IM_SERVER, 0);
-    char type = DOORSERVER;
-    init_server(&type);
+    infos_st* infos = malloc(sizeof(infos_st));
+    infos->serv_type = DOORSERVER;
+    init_server(infos);
     return 0;
 }
