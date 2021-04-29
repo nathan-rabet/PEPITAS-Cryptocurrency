@@ -2,7 +2,7 @@
 #define HASH_H
 
 #include <stdlib.h>
-#include "core/blockchain/block.h"
+#include "blockchain/block.h"
 
 /**
  * @brief Apply the SHA384 algorithm on a 'data' of size 'len_data'

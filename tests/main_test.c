@@ -1,4 +1,4 @@
-#include "core/blockchain/wallet.h"
+#include "blockchain/wallet.h"
 
 int main()
 {

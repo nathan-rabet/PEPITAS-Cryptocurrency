@@ -37,9 +37,9 @@ void send_get_blocks(client_connection *cc){
     safe_write(cc->clientfd, HD_GET_BLOCKS, sizeof(HD_GET_BLOCKS));
     safe_write(cc->clientfd, cc->Payload, cc->Playloadsize);
 }
-void send_actual_height(int fd){
+void send_actual_height(int fd, infos_st *infos){
     safe_write(fd, HD_ACTUAL_HEIGHT, sizeof(HD_ACTUAL_HEIGHT));
-    safe_write(fd, 52, sizeof(size_t));
+    safe_write(fd, &infos->actual_height, sizeof(size_t));
     safe_write(fd, "\r\n\r\n", 4);
 }
 
@@ -47,6 +47,10 @@ void send_reject_demand(int fd){
     safe_write(fd, HD_REJECT_DEMAND, sizeof(HD_REJECT_DEMAND));
 }
 
-void send_pending_transaction_list(sockfd){
+void send_send_block(int fd, size_t height){
+    
+}
+
+void send_pending_transaction_list(int fd){
 
 }

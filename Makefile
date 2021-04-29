@@ -4,27 +4,13 @@ PCFLAGS = `pkg-config --libs gtk+-3.0`
 
 LDPARAMS = -L . -lcrypto -lssl
 
-SRC  = src/network/client.c
-SRC += src/network/server.c
-SRC += src/misc/safe.c
-SRC += src/cryptosystem/rsa.c
-SRC += src/core/blockchain/wallet.c
-SRC += src/core/blockchain/block.c
-SRC += src/core/blockchain/blockchain_header.c
-SRC += src/cryptosystem/signature.c
-SRC += src/network/send_data.c
-SRC += src/network/get_data.c
-SRC += src/network/network.c
-SRC += src/ui/ui.c
-SRC += src/misc/files.c
-SRC += src/cryptosystem/hash.c
-SRC += src/core/validation/validations.c
+SRC:=$(shell find src/core -name *.c)
 
 SRC_TEST =  tests/unit_testing.c 
 SRC_TEST += tests/src/cryptosystem/rsa_test.c 
 SRC_TEST += tests/src/cryptosystem/signature_test.c
-SRC_TEST += tests/src/core/blockchain/block_test.c
-SRC_TEST += tests/src/core/blockchain/block_test.c
+SRC_TEST += tests/src/blockchain/block_test.c
+SRC_TEST += tests/src/blockchain/block_test.c
 
 all: test server client sign ui doorserver
 

@@ -1,10 +1,15 @@
 #ifndef TRANSACTION_H
 #define TRANSACTION_H
 
+#include <string.h>
 #include <stdlib.h>
 #include <openssl/rsa.h>
 #include <openssl/sha.h>
 #include <time.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+#include <fcntl.h>
 
 #define TRANSACTION_DATA_SIZE sizeof(size_t) * 3 + sizeof(time_t) + (512 * 2)
 #define TRANSACTION_SIZE sizeof(size_t) + 2048 + TRANSACTION_DATA_SIZE
@@ -49,5 +54,11 @@ typedef struct Transaction
  * @return returns 0 if the broadcast succeeds, -1 otherwise
  */
 int send_money(size_t amount, u_int64_t receiver_public_key);
-
+void write_transactiondata(TransactionData *transaction, int fd);
+void write_transaction(Transaction *transaction, int fd);
+void get_transaction_data(Transaction *trans, char **buff, size_t *index);
+void convert_data_to_transactiondata(TransactionData *transactiondata, FILE *transaction_file);
+void load_transaction(Transaction *transaction, FILE *transaction_file);
+Transaction * load_pending_transaction(time_t timestamp);
+void add_pending_transaction(Transaction *transaction);
 #endif

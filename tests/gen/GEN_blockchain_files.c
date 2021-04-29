@@ -1,6 +1,6 @@
 #include "tests_macros.h"
-#include "core/blockchain/block.h"
-#include "core/blockchain/transaction.h"
+#include "blockchain/block.h"
+#include "blockchain/transaction.h"
 
 void* rand_data(size_t size) {
         char *data = malloc(size * sizeof(char));

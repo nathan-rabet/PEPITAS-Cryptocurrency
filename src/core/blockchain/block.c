@@ -1,4 +1,4 @@
-#include "core/blockchain/block.h"
+#include "blockchain/block.h"
 
 #define GENESIS_RSA_PUB_1 "-----BEGIN RSA PUBLIC KEY-----\nMIIBCAKCAQEAwcXVgJ6Hy9nryAmSFGpRYxLtPJ1VcI9XTbV34hniNMtztMGpwSTG\nCQ28WIWiD43qjmHxvY4Y26mLYXPjlJ2HiwneSoZcLtY+gJfObGcclpI1DSA0vE72\neTBbDz8enRbJqFWenwopKDoBjvf7nwc/fqRwD0ptLC7xwlPccRiLGdOvP/IusLY0\nLCP6A9R50H7tGsbaAQfGoHYezY8p05K6XRankb7I8wsLFdU6Ew6OghX1tq02liP4\ns5DrloSsxi1mJtW7d+vln0D/a7t2bz4jI+OMtD5M5jldGMyQpzq3D8ZJokMyh6K2\nNLwrAiqDKZiIHJTw8FZidA9/yuzlRpxNHQIBAw==\n-----END RSA PUBLIC KEY-----\n"
 // GENESIS_RSA_PRIV_1
@@ -66,7 +66,7 @@ Block *get_genesis_block()
     return &genesis_block;
 }
 
-ChunkBlockchain *get_blockchain(size_t nb_chunk)
+ChunkBlockchain *load_blockchain(size_t nb_chunk)
 {
 #ifdef TEST
 #undef NB_BLOCK_PER_CHUNK
@@ -83,7 +83,8 @@ ChunkBlockchain *get_blockchain(size_t nb_chunk)
 
     for (size_t i = 0; i < NB_BLOCK_PER_CHUNK; i++)
     {
-        if (blockchain_chunk.chunk[i] != NULL) {
+        if (blockchain_chunk.chunk[i] != NULL)
+        {
             free_block(blockchain_chunk.chunk[i]);
             blockchain_chunk.chunk[i] = NULL;
         }
@@ -93,6 +94,7 @@ ChunkBlockchain *get_blockchain(size_t nb_chunk)
         snprintf(path, 256, "./blockchain/block%lu", (nb_chunk - 1) * NB_BLOCK_PER_CHUNK + i);
         if (stat(path, &buffer) != 0)
         {
+            blockchain_chunk.nb_blocks = i;
             if (i == 0)
                 return NULL;
             break;
@@ -163,7 +165,7 @@ void convert_data_to_blockdata(BlockData *blockdata, FILE *blockfile)
     for (size_t i = 0; i < blockdata->nb_transactions; i++)
     {
         blockdata->transactions[i] = malloc(sizeof(Transaction));
-        convert_data_to_transaction(blockdata->transactions[i], blockfile);
+        load_transaction(blockdata->transactions[i], blockfile);
     }
 }
 
@@ -216,20 +218,20 @@ Block *get_next_block(Block *block)
 {
     if (block->chunk_id == NB_BLOCK_PER_CHUNK - 1)
     {
-        size_t next_chunk_nb = get_blockchain(0)->chunk_nb + 1;
-        return get_blockchain(next_chunk_nb)->chunk[0];
+        size_t next_chunk_nb = load_blockchain(0)->chunk_nb + 1;
+        return load_blockchain(next_chunk_nb)->chunk[0];
     }
-    return get_blockchain(CURRENT_CHUNK)->chunk[block->chunk_id + 1];
+    return load_blockchain(CURRENT_CHUNK)->chunk[block->chunk_id + 1];
 }
 
 Block *get_prev_block(Block *block)
 {
     if (block->chunk_id == 0)
     {
-        size_t next_chunk_nb = get_blockchain(0)->chunk_nb - 1;
-        return get_blockchain(next_chunk_nb)->chunk[NB_BLOCK_PER_CHUNK - 1];
+        size_t next_chunk_nb = load_blockchain(0)->chunk_nb - 1;
+        return load_blockchain(next_chunk_nb)->chunk[NB_BLOCK_PER_CHUNK - 1];
     }
-    return get_blockchain(CURRENT_CHUNK)->chunk[block->chunk_id - 1];
+    return load_blockchain(CURRENT_CHUNK)->chunk[block->chunk_id - 1];
 }
 
 char *get_blockdata_data(Block *block, size_t *size)
@@ -266,17 +268,25 @@ void write_blockdata(BlockData blockdata, int fd)
 {
     // IGNORE BLOCK PREV AND NEXT BECAUSE RECUP ADDR AT PARSING
     write(fd, &blockdata.magic, sizeof(char));
+    write(fd, &blockdata.epoch_id, sizeof(int));
+    write(fd, &blockdata.is_prev_block_valid, sizeof(char));
     write(fd, blockdata.previous_block_hash, 97);
     write(fd, &blockdata.height, sizeof(size_t));
     write(fd, &blockdata.nb_transactions, sizeof(uint16_t));
+    write(fd, &blockdata.prev_validators_votes, MAX_VALIDATORS_PER_BLOCK / 8);
 
-    BIO *pubkey = BIO_new(BIO_s_mem());
-    PEM_write_bio_RSAPublicKey(pubkey, blockdata.validator_public_key);
-    int rsa_size = BIO_pending(pubkey);
-    write(fd, &rsa_size, sizeof(int));
-    char temp[1000];
-    BIO_read(pubkey, temp, rsa_size);
-    write(fd, &temp, rsa_size);
+    // Write validators
+    for (size_t i = 0; i < MAX_VALIDATORS_PER_BLOCK; i++)
+    {
+        BIO *pubkey = BIO_new(BIO_s_mem());
+        PEM_write_bio_RSAPublicKey(pubkey, blockdata.validator_public_key[i]);
+        int rsa_size = BIO_pending(pubkey);
+        write(fd, &rsa_size, sizeof(int));
+        char temp[1000];
+        BIO_read(pubkey, temp, rsa_size);
+        write(fd, &temp, rsa_size);
+        BIO_free_all(pubkey);
+    }
 
     write(fd, &blockdata.block_timestamp, sizeof(time_t));
     for (size_t i = 0; i < blockdata.nb_transactions; i++)
@@ -284,11 +294,12 @@ void write_blockdata(BlockData blockdata, int fd)
         write_transaction(blockdata.transactions[i], fd);
     }
 
-    BIO_free_all(pubkey);
 }
 
 void write_block(Block block, int fd)
 {
-    write(fd, block.block_signature, SIGNATURE_LEN);
+    write(fd, block.block_signature, 256);
+    write(fd, block.validators_votes, MAX_VALIDATORS_PER_BLOCK / 8);
+    write(fd, block.vote_signature, 256 * (MAX_VALIDATORS_PER_BLOCK - 1));
     write_blockdata(block.block_data, fd);
 }

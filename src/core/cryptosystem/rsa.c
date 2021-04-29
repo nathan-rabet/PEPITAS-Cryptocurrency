@@ -1,5 +1,5 @@
 #include "cryptosystem/rsa.h"
-#include "core/blockchain/wallet.h"
+#include "blockchain/wallet.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <openssl/rsa.h>

@@ -1,7 +1,10 @@
-#include "core/blockchain/transaction.h"
+#include "blockchain/transaction.h"
 
 void write_transactiondata(TransactionData *transaction, int fd)
 {
+    write(fd, &transaction->magic, sizeof(char));
+    write(fd, &transaction->type, sizeof(char));
+
     BIO *pubkey = BIO_new(BIO_s_mem());
     PEM_write_bio_RSAPublicKey(pubkey, transaction->sender_public_key);
     int rsa_size = BIO_pending(pubkey);
@@ -31,7 +34,7 @@ void write_transactiondata(TransactionData *transaction, int fd)
     write(fd, &transaction->transaction_timestamp, sizeof(time_t));
     write(fd, &transaction->receiver_remaining_money, sizeof(time_t));
     write(fd, &transaction->sender_remaining_money, sizeof(time_t));
-
+    
     write(fd, transaction->cause, 512);
     write(fd, transaction->asset, 512);
 }
@@ -39,7 +42,7 @@ void write_transactiondata(TransactionData *transaction, int fd)
 void write_transaction(Transaction *transaction, int fd)
 {
     write_transactiondata(transaction->transaction_data, fd);
-    write(fd, transaction->transaction_signature, SIGNATURE_LEN);
+    write(fd, transaction->transaction_signature, 256);
 }
 
 void get_transaction_data(Transaction *trans, char **buff, size_t *index)
@@ -137,7 +140,7 @@ void load_transaction(Transaction *transaction, FILE *transaction_file)
     TransactionData *transdata = malloc(sizeof(TransactionData));
     convert_data_to_transactiondata(transdata, transaction_file);
     transaction->transaction_data = transdata;
-    fread(transaction->transaction_signature, SIGNATURE_LEN, 1, transaction_file);
+    fread(transaction->transaction_signature, 256, 1, transaction_file);
 }
 
 Transaction * load_pending_transaction(time_t timestamp) {

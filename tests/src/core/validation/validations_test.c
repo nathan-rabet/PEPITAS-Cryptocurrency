@@ -1,5 +1,5 @@
 #include "gen/GEN_validators_file.c"
-#include "core/validation/validations.h"
+#include "validation/validators.h"
 #include "tests_macros.h"
 
 void validations_test()

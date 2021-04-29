@@ -3,17 +3,19 @@
 
 #include <string.h>
 #include <stdlib.h>
-#include <openssl/sha.h>
 #include <sys/stat.h>
 #include <unistd.h>
 #include <err.h>
 #include <errno.h>
+#include <openssl/sha.h>
+#include <openssl/pem.h>
 #include <openssl/rsa.h>
 #include <openssl/crypto.h>
 #include <fcntl.h>
 #include <sys/types.h>
 
 #include "transaction.h"
+#include "misc/files.h"
 
 #define MAX_VALIDATORS_PER_BLOCK 512
 
@@ -61,6 +63,7 @@ typedef struct ChunkBlockchain
 {
     size_t chunk_nb; // The split offset
     Block **chunk;   // The splited blocks
+    int16_t nb_blocks;        // The number of blocks loaded in the chunk
 } ChunkBlockchain;
 
 Block *get_genesis_block();
@@ -82,7 +85,6 @@ ChunkBlockchain *load_blockchain(size_t nb_chunk);
  */
 ChunkBlockchain *load_last_blockchain();
 
-
 /**
  * @brief Get the last block height
  * 
@@ -91,20 +93,18 @@ ChunkBlockchain *load_last_blockchain();
 size_t get_last_block_height();
 
 /**
- * @brief Loads a blockchain object with a padding of 'nb_chunk'
- * 
- * @param nb_chunk The chunk nb, 
- * if 0 : return the current blockchain object without modification
- * @return ChunkBlockchain*, NULL if the ChunkBlockchain is empty after switching
- */
-ChunkBlockchain *get_blockchain(size_t nb_chunk);
-/**
  * @brief Writes a block struct in a file
  * 
  * @param block The block to write
  */
 void write_block_file(Block block);
 
+/**
+ * @brief Get a block object
+ * 
+ * @param block_height The height of the block
+ * @return Block* 
+ */
 Block *get_block(size_t block_height);
 
 /**

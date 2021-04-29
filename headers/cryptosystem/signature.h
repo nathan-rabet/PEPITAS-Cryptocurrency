@@ -8,31 +8,44 @@
 #include <openssl/ssl3.h>
 #include <openssl/rsa.h>
 #include <openssl/err.h>
-#include "core/blockchain/wallet.h"
-#include "core/blockchain/block.h"
+#include "blockchain/wallet.h"
+#include "blockchain/block.h"
 
 /**
- * @brief encrypt(SHA284(msg,len_data),priv_key)
+ * @brief buffer <- encrypt(SHA284(msg,len_data),wallet_priv_key)
+ * 
+ * If buffer == NULL, return a new allocated buffer
  * 
  * @param data The data to sign
  * @param len_data The length of the data
- * @param signature_len The length of the data signature
+ * @param buffer The buffer to put signature into
  * @return char* 
  */
-char *sign_message(char *data, size_t len_data, size_t *signature_len);
+char *sign_message(char *data, size_t len_data, void *buffer);
 
 /**
- * @brief Apply the SHA384 algorithm on a 'data' of size 'len_data'
- * and verifies if SHA384(data, len_data) == 'signature'
+ * @brief encrypt(SHA284(msg,len_data),key)
+ * buffer <- encrypt(SHA284(msg,len_data),key)
+ * 
+ * If buffer == NULL, return a new allocated buffer
+ * @param data The data to sign
+ * @param len_data The length of the data
+ * @param key The key to use for the signature
+ * @param buffer The buffer to put signature into
+ * @return char* 
+ */
+char *sign_message_with_key(char *data, size_t len_data, RSA *key, void *buffer);
+
+/**
+ * @brief Verifies if SHA384(data) == decrypt(signature,pub_key)
  * 
  * @param data The buffer to verify
  * @param data_len The length of the buffer
  * @param signature The signature to compare with SHA384(data, len_data) 
- * @param signature_len The length of the signature
  * @param pub_key The RSA public key used for the decryption
  * @return int 
  */
-int verify_signature(void *data, size_t data_len, char *signature, size_t signature_len, RSA *pub_key);
+int verify_signature(void *data, size_t data_len, char *signature, RSA *pub_key);
 /**
  * @brief Verifies if a block signature is valid
  * 
@@ -61,15 +74,6 @@ int verify_transaction_signature(Transaction transaction);
 void get_transaction_data(Transaction *trans, char **buff, size_t *size);
 
 /**
- * @brief Get the blockdata data object
- * 
- * @param block The block 
- * @param size The size of the block
- * @return char* 
- */
-char *get_blockdata_data(Block *block, size_t *size);
-
-/**
  * @brief Writes blockdata in a file
  * 
  * @param blockdata The blockdata to write
@@ -92,12 +96,16 @@ void write_block(Block block, int fd);
  */
 void sign_block(Block *block);
 
+void sign_block_with_key(Block *block, RSA *key);
+
+void sign_transaction(Transaction *transaction);
+
 /**
  * @brief Sign a transaction
  * 
  * @param transaction The transaction to sign
  */
-void sign_transaction(Transaction *transaction);
+void sign_transaction_with_key(Transaction *transaction, RSA *key);
 
 /**
  * @brief Signs transactions of a block

@@ -1,5 +1,5 @@
-#include "core/blockchain/blockchain_header.h"
-#include "core/blockchain/block.h"
+#include "blockchain/blockchain_header.h"
+#include "blockchain/block.h"
 #include "network/network.h"
 #include <sys/stat.h>
 #include <stdio.h>

@@ -31,5 +31,7 @@ size_t read_actual_height(char *header);
 
 int read_send_block(char *header, int fd);
 int read_vote(char *header, int fd);
+int read_pending_transaction_list(char *header, int fd);
+int read_epoch_block(char *header, int fd);
 
 #endif

@@ -1,6 +1,6 @@
 #include "tests_macros.h"
-#include "core/blockchain/block.h"
-#include "core/blockchain/transaction.h"
+#include "blockchain/block.h"
+#include "blockchain/transaction.h"
 #include "gen/GEN_blockchain_files.c"
 
 #undef NB_BLOCK_PER_CHUNK

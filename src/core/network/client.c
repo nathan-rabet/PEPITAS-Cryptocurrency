@@ -241,10 +241,6 @@ void *client_thread(void *args){
             send_get_blocks(cc);
             read_header(cc->clientfd, infos);
             break;
-        case DD_GET_BLOCKS_HEADERS:
-            send_get_headers(cc);
-            read_header(cc->clientfd, infos);
-            break;
         
         default:
             break;

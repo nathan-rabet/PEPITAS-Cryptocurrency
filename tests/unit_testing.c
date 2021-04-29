@@ -2,8 +2,8 @@
 #include "cryptosystem/signature_test.h"
 #include "cryptosystem/rsa_test.h"
 #include "network/client_test.c"
-#include "core/blockchain/block_test.h"
-#include "core/validation/validations_test.c"
+#include "blockchain/block_test.h"
+#include "validation/validations_test.c"
 
 int main()
 {

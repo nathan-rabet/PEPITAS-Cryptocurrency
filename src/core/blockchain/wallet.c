@@ -1,8 +1,8 @@
 #include <time.h>
 
-#include "core/blockchain/wallet.h"
+#include "blockchain/wallet.h"
 #include "cryptosystem/rsa.h"
-#include "core/blockchain/transaction.h"
+#include "blockchain/transaction.h"
 
 Wallet* get_my_wallet() {
 

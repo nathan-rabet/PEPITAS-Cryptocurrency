@@ -1,6 +1,6 @@
 #include <openssl/sha.h>
 #include "cryptosystem/hash.h"
-#include "core/blockchain/block.h"
+#include "blockchain/block.h"
 #include "cryptosystem/signature.h"
 
 char *sha384_data(void *data, size_t len_data)

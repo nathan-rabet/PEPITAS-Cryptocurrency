@@ -1,7 +1,7 @@
 #include "tests_macros.h"
 #include "cryptosystem/signature.h"
 #include "cryptosystem/rsa.h"
-#include "core/blockchain/wallet.h"
+#include "blockchain/wallet.h"
 
 #include <stdio.h>
 #include <unistd.h>

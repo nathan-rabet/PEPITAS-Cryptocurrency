@@ -8,7 +8,7 @@
 #include "network/send_data.h"
 #include "network/get_data.h"
 #include "misc/safe.h"
-#include "core/blockchain/blockchain_header.h"
+#include "blockchain/blockchain_header.h"
 
 extern int nb_connection;
 extern client_connection *client_connections;

@@ -137,7 +137,7 @@ int read_get_blocks(char *header, int fd, infos_st *infos){
     {
         size_t height = *(size_t *)(header + buffer_index);
         if (height == 0){
-            send_actual_height(fd);
+            send_actual_height(fd, infos);
         }
         else
         {

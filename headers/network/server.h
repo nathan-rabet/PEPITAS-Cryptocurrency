@@ -7,7 +7,7 @@
 #include <semaphore.h>
 #include <netdb.h>
 #include <arpa/inet.h>
-#include "core/blockchain/block.h"
+#include "blockchain/block.h"
 #include "network/client.h"
 #include "network/get_data.h"
 #include "network/send_data.h"
