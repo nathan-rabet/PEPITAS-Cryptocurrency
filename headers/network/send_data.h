@@ -29,6 +29,6 @@ void send_reject_demand(int fd);
 
 void send_send_block(int fd, size_t height);
 
-void send_pending_transaction_list(header, sockfd);
+void send_pending_transaction_list(int sockfd);
 
 #endif

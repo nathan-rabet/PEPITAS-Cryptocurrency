@@ -47,6 +47,6 @@ void send_reject_demand(int fd){
     safe_write(fd, HD_REJECT_DEMAND, sizeof(HD_REJECT_DEMAND));
 }
 
-void send_pending_transaction_list(header, sockfd){
+void send_pending_transaction_list(sockfd){
 
 }
