@@ -49,13 +49,13 @@ int process_header(char *header, size_t size, int sockfd, infos_st *infos)
     if (strncmp(HD_GET_PENDING_TRANSACTION_LIST, header, strlen(HD_GET_PENDING_TRANSACTION_LIST)) == 0)
     {
         printf("Recived header HD_GET_PENDING_TRANSACTION_LIST\n");
-        send_pending_transaction_list(header, sockfd);
+        send_pending_transaction_list(sockfd);
         return 1;
     }
     if (strncmp(HD_REJECT_DEMAND, header, strlen(HD_REJECT_DEMAND)) == 0)
     {
         printf("Recived header HD_REJECT_DEMAND\n");
-        send_pending_transaction_list(header, sockfd);
+        send_reject_demand(sockfd);
         return 1;
     }
     if (strncmp(HD_SEND_PENDING_TRANSACTION, header, strlen(HD_SEND_PENDING_TRANSACTION)) == 0)
