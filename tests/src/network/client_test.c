@@ -11,7 +11,7 @@ void network_test()
 {
     // Init client lists
     char areDown = 0;
-    if (set_neighbour(NULL, 0) == 0)
+    if (set_neighbour(NULL, 0, 0) == 0)
     {
         TEST_PASSED("Init hard coded addresses");
     }

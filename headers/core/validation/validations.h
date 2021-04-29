@@ -4,8 +4,6 @@
 #include <stdlib.h>
 #include <openssl/rsa.h>
 
-#define MAX_VALIDATORS_PER_BLOCK 512
-
 /**
  * @brief Get the 'next block' validators RSA public keys
  * @param nb_validators return value, the number of selected validators

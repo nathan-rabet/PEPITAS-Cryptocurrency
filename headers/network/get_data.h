@@ -1,6 +1,8 @@
 #ifndef GET_DATA_H
 #define GET_DATA_H
 
+#include <string.h>
+
 #include "network/network.h"
 #include "network/client.h"
 #include "network/server.h"

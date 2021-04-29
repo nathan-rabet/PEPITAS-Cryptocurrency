@@ -1,10 +1,23 @@
 #ifndef BLOCK_H
 #define BLOCK_H
 
+#include <string.h>
 #include <stdlib.h>
 #include <openssl/sha.h>
+#include <sys/stat.h>
+#include <unistd.h>
+#include <err.h>
+#include <errno.h>
+#include <openssl/rsa.h>
+#include <openssl/crypto.h>
+#include <fcntl.h>
+#include <sys/types.h>
+
 #include "transaction.h"
-#include "core/validation/validations.h"
+
+#define MAX_VALIDATORS_PER_BLOCK 512
+
+#define SIGNATURE_LEN 256
 
 #define CURRENT_CHUNK 0
 
@@ -50,6 +63,33 @@ typedef struct ChunkBlockchain
     Block **chunk;   // The splited blocks
 } ChunkBlockchain;
 
+Block *get_genesis_block();
+
+/**
+ * @brief Loads a blockchain object with a padding of 'nb_chunk'
+ * 
+ * @param nb_chunk The chunk nb, 
+ * if 0 : return the current blockchain object without modification
+ * @return ChunkBlockchain*, NULL if the ChunkBlockchain is empty after switching
+ */
+ChunkBlockchain *load_blockchain(size_t nb_chunk);
+
+/**
+ * @brief Load the last local blockchain chunk
+ * 
+ * @param nb_chunk 
+ * @return ChunkBlockchain* 
+ */
+ChunkBlockchain *load_last_blockchain();
+
+
+/**
+ * @brief Get the last block height
+ * 
+ * @return size_t 
+ */
+size_t get_last_block_height();
+
 /**
  * @brief Loads a blockchain object with a padding of 'nb_chunk'
  * 
@@ -89,4 +129,29 @@ Block *get_next_block(Block *block);
  * @return The next Block* 
  */
 Block *get_prev_block(Block *block);
+
+/**
+ * @brief Get the blockdata data object
+ * 
+ * @param block The block 
+ * @param size The size of the block
+ * @return char* 
+ */
+char *get_blockdata_data(Block *block, size_t *size);
+
+/**
+ * @brief Writes blockdata in a file
+ * 
+ * @param blockdata The blockdata to write
+ * @param fd The file descriptor of the file in which the blockdata is written
+ */
+void write_blockdata(BlockData blockdata, int fd);
+
+/**
+ * @brief Writes a block in a file
+ * 
+ * @param block The block to write
+ * @param fd the file descriptor of the file in which the block is written
+ */
+void write_block(Block block, int fd);
 #endif

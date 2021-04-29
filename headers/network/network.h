@@ -23,6 +23,8 @@
 
 #define MAX_SERVER 20
 
+#define MAX_VALIDATORS_PER_BLOCK 512
+
 typedef struct Neighbour
 {
     int family;     // Use AF_* for IPv4, IPv6 or other addrinfo fields

@@ -7,6 +7,7 @@
 #include "network/server.h"
 #include "network/send_data.h"
 #include "network/get_data.h"
+#include "misc/safe.h"
 #include "core/blockchain/blockchain_header.h"
 
 extern int nb_connection;
@@ -79,7 +80,6 @@ void askfornewblockchain()
         if (client_connections[i].clientfd != 0) {
             while (client_connections[i].demand == 0);
             free(client_connections[i].Payload);
-            client_connections[i].Playloadsize == 0;
         }
     }
 }
