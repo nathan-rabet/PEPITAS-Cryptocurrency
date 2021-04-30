@@ -99,7 +99,7 @@ int fetch_client_list(char who, int fd)
         else
             hostname_size = 39;
 
-        read(fd, &hostname, hostname_size);
+        read(fd, hostname, hostname_size);
         index++;
         
         set_neighbour(who, hostname, family);
