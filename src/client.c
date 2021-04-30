@@ -17,24 +17,26 @@ static pthread_t server_t;
 
 
 void join_network_door(infos_st *infos){
-    int connection_fd = 0;
+    client_connection *connection_fd;
     for (size_t i = 0; i < NB_HARD_CODED_ADDR; i++)
     {
         connection_fd = listen_to(infos ,HARD_CODED_ADDR[i]);
-        if (connection_fd != 0)
+        if (connection_fd != NULL)
             break;
     }
-    if (connection_fd == 0)
+    if (connection_fd == NULL)
         err(EXIT_FAILURE, "Aie aie aie pas de réseau mon reuf :(\nHave a great day\n");
 
     //SEND ACCEPT
-    safe_write(connection_fd, HD_CONNECTION_TO_NETWORK, strlen(HD_CONNECTION_TO_NETWORK));
+    safe_write(connection_fd->clientfd, HD_CONNECTION_TO_NETWORK, strlen(HD_CONNECTION_TO_NETWORK));
 
-    read_header(connection_fd, infos);
+    read_header(connection_fd->clientfd, infos);
     print_neighbours(IM_CLIENT, 0);
 
     // Close connection to door server
-    close(connection_fd);
+    close(connection_fd->clientfd);
+    pthread_cancel(connection_fd->thread);
+    connection_fd->clientfd = 0;
 }
 
 void connection_to_others(infos_st *infos){

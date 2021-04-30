@@ -148,7 +148,7 @@ int number_neighbours(char who)
     return nb_neigbours;
 }
 
-int listen_to(infos_st *infos, Neighbour neighbour)
+client_connection *listen_to(infos_st *infos, Neighbour neighbour)
 {
     struct addrinfo hints = {0};
 
@@ -160,7 +160,7 @@ int listen_to(infos_st *infos, Neighbour neighbour)
 
     // If no neighbour
     if (neighbour.hostname == NULL)
-        return -1;
+        return NULL;
 
     // Get adress information
     addrinfo_ret = getaddrinfo(neighbour.hostname, STATIC_PORT, &hints, &result);
@@ -170,7 +170,7 @@ int listen_to(infos_st *infos, Neighbour neighbour)
     {
         dprintf(STDERR_FILENO, "Fail getting information for address '%s' on port %s: %s",
                 neighbour.hostname, STATIC_PORT, gai_strerror(addrinfo_ret));
-        return -1;
+        return NULL;
     }
 
     // Try to connect for each result
@@ -207,12 +207,12 @@ int listen_to(infos_st *infos, Neighbour neighbour)
             args->infos = infos;
             args->client_con = &client_connections[index];
             pthread_create(&client_connections[index].thread, NULL, client_thread, args);
+            return &client_connections[index];
         }
-        return sockfd;
     }
 
     // Connection failed
-    return -1;
+    return NULL;
 }
 
 int find_empty_connection(int max)

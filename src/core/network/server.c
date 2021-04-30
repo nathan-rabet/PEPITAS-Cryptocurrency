@@ -55,7 +55,6 @@ void *redirect_connection(void *arg)
         set_neighbour(IM_SERVER, ip_str, AF_INET);
         save_neighbours(IM_SERVER);
         print_neighbours(IM_SERVER, 1);
-        
         //send client list
         send_client_list(IM_SERVER, clientfd, ip_str);
     }

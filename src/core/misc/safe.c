@@ -17,7 +17,7 @@ int safe_write(int fd, const void *buf, ssize_t count)
 
 ssize_t safe_read(int fd, const void **buf, size_t *bufsize)
 {
-	size_t buffersize = 256;
+	size_t buffersize = 12;
 	size_t read_count = 0;
 	char *buffer = calloc(buffersize, sizeof(char));
 	do
@@ -33,7 +33,7 @@ ssize_t safe_read(int fd, const void **buf, size_t *bufsize)
 		read_count += nb_read;
 		if (read_count >= buffersize)
 		{
-			buffersize *= 2;
+			buffersize += 1;
 			buffer = realloc(buffer, buffersize);
 		}
 	} while (strncmp("\r\n\r\n", buffer + (read_count - 4), 4) != 0);
