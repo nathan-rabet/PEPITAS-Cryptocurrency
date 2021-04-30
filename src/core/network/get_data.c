@@ -84,8 +84,10 @@ int fetch_client_list(char who, int fd)
     size_t index = 0;
     int family = 0;
     char *hostname = malloc(SIZE_OF_HOSTNAME);
+    int nb_ng;
+    read(fd, &nb_ng, sizeof(int));
 
-    while (index < MAX_NEIGHBOURS)
+    while (index < nb_ng)
     {
         read(fd, &family, sizeof(int));
 
