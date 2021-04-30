@@ -129,7 +129,7 @@ int main()
     }
 
     // Try Load Old blockchain
-    gen_blockchain_header();
+    gen_blockchain_header(infos);
 
     // Open server
     pthread_create(&server_t, NULL, init_server, &infos);

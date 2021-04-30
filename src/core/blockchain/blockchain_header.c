@@ -1,8 +1,4 @@
 #include "blockchain/blockchain_header.h"
-#include "blockchain/block.h"
-#include "network/network.h"
-#include <sys/stat.h>
-#include <stdio.h>
 
 void write_block_header(FILE *fd, Block *block, size_t height)
 {
