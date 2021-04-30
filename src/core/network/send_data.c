@@ -11,7 +11,7 @@ int send_client_list(char who, int sockfd, char *sockip)
     for (size_t index = 0; index < MAX_NEIGHBOURS; index++)
         if (client_list->neighbours[index].hostname != NULL)
             ng++;
-
+    printf("ng value : %i\n", ng);
     if (safe_write(sockfd, (void *)&ng, sizeof(int)) == -1)
         return -1;
 
