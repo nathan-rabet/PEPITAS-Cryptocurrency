@@ -237,11 +237,20 @@ void *client_thread(void *args){
         sem_wait(&cc->lock);
         switch (cc->demand)
         {
-        case DD_GET_BLOCKS:
+        case DD_GET_HEIGHT:
             send_get_blocks(cc);
-            read_header(cc->clientfd, infos);
+            cc->actual_client_height = read_header(cc->clientfd, infos);
             break;
         
+        case DD_GET_BLOCKS:
+        {
+            send_get_blocks(cc);
+            for (size_t i = 0; i < cc->Payload; i++)
+            {
+                read_header(cc->clientfd, infos);
+            }
+        }
+
         default:
             break;
         }

@@ -14,7 +14,7 @@
  * @param sockfd The sock FD
  * @return 0 if sucess, -1 otherwise
  */
-int read_header(int sockfd, infos_st *infos);
+size_t read_header(int sockfd, infos_st *infos);
 
 /**
  * @brief Merges my neighbours list with the one sent by 'neighbour_id'. 

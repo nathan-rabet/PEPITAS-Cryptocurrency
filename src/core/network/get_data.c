@@ -1,6 +1,6 @@
 #include "network/get_data.h"
 
-int process_header(char *header, size_t size, int sockfd, infos_st *infos)
+size_t process_header(char *header, size_t size, int sockfd, infos_st *infos)
 {
     if (strncmp(HD_GET_CLIENT_LIST, header, strlen(HD_GET_CLIENT_LIST)) == 0)
     {
@@ -109,7 +109,7 @@ int fetch_client_list(char who, int fd)
 }
 
 
-int read_header(int sockfd, infos_st *infos)
+size_t read_header(int sockfd, infos_st *infos)
 {
     // Waiting header for server and read it
     char *buffer;
@@ -121,11 +121,11 @@ int read_header(int sockfd, infos_st *infos)
 
     if (nb_read != -1)
     {
-        int r = process_header(buffer, nb_read, sockfd, infos);
+        size_t r = process_header(buffer, nb_read, sockfd, infos);
         free(buffer);
         return r;
     }
-    return -1;
+    return 0;
 }
 
 int read_get_blocks(int fd, infos_st *infos){

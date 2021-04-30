@@ -44,6 +44,7 @@ typedef struct client_connection
     int clientfd; // The client<->server connection socket
     size_t Playloadsize;
     void *Payload;
+    size_t actual_client_height;
 } client_connection;
 
 typedef struct infos_st
@@ -75,7 +76,7 @@ extern const Neighbour HARD_CODED_ADDR[];
 #define HD_SEND_VOTE                        "SEND VOTE\r\n\r\n"
 
 // DEMAND
-#define DD_GET_BLOCKS                  1
-#define DD_GET_BLOCKS_HEADERS          2
+#define DD_GET_HEIGHT                  1
+#define DD_GET_BLOCKS                  2
 
 #endif

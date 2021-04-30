@@ -51,25 +51,19 @@ void connection_to_others(infos_st *infos){
     printf("Connected to %i clients! \n", nb_connection);
 }
 
-void askfornewblockchain()
+size_t update_blockchain_height(infos_st *infos)
 {
-    FILE *blockchainh = fopen("blockchain/blockchainheader", "wb");
-    if (blockchainh == NULL)
-        return;
-    char hash[SHA384_DIGEST_LENGTH];
-    fread(hash, sizeof(size_t), 1, blockchainh);
-    fread(hash, SHA384_DIGEST_LENGTH, 1, blockchainh);
-    fclose(blockchainh);
+    size_t max_h = 0;
+    size_t max_h_i = 0;
     for (size_t i = 0; i < MAX_CONNECTION; i++)
     {
         if (client_connections[i].clientfd != 0) {
-            client_connections[i].demand = DD_GET_BLOCKS;
-            client_connections[i].Playloadsize = sizeof(uint32_t) + sizeof(char) * (1 + 4 + SHA384_DIGEST_LENGTH);
+            client_connections[i].demand = DD_GET_HEIGHT;
+            client_connections[i].Playloadsize = sizeof(uint32_t) + sizeof(char) + sizeof(size_t);
             client_connections[i].Payload = malloc(client_connections[i].Playloadsize);
             *(uint32_t *)client_connections[i].Payload = P_VERSION;
-            *((char *)client_connections[i].Payload + sizeof(uint32_t)) = 1;
-            memcpy(((char *)client_connections[i].Payload + sizeof(uint32_t) + sizeof(char)), hash, SHA384_DIGEST_LENGTH);
-            memcpy(((char *)client_connections[i].Payload + sizeof(uint32_t) + sizeof(char) * (SHA384_DIGEST_LENGTH + 1)), "\r\n\r\n", 4);
+            *(char *)(client_connections[i].Payload + sizeof(uint32_t)) = 1;
+            *(size_t *)(client_connections[i].Payload + sizeof(size_t) + sizeof(char)) = 0;
             sem_post(&client_connections[i].lock);
 
             // BREAK IF SUCCESS
@@ -80,29 +74,40 @@ void askfornewblockchain()
     for (size_t i = 0; i < MAX_CONNECTION; i++)
     {
         if (client_connections[i].clientfd != 0) {
-            while (client_connections[i].demand == 0);
+            while (client_connections[i].demand != 0);
+            if (max_h < client_connections[i].actual_client_height){
+                max_h = client_connections[i].actual_client_height;
+                max_h_i = i;
+            }
             free(client_connections[i].Payload);
         }
     }
+
+    return max_h_i;
 }
 
-void timo_la_grenouille(){
-    for (size_t i = 0; i < MAX_CONNECTION; i++)
-    {
-        if (client_connections[i].clientfd != 0) {
-            client_connections[i].demand = DD_GET_BLOCKS_HEADERS;
-            sem_post(&client_connections[i].lock);
-            
+void update_blockchain(infos_st *infos, size_t index_client){
+
+    while (client_connections[index_client].actual_client_height < infos->actual_height) {
+        client_connections[index_client].demand = DD_GET_BLOCKS;
+
+        char nb_dd = (infos->actual_height - client_connections[index_client].actual_client_height) % 50;
+
+        client_connections[index_client].Playloadsize = sizeof(uint32_t) + sizeof(char) + (sizeof(size_t) * nb_dd);
+        client_connections[index_client].Payload = malloc(client_connections[index_client].Playloadsize);
+        *(uint32_t *)client_connections[index_client].Payload = P_VERSION;
+        *(char *)(client_connections[index_client].Payload + sizeof(uint32_t)) = nb_dd;
+        for (size_t i = 1; i <= nb_dd; i++)
+        {
+            *(size_t *)(client_connections[index_client].Payload + sizeof(uint32_t) + sizeof(char) + (sizeof(size_t) * i)) = client_connections[index_client].actual_client_height + i;
         }
+        
+
+        sem_post(&client_connections[index_client].lock);
+        //WAIT
+        while (client_connections[index_client].demand != 0);
     }
 
-    //WAIT
-    for (size_t i = 0; i < MAX_CONNECTION; i++)
-    {
-        if (client_connections[i].clientfd != 0) {
-            while (client_connections[i].demand == 0);
-        }
-    }
 }
 
 int main()
@@ -118,7 +123,6 @@ int main()
         sem_init(&client_connections[i].lock, 0, 0);
     }
 
-    nb_connection = 0;
     printf("Starting client...\n");
 
     printf("Try to load last client list\n");
@@ -146,8 +150,11 @@ int main()
     {
         printf("Connection to others...\n");
         connection_to_others(infos);
+        printf("Update blockchain height...\n");
+        size_t index_client = update_blockchain_height(infos);
         printf("Update blockchain...\n");
-        askfornewblockchain();
+        update_blockchain(infos, index_client);
+        printf("Blockchain syncronized with: %lu\n", infos->actual_height);
     }
     
     while (1);
