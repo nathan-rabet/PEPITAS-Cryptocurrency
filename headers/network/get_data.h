@@ -23,15 +23,14 @@ int read_header(int sockfd, infos_st *infos);
  * 
  * @return 0 if sucess, -1 otherwise
  */
-int fetch_client_list(char who, char *buffer, size_t buffer_size);
+int fetch_client_list(char who, int fd);
 
-int read_get_blocks(char *header, int fd, infos_st *infos);
+int read_get_blocks(int fd, infos_st *infos);
 
-size_t read_actual_height(char *header);
-
-int read_send_block(char *header, int fd);
-int read_vote(char *header, int fd);
-int read_pending_transaction_list(char *header, int fd);
-int read_epoch_block(char *header, int fd);
+size_t read_actual_height(int fd);
+int read_send_block(int fd);
+int read_vote(int fd);
+int read_pending_transaction_list(int fd);
+int read_epoch_block(int fd);
 
 #endif

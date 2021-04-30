@@ -96,51 +96,51 @@ void get_transaction_data(Transaction *trans, char **buff, size_t *index)
     *index += 512;
 }
 
-void convert_data_to_transactiondata(TransactionData *transactiondata, FILE *blockfile)
+void convert_data_to_transactiondata(TransactionData *transactiondata, int fd)
 {
-    fread(&transactiondata->magic, sizeof(char), 1, blockfile);
-    fread(&transactiondata->type, sizeof(char), 1, blockfile);
+    read(fd, &transactiondata->magic, sizeof(char));
+    read(fd, &transactiondata->type, sizeof(char));
     uint16_t RSAsize;
-    fread(&RSAsize, sizeof(int), 1, blockfile);
+    read(fd, &RSAsize, sizeof(int));
 
     char temp[1000];
-    fread(temp, RSAsize, 1, blockfile);
+    read(fd, temp, RSAsize);
     BIO *pubkey = BIO_new(BIO_s_mem());
     BIO_write(pubkey, temp, RSAsize);
     transactiondata->sender_public_key = RSA_new();
     PEM_read_bio_RSAPublicKey(pubkey, &transactiondata->sender_public_key, NULL, NULL);
     BIO_free(pubkey);
 
-    fread(&RSAsize, sizeof(int), 1, blockfile);
-    fread(temp, RSAsize, 1, blockfile);
+    read(fd, &RSAsize, sizeof(int));
+    read(fd, temp, RSAsize);
     BIO *pubkey1 = BIO_new(BIO_s_mem());
     BIO_write(pubkey1, temp, RSAsize);
     transactiondata->receiver_public_key = RSA_new();
     PEM_read_bio_RSAPublicKey(pubkey1, &transactiondata->receiver_public_key, NULL, NULL);
     BIO_free(pubkey1);
 
-    fread(&RSAsize, sizeof(int), 1, blockfile);
-    fread(temp, RSAsize, 1, blockfile);
+    read(fd, &RSAsize, sizeof(int));
+    read(fd, temp, RSAsize);
     BIO *pubkey2 = BIO_new(BIO_s_mem());
     BIO_write(pubkey2, temp, RSAsize);
     transactiondata->organisation_public_key = RSA_new();
     PEM_read_bio_RSAPublicKey(pubkey2, &transactiondata->organisation_public_key, NULL, NULL);
     BIO_free(pubkey2);
 
-    fread(&transactiondata->amount, sizeof(size_t), 1, blockfile);
-    fread(&transactiondata->receiver_remaining_money, sizeof(size_t), 1, blockfile);
-    fread(&transactiondata->sender_remaining_money, sizeof(size_t), 1, blockfile);
-    fread(&transactiondata->transaction_timestamp, sizeof(time_t), 1, blockfile);
-    fread(transactiondata->cause, 512, 1, blockfile);
-    fread(transactiondata->asset, 512, 1, blockfile);
+    read(fd, &transactiondata->amount, sizeof(size_t));
+    read(fd, &transactiondata->receiver_remaining_money, sizeof(size_t));
+    read(fd, &transactiondata->sender_remaining_money, sizeof(size_t));
+    read(fd, &transactiondata->transaction_timestamp, sizeof(time_t));
+    read(fd, transactiondata->cause, 512);
+    read(fd, transactiondata->asset, 512);
 }
 
-void load_transaction(Transaction *transaction, FILE *transaction_file)
+void load_transaction(Transaction **transaction, int fd)
 {
     TransactionData *transdata = malloc(sizeof(TransactionData));
-    convert_data_to_transactiondata(transdata, transaction_file);
-    transaction->transaction_data = transdata;
-    fread(transaction->transaction_signature, 256, 1, transaction_file);
+    convert_data_to_transactiondata(transdata, fd);
+    (*transaction)->transaction_data = transdata;
+    read(fd, (*transaction)->transaction_signature, 256);
 }
 
 Transaction * load_pending_transaction(time_t timestamp) {
@@ -150,11 +150,9 @@ Transaction * load_pending_transaction(time_t timestamp) {
     FILE *transaction_file = fopen(name,"r");
     if (transaction_file == NULL)
         return NULL;
-    
-    Transaction * transaction = malloc(sizeof(Transaction));
-    load_transaction(transaction,transaction_file);
+    TransactionData *transaction;
+    load_transaction(&transaction, transaction_file);
     return transaction;
-
 }
 
 void add_pending_transaction(Transaction *transaction)

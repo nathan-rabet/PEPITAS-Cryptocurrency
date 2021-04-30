@@ -57,8 +57,9 @@ int send_money(size_t amount, u_int64_t receiver_public_key);
 void write_transactiondata(TransactionData *transaction, int fd);
 void write_transaction(Transaction *transaction, int fd);
 void get_transaction_data(Transaction *trans, char **buff, size_t *index);
-void convert_data_to_transactiondata(TransactionData *transactiondata, FILE *transaction_file);
-void load_transaction(Transaction *transaction, FILE *transaction_file);
+void convert_data_to_transactiondata(TransactionData *transactiondata, int fd);
+void load_transaction(Transaction **transaction, int fd);
 Transaction * load_pending_transaction(time_t timestamp);
 void add_pending_transaction(Transaction *transaction);
+
 #endif

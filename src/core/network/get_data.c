@@ -29,12 +29,12 @@ int process_header(char *header, size_t size, int sockfd, infos_st *infos)
     if (strncmp(HD_SEND_CLIENT_LIST, header, 8) == 0)
     {
         printf("Recived header HD_SEND_CLIENT_LIST\n");
-        return fetch_client_list(IM_CLIENT, header, size);
+        return fetch_client_list(IM_CLIENT, sockfd);
     }
     if (strncmp(HD_GET_BLOCKS, header, strlen(HD_GET_BLOCKS)) == 0)
     {
         printf("Recived header HD_GET_BLOCKS\n");
-        return read_get_blocks(header, sockfd, infos);
+        return read_get_blocks(sockfd, infos);
     }
     if (strncmp(HD_ACTUAL_HEIGHT, header, strlen(HD_ACTUAL_HEIGHT)) == 0)
     {
@@ -44,34 +44,34 @@ int process_header(char *header, size_t size, int sockfd, infos_st *infos)
     if (strncmp(HD_SEND_BLOCK, header, strlen(HD_SEND_BLOCK)) == 0)
     {
         printf("Recived header HD_SEND_BLOCK\n");
-        return read_send_block(header, sockfd);
+        return read_send_block(sockfd);
     }
     if (strncmp(HD_GET_PENDING_TRANSACTION_LIST, header, strlen(HD_GET_PENDING_TRANSACTION_LIST)) == 0)
     {
         printf("Recived header HD_GET_PENDING_TRANSACTION_LIST\n");
         send_pending_transaction_list(sockfd);
-        return 1;
+        return 0;
     }
     if (strncmp(HD_REJECT_DEMAND, header, strlen(HD_REJECT_DEMAND)) == 0)
     {
         printf("Recived header HD_REJECT_DEMAND\n");
         send_reject_demand(sockfd);
-        return 1;
+        return 0;
     }
     if (strncmp(HD_SEND_PENDING_TRANSACTION, header, strlen(HD_SEND_PENDING_TRANSACTION)) == 0)
     {
         printf("Recived header HD_SEND_PENDING_TRANSACTION\n");
-        return read_pending_transaction_list(header, sockfd);
+        return read_pending_transaction_list(sockfd);
     }
     if (strncmp(HD_SEND_EPOCH_BLOCK, header, strlen(HD_SEND_EPOCH_BLOCK)) == 0)
     {
         printf("Recived header HD_SEND_EPOCH_BLOCK\n");
-        return read_epoch_block(header, sockfd);
+        return read_epoch_block(sockfd);
     }
     if (strncmp(HD_SEND_VOTE, header, strlen(HD_SEND_VOTE)) == 0)
     {
         printf("Recived header HD_SEND_EPOCH_BLOCK\n");
-        return read_vote(header, sockfd);
+        return read_vote(sockfd);
     }
     
 
@@ -79,18 +79,15 @@ int process_header(char *header, size_t size, int sockfd, infos_st *infos)
     return 0;
 }
 
-int fetch_client_list(char who, char *buffer, size_t buffer_size)
+int fetch_client_list(char who, int fd)
 {
-    size_t buffer_index = strlen(HD_SEND_CLIENT_LIST);
-
+    size_t index = 0;
     int family = 0;
     char *hostname = malloc(SIZE_OF_HOSTNAME);
 
-    while (buffer_index < buffer_size - 5)
+    while (index < MAX_NEIGHBOURS)
     {
-        family = *(int *)(buffer + buffer_index);
-
-        buffer_index += sizeof(int);
+        read(fd, &family, sizeof(int));
 
         int hostname_size;
         // IPv4
@@ -100,14 +97,12 @@ int fetch_client_list(char who, char *buffer, size_t buffer_size)
         else
             hostname_size = 39;
 
-        memcpy(hostname, buffer + buffer_index, hostname_size);
-
-        buffer_index += hostname_size;
+        read(fd, &hostname, hostname_size);
+        index++;
         
         set_neighbour(who, hostname, family);
     }
-
-    free(buffer);
+    free(hostname);
     return 0;
 }
 
@@ -123,26 +118,30 @@ int read_header(int sockfd, infos_st *infos)
     nb_read = safe_read(sockfd, (void *)&buffer, &buffer_size);
 
     if (nb_read != -1)
-        return process_header(buffer, nb_read, sockfd, infos);
+    {
+        int r = process_header(buffer, nb_read, sockfd, infos);
+        free(buffer);
+        return r;
+    }
     return -1;
 }
 
-int read_get_blocks(char *header, int fd, infos_st *infos){
-    size_t buffer_index = strlen(HD_GET_BLOCKS);
-    uint32_t version = *(uint32_t *)(header + buffer_index);
-    buffer_index += sizeof(uint32_t);
-    char hash_count = *(header + buffer_index);
-    buffer_index += sizeof(char);
-    for (char i = 0; i < hash_count; i++, buffer_index += sizeof(size_t))
+int read_get_blocks(int fd, infos_st *infos){
+    uint32_t version;
+    read(fd, &version, sizeof(uint32_t));
+    char hash_count;
+    read(fd, &hash_count, sizeof(char));
+    for (char i = 0; i < hash_count; i++)
     {
-        size_t height = *(size_t *)(header + buffer_index);
+        size_t height;
+        read(fd, &height, sizeof(uint32_t));
         if (height == 0){
             send_actual_height(fd, infos);
         }
         else
         {
             if (height < infos->actual_height){
-                send_send_block(fd, *(size_t *)(header + buffer_index));
+                send_send_block(fd, height);
             }
             else
             {
@@ -153,24 +152,31 @@ int read_get_blocks(char *header, int fd, infos_st *infos){
     return 0;
 }
 
-size_t read_actual_height(char *header){
-    return *(size_t *)(header + strlen(HD_ACTUAL_HEIGHT));
+size_t read_actual_height(int fd){
+    size_t ac;
+    read(fd, &ac, sizeof(size_t));
+    return ac;
 }
 
-int read_send_block(char *header, int fd){
+int read_send_block(int fd){
     Block my_new_block;
+    convert_data_to_block(&my_new_block, fd);
+    // ADD TO BLOCKCHAIN IF TRUE
     return 0;
 }
 
-int read_vote(char *header, int fd){
-    size_t buffer_index = strlen(HD_SEND_VOTE);
+int read_vote(int fd){
+    
     return 0;
 }
 
-int read_epoch_block(char *header, int fd){
+int read_epoch_block(int fd){
+    Block my_new_epoch;
+    convert_data_to_block(&my_new_epoch, fd);
+    // GESTION EPOCH
     return 0;
 }
 
-int read_pending_transaction_list(char *header, int fd){
+int read_pending_transaction_list(int fd){
     return 0;
 }

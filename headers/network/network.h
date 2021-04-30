@@ -62,17 +62,17 @@ extern const Neighbour HARD_CODED_ADDR[];
 
 // REQUESTS
 #define HD_GET_CLIENT_LIST                  "GET CLIENT LIST\r\n\r\n"
-#define HD_SEND_CLIENT_LIST                 "SEND CLIENT LIST\n"
+#define HD_SEND_CLIENT_LIST                 "SEND CLIENT LIST\r\n\r\n"
 #define HD_CONNECTION_TO_NETWORK            "CONNECTION TO NETWORK\r\n\r\n"
 #define HD_CONNECTION_TO_NODE               "CONNECTION TO NODE\r\n\r\n"
-#define HD_GET_BLOCKS                       "GET BLOCKS\n"
-#define HD_ACTUAL_HEIGHT                    "ACTUAL HEIGHT\n"
-#define HD_SEND_BLOCK                       "SEND BLOCK\n"
+#define HD_GET_BLOCKS                       "GET BLOCKS\r\n\r\n"
+#define HD_ACTUAL_HEIGHT                    "ACTUAL HEIGHT\r\n\r\n"
+#define HD_SEND_BLOCK                       "SEND BLOCK\r\n\r\n"
 #define HD_GET_PENDING_TRANSACTION_LIST     "GET PENDING TRANSACTION LIST\r\n\r\n"
 #define HD_REJECT_DEMAND                    "REJECT DEMAND\r\n\r\n"
-#define HD_SEND_PENDING_TRANSACTION         "SEND PENDING TRANSACTION\n"
-#define HD_SEND_EPOCH_BLOCK                 "SEND EPOCH BLOCK\n"
-#define HD_SEND_VOTE                        "SEND VOTE\n"
+#define HD_SEND_PENDING_TRANSACTION         "SEND PENDING TRANSACTION\r\n\r\n"
+#define HD_SEND_EPOCH_BLOCK                 "SEND EPOCH BLOCK\r\n\r\n"
+#define HD_SEND_VOTE                        "SEND VOTE\r\n\r\n"
 
 // DEMAND
 #define DD_GET_BLOCKS                  1

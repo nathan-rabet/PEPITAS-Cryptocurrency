@@ -26,11 +26,7 @@ int send_client_list(char who, int sockfd, char *sockip)
             if (safe_write(sockfd, (void *)client_list->neighbours[index].hostname, hostname_size) == -1)
                 return -1;
         }
-    }
-
-    // END SENDING
-    return safe_write(sockfd, "\r\n\r\n", 5);
-    
+    }    
 }
 
 void send_get_blocks(client_connection *cc){
@@ -40,7 +36,6 @@ void send_get_blocks(client_connection *cc){
 void send_actual_height(int fd, infos_st *infos){
     safe_write(fd, HD_ACTUAL_HEIGHT, sizeof(HD_ACTUAL_HEIGHT));
     safe_write(fd, &infos->actual_height, sizeof(size_t));
-    safe_write(fd, "\r\n\r\n", 4);
 }
 
 void send_reject_demand(int fd){
@@ -48,7 +43,10 @@ void send_reject_demand(int fd){
 }
 
 void send_send_block(int fd, size_t height){
-    
+    safe_write(fd, HD_SEND_BLOCK, sizeof(HD_SEND_BLOCK));
+    Block *block = get_block(height);
+    write_block(*block, fd);
+    free_block(block);
 }
 
 void send_pending_transaction_list(int fd){

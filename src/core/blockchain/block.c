@@ -135,46 +135,45 @@ void write_block_file(Block block)
     close(fd);
 }
 
-void convert_data_to_blockdata(BlockData *blockdata, FILE *blockfile)
+void convert_data_to_blockdata(BlockData *blockdata, int fd)
 {
-    fread(&blockdata->magic, sizeof(char), 1, blockfile);
-    fread(&blockdata->epoch_id, sizeof(int), 1, blockfile);
-    fread(&blockdata->is_prev_block_valid, sizeof(char), 1, blockfile);
-    fread(blockdata->previous_block_hash, 97, 1, blockfile);
-    fread(&blockdata->height, sizeof(size_t), 1, blockfile);
-    fread(&blockdata->nb_transactions, sizeof(uint16_t), 1, blockfile);
-    fread(blockdata->prev_validators_votes, MAX_VALIDATORS_PER_BLOCK / 8, 1, blockfile);
+    read(fd, &blockdata->magic, sizeof(char));
+    read(fd, &blockdata->epoch_id, sizeof(int));
+    read(fd, &blockdata->is_prev_block_valid, sizeof(char));
+    read(fd, blockdata->previous_block_hash, 97);
+    read(fd, &blockdata->height, sizeof(size_t));
+    read(fd, &blockdata->nb_transactions, sizeof(uint16_t));
+    read(fd, blockdata->prev_validators_votes, MAX_VALIDATORS_PER_BLOCK / 8);
 
 
     //Load validators
     for (size_t i = 0; i < MAX_VALIDATORS_PER_BLOCK; i++)
     {
         uint16_t RSAsize;
-        fread(&RSAsize, sizeof(int), 1, blockfile);
+        read(fd, &RSAsize, sizeof(int));
         char temp[1000];
         BIO *pubkey = BIO_new(BIO_s_mem());
-        fread(temp, RSAsize, 1, blockfile);
+        read(fd, temp, RSAsize);
         BIO_write(pubkey, temp, RSAsize);
         blockdata->validator_public_key[i] = RSA_new();
         PEM_read_bio_RSAPublicKey(pubkey, &blockdata->validator_public_key[i], NULL, NULL);
     }
     
 
-    fread(&blockdata->block_timestamp, sizeof(time_t), 1, blockfile);
+    read(fd, &blockdata->block_timestamp, sizeof(time_t));
     blockdata->transactions = malloc(blockdata->nb_transactions * sizeof(Transaction *));
     for (size_t i = 0; i < blockdata->nb_transactions; i++)
     {
-        blockdata->transactions[i] = malloc(sizeof(Transaction));
-        load_transaction(blockdata->transactions[i], blockfile);
+        load_transaction(&blockdata->transactions[i], fd);
     }
 }
 
-void convert_data_to_block(Block *block, FILE *blockfile)
+void convert_data_to_block(Block *block, int fd)
 {
-    fread(block->block_signature, 256, 1, blockfile);
-    fread(block->validators_votes, MAX_VALIDATORS_PER_BLOCK / 8, 1, blockfile);
-    fread(block->vote_signature, 256 * (MAX_VALIDATORS_PER_BLOCK - 1), 1, blockfile);
-    convert_data_to_blockdata(&block->block_data, blockfile);
+    read(fd, block->block_signature, 256);
+    read(fd, block->validators_votes, MAX_VALIDATORS_PER_BLOCK / 8);
+    read(fd, block->vote_signature, 256 * (MAX_VALIDATORS_PER_BLOCK - 1));
+    convert_data_to_blockdata(&block->block_data, fd);
 }
 
 Block *get_block(size_t block_height)

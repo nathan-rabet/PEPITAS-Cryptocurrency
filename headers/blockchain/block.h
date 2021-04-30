@@ -154,4 +154,6 @@ void write_blockdata(BlockData blockdata, int fd);
  * @param fd the file descriptor of the file in which the block is written
  */
 void write_block(Block block, int fd);
+
+void convert_data_to_block(Block *block, int fd);
 #endif
