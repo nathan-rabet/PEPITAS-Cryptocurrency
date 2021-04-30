@@ -10,7 +10,6 @@
 #include "misc/safe.h"
 #include "blockchain/blockchain_header.h"
 
-extern int nb_connection;
 extern client_connection *client_connections;
 static pthread_t server_t;
 
@@ -41,11 +40,13 @@ void join_network_door(infos_st *infos){
 
 void connection_to_others(infos_st *infos){
     Node *node = get_my_node(IM_CLIENT);
+    int nb_connection = number_neighbours(IM_CLIENT);
     for (size_t i = 0; i < MAX_NEIGHBOURS && nb_connection < MAX_CONNECTION; i++)
     {
         if (node->neighbours[i].hostname != NULL)
         {
-            listen_to(infos, node->neighbours[i]);
+            if (listen_to(infos, node->neighbours[i]) == NULL)
+                printf("Fail de connection to neighbourg\n");
         }
     }
     printf("Connected to %i clients! \n", nb_connection);
@@ -92,6 +93,7 @@ void update_blockchain(infos_st *infos, size_t index_client){
         client_connections[index_client].demand = DD_GET_BLOCKS;
 
         char nb_dd = (infos->actual_height - client_connections[index_client].actual_client_height) % 50;
+        printf("Demande de %i Blocks\n", nb_dd);
 
         client_connections[index_client].Playloadsize = sizeof(uint32_t) + sizeof(char) + (sizeof(size_t) * nb_dd);
         client_connections[index_client].Payload = malloc(client_connections[index_client].Playloadsize);
@@ -152,6 +154,7 @@ int main()
         connection_to_others(infos);
         printf("Update blockchain height...\n");
         size_t index_client = update_blockchain_height(infos);
+        printf("Max client blockchain height found is: %lu\n", client_connections[index_client].actual_client_height);
         printf("Update blockchain...\n");
         update_blockchain(infos, index_client);
         printf("Blockchain syncronized with: %lu\n", infos->actual_height);

@@ -1,6 +1,5 @@
 #include "network/client.h"
 
-int nb_connection = 0;
 client_connection *client_connections = NULL;
 
 Node *get_my_node(char who)
@@ -184,6 +183,7 @@ client_connection *listen_to(infos_st *infos, Neighbour neighbour)
 
         if (sockfd != -1)
         {
+            printf("coucou\n");
             // Try to connect
             if (connect(sockfd, rp->ai_addr, rp->ai_addrlen) != -1)
                 break;
@@ -197,16 +197,18 @@ client_connection *listen_to(infos_st *infos, Neighbour neighbour)
     if (rp != NULL)
     {
         // Connection success
-        nb_connection += 1;
         int index = find_empty_connection(MAX_CONNECTION);
         if (index != -1)
         {
             client_connections[index].clientfd = sockfd;
             client_connections[index].demand = 0;
+
             th_arg *args = malloc(sizeof(th_arg));
             args->infos = infos;
             args->client_con = &client_connections[index];
+
             pthread_create(&client_connections[index].thread, NULL, client_thread, args);
+
             return &client_connections[index];
         }
     }
