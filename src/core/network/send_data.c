@@ -7,11 +7,22 @@ int send_client_list(char who, int sockfd, char *sockip)
     if (safe_write(sockfd, HD_SEND_CLIENT_LIST, strlen(HD_SEND_CLIENT_LIST)) == -1)
         return -1;
 
-    int ng;
+    int ng = 0;
     for (size_t index = 0; index < MAX_NEIGHBOURS; index++)
-        if (client_list->neighbours[index].hostname != NULL)
+    {
+        int hostname_size;
+
+        // IPv4
+        if (client_list->neighbours[index].family == AF_INET)
+            hostname_size = 15;
+
+        // IPv6
+        else
+            hostname_size = 39;
+        if (client_list->neighbours[index].hostname != NULL && strncmp(sockip, client_list->neighbours[index].hostname, hostname_size))
             ng++;
-    printf("ng value : %i\n", ng);
+    }
+    
     if (safe_write(sockfd, (void *)&ng, sizeof(int)) == -1)
         return -1;
 
@@ -34,7 +45,8 @@ int send_client_list(char who, int sockfd, char *sockip)
             if (safe_write(sockfd, (void *)client_list->neighbours[index].hostname, hostname_size) == -1)
                 return -1;
         }
-    }    
+    }
+    return 0;
 }
 
 void send_get_blocks(client_connection *cc){
