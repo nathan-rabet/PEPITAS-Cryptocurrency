@@ -150,7 +150,7 @@ int number_neighbours(char who)
     return nb_neigbours;
 }
 
-client_connection *listen_to(infos_st *infos, Neighbour neighbour)
+client_connection *listen_to(infos_st *infos, Neighbour neighbour, char* connection_type)
 {
     struct addrinfo hints = {0};
 
@@ -199,6 +199,10 @@ client_connection *listen_to(infos_st *infos, Neighbour neighbour)
     if (rp != NULL)
     {
         // Connection success
+
+        //SEND ACCEPT
+        safe_write(sockfd, connection_type, strlen(connection_type));
+
         int index = find_empty_connection(MAX_CONNECTION);
         if (index != -1)
         {

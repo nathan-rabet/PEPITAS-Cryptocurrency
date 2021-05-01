@@ -19,15 +19,12 @@ void join_network_door(infos_st *infos){
     client_connection *connection_fd;
     for (size_t i = 0; i < NB_HARD_CODED_ADDR; i++)
     {
-        connection_fd = listen_to(infos ,HARD_CODED_ADDR[i]);
+        connection_fd = listen_to(infos ,HARD_CODED_ADDR[i], HD_CONNECTION_TO_NETWORK);
         if (connection_fd != NULL)
             break;
     }
     if (connection_fd == NULL)
         err(EXIT_FAILURE, "Aie aie aie pas de réseau mon reuf :(\nHave a great day\n");
-
-    //SEND ACCEPT
-    safe_write(connection_fd->clientfd, HD_CONNECTION_TO_NETWORK, strlen(HD_CONNECTION_TO_NETWORK));
 
     read_header(connection_fd->clientfd, infos);
     print_neighbours(IM_CLIENT, 0);
@@ -45,7 +42,7 @@ void connection_to_others(infos_st *infos){
     {
         if (node->neighbours[i].hostname != NULL)
         {
-            if (listen_to(infos, node->neighbours[i]) == NULL)
+            if (listen_to(infos, node->neighbours[i], HD_CONNECTION_TO_NODE) == NULL)
                 printf("Fail de connection to neighbour\n");
         }
     }
