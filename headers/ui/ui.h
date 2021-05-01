@@ -6,9 +6,9 @@
 #include <string.h>
 #include <err.h>
 #include <time.h>
-#include "../cryptosystem/rsa.h"
-#include "../cryptosystem/hash.h"
-#include "../core/blockchain/wallet.h"
+#include "cryptosystem/rsa.h"
+#include "cryptosystem/hash.h"
+#include "blockchain/wallet.h"
 
 /**
  * @brief Setups the gtk widgets for the GUI

@@ -192,26 +192,26 @@
             </child>
             <child>
               <object class="GtkLabel" id="label2">
-                <property name="width_request">116</property>
-                <property name="height_request">43</property>
+                <property name="width_request">102</property>
+                <property name="height_request">33</property>
                 <property name="visible">True</property>
                 <property name="label" translatable="yes">Balance:</property>
               </object>
               <packing>
-                <property name="x">331</property>
-                <property name="y">42</property>
+                <property name="x">386</property>
+                <property name="y">51</property>
               </packing>
             </child>
             <child>
               <object class="GtkLabel" id="balance_2">
-                <property name="width_request">144</property>
+                <property name="width_request">117</property>
                 <property name="height_request">37</property>
                 <property name="visible">True</property>
                 <property name="label" translatable="yes">0</property>
               </object>
               <packing>
-                <property name="x">454</property>
-                <property name="y">48</property>
+                <property name="x">505</property>
+                <property name="y">49</property>
               </packing>
             </child>
             <child>
@@ -222,8 +222,8 @@
                 <property name="label" translatable="yes">Public key:</property>
               </object>
               <packing>
-                <property name="x">331</property>
-                <property name="y">145</property>
+                <property name="x">375</property>
+                <property name="y">113</property>
               </packing>
             </child>
             <child>
@@ -234,8 +234,8 @@
                 <property name="label" translatable="yes">pkey</property>
               </object>
               <packing>
-                <property name="x">448</property>
-                <property name="y">149</property>
+                <property name="x">477</property>
+                <property name="y">115</property>
               </packing>
             </child>
             <child>
@@ -246,8 +246,8 @@
                 <property name="label" translatable="yes">Private key:</property>
               </object>
               <packing>
-                <property name="x">341</property>
-                <property name="y">192</property>
+                <property name="x">380</property>
+                <property name="y">189</property>
               </packing>
             </child>
             <child>
@@ -259,7 +259,7 @@
                 <property name="label" translatable="yes">privatekey</property>
               </object>
               <packing>
-                <property name="x">470</property>
+                <property name="x">498</property>
                 <property name="y">196</property>
               </packing>
             </child>
@@ -275,8 +275,179 @@
                 <property name="yalign">0.52999997138977051</property>
               </object>
               <packing>
-                <property name="x">425</property>
-                <property name="y">246</property>
+                <property name="x">454</property>
+                <property name="y">248</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkProgressBar" id="progress_bar_blockchain">
+                <property name="width_request">156</property>
+                <property name="height_request">20</property>
+                <property name="visible">True</property>
+                <property name="sensitive">False</property>
+                <property name="show_text">True</property>
+                <property name="pulse_step">0.01</property>
+              </object>
+              <packing>
+                <property name="x">20</property>
+                <property name="y">83</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label22">
+                <property name="width_request">140</property>
+                <property name="height_request">20</property>
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Blockchain</property>
+              </object>
+              <packing>
+                <property name="x">26</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label23">
+                <property name="width_request">132</property>
+                <property name="height_request">21</property>
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Pepitas wallet</property>
+              </object>
+              <packing>
+                <property name="x">444</property>
+                <property name="y">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="synchro_label">
+                <property name="width_request">149</property>
+                <property name="height_request">20</property>
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Synchronisation</property>
+              </object>
+              <packing>
+                <property name="x">25</property>
+                <property name="y">60</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="block_amount_label">
+                <property name="width_request">144</property>
+                <property name="height_request">20</property>
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">0</property>
+              </object>
+              <packing>
+                <property name="x">19</property>
+                <property name="y">102</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label24">
+                <property name="width_request">142</property>
+                <property name="height_request">26</property>
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Latest blocks</property>
+              </object>
+              <packing>
+                <property name="x">24</property>
+                <property name="y">124</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="latest_block_name1">
+                <property name="width_request">121</property>
+                <property name="height_request">45</property>
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Block1
+</property>
+              </object>
+              <packing>
+                <property name="x">36</property>
+                <property name="y">152</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="latest_block_name2">
+                <property name="width_request">151</property>
+                <property name="height_request">43</property>
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Block2
+</property>
+              </object>
+              <packing>
+                <property name="x">21</property>
+                <property name="y">195</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="latest_block_name3">
+                <property name="width_request">144</property>
+                <property name="height_request">44</property>
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Block3
+</property>
+              </object>
+              <packing>
+                <property name="x">25</property>
+                <property name="y">239</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label25">
+                <property name="width_request">120</property>
+                <property name="height_request">25</property>
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Network</property>
+              </object>
+              <packing>
+                <property name="x">238</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label26">
+                <property name="width_request">114</property>
+                <property name="height_request">23</property>
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Connections</property>
+              </object>
+              <packing>
+                <property name="x">241</property>
+                <property name="y">43</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="connections_label">
+                <property name="width_request">112</property>
+                <property name="height_request">27</property>
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">0</property>
+              </object>
+              <packing>
+                <property name="x">240</property>
+                <property name="y">74</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label27">
+                <property name="width_request">118</property>
+                <property name="height_request">27</property>
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Mempool</property>
+              </object>
+              <packing>
+                <property name="x">237</property>
+                <property name="y">115</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="mempool_label">
+                <property name="width_request">125</property>
+                <property name="height_request">29</property>
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">0</property>
+              </object>
+              <packing>
+                <property name="x">236</property>
+                <property name="y">141</property>
               </packing>
             </child>
           </object>
@@ -470,15 +641,15 @@ therefore gaining more Pepitas</property>
             <child>
               <object class="GtkButton" id="invest_but1">
                 <property name="label" translatable="yes">Invest</property>
-                <property name="width_request">63</property>
-                <property name="height_request">35</property>
+                <property name="width_request">41</property>
+                <property name="height_request">26</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
               </object>
               <packing>
                 <property name="x">74</property>
-                <property name="y">175</property>
+                <property name="y">174</property>
               </packing>
             </child>
             <child>
@@ -495,14 +666,14 @@ therefore gaining more Pepitas</property>
             </child>
             <child>
               <object class="GtkLabel" id="stake_label1">
-                <property name="width_request">113</property>
-                <property name="height_request">35</property>
+                <property name="width_request">28</property>
+                <property name="height_request">30</property>
                 <property name="visible">True</property>
                 <property name="label" translatable="yes">0</property>
               </object>
               <packing>
-                <property name="x">470</property>
-                <property name="y">224</property>
+                <property name="x">448</property>
+                <property name="y">226</property>
               </packing>
             </child>
             <child>
