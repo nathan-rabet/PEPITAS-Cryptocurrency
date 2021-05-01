@@ -467,15 +467,15 @@
             <property name="visible">True</property>
             <child>
               <object class="GtkEntry" id="transa_amount">
-                <property name="width_request">124</property>
-                <property name="height_request">28</property>
+                <property name="width_request">158</property>
+                <property name="height_request">23</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="invisible_char">&#x25CF;</property>
               </object>
               <packing>
-                <property name="x">90</property>
-                <property name="y">210</property>
+                <property name="x">75</property>
+                <property name="y">209</property>
               </packing>
             </child>
             <child>
@@ -577,7 +577,7 @@
                 <property name="width_request">140</property>
                 <property name="height_request">34</property>
                 <property name="visible">True</property>
-                <property name="label" translatable="yes">Balance:</property>
+                <property name="label" translatable="yes">Current balance:</property>
               </object>
               <packing>
                 <property name="x">60</property>
@@ -592,8 +592,8 @@
                 <property name="label" translatable="yes">0</property>
               </object>
               <packing>
-                <property name="x">179</property>
-                <property name="y">80</property>
+                <property name="x">180</property>
+                <property name="y">84</property>
               </packing>
             </child>
             <child>
@@ -956,6 +956,7 @@ therefore gaining more Pepitas</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="invisible_char">&#x25CF;</property>
+            <property name="invisible_char_set">True</property>
           </object>
           <packing>
             <property name="x">36</property>
@@ -976,26 +977,11 @@ therefore gaining more Pepitas</property>
           </packing>
         </child>
         <child>
-          <object class="GtkCheckButton" id="password_rem_but">
-            <property name="label" translatable="yes">Remember password</property>
-            <property name="width_request">191</property>
-            <property name="height_request">56</property>
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">False</property>
-            <property name="draw_indicator">True</property>
-          </object>
-          <packing>
-            <property name="x">46</property>
-            <property name="y">226</property>
-          </packing>
-        </child>
-        <child>
           <object class="GtkLabel" id="label21">
             <property name="width_request">195</property>
             <property name="height_request">33</property>
             <property name="visible">True</property>
-            <property name="label" translatable="yes">You don't have a key?</property>
+            <property name="label" translatable="yes">You don't have an account?</property>
           </object>
           <packing>
             <property name="x">365</property>
@@ -1004,7 +990,7 @@ therefore gaining more Pepitas</property>
         </child>
         <child>
           <object class="GtkButton" id="create_key_but1">
-            <property name="label" translatable="yes">Create a key</property>
+            <property name="label" translatable="yes">Create account</property>
             <property name="width_request">126</property>
             <property name="height_request">31</property>
             <property name="visible">True</property>
@@ -1037,8 +1023,8 @@ therefore gaining more Pepitas</property>
             <property name="visible">True</property>
           </object>
           <packing>
-            <property name="x">54</property>
-            <property name="y">268</property>
+            <property name="x">193</property>
+            <property name="y">265</property>
           </packing>
         </child>
       </object>
@@ -1052,54 +1038,79 @@ therefore gaining more Pepitas</property>
         <property name="visible">True</property>
         <child>
           <object class="GtkLabel" id="label25">
-            <property name="width_request">169</property>
-            <property name="height_request">62</property>
+            <property name="width_request">68</property>
+            <property name="height_request">20</property>
             <property name="visible">True</property>
             <property name="label" translatable="yes">Key creation:</property>
             <property name="use_markup">True</property>
           </object>
           <packing>
-            <property name="x">139</property>
-            <property name="y">4</property>
+            <property name="x">180</property>
+            <property name="y">1</property>
           </packing>
         </child>
         <child>
           <object class="GtkEntry" id="password_entry2">
-            <property name="width_request">187</property>
-            <property name="height_request">35</property>
+            <property name="width_request">158</property>
+            <property name="height_request">23</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="invisible_char">&#x25CF;</property>
           </object>
           <packing>
-            <property name="x">133</property>
-            <property name="y">124</property>
+            <property name="x">22</property>
+            <property name="y">126</property>
           </packing>
         </child>
         <child>
           <object class="GtkLabel" id="label28">
-            <property name="width_request">143</property>
-            <property name="height_request">35</property>
+            <property name="width_request">53</property>
+            <property name="height_request">20</property>
             <property name="visible">True</property>
             <property name="label" translatable="yes">Password:</property>
           </object>
           <packing>
-            <property name="x">153</property>
-            <property name="y">90</property>
+            <property name="x">67</property>
+            <property name="y">87</property>
           </packing>
         </child>
         <child>
           <object class="GtkButton" id="create_key_but2">
-            <property name="label" translatable="yes">Create key</property>
-            <property name="width_request">130</property>
-            <property name="height_request">35</property>
+            <property name="label" translatable="yes">Create account</property>
+            <property name="width_request">107</property>
+            <property name="height_request">25</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
           </object>
           <packing>
-            <property name="x">163</property>
-            <property name="y">185</property>
+            <property name="x">165</property>
+            <property name="y">189</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="label30">
+            <property name="width_request">123</property>
+            <property name="height_request">23</property>
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">Key (optionnal):</property>
+          </object>
+          <packing>
+            <property name="x">277</property>
+            <property name="y">84</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkEntry" id="key_entry">
+            <property name="width_request">165</property>
+            <property name="height_request">24</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="invisible_char">&#x25CF;</property>
+          </object>
+          <packing>
+            <property name="x">256</property>
+            <property name="y">126</property>
           </packing>
         </child>
       </object>

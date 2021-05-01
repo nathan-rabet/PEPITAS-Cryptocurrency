@@ -10,6 +10,6 @@
  * @brief Get the keys object
  * 
  */
-void get_keys();
+void get_keys(char *password);
 
 #endif

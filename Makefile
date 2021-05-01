@@ -29,6 +29,7 @@ doorserver: src/serverdoor.c ${SRC}
 client: src/client.c ${SRC}
 	@mkdir -p bin
 	${CC} ${CFLAGS} -Wall $^ ${PCFLAGS} -o bin/client ${LDPARAMS}
+	cp src/core/ui/pepitas.glade ./pepitas.glade
 
 ui: src/gui.c ${SRC}
 	@mkdir -p bin

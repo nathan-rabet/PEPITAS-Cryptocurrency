@@ -18,9 +18,15 @@
 // PUBLIC KEY : (n, e)
 // PRIVATE KEY: (n, d)
 
-void get_keys()
+void get_keys(char *password)
 {
     Wallet *wallet = get_my_wallet();
+
+    if (wallet->pub_key != NULL)
+    {
+        return;
+    }
+    
 
     struct stat st = {0};
 

@@ -18,7 +18,7 @@ static GtkButton *add_contact_but2;
 static GtkButton *create_key_but1;
 static GtkButton *create_key_but2;
 static GtkButton *connect_but;
-static GtkCheckButton *password_rem_but;
+
 
 GtkLabel *balance_1;
 GtkLabel *balance_2;
@@ -38,6 +38,7 @@ GtkEntry *name_entry_con;
 GtkEntry *public_key_entry_con;
 GtkEntry *password_entry1;
 GtkEntry *password_entry2;
+GtkEntry *key_entry;
 GtkTreeView *tv_con;
 GtkTreeStore *ts_con;
 GtkTreeViewColumn *cx1_con;
@@ -98,6 +99,8 @@ void *setup(void *args)
     invest_entry = GTK_ENTRY(gtk_builder_get_object(builder, "invest_entry"));
     recover_entry = GTK_ENTRY(gtk_builder_get_object(builder, "recover_entry"));
 
+    key_entry = GTK_ENTRY(gtk_builder_get_object(builder, "key_entry"));
+
     transa_amount = GTK_ENTRY(gtk_builder_get_object(builder, "transa_amount"));
     recipient_key = GTK_ENTRY(gtk_builder_get_object(builder, "recipient_key"));
     contacts_combo = GTK_COMBO_BOX(gtk_builder_get_object(builder, "contacts_combo"));
@@ -126,7 +129,6 @@ void *setup(void *args)
     password_entry1 = GTK_ENTRY(gtk_builder_get_object(builder, "password_entry1"));
     password_entry2 = GTK_ENTRY(gtk_builder_get_object(builder, "password_entry2"));
 
-    password_rem_but = GTK_CHECK_BUTTON(gtk_builder_get_object(builder, "password_rem_but"));
     create_key_but1 = GTK_BUTTON(gtk_builder_get_object(builder, "create_key_but1"));
     create_key_but2 = GTK_BUTTON(gtk_builder_get_object(builder, "create_key_but2"));
     connect_but = GTK_BUTTON(gtk_builder_get_object(builder, "connect_but"));
@@ -543,7 +545,13 @@ gboolean on_create_key_but1_press(__attribute__ ((unused)) GtkWidget *widget,
                     __attribute__ ((unused)) GdkEventKey *event,
                     __attribute__ ((unused)) gpointer user_data)
 {
-    gtk_widget_show(create_key_window);
+    struct stat st = {0};
+    if (stat(".ui/.password", &st) == -1)
+    {
+        gtk_widget_show(create_key_window);
+        return TRUE;
+    }
+    change_label_text(password_error_label, "Account already exist");
     return TRUE;
 
 }
@@ -552,19 +560,43 @@ gboolean on_create_key_but2_press(__attribute__ ((unused)) GtkWidget *widget,
                     __attribute__ ((unused)) GdkEventKey *event,
                     __attribute__ ((unused)) gpointer user_data)
 {
-    /*
-    char *buff = malloc(sizeof(char) * strlen(gtk_entry_get_text(password_entry2)));
-    sprintf(buff, gtk_entry_get_text(password_entry2));
-    */
-    get_keys();
-    //char *hashed = sha384_data(buff, strlen(buff));
-    //FILE *password_f = fopen("../../.password", "wb");
-    //if(password_f == NULL)
-    //    err(-1, "Couldn't open password file");
-    //fwrite(hashed, 1, sizeof(hashed), password_f);
-    //free(buff);
-    //free(hashed);
-    //fclose(password_f);
+    size_t bufflen = strlen(gtk_entry_get_text(password_entry2));
+    if (bufflen < 5){
+        change_label_text(password_error_label, "Invalid password\n(min 5 characters)");
+        gtk_widget_hide(create_key_window);
+        return TRUE;
+    }
+    char *buff = malloc(sizeof(char) * bufflen);
+    memcpy(buff, gtk_entry_get_text(password_entry2), bufflen);
+    size_t keylen = strlen(gtk_entry_get_text(key_entry));
+    // if (keylen != 0)
+    // {
+    //     char *buffkey = malloc(keylen);
+    //     memcpy(buff, gtk_entry_get_text(key_entry), keylen);
+
+    //     FILE* rsa_public_file = fopen("./.keys/rsa.pub", "wb");
+    //     FILE* rsa_private_file = fopen("./.keys/rsa", "wb");
+
+    //     if (!rsa_private_file || !rsa_public_file)
+    //         err(errno, "Impossible to write '.keys/rsa.pub' and .keys/rsa files");
+
+    //     if (fwrite(buffkey, keylen, 1, rsa_private_file) == -1)
+    //         err(errno, "Impossible to write data in '.keys/rsa'");
+    //     fclose(rsa_private_file);
+
+    //     if (fwrite(buffkey, keylen, 1, rsa_private_file) == -1)
+    //         err(errno, "Impossible to write data in '.keys/rsa.pub'");
+    //     fclose(rsa_public_file);
+    // }
+    get_keys(buff);
+    char *hashed = sha384_data(buff, bufflen);
+    FILE *password_f = fopen(".ui/.password", "wb");
+    if(password_f == NULL)
+        err(-1, "Couldn't open password file");
+    fwrite(hashed, 48, 1, password_f);
+    free(buff);
+    free(hashed);
+    fclose(password_f);
     gtk_widget_hide(create_key_window);
     return TRUE;
 }
@@ -572,16 +604,30 @@ gboolean on_create_key_but2_press(__attribute__ ((unused)) GtkWidget *widget,
 gboolean on_connect_but_press(__attribute__ ((unused)) GtkWidget *widget,
                     __attribute__ ((unused)) GdkEventKey *event,
                     __attribute__ ((unused)) gpointer user_data)
-{/*
-    FILE *password_f = fopen("../../.password", "r");
+{
+    struct stat st = {0};
+    if (stat(".ui/.password", &st) == -1)
+    {
+        change_label_text(password_error_label, "No password, please create an account");
+        return TRUE;
+    }
+    FILE *password_f = fopen(".ui/.password", "r");
     if(password_f == NULL)
         err(-1, "Couldn't open password file");
-    char *buff = malloc(sizeof(char) * strlen(gtk_entry_get_text(password_entry1)));
-    sprintf(buff, gtk_entry_get_text(password_entry1));
-    char *hashed = sha384_data(buff, strlen(buff));
-    char *buff_hashed = malloc(strlen(hashed) * sizeof(char));
-    fread(buff_hashed, 1, strlen(hashed), password_f);
-    if(strcmp(buff_hashed, hashed) != 0)
+
+    size_t bufflen = strlen(gtk_entry_get_text(password_entry1));
+    if (bufflen < 5){
+        change_label_text(password_error_label, "Invalid password\n(min 5 characters)");
+        gtk_widget_hide(create_key_window);
+        return TRUE;
+    }
+
+    char *buff = malloc(sizeof(char) * bufflen);
+    memcpy(buff, gtk_entry_get_text(password_entry1), bufflen);
+    char *hashed = sha384_data(buff, bufflen);
+    char *buff_hashed = malloc(48 * sizeof(char));
+    fread(buff_hashed, 1, 48, password_f);
+    if(strncmp(buff_hashed, hashed, 48) != 0)
     {
         free(buff_hashed);
         free(hashed);
@@ -591,16 +637,17 @@ gboolean on_connect_but_press(__attribute__ ((unused)) GtkWidget *widget,
     }
     else
     {
+        get_keys(buff);
         free(buff_hashed);
         free(hashed);
         free(buff);
-        fclose(password_f);*/
+        fclose(password_f);
         update_labels();
         load_contacts_from_file();
         load_transactions_from_file();
         gtk_widget_hide(connection_window);
         gtk_widget_show(window);
-    //}
+    }
     return TRUE;
 }
 

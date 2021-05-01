@@ -119,6 +119,8 @@ int main()
     pthread_t ui_th;
     pthread_create(&ui_th, NULL, setup, NULL);
 
+    sleep(1);
+
     infos_st *infos = malloc(sizeof(infos_st));
     infos->actual_height = 0;
     infos->is_sychronize = 0;
