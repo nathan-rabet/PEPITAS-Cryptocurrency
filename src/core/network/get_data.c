@@ -4,6 +4,7 @@ size_t process_header(char *header, size_t size, int sockfd, infos_st *infos)
 {
     if (strncmp(HD_GET_CLIENT_LIST, header, strlen(HD_GET_CLIENT_LIST)) == 0)
     {
+        SERVERMSG
         printf("Recived header HD_GET_CLIENT_LIST\n");
         struct sockaddr_in client_addr;
         socklen_t client_addr_len = sizeof(client_addr);
@@ -18,58 +19,68 @@ size_t process_header(char *header, size_t size, int sockfd, infos_st *infos)
     }
     if (strncmp(HD_CONNECTION_TO_NETWORK, header, strlen(HD_CONNECTION_TO_NETWORK)) == 0)
     {
+        SERVERMSG
         printf("Recived header HD_CONNECTION_TO_NETWORK\n");
         return 1;
     }
     if (strncmp(HD_CONNECTION_TO_NODE, header, strlen(HD_CONNECTION_TO_NODE)) == 0)
     {
+        SERVERMSG
         printf("Recived header HD_CONNECTION_TO_NODE\n");
         return 1;
     }
     if (strncmp(HD_SEND_CLIENT_LIST, header, 8) == 0)
     {
+        CLIENTMSG
         printf("Recived header HD_SEND_CLIENT_LIST\n");
         return fetch_client_list(IM_CLIENT, sockfd);
     }
     if (strncmp(HD_GET_BLOCKS, header, strlen(HD_GET_BLOCKS)) == 0)
     {
+        SERVERMSG
         printf("Recived header HD_GET_BLOCKS\n");
         return read_get_blocks(sockfd, infos);
     }
     if (strncmp(HD_ACTUAL_HEIGHT, header, strlen(HD_ACTUAL_HEIGHT)) == 0)
     {
+        CLIENTMSG
         printf("Recived header HD_ACTUAL_HEIGHT\n");
         return read_actual_height(header);
     }
     if (strncmp(HD_SEND_BLOCK, header, strlen(HD_SEND_BLOCK)) == 0)
     {
+        CLIENTMSG
         printf("Recived header HD_SEND_BLOCK\n");
         return read_send_block(sockfd);
     }
     if (strncmp(HD_GET_PENDING_TRANSACTION_LIST, header, strlen(HD_GET_PENDING_TRANSACTION_LIST)) == 0)
     {
+        SERVERMSG
         printf("Recived header HD_GET_PENDING_TRANSACTION_LIST\n");
         send_pending_transaction_list(sockfd);
         return 0;
     }
     if (strncmp(HD_REJECT_DEMAND, header, strlen(HD_REJECT_DEMAND)) == 0)
     {
+        CLIENTMSG
         printf("Recived header HD_REJECT_DEMAND\n");
-        send_reject_demand(sockfd);
         return 0;
     }
     if (strncmp(HD_SEND_PENDING_TRANSACTION, header, strlen(HD_SEND_PENDING_TRANSACTION)) == 0)
     {
+        CLIENTMSG
         printf("Recived header HD_SEND_PENDING_TRANSACTION\n");
         return read_pending_transaction_list(sockfd);
     }
     if (strncmp(HD_SEND_EPOCH_BLOCK, header, strlen(HD_SEND_EPOCH_BLOCK)) == 0)
     {
+        CLIENTMSG
         printf("Recived header HD_SEND_EPOCH_BLOCK\n");
         return read_epoch_block(sockfd);
     }
     if (strncmp(HD_SEND_VOTE, header, strlen(HD_SEND_VOTE)) == 0)
     {
+        CLIENTMSG
         printf("Recived header HD_SEND_EPOCH_BLOCK\n");
         return read_vote(sockfd);
     }

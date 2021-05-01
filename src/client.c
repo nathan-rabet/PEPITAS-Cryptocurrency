@@ -49,6 +49,7 @@ void connection_to_others(infos_st *infos){
                 printf("Fail de connection to neighbourg\n");
         }
     }
+    MANAGERMSG
     printf("Connected to %i clients! \n", nb_connection);
 }
 
@@ -124,15 +125,18 @@ int main()
     {
         sem_init(&client_connections[i].lock, 0, 0);
     }
-
-    printf("Starting client...\n");
-
+    MANAGERMSG
+    printf("Starting Manager\n");
+    MANAGERMSG
     printf("Try to load last client list\n");
     load_neighbours(IM_CLIENT);
 
     if (number_neighbours(IM_CLIENT) == 0)
     {
-        printf("No last node for the network :(\nSearch on doors...\n");
+        MANAGERMSG
+        printf("No last node for the network :(\n");
+        MANAGERMSG
+        printf("Search on doors...\n");
         join_network_door(infos);
     }
 
@@ -145,18 +149,24 @@ int main()
     // TEST LEN LIST
     if (number_neighbours(IM_CLIENT) == 0)
     {
+        MANAGERMSG
         printf("I'am the first node on the network\n");
 
     }
     else
     {
+        MANAGERMSG
         printf("Connection to others...\n");
         connection_to_others(infos);
+        MANAGERMSG
         printf("Update blockchain height...\n");
         size_t index_client = update_blockchain_height(infos);
+        MANAGERMSG
         printf("Max client blockchain height found is: %lu\n", client_connections[index_client].actual_client_height);
+        MANAGERMSG
         printf("Update blockchain...\n");
         update_blockchain(infos, index_client);
+        MANAGERMSG
         printf("Blockchain syncronized with: %lu\n", infos->actual_height);
     }
     

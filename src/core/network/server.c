@@ -69,6 +69,8 @@ void *redirect_connection(void *arg)
 void *init_server(void *args)
 {
     infos_st *infos = (infos_st *)args;
+    client_connection *client_connections = calloc(MAX_SERVER, sizeof(client_connection));
+    SERVERMSG
     printf("Opening client server...\n");
 
     struct addrinfo hints = {0}; //
@@ -121,7 +123,6 @@ void *init_server(void *args)
 
     listen(sockfd, 5);
 
-    client_connection *client_connections = calloc(MAX_SERVER, sizeof(client_connection));
 
     while (1)
     {
@@ -135,11 +136,12 @@ void *init_server(void *args)
         
         if (infos->serv_type == NODESERVER)
         {
-        
             int index = find_empty_connection(MAX_SERVER);
             client_connections[index].clientfd = accept(sockfd, rp->ai_addr, &rp->ai_addrlen);
             if (client_connections[index].clientfd != -1)
             {
+                SERVERMSG
+                printf("New connection\n");
                 th_arg *args = malloc(sizeof(th_arg));
                 args->infos = infos;
                 args->client_con = &client_connections[index];

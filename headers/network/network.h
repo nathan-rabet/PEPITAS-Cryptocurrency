@@ -79,4 +79,10 @@ extern const Neighbour HARD_CODED_ADDR[];
 #define DD_GET_HEIGHT                  1
 #define DD_GET_BLOCKS                  2
 
+// MESSAGE INFO
+
+#define SERVERMSG           printf("\033[0;31m[S]:\033[0m ");
+#define CLIENTMSG           printf("\033[0;34m[C]:\033[0m ");
+#define MANAGERMSG          printf("\033[0;32m[M]:\033[0m ");
+
 #endif
