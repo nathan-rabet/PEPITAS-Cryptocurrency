@@ -27,6 +27,9 @@ GtkLabel *stake_label1;
 GtkLabel *stake_label2;
 GtkLabel *stake_label3;
 GtkLabel *password_error_label;
+GtkLabel *latest_block_name1;
+GtkLabel *latest_block_name2;
+GtkLabel *latest_block_name3;
 GtkEntry *transa_amount;
 GtkEntry *recipient_key;
 GtkEntry *invest_entry;
@@ -52,15 +55,24 @@ GtkCellRenderer *cr3_th;
 GtkComboBox *contacts_combo;
 GtkListStore *ls_combo;
 GtkCellRenderer *cr1_combo;
+GtkProgressBar *progress_bar_blockchain;
 
 
-int setup()
+
+void *setup(void *args)
 {
+    struct stat st = {0};
+
+    if (stat(".ui", &st) == -1)
+    {
+        mkdir(".ui", 0700);
+    }
+
     GtkBuilder *builder;
     GError *err = NULL;
 
     builder = gtk_builder_new();
-    if(gtk_builder_add_from_file(builder, "pepitas.glade", &err) == 0)
+    if(gtk_builder_add_from_file(builder, "./pepitas.glade", &err) == 0)
     {
         fprintf(stderr, "Error adding build from file. Error: %s\n", err->message);
         return 1;
@@ -126,6 +138,15 @@ int setup()
     stake_label2 = GTK_LABEL(gtk_builder_get_object(builder, "stake_label2"));
     stake_label3 = GTK_LABEL(gtk_builder_get_object(builder, "stake_label3"));
     password_error_label = GTK_LABEL(gtk_builder_get_object(builder, "password_error_label"));
+    synchro_label = GTK_LABEL(gtk_builder_get_object(builder, "synchro_label"));
+    block_amount_label= GTK_LABEL(gtk_builder_get_object(builder, "block_amount_label"));
+    latest_block_name1 = GTK_LABEL(gtk_builder_get_object(builder, "latest_block_name1"));
+    latest_block_name2 = GTK_LABEL(gtk_builder_get_object(builder, "latest_block_name2"));
+    latest_block_name3 = GTK_LABEL(gtk_builder_get_object(builder, "latest_block_name3"));
+    connections_label = GTK_LABEL(gtk_builder_get_object(builder, "connections_label"));
+    mempool_label = GTK_LABEL(gtk_builder_get_object(builder, "mempool_label"));
+
+    progress_bar_blockchain = GTK_PROGRESS_BAR(gtk_builder_get_object(builder, "progress_bar_blockchain"));
 
     gtk_widget_hide(GTK_WIDGET(private_key_label));
     gtk_widget_hide(invest_window);
@@ -153,11 +174,55 @@ int setup()
 
     g_object_unref(G_OBJECT(builder));
 
+    // SETUP
+    gtk_label_set_text(latest_block_name1, "");
+    gtk_label_set_text(latest_block_name2, "");
+    gtk_label_set_text(latest_block_name3, "");
+
     gtk_widget_show(connection_window);
 
-    return 0;
+    gtk_main();
 }
 
+
+void change_label_text(GtkLabel *label, char* text)
+{
+    gtk_label_set_text(label, text);
+}
+
+void add_new_blockinfo(size_t height, size_t transaction)
+{
+    blocksinfo[2] = blocksinfo[1];
+    blocksinfo[1] = blocksinfo[0];
+    blocksinfo[0].height = height;
+    blocksinfo[0].transactions = transaction;
+    char tmp[100];
+    sprintf(tmp, "Block %lu\n%lu transaction", blocksinfo[0].height, blocksinfo[0].transactions);
+    gtk_label_set_text(latest_block_name1, tmp);
+    sprintf(tmp, "Block %lu\n%lu transaction", blocksinfo[1].height, blocksinfo[1].transactions);
+    gtk_label_set_text(latest_block_name2, tmp);
+    sprintf(tmp, "Block %lu\n%lu transaction", blocksinfo[2].height, blocksinfo[2].transactions);
+    gtk_label_set_text(latest_block_name3, tmp);
+}
+
+void update_sync(size_t actual, size_t final){
+    if (actual == final)
+    {
+        gtk_progress_bar_set_fraction(progress_bar_blockchain, (gdouble)1);
+        change_label_text(synchro_label, "Syncronized");
+        char tmp[100];
+        sprintf(tmp, "%lu blocks", final);
+        change_label_text(block_amount_label, tmp);
+        return;
+    }
+    gdouble percent = (double)actual/(double)final;
+    gtk_progress_bar_set_fraction(progress_bar_blockchain, percent);
+    change_label_text(synchro_label, "Syncronisation");
+    char tmp[100];
+    sprintf(tmp, "%lu out of %lu blocks", actual, final);
+    change_label_text(block_amount_label, "");
+    
+}
 
 gboolean on_main_window_delete(
             GtkWidget *widget, __attribute__((unused)) gpointer data)
@@ -211,7 +276,7 @@ gboolean on_transaction_button_press(__attribute__ ((unused)) GtkWidget *widget,
 
 void add_transaction_with_pkey(double amount, char *public_key, char *date)
 {
-        FILE *th_f = fopen("src/ui/.transa_history", "a");
+        FILE *th_f = fopen(".ui/.transa_history", "a");
         if(th_f == NULL)
             err(-1, "Couldn't open transaction history file");
 
@@ -232,7 +297,7 @@ void add_transaction_with_pkey(double amount, char *public_key, char *date)
 
 void add_transaction_with_contact(double amount, char *public_key, char *date)
 {
-        FILE *th_f = fopen("src/ui/.transa_history", "a");
+        FILE *th_f = fopen(".ui/.transa_history", "a");
         if(th_f == NULL)
             err(-1, "Couldn't open transaction history file");
 
@@ -263,7 +328,13 @@ void add_transaction_from_file(double amount, char *public_key, char *date)
 void load_transactions_from_file()
 {
     char buff[128];
-    FILE *th_f = fopen("src/ui/.transa_history", "r");
+    struct stat st = {0};
+    if (stat(".ui/.transa_history", &st) == -1)
+    {
+        FILE *th_f2 = fopen(".ui/.transa_history", "w");
+        fclose(th_f2);
+    }
+    FILE *th_f = fopen(".ui/.transa_history", "r");
     if(th_f == NULL)
         err(-1, "Couldn't open transaction history file");
 
@@ -365,7 +436,7 @@ gboolean add_contact(__attribute__ ((unused)) GtkWidget *widget,
     const char *public_key = gtk_entry_get_text(public_key_entry_con);
     if(strcmp(name, "") != 0 && strcmp(public_key ,"") != 0)
     {
-        FILE *contacts_f = fopen("src/ui/.contacts", "a");
+        FILE *contacts_f = fopen(".ui/.contacts", "a");
         if(contacts_f == NULL)
             err(-1, "Couldn't open contacts file");
 
@@ -406,7 +477,13 @@ void add_contacts_from_file(char *name, char *public_key)
 void load_contacts_from_file()
 {
     char buff[128];
-    FILE *contacts_f = fopen("src/ui/.contacts", "r");
+    struct stat st = {0};
+    if (stat(".ui/.contacts", &st) == -1)
+    {
+        FILE *th_f2 = fopen(".ui/.contacts", "w");
+        fclose(th_f2);
+    }
+    FILE *contacts_f = fopen(".ui/.contacts", "r");
     if(contacts_f == NULL)
         err(-1, "Couldn't open contacts file");
 
@@ -428,7 +505,13 @@ void load_contacts_from_file()
 char *get_public_key_from_contacts(const char *name)
 {
     char buff[128];
-    FILE *contacts_f = fopen("src/ui/.contacts", "r");
+    struct stat st = {0};
+    if (stat(".ui/.contacts", &st) == -1)
+    {
+        FILE *th_f2 = fopen(".ui/.contacts", "w");
+        fclose(th_f2);
+    }
+    FILE *contacts_f = fopen(".ui/.contacts", "r");
     if(contacts_f == NULL)
         err(-1, "Couldn't open contacts file");
 

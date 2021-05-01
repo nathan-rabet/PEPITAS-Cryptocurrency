@@ -51,7 +51,8 @@ size_t process_header(char *header, size_t size, int sockfd, infos_st *infos)
     {
         CLIENTMSG
         printf("Recived header HD_SEND_BLOCK\n");
-        return read_send_block(sockfd);
+        read_send_block(sockfd);
+        return 0;
     }
     if (strncmp(HD_GET_PENDING_TRANSACTION_LIST, header, strlen(HD_GET_PENDING_TRANSACTION_LIST)) == 0)
     {

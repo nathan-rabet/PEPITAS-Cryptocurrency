@@ -9,6 +9,7 @@
 #include "network/get_data.h"
 #include "misc/safe.h"
 #include "blockchain/blockchain_header.h"
+#include "ui/ui.h"
 
 extern client_connection *client_connections;
 static pthread_t server_t;
@@ -112,6 +113,12 @@ void update_blockchain(infos_st *infos, size_t index_client){
 
 int main()
 {
+    gtk_init(NULL, NULL);
+    MANAGERMSG
+    printf("Starting UI\n");
+    pthread_t ui_th;
+    pthread_create(&ui_th, NULL, setup, NULL);
+
     infos_st *infos = malloc(sizeof(infos_st));
     infos->actual_height = 0;
     infos->is_sychronize = 0;
@@ -139,7 +146,7 @@ int main()
 
     // Try Load Old blockchain
     gen_blockchain_header(infos);
-
+    update_sync(infos->actual_height, infos->actual_height);
     // Open server
     pthread_create(&server_t, NULL, init_server, &infos);
 
@@ -165,6 +172,8 @@ int main()
         update_blockchain(infos, index_client);
         MANAGERMSG
         printf("Blockchain syncronized with: %lu\n", infos->actual_height);
+        change_label_text(synchro_label, "Syncronized");
+        change_label_text(block_amount_label, "");
     }
     
     while (1);

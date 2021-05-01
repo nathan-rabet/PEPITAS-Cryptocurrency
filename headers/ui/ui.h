@@ -10,11 +10,24 @@
 #include "cryptosystem/hash.h"
 #include "blockchain/wallet.h"
 
+GtkLabel *synchro_label;
+GtkLabel *block_amount_label;
+GtkLabel *connections_label;
+GtkLabel *mempool_label;
+struct blockinfo
+{
+    size_t height;
+    size_t transactions;
+};
+
+struct blockinfo blocksinfo[3];
+
+
 /**
  * @brief Setups the gtk widgets for the GUI
  * @return int Returns 1 if there is an error, 0 otherwise
  */
-int setup();
+void* setup(void* args);
 
 /**
  * @brief Destroys the window when it is closed
@@ -111,7 +124,7 @@ gboolean on_add_contact_button1_press(GtkWidget *widget, GdkEventKey *event, gpo
  */
 gboolean add_contact(GtkWidget *widget, GdkEventKey *event, gpointer user_data);
 
-
+void change_label_text(GtkLabel *label, char *text);
 gboolean on_create_key_but1_press(GtkWidget *widget, GdkEventKey *event, gpointer user_data);
 gboolean on_create_key_but2_press(GtkWidget *widget, GdkEventKey *event, gpointer user_data);
 gboolean on_connect_but_press(GtkWidget *widget, GdkEventKey *event, gpointer user_data);
@@ -124,5 +137,7 @@ void add_transaction_with_contact(double amount, char *public_key, char *date);
 void add_transaction_from_file(double amount, char *public_key, char *date);
 void load_transaction_from_file();
 char *get_public_key_from_contacts(const char *name);
-
+void change_label_text(GtkLabel *label, char* text);
+void add_new_blockinfo(size_t height, size_t transaction);
+void update_sync(size_t actual, size_t final);
 #endif

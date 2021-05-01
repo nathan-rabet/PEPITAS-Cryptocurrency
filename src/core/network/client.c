@@ -256,6 +256,7 @@ void *client_thread(void *args){
             for (size_t i = 0; i < cc->Payload; i++)
             {
                 read_header(cc->clientfd, infos);
+                update_sync(infos->actual_height, cc->actual_client_height);
             }
         }
 

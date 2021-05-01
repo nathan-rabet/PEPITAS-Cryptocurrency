@@ -392,7 +392,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="label25">
+              <object class="GtkLabel" id="label29">
                 <property name="width_request">120</property>
                 <property name="height_request">25</property>
                 <property name="visible">True</property>
@@ -1051,7 +1051,7 @@ therefore gaining more Pepitas</property>
       <object class="GtkFixed" id="fixed11">
         <property name="visible">True</property>
         <child>
-          <object class="GtkLabel" id="label22">
+          <object class="GtkLabel" id="label25">
             <property name="width_request">169</property>
             <property name="height_request">62</property>
             <property name="visible">True</property>
@@ -1077,7 +1077,7 @@ therefore gaining more Pepitas</property>
           </packing>
         </child>
         <child>
-          <object class="GtkLabel" id="label23">
+          <object class="GtkLabel" id="label28">
             <property name="width_request">143</property>
             <property name="height_request">35</property>
             <property name="visible">True</property>

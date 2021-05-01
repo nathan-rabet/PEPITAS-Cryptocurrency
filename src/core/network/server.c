@@ -131,7 +131,7 @@ void *init_server(void *args)
     { /* No address succeeded */
         SERVERMSG
         printf("Could not bind\n");
-        exit(EXIT_FAILURE);
+        //exit(EXIT_FAILURE);
     }
 
     listen(sockfd, 5);

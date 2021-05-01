@@ -7,6 +7,7 @@
 #include "network/client.h"
 #include "network/server.h"
 #include "network/send_data.h"
+#include "ui/ui.h"
 
 /**
  * @brief Waits a header in 'sockfd', reads it and processes it
