@@ -17,7 +17,15 @@ void *accept_connection(void *args)
     if (inet_ntop(AF_INET, &(client_addr.sin_addr), ip_str, INET_ADDRSTRLEN) == NULL)
         err(EXIT_FAILURE, "Failed to convert client IP address to string\n");
 
+    SERVERMSG
     printf("New connection: '%s'\n", ip_str);
+
+    // VERIFY
+    if (read_header(cl_c->clientfd, infos) == 1)
+    {
+        SERVERMSG
+        printf("Accept connection: '%s'\n", ip_str);
+    }
 
     // SERVER ROUTINE
     while (1)
@@ -89,6 +97,10 @@ void *init_server(void *args)
     // Error management
     if (addrinfo_error != 0)
     {
+        
+        SERVERMSG
+        printf("Fail getting address on port %s: %s\n",
+             STATIC_PORT, gai_strerror(addrinfo_error));
         errx(EXIT_FAILURE, "Fail getting address on port %s: %s",
              STATIC_PORT, gai_strerror(addrinfo_error));
     }
@@ -117,7 +129,8 @@ void *init_server(void *args)
 
     if (rp == NULL)
     { /* No address succeeded */
-        fprintf(stderr, "Could not bind\n");
+        SERVERMSG
+        printf("Could not bind\n");
         exit(EXIT_FAILURE);
     }
 
@@ -134,14 +147,14 @@ void *init_server(void *args)
             pthread_create(&thread, NULL, redirect_connection, clientfd);
         }
         
+        SERVERMSG
+        printf("New connection\n");
         if (infos->serv_type == NODESERVER)
         {
             int index = find_empty_connection(MAX_SERVER);
             client_connections[index].clientfd = accept(sockfd, rp->ai_addr, &rp->ai_addrlen);
             if (client_connections[index].clientfd != -1)
             {
-                SERVERMSG
-                printf("New connection\n");
                 th_arg *args = malloc(sizeof(th_arg));
                 args->infos = infos;
                 args->client_con = &client_connections[index];

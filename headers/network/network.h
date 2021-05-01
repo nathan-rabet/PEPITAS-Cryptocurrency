@@ -9,7 +9,7 @@
 #define NB_HARD_CODED_ADDR 2
 #define MAX_CONNECTION 5
 
-#define STATIC_PORT "4242"
+#define STATIC_PORT "4245"
 
 #define P_VERSION 0
 
