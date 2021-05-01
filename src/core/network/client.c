@@ -186,7 +186,6 @@ client_connection *listen_to(infos_st *infos, Neighbour neighbour)
 
         if (sockfd != -1)
         {
-            printf("coucou\n");
             // Try to connect
             if (connect(sockfd, rp->ai_addr, rp->ai_addrlen) != -1)
                 break;

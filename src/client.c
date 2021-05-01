@@ -46,7 +46,7 @@ void connection_to_others(infos_st *infos){
         if (node->neighbours[i].hostname != NULL)
         {
             if (listen_to(infos, node->neighbours[i]) == NULL)
-                printf("Fail de connection to neighbourg\n");
+                printf("Fail de connection to neighbour\n");
         }
     }
     MANAGERMSG
