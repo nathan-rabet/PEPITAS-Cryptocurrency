@@ -1,0 +1,106 @@
+.TH "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/headers/misc/safe.h" 3 "Thu Apr 22 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/headers/misc/safe.h
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <err\&.h>\fP
+.br
+\fC#include <unistd\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+\fC#include <errno\&.h>\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBsafe_write\fP (int fd, const void *buf, ssize_t count)"
+.br
+.RI "Writes safely to a file descriptor\&. "
+.ti -1c
+.RI "ssize_t \fBsafe_read\fP (int fd, const void **buf, size_t *bufsize)"
+.br
+.RI "Reads safely in a file descriptor until '\\r\\n\\r\\n'\&. "
+.ti -1c
+.RI "ssize_t \fBsafe_fread\fP (void *buffer, const size_t size, const size_t n, FILE *file)"
+.br
+.RI "Calls 'fread' but safely ! "
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "ssize_t safe_fread (void * buffer, const size_t size, const size_t n, FILE * file)"
+
+.PP
+Calls 'fread' but safely ! 
+.PP
+\fBParameters\fP
+.RS 4
+\fIbuffer\fP The buffer to write on 
+.br
+\fIsize\fP The size of 1 read element 
+.br
+\fIn\fP The number of elements to read 
+.br
+\fIfile\fP The IO FILE 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+ssize_t, -1 if error or the number of read items 
+.RE
+.PP
+
+.PP
+Definition at line 40 of file safe\&.c\&.
+.SS "ssize_t safe_read (int fd, const void ** buf, size_t * bufsize)"
+
+.PP
+Reads safely in a file descriptor until '\\r\\n\\r\\n'\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIfd\fP The file descriptor 
+.br
+\fIbuf\fP The buffer which contains the message 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+The number of byte the file 'fd', if -1 error 
+.RE
+.PP
+
+.PP
+Definition at line 18 of file safe\&.c\&.
+.SS "int safe_write (int fd, const void * buf, ssize_t count)"
+
+.PP
+Writes safely to a file descriptor\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIfd\fP The file descriptor 
+.br
+\fIbuf\fP The buffer to write 
+.br
+\fIcount\fP The number of byte to write in fd
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Error code 
+.RE
+.PP
+
+.PP
+Definition at line 4 of file safe\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for PEPITAS CRYPTOCURRENCY from the source code\&.

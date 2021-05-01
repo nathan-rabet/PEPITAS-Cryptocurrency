@@ -1,4 +1,0 @@
-<map id="listen_to" name="listen_to">
-<area shape="rect" id="node1" title="Tries to connect to the peer&#45;to&#45;peer network via a node in the Node structure." alt="" coords="5,5,84,32"/>
-<area shape="rect" id="node2" href="$network_2client_8c.html#a4ea1881daff49eeaf17c8600631e7cf0" title="Get the my node object." alt="" coords="132,5,243,32"/>
-</map>

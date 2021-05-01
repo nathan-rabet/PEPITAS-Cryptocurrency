@@ -1,0 +1,11 @@
+digraph "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/src/ui" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_68267d1309a1af8e8297ef4c3efbcdba {
+    graph [ bgcolor="#ddddee", pencolor="black", label="src" fontname="Helvetica", fontsize="10", URL="dir_68267d1309a1af8e8297ef4c3efbcdba.html"]
+  dir_da5c6b39c0a2f54e57df6799511cd3ab [shape=box, label="ui", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_da5c6b39c0a2f54e57df6799511cd3ab.html"];
+  }
+  dir_7f57b1e41c5acd0e859ae5f3a2b075a9 [shape=box label="headers" fillcolor="white" style="filled" color="red" URL="dir_7f57b1e41c5acd0e859ae5f3a2b075a9.html"];
+  dir_da5c6b39c0a2f54e57df6799511cd3ab->dir_7f57b1e41c5acd0e859ae5f3a2b075a9 [headlabel="1", labeldistance=1.5 headhref="dir_000015_000000.html"];
+}

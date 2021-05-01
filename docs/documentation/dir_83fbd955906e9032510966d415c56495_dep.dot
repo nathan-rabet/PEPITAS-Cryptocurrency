@@ -1,0 +1,13 @@
+digraph "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/headers/network" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_7f57b1e41c5acd0e859ae5f3a2b075a9 {
+    graph [ bgcolor="#ddddee", pencolor="black", label="headers" fontname="Helvetica", fontsize="10", URL="dir_7f57b1e41c5acd0e859ae5f3a2b075a9.html"]
+  dir_83fbd955906e9032510966d415c56495 [shape=box, label="network", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_83fbd955906e9032510966d415c56495.html"];
+  }
+  dir_c55509eeb63bcbc47aa921b127ea82fb [shape=box label="core" fillcolor="white" style="filled" color="red" URL="dir_c55509eeb63bcbc47aa921b127ea82fb.html"];
+  dir_cd2dfb8956d87c3e23bff5bc3c96e5c3 [shape=box label="misc" URL="dir_cd2dfb8956d87c3e23bff5bc3c96e5c3.html"];
+  dir_83fbd955906e9032510966d415c56495->dir_c55509eeb63bcbc47aa921b127ea82fb [headlabel="1", labeldistance=1.5 headhref="dir_000006_000001.html"];
+  dir_83fbd955906e9032510966d415c56495->dir_cd2dfb8956d87c3e23bff5bc3c96e5c3 [headlabel="1", labeldistance=1.5 headhref="dir_000006_000005.html"];
+}

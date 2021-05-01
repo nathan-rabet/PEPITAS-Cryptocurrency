@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>PEPITAS: src/core/validation/validations.c Source File</title>
+<title>PEPITAS CRYPTOCURRENCY: /home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/src/core/validation/validations.c Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -24,11 +24,11 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">PEPITAS
-   &#160;<span id="projectnumber">0.1</span>
+   <div id="projectname">PEPITAS CRYPTOCURRENCY
    </div>
-   <div id="projectbrief">C cryptocurrency</div>
+   <div id="projectbrief">C based cryptocurrency</div>
   </td>
  </tr>
  </tbody>
@@ -90,48 +90,147 @@ $(document).ready(function(){initNavTree('validations_8c_source.html',''); initR
 <a href="validations_8c.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="validations_8h.html">core/validation/validations.h</a>&quot;</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="block_8h.html">core/blockchain/block.h</a>&quot;</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="signature_8h.html">cryptosystem/signature.h</a>&quot;</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="hash_8h.html">cryptosystem/hash.h</a>&quot;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="files_8h.html">misc/files.h</a>&quot;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;string.h&gt;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="validations_8c.html#a2a1baeb099bff541150b25083d6aaae6">    8</a></span>&#160;<span class="preprocessor">#define NB_VALIDATOR_PER_BLOCK 50</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
-<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="validations_8c.html#a0646d553a5b31e99a28af98053c78437">   10</a></span>&#160;RSA *<a class="code" href="validations_8c.html#a0646d553a5b31e99a28af98053c78437">get_next_validator</a>(<span class="keywordtype">char</span> blockchain_flag)</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <span class="comment">// TODO</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <span class="comment">// Get &quot;random&quot; value</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="keywordtype">char</span> *last_block_file_path = NULL;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keywordflow">switch</span> (blockchain_flag)</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    {</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keywordflow">case</span> <a class="code" href="block_8h.html#acc78e52b655cbfb4c04d3785bee81a1c">GENERAL_BLOCKCHAIN</a>:</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        last_block_file_path = <a class="code" href="files_8h.html#af7f19b3a3e64c414589ae92109adda1e">last_file_in_folder</a>(<span class="stringliteral">&quot;.general&quot;</span>);</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keywordflow">case</span> <a class="code" href="block_8h.html#aa32486137603765eb658695e6f19ec91">VALIDATOR_BLOCKCHAIN</a>:</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        last_block_file_path = <a class="code" href="files_8h.html#af7f19b3a3e64c414589ae92109adda1e">last_file_in_folder</a>(<span class="stringliteral">&quot;.validator&quot;</span>);</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    }</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keywordflow">if</span> (last_block_file_path == NULL)</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <span class="keywordflow">return</span> NULL;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="comment">//Block *last_block = get_block((size_t)atol(&amp;last_block_file_path[5]), blockchain_flag); // [5] because filename is &quot;blockXXX&quot;</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="comment">//char * sha384 = hash_block_transactions(last_block);</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="rsa_8h.html">cryptosystem/rsa.h</a>&quot;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="hash_8h.html">cryptosystem/hash.h</a>&quot;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="math_8h.html">misc/math.h</a>&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="files_8h.html">misc/files.h</a>&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="safe_8h.html">misc/safe.h</a>&quot;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;string.h&gt;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="math_8h.html">math.h</a>&gt;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;openssl/bio.h&gt;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="validations_8c.html#a63ae7a32d04d17e1ac38f0d19197e109">   13</a></span>&#160;<span class="preprocessor">#define NB_RSA_CHUNK 2048 / 64</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="validations_8c.html#aebcc63085ec90348cc76624d948759dc">   14</a></span>&#160;<span class="preprocessor">#define MAX_VALIDATORS_PER_BLOCK 10000</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="validations_8c.html#a7e3a2411fd0fab14465d33a5c0964aa6">   16</a></span>&#160;uint16_t <a class="code" href="validations_8c.html#a7e3a2411fd0fab14465d33a5c0964aa6">define_nb_validators</a>(<span class="keywordtype">size_t</span> n)</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;{</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keywordflow">if</span> (n &lt;= 1)</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        <span class="keywordflow">return</span> n;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    uint16_t sqroot = 1;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keywordflow">while</span> (sqroot * sqroot &lt; n)</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        sqroot++;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    sqroot = 10 * (sqroot - 1);</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordflow">if</span> (sqroot &gt; n)</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <span class="keywordflow">return</span> n;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="math_8h.html#afa99ec4acc4ecb2dc3c2d05da15d0e3f">MAX</a>(sqroot, 1000);</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;}</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="comment">// For 1 validator =&gt; Stake * nb_transactions</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="comment">// Need to build a file on crafting</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordflow">return</span> NULL;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;}</div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="validations_8c.html#a96d9964840289a425328257dd9a4c106">   31</a></span>&#160;RSA **<a class="code" href="validations_8c.html#a96d9964840289a425328257dd9a4c106">get_next_committee</a>(<span class="keywordtype">size_t</span> *nb_validators)</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;{</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="comment">// Get &quot;random&quot; value</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordtype">char</span> *last_block_file_path = <a class="code" href="files_8h.html#af7f19b3a3e64c414589ae92109adda1e">last_file_in_folder</a>(<span class="stringliteral">&quot;blockchain&quot;</span>);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <a class="code" href="struct_block.html">Block</a> *last_block = <a class="code" href="block_8h.html#a32140266e4b385f64860944a5edd0153">get_block</a>((<span class="keywordtype">size_t</span>)atol(&amp;last_block_file_path[5])); <span class="comment">// [5] because filename is &quot;blockXXX&quot;</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordtype">char</span> *sha384 = <a class="code" href="hash_8h.html#a1a0c4c7a5b69d66d29782dfc45e625ec">hash_block_transactions</a>(last_block);</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="comment">// Init validators states file</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    FILE *validators_states = fopen(<span class="stringliteral">&quot;validators.state&quot;</span>, <span class="stringliteral">&quot;r&quot;</span>);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordtype">size_t</span> total_stake;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordtype">size_t</span> nb_total_validators;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="safe_8h.html#ac4bf776335d7193068afa656b91a8827">safe_fread</a>(&amp;nb_total_validators, <span class="keyword">sizeof</span>(<span class="keywordtype">size_t</span>), 1, validators_states) &lt; 1)</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <span class="keywordflow">return</span> NULL;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="safe_8h.html#ac4bf776335d7193068afa656b91a8827">safe_fread</a>(&amp;total_stake, <span class="keyword">sizeof</span>(<span class="keywordtype">size_t</span>), 1, validators_states) &lt; 1)</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="keywordflow">return</span> NULL;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordflow">while</span> (fseek(validators_states, 3 * <span class="keyword">sizeof</span>(<span class="keywordtype">size_t</span>) + <span class="keyword">sizeof</span>(<span class="keywordtype">char</span>), SEEK_SET) != 0)</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        ; <span class="comment">// escape block_height_validity[sizeof(size_t)] &#39;\n&#39;[sizeof(char)]</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="comment">// Deterministic algorithm for setting the next committee size</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    *nb_validators = <a class="code" href="validations_8c.html#a7e3a2411fd0fab14465d33a5c0964aa6">define_nb_validators</a>(nb_total_validators);</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    RSA **rsa_keys = malloc(*nb_validators * <span class="keyword">sizeof</span>(RSA *));</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordtype">size_t</span> *already_selected_validators_index = malloc(*nb_validators * <span class="keyword">sizeof</span>(<span class="keywordtype">size_t</span>));</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keywordtype">size_t</span> i = 0;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordtype">size_t</span> j = 1;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> v = 0; v &lt; nb_total_validators; v++)</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    {</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        <span class="keywordtype">size_t</span> random_offset = 3 * <span class="keyword">sizeof</span>(size_t) + <span class="keyword">sizeof</span>(<span class="keywordtype">char</span>) + (((<span class="keywordtype">size_t</span> *)sha384)[i] % nb_total_validators) * (<a class="code" href="rsa_8h.html#abff8d9514a23647de99e49913084f135">RSA_KEY_SIZE</a> + 2 * <span class="keyword">sizeof</span>(<span class="keywordtype">size_t</span>) + <span class="keyword">sizeof</span>(char));</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <span class="keywordflow">while</span> (fseek(validators_states, random_offset, SEEK_SET) != 0)</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            ;                                                      <span class="comment">// Setting random starting point</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        <span class="keywordtype">size_t</span> random_power = ((<span class="keywordtype">size_t</span> *)sha384)[j] % total_stake; <span class="comment">// Setting random power value</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <span class="keywordtype">char</span> next_validator_pk[<a class="code" href="rsa_8h.html#abff8d9514a23647de99e49913084f135">RSA_KEY_SIZE</a>];</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <span class="keywordtype">char</span> is_next_validator = 0;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <span class="keywordtype">size_t</span> current_validator = 0;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <span class="keywordflow">while</span> (!is_next_validator)</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        {</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;            </div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;            <span class="keywordtype">size_t</span> next_validator_power;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            ssize_t rsa_fread = <a class="code" href="safe_8h.html#ac4bf776335d7193068afa656b91a8827">safe_fread</a>(&amp;next_validator_pk, <span class="keyword">sizeof</span>(<span class="keywordtype">char</span>), <a class="code" href="rsa_8h.html#abff8d9514a23647de99e49913084f135">RSA_KEY_SIZE</a>, validators_states);</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;            <span class="keywordflow">while</span> (fseek(validators_states, <span class="keyword">sizeof</span>(<span class="keywordtype">size_t</span>), SEEK_CUR) != 0)</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                ; <span class="comment">// &#39;user_stake&#39; escape</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;            <span class="keywordflow">if</span> (rsa_fread &lt; <a class="code" href="rsa_8h.html#abff8d9514a23647de99e49913084f135">RSA_KEY_SIZE</a> || <a class="code" href="safe_8h.html#ac4bf776335d7193068afa656b91a8827">safe_fread</a>(&amp;next_validator_power, <span class="keyword">sizeof</span>(<span class="keywordtype">size_t</span>), 1, validators_states) &lt; 1)</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;            {</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                <span class="keywordflow">while</span> (fseek(validators_states, <span class="keyword">sizeof</span>(<span class="keywordtype">size_t</span>) * 3 + <span class="keyword">sizeof</span>(<span class="keywordtype">char</span>), SEEK_SET) != 0)</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                    ; <span class="comment">// escape nb_validators[sizeof(size_t)], total_stake[sizeof(size_t)], &#39;\n&#39;[sizeof(char)]</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                <span class="keywordflow">continue</span>;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            }</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            is_next_validator = __builtin_usubl_overflow(random_power, next_validator_power, &amp;random_power);</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;            <span class="keywordflow">while</span> (fseek(validators_states, <span class="keyword">sizeof</span>(<span class="keywordtype">char</span>), SEEK_CUR) != 0)</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                ; <span class="comment">// &#39;\n&#39; escape</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;            current_validator++;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        }</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        current_validator--;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        <span class="keywordtype">char</span> alreadyExists = 0;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> k = 0; k &lt; v; k++)</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        {</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;            <span class="keywordflow">if</span> (already_selected_validators_index[k] == current_validator)</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                alreadyExists = 1;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        }</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        <span class="keywordflow">if</span> (!alreadyExists)</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        {</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;            <span class="keywordtype">char</span> rsa_string[<a class="code" href="rsa_8h.html#a150e403695b4741246d3008143bc009a">RSA_FILE_TOTAL_SIZE</a> + 1] = {0};</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;            strcpy(rsa_string, <span class="stringliteral">&quot;-----BEGIN RSA PUBLIC KEY-----\n&quot;</span>);</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;            memcpy(&amp;rsa_string[<a class="code" href="rsa_8h.html#adbc0e5075c30d3bb2c3bfca959cc9fdf">RSA_BEGIN_SIZE</a>], next_validator_pk, <a class="code" href="rsa_8h.html#abff8d9514a23647de99e49913084f135">RSA_KEY_SIZE</a>);</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;            strncpy(&amp;rsa_string[<a class="code" href="rsa_8h.html#a150e403695b4741246d3008143bc009a">RSA_FILE_TOTAL_SIZE</a> - <a class="code" href="rsa_8h.html#a0125ff1fd034dae1c06832611ebf4bfc">RSA_END_SIZE</a>], <span class="stringliteral">&quot;-----END RSA PUBLIC KEY-----\n&quot;</span>, <a class="code" href="rsa_8h.html#a0125ff1fd034dae1c06832611ebf4bfc">RSA_END_SIZE</a> + 1);</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;            BIO *bufio;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;            bufio = BIO_new_mem_buf((<span class="keywordtype">void</span> *)rsa_string, <a class="code" href="rsa_8h.html#a150e403695b4741246d3008143bc009a">RSA_FILE_TOTAL_SIZE</a>);</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;            <span class="keywordflow">if</span> (PEM_read_bio_RSAPublicKey(bufio, &amp;rsa_keys[v], 0, NULL) == NULL)</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;                errx(EXIT_FAILURE, <span class="stringliteral">&quot;PEM_read_bio_RSAPublicKey returned NULL&quot;</span>);</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;            already_selected_validators_index[v] = current_validator;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        }</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; </div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        <span class="keywordflow">if</span> (++j &gt;= <a class="code" href="validations_8c.html#a63ae7a32d04d17e1ac38f0d19197e109">NB_RSA_CHUNK</a>)</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;        {</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;            i++;</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;            j = 0;</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        }</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    }</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; </div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    free(already_selected_validators_index);</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    <span class="keywordflow">return</span> rsa_keys;</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
+<div class="ttc" id="avalidations_8c_html_a63ae7a32d04d17e1ac38f0d19197e109"><div class="ttname"><a href="validations_8c.html#a63ae7a32d04d17e1ac38f0d19197e109">NB_RSA_CHUNK</a></div><div class="ttdeci">#define NB_RSA_CHUNK</div><div class="ttdef"><b>Definition:</b> <a href="validations_8c_source.html#l00013">validations.c:13</a></div></div>
 <div class="ttc" id="ablock_8h_html"><div class="ttname"><a href="block_8h.html">block.h</a></div></div>
-<div class="ttc" id="avalidations_8c_html_a0646d553a5b31e99a28af98053c78437"><div class="ttname"><a href="validations_8c.html#a0646d553a5b31e99a28af98053c78437">get_next_validator</a></div><div class="ttdeci">RSA * get_next_validator(char blockchain_flag)</div><div class="ttdoc">Get the 'next block' validator RSA public key.</div><div class="ttdef"><b>Definition:</b> <a href="validations_8c_source.html#l00010">validations.c:10</a></div></div>
-<div class="ttc" id="afiles_8h_html_af7f19b3a3e64c414589ae92109adda1e"><div class="ttname"><a href="files_8h.html#af7f19b3a3e64c414589ae92109adda1e">last_file_in_folder</a></div><div class="ttdeci">char * last_file_in_folder(char folder_path[])</div><div class="ttdoc">Return the last file (reverse alphabetical order) of a folder path.</div><div class="ttdef"><b>Definition:</b> <a href="files_8c_source.html#l00006">files.c:6</a></div></div>
+<div class="ttc" id="ahash_8h_html_a1a0c4c7a5b69d66d29782dfc45e625ec"><div class="ttname"><a href="hash_8h.html#a1a0c4c7a5b69d66d29782dfc45e625ec">hash_block_transactions</a></div><div class="ttdeci">char * hash_block_transactions(Block *block)</div><div class="ttdoc">Apply the SHA384 to all block transactions.</div><div class="ttdef"><b>Definition:</b> <a href="hash_8c_source.html#l00024">hash.c:24</a></div></div>
+<div class="ttc" id="ablock_8h_html_a32140266e4b385f64860944a5edd0153"><div class="ttname"><a href="block_8h.html#a32140266e4b385f64860944a5edd0153">get_block</a></div><div class="ttdeci">Block * get_block(size_t block_height)</div><div class="ttdef"><b>Definition:</b> <a href="block_8c_source.html#l00150">block.c:150</a></div></div>
+<div class="ttc" id="arsa_8h_html_a150e403695b4741246d3008143bc009a"><div class="ttname"><a href="rsa_8h.html#a150e403695b4741246d3008143bc009a">RSA_FILE_TOTAL_SIZE</a></div><div class="ttdeci">#define RSA_FILE_TOTAL_SIZE</div><div class="ttdef"><b>Definition:</b> <a href="rsa_8h_source.html#l00005">rsa.h:5</a></div></div>
+<div class="ttc" id="arsa_8h_html_a0125ff1fd034dae1c06832611ebf4bfc"><div class="ttname"><a href="rsa_8h.html#a0125ff1fd034dae1c06832611ebf4bfc">RSA_END_SIZE</a></div><div class="ttdeci">#define RSA_END_SIZE</div><div class="ttdef"><b>Definition:</b> <a href="rsa_8h_source.html#l00007">rsa.h:7</a></div></div>
+<div class="ttc" id="arsa_8h_html_abff8d9514a23647de99e49913084f135"><div class="ttname"><a href="rsa_8h.html#abff8d9514a23647de99e49913084f135">RSA_KEY_SIZE</a></div><div class="ttdeci">#define RSA_KEY_SIZE</div><div class="ttdef"><b>Definition:</b> <a href="rsa_8h_source.html#l00004">rsa.h:4</a></div></div>
+<div class="ttc" id="afiles_8h_html_af7f19b3a3e64c414589ae92109adda1e"><div class="ttname"><a href="files_8h.html#af7f19b3a3e64c414589ae92109adda1e">last_file_in_folder</a></div><div class="ttdeci">char * last_file_in_folder(char folder_path[])</div><div class="ttdoc">Return the last file (reverse alphabetical order) of a folder path.</div><div class="ttdef"><b>Definition:</b> <a href="files_8c_source.html#l00007">files.c:7</a></div></div>
+<div class="ttc" id="avalidations_8c_html_a7e3a2411fd0fab14465d33a5c0964aa6"><div class="ttname"><a href="validations_8c.html#a7e3a2411fd0fab14465d33a5c0964aa6">define_nb_validators</a></div><div class="ttdeci">uint16_t define_nb_validators(size_t n)</div><div class="ttdef"><b>Definition:</b> <a href="validations_8c_source.html#l00016">validations.c:16</a></div></div>
+<div class="ttc" id="amath_8h_html"><div class="ttname"><a href="math_8h.html">math.h</a></div></div>
 <div class="ttc" id="asignature_8h_html"><div class="ttname"><a href="signature_8h.html">signature.h</a></div></div>
-<div class="ttc" id="ablock_8h_html_aa32486137603765eb658695e6f19ec91"><div class="ttname"><a href="block_8h.html#aa32486137603765eb658695e6f19ec91">VALIDATOR_BLOCKCHAIN</a></div><div class="ttdeci">#define VALIDATOR_BLOCKCHAIN</div><div class="ttdef"><b>Definition:</b> <a href="block_8h_source.html#l00009">block.h:9</a></div></div>
+<div class="ttc" id="arsa_8h_html_adbc0e5075c30d3bb2c3bfca959cc9fdf"><div class="ttname"><a href="rsa_8h.html#adbc0e5075c30d3bb2c3bfca959cc9fdf">RSA_BEGIN_SIZE</a></div><div class="ttdeci">#define RSA_BEGIN_SIZE</div><div class="ttdef"><b>Definition:</b> <a href="rsa_8h_source.html#l00006">rsa.h:6</a></div></div>
+<div class="ttc" id="arsa_8h_html"><div class="ttname"><a href="rsa_8h.html">rsa.h</a></div></div>
+<div class="ttc" id="asafe_8h_html"><div class="ttname"><a href="safe_8h.html">safe.h</a></div></div>
 <div class="ttc" id="avalidations_8h_html"><div class="ttname"><a href="validations_8h.html">validations.h</a></div></div>
 <div class="ttc" id="ahash_8h_html"><div class="ttname"><a href="hash_8h.html">hash.h</a></div></div>
+<div class="ttc" id="amath_8h_html_afa99ec4acc4ecb2dc3c2d05da15d0e3f"><div class="ttname"><a href="math_8h.html#afa99ec4acc4ecb2dc3c2d05da15d0e3f">MAX</a></div><div class="ttdeci">#define MAX(a, b)</div><div class="ttdef"><b>Definition:</b> <a href="math_8h_source.html#l00002">math.h:2</a></div></div>
+<div class="ttc" id="astruct_block_html"><div class="ttname"><a href="struct_block.html">Block</a></div><div class="ttdef"><b>Definition:</b> <a href="block_8h_source.html#l00031">block.h:31</a></div></div>
+<div class="ttc" id="asafe_8h_html_ac4bf776335d7193068afa656b91a8827"><div class="ttname"><a href="safe_8h.html#ac4bf776335d7193068afa656b91a8827">safe_fread</a></div><div class="ttdeci">ssize_t safe_fread(void *buffer, const size_t size, const size_t n, FILE *file)</div><div class="ttdoc">Calls 'fread' but safely !</div><div class="ttdef"><b>Definition:</b> <a href="safe_8c_source.html#l00040">safe.c:40</a></div></div>
 <div class="ttc" id="afiles_8h_html"><div class="ttname"><a href="files_8h.html">files.h</a></div></div>
-<div class="ttc" id="ablock_8h_html_acc78e52b655cbfb4c04d3785bee81a1c"><div class="ttname"><a href="block_8h.html#acc78e52b655cbfb4c04d3785bee81a1c">GENERAL_BLOCKCHAIN</a></div><div class="ttdeci">#define GENERAL_BLOCKCHAIN</div><div class="ttdef"><b>Definition:</b> <a href="block_8h_source.html#l00008">block.h:8</a></div></div>
+<div class="ttc" id="avalidations_8c_html_a96d9964840289a425328257dd9a4c106"><div class="ttname"><a href="validations_8c.html#a96d9964840289a425328257dd9a4c106">get_next_committee</a></div><div class="ttdeci">RSA ** get_next_committee(size_t *nb_validators)</div><div class="ttdoc">Get the 'next block' validators RSA public keys.</div><div class="ttdef"><b>Definition:</b> <a href="validations_8c_source.html#l00031">validations.c:31</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

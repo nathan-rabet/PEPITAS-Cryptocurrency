@@ -1,7 +1,0 @@
-<map id="verify_sign_test" name="verify_sign_test">
-<area shape="rect" id="node1" title=" " alt="" coords="5,31,131,57"/>
-<area shape="rect" id="node2" href="$wallet_8h.html#a993fb7ec0c86c7a2d8ff68363e9f5304" title="Get my wallet object." alt="" coords="353,5,472,32"/>
-<area shape="rect" id="node3" href="$signature_8h.html#a31fa447711840b3c0932cfe068d8cc65" title="encrypt(SHA284(msg,len_data),priv_key)" alt="" coords="185,31,299,57"/>
-<area shape="rect" id="node5" href="$signature_8h.html#a03bc161fe8675e7bf8763cdcee6a3ac2" title="Apply the SHA384 algorithm on a &#39;data&#39; of size &#39;len_data&#39; and verifies if SHA384(data,..." alt="" coords="179,81,305,108"/>
-<area shape="rect" id="node4" href="$hash_8h.html#a67d06acefe39c395887f87d76bed5ba3" title="Apply the SHA384 algorithm on a &#39;data&#39; of size &#39;len_data&#39;." alt="" coords="360,68,465,95"/>
-</map>

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>PEPITAS: tests/unit_testing.c Source File</title>
+<title>PEPITAS CRYPTOCURRENCY: /home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/tests/unit_testing.c Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -24,11 +24,11 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">PEPITAS
-   &#160;<span id="projectnumber">0.1</span>
+   <div id="projectname">PEPITAS CRYPTOCURRENCY
    </div>
-   <div id="projectbrief">C cryptocurrency</div>
+   <div id="projectbrief">C based cryptocurrency</div>
   </td>
  </tr>
  </tbody>
@@ -87,38 +87,35 @@ $(document).ready(function(){initNavTree('unit__testing_8c_source.html',''); ini
 <div class="title">unit_testing.c</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="unit__testing_8c.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &lt;unistd.h&gt;</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &lt;sys/wait.h&gt;</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;openssl/rsa.h&gt;</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;openssl/evp.h&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="tests__macros_8h.html">tests_macros.h</a>&quot;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="signature__test_8h.html">cryptosystem/signature_test.h</a>&quot;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="rsa__test_8h.html">cryptosystem/rsa_test.h</a>&quot;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="client__test_8c.html">network/client_test.c</a>&quot;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="block__test_8h.html">core/blockchain/block_test.h</a>&quot;</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
-<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="unit__testing_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4">   12</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="unit__testing_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>()</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;{</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <a class="code" href="tests__macros_8h.html#a8770dab78ce7c6f0b1992f3c074e8c1a">DEBUG</a>(<a class="code" href="rsa__test_8c.html#a7309b60d797fb615e8f65c3ffff55dbd">get_keys_test</a>);</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <a class="code" href="tests__macros_8h.html#a8770dab78ce7c6f0b1992f3c074e8c1a">DEBUG</a>(<a class="code" href="rsa__test_8c.html#a4a75fd529349b64297cc6abb08f2aaf6">get_keys_equality_test</a>);</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <a class="code" href="tests__macros_8h.html#a8770dab78ce7c6f0b1992f3c074e8c1a">DEBUG</a>(<a class="code" href="signature__test_8c.html#a1a567e3415b0bcb5531f72f29d571dac">verify_sign_test</a>);</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <a class="code" href="tests__macros_8h.html#a8770dab78ce7c6f0b1992f3c074e8c1a">DEBUG</a>(<a class="code" href="client__test_8c.html#ade76ed0fdf28b393fbdc89e611688256">network_test</a>);</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <a class="code" href="tests__macros_8h.html#a8770dab78ce7c6f0b1992f3c074e8c1a">DEBUG</a>(<a class="code" href="block__test_8c.html#a19557d53270dbd4aa648e8949214eecd">genererate_random_blocks_test</a>);</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <a class="code" href="tests__macros_8h.html#a8770dab78ce7c6f0b1992f3c074e8c1a">DEBUG</a>(<a class="code" href="block__test_8c.html#ad83790a3d08aff3d0de25b9a76e474c4">block_test</a>);</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;}</div>
+<a href="unit__testing_8c.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="tests__macros_8h.html">tests_macros.h</a>&quot;</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="signature__test_8h.html">cryptosystem/signature_test.h</a>&quot;</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="rsa__test_8h.html">cryptosystem/rsa_test.h</a>&quot;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="client__test_8c.html">network/client_test.c</a>&quot;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="block__test_8h.html">core/blockchain/block_test.h</a>&quot;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="validations__test_8c.html">core/validation/validations_test.c</a>&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
+<div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="unit__testing_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4">    8</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="unit__testing_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>()</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;{</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    <a class="code" href="tests__macros_8h.html#a8770dab78ce7c6f0b1992f3c074e8c1a">DEBUG</a>(<a class="code" href="rsa__test_8c.html#a7309b60d797fb615e8f65c3ffff55dbd">get_keys_test</a>);</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <a class="code" href="tests__macros_8h.html#a8770dab78ce7c6f0b1992f3c074e8c1a">DEBUG</a>(<a class="code" href="rsa__test_8c.html#a4a75fd529349b64297cc6abb08f2aaf6">get_keys_equality_test</a>);</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <a class="code" href="tests__macros_8h.html#a8770dab78ce7c6f0b1992f3c074e8c1a">DEBUG</a>(<a class="code" href="signature__test_8c.html#a1a567e3415b0bcb5531f72f29d571dac">verify_sign_test</a>);</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <a class="code" href="tests__macros_8h.html#a8770dab78ce7c6f0b1992f3c074e8c1a">DEBUG</a>(<a class="code" href="client__test_8c.html#ade76ed0fdf28b393fbdc89e611688256">network_test</a>);</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <a class="code" href="tests__macros_8h.html#a8770dab78ce7c6f0b1992f3c074e8c1a">DEBUG</a>(<a class="code" href="block__test_8c.html#ad83790a3d08aff3d0de25b9a76e474c4">block_test</a>);</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <a class="code" href="tests__macros_8h.html#a8770dab78ce7c6f0b1992f3c074e8c1a">DEBUG</a>(<a class="code" href="validations__test_8c.html#ab838b4317c66f7c0e811c0bb3b595d2f">validations_test</a>);</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="aclient__test_8c_html"><div class="ttname"><a href="client__test_8c.html">client_test.c</a></div></div>
-<div class="ttc" id="ablock__test_8c_html_a19557d53270dbd4aa648e8949214eecd"><div class="ttname"><a href="block__test_8c.html#a19557d53270dbd4aa648e8949214eecd">genererate_random_blocks_test</a></div><div class="ttdeci">void genererate_random_blocks_test(void)</div><div class="ttdef"><b>Definition:</b> <a href="block__test_8c_source.html#l00024">block_test.c:24</a></div></div>
 <div class="ttc" id="aclient__test_8c_html_ade76ed0fdf28b393fbdc89e611688256"><div class="ttname"><a href="client__test_8c.html#ade76ed0fdf28b393fbdc89e611688256">network_test</a></div><div class="ttdeci">void network_test()</div><div class="ttdef"><b>Definition:</b> <a href="client__test_8c_source.html#l00010">client_test.c:10</a></div></div>
-<div class="ttc" id="aunit__testing_8c_html_ae66f6b31b5ad750f1fe042a706a4e3d4"><div class="ttname"><a href="unit__testing_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a></div><div class="ttdeci">int main()</div><div class="ttdef"><b>Definition:</b> <a href="unit__testing_8c_source.html#l00012">unit_testing.c:12</a></div></div>
+<div class="ttc" id="aunit__testing_8c_html_ae66f6b31b5ad750f1fe042a706a4e3d4"><div class="ttname"><a href="unit__testing_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a></div><div class="ttdeci">int main()</div><div class="ttdef"><b>Definition:</b> <a href="unit__testing_8c_source.html#l00008">unit_testing.c:8</a></div></div>
 <div class="ttc" id="atests__macros_8h_html_a8770dab78ce7c6f0b1992f3c074e8c1a"><div class="ttname"><a href="tests__macros_8h.html#a8770dab78ce7c6f0b1992f3c074e8c1a">DEBUG</a></div><div class="ttdeci">#define DEBUG(function)</div><div class="ttdef"><b>Definition:</b> <a href="tests__macros_8h_source.html#l00005">tests_macros.h:5</a></div></div>
+<div class="ttc" id="avalidations__test_8c_html"><div class="ttname"><a href="validations__test_8c.html">validations_test.c</a></div></div>
 <div class="ttc" id="arsa__test_8c_html_a4a75fd529349b64297cc6abb08f2aaf6"><div class="ttname"><a href="rsa__test_8c.html#a4a75fd529349b64297cc6abb08f2aaf6">get_keys_equality_test</a></div><div class="ttdeci">void get_keys_equality_test()</div><div class="ttdef"><b>Definition:</b> <a href="rsa__test_8c_source.html#l00028">rsa_test.c:28</a></div></div>
+<div class="ttc" id="avalidations__test_8c_html_ab838b4317c66f7c0e811c0bb3b595d2f"><div class="ttname"><a href="validations__test_8c.html#ab838b4317c66f7c0e811c0bb3b595d2f">validations_test</a></div><div class="ttdeci">void validations_test()</div><div class="ttdef"><b>Definition:</b> <a href="validations__test_8c_source.html#l00005">validations_test.c:5</a></div></div>
 <div class="ttc" id="arsa__test_8h_html"><div class="ttname"><a href="rsa__test_8h.html">rsa_test.h</a></div></div>
-<div class="ttc" id="ablock__test_8c_html_ad83790a3d08aff3d0de25b9a76e474c4"><div class="ttname"><a href="block__test_8c.html#ad83790a3d08aff3d0de25b9a76e474c4">block_test</a></div><div class="ttdeci">void block_test(void)</div><div class="ttdef"><b>Definition:</b> <a href="block__test_8c_source.html#l00071">block_test.c:71</a></div></div>
+<div class="ttc" id="ablock__test_8c_html_ad83790a3d08aff3d0de25b9a76e474c4"><div class="ttname"><a href="block__test_8c.html#ad83790a3d08aff3d0de25b9a76e474c4">block_test</a></div><div class="ttdeci">void block_test(void)</div><div class="ttdef"><b>Definition:</b> <a href="block__test_8c_source.html#l00011">block_test.c:11</a></div></div>
 <div class="ttc" id="ablock__test_8h_html"><div class="ttname"><a href="block__test_8h.html">block_test.h</a></div></div>
 <div class="ttc" id="asignature__test_8c_html_a1a567e3415b0bcb5531f72f29d571dac"><div class="ttname"><a href="signature__test_8c.html#a1a567e3415b0bcb5531f72f29d571dac">verify_sign_test</a></div><div class="ttdeci">void verify_sign_test()</div><div class="ttdef"><b>Definition:</b> <a href="signature__test_8c_source.html#l00004">signature_test.c:4</a></div></div>
 <div class="ttc" id="arsa__test_8c_html_a7309b60d797fb615e8f65c3ffff55dbd"><div class="ttname"><a href="rsa__test_8c.html#a7309b60d797fb615e8f65c3ffff55dbd">get_keys_test</a></div><div class="ttdeci">void get_keys_test()</div><div class="ttdef"><b>Definition:</b> <a href="rsa__test_8c_source.html#l00014">rsa_test.c:14</a></div></div>

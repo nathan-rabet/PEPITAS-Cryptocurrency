@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['general_5fblockchain_405',['GENERAL_BLOCKCHAIN',['../block_8h.html#acc78e52b655cbfb4c04d3785bee81a1c',1,'block.h']]]
+  ['debug_460',['DEBUG',['../tests__macros_8h.html#a8770dab78ce7c6f0b1992f3c074e8c1a',1,'tests_macros.h']]]
 ];

@@ -1,8 +1,0 @@
-<map id="write_transaction" name="write_transaction">
-<area shape="rect" id="node1" title=" " alt="" coords="879,5,1013,32"/>
-<area shape="rect" id="node2" href="$signature_8c.html#a0e5ff1f119568fb8566981cf7da11d7f" title="Writes blockdata in a file." alt="" coords="704,5,831,32"/>
-<area shape="rect" id="node3" href="$signature_8c.html#a58b3466ce733938859f0651b2a756e95" title="Writes a block in a file." alt="" coords="559,5,656,32"/>
-<area shape="rect" id="node4" href="$block_8c.html#ab8c379edfa3ee188d349f526391c064a" title="Writes a block struct in a file." alt="" coords="387,5,511,32"/>
-<area shape="rect" id="node5" href="$block__test_8h.html#a19557d53270dbd4aa648e8949214eecd" title=" " alt="" coords="108,5,339,32"/>
-<area shape="rect" id="node6" href="$unit__testing_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,5,60,32"/>
-</map>

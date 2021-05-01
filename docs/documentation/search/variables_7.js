@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['organisation_5fpublic_5fkey_364',['organisation_public_key',['../struct_transaction_data.html#a67d7c4e95988d712faf91b928f317fd9',1,'TransactionData']]]
+  ['magic_412',['magic',['../struct_block_data.html#a3f86b2fdc165f662a1d3a69ab9cb5fe2',1,'BlockData']]]
 ];

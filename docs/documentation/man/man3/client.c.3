@@ -1,0 +1,80 @@
+.TH "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/src/network/client.c" 3 "Thu Apr 22 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/src/network/client.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'network/client\&.h'\fP
+.br
+\fC#include 'network/server\&.h'\fP
+.br
+\fC#include 'network/network\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBNode\fP * \fBget_my_node\fP ()"
+.br
+.RI "Get the my node object\&. "
+.ti -1c
+.RI "int \fBset_neighbour\fP (char *hostname, int family)"
+.br
+.RI "Sets a neighbour in the client\&.neightbours section\&. "
+.ti -1c
+.RI "int \fBlisten_to\fP (size_t neighbour_id)"
+.br
+.RI "Tries to connect to the peer-to-peer network via a node in the \fBNode\fP structure\&. "
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "\fBNode\fP* get_my_node ()"
+
+.PP
+Get the my node object\&. 
+.PP
+\fBReturns\fP
+.RS 4
+Node* 
+.RE
+.PP
+
+.PP
+Definition at line 5 of file client\&.c\&.
+.SS "int listen_to (size_t neighbour_id)"
+
+.PP
+Tries to connect to the peer-to-peer network via a node in the \fBNode\fP structure\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIneighbour_id\fP The neighbour's index (in struct \fBNode\fP) to connect with 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+socket FD or -1 if an error occurs 
+.RE
+.PP
+
+.PP
+Definition at line 57 of file client\&.c\&.
+.SS "int set_neighbour (char * hostname, int family)"
+
+.PP
+Sets a neighbour in the client\&.neightbours section\&. 
+.PP
+\fBReturns\fP
+.RS 4
+0 if sucess, -1 otherwise 
+.RE
+.PP
+
+.PP
+Definition at line 14 of file client\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for PEPITAS CRYPTOCURRENCY from the source code\&.

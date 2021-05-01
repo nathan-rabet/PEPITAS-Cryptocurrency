@@ -1,0 +1,72 @@
+.TH "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/src/cryptosystem/hash.c" 3 "Thu Apr 22 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/src/cryptosystem/hash.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <openssl/sha\&.h>\fP
+.br
+\fC#include 'cryptosystem/hash\&.h'\fP
+.br
+\fC#include 'core/blockchain/block\&.h'\fP
+.br
+\fC#include 'cryptosystem/signature\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "char * \fBsha384_data\fP (void *data, size_t len_data)"
+.br
+.RI "Apply the SHA384 algorithm on a 'data' of size 'len_data'\&. "
+.ti -1c
+.RI "char * \fBhash_block_transactions\fP (\fBBlock\fP *block)"
+.br
+.RI "Apply the SHA384 to all block transactions\&. "
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "char* hash_block_transactions (\fBBlock\fP * block)"
+
+.PP
+Apply the SHA384 to all block transactions\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIblock\fP The block to deal with 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+sha384[SHA384_DIGEST_LENGTH] 
+.RE
+.PP
+
+.PP
+Definition at line 24 of file hash\&.c\&.
+.SS "char* sha384_data (void * data, size_t len_data)"
+
+.PP
+Apply the SHA384 algorithm on a 'data' of size 'len_data'\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIdata\fP The buffer to hash 
+.br
+\fIlen_data\fP The length of the buffer 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+char[97] (on heap) 
+.RE
+.PP
+
+.PP
+Definition at line 6 of file hash\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for PEPITAS CRYPTOCURRENCY from the source code\&.

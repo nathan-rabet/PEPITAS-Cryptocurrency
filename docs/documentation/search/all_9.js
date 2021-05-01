@@ -1,8 +1,10 @@
 var searchData=
 [
-  ['main_88',['main',['../client_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main():&#160;client.c'],['../gui_8c.html#a3c04138a5bfe5d72780bb7e82a18e627',1,'main(int argc, char **argv):&#160;gui.c'],['../server_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main():&#160;server.c'],['../sign_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main():&#160;sign.c'],['../main__test_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main():&#160;main_test.c'],['../server__test_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main():&#160;server_test.c'],['../unit__testing_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main():&#160;unit_testing.c']]],
-  ['main_5ftest_2ec_89',['main_test.c',['../main__test_8c.html',1,'']]],
-  ['max_90',['MAX',['../rsa__test_8c.html#afa99ec4acc4ecb2dc3c2d05da15d0e3f',1,'rsa_test.c']]],
-  ['max_5fneighbours_91',['MAX_NEIGHBOURS',['../client_8h.html#ae35694bd71aaa8aa2608ba5d24de667d',1,'client.h']]],
-  ['max_5ftransactions_5fper_5fblock_92',['MAX_TRANSACTIONS_PER_BLOCK',['../block_8h.html#ad5eeaf6e69c02a55a536b7f4c50a3a6e',1,'block.h']]]
+  ['last_5ffile_5fin_5ffolder_94',['last_file_in_folder',['../files_8h.html#af7f19b3a3e64c414589ae92109adda1e',1,'last_file_in_folder(char folder_path[]):&#160;files.c'],['../files_8c.html#af7f19b3a3e64c414589ae92109adda1e',1,'last_file_in_folder(char folder_path[]):&#160;files.c']]],
+  ['listen_5fto_95',['listen_to',['../client_8h.html#adbe3c438ad6697293ab73147fd262b0b',1,'listen_to(size_t neighbour_id):&#160;client.c'],['../network_2client_8c.html#adbe3c438ad6697293ab73147fd262b0b',1,'listen_to(size_t neighbour_id):&#160;client.c']]],
+  ['load_5fcontacts_5ffrom_5ffile_96',['load_contacts_from_file',['../ui_8h.html#a73fe931a2fbeb2086428ad91c0cbc05e',1,'load_contacts_from_file():&#160;ui.c'],['../ui_8c.html#a73fe931a2fbeb2086428ad91c0cbc05e',1,'load_contacts_from_file():&#160;ui.c']]],
+  ['load_5ftransaction_5ffrom_5ffile_97',['load_transaction_from_file',['../ui_8h.html#aafd81ce434d4f1abdba55e0ffc6b719f',1,'ui.h']]],
+  ['load_5ftransactions_5ffrom_5ffile_98',['load_transactions_from_file',['../ui_8c.html#a8909bf913522e177fc1629b07c32420c',1,'ui.c']]],
+  ['log_99',['LOG',['../tests__macros_8h.html#ab2c74502b7c2f598b58bec7ea1e9c6d6',1,'tests_macros.h']]],
+  ['ls_5fcombo_100',['ls_combo',['../ui_8c.html#a56f0bc64e6d4d817b9eab9ed1796f868',1,'ui.c']]]
 ];

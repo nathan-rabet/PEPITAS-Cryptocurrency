@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['init_5fserver_290',['init_server',['../server_8h.html#ad7de155004abd1b0a8577003348ba464',1,'init_server():&#160;server.c'],['../network_2server_8c.html#ad7de155004abd1b0a8577003348ba464',1,'init_server():&#160;server.c']]]
+  ['hash_5fblock_5ftransactions_329',['hash_block_transactions',['../hash_8h.html#a1a0c4c7a5b69d66d29782dfc45e625ec',1,'hash_block_transactions(Block *block):&#160;hash.c'],['../hash_8c.html#a1a0c4c7a5b69d66d29782dfc45e625ec',1,'hash_block_transactions(Block *block):&#160;hash.c']]]
 ];

@@ -1,11 +1,11 @@
 var searchData=
 [
-  ['sender_5fpublic_5fkey_374',['sender_public_key',['../struct_transaction_data.html#adab773a393f892dc7c1e31ff1ce733f8',1,'TransactionData']]],
-  ['sender_5fremaining_5fmoney_375',['sender_remaining_money',['../struct_transaction_data.html#a1b1eb3251076e2d5f443c12a1a21757c',1,'TransactionData']]],
-  ['server_5fsockfd_376',['server_sockfd',['../struct_neighbour.html#a2ccfb2765eac8b4d979cdd448e39e7cb',1,'Neighbour']]],
-  ['signature_5flen_377',['signature_len',['../struct_block.html#aa8352dca3d12392f6a9eff7c46944009',1,'Block::signature_len()'],['../struct_transaction.html#aa8352dca3d12392f6a9eff7c46944009',1,'Transaction::signature_len()']]],
-  ['socket_378',['socket',['../structclient__connection.html#a3666576f6b88007cc7b8f26c7da596c8',1,'client_connection']]],
-  ['stake_5flabel1_379',['stake_label1',['../ui_8c.html#a4722da076b88ed9d7695ae3d38945692',1,'ui.c']]],
-  ['stake_5flabel2_380',['stake_label2',['../ui_8c.html#a16f98e00efbcc9f5356cd26ddde7cc53',1,'ui.c']]],
-  ['stake_5flabel3_381',['stake_label3',['../ui_8c.html#ac7f6d61c5f9e17e359513909d01dbbd0',1,'ui.c']]]
+  ['password_5fentry1_417',['password_entry1',['../ui_8c.html#ad339cc79acfe1685a9cc695347628fed',1,'ui.c']]],
+  ['password_5fentry2_418',['password_entry2',['../ui_8c.html#aa345dbc39b26d7892d6b987c3b7dd280',1,'ui.c']]],
+  ['password_5ferror_5flabel_419',['password_error_label',['../ui_8c.html#a8b12d0127ba1f869e04b7c403ea82ff2',1,'ui.c']]],
+  ['previous_5fblock_5fhash_420',['previous_block_hash',['../struct_block_data.html#a0167d1bdc7d4e5d8d423188581cbb064',1,'BlockData']]],
+  ['priv_5fkey_421',['priv_key',['../struct_wallet.html#ad3051f431d5c0b376f67c497d521290a',1,'Wallet']]],
+  ['private_5fkey_5flabel_422',['private_key_label',['../ui_8c.html#ad8381a6084abf1920354514475732b69',1,'ui.c']]],
+  ['pub_5fkey_423',['pub_key',['../struct_wallet.html#a7c3fbe707cd5eabe1365d44b5d1cd16f',1,'Wallet']]],
+  ['public_5fkey_5fentry_5fcon_424',['public_key_entry_con',['../ui_8c.html#a1232a61f99830b200a87137da4ad0232',1,'ui.c']]]
 ];

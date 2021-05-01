@@ -1,0 +1,99 @@
+.TH "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/headers/network/network.h" 3 "Thu Apr 22 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/headers/network/network.h
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <unistd\&.h>\fP
+.br
+\fC#include <sys/un\&.h>\fP
+.br
+\fC#include <sys/types\&.h>\fP
+.br
+\fC#include <sys/socket\&.h>\fP
+.br
+\fC#include <netdb\&.h>\fP
+.br
+\fC#include <err\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+\fC#include <pthread\&.h>\fP
+.br
+\fC#include <arpa/inet\&.h>\fP
+.br
+\fC#include 'misc/safe\&.h'\fP
+.br
+\fC#include 'client\&.h'\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBNB_HARD_CODED_ADDR\fP   2"
+.br
+.ti -1c
+.RI "#define \fBSTATIC_PORT\fP   '4242'"
+.br
+.ti -1c
+.RI "#define \fBHD_GET_CLIENT_LIST\fP   'GET CLIENT LIST\\r\\n\\r\\n'"
+.br
+.ti -1c
+.RI "#define \fBHD_SEND_CLIENT_LIST\fP   'SEND CLIENT LIST\\n'"
+.br
+.ti -1c
+.RI "#define \fBHD_GET_BLOCKCHAIN\fP   'GET BLOCKCHAIN\\r\\n\\r\\n'"
+.br
+.ti -1c
+.RI "#define \fBHD_SEND_BLOCKCHAIN\fP   'SEND BLOCKCHAIN\\n'"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "const \fBNeighbour\fP \fBHARD_CODED_ADDR\fP []"
+.br
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define HD_GET_BLOCKCHAIN   'GET BLOCKCHAIN\\r\\n\\r\\n'"
+
+.PP
+Definition at line 25 of file network\&.h\&.
+.SS "#define HD_GET_CLIENT_LIST   'GET CLIENT LIST\\r\\n\\r\\n'"
+
+.PP
+Definition at line 23 of file network\&.h\&.
+.SS "#define HD_SEND_BLOCKCHAIN   'SEND BLOCKCHAIN\\n'"
+
+.PP
+Definition at line 26 of file network\&.h\&.
+.SS "#define HD_SEND_CLIENT_LIST   'SEND CLIENT LIST\\n'"
+
+.PP
+Definition at line 24 of file network\&.h\&.
+.SS "#define NB_HARD_CODED_ADDR   2"
+
+.PP
+Definition at line 17 of file network\&.h\&.
+.SS "#define STATIC_PORT   '4242'"
+
+.PP
+Definition at line 20 of file network\&.h\&.
+.SH "Variable Documentation"
+.PP 
+.SS "const \fBNeighbour\fP HARD_CODED_ADDR[]"
+
+.PP
+Definition at line 4 of file network\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for PEPITAS CRYPTOCURRENCY from the source code\&.

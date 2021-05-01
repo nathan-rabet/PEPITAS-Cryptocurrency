@@ -1,0 +1,61 @@
+.TH "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/src/misc/files.c" 3 "Thu Apr 22 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/src/misc/files.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'misc/files\&.h'\fP
+.br
+\fC#include <dirent\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fB_GNU_SOURCE\fP"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "char * \fBlast_file_in_folder\fP (char folder_path[])"
+.br
+.RI "Return the last file (reverse alphabetical order) of a folder path\&. "
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define _GNU_SOURCE"
+
+.PP
+Definition at line 1 of file files\&.c\&.
+.SH "Function Documentation"
+.PP 
+.SS "char* last_file_in_folder (char folder_path[])"
+
+.PP
+Return the last file (reverse alphabetical order) of a folder path\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIfolder_path\fP The path of the folder 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+char*, return NULL if any error, must be freed ! 
+.RE
+.PP
+
+.PP
+Definition at line 7 of file files\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for PEPITAS CRYPTOCURRENCY from the source code\&.

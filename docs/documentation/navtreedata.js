@@ -22,11 +22,11 @@ for the JavaScript code in this file
 */
 var NAVTREE =
 [
-  [ "PEPITAS", "index.html", [
-    [ "PEPITAS", "md__r_e_a_d_m_e.html", [
-      [ "CODING STYLE", "md__r_e_a_d_m_e.html#autotoc_md1", [
-        [ "Coding case", "md__r_e_a_d_m_e.html#autotoc_md2", null ],
-        [ "Tests", "md__r_e_a_d_m_e.html#autotoc_md3", null ]
+  [ "PEPITAS CRYPTOCURRENCY", "index.html", [
+    [ "PEPITAS", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__r_e_a_d_m_e.html", [
+      [ "CODING STYLE", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__r_e_a_d_m_e.html#autotoc_md1", [
+        [ "Coding case", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__r_e_a_d_m_e.html#autotoc_md2", null ],
+        [ "Tests", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__r_e_a_d_m_e.html#autotoc_md3", null ]
       ] ]
     ] ],
     [ "Data Structures", "annotated.html", [
@@ -40,7 +40,7 @@ var NAVTREE =
     [ "Files", "files.html", [
       [ "File List", "files.html", "files_dup" ],
       [ "Globals", "globals.html", [
-        [ "All", "globals.html", null ],
+        [ "All", "globals.html", "globals_dup" ],
         [ "Functions", "globals_func.html", null ],
         [ "Variables", "globals_vars.html", null ],
         [ "Typedefs", "globals_type.html", null ],
@@ -52,8 +52,8 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"_g_e_n__validators__file_8c.html",
-"struct_neighbour.html#a4417150d9f858949bd9ea8794995ebcc"
+"_g_e_n__blockchain__files_8c.html",
+"signature_8h.html#af656af2c0f2bf2ea38d4fba26b50f5d6"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

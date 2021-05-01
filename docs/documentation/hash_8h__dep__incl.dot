@@ -1,0 +1,21 @@
+digraph "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/headers/cryptosystem/hash.h"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="/home/runner/work/PEPITAS\l-Cryptocurrency/PEPITAS\l-Cryptocurrency/headers\l/cryptosystem/hash.h",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="/home/runner/work/PEPITAS\l-Cryptocurrency/PEPITAS\l-Cryptocurrency/headers\l/ui/ui.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$ui_8h.html",tooltip=" "];
+  Node2 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="/home/runner/work/PEPITAS\l-Cryptocurrency/PEPITAS\l-Cryptocurrency/src/gui.c",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$gui_8c.html",tooltip=" "];
+  Node2 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="/home/runner/work/PEPITAS\l-Cryptocurrency/PEPITAS\l-Cryptocurrency/src/ui/ui.c",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$ui_8c.html",tooltip=" "];
+  Node1 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="/home/runner/work/PEPITAS\l-Cryptocurrency/PEPITAS\l-Cryptocurrency/src/core\l/validation/validations.c",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$validations_8c.html",tooltip=" "];
+  Node1 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="/home/runner/work/PEPITAS\l-Cryptocurrency/PEPITAS\l-Cryptocurrency/src/cryptosystem/hash.c",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$hash_8c.html",tooltip=" "];
+  Node1 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="/home/runner/work/PEPITAS\l-Cryptocurrency/PEPITAS\l-Cryptocurrency/src/cryptosystem\l/signature.c",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$signature_8c.html",tooltip=" "];
+  Node1 -> Node8 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="/home/runner/work/PEPITAS\l-Cryptocurrency/PEPITAS\l-Cryptocurrency/src/sign.c",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$sign_8c.html",tooltip=" "];
+}

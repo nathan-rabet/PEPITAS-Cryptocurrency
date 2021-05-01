@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['last_5ffile_5fin_5ffolder_85',['last_file_in_folder',['../files_8h.html#af7f19b3a3e64c414589ae92109adda1e',1,'last_file_in_folder(char folder_path[]):&#160;files.c'],['../files_8c.html#af7f19b3a3e64c414589ae92109adda1e',1,'last_file_in_folder(char folder_path[]):&#160;files.c']]],
-  ['listen_5fto_86',['listen_to',['../client_8h.html#adbe3c438ad6697293ab73147fd262b0b',1,'listen_to(size_t neighbour_id):&#160;client.c'],['../network_2client_8c.html#adbe3c438ad6697293ab73147fd262b0b',1,'listen_to(size_t neighbour_id):&#160;client.c']]],
-  ['log_87',['LOG',['../tests__macros_8h.html#ab2c74502b7c2f598b58bec7ea1e9c6d6',1,'tests_macros.h']]]
+  ['info_90',['info',['../structclient__connection.html#abfdfc09512d7f851f879cdc859ef4cd5',1,'client_connection']]],
+  ['init_5fserver_91',['init_server',['../server_8h.html#ad7de155004abd1b0a8577003348ba464',1,'init_server():&#160;server.c'],['../network_2server_8c.html#ad7de155004abd1b0a8577003348ba464',1,'init_server():&#160;server.c']]],
+  ['invest_5fentry_92',['invest_entry',['../ui_8c.html#a1cd59d712f0351edfa00b753656b486a',1,'ui.c']]],
+  ['is_5fvalidator_93',['is_validator',['../struct_wallet.html#a54dce2288a6b5f6866903d56a598317f',1,'Wallet']]]
 ];

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>PEPITAS: headers/core/validation/validations.h Source File</title>
+<title>PEPITAS CRYPTOCURRENCY: /home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/headers/core/validation/validations.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -24,11 +24,11 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">PEPITAS
-   &#160;<span id="projectnumber">0.1</span>
+   <div id="projectname">PEPITAS CRYPTOCURRENCY
    </div>
-   <div id="projectbrief">C cryptocurrency</div>
+   <div id="projectbrief">C based cryptocurrency</div>
   </td>
  </tr>
  </tbody>
@@ -87,16 +87,21 @@ $(document).ready(function(){initNavTree('validations_8h_source.html',''); initR
 <div class="title">validations.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="validations_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &lt;stdlib.h&gt;</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &lt;openssl/rsa.h&gt;</span></div>
+<a href="validations_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef VALIDATIONS_H</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define VALIDATIONS_H</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;RSA* <a class="code" href="validations_8h.html#a0646d553a5b31e99a28af98053c78437">get_next_validator</a>(<span class="keywordtype">char</span> blockchain_flag);</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;ssize_t <a class="code" href="validations_8h.html#a689f119eae86a33365e456a2acd5952a">get_amount</a>(RSA* public_key);</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;stdlib.h&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;openssl/rsa.h&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;RSA **<a class="code" href="validations_8h.html#a96d9964840289a425328257dd9a4c106">get_next_committee</a>(<span class="keywordtype">size_t</span> *nb_validators);</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;ssize_t <a class="code" href="validations_8h.html#a689f119eae86a33365e456a2acd5952a">get_amount</a>(RSA* public_key);</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="avalidations_8h_html_a689f119eae86a33365e456a2acd5952a"><div class="ttname"><a href="validations_8h.html#a689f119eae86a33365e456a2acd5952a">get_amount</a></div><div class="ttdeci">ssize_t get_amount(RSA *public_key)</div><div class="ttdoc">Searches how much money 'public_key' has.</div></div>
-<div class="ttc" id="avalidations_8h_html_a0646d553a5b31e99a28af98053c78437"><div class="ttname"><a href="validations_8h.html#a0646d553a5b31e99a28af98053c78437">get_next_validator</a></div><div class="ttdeci">RSA * get_next_validator(char blockchain_flag)</div><div class="ttdoc">Get the 'next block' validator RSA public key.</div><div class="ttdef"><b>Definition:</b> <a href="validations_8c_source.html#l00010">validations.c:10</a></div></div>
+<div class="ttc" id="avalidations_8h_html_a96d9964840289a425328257dd9a4c106"><div class="ttname"><a href="validations_8h.html#a96d9964840289a425328257dd9a4c106">get_next_committee</a></div><div class="ttdeci">RSA ** get_next_committee(size_t *nb_validators)</div><div class="ttdoc">Get the 'next block' validators RSA public keys.</div><div class="ttdef"><b>Definition:</b> <a href="validations_8c_source.html#l00031">validations.c:31</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

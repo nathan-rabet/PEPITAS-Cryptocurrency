@@ -1,0 +1,44 @@
+digraph "get_my_wallet"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="get_my_wallet",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Get my wallet object."];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="create_account",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$wallet_8c.html#a26c6f56037df4dbfb58855db1633a7df",tooltip="Creates an account in local and broadcasts the creation to the network."];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="get_keys",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$rsa_8c.html#a4f017f51874e2df61091a589c98aa54c",tooltip="Get the keys object."];
+  Node3 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="get_keys_equality_test",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$rsa__test_8h.html#a4a75fd529349b64297cc6abb08f2aaf6",tooltip=" "];
+  Node4 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="main",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$unit__testing_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4",tooltip=" "];
+  Node3 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="get_keys_test",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$rsa__test_8h.html#a7309b60d797fb615e8f65c3ffff55dbd",tooltip=" "];
+  Node6 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="main",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$sign_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4",tooltip=" "];
+  Node3 -> Node8 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="on_create_key_but2\l_press",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$ui_8c.html#ab865e6138c061d47b274af99c574af03",tooltip=" "];
+  Node1 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node9 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 [label="sign_message",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$signature_8c.html#a31fa447711840b3c0932cfe068d8cc65",tooltip="encrypt(SHA284(msg,len_data),priv_key)"];
+  Node9 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 -> Node10 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node10 [label="sign_block",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$signature_8c.html#a5fc24af7af2e6c9cd4de2efcbd26ffb9",tooltip="Signs a block."];
+  Node9 -> Node11 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node11 [label="sign_transaction",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$signature_8c.html#afc30cc798edd88f7749c81431cc12684",tooltip="Sign a transaction."];
+  Node11 -> Node12 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node12 [label="sign_block_transactions",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$signature_8c.html#a885aee9c6a53f767ed991b0a2496e37e",tooltip="Signs transactions of a block."];
+  Node9 -> Node13 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node13 [label="verify_sign_test",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$signature__test_8h.html#a1a567e3415b0bcb5531f72f29d571dac",tooltip=" "];
+  Node13 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node14 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node14 [label="update_labels",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$ui_8c.html#af1854ec5ff4099ed69a1b51a3fd3b3df",tooltip=" "];
+  Node14 -> Node15 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node15 [label="on_connect_but_press",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$ui_8c.html#aa118feebec7cfa09ac8e958107872c47",tooltip=" "];
+  Node1 -> Node13 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+}

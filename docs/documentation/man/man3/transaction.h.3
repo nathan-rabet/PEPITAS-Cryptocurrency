@@ -1,0 +1,94 @@
+.TH "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/headers/core/blockchain/transaction.h" 3 "Thu Apr 22 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/headers/core/blockchain/transaction.h
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <openssl/rsa\&.h>\fP
+.br
+\fC#include <openssl/sha\&.h>\fP
+.br
+\fC#include <time\&.h>\fP
+.br
+
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fBTransactionData\fP"
+.br
+.ti -1c
+.RI "struct \fBTransaction\fP"
+.br
+.in -1c
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBTRANSACTION_DATA_SIZE\fP   sizeof(size_t) * 3 + sizeof(time_t) + (512 * 2)"
+.br
+.ti -1c
+.RI "#define \fBTRANSACTION_SIZE\fP   sizeof(size_t) + 2048 + \fBTRANSACTION_DATA_SIZE\fP"
+.br
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef struct \fBTransactionData\fP \fBTransactionData\fP"
+.br
+.ti -1c
+.RI "typedef struct \fBTransaction\fP \fBTransaction\fP"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBsend_money\fP (size_t amount, u_int64_t receiver_public_key)"
+.br
+.RI "Send 'amount' money to 'receiver_public_key'\&. This will broadcast a transaction to the network\&. "
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define TRANSACTION_DATA_SIZE   sizeof(size_t) * 3 + sizeof(time_t) + (512 * 2)"
+
+.PP
+Definition at line 9 of file transaction\&.h\&.
+.SS "#define TRANSACTION_SIZE   sizeof(size_t) + 2048 + \fBTRANSACTION_DATA_SIZE\fP"
+
+.PP
+Definition at line 10 of file transaction\&.h\&.
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef struct \fBTransaction\fP \fBTransaction\fP"
+
+.SS "typedef struct \fBTransactionData\fP \fBTransactionData\fP"
+
+.SH "Function Documentation"
+.PP 
+.SS "int send_money (size_t amount, u_int64_t receiver_public_key)"
+
+.PP
+Send 'amount' money to 'receiver_public_key'\&. This will broadcast a transaction to the network\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIamount\fP The amount to send 
+.br
+\fIreceiver_public_key\fP The receiver public key 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+returns 0 if the broadcast succeeds, -1 otherwise 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for PEPITAS CRYPTOCURRENCY from the source code\&.

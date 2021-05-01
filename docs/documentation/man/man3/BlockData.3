@@ -1,0 +1,72 @@
+.TH "BlockData" 3 "Thu Apr 22 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+BlockData
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <block\&.h>\fP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "char \fBmagic\fP"
+.br
+.ti -1c
+.RI "char \fBprevious_block_hash\fP [SHA384_DIGEST_LENGTH *2+1]"
+.br
+.ti -1c
+.RI "size_t \fBheight\fP"
+.br
+.ti -1c
+.RI "uint16_t \fBnb_transactions\fP"
+.br
+.ti -1c
+.RI "\fBTransaction\fP ** \fBtransactions\fP"
+.br
+.ti -1c
+.RI "RSA * \fBvalidator_public_key\fP"
+.br
+.ti -1c
+.RI "time_t \fBblock_timestamp\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line 17 of file block\&.h\&.
+.SH "Field Documentation"
+.PP 
+.SS "time_t block_timestamp"
+
+.PP
+Definition at line 28 of file block\&.h\&.
+.SS "size_t height"
+
+.PP
+Definition at line 21 of file block\&.h\&.
+.SS "char magic"
+
+.PP
+Definition at line 19 of file block\&.h\&.
+.SS "uint16_t nb_transactions"
+
+.PP
+Definition at line 23 of file block\&.h\&.
+.SS "char previous_block_hash[SHA384_DIGEST_LENGTH *2+1]"
+
+.PP
+Definition at line 20 of file block\&.h\&.
+.SS "\fBTransaction\fP** transactions"
+
+.PP
+Definition at line 24 of file block\&.h\&.
+.SS "RSA* validator_public_key"
+
+.PP
+Definition at line 27 of file block\&.h\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for PEPITAS CRYPTOCURRENCY from the source code\&.

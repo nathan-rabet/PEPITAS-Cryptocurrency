@@ -1,8 +1,6 @@
 var searchData=
 [
-  ['previous_5fblock_5fhash_365',['previous_block_hash',['../struct_block_data.html#a0167d1bdc7d4e5d8d423188581cbb064',1,'BlockData']]],
-  ['priv_5fkey_366',['priv_key',['../struct_wallet.html#ad3051f431d5c0b376f67c497d521290a',1,'Wallet']]],
-  ['private_5fkey_5flabel_367',['private_key_label',['../ui_8c.html#ad8381a6084abf1920354514475732b69',1,'ui.c']]],
-  ['pub_5fkey_368',['pub_key',['../struct_wallet.html#a7c3fbe707cd5eabe1365d44b5d1cd16f',1,'Wallet']]],
-  ['public_5fkey_5fentry_5fcon_369',['public_key_entry_con',['../ui_8c.html#a1232a61f99830b200a87137da4ad0232',1,'ui.c']]]
+  ['name_5fentry_5fcon_413',['name_entry_con',['../ui_8c.html#af7c418915599a0feee638b616aca25ec',1,'ui.c']]],
+  ['nb_5ftransactions_414',['nb_transactions',['../struct_block_data.html#a6a025b5ff7c48992e8d360c35f02b7e8',1,'BlockData']]],
+  ['neighbours_415',['neighbours',['../struct_node.html#a64982c1c406035f198bfe705faf683b2',1,'Node']]]
 ];

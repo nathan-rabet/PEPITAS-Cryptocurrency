@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>PEPITAS: headers/ui/ui.h File Reference</title>
+<title>PEPITAS CRYPTOCURRENCY: /home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/headers/ui/ui.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -24,11 +24,11 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">PEPITAS
-   &#160;<span id="projectnumber">0.1</span>
+   <div id="projectname">PEPITAS CRYPTOCURRENCY
    </div>
-   <div id="projectbrief">C cryptocurrency</div>
+   <div id="projectbrief">C based cryptocurrency</div>
   </td>
  </tr>
  </tbody>
@@ -92,26 +92,22 @@ $(document).ready(function(){initNavTree('ui_8h.html',''); initResizable(); });
 <div class="textblock"><code>#include &lt;gtk/gtk.h&gt;</code><br />
 <code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
+<code>#include &lt;err.h&gt;</code><br />
+<code>#include &lt;time.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="rsa_8h_source.html">../cryptosystem/rsa.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="hash_8h_source.html">../cryptosystem/hash.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="wallet_8h_source.html">../core/blockchain/wallet.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for ui.h:</div>
 <div class="dyncontent">
-<div class="center"><img src="ui_8h__incl.png" border="0" usemap="#headers_2ui_2ui_8h" alt=""/></div>
-<map name="headers_2ui_2ui_8h" id="headers_2ui_2ui_8h">
-<area shape="rect" title=" " alt="" coords="83,5,202,32"/>
-<area shape="rect" title=" " alt="" coords="5,80,85,107"/>
-<area shape="rect" title=" " alt="" coords="109,80,176,107"/>
-<area shape="rect" title=" " alt="" coords="201,80,271,107"/>
-</map>
+<div class="center"><img src="ui_8h__incl.png" border="0" usemap="#_2home_2runner_2work_2_p_e_p_i_t_a_s-_cryptocurrency_2_p_e_p_i_t_a_s-_cryptocurrency_2headers_2ui_2ui_8h" alt=""/></div>
+<!-- MAP 0 -->
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
-<div class="center"><img src="ui_8h__dep__incl.png" border="0" usemap="#headers_2ui_2ui_8hdep" alt=""/></div>
-<map name="headers_2ui_2ui_8hdep" id="headers_2ui_2ui_8hdep">
-<area shape="rect" title=" " alt="" coords="36,5,155,32"/>
-<area shape="rect" href="gui_8c.html" title=" " alt="" coords="5,80,81,107"/>
-<area shape="rect" href="ui_8c.html" title=" " alt="" coords="105,80,189,107"/>
-</map>
+<div class="center"><img src="ui_8h__dep__incl.png" border="0" usemap="#_2home_2runner_2work_2_p_e_p_i_t_a_s-_cryptocurrency_2_p_e_p_i_t_a_s-_cryptocurrency_2headers_2ui_2ui_8hdep" alt=""/></div>
+<!-- MAP 1 -->
 </div>
 </div>
 <p><a href="ui_8h_source.html">Go to the source code of this file.</a></p>
@@ -151,6 +147,30 @@ Functions</h2></td></tr>
 <tr class="memitem:a7d043349856d2b80a23d2dbe3d59735d"><td class="memItemLeft" align="right" valign="top">gboolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8h.html#a7d043349856d2b80a23d2dbe3d59735d">add_contact</a> (GtkWidget *widget, GdkEventKey *event, gpointer user_data)</td></tr>
 <tr class="memdesc:a7d043349856d2b80a23d2dbe3d59735d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a contact to the treeview if the entrys weren't empty, and closes the contact window.  <a href="ui_8h.html#a7d043349856d2b80a23d2dbe3d59735d">More...</a><br /></td></tr>
 <tr class="separator:a7d043349856d2b80a23d2dbe3d59735d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e9026a91a87b08fa5f6f04227565895"><td class="memItemLeft" align="right" valign="top">gboolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8h.html#a0e9026a91a87b08fa5f6f04227565895">on_create_key_but1_press</a> (GtkWidget *widget, GdkEventKey *event, gpointer user_data)</td></tr>
+<tr class="separator:a0e9026a91a87b08fa5f6f04227565895"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa98b162fce8b7169cab09ee15dde4acf"><td class="memItemLeft" align="right" valign="top">gboolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8h.html#aa98b162fce8b7169cab09ee15dde4acf">on_create_key_but2_press</a> (GtkWidget *widget, GdkEventKey *event, gpointer user_data)</td></tr>
+<tr class="separator:aa98b162fce8b7169cab09ee15dde4acf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9701dfc71a53e17b0796207efacf7cf3"><td class="memItemLeft" align="right" valign="top">gboolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8h.html#a9701dfc71a53e17b0796207efacf7cf3">on_connect_but_press</a> (GtkWidget *widget, GdkEventKey *event, gpointer user_data)</td></tr>
+<tr class="separator:a9701dfc71a53e17b0796207efacf7cf3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3cce6cef71ccb6ae5dd4c9ca852eb31f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8h.html#a3cce6cef71ccb6ae5dd4c9ca852eb31f">add_contacts_from_file</a> (char *name, char *public_key)</td></tr>
+<tr class="separator:a3cce6cef71ccb6ae5dd4c9ca852eb31f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73fe931a2fbeb2086428ad91c0cbc05e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8h.html#a73fe931a2fbeb2086428ad91c0cbc05e">load_contacts_from_file</a> ()</td></tr>
+<tr class="separator:a73fe931a2fbeb2086428ad91c0cbc05e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acfeb1c1504a9c8dab16b48f4ee0a8324"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8h.html#acfeb1c1504a9c8dab16b48f4ee0a8324">add_contact_to_combobox</a> (char *name)</td></tr>
+<tr class="separator:acfeb1c1504a9c8dab16b48f4ee0a8324"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1854ec5ff4099ed69a1b51a3fd3b3df"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8h.html#af1854ec5ff4099ed69a1b51a3fd3b3df">update_labels</a> ()</td></tr>
+<tr class="separator:af1854ec5ff4099ed69a1b51a3fd3b3df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf3736e772d266218ca1c9c0e4b38ac3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8h.html#adf3736e772d266218ca1c9c0e4b38ac3">add_transaction_with_pkey</a> (double amount, char *public_key, char *date)</td></tr>
+<tr class="separator:adf3736e772d266218ca1c9c0e4b38ac3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f9ada2bfa01c401df766ed824f0fdfd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8h.html#a9f9ada2bfa01c401df766ed824f0fdfd">add_transaction_with_contact</a> (double amount, char *public_key, char *date)</td></tr>
+<tr class="separator:a9f9ada2bfa01c401df766ed824f0fdfd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:addfd36df97e95e6d913426e07a659057"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8h.html#addfd36df97e95e6d913426e07a659057">add_transaction_from_file</a> (double amount, char *public_key, char *date)</td></tr>
+<tr class="separator:addfd36df97e95e6d913426e07a659057"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aafd81ce434d4f1abdba55e0ffc6b719f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8h.html#aafd81ce434d4f1abdba55e0ffc6b719f">load_transaction_from_file</a> ()</td></tr>
+<tr class="separator:aafd81ce434d4f1abdba55e0ffc6b719f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ff6af24bc9be5261b9ef9f6169c91da"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8h.html#a0ff6af24bc9be5261b9ef9f6169c91da">get_public_key_from_contacts</a> (const char *name)</td></tr>
+<tr class="separator:a0ff6af24bc9be5261b9ef9f6169c91da"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="a7d043349856d2b80a23d2dbe3d59735d"></a>
@@ -198,6 +218,268 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="acfeb1c1504a9c8dab16b48f4ee0a8324"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acfeb1c1504a9c8dab16b48f4ee0a8324">&#9670;&nbsp;</a></span>add_contact_to_combobox()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void add_contact_to_combobox </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00389">389</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="ui_8h_acfeb1c1504a9c8dab16b48f4ee0a8324_icgraph.png" border="0" usemap="#ui_8h_acfeb1c1504a9c8dab16b48f4ee0a8324_icgraph" alt=""/></div>
+<!-- MAP 2 -->
+</div>
+
+</div>
+</div>
+<a id="a3cce6cef71ccb6ae5dd4c9ca852eb31f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3cce6cef71ccb6ae5dd4c9ca852eb31f">&#9670;&nbsp;</a></span>add_contacts_from_file()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void add_contacts_from_file </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>public_key</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00397">397</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="ui_8h_a3cce6cef71ccb6ae5dd4c9ca852eb31f_icgraph.png" border="0" usemap="#ui_8h_a3cce6cef71ccb6ae5dd4c9ca852eb31f_icgraph" alt=""/></div>
+<!-- MAP 3 -->
+</div>
+
+</div>
+</div>
+<a id="addfd36df97e95e6d913426e07a659057"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#addfd36df97e95e6d913426e07a659057">&#9670;&nbsp;</a></span>add_transaction_from_file()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void add_transaction_from_file </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>amount</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>public_key</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>date</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00253">253</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="ui_8h_addfd36df97e95e6d913426e07a659057_icgraph.png" border="0" usemap="#ui_8h_addfd36df97e95e6d913426e07a659057_icgraph" alt=""/></div>
+<!-- MAP 4 -->
+</div>
+
+</div>
+</div>
+<a id="a9f9ada2bfa01c401df766ed824f0fdfd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f9ada2bfa01c401df766ed824f0fdfd">&#9670;&nbsp;</a></span>add_transaction_with_contact()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void add_transaction_with_contact </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>amount</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>public_key</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>date</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00233">233</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="ui_8h_a9f9ada2bfa01c401df766ed824f0fdfd_icgraph.png" border="0" usemap="#ui_8h_a9f9ada2bfa01c401df766ed824f0fdfd_icgraph" alt=""/></div>
+<!-- MAP 5 -->
+</div>
+
+</div>
+</div>
+<a id="adf3736e772d266218ca1c9c0e4b38ac3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf3736e772d266218ca1c9c0e4b38ac3">&#9670;&nbsp;</a></span>add_transaction_with_pkey()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void add_transaction_with_pkey </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>amount</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>public_key</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>date</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00212">212</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="ui_8h_adf3736e772d266218ca1c9c0e4b38ac3_icgraph.png" border="0" usemap="#ui_8h_adf3736e772d266218ca1c9c0e4b38ac3_icgraph" alt=""/></div>
+<!-- MAP 6 -->
+</div>
+
+</div>
+</div>
+<a id="a0ff6af24bc9be5261b9ef9f6169c91da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ff6af24bc9be5261b9ef9f6169c91da">&#9670;&nbsp;</a></span>get_public_key_from_contacts()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char* get_public_key_from_contacts </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00428">428</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="ui_8h_a0ff6af24bc9be5261b9ef9f6169c91da_icgraph.png" border="0" usemap="#ui_8h_a0ff6af24bc9be5261b9ef9f6169c91da_icgraph" alt=""/></div>
+<!-- MAP 7 -->
+</div>
+
+</div>
+</div>
+<a id="a73fe931a2fbeb2086428ad91c0cbc05e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73fe931a2fbeb2086428ad91c0cbc05e">&#9670;&nbsp;</a></span>load_contacts_from_file()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void load_contacts_from_file </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00406">406</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="ui_8h_a73fe931a2fbeb2086428ad91c0cbc05e_cgraph.png" border="0" usemap="#ui_8h_a73fe931a2fbeb2086428ad91c0cbc05e_cgraph" alt=""/></div>
+<!-- MAP 8 -->
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="ui_8h_a73fe931a2fbeb2086428ad91c0cbc05e_icgraph.png" border="0" usemap="#ui_8h_a73fe931a2fbeb2086428ad91c0cbc05e_icgraph" alt=""/></div>
+<!-- MAP 9 -->
+</div>
+
+</div>
+</div>
+<a id="aafd81ce434d4f1abdba55e0ffc6b719f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aafd81ce434d4f1abdba55e0ffc6b719f">&#9670;&nbsp;</a></span>load_transaction_from_file()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void load_transaction_from_file </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a5b92cf6ae0979b3c006e00782588829b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5b92cf6ae0979b3c006e00782588829b">&#9670;&nbsp;</a></span>on_add_contact_button1_press()</h2>
 
@@ -240,6 +522,108 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>gboolean Error code </dd></dl>
+
+</div>
+</div>
+<a id="a9701dfc71a53e17b0796207efacf7cf3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9701dfc71a53e17b0796207efacf7cf3">&#9670;&nbsp;</a></span>on_connect_but_press()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">gboolean on_connect_but_press </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>widget</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GdkEventKey *&#160;</td>
+          <td class="paramname"><em>event</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gpointer&#160;</td>
+          <td class="paramname"><em>user_data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0e9026a91a87b08fa5f6f04227565895"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e9026a91a87b08fa5f6f04227565895">&#9670;&nbsp;</a></span>on_create_key_but1_press()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">gboolean on_create_key_but1_press </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>widget</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GdkEventKey *&#160;</td>
+          <td class="paramname"><em>event</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gpointer&#160;</td>
+          <td class="paramname"><em>user_data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa98b162fce8b7169cab09ee15dde4acf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa98b162fce8b7169cab09ee15dde4acf">&#9670;&nbsp;</a></span>on_create_key_but2_press()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">gboolean on_create_key_but2_press </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>widget</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GdkEventKey *&#160;</td>
+          <td class="paramname"><em>event</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gpointer&#160;</td>
+          <td class="paramname"><em>user_data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -368,7 +752,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>gboolean Error code </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00126">126</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00162">162</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
 
 </div>
 </div>
@@ -600,15 +984,43 @@ Functions</h2></td></tr>
 <p>Setups the gtk widgets for the GUI. </p>
 <dl class="section return"><dt>Returns</dt><dd>int Returns 1 if there is an error, 0 otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00045">45</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00057">57</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="ui_8h_a099d48038e444c2f3e69904477527798_icgraph.png" border="0" usemap="#ui_8h_a099d48038e444c2f3e69904477527798_icgraph" alt=""/></div>
-<map name="ui_8h_a099d48038e444c2f3e69904477527798_icgraph" id="ui_8h_a099d48038e444c2f3e69904477527798_icgraph">
-<area shape="rect" title="Setups the gtk widgets for the GUI." alt="" coords="108,5,167,32"/>
-<area shape="rect" href="gui_8c.html#a3c04138a5bfe5d72780bb7e82a18e627" title=" " alt="" coords="5,5,60,32"/>
-</map>
+<!-- MAP 10 -->
+</div>
+
+</div>
+</div>
+<a id="af1854ec5ff4099ed69a1b51a3fd3b3df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af1854ec5ff4099ed69a1b51a3fd3b3df">&#9670;&nbsp;</a></span>update_labels()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void update_labels </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00524">524</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="ui_8h_af1854ec5ff4099ed69a1b51a3fd3b3df_cgraph.png" border="0" usemap="#ui_8h_af1854ec5ff4099ed69a1b51a3fd3b3df_cgraph" alt=""/></div>
+<!-- MAP 11 -->
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="ui_8h_af1854ec5ff4099ed69a1b51a3fd3b3df_icgraph.png" border="0" usemap="#ui_8h_af1854ec5ff4099ed69a1b51a3fd3b3df_icgraph" alt=""/></div>
+<!-- MAP 12 -->
 </div>
 
 </div>

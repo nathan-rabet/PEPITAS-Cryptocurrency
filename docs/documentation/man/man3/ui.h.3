@@ -1,0 +1,349 @@
+.TH "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/headers/ui/ui.h" 3 "Thu Apr 22 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/headers/ui/ui.h
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <gtk/gtk\&.h>\fP
+.br
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+\fC#include <err\&.h>\fP
+.br
+\fC#include <time\&.h>\fP
+.br
+\fC#include '\&.\&./cryptosystem/rsa\&.h'\fP
+.br
+\fC#include '\&.\&./cryptosystem/hash\&.h'\fP
+.br
+\fC#include '\&.\&./core/blockchain/wallet\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBsetup\fP ()"
+.br
+.RI "Setups the gtk widgets for the GUI\&. "
+.ti -1c
+.RI "gboolean \fBon_main_window_delete\fP (GtkWidget *widget, __attribute__((unused)) gpointer data)"
+.br
+.RI "Destroys the window when it is closed\&. "
+.ti -1c
+.RI "void \fBon_main_window_destroy\fP (__attribute((unused)) GtkWidget *widget, __attribute__((unused)) gpointer data)"
+.br
+.RI "Quits GTK when the program ends\&. "
+.ti -1c
+.RI "gboolean \fBon_transaction_button_press\fP (GtkWidget *widget, GdkEventKey *event, gpointer user_data)"
+.br
+.RI "Will be used when the transaction function is ready\&. "
+.ti -1c
+.RI "gboolean \fBon_pkey_button_press\fP (GtkWidget *widget, GdkEventKey *event, gpointer user_data)"
+.br
+.RI "Hides the private key of the user, or shows it if it was already hidden\&. "
+.ti -1c
+.RI "gboolean \fBon_invest_button1_press\fP (GtkWidget *widget, GdkEventKey *event, gpointer user_data)"
+.br
+.RI "Opens the invest window\&. "
+.ti -1c
+.RI "gboolean \fBon_invest_button2_press\fP (GtkWidget *widget, GdkEventKey *event, gpointer user_data)"
+.br
+.RI "Resets the entry in the invest window and closes it, will later be used for the invest function\&. "
+.ti -1c
+.RI "gboolean \fBon_recover_button1_press\fP (GtkWidget *widget, GdkEventKey *event, gpointer user_data)"
+.br
+.RI "Opens the recover window\&. "
+.ti -1c
+.RI "gboolean \fBon_recover_button2_press\fP (GtkWidget *widget, GdkEventKey *event, gpointer user_data)"
+.br
+.RI "Resets the entry in the recover window and closes it, will later be used for the recover function\&. "
+.ti -1c
+.RI "gboolean \fBon_add_contact_button1_press\fP (GtkWidget *widget, GdkEventKey *event, gpointer user_data)"
+.br
+.RI "Opens the contact window\&. "
+.ti -1c
+.RI "gboolean \fBadd_contact\fP (GtkWidget *widget, GdkEventKey *event, gpointer user_data)"
+.br
+.RI "Adds a contact to the treeview if the entrys weren't empty, and closes the contact window\&. "
+.ti -1c
+.RI "gboolean \fBon_create_key_but1_press\fP (GtkWidget *widget, GdkEventKey *event, gpointer user_data)"
+.br
+.ti -1c
+.RI "gboolean \fBon_create_key_but2_press\fP (GtkWidget *widget, GdkEventKey *event, gpointer user_data)"
+.br
+.ti -1c
+.RI "gboolean \fBon_connect_but_press\fP (GtkWidget *widget, GdkEventKey *event, gpointer user_data)"
+.br
+.ti -1c
+.RI "void \fBadd_contacts_from_file\fP (char *name, char *public_key)"
+.br
+.ti -1c
+.RI "void \fBload_contacts_from_file\fP ()"
+.br
+.ti -1c
+.RI "void \fBadd_contact_to_combobox\fP (char *name)"
+.br
+.ti -1c
+.RI "void \fBupdate_labels\fP ()"
+.br
+.ti -1c
+.RI "void \fBadd_transaction_with_pkey\fP (double amount, char *public_key, char *date)"
+.br
+.ti -1c
+.RI "void \fBadd_transaction_with_contact\fP (double amount, char *public_key, char *date)"
+.br
+.ti -1c
+.RI "void \fBadd_transaction_from_file\fP (double amount, char *public_key, char *date)"
+.br
+.ti -1c
+.RI "void \fBload_transaction_from_file\fP ()"
+.br
+.ti -1c
+.RI "char * \fBget_public_key_from_contacts\fP (const char *name)"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "gboolean add_contact (GtkWidget * widget, GdkEventKey * event, gpointer user_data)"
+
+.PP
+Adds a contact to the treeview if the entrys weren't empty, and closes the contact window\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIwidget\fP unused 
+.br
+\fIevent\fP unused 
+.br
+\fIuser_data\fP unused 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+gboolean Error code 
+.RE
+.PP
+
+.SS "void add_contact_to_combobox (char * name)"
+
+.PP
+Definition at line 389 of file ui\&.c\&.
+.SS "void add_contacts_from_file (char * name, char * public_key)"
+
+.PP
+Definition at line 397 of file ui\&.c\&.
+.SS "void add_transaction_from_file (double amount, char * public_key, char * date)"
+
+.PP
+Definition at line 253 of file ui\&.c\&.
+.SS "void add_transaction_with_contact (double amount, char * public_key, char * date)"
+
+.PP
+Definition at line 233 of file ui\&.c\&.
+.SS "void add_transaction_with_pkey (double amount, char * public_key, char * date)"
+
+.PP
+Definition at line 212 of file ui\&.c\&.
+.SS "char* get_public_key_from_contacts (const char * name)"
+
+.PP
+Definition at line 428 of file ui\&.c\&.
+.SS "void load_contacts_from_file ()"
+
+.PP
+Definition at line 406 of file ui\&.c\&.
+.SS "void load_transaction_from_file ()"
+
+.SS "gboolean on_add_contact_button1_press (GtkWidget * widget, GdkEventKey * event, gpointer user_data)"
+
+.PP
+Opens the contact window\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIwidget\fP unused 
+.br
+\fIevent\fP unused 
+.br
+\fIuser_data\fP unused 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+gboolean Error code 
+.RE
+.PP
+
+.SS "gboolean on_connect_but_press (GtkWidget * widget, GdkEventKey * event, gpointer user_data)"
+
+.SS "gboolean on_create_key_but1_press (GtkWidget * widget, GdkEventKey * event, gpointer user_data)"
+
+.SS "gboolean on_create_key_but2_press (GtkWidget * widget, GdkEventKey * event, gpointer user_data)"
+
+.SS "gboolean on_invest_button1_press (GtkWidget * widget, GdkEventKey * event, gpointer user_data)"
+
+.PP
+Opens the invest window\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIwidget\fP unused 
+.br
+\fIevent\fP unused 
+.br
+\fIuser_data\fP unused 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+gboolean 
+.RE
+.PP
+
+.SS "gboolean on_invest_button2_press (GtkWidget * widget, GdkEventKey * event, gpointer user_data)"
+
+.PP
+Resets the entry in the invest window and closes it, will later be used for the invest function\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIwidget\fP unused 
+.br
+\fIevent\fP unused 
+.br
+\fIuser_data\fP unused 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+gboolean Error Code 
+.RE
+.PP
+
+.SS "gboolean on_main_window_delete (GtkWidget * widget, __attribute__((unused)) gpointer data)"
+
+.PP
+Destroys the window when it is closed\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIwidget\fP The main window of the GUI 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+gboolean Error code 
+.RE
+.PP
+
+.PP
+Definition at line 162 of file ui\&.c\&.
+.SS "void on_main_window_destroy (__attribute((unused)) GtkWidget * widget, __attribute__((unused)) gpointer data)"
+
+.PP
+Quits GTK when the program ends\&. 
+.SS "gboolean on_pkey_button_press (GtkWidget * widget, GdkEventKey * event, gpointer user_data)"
+
+.PP
+Hides the private key of the user, or shows it if it was already hidden\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIwidget\fP unused 
+.br
+\fIevent\fP unused 
+.br
+\fIuser_data\fP unused 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+gboolean Error code 
+.RE
+.PP
+
+.SS "gboolean on_recover_button1_press (GtkWidget * widget, GdkEventKey * event, gpointer user_data)"
+
+.PP
+Opens the recover window\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIwidget\fP unused 
+.br
+\fIevent\fP unused 
+.br
+\fIuser_data\fP unused 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+gboolean Error code 
+.RE
+.PP
+
+.SS "gboolean on_recover_button2_press (GtkWidget * widget, GdkEventKey * event, gpointer user_data)"
+
+.PP
+Resets the entry in the recover window and closes it, will later be used for the recover function\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIwidget\fP unused 
+.br
+\fIevent\fP unused 
+.br
+\fIuser_data\fP unused 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+gboolean Error code 
+.RE
+.PP
+
+.SS "gboolean on_transaction_button_press (GtkWidget * widget, GdkEventKey * event, gpointer user_data)"
+
+.PP
+Will be used when the transaction function is ready\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIwidget\fP unused 
+.br
+\fIevent\fP unused 
+.br
+\fIuser_data\fP unused 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+gboolean Error code 
+.RE
+.PP
+
+.SS "int setup ()"
+
+.PP
+Setups the gtk widgets for the GUI\&. 
+.PP
+\fBReturns\fP
+.RS 4
+int Returns 1 if there is an error, 0 otherwise 
+.RE
+.PP
+
+.PP
+Definition at line 57 of file ui\&.c\&.
+.SS "void update_labels ()"
+
+.PP
+Definition at line 524 of file ui\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for PEPITAS CRYPTOCURRENCY from the source code\&.
