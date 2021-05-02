@@ -16,7 +16,7 @@ uint16_t define_nb_validators(size_t n){
     return MAX(sqroot, 1000);
 }
 
-char *hash_block_transactions_epoch(Block *block, int epoch)
+char *hash_block_transactions_epoch(Block *block)
 {
     char *buf = NULL;
     size_t size = 0;

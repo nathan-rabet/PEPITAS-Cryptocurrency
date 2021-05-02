@@ -1,6 +1,6 @@
 #include "network/get_data.h"
 
-size_t process_header(char *header, size_t size, int sockfd, infos_st *infos)
+size_t process_header(char *header, int sockfd, infos_st *infos)
 {
     if (strncmp(HD_GET_CLIENT_LIST, header, strlen(HD_GET_CLIENT_LIST)) == 0)
     {
@@ -133,7 +133,7 @@ size_t read_header(int sockfd, infos_st *infos)
 
     if (nb_read != -1)
     {
-        size_t r = process_header(buffer, nb_read, sockfd, infos);
+        size_t r = process_header(buffer, sockfd, infos);
         free(buffer);
         return r;
     }
@@ -179,7 +179,7 @@ int read_send_block(int fd){
     return 0;
 }
 
-int read_vote(int fd){
+int read_vote(__attribute__((unused))int fd){
     
     return 0;
 }
@@ -191,6 +191,6 @@ int read_epoch_block(int fd){
     return 0;
 }
 
-int read_pending_transaction_list(int fd){
+int read_pending_transaction_list(__attribute__((unused))int fd){
     return 0;
 }

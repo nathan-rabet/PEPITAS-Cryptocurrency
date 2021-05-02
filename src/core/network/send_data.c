@@ -69,6 +69,6 @@ void send_send_block(int fd, size_t height){
     free_block(block);
 }
 
-void send_pending_transaction_list(int fd){
+void send_pending_transaction_list(__attribute__((unused))int fd){
 
 }

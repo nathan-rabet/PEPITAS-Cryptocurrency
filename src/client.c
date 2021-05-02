@@ -82,7 +82,7 @@ size_t update_blockchain_height(infos_st *infos)
             free(client_connections[i].Payload);
         }
     }
-
+    update_sync(infos->actual_height, max_h_i);
     return max_h_i;
 }
 

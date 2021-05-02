@@ -212,7 +212,7 @@ void add_new_blockinfo(size_t height, size_t transaction)
 }
 
 void update_sync(size_t actual, size_t final){
-    if (actual == final)
+    if (actual >= final)
     {
         gtk_progress_bar_set_fraction(progress_bar_blockchain, (gdouble)1);
         change_label_text(synchro_label, "Syncronized");
