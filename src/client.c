@@ -98,7 +98,7 @@ void update_blockchain(infos_st *infos, size_t index_client){
         client_connections[index_client].Payload = malloc(client_connections[index_client].Playloadsize);
         *(uint32_t *)client_connections[index_client].Payload = P_VERSION;
         *(char *)(client_connections[index_client].Payload + sizeof(uint32_t)) = nb_dd;
-        for (size_t i = 1; i <= nb_dd; i++)
+        for (char i = 1; i <= nb_dd; i++)
         {
             *(size_t *)(client_connections[index_client].Payload + sizeof(uint32_t) + sizeof(char) + (sizeof(size_t) * i)) = client_connections[index_client].actual_client_height + i;
         }
@@ -117,9 +117,14 @@ int main()
     MANAGERMSG
     printf("Starting UI\n");
     pthread_t ui_th;
-    pthread_create(&ui_th, NULL, setup, NULL);
+    char is_setup = 0;
+    pthread_create(&ui_th, NULL, setup, &is_setup);
 
-    sleep(1);
+    while (is_setup == 0)
+    {
+        sleep(1);
+    }
+    
 
     infos_st *infos = malloc(sizeof(infos_st));
     infos->actual_height = 0;

@@ -76,7 +76,7 @@ void *setup(void *args)
     if(gtk_builder_add_from_file(builder, "./pepitas.glade", &err) == 0)
     {
         fprintf(stderr, "Error adding build from file. Error: %s\n", err->message);
-        return 1;
+        pthread_exit(NULL);
     }
 
     window = GTK_WIDGET(gtk_builder_get_object(builder, "Pepitas"));
@@ -183,7 +183,11 @@ void *setup(void *args)
 
     gtk_widget_show(connection_window);
 
+    *(char *)args = 1;
+
     gtk_main();
+
+    pthread_exit(NULL);
 }
 
 
@@ -569,25 +573,25 @@ gboolean on_create_key_but2_press(__attribute__ ((unused)) GtkWidget *widget,
     char *buff = malloc(sizeof(char) * bufflen);
     memcpy(buff, gtk_entry_get_text(password_entry2), bufflen);
     size_t keylen = strlen(gtk_entry_get_text(key_entry));
-    // if (keylen != 0)
-    // {
-    //     char *buffkey = malloc(keylen);
-    //     memcpy(buff, gtk_entry_get_text(key_entry), keylen);
+    if (keylen != 0)
+    {
+        char *buffkey = malloc(keylen);
+        memcpy(buff, gtk_entry_get_text(key_entry), keylen);
 
-    //     FILE* rsa_public_file = fopen("./.keys/rsa.pub", "wb");
-    //     FILE* rsa_private_file = fopen("./.keys/rsa", "wb");
+        FILE* rsa_public_file = fopen("./.keys/rsa.pub", "wb");
+        FILE* rsa_private_file = fopen("./.keys/rsa", "wb");
 
-    //     if (!rsa_private_file || !rsa_public_file)
-    //         err(errno, "Impossible to write '.keys/rsa.pub' and .keys/rsa files");
+        if (!rsa_private_file || !rsa_public_file)
+            err(errno, "Impossible to write '.keys/rsa.pub' and .keys/rsa files");
 
-    //     if (fwrite(buffkey, keylen, 1, rsa_private_file) == -1)
-    //         err(errno, "Impossible to write data in '.keys/rsa'");
-    //     fclose(rsa_private_file);
+        if (fwrite(buffkey, keylen, 1, rsa_private_file) == 0)
+            err(errno, "Impossible to write data in '.keys/rsa'");
+        fclose(rsa_private_file);
 
-    //     if (fwrite(buffkey, keylen, 1, rsa_private_file) == -1)
-    //         err(errno, "Impossible to write data in '.keys/rsa.pub'");
-    //     fclose(rsa_public_file);
-    // }
+        if (fwrite(buffkey, keylen, 1, rsa_private_file) == 0)
+            err(errno, "Impossible to write data in '.keys/rsa.pub'");
+        fclose(rsa_public_file);
+    }
     get_keys(buff);
     char *hashed = sha384_data(buff, bufflen);
     FILE *password_f = fopen(".ui/.password", "wb");

@@ -147,11 +147,12 @@ Transaction * load_pending_transaction(time_t timestamp) {
     char name[15] = {0};    
     sprintf(name, "pdt/%ld", timestamp);
 
-    FILE *transaction_file = fopen(name,"r");
-    if (transaction_file == NULL)
+    int transaction_file = open(name, O_RDONLY);
+    if (transaction_file == -1)
         return NULL;
-    TransactionData *transaction;
+    Transaction *transaction;
     load_transaction(&transaction, transaction_file);
+    close(transaction_file);
     return transaction;
 }
 

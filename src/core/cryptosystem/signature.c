@@ -81,7 +81,7 @@ int verify_block_signature(Block block)
     int ret = verify_signature(buf,
                                size,
                                block.block_signature,
-                               get_epoch_man_pkey());
+                               get_epoch_man_pkey(&block.block_data));
     free(buf);
     return ret;
 }

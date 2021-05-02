@@ -122,7 +122,7 @@ RSA **get_comittee(size_t block_height, size_t *nb_validators)
 
 RSA **get_next_comittee(size_t *nb_validators)
 {
-    return get_comittee(get_last_block_height(), *nb_validators);
+    return get_comittee(get_last_block_height(), nb_validators);
 }
 
 ssize_t get_validators_states_total_stake()

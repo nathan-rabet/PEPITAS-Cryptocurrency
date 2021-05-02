@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <openssl/rsa.h>
 #include <openssl/sha.h>
+#include <openssl/pem.h>
 #include <time.h>
 #include <sys/types.h>
 #include <sys/stat.h>

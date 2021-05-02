@@ -45,7 +45,7 @@ size_t process_header(char *header, size_t size, int sockfd, infos_st *infos)
     {
         CLIENTMSG
         printf("Recived header HD_ACTUAL_HEIGHT\n");
-        return read_actual_height(header);
+        return read_actual_height(sockfd);
     }
     if (strncmp(HD_SEND_BLOCK, header, strlen(HD_SEND_BLOCK)) == 0)
     {
@@ -93,7 +93,7 @@ size_t process_header(char *header, size_t size, int sockfd, infos_st *infos)
 
 int fetch_client_list(char who, int fd)
 {
-    size_t index = 0;
+    int index = 0;
     int family = 0;
     char *hostname = malloc(SIZE_OF_HOSTNAME);
     int nb_ng;

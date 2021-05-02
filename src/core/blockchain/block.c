@@ -179,17 +179,21 @@ void convert_data_to_block(Block *block, int fd)
 Block *get_block(size_t block_height)
 {
     Block *block = malloc(sizeof(Block));
-    FILE *blockfile;
+    int blockfile;
     char dir[256];
 
     snprintf(dir, 256, "blockchain/block%lu", block_height);
+    struct stat st = {0};
+    if (stat(dir, &st) == -1)
+    {
+        return NULL;
+    }
 
-
-    blockfile = fopen(dir, "rb");
-    if (!blockfile)
+    blockfile = open(dir, O_RDONLY);
+    if (blockfile == -1)
         return NULL;
     convert_data_to_block(block, blockfile);
-    fclose(blockfile);
+    close(blockfile);
 
     return block;
 }
@@ -236,7 +240,7 @@ Block *get_prev_block(Block *block)
 char *get_blockdata_data(Block *block, size_t *size)
 {
     size_t index = 0;
-    char *buffer = malloc(BLOCK_DATA_SIZE + 1000);
+    char *buffer = malloc(BLOCK_DATA_SIZE + 1000*MAX_VALIDATORS_PER_BLOCK);
     memcpy(buffer + index, block->block_data.previous_block_hash, 97);
     index += 97;
     memcpy(buffer + index, &block->block_data.height, sizeof(size_t));
@@ -244,15 +248,19 @@ char *get_blockdata_data(Block *block, size_t *size)
     memcpy(buffer + index, &block->block_data.nb_transactions, sizeof(uint16_t));
     index += sizeof(uint16_t);
 
-    BIO *pubkey = BIO_new(BIO_s_mem());
-    PEM_write_bio_RSAPublicKey(pubkey, block->block_data.validator_public_key);
-    int rsa_size = BIO_pending(pubkey);
-    memcpy(buffer + index, &rsa_size, sizeof(int));
-    index += sizeof(int);
-    char temp[1000];
-    BIO_read(pubkey, temp, rsa_size);
-    memcpy(buffer + index, temp, rsa_size);
-    index += rsa_size;
+    // Read validators
+    for (size_t i = 0; i < MAX_VALIDATORS_PER_BLOCK; i++)
+    {
+        BIO *pubkey = BIO_new(BIO_s_mem());
+        PEM_write_bio_RSAPublicKey(pubkey, block->block_data.validator_public_key[i]);
+        int rsa_size = BIO_pending(pubkey);
+        memcpy(buffer + index, &rsa_size, sizeof(int));
+        index += sizeof(int);
+        char temp[1000];
+        BIO_read(pubkey, temp, rsa_size);
+        memcpy(buffer + index, temp, rsa_size);
+        index += rsa_size;
+    }
 
     memcpy(buffer + index, &block->block_data.block_timestamp, sizeof(time_t));
     for (size_t i = 0; i < block->block_data.nb_transactions; i++)

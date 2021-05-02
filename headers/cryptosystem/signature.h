@@ -10,6 +10,7 @@
 #include <openssl/err.h>
 #include "blockchain/wallet.h"
 #include "blockchain/block.h"
+#include "validation/epoch_man.h"
 
 /**
  * @brief buffer <- encrypt(SHA284(msg,len_data),wallet_priv_key)
