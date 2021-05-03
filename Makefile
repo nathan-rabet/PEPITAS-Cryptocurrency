@@ -7,10 +7,7 @@ LDPARAMS = -L . -lcrypto -lssl
 SRC:=$(shell find src/core -name *.c)
 
 SRC_TEST =  tests/unit_testing.c 
-SRC_TEST += tests/src/cryptosystem/rsa_test.c 
-SRC_TEST += tests/src/cryptosystem/signature_test.c
-SRC_TEST += tests/src/blockchain/block_test.c
-SRC_TEST += tests/src/blockchain/block_test.c
+SRC_TEST += $(shell find tests/src/core -name *.c)
 
 all: test server client sign ui doorserver
 
