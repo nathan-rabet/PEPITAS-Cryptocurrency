@@ -26,7 +26,7 @@ void gen_blockchain(size_t nb_blocks)
     for (size_t i = 0; i < NB_BLOCK; i++)
     {
         Block *block = malloc(sizeof(Block));
-        rand_data(256,block->block_signature);
+        rand_data(SIGNATURE_LEN,block->block_signature);
 
         block->chunk_id = i % NB_BLOCK_PER_CHUNK;
         block->block_data.height = i;
@@ -39,7 +39,7 @@ void gen_blockchain(size_t nb_blocks)
 
             block->block_data.transactions[j] = malloc(sizeof(Transaction));
             block->block_data.transactions[j]->transaction_data = malloc(sizeof(TransactionData));
-            rand_data(2048,block->block_data.transactions[j]->transaction_signature);
+            rand_data(SIGNATURE_LEN,block->block_data.transactions[j]->transaction_signature);
 
             BIGNUM *E = BN_new();
             BN_dec2bn(&E, "3");

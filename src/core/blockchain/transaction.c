@@ -135,23 +135,23 @@ void convert_data_to_transactiondata(TransactionData *transactiondata, int fd)
     read(fd, transactiondata->asset, 512);
 }
 
-void load_transaction(Transaction **transaction, int fd)
+void load_transaction(Transaction *transaction, int fd)
 {
     TransactionData *transdata = malloc(sizeof(TransactionData));
     convert_data_to_transactiondata(transdata, fd);
-    (*transaction)->transaction_data = transdata;
-    read(fd, (*transaction)->transaction_signature, 256);
+    transaction->transaction_data = transdata;
+    read(fd, transaction->transaction_signature, 256);
 }
 
-Transaction * load_pending_transaction(time_t timestamp) {
+Transaction* load_pending_transaction(time_t timestamp) {
     char name[15] = {0};    
     sprintf(name, "pdt/%ld", timestamp);
 
     int transaction_file = open(name, O_RDONLY);
     if (transaction_file == -1)
         return NULL;
-    Transaction *transaction;
-    load_transaction(&transaction, transaction_file);
+    Transaction *transaction = malloc(sizeof(Transaction));
+    load_transaction(transaction, transaction_file);
     close(transaction_file);
     return transaction;
 }
