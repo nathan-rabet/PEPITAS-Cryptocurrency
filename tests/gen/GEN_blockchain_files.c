@@ -1,31 +1,32 @@
+#ifndef GEN_BLC_F_C
+#define GEN_BLC_F_C
+
 #include "tests_macros.h"
 #include "blockchain/block.h"
 #include "blockchain/transaction.h"
 
-void* rand_data(size_t size) {
-        char *data = malloc(size * sizeof(char));
+void rand_data(size_t size,char* buffer)
+{
     if (size)
     {
         --size;
         for (size_t n = 0; n < size; n++)
         {
             char c = rand() % 254 + 1;
-            data[n] = c;
+            buffer[n] = c;
         }
-        data[size] = '\0';
+        buffer[size] = '\0';
     }
-    return data;
 }
 
-void gen_blockhain(size_t nb_blocks)
+void gen_blockchain(size_t nb_blocks)
 {
     size_t const NB_BLOCK = nb_blocks;
     LOG("Creating '%ld' fake blocks", NB_BLOCK);
     for (size_t i = 0; i < NB_BLOCK; i++)
     {
         Block *block = malloc(sizeof(Block));
-        block->block_signature = (char *)rand_data(256);
-        block->signature_len = 256;
+        rand_data(256,block->block_signature);
 
         block->chunk_id = i % NB_BLOCK_PER_CHUNK;
         block->block_data.height = i;
@@ -38,8 +39,7 @@ void gen_blockhain(size_t nb_blocks)
 
             block->block_data.transactions[j] = malloc(sizeof(Transaction));
             block->block_data.transactions[j]->transaction_data = malloc(sizeof(TransactionData));
-            block->block_data.transactions[j]->signature_len = 2048;
-            block->block_data.transactions[j]->transaction_signature = rand_data(2048);
+            rand_data(2048,block->block_data.transactions[j]->transaction_signature);
 
             BIGNUM *E = BN_new();
             BN_dec2bn(&E, "3");
@@ -49,7 +49,7 @@ void gen_blockhain(size_t nb_blocks)
 
             block->block_data.transactions[j]->transaction_data->receiver_public_key = RSA_new();
             RSA_generate_key_ex(block->block_data.transactions[j]->transaction_data->receiver_public_key, 2048, E, NULL);
-            
+
             block->block_data.transactions[j]->transaction_data->sender_public_key = RSA_new();
             RSA_generate_key_ex(block->block_data.transactions[j]->transaction_data->sender_public_key, 2048, E, NULL);
 
@@ -61,3 +61,4 @@ void gen_blockhain(size_t nb_blocks)
         free_block(block);
     }
 }
+#endif

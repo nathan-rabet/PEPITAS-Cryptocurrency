@@ -1,9 +1,9 @@
 #include "tests_macros.h"
-#include "cryptosystem/signature_test.h"
 #include "cryptosystem/rsa_test.h"
-#include "network/client_test.c"
+#include "cryptosystem/signature_test.h"
+#include "network/client_test.h"
 #include "blockchain/block_test.h"
-#include "validation/validations_test.c"
+#include "validation/validations_test.h"
 
 int main()
 {

@@ -1,3 +1,5 @@
+#ifndef MAIN_TEST_C
+#define MAIN_TEST_C
 #include "blockchain/wallet.h"
 
 int main()
@@ -6,3 +8,4 @@ int main()
     printf("%d",RSA_size(get_my_wallet()->pub_key));
     return 0;
 }
+#endif

@@ -1,7 +1,11 @@
+#ifndef RSA_SIZE_C
+#define RSA_SIZE_C
 #include "tests_macros.h"
 #include "cryptosystem/signature.h"
 #include "cryptosystem/rsa.h"
 #include "blockchain/wallet.h"
+#include "misc/math.h"
+
 
 #include <stdio.h>
 #include <unistd.h>
@@ -13,7 +17,7 @@
 
 void get_keys_test()
 {
-    get_keys();
+    get_keys(NULL);
 
     if (access(".keys/rsa.pub", F_OK) == 0 && access(".keys/rsa", F_OK) == 0 && get_my_wallet()->priv_key != NULL && get_my_wallet()->pub_key)
     {
@@ -35,7 +39,7 @@ void get_keys_equality_test()
     }
 
     // Generating keys
-    get_keys();
+    get_keys(NULL);
 
     FILE *rsa_generate_public_file = fopen("./~test/rsa_generate.pub", "w+");
     FILE *rsa_generate_private_file = fopen("./~test/rsa_generate", "w+");
@@ -58,7 +62,7 @@ void get_keys_equality_test()
     fread(buff_private_generate, 1, rsa_generate_private_file_size, rsa_generate_private_file);
 
     // Getting keys (must be equal to generated keys)
-    get_keys();
+    get_keys(NULL);
 
     FILE *rsa_get_public_file = fopen("./~test/rsa_get.pub", "w+");
     FILE *rsa_get_private_file = fopen("./~test/rsa_get", "w+");
@@ -80,11 +84,6 @@ void get_keys_equality_test()
     fread(buff_public_get, 1, rsa_get_public_file_size, rsa_get_public_file);
     fread(buff_private_get, 1, rsa_get_private_file_size, rsa_get_private_file);
 
-#define MAX(a, b) \
-    ({ __typeof__ (a) _a = (a); \
-       __typeof__ (b) _b = (b); \
-     _a > _b ? _a : _b; })
-
     if (strncmp(buff_public_generate, buff_public_get, MAX(rsa_generate_public_file_size, rsa_get_public_file_size)) == 0 && strncmp(buff_private_generate, buff_private_get, MAX(rsa_generate_private_file_size, rsa_get_private_file_size)) == 0)
     {
         TEST_PASSED("Generate, then get keys : equality test");
@@ -94,3 +93,4 @@ void get_keys_equality_test()
         TEST_FAILED("Generate, then get keys : equality test", "The keys before and after are not equal");
     }
 }
+#endif

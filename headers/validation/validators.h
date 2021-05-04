@@ -3,12 +3,10 @@
 
 #include <stdlib.h>
 #include <string.h>
-#include <math.h>
 #include <openssl/rsa.h>
 #include <openssl/pem.h>
 #include "cryptosystem/rsa.h"
 #include "cryptosystem/hash.h"
-#include "misc/math.h"
 #include "misc/files.h"
 #include "misc/safe.h"
 

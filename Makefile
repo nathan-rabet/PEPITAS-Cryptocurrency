@@ -1,13 +1,12 @@
 CC = gcc
-CFLAGS = -I"headers" -I"tests/src" -I"tests" `pkg-config --cflags gtk+-3.0` -Wall -Wextra -g -pthread
+CFLAGS = -I"headers" -I"tests/headers" -I"tests" `pkg-config --cflags gtk+-3.0` -Wall -Wextra -g -pthread
 PCFLAGS = `pkg-config --libs gtk+-3.0`
 
 LDPARAMS = -L . -lcrypto -lssl
 
-SRC:=$(shell find src/core -name *.c)
+SRC = $(shell find src/core -name *.c)
 
-SRC_TEST =  tests/unit_testing.c 
-SRC_TEST += $(shell find tests/src/core -name *.c)
+SRC_TEST = $(shell find tests/src -name *.c)
 
 all: test server client sign ui doorserver
 
@@ -41,7 +40,7 @@ test: .test_build
 	rm -rf ./bin/validators.state
 	@cd ..
 
-.test_build: $(SRC_TEST) ${SRC}
+.test_build: $(SRC_TEST) ${SRC} tests/unit_testing.c
 	@mkdir -p bin
 	@${CC} ${CFLAGS} $^ ${PCFLAGS} -o bin/test ${LDPARAMS} -D TEST
 

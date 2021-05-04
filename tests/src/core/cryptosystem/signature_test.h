@@ -1,1 +1,0 @@
-void verify_sign_test();

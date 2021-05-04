@@ -1,1 +1,0 @@
-void block_test(void);

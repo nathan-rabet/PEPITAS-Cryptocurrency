@@ -1,3 +1,5 @@
+#ifndef GEN_VALIDATORS_FILE_H
+#define GEN_VALIDATORS_FILE_H
 #include <stdio.h>
 #include <openssl/rsa.h>
 #include <openssl/pem.h>
@@ -5,6 +7,7 @@
 #include <time.h>
 #include <stdlib.h>
 #include <math.h>
+#include "tests_macros.h"
 
 #include "cryptosystem/rsa.h"
 
@@ -68,3 +71,4 @@ void gen_validators_file(char path[])
     remove(".temp_validators");
     fclose(validators_file);
 }
+#endif
