@@ -14,7 +14,7 @@ char *sign_message(char *data, size_t len_data, void *buffer)
     char *sha = sha384_data(data, len_data);
 
     // encrypt the message
-    char *encrypt = malloc(RSA_size(wallet->priv_key) * 2);
+    char *encrypt;
     if (buffer == NULL)
         encrypt = malloc(RSA_size(wallet->priv_key) * 2);
     else

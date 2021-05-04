@@ -3,9 +3,8 @@
 
 void verify_sign_test()
 {
-    char *msg = "Coucou bande de nouilles!";
-    size_t signature_len;
-    char *signature = sign_message(msg, strlen(msg), &signature_len);
+    char msg[] = "Coucou bande de nouilles!";
+    char *signature = sign_message(msg, strlen(msg), NULL);
     if (verify_signature(msg, strlen(msg), signature, get_my_wallet()->pub_key))
     {
         TEST_PASSED("Message verification");

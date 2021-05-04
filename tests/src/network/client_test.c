@@ -6,8 +6,11 @@
 
 #include "network/network.h"
 #include "network/server.h"
+#include "network/client.h"
 #include "network/send_data.h"
 #include "network/get_data.h"
+
+extern client_connection *client_connections;
 
 void network_test()
 {
@@ -26,14 +29,17 @@ void network_test()
     if (!areDown)
     {
         infos_st infos;
+        infos.serv_type = NODESERVER;
         char connection_type = 42;
-        if (listen_to(&infos,get_my_node(IM_CLIENT)->neighbours[0],&connection_type)->clientfd != 0)
+
+        client_connections = malloc(sizeof(client_connection) * MAX_CONNECTION);
+        if (listen_to(&infos, get_my_node(IM_CLIENT)->neighbours[0], &connection_type) != NULL)
         {
             TEST_PASSED("Connect to server");
         }
         else
         {
-            TEST_FAILED("Connect to server", "listen_to(0) returned -1");
+            TEST_FAILED("Connect to server", "listen_to(0) returned NULL");
         }
     }
 }
