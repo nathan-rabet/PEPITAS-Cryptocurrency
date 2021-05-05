@@ -108,14 +108,14 @@ void convert_data_to_transactiondata(TransactionData *transactiondata, int fd)
     BIO *pubkey = BIO_new(BIO_s_mem());
     BIO_write(pubkey, temp, RSAsize);
     transactiondata->sender_public_key = RSA_new();
-    PEM_read_bio_RSAPublicKey(pubkey, &transactiondata->sender_public_key, NULL, NULL);
+    transactiondata->sender_public_key = PEM_read_bio_RSAPublicKey(pubkey, NULL, 0, NULL);
     BIO_free(pubkey);
 
     read(fd, &RSAsize, sizeof(int));
     read(fd, temp, RSAsize);
     BIO *pubkey1 = BIO_new(BIO_s_mem());
     BIO_write(pubkey1, temp, RSAsize);
-    transactiondata->receiver_public_key = RSA_new();
+    //transactiondata->receiver_public_key = RSA_new();
     PEM_read_bio_RSAPublicKey(pubkey1, &transactiondata->receiver_public_key, NULL, NULL);
     BIO_free(pubkey1);
 
@@ -123,7 +123,7 @@ void convert_data_to_transactiondata(TransactionData *transactiondata, int fd)
     read(fd, temp, RSAsize);
     BIO *pubkey2 = BIO_new(BIO_s_mem());
     BIO_write(pubkey2, temp, RSAsize);
-    transactiondata->organisation_public_key = RSA_new();
+    //transactiondata->organisation_public_key = RSA_new();
     PEM_read_bio_RSAPublicKey(pubkey2, &transactiondata->organisation_public_key, NULL, NULL);
     BIO_free(pubkey2);
 
@@ -137,9 +137,8 @@ void convert_data_to_transactiondata(TransactionData *transactiondata, int fd)
 
 void load_transaction(Transaction *transaction, int fd)
 {
-    TransactionData *transdata = malloc(sizeof(TransactionData));
-    convert_data_to_transactiondata(transdata, fd);
-    transaction->transaction_data = transdata;
+    transaction->transaction_data = malloc(sizeof(TransactionData));
+    convert_data_to_transactiondata(transaction->transaction_data, fd);
     read(fd, transaction->transaction_signature, 256);
 }
 
