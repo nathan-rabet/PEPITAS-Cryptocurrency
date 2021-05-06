@@ -55,12 +55,12 @@ Block *get_genesis_block()
         PEM_read_bio_RSAPublicKey(bufio, &rsa2, 0, NULL);
         BIO_free(bufio);
 
-        genesis_block.block_data.transactions[0]->transaction_data->receiver_public_key = rsa1;
-        genesis_block.block_data.transactions[1]->transaction_data->receiver_public_key = rsa2;
-        genesis_block.block_data.transactions[0]->transaction_data->receiver_remaining_money = 4200000000;
-        genesis_block.block_data.transactions[1]->transaction_data->receiver_remaining_money = 4200000000;
-        genesis_block.block_data.transactions[0]->transaction_data->transaction_timestamp = 1005458400;
-        genesis_block.block_data.transactions[1]->transaction_data->transaction_timestamp = 980834400;
+        genesis_block.block_data.transactions[0]->transaction_data.receiver_public_key = rsa1;
+        genesis_block.block_data.transactions[1]->transaction_data.receiver_public_key = rsa2;
+        genesis_block.block_data.transactions[0]->transaction_data.receiver_remaining_money = 4200000000;
+        genesis_block.block_data.transactions[1]->transaction_data.receiver_remaining_money = 4200000000;
+        genesis_block.block_data.transactions[0]->transaction_data.transaction_timestamp = 1005458400;
+        genesis_block.block_data.transactions[1]->transaction_data.transaction_timestamp = 980834400;
         write_block_file(genesis_block);
     }
     return &genesis_block;
@@ -164,6 +164,7 @@ void convert_data_to_blockdata(BlockData *blockdata, int fd)
     blockdata->transactions = malloc(blockdata->nb_transactions * sizeof(Transaction *));
     for (size_t i = 0; i < blockdata->nb_transactions; i++)
     {
+        blockdata->transactions[i] = malloc(sizeof(Transaction));
         load_transaction(blockdata->transactions[i], fd);
     }
 }
@@ -203,9 +204,9 @@ void free_block(Block *block)
     // Transaction
     for (size_t i = 0; i < block->block_data.nb_transactions; i++)
     {
-        RSA_free(block->block_data.transactions[i]->transaction_data->organisation_public_key);
-        RSA_free(block->block_data.transactions[i]->transaction_data->receiver_public_key);
-        RSA_free(block->block_data.transactions[i]->transaction_data->sender_public_key);
+        RSA_free(block->block_data.transactions[i]->transaction_data.organisation_public_key);
+        RSA_free(block->block_data.transactions[i]->transaction_data.receiver_public_key);
+        RSA_free(block->block_data.transactions[i]->transaction_data.sender_public_key);
     }
     // Validators
     for (int i = 0; i < block->block_data.nb_validators; i++)
