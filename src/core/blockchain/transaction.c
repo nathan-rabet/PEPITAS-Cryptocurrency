@@ -100,7 +100,7 @@ void convert_data_to_transactiondata(TransactionData *transactiondata, int fd)
 {
     read(fd, &transactiondata->magic, sizeof(char));
     read(fd, &transactiondata->type, sizeof(char));
-    uint16_t RSAsize;
+    int RSAsize;
     read(fd, &RSAsize, sizeof(int));
 
     char temp[1000];
@@ -115,16 +115,16 @@ void convert_data_to_transactiondata(TransactionData *transactiondata, int fd)
     read(fd, temp, RSAsize);
     BIO *pubkey1 = BIO_new(BIO_s_mem());
     BIO_write(pubkey1, temp, RSAsize);
-    //transactiondata->receiver_public_key = RSA_new();
-    PEM_read_bio_RSAPublicKey(pubkey1, &transactiondata->receiver_public_key, NULL, NULL);
+    transactiondata->receiver_public_key = RSA_new();
+    transactiondata->receiver_public_key = PEM_read_bio_RSAPublicKey(pubkey1, NULL, 0, NULL);
     BIO_free(pubkey1);
 
     read(fd, &RSAsize, sizeof(int));
     read(fd, temp, RSAsize);
     BIO *pubkey2 = BIO_new(BIO_s_mem());
     BIO_write(pubkey2, temp, RSAsize);
-    //transactiondata->organisation_public_key = RSA_new();
-    PEM_read_bio_RSAPublicKey(pubkey2, &transactiondata->organisation_public_key, NULL, NULL);
+    transactiondata->organisation_public_key = RSA_new();
+    transactiondata->organisation_public_key = PEM_read_bio_RSAPublicKey(pubkey2, NULL, 0, NULL);
     BIO_free(pubkey2);
 
     read(fd, &transactiondata->amount, sizeof(size_t));

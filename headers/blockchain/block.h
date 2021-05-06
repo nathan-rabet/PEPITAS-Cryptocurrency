@@ -43,7 +43,7 @@ typedef struct BlockData
 
     //* Validator area
     int nb_validators;
-    RSA *validator_public_key[MAX_VALIDATORS_PER_BLOCK];            // The public key of the validators
+    RSA *validators_public_keys[MAX_VALIDATORS_PER_BLOCK];            // The public key of the validators
     char prev_validators_votes[MAX_VALIDATORS_PER_BLOCK / 8]; // BITMAP
     time_t block_timestamp;                                         // The block creation timestamp
 } BlockData;

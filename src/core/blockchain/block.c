@@ -150,14 +150,14 @@ void convert_data_to_blockdata(BlockData *blockdata, int fd)
     //Load validators
     for (int i = 0; i < blockdata->nb_validators; i++)
     {
-        uint16_t RSAsize;
+        int RSAsize;
         read(fd, &RSAsize, sizeof(int));
         char temp[1000];
         BIO *pubkey = BIO_new(BIO_s_mem());
         read(fd, temp, RSAsize);
         BIO_write(pubkey, temp, RSAsize);
-        blockdata->validator_public_key[i] = RSA_new();
-        PEM_read_bio_RSAPublicKey(pubkey, &blockdata->validator_public_key[i], NULL, NULL);
+        blockdata->validators_public_keys[i] = RSA_new();
+        PEM_read_bio_RSAPublicKey(pubkey, &blockdata->validators_public_keys[i], NULL, NULL);
     }
 
     read(fd, &blockdata->block_timestamp, sizeof(time_t));
@@ -210,7 +210,7 @@ void free_block(Block *block)
     // Validators
     for (int i = 0; i < block->block_data.nb_validators; i++)
     {
-        RSA_free(block->block_data.validator_public_key[i]);
+        RSA_free(block->block_data.validators_public_keys[i]);
     }
 
     free(block->block_data.transactions);
@@ -254,7 +254,7 @@ char *get_blockdata_data(Block *block, size_t *size)
     for (int i = 0; i < block->block_data.nb_validators; i++)
     {
         BIO *pubkey = BIO_new(BIO_s_mem());
-        PEM_write_bio_RSAPublicKey(pubkey, block->block_data.validator_public_key[i]);
+        PEM_write_bio_RSAPublicKey(pubkey, block->block_data.validators_public_keys[i]);
         int rsa_size = BIO_pending(pubkey);
         memcpy(buffer + index, &rsa_size, sizeof(int));
         index += sizeof(int);
@@ -289,7 +289,7 @@ void write_blockdata(BlockData blockdata, int fd)
     for (int i = 0; i < blockdata.nb_validators; i++)
     {
         BIO *pubkey = BIO_new(BIO_s_mem());
-        PEM_write_bio_RSAPublicKey(pubkey, blockdata.validator_public_key[i]);
+        PEM_write_bio_RSAPublicKey(pubkey, blockdata.validators_public_keys[i]);
         int rsa_size = BIO_pending(pubkey);
         write(fd, &rsa_size, sizeof(int));
         char temp[1000];

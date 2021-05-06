@@ -34,15 +34,14 @@ void gen_blockchain(size_t nb_blocks)
         block->block_data.nb_transactions = 1;
         block->block_data.transactions =
             malloc(block->block_data.nb_transactions * sizeof(Transaction *));
+        BIGNUM *E = BN_new();
+        BN_dec2bn(&E, "3");
         for (size_t j = 0; j < block->block_data.nb_transactions; j++)
         {
 
             block->block_data.transactions[j] = malloc(sizeof(Transaction));
             block->block_data.transactions[j]->transaction_data = malloc(sizeof(TransactionData));
             rand_data(SIGNATURE_LEN,block->block_data.transactions[j]->transaction_signature);
-
-            BIGNUM *E = BN_new();
-            BN_dec2bn(&E, "3");
 
             block->block_data.transactions[j]->transaction_data->organisation_public_key = RSA_new();
             RSA_generate_key_ex(block->block_data.transactions[j]->transaction_data->organisation_public_key, 2048, E, NULL);
@@ -52,10 +51,14 @@ void gen_blockchain(size_t nb_blocks)
 
             block->block_data.transactions[j]->transaction_data->sender_public_key = RSA_new();
             RSA_generate_key_ex(block->block_data.transactions[j]->transaction_data->sender_public_key, 2048, E, NULL);
-
+            
             block->block_data.transactions[j]->transaction_data->transaction_timestamp = time(NULL);
             block->block_data.transactions[j]->transaction_data->amount = 987654321;
         }
+
+        block->block_data.nb_validators = 1;
+        block->block_data.validators_public_keys[0] = RSA_new();
+        RSA_generate_key_ex(block->block_data.validators_public_keys[0], 2048, E, NULL);
 
         write_block_file(*block);
         free_block(block);
