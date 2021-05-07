@@ -11,6 +11,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <err.h>
 
 #define TRANSACTION_DATA_SIZE sizeof(size_t) * 3 + sizeof(time_t) + (512 * 2)
 #define TRANSACTION_SIZE sizeof(size_t) + 2048 + TRANSACTION_DATA_SIZE
@@ -41,7 +42,7 @@ typedef struct TransactionData
 
 typedef struct Transaction
 {
-    TransactionData *transaction_data; // Exclude the signature
+    TransactionData transaction_data; // Exclude the signature
 
     char transaction_signature[256]; // SHA384 signature
 } Transaction;
@@ -59,8 +60,8 @@ void write_transactiondata(TransactionData *transaction, int fd);
 void write_transaction(Transaction *transaction, int fd);
 void get_transaction_data(Transaction *trans, char **buff, size_t *index);
 void convert_data_to_transactiondata(TransactionData *transactiondata, int fd);
-void load_transaction(Transaction **transaction, int fd);
-Transaction * load_pending_transaction(time_t timestamp);
+void load_transaction(Transaction *transaction, int fd);
+Transaction* load_pending_transaction(time_t timestamp);
 void add_pending_transaction(Transaction *transaction);
 
 #endif

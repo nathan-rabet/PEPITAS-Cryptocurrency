@@ -55,12 +55,12 @@ Block *get_genesis_block()
         PEM_read_bio_RSAPublicKey(bufio, &rsa2, 0, NULL);
         BIO_free(bufio);
 
-        genesis_block.block_data.transactions[0]->transaction_data->receiver_public_key = rsa1;
-        genesis_block.block_data.transactions[1]->transaction_data->receiver_public_key = rsa2;
-        genesis_block.block_data.transactions[0]->transaction_data->receiver_remaining_money = 4200000000;
-        genesis_block.block_data.transactions[1]->transaction_data->receiver_remaining_money = 4200000000;
-        genesis_block.block_data.transactions[0]->transaction_data->transaction_timestamp = 1005458400;
-        genesis_block.block_data.transactions[1]->transaction_data->transaction_timestamp = 980834400;
+        genesis_block.block_data.transactions[0]->transaction_data.receiver_public_key = rsa1;
+        genesis_block.block_data.transactions[1]->transaction_data.receiver_public_key = rsa2;
+        genesis_block.block_data.transactions[0]->transaction_data.receiver_remaining_money = 4200000000;
+        genesis_block.block_data.transactions[1]->transaction_data.receiver_remaining_money = 4200000000;
+        genesis_block.block_data.transactions[0]->transaction_data.transaction_timestamp = 1005458400;
+        genesis_block.block_data.transactions[1]->transaction_data.transaction_timestamp = 980834400;
         write_block_file(genesis_block);
     }
     return &genesis_block;
@@ -107,7 +107,8 @@ ChunkBlockchain *load_blockchain(size_t nb_chunk)
     return &blockchain_chunk;
 }
 
-ChunkBlockchain *load_last_blockchain() {
+ChunkBlockchain *load_last_blockchain()
+{
     return load_blockchain(get_last_block_height() / NB_BLOCK_PER_CHUNK);
 }
 
@@ -122,11 +123,11 @@ void write_block_file(Block block)
     struct stat st = {0};
     char dir[256];
 
-        if (stat("blockchain", &st) == -1)
-        {
-            mkdir("blockchain", 0700);
-        }
-        snprintf(dir, 256, "blockchain/block%lu", block.block_data.height);
+    if (stat("blockchain", &st) == -1)
+    {
+        mkdir("blockchain", 0700);
+    }
+    snprintf(dir, 256, "blockchain/block%lu", block.block_data.height);
 
     int fd = open(dir, O_WRONLY | O_CREAT, 0644);
     if (fd == -1)
@@ -144,27 +145,27 @@ void convert_data_to_blockdata(BlockData *blockdata, int fd)
     read(fd, &blockdata->height, sizeof(size_t));
     read(fd, &blockdata->nb_transactions, sizeof(uint16_t));
     read(fd, blockdata->prev_validators_votes, MAX_VALIDATORS_PER_BLOCK / 8);
-
+    read(fd, &blockdata->nb_validators, sizeof(int));
 
     //Load validators
-    for (size_t i = 0; i < MAX_VALIDATORS_PER_BLOCK; i++)
+    for (int i = 0; i < blockdata->nb_validators; i++)
     {
-        uint16_t RSAsize;
+        int RSAsize;
         read(fd, &RSAsize, sizeof(int));
         char temp[1000];
         BIO *pubkey = BIO_new(BIO_s_mem());
         read(fd, temp, RSAsize);
         BIO_write(pubkey, temp, RSAsize);
-        blockdata->validator_public_key[i] = RSA_new();
-        PEM_read_bio_RSAPublicKey(pubkey, &blockdata->validator_public_key[i], NULL, NULL);
+        blockdata->validators_public_keys[i] = RSA_new();
+        PEM_read_bio_RSAPublicKey(pubkey, &blockdata->validators_public_keys[i], NULL, NULL);
     }
-    
 
     read(fd, &blockdata->block_timestamp, sizeof(time_t));
     blockdata->transactions = malloc(blockdata->nb_transactions * sizeof(Transaction *));
     for (size_t i = 0; i < blockdata->nb_transactions; i++)
     {
-        load_transaction(&blockdata->transactions[i], fd);
+        blockdata->transactions[i] = malloc(sizeof(Transaction));
+        load_transaction(blockdata->transactions[i], fd);
     }
 }
 
@@ -203,16 +204,16 @@ void free_block(Block *block)
     // Transaction
     for (size_t i = 0; i < block->block_data.nb_transactions; i++)
     {
-        RSA_free(block->block_data.transactions[i]->transaction_data->organisation_public_key);
-        RSA_free(block->block_data.transactions[i]->transaction_data->receiver_public_key);
-        RSA_free(block->block_data.transactions[i]->transaction_data->sender_public_key);
+        RSA_free(block->block_data.transactions[i]->transaction_data.organisation_public_key);
+        RSA_free(block->block_data.transactions[i]->transaction_data.receiver_public_key);
+        RSA_free(block->block_data.transactions[i]->transaction_data.sender_public_key);
     }
     // Validators
-    for (size_t i = 0; i < MAX_VALIDATORS_PER_BLOCK; i++)
+    for (int i = 0; i < block->block_data.nb_validators; i++)
     {
-        RSA_free(block->block_data.validator_public_key[i]);
+        RSA_free(block->block_data.validators_public_keys[i]);
     }
-    
+
     free(block->block_data.transactions);
     free(block);
 }
@@ -240,19 +241,21 @@ Block *get_prev_block(Block *block)
 char *get_blockdata_data(Block *block, size_t *size)
 {
     size_t index = 0;
-    char *buffer = malloc(BLOCK_DATA_SIZE + 1000*MAX_VALIDATORS_PER_BLOCK);
+    char *buffer = malloc(BLOCK_DATA_SIZE + 1000 * MAX_VALIDATORS_PER_BLOCK);
     memcpy(buffer + index, block->block_data.previous_block_hash, 97);
     index += 97;
     memcpy(buffer + index, &block->block_data.height, sizeof(size_t));
     index += sizeof(size_t);
     memcpy(buffer + index, &block->block_data.nb_transactions, sizeof(uint16_t));
     index += sizeof(uint16_t);
+    memcpy(buffer + index, &block->block_data.nb_validators, sizeof(int));
+    index += sizeof(int);
 
     // Read validators
-    for (size_t i = 0; i < MAX_VALIDATORS_PER_BLOCK; i++)
+    for (int i = 0; i < block->block_data.nb_validators; i++)
     {
         BIO *pubkey = BIO_new(BIO_s_mem());
-        PEM_write_bio_RSAPublicKey(pubkey, block->block_data.validator_public_key[i]);
+        PEM_write_bio_RSAPublicKey(pubkey, block->block_data.validators_public_keys[i]);
         int rsa_size = BIO_pending(pubkey);
         memcpy(buffer + index, &rsa_size, sizeof(int));
         index += sizeof(int);
@@ -280,13 +283,14 @@ void write_blockdata(BlockData blockdata, int fd)
     write(fd, blockdata.previous_block_hash, 97);
     write(fd, &blockdata.height, sizeof(size_t));
     write(fd, &blockdata.nb_transactions, sizeof(uint16_t));
-    write(fd, &blockdata.prev_validators_votes, MAX_VALIDATORS_PER_BLOCK / 8);
+    write(fd, blockdata.prev_validators_votes, MAX_VALIDATORS_PER_BLOCK / 8);
+    write(fd, &blockdata.nb_validators, sizeof(int));
 
     // Write validators
-    for (size_t i = 0; i < MAX_VALIDATORS_PER_BLOCK; i++)
+    for (int i = 0; i < blockdata.nb_validators; i++)
     {
         BIO *pubkey = BIO_new(BIO_s_mem());
-        PEM_write_bio_RSAPublicKey(pubkey, blockdata.validator_public_key[i]);
+        PEM_write_bio_RSAPublicKey(pubkey, blockdata.validators_public_keys[i]);
         int rsa_size = BIO_pending(pubkey);
         write(fd, &rsa_size, sizeof(int));
         char temp[1000];
@@ -300,7 +304,6 @@ void write_blockdata(BlockData blockdata, int fd)
     {
         write_transaction(blockdata.transactions[i], fd);
     }
-
 }
 
 void write_block(Block block, int fd)

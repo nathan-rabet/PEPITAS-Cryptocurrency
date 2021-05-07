@@ -25,6 +25,10 @@
 
 #define MAX_VALIDATORS_PER_BLOCK 512
 
+#define SOL_TCP 6  // socket options TCP level
+#define TCP_USER_TIMEOUT 18  // how long for loss retry before timeout [ms]
+
+
 typedef struct Neighbour
 {
     int family;     // Use AF_* for IPv4, IPv6 or other addrinfo fields

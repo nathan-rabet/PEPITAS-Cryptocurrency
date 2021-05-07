@@ -1,3 +1,4 @@
+#include "network/network.h"
 #include "network/client.h"
 
 client_connection *client_connections = NULL;
@@ -30,7 +31,7 @@ int set_neighbour(char who, char *hostname, int family)
         {
             return 0;
         }
-        
+
         index++;
     }
     if (min_null != -1)
@@ -62,9 +63,10 @@ void print_neighbours(char who, char mask)
     printf("Neighbour list:\n");
     for (size_t i = 0; i < MAX_NEIGHBOURS; i++)
     {
-        if (!(!mask && node->neighbours[i].hostname == NULL)){
+        if (!(!mask && node->neighbours[i].hostname == NULL))
+        {
             CLIENTMSG
-            printf("%02lu: hostname \"%s\", family \"%i\"\n", i ,node->neighbours[i].hostname, node->neighbours[i].family);
+            printf("%02lu: hostname \"%s\", family \"%i\"\n", i, node->neighbours[i].hostname, node->neighbours[i].family);
         }
     }
 }
@@ -81,10 +83,12 @@ void save_neighbours(char who)
     }
 
     FILE *nfile;
-    if (who == IM_CLIENT) {
+    if (who == IM_CLIENT)
+    {
         nfile = fopen("./.neighbours/client_neighbours", "wb");
     }
-    else {
+    else
+    {
         nfile = fopen("./.neighbours/server_neighbours", "wb");
     }
     if (!nfile)
@@ -110,14 +114,18 @@ void load_neighbours(char who)
 {
     Node *node = get_my_node(who);
     FILE *nfile;
-    if (who == IM_CLIENT) {
-        if (access(".neighbours/client_neighbours", F_OK)) {
+    if (who == IM_CLIENT)
+    {
+        if (access(".neighbours/client_neighbours", F_OK))
+        {
             return;
         }
         nfile = fopen("./.neighbours/client_neighbours", "rb");
     }
-    else {
-        if (access(".neighbours/server_neighbours", F_OK)) {
+    else
+    {
+        if (access(".neighbours/server_neighbours", F_OK))
+        {
             return;
         }
         nfile = fopen("./.neighbours/server_neighbours", "rb");
@@ -150,7 +158,7 @@ int number_neighbours(char who)
     return nb_neigbours;
 }
 
-client_connection *listen_to(infos_st *infos, Neighbour neighbour, char* connection_type)
+client_connection *listen_to(infos_st *infos, Neighbour neighbour, char *connection_type)
 {
     struct addrinfo hints = {0};
 
@@ -177,21 +185,24 @@ client_connection *listen_to(infos_st *infos, Neighbour neighbour, char* connect
 
     // Try to connect for each result
     int sockfd;
-    struct addrinfo *rp; // result points to a linked list
+    struct addrinfo *rp;     // result points to a linked list
     for (rp = result; rp != NULL; rp = rp->ai_next)
     {
         sockfd = socket(rp->ai_family, rp->ai_socktype, rp->ai_protocol);
         if (sockfd == -1)
             continue; // The socket is not created
 
-        if (sockfd != -1)
-        {
-            // Try to connect
-            if (connect(sockfd, rp->ai_addr, rp->ai_addrlen) != -1)
-                break;
-            // Fail to connect
-            close(sockfd);
-        }
+        #ifdef TEST
+        // Set timeout for debug
+        int tcp_timeout = 5000; // user timeout in milliseconds [ms]
+        setsockopt(sockfd, SOL_TCP, TCP_USER_TIMEOUT, (char *)&tcp_timeout, sizeof(tcp_timeout));
+        #endif
+
+        // Try to connect
+        if (connect(sockfd, rp->ai_addr, rp->ai_addrlen) != -1)
+            break;
+        // Fail to connect
+        close(sockfd);
     }
 
     freeaddrinfo(result);
@@ -233,7 +244,8 @@ int find_empty_connection(int max)
     return -1;
 }
 
-void *client_thread(void *args){
+void *client_thread(void *args)
+{
     th_arg *a = (th_arg *)args;
     client_connection *cc = a->client_con;
     infos_st *infos = a->infos;
@@ -249,7 +261,7 @@ void *client_thread(void *args){
             send_get_blocks(cc);
             cc->actual_client_height = read_header(cc->clientfd, infos);
             break;
-        
+
         case DD_GET_BLOCKS:
         {
             send_get_blocks(cc);
@@ -265,5 +277,4 @@ void *client_thread(void *args){
         }
         cc->demand = 0;
     }
-    
 }

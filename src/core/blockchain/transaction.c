@@ -41,7 +41,7 @@ void write_transactiondata(TransactionData *transaction, int fd)
 
 void write_transaction(Transaction *transaction, int fd)
 {
-    write_transactiondata(transaction->transaction_data, fd);
+    write_transactiondata(&transaction->transaction_data, fd);
     write(fd, transaction->transaction_signature, 256);
 }
 
@@ -49,7 +49,7 @@ void get_transaction_data(Transaction *trans, char **buff, size_t *index)
 {
     *buff = realloc(*buff, *index + TRANSACTION_DATA_SIZE + 3000);
     BIO *pubkey = BIO_new(BIO_s_mem());
-    PEM_write_bio_RSAPublicKey(pubkey, trans->transaction_data->sender_public_key);
+    PEM_write_bio_RSAPublicKey(pubkey, trans->transaction_data.sender_public_key);
     int rsa_size = BIO_pending(pubkey);
     memcpy(*buff + *index, &rsa_size, sizeof(int));
     *index += sizeof(int);
@@ -59,7 +59,7 @@ void get_transaction_data(Transaction *trans, char **buff, size_t *index)
     *index += rsa_size;
 
     BIO *pubkey2 = BIO_new(BIO_s_mem());
-    PEM_write_bio_RSAPublicKey(pubkey2, trans->transaction_data->receiver_public_key);
+    PEM_write_bio_RSAPublicKey(pubkey2, trans->transaction_data.receiver_public_key);
     rsa_size = BIO_pending(pubkey2);
     memcpy(*buff + *index, &rsa_size, sizeof(int));
     *index += sizeof(int);
@@ -68,7 +68,7 @@ void get_transaction_data(Transaction *trans, char **buff, size_t *index)
     *index += rsa_size;
 
     BIO *pubkey3 = BIO_new(BIO_s_mem());
-    PEM_write_bio_RSAPublicKey(pubkey3, trans->transaction_data->organisation_public_key);
+    PEM_write_bio_RSAPublicKey(pubkey3, trans->transaction_data.organisation_public_key);
     rsa_size = BIO_pending(pubkey3);
     memcpy(*buff + *index, &rsa_size, sizeof(int));
     *index += sizeof(int);
@@ -79,20 +79,20 @@ void get_transaction_data(Transaction *trans, char **buff, size_t *index)
     BIO_free(pubkey2);
     BIO_free(pubkey3);
 
-    memcpy(*buff + *index, &trans->transaction_data->amount, sizeof(size_t));
+    memcpy(*buff + *index, &trans->transaction_data.amount, sizeof(size_t));
     *index += sizeof(size_t);
 
-    memcpy(*buff + *index, &trans->transaction_data->receiver_remaining_money, sizeof(size_t));
+    memcpy(*buff + *index, &trans->transaction_data.receiver_remaining_money, sizeof(size_t));
     *index += sizeof(size_t);
 
-    memcpy(*buff + *index, &trans->transaction_data->sender_remaining_money, sizeof(size_t));
+    memcpy(*buff + *index, &trans->transaction_data.sender_remaining_money, sizeof(size_t));
     *index += sizeof(size_t);
 
-    memcpy(*buff + *index, &trans->transaction_data->transaction_timestamp, sizeof(time_t));
+    memcpy(*buff + *index, &trans->transaction_data.transaction_timestamp, sizeof(time_t));
     *index += sizeof(time_t);
-    memcpy(*buff + *index, trans->transaction_data->cause, sizeof(512));
+    memcpy(*buff + *index, trans->transaction_data.cause, sizeof(512));
     *index += 512;
-    memcpy(*buff + *index, trans->transaction_data->asset, sizeof(512));
+    memcpy(*buff + *index, trans->transaction_data.asset, sizeof(512));
     *index += 512;
 }
 
@@ -100,31 +100,28 @@ void convert_data_to_transactiondata(TransactionData *transactiondata, int fd)
 {
     read(fd, &transactiondata->magic, sizeof(char));
     read(fd, &transactiondata->type, sizeof(char));
-    uint16_t RSAsize;
+    int RSAsize;
     read(fd, &RSAsize, sizeof(int));
 
     char temp[1000];
     read(fd, temp, RSAsize);
     BIO *pubkey = BIO_new(BIO_s_mem());
     BIO_write(pubkey, temp, RSAsize);
-    transactiondata->sender_public_key = RSA_new();
-    PEM_read_bio_RSAPublicKey(pubkey, &transactiondata->sender_public_key, NULL, NULL);
+    transactiondata->sender_public_key = PEM_read_bio_RSAPublicKey(pubkey, NULL, 0, NULL);
     BIO_free(pubkey);
 
     read(fd, &RSAsize, sizeof(int));
     read(fd, temp, RSAsize);
     BIO *pubkey1 = BIO_new(BIO_s_mem());
     BIO_write(pubkey1, temp, RSAsize);
-    transactiondata->receiver_public_key = RSA_new();
-    PEM_read_bio_RSAPublicKey(pubkey1, &transactiondata->receiver_public_key, NULL, NULL);
+    transactiondata->receiver_public_key = PEM_read_bio_RSAPublicKey(pubkey1, NULL, 0, NULL);
     BIO_free(pubkey1);
 
     read(fd, &RSAsize, sizeof(int));
     read(fd, temp, RSAsize);
     BIO *pubkey2 = BIO_new(BIO_s_mem());
     BIO_write(pubkey2, temp, RSAsize);
-    transactiondata->organisation_public_key = RSA_new();
-    PEM_read_bio_RSAPublicKey(pubkey2, &transactiondata->organisation_public_key, NULL, NULL);
+    transactiondata->organisation_public_key = PEM_read_bio_RSAPublicKey(pubkey2, NULL, 0, NULL);
     BIO_free(pubkey2);
 
     read(fd, &transactiondata->amount, sizeof(size_t));
@@ -135,23 +132,25 @@ void convert_data_to_transactiondata(TransactionData *transactiondata, int fd)
     read(fd, transactiondata->asset, 512);
 }
 
-void load_transaction(Transaction **transaction, int fd)
+void load_transaction(Transaction *transaction, int fd)
 {
-    TransactionData *transdata = malloc(sizeof(TransactionData));
-    convert_data_to_transactiondata(transdata, fd);
-    (*transaction)->transaction_data = transdata;
-    read(fd, (*transaction)->transaction_signature, 256);
+    if (transaction == NULL)
+    {
+        errx(EXIT_FAILURE, "Load_transaction: transction is not malloc");
+    }
+    convert_data_to_transactiondata(&transaction->transaction_data, fd);
+    read(fd, transaction->transaction_signature, 256);
 }
 
-Transaction * load_pending_transaction(time_t timestamp) {
+Transaction* load_pending_transaction(time_t timestamp) {
     char name[15] = {0};    
     sprintf(name, "pdt/%ld", timestamp);
 
     int transaction_file = open(name, O_RDONLY);
     if (transaction_file == -1)
         return NULL;
-    Transaction *transaction;
-    load_transaction(&transaction, transaction_file);
+    Transaction *transaction = malloc(sizeof(Transaction));
+    load_transaction(transaction, transaction_file);
     close(transaction_file);
     return transaction;
 }
@@ -166,7 +165,7 @@ void add_pending_transaction(Transaction *transaction)
         mkdir("pdt", 0700);
     }
 
-    sprintf(name, "pdt/%ld", transaction->transaction_data->transaction_timestamp);
+    sprintf(name, "pdt/%ld", transaction->transaction_data.transaction_timestamp);
 
     int pending_transaction_fd = open(name, O_CREAT | O_WRONLY);
     write_transaction(transaction,pending_transaction_fd);

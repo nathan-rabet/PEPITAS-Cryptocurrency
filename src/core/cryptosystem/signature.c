@@ -94,7 +94,7 @@ int verify_transaction_signature(Transaction transaction)
     int ret = verify_signature(&transaction.transaction_data,
                                size,
                                transaction.transaction_signature,
-                               transaction.transaction_data->sender_public_key);
+                               transaction.transaction_data.sender_public_key);
     free(buf);
     return ret;
 }

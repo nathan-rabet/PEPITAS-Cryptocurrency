@@ -37,7 +37,7 @@
 //         // bool sender_not_receiver
 
 //         // TODO : Sender != receiver
-//         //if (pending_transaction.transaction_data->sender_public_key)
+//         //if (pending_transaction.transaction_data.sender_public_key)
 
 //         // Load the last chunk (to reverse-parse the blockchain)
 //         ChunkBlockchain *working_chunk;
@@ -54,17 +54,17 @@
 //             {
 //                 Transaction *transaction = working_chunk->chunk[b]->block_data.transactions[t];
 
-//                 if (!sender_exists && transaction->transaction_data->receiver_public_key == pending_transaction.transaction_data->sender_public_key) {
+//                 if (!sender_exists && transaction->transaction_data.receiver_public_key == pending_transaction.transaction_data.sender_public_key) {
 //                     sender_exists = 1;
 
-//                     if (pending_transaction.transaction_data->sender_remaining_money == transaction->transaction_data.)
+//                     if (pending_transaction.transaction_data.sender_remaining_money == transaction->transaction_data.)
 
 //                 }
 
-//                 if (transaction->transaction_data->sender_public_key == pending_transaction.transaction_data->sender_public_key)
+//                 if (transaction->transaction_data.sender_public_key == pending_transaction.transaction_data.sender_public_key)
 
 //                 // Check 'receiver_exists'
-//                 if (!receiver_exists && transaction->transaction_data->receiver_public_key == pending_transaction.transaction_data->receiver_public_key || transaction->transaction_data->sender_public_key == pending_transaction.transaction_data->receiver_public_key)
+//                 if (!receiver_exists && transaction->transaction_data.receiver_public_key == pending_transaction.transaction_data.receiver_public_key || transaction->transaction_data.sender_public_key == pending_transaction.transaction_data.receiver_public_key)
 //                     receiver_exists = 1;
 
                 

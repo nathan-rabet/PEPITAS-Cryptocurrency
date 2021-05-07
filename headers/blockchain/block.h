@@ -23,7 +23,7 @@
 
 #define CURRENT_CHUNK 0
 
-#define BLOCK_DATA_SIZE (SHA384_DIGEST_LENGTH * 2 + 1) + sizeof(size_t) + sizeof(uint16_t) + sizeof(time_t)
+#define BLOCK_DATA_SIZE (SHA384_DIGEST_LENGTH * 2 + 1) + sizeof(size_t) + sizeof(uint16_t) + sizeof(time_t) + sizeof(int)
 #define BLOCK_SIZE 2048 + sizeof(size_t) + BLOCK_DATA_SIZE + SHA384_DIGEST_LENGTH * 2 + 1
 
 #define MAX_TRANSACTIONS_PER_BLOCK 16384
@@ -42,7 +42,8 @@ typedef struct BlockData
     Transaction **transactions; // Transactions vector
 
     //* Validator area
-    RSA *validator_public_key[MAX_VALIDATORS_PER_BLOCK];            // The public key of the validators
+    int nb_validators;
+    RSA *validators_public_keys[MAX_VALIDATORS_PER_BLOCK];            // The public key of the validators
     char prev_validators_votes[MAX_VALIDATORS_PER_BLOCK / 8]; // BITMAP
     time_t block_timestamp;                                         // The block creation timestamp
 } BlockData;
