@@ -61,12 +61,13 @@ size_t update_blockchain_height(infos_st *infos)
     for (size_t i = 0; i < MAX_CONNECTION; i++)
     {
         if (client_connections[i].clientfd != 0) {
+            get_blocks_t * Payload = malloc(sizeof(get_blocks_t));
+            Payload->version = P_VERSION + 20;
+            Payload->nb_demands = 152;
+            Payload->blocks_height[0] = 950;
             client_connections[i].demand = DD_GET_HEIGHT;
             client_connections[i].Playloadsize = sizeof(get_blocks_t);
-            client_connections[i].Payload = malloc(sizeof(get_blocks_t));
-            ((get_blocks_t *)client_connections[i].Payload)->version = P_VERSION;
-            ((get_blocks_t *)client_connections[i].Payload)->nb_demands = 1;
-            ((get_blocks_t *)client_connections[i].Payload)->blocks_height[0] = 0;
+            client_connections[i].Payload = Payload;
             sem_post(&client_connections[i].lock);
 
             // BREAK IF SUCCESS
