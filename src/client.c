@@ -62,9 +62,9 @@ size_t update_blockchain_height(infos_st *infos)
     {
         if (client_connections[i].clientfd != 0) {
             get_blocks_t * Payload = malloc(sizeof(get_blocks_t));
-            Payload->version = P_VERSION + 20;
-            Payload->nb_demands = 152;
-            Payload->blocks_height[0] = 950;
+            Payload->version = P_VERSION;
+            Payload->nb_demands = 1;
+            Payload->blocks_height[0] = 0;
             client_connections[i].demand = DD_GET_HEIGHT;
             client_connections[i].Playloadsize = sizeof(get_blocks_t);
             client_connections[i].Payload = Payload;
