@@ -52,14 +52,13 @@ int send_client_list(char who, int sockfd, char *sockip)
 void send_get_blocks(client_connection *cc){
     CLIENTMSG
     printf("Send HD_GET_BLOCKS\n");
-    safe_send(cc->clientfd, HD_GET_BLOCKS, sizeof(HD_GET_BLOCKS));
-    safe_send(cc->clientfd, cc->Payload, cc->Playloadsize);
-
+    safe_write(cc->clientfd, HD_GET_BLOCKS, sizeof(HD_GET_BLOCKS));
+    write(cc->clientfd, cc->Payload, cc->Playloadsize);
 }
 void send_actual_height(int fd, infos_st *infos){
     CLIENTMSG
     printf("Send HD_ACTUAL_HEIGHT\n");
-    safe_send(fd, HD_ACTUAL_HEIGHT, sizeof(HD_ACTUAL_HEIGHT));
+    safe_write(fd, HD_ACTUAL_HEIGHT, sizeof(HD_ACTUAL_HEIGHT));
     safe_write(fd, &infos->actual_height, sizeof(size_t));
 }
 
@@ -88,7 +87,7 @@ void send_send_block(int fd, size_t height){
     blockfile = open(dir, O_RDONLY);
     if (blockfile == -1)
         return;
-    safe_send(fd, HD_SEND_BLOCK, sizeof(HD_SEND_BLOCK));
+    safe_write(fd, HD_SEND_BLOCK, sizeof(HD_SEND_BLOCK));
     safe_send(fd, (void *)&height, sizeof(size_t));
     while ((r = read(blockfile, temp, 1024) != 0))
     {

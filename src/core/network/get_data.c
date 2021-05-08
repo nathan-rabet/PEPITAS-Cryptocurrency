@@ -141,14 +141,11 @@ size_t read_header(int sockfd, infos_st *infos)
 }
 
 int read_get_blocks(int fd, infos_st *infos){
-    uint32_t version;
-    read(fd, &version, sizeof(uint32_t));
-    char hash_count;
-    read(fd, &hash_count, sizeof(char));
-    for (char i = 0; i < hash_count; i++)
+    get_blocks_t demand;
+    recv(fd, &demand, sizeof(get_blocks_t), MSG_WAITALL);
+    for (char i = 0; i < demand.nb_demands; i++)
     {
-        size_t height;
-        read(fd, &height, sizeof(uint32_t));
+        size_t height = *(demand.blocks_height + i);
         if (height == 0){
             send_actual_height(fd, infos);
         }

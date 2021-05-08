@@ -4,6 +4,7 @@
 
 #include <pthread.h>
 #include <semaphore.h>
+#include <stdint.h>
 
 #define SIZE_OF_HOSTNAME 39
 #define NB_HARD_CODED_ADDR 2
@@ -88,5 +89,12 @@ extern const Neighbour HARD_CODED_ADDR[];
 #define SERVERMSG           printf("\033[0;31m[S]:\033[0m ");
 #define CLIENTMSG           printf("\033[0;34m[C]:\033[0m ");
 #define MANAGERMSG          printf("\033[0;32m[M]:\033[0m ");
+
+typedef struct get_blocks_t
+{
+    uint32_t version;
+    char nb_demands;
+    size_t blocks_height[50];
+}get_blocks_t;
 
 #endif
