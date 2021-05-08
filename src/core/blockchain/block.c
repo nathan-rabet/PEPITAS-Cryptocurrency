@@ -48,11 +48,11 @@ Block *get_genesis_block()
         RSA *rsa2;
 
         bufio = BIO_new_mem_buf(GENESIS_RSA_PUB_1, strlen(GENESIS_RSA_PUB_1));
-        PEM_read_bio_RSAPublicKey(bufio, &rsa1, 0, NULL);
+        rsa1 = PEM_read_bio_RSAPublicKey(bufio, NULL, 0, NULL);
         BIO_free(bufio);
 
         bufio = BIO_new_mem_buf(GENESIS_RSA_PUB_2, strlen(GENESIS_RSA_PUB_2));
-        PEM_read_bio_RSAPublicKey(bufio, &rsa2, 0, NULL);
+        rsa2 = PEM_read_bio_RSAPublicKey(bufio, NULL, 0, NULL);
         BIO_free(bufio);
 
         genesis_block.block_data.transactions[0]->transaction_data.receiver_public_key = rsa1;
@@ -157,7 +157,7 @@ void convert_data_to_blockdata(BlockData *blockdata, int fd)
         read(fd, temp, RSAsize);
         BIO_write(pubkey, temp, RSAsize);
         blockdata->validators_public_keys[i] = RSA_new();
-        PEM_read_bio_RSAPublicKey(pubkey, &blockdata->validators_public_keys[i], NULL, NULL);
+        blockdata->validators_public_keys[i] = PEM_read_bio_RSAPublicKey(pubkey, NULL, 0, NULL);
     }
 
     read(fd, &blockdata->block_timestamp, sizeof(time_t));
