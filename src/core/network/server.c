@@ -151,8 +151,6 @@ void *init_server(void *args)
         {
             int index = find_empty_connection(MAX_SERVER);
             client_connections[index].clientfd = accept(sockfd, rp->ai_addr, &rp->ai_addrlen);
-            SERVERMSG
-            printf("New connection\n");
             if (client_connections[index].clientfd != -1)
             {
                 th_arg *args = malloc(sizeof(th_arg));
