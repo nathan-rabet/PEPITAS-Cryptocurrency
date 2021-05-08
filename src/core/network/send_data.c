@@ -94,7 +94,7 @@ void send_send_block(int fd, size_t height){
         safe_send(fd, temp, r);
     }
     SERVERMSG
-    printf("Send HD_SEND_BLOCK\n");
+    printf("Send block %lu to fd %i\n", height, fd);
 }
 
 void send_pending_transaction_list(__attribute__((unused))int fd){

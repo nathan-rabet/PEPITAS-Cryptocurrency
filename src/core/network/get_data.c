@@ -87,6 +87,7 @@ size_t process_header(char *header, int sockfd, infos_st *infos)
     }
     
 
+    WARNINGMSG("Can't read header!")
 
     return 0;
 }
