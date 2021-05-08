@@ -50,11 +50,11 @@ int send_client_list(char who, int sockfd, char *sockip)
 }
 
 void send_get_blocks(client_connection *cc){
-    safe_write(cc->clientfd, HD_GET_BLOCKS, sizeof(HD_GET_BLOCKS));
-    safe_write(cc->clientfd, cc->Payload, cc->Playloadsize);
+    safe_send(cc->clientfd, HD_GET_BLOCKS, sizeof(HD_GET_BLOCKS));
+    safe_send(cc->clientfd, cc->Payload, cc->Playloadsize);
 }
 void send_actual_height(int fd, infos_st *infos){
-    safe_write(fd, HD_ACTUAL_HEIGHT, sizeof(HD_ACTUAL_HEIGHT));
+    safe_send(fd, HD_ACTUAL_HEIGHT, sizeof(HD_ACTUAL_HEIGHT));
     safe_write(fd, &infos->actual_height, sizeof(size_t));
 }
 

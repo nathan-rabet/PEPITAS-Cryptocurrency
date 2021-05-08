@@ -19,12 +19,14 @@
 ### CONNECTION TO NETWORK
 **Message:**
 char * : "CONNECTION TO NETWORK\r\n\r\n"
+
 **Description**
 Send a request to be accepted by a network door.
 
 ### CONNECTION TO NODE
 **Message:**
 char * : "CONNECTION TO NODE\r\n\r\n"
+
 **Description**
 Send a request to be accepted by a network node.
 ### GET BLOCKS
@@ -54,16 +56,19 @@ The block of height demand by "GET BLOCKS".
 ### GET PENDING TRANSACTION LIST
 **Message**
 char * : "GET PENDING TRANSACTION LIST\r\n\r\n"
+
 **Description**
 Call "SEND PENDING TRANSACTION".
 ### REJECT DEMAND
 **Message:**
 char * : "REJECT DEMAND\r\n\r\n"
+
 **Description**
 Reject a demand if can't reply. For example a "GET BLOCKS" of a not existing block.
 ### SEND PENDING TRANSACTION
 **Message:**
 char * : "SEND PENDING TRANSACTION\r\n\r\n"
+
 **Description**
 Send the epoch block of a committee member.
 ### SEND EPOCH BLOCK
