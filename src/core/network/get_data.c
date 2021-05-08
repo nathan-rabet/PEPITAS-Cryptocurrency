@@ -142,7 +142,13 @@ size_t read_header(int sockfd, infos_st *infos)
 
 int read_get_blocks(int fd, infos_st *infos){
     get_blocks_t demand;
-    recv(fd, &demand, sizeof(get_blocks_t), MSG_WAITALL);
+    ssize_t r;
+    read(fd, &demand, 1);
+    if ((r = recv(fd, &demand, sizeof(get_blocks_t), MSG_WAITALL)) != sizeof(get_blocks_t))
+    {
+        SERVERMSG
+        printf("OOF Failed to load payload: %lx\n", r);
+    }
     for (char i = 0; i < demand.nb_demands; i++)
     {
         size_t height = *(demand.blocks_height + i);
