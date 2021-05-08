@@ -61,7 +61,7 @@ size_t update_blockchain_height(infos_st *infos)
     for (size_t i = 0; i < MAX_CONNECTION; i++)
     {
         if (client_connections[i].clientfd != 0) {
-            get_blocks_t * Payload = malloc(sizeof(get_blocks_t));
+            get_blocks_t * Payload = calloc(1, sizeof(get_blocks_t));
             Payload->version = P_VERSION;
             Payload->nb_demands = 1;
             Payload->blocks_height[0] = 0;
@@ -95,21 +95,22 @@ void update_blockchain(infos_st *infos, size_t index_client){
     while (client_connections[index_client].actual_client_height > infos->actual_height + demand_height) {
         client_connections[index_client].demand = DD_GET_BLOCKS;
 
-        char nb_dd = (infos->actual_height - client_connections[index_client].actual_client_height) % 50;
-        demand_height += nb_dd;
+        char nb_dd = (client_connections[index_client].actual_client_height - infos->actual_height) % 50;
+        MANAGERMSG
         printf("Demande de %i Blocks\n", nb_dd);
 
         client_connections[index_client].Playloadsize = sizeof(get_blocks_t);
-        client_connections[index_client].Payload = malloc(sizeof(get_blocks_t));
-        ((get_blocks_t *)client_connections[index_client].Payload)->version = P_VERSION;
-        ((get_blocks_t *)client_connections[index_client].Payload)->nb_demands = nb_dd;
-        ((get_blocks_t *)client_connections[index_client].Payload)->blocks_height[0] = 0;
+        get_blocks_t * Payload = calloc(1, sizeof(get_blocks_t));
+        client_connections[index_client].Payload = Payload;
+        Payload->version = P_VERSION;
+        Payload->nb_demands = nb_dd;
         for (char i = 1; i <= nb_dd; i++)
         {
-            ((get_blocks_t *)client_connections[index_client].Payload)->blocks_height[i-1] = client_connections[index_client].actual_client_height + i;
+            Payload->blocks_height[i-1] = infos->actual_height + i + demand_height;
         }
         
 
+        demand_height += nb_dd;
         sem_post(&client_connections[index_client].lock);
         //WAIT
         while (client_connections[index_client].demand != 0);
