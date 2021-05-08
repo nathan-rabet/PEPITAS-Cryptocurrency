@@ -15,6 +15,20 @@ int safe_write(int fd, const void *buf, ssize_t count)
 	return 0;
 }
 
+int safe_send(int fd, const void *buf, ssize_t count)
+{
+	ssize_t offset = 0;
+	while (count > 0)
+	{
+		offset = send(fd, buf, count, MSG_MORE);
+		buf += offset;
+		count -= offset;
+		if (offset == -1)
+			return errno;
+	}
+	return 0;
+}
+
 ssize_t safe_read(int fd, const void **buf, size_t *bufsize)
 {
 	size_t buffersize = 12;

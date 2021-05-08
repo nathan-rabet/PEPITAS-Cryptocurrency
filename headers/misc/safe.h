@@ -6,6 +6,8 @@
 #include <unistd.h>
 #include <string.h>
 #include <errno.h>
+#include <sys/types.h>
+#include <sys/socket.h>
 
 /**
  * @brief Writes safely to a file descriptor
@@ -17,6 +19,17 @@
  * @return Error code
  */
 int safe_write(int fd, const void *buf, ssize_t count);
+
+/**
+ * @brief Send safely to a file descriptor
+ * 
+ * @param fd The file descriptor
+ * @param buf The buffer to write
+ * @param count The number of byte to write in fd
+ * 
+ * @return Error code
+ */
+int safe_send(int fd, const void *buf, ssize_t count)
 
 /**
  * @brief Reads safely in a file descriptor until '\\r\\n\\r\\n'
