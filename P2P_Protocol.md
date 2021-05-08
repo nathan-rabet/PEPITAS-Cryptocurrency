@@ -49,6 +49,7 @@ Send my actual blockchain height.
 **Message:**
 char * : "SEND BLOCK\r\n\r\n"
 size_t : Block height
+size_t : Block size
 char * : Block struct
 
 **Description**
