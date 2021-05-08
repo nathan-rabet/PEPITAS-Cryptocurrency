@@ -78,11 +78,6 @@ void send_send_block(int fd, size_t height){
     ssize_t r = 0;
 
     snprintf(dir, 256, "blockchain/block%lu", height);
-    struct stat st = {0};
-    if (stat(dir, &st) == -1)
-    {
-        return;
-    }
 
     blockfile = open(dir, O_RDONLY);
     if (blockfile == -1)

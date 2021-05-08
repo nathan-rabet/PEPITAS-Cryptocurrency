@@ -183,15 +183,14 @@ int read_send_block(int fd){
     if (r != sizeof(size_t))
         return -1;
     snprintf(dir, 256, "blockchain/c%iblock%lu", fd, block_height);
-    struct stat st = {0};
-    if (stat(dir, &st) == -1)
+
+    blockfile = open(dir, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+    if (blockfile == -1)
     {
+        CLIENTMSG
+        printf("Can't create c%iblock%lu file\n", fd, block_height);
         return -1;
     }
-
-    blockfile = open(dir, O_WRONLY & O_TRUNC & O_CREAT);
-    if (blockfile == -1)
-        return -1;
 
     while ((r = read(fd, temp, 1024)) != 0)
     {

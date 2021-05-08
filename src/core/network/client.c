@@ -265,7 +265,7 @@ void *client_thread(void *args)
         case DD_GET_BLOCKS:
         {
             send_get_blocks(cc);
-            for (char i = 0; i < *(char *)cc->Payload; i++)
+            for (char i = 0; i < ((get_blocks_t *)cc->Payload)->nb_demands; i++)
             {
                 read_header(cc->clientfd, infos);
                 update_sync(infos->actual_height, cc->actual_client_height);
