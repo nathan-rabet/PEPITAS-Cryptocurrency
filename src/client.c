@@ -172,8 +172,6 @@ int main()
         MANAGERMSG
         printf("Connection to others...\n");
         connection_to_others(infos);
-        // test
-        listen_to(infos ,HARD_CODED_ADDR[0], HD_CONNECTION_TO_NETWORK);
         MANAGERMSG
         printf("Update blockchain height...\n");
         size_t index_client = update_blockchain_height(infos);
