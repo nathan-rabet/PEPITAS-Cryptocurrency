@@ -69,8 +69,7 @@ void send_reject_demand(int fd){
 }
 
 void send_send_block(int fd, size_t height){
-    // TEST IF BLOCK
-    int blockfile;
+    
     char dir[256];
     char temp[1024];
     size_t bc_size = 0;
@@ -78,23 +77,28 @@ void send_send_block(int fd, size_t height){
 
     snprintf(dir, 256, "blockchain/block%lu", height);
 
-    blockfile = open(dir, O_RDONLY);
-    if (blockfile == -1)
+    FILE *blockfile = fopen(dir, "r");
+    if (blockfile == NULL)
         return;
-    struct stat st;
-    stat(dir, &st);
-    bc_size = st.st_size;
+    fseek(blockfile, 0L, SEEK_END);
+    bc_size = ftell(blockfile);
+    fseek(blockfile, 0L, SEEK_SET);
     safe_write(fd, HD_SEND_BLOCK, strlen(HD_SEND_BLOCK));
     safe_send(fd, (void *)&height, sizeof(size_t));
     safe_send(fd, (void *)&bc_size, sizeof(size_t));
-    while ((r = read(blockfile, temp, 1024) != 0))
+    while ((r = fread(temp, 1, 1024, blockfile)) != 0 && bc_size > 0)
     {
         if (r == -1)
             errx(EXIT_FAILURE, "Can't send block %lu\n", height);
         safe_write(fd, temp, r);
+        bc_size -= r;
+    }
+    if (bc_size > 0){
+        WARNINGMSG("Failed to send all the block!")
     }
     SERVERMSG
     printf("Send block %lu to fd %i\n", height, fd);
+    fclose(blockfile);
 }
 
 void send_pending_transaction_list(__attribute__((unused))int fd){

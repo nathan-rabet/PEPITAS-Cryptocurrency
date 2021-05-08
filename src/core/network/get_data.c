@@ -197,7 +197,7 @@ int read_send_block(int fd){
         return -1;
     }
 
-    while ((r = read(fd, temp, bc_size%1024)) != 0 && bc_size > 0)
+    while ((r = read(fd, temp, bc_size > 1024 ? 1024 : bc_size)) != 0 && bc_size > 0)
     {
         if (r == -1)
             errx(EXIT_FAILURE, "Can't read block %lu in connection fd: %i", block_height, fd);
