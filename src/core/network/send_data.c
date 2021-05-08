@@ -91,7 +91,7 @@ void send_send_block(int fd, size_t height){
     {
         if (r == -1)
             errx(EXIT_FAILURE, "Can't send block %lu\n", height);
-        safe_send(fd, temp, r);
+        safe_write(fd, temp, r);
     }
     SERVERMSG
     printf("Send block %lu to fd %i\n", height, fd);

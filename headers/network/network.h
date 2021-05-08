@@ -89,7 +89,7 @@ extern const Neighbour HARD_CODED_ADDR[];
 #define SERVERMSG           printf("\033[0;31m[S]:\033[0m ");
 #define CLIENTMSG           printf("\033[0;34m[C]:\033[0m ");
 #define MANAGERMSG          printf("\033[0;32m[M]:\033[0m ");
-#define WARNINGMSG(x)       printf("\033[0;36m[W]: %s\033[0m ", x);
+#define WARNINGMSG(x)       printf("\033[0;35m[W]: %s\033[0m\n", x);
 
 typedef struct __attribute__ ((__packed__)) get_blocks_t
 {

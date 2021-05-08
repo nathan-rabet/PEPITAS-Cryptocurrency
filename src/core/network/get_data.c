@@ -180,8 +180,11 @@ int read_send_block(int fd){
     char dir[256];
     char temp[1024];
     size_t block_height;
+    size_t bc_size;
     ssize_t r = read(fd, &block_height, sizeof(size_t));
-    size_t bc_size = read(fd, &bc_size, sizeof(size_t));
+    if (r != sizeof(size_t))
+        return -1;
+    r = read(fd, &bc_size, sizeof(size_t));
     if (r != sizeof(size_t))
         return -1;
     snprintf(dir, 256, "blockchain/c%iblock%lu", fd, block_height);
@@ -200,6 +203,9 @@ int read_send_block(int fd){
             errx(EXIT_FAILURE, "Can't read block %lu in connection fd: %i", block_height, fd);
         safe_write(blockfile, temp, r);
         bc_size -= r;
+    }
+    if (bc_size > 0){
+        WARNINGMSG("Failed to read all the block!")
     }
     close(blockfile);
     CLIENTMSG
