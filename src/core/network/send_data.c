@@ -50,19 +50,28 @@ int send_client_list(char who, int sockfd, char *sockip)
 }
 
 void send_get_blocks(client_connection *cc){
+    CLIENTMSG
+    printf("Send HD_GET_BLOCKS\n");
     safe_send(cc->clientfd, HD_GET_BLOCKS, sizeof(HD_GET_BLOCKS));
     safe_send(cc->clientfd, cc->Payload, cc->Playloadsize);
+
 }
 void send_actual_height(int fd, infos_st *infos){
+    CLIENTMSG
+    printf("Send HD_ACTUAL_HEIGHT\n");
     safe_send(fd, HD_ACTUAL_HEIGHT, sizeof(HD_ACTUAL_HEIGHT));
     safe_write(fd, &infos->actual_height, sizeof(size_t));
 }
 
 void send_reject_demand(int fd){
+    SERVERMSG
+    printf("Send HD_REJECT_DEMAND\n");
     safe_write(fd, HD_REJECT_DEMAND, sizeof(HD_REJECT_DEMAND));
 }
 
 void send_send_block(int fd, size_t height){
+    SERVERMSG
+    printf("Send HD_SEND_BLOCK\n");
     // TEST IF BLOCK
     int blockfile;
     char dir[256];
