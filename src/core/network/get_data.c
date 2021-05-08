@@ -156,7 +156,7 @@ int read_get_blocks(int fd, infos_st *infos){
         }
         else
         {
-            if (height < infos->actual_height){
+            if (height <= infos->actual_height){
                 send_send_block(fd, height);
             }
             else
