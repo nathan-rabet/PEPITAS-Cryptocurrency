@@ -1,6 +1,7 @@
 #ifndef SAFE_H
 #define SAFE_H
 
+#include <stdio.h>
 #include <stdlib.h>
 #include <err.h>
 #include <unistd.h>
@@ -29,7 +30,7 @@ int safe_write(int fd, const void *buf, ssize_t count);
  * 
  * @return Error code
  */
-int safe_send(int fd, const void *buf, ssize_t count)
+int safe_send(int fd, const void *buf, ssize_t count);
 
 /**
  * @brief Reads safely in a file descriptor until '\\r\\n\\r\\n'

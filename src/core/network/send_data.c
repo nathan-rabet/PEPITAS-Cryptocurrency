@@ -63,10 +63,30 @@ void send_reject_demand(int fd){
 }
 
 void send_send_block(int fd, size_t height){
-    safe_write(fd, HD_SEND_BLOCK, sizeof(HD_SEND_BLOCK));
-    Block *block = get_block(height);
-    write_block(*block, fd);
-    free_block(block);
+    // TEST IF BLOCK
+    int blockfile;
+    char dir[256];
+    char temp[1024];
+    ssize_t r = 0;
+
+    snprintf(dir, 256, "blockchain/block%lu", height);
+    struct stat st = {0};
+    if (stat(dir, &st) == -1)
+    {
+        return;
+    }
+
+    blockfile = open(dir, O_RDONLY);
+    if (blockfile == -1)
+        return;
+    safe_send(fd, HD_SEND_BLOCK, sizeof(HD_SEND_BLOCK));
+    safe_send(fd, (void *)&height, sizeof(size_t));
+    while ((r = read(blockfile, temp, 1024) != 0))
+    {
+        if (r == -1)
+            errx(EXIT_FAILURE, "Can't send block %lu\n", height);
+        safe_send(fd, temp, r);
+    }
 }
 
 void send_pending_transaction_list(__attribute__((unused))int fd){

@@ -173,8 +173,33 @@ size_t read_actual_height(int fd){
 }
 
 int read_send_block(int fd){
-    Block my_new_block;
-    convert_data_to_block(&my_new_block, fd);
+    int blockfile;
+    char dir[256];
+    char temp[1024];
+    size_t block_height;
+    ssize_t r = read(fd, &block_height, sizeof(size_t));
+    if (r != sizeof(size_t))
+        return -1;
+    snprintf(dir, 256, "blockchain/c%iblock%lu", fd, block_height);
+    struct stat st = {0};
+    if (stat(dir, &st) == -1)
+    {
+        return -1;
+    }
+
+    blockfile = open(dir, O_WRONLY & O_TRUNC & O_CREAT);
+    if (blockfile == -1)
+        return -1;
+
+    while ((r = read(fd, temp, 1024)) != 0)
+    {
+        if (r == -1)
+            errx(EXIT_FAILURE, "Can't read block %lu in connection fd: %i", block_height, fd);
+        safe_write(blockfile, temp, r);
+    }
+    close(blockfile);
+    CLIENTMSG
+    printf("Recived block %lu in connection fd: %i\n", block_height, fd);
     // ADD TO BLOCKCHAIN IF TRUE
     return 0;
 }

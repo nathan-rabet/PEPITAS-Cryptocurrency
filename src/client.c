@@ -49,6 +49,9 @@ void connection_to_others(infos_st *infos){
     }
     MANAGERMSG
     printf("Connected to %i clients! \n", nb_connection);
+    char tmp[5];
+    snprintf(tmp, 5, "%i", nb_connection);
+    change_label_text(connections_label, tmp);
 }
 
 size_t update_blockchain_height(infos_st *infos)
@@ -146,9 +149,9 @@ int main()
     {
         MANAGERMSG
         printf("No last node for the network :(\n");
-        // MANAGERMSG
-        // printf("Search on doors...\n");
-        // join_network_door(infos);
+        MANAGERMSG
+        printf("Search on doors...\n");
+        join_network_door(infos);
     }
 
     // Try Load Old blockchain
@@ -168,7 +171,7 @@ int main()
     {
         MANAGERMSG
         printf("Connection to others...\n");
-        // connection_to_others(infos);
+        connection_to_others(infos);
         // test
         listen_to(infos ,HARD_CODED_ADDR[0], HD_CONNECTION_TO_NETWORK);
         MANAGERMSG
