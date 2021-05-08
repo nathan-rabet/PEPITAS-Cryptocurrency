@@ -102,6 +102,10 @@ Collaboration diagram for BlockData:</div>
 Data Fields</h2></td></tr>
 <tr class="memitem:a3f86b2fdc165f662a1d3a69ab9cb5fe2"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_block_data.html#a3f86b2fdc165f662a1d3a69ab9cb5fe2">magic</a></td></tr>
 <tr class="separator:a3f86b2fdc165f662a1d3a69ab9cb5fe2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a278b59ca8ce2a9b806c99a450d00dfa7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_block_data.html#a278b59ca8ce2a9b806c99a450d00dfa7">epoch_id</a></td></tr>
+<tr class="separator:a278b59ca8ce2a9b806c99a450d00dfa7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae7d0cc98b644d1987ca49e030c16e616"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_block_data.html#ae7d0cc98b644d1987ca49e030c16e616">is_prev_block_valid</a></td></tr>
+<tr class="separator:ae7d0cc98b644d1987ca49e030c16e616"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0167d1bdc7d4e5d8d423188581cbb064"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_block_data.html#a0167d1bdc7d4e5d8d423188581cbb064">previous_block_hash</a> [SHA384_DIGEST_LENGTH *2+1]</td></tr>
 <tr class="separator:a0167d1bdc7d4e5d8d423188581cbb064"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a02afeaaf8574e7a78d6b466ff2695052"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_block_data.html#a02afeaaf8574e7a78d6b466ff2695052">height</a></td></tr>
@@ -110,14 +114,18 @@ Data Fields</h2></td></tr>
 <tr class="separator:a6a025b5ff7c48992e8d360c35f02b7e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acf585c1809511c4f5b5366bb2bc2e855"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_transaction.html">Transaction</a> **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_block_data.html#acf585c1809511c4f5b5366bb2bc2e855">transactions</a></td></tr>
 <tr class="separator:acf585c1809511c4f5b5366bb2bc2e855"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1d8ab4aac816e898ff1928f40833cd8c"><td class="memItemLeft" align="right" valign="top">RSA *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_block_data.html#a1d8ab4aac816e898ff1928f40833cd8c">validator_public_key</a></td></tr>
-<tr class="separator:a1d8ab4aac816e898ff1928f40833cd8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e3cf87673d9cf2f1b5341ad61427fea"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_block_data.html#a7e3cf87673d9cf2f1b5341ad61427fea">nb_validators</a></td></tr>
+<tr class="separator:a7e3cf87673d9cf2f1b5341ad61427fea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6f252ad04c4e1be04547b6591bc290a"><td class="memItemLeft" align="right" valign="top">RSA *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_block_data.html#ae6f252ad04c4e1be04547b6591bc290a">validators_public_keys</a> [<a class="el" href="validators_8h.html#aebcc63085ec90348cc76624d948759dc">MAX_VALIDATORS_PER_BLOCK</a>]</td></tr>
+<tr class="separator:ae6f252ad04c4e1be04547b6591bc290a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6cfae1fadd5c4029135e08bef738496f"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_block_data.html#a6cfae1fadd5c4029135e08bef738496f">prev_validators_votes</a> [<a class="el" href="validators_8h.html#aebcc63085ec90348cc76624d948759dc">MAX_VALIDATORS_PER_BLOCK</a>/8]</td></tr>
+<tr class="separator:a6cfae1fadd5c4029135e08bef738496f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a35920c7529ccc1863e3fd10f39bb1015"><td class="memItemLeft" align="right" valign="top">time_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_block_data.html#a35920c7529ccc1863e3fd10f39bb1015">block_timestamp</a></td></tr>
 <tr class="separator:a35920c7529ccc1863e3fd10f39bb1015"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="block_8h_source.html#l00017">17</a> of file <a class="el" href="block_8h_source.html">block.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="block_8h_source.html#l00033">33</a> of file <a class="el" href="block_8h_source.html">block.h</a>.</p>
 </div><h2 class="groupheader">Field Documentation</h2>
 <a id="a35920c7529ccc1863e3fd10f39bb1015"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a35920c7529ccc1863e3fd10f39bb1015">&#9670;&nbsp;</a></span>block_timestamp</h2>
@@ -131,7 +139,23 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="block_8h_source.html#l00028">28</a> of file <a class="el" href="block_8h_source.html">block.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="block_8h_source.html#l00048">48</a> of file <a class="el" href="block_8h_source.html">block.h</a>.</p>
+
+</div>
+</div>
+<a id="a278b59ca8ce2a9b806c99a450d00dfa7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a278b59ca8ce2a9b806c99a450d00dfa7">&#9670;&nbsp;</a></span>epoch_id</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int epoch_id</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="block_8h_source.html#l00036">36</a> of file <a class="el" href="block_8h_source.html">block.h</a>.</p>
 
 </div>
 </div>
@@ -147,7 +171,23 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="block_8h_source.html#l00021">21</a> of file <a class="el" href="block_8h_source.html">block.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="block_8h_source.html#l00039">39</a> of file <a class="el" href="block_8h_source.html">block.h</a>.</p>
+
+</div>
+</div>
+<a id="ae7d0cc98b644d1987ca49e030c16e616"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae7d0cc98b644d1987ca49e030c16e616">&#9670;&nbsp;</a></span>is_prev_block_valid</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char is_prev_block_valid</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="block_8h_source.html#l00037">37</a> of file <a class="el" href="block_8h_source.html">block.h</a>.</p>
 
 </div>
 </div>
@@ -163,7 +203,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="block_8h_source.html#l00019">19</a> of file <a class="el" href="block_8h_source.html">block.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="block_8h_source.html#l00035">35</a> of file <a class="el" href="block_8h_source.html">block.h</a>.</p>
 
 </div>
 </div>
@@ -179,7 +219,39 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="block_8h_source.html#l00023">23</a> of file <a class="el" href="block_8h_source.html">block.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="block_8h_source.html#l00041">41</a> of file <a class="el" href="block_8h_source.html">block.h</a>.</p>
+
+</div>
+</div>
+<a id="a7e3cf87673d9cf2f1b5341ad61427fea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e3cf87673d9cf2f1b5341ad61427fea">&#9670;&nbsp;</a></span>nb_validators</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int nb_validators</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="block_8h_source.html#l00045">45</a> of file <a class="el" href="block_8h_source.html">block.h</a>.</p>
+
+</div>
+</div>
+<a id="a6cfae1fadd5c4029135e08bef738496f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6cfae1fadd5c4029135e08bef738496f">&#9670;&nbsp;</a></span>prev_validators_votes</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char prev_validators_votes[<a class="el" href="validators_8h.html#aebcc63085ec90348cc76624d948759dc">MAX_VALIDATORS_PER_BLOCK</a>/8]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="block_8h_source.html#l00047">47</a> of file <a class="el" href="block_8h_source.html">block.h</a>.</p>
 
 </div>
 </div>
@@ -195,7 +267,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="block_8h_source.html#l00020">20</a> of file <a class="el" href="block_8h_source.html">block.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="block_8h_source.html#l00038">38</a> of file <a class="el" href="block_8h_source.html">block.h</a>.</p>
 
 </div>
 </div>
@@ -211,28 +283,28 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="block_8h_source.html#l00024">24</a> of file <a class="el" href="block_8h_source.html">block.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="block_8h_source.html#l00042">42</a> of file <a class="el" href="block_8h_source.html">block.h</a>.</p>
 
 </div>
 </div>
-<a id="a1d8ab4aac816e898ff1928f40833cd8c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1d8ab4aac816e898ff1928f40833cd8c">&#9670;&nbsp;</a></span>validator_public_key</h2>
+<a id="ae6f252ad04c4e1be04547b6591bc290a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae6f252ad04c4e1be04547b6591bc290a">&#9670;&nbsp;</a></span>validators_public_keys</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">RSA* validator_public_key</td>
+          <td class="memname">RSA* validators_public_keys[<a class="el" href="validators_8h.html#aebcc63085ec90348cc76624d948759dc">MAX_VALIDATORS_PER_BLOCK</a>]</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="block_8h_source.html#l00027">27</a> of file <a class="el" href="block_8h_source.html">block.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="block_8h_source.html#l00046">46</a> of file <a class="el" href="block_8h_source.html">block.h</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
-<li>/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/headers/core/blockchain/<a class="el" href="block_8h_source.html">block.h</a></li>
+<li>/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/headers/blockchain/<a class="el" href="block_8h_source.html">block.h</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

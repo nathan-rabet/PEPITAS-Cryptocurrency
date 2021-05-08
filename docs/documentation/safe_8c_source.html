@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>PEPITAS CRYPTOCURRENCY: /home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/src/misc/safe.c Source File</title>
+<title>PEPITAS CRYPTOCURRENCY: /home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/src/core/misc/safe.c Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,68 +87,87 @@ $(document).ready(function(){initNavTree('safe_8c_source.html',''); initResizabl
 <div class="title">safe.c</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="safe_8c.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="safe_8h.html">misc/safe.h</a>&quot;</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno"><a class="line" href="safe_8c.html#a405edff38f586c79822927a3b981e504">    4</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="safe_8c.html#a405edff38f586c79822927a3b981e504">safe_write</a>(<span class="keywordtype">int</span> fd, <span class="keyword">const</span> <span class="keywordtype">void</span> *buf, ssize_t count)</div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;{</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;    ssize_t offset = 0;</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;    <span class="keywordflow">while</span> (count &gt; 0)</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    {</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;        offset = write(fd, buf, count);</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;        buf += offset;</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;        count -= offset;</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;        <span class="keywordflow">if</span> (offset == -1)</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;            <span class="keywordflow">return</span> errno;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    }</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;}</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="safe_8c.html#a5cdb8f1fd0a2b177164e88074639a648">   18</a></span>&#160;ssize_t <a class="code" href="safe_8c.html#a5cdb8f1fd0a2b177164e88074639a648">safe_read</a>(<span class="keywordtype">int</span> fd, <span class="keyword">const</span> <span class="keywordtype">void</span> **buf, <span class="keywordtype">size_t</span> *bufsize)</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;{</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keywordtype">size_t</span> buffersize = 256;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keywordtype">size_t</span> read_count = 0;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keywordtype">char</span> *buffer = calloc(buffersize, <span class="keyword">sizeof</span>(<span class="keywordtype">char</span>));</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keywordflow">do</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    {</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        ssize_t nb_read = read(fd, buffer + read_count, buffersize - read_count);</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <span class="keywordflow">if</span> (nb_read == -1)</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;            <span class="keywordflow">return</span> -1;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        read_count += nb_read;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="keywordflow">if</span> (read_count &gt;= buffersize)</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        {</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            buffersize *= 2;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            buffer = realloc(buffer, buffersize);</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        }</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    } <span class="keywordflow">while</span> (strncmp(<span class="stringliteral">&quot;\r\n\r\n&quot;</span>, buffer + (read_count - 5), 5) != 0);</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    *buf = buffer;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    *bufsize = buffersize;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordflow">return</span> read_count;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;}</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="safe_8c.html#ac4bf776335d7193068afa656b91a8827">   40</a></span>&#160;ssize_t <a class="code" href="safe_8c.html#ac4bf776335d7193068afa656b91a8827">safe_fread</a>(<span class="keywordtype">void</span> *buffer, <span class="keyword">const</span> <span class="keywordtype">size_t</span> size, <span class="keyword">const</span> <span class="keywordtype">size_t</span> n, FILE *file)</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;{</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordtype">size_t</span> total_count = 0;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    ssize_t nb_read = 0;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordflow">do</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    {</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        nb_read = fread(buffer + (total_count * size), size, n - total_count, file);</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <span class="keywordflow">if</span> (nb_read == -1)</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            <span class="keywordflow">return</span> -1;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        total_count += nb_read;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    } <span class="keywordflow">while</span> (nb_read &gt; 0);</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordflow">return</span> total_count;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;}</div>
+<a href="safe_8c.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="safe_8h.html">misc/safe.h</a>&quot;</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
+<div class="line"><a name="l00003"></a><span class="lineno"><a class="line" href="safe_8c.html#a405edff38f586c79822927a3b981e504">    3</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="safe_8c.html#a405edff38f586c79822927a3b981e504">safe_write</a>(<span class="keywordtype">int</span> fd, <span class="keyword">const</span> <span class="keywordtype">void</span> *buf, ssize_t count)</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;{</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;    ssize_t offset = 0;</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;    <span class="keywordflow">while</span> (count &gt; 0)</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;    {</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;        offset = write(fd, buf, count);</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;        buf += offset;</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;        count -= offset;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;        <span class="keywordflow">if</span> (offset == -1)</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;            <span class="keywordflow">return</span> errno;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    }</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;}</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="safe_8c.html#aeb28bdb1609a5e208b7840b471413e81">   17</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="safe_8c.html#aeb28bdb1609a5e208b7840b471413e81">safe_send</a>(<span class="keywordtype">int</span> fd, <span class="keyword">const</span> <span class="keywordtype">void</span> *buf, ssize_t count)</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;{</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    ssize_t offset = 0;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keywordflow">while</span> (count &gt; 0)</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    {</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        offset = send(fd, buf, count, MSG_MORE);</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        buf += offset;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        count -= offset;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <span class="keywordflow">if</span> (offset == -1)</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;            <span class="keywordflow">return</span> errno;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    }</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;}</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="safe_8c.html#a5cdb8f1fd0a2b177164e88074639a648">   31</a></span>&#160;ssize_t <a class="code" href="safe_8c.html#a5cdb8f1fd0a2b177164e88074639a648">safe_read</a>(<span class="keywordtype">int</span> fd, <span class="keyword">const</span> <span class="keywordtype">void</span> **buf, <span class="keywordtype">size_t</span> *bufsize)</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;{</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordtype">size_t</span> buffersize = 12;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordtype">size_t</span> read_count = 0;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keywordtype">char</span> *buffer = calloc(buffersize, <span class="keyword">sizeof</span>(<span class="keywordtype">char</span>));</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordflow">do</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    {</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        ssize_t nb_read = read(fd, buffer + read_count, buffersize - read_count);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="keywordflow">if</span> (nb_read == 0)</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        {</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        }</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="keywordflow">if</span> (nb_read == -1)</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;            <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        read_count += nb_read;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <span class="keywordflow">if</span> (read_count &gt;= buffersize)</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        {</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            buffersize += 1;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            buffer = realloc(buffer, buffersize);</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        }</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    } <span class="keywordflow">while</span> (strncmp(<span class="stringliteral">&quot;\r\n\r\n&quot;</span>, buffer + (read_count - 4), 4) != 0);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    *buf = buffer;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    *bufsize = buffersize;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keywordflow">return</span> read_count;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;}</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno"><a class="line" href="safe_8c.html#ac4bf776335d7193068afa656b91a8827">   58</a></span>&#160;ssize_t <a class="code" href="safe_8c.html#ac4bf776335d7193068afa656b91a8827">safe_fread</a>(<span class="keywordtype">void</span> *buffer, <span class="keyword">const</span> <span class="keywordtype">size_t</span> size, <span class="keyword">const</span> <span class="keywordtype">size_t</span> n, FILE *file)</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;{</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordtype">size_t</span> total_count = 0;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    ssize_t nb_read = 0;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordflow">do</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    {</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        nb_read = fread(buffer + (total_count * size), size, n - total_count, file);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        <span class="keywordflow">if</span> (nb_read == -1)</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        total_count += nb_read;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    } <span class="keywordflow">while</span> (nb_read &gt; 0);</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordflow">return</span> total_count;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="asafe_8c_html_a405edff38f586c79822927a3b981e504"><div class="ttname"><a href="safe_8c.html#a405edff38f586c79822927a3b981e504">safe_write</a></div><div class="ttdeci">int safe_write(int fd, const void *buf, ssize_t count)</div><div class="ttdoc">Writes safely to a file descriptor.</div><div class="ttdef"><b>Definition:</b> <a href="safe_8c_source.html#l00004">safe.c:4</a></div></div>
-<div class="ttc" id="asafe_8c_html_a5cdb8f1fd0a2b177164e88074639a648"><div class="ttname"><a href="safe_8c.html#a5cdb8f1fd0a2b177164e88074639a648">safe_read</a></div><div class="ttdeci">ssize_t safe_read(int fd, const void **buf, size_t *bufsize)</div><div class="ttdoc">Reads safely in a file descriptor until '\r\n\r\n'.</div><div class="ttdef"><b>Definition:</b> <a href="safe_8c_source.html#l00018">safe.c:18</a></div></div>
+<div class="ttc" id="asafe_8c_html_aeb28bdb1609a5e208b7840b471413e81"><div class="ttname"><a href="safe_8c.html#aeb28bdb1609a5e208b7840b471413e81">safe_send</a></div><div class="ttdeci">int safe_send(int fd, const void *buf, ssize_t count)</div><div class="ttdoc">Send safely to a file descriptor.</div><div class="ttdef"><b>Definition:</b> <a href="safe_8c_source.html#l00017">safe.c:17</a></div></div>
+<div class="ttc" id="asafe_8c_html_a405edff38f586c79822927a3b981e504"><div class="ttname"><a href="safe_8c.html#a405edff38f586c79822927a3b981e504">safe_write</a></div><div class="ttdeci">int safe_write(int fd, const void *buf, ssize_t count)</div><div class="ttdoc">Writes safely to a file descriptor.</div><div class="ttdef"><b>Definition:</b> <a href="safe_8c_source.html#l00003">safe.c:3</a></div></div>
+<div class="ttc" id="asafe_8c_html_a5cdb8f1fd0a2b177164e88074639a648"><div class="ttname"><a href="safe_8c.html#a5cdb8f1fd0a2b177164e88074639a648">safe_read</a></div><div class="ttdeci">ssize_t safe_read(int fd, const void **buf, size_t *bufsize)</div><div class="ttdoc">Reads safely in a file descriptor until '\r\n\r\n'.</div><div class="ttdef"><b>Definition:</b> <a href="safe_8c_source.html#l00031">safe.c:31</a></div></div>
 <div class="ttc" id="asafe_8h_html"><div class="ttname"><a href="safe_8h.html">safe.h</a></div></div>
-<div class="ttc" id="asafe_8c_html_ac4bf776335d7193068afa656b91a8827"><div class="ttname"><a href="safe_8c.html#ac4bf776335d7193068afa656b91a8827">safe_fread</a></div><div class="ttdeci">ssize_t safe_fread(void *buffer, const size_t size, const size_t n, FILE *file)</div><div class="ttdoc">Calls 'fread' but safely !</div><div class="ttdef"><b>Definition:</b> <a href="safe_8c_source.html#l00040">safe.c:40</a></div></div>
+<div class="ttc" id="asafe_8c_html_ac4bf776335d7193068afa656b91a8827"><div class="ttname"><a href="safe_8c.html#ac4bf776335d7193068afa656b91a8827">safe_fread</a></div><div class="ttdeci">ssize_t safe_fread(void *buffer, const size_t size, const size_t n, FILE *file)</div><div class="ttdoc">Calls 'fread' but safely !</div><div class="ttdef"><b>Definition:</b> <a href="safe_8c_source.html#l00058">safe.c:58</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_88826aa2a10e1882b573f502bc7f4b55.html">misc</a></li><li class="navelem"><a class="el" href="safe_8c.html">safe.c</a></li>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_aebb8dcc11953d78e620bbef0b9e2183.html">core</a></li><li class="navelem"><a class="el" href="dir_1d1b10f61824508180eede0e0533804d.html">misc</a></li><li class="navelem"><a class="el" href="safe_8c.html">safe.c</a></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>

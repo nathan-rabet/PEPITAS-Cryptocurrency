@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['ls_5fcombo_411',['ls_combo',['../ui_8c.html#a56f0bc64e6d4d817b9eab9ed1796f868',1,'ui.c']]]
+  ['get_5fblocks_5ft_603',['get_blocks_t',['../network_8h.html#aef691ccc586177c6f1ed45825b4b79bd',1,'network.h']]]
 ];

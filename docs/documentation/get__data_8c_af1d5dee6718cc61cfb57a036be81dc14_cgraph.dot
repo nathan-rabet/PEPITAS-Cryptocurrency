@@ -1,0 +1,12 @@
+digraph "fetch_client_list"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="fetch_client_list",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Merges my neighbours list with the one sent by 'neighbour_id'."];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="set_neighbour",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$client_8h.html#a65f3df28a906d619b5f408a26aec7649",tooltip="Sets a neighbour in the client.neightbours section."];
+  Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="get_my_node",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$core_2network_2client_8c.html#a745cc052bf8990bd3189b857a1d29f40",tooltip="Get the my node object."];
+}

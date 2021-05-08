@@ -1,4 +1,4 @@
-.TH "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/headers/ui/ui.h" 3 "Thu Apr 22 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
+.TH "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/headers/ui/ui.h" 3 "Sat May 8 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -16,26 +16,33 @@
 .br
 \fC#include <time\&.h>\fP
 .br
-\fC#include '\&.\&./cryptosystem/rsa\&.h'\fP
+\fC#include 'cryptosystem/rsa\&.h'\fP
 .br
-\fC#include '\&.\&./cryptosystem/hash\&.h'\fP
+\fC#include 'cryptosystem/hash\&.h'\fP
 .br
-\fC#include '\&.\&./core/blockchain/wallet\&.h'\fP
+\fC#include 'blockchain/wallet\&.h'\fP
 .br
 
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fBblockinfo\fP"
+.br
+.in -1c
 .SS "Functions"
 
 .in +1c
 .ti -1c
-.RI "int \fBsetup\fP ()"
+.RI "void * \fBsetup\fP (void *args)"
 .br
 .RI "Setups the gtk widgets for the GUI\&. "
 .ti -1c
-.RI "gboolean \fBon_main_window_delete\fP (GtkWidget *widget, __attribute__((unused)) gpointer data)"
+.RI "gboolean \fBon_main_window_delete\fP (GtkWidget *widget, \fB__attribute__\fP((unused)) gpointer data)"
 .br
 .RI "Destroys the window when it is closed\&. "
 .ti -1c
-.RI "void \fBon_main_window_destroy\fP (__attribute((unused)) GtkWidget *widget, __attribute__((unused)) gpointer data)"
+.RI "void \fBon_main_window_destroy\fP (__attribute((unused)) GtkWidget *widget, \fB__attribute__\fP((unused)) gpointer data)"
 .br
 .RI "Quits GTK when the program ends\&. "
 .ti -1c
@@ -70,6 +77,9 @@
 .RI "gboolean \fBadd_contact\fP (GtkWidget *widget, GdkEventKey *event, gpointer user_data)"
 .br
 .RI "Adds a contact to the treeview if the entrys weren't empty, and closes the contact window\&. "
+.ti -1c
+.RI "void \fBchange_label_text\fP (GtkLabel *label, char *text)"
+.br
 .ti -1c
 .RI "gboolean \fBon_create_key_but1_press\fP (GtkWidget *widget, GdkEventKey *event, gpointer user_data)"
 .br
@@ -106,6 +116,31 @@
 .ti -1c
 .RI "char * \fBget_public_key_from_contacts\fP (const char *name)"
 .br
+.ti -1c
+.RI "void \fBadd_new_blockinfo\fP (size_t height, size_t transaction)"
+.br
+.ti -1c
+.RI "void \fBupdate_sync\fP (size_t actual, size_t final)"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "GtkLabel * \fBsynchro_label\fP"
+.br
+.ti -1c
+.RI "GtkLabel * \fBblock_amount_label\fP"
+.br
+.ti -1c
+.RI "GtkLabel * \fBconnections_label\fP"
+.br
+.ti -1c
+.RI "GtkLabel * \fBmempool_label\fP"
+.br
+.ti -1c
+.RI "struct \fBblockinfo\fP \fBblocksinfo\fP [3]"
+.br
 .in -1c
 .SH "Function Documentation"
 .PP 
@@ -132,31 +167,39 @@ gboolean Error code
 .SS "void add_contact_to_combobox (char * name)"
 
 .PP
-Definition at line 389 of file ui\&.c\&.
+Definition at line 466 of file ui\&.c\&.
 .SS "void add_contacts_from_file (char * name, char * public_key)"
 
 .PP
-Definition at line 397 of file ui\&.c\&.
+Definition at line 474 of file ui\&.c\&.
+.SS "void add_new_blockinfo (size_t height, size_t transaction)"
+
+.PP
+Definition at line 199 of file ui\&.c\&.
 .SS "void add_transaction_from_file (double amount, char * public_key, char * date)"
 
 .PP
-Definition at line 253 of file ui\&.c\&.
+Definition at line 324 of file ui\&.c\&.
 .SS "void add_transaction_with_contact (double amount, char * public_key, char * date)"
 
 .PP
-Definition at line 233 of file ui\&.c\&.
+Definition at line 304 of file ui\&.c\&.
 .SS "void add_transaction_with_pkey (double amount, char * public_key, char * date)"
 
 .PP
-Definition at line 212 of file ui\&.c\&.
+Definition at line 283 of file ui\&.c\&.
+.SS "void change_label_text (GtkLabel * label, char * text)"
+
+.PP
+Definition at line 194 of file ui\&.c\&.
 .SS "char* get_public_key_from_contacts (const char * name)"
 
 .PP
-Definition at line 428 of file ui\&.c\&.
+Definition at line 511 of file ui\&.c\&.
 .SS "void load_contacts_from_file ()"
 
 .PP
-Definition at line 406 of file ui\&.c\&.
+Definition at line 483 of file ui\&.c\&.
 .SS "void load_transaction_from_file ()"
 
 .SS "gboolean on_add_contact_button1_press (GtkWidget * widget, GdkEventKey * event, gpointer user_data)"
@@ -225,7 +268,7 @@ gboolean Error Code
 .RE
 .PP
 
-.SS "gboolean on_main_window_delete (GtkWidget * widget, __attribute__((unused)) gpointer data)"
+.SS "gboolean on_main_window_delete (GtkWidget * widget, \fB__attribute__\fP((unused)) gpointer data)"
 
 .PP
 Destroys the window when it is closed\&. 
@@ -242,8 +285,8 @@ gboolean Error code
 .PP
 
 .PP
-Definition at line 162 of file ui\&.c\&.
-.SS "void on_main_window_destroy (__attribute((unused)) GtkWidget * widget, __attribute__((unused)) gpointer data)"
+Definition at line 233 of file ui\&.c\&.
+.SS "void on_main_window_destroy (__attribute((unused)) GtkWidget * widget, \fB__attribute__\fP((unused)) gpointer data)"
 
 .PP
 Quits GTK when the program ends\&. 
@@ -327,7 +370,7 @@ gboolean Error code
 .RE
 .PP
 
-.SS "int setup ()"
+.SS "void* setup (void * args)"
 
 .PP
 Setups the gtk widgets for the GUI\&. 
@@ -339,11 +382,37 @@ int Returns 1 if there is an error, 0 otherwise
 .PP
 
 .PP
-Definition at line 57 of file ui\&.c\&.
+Definition at line 63 of file ui\&.c\&.
 .SS "void update_labels ()"
 
 .PP
-Definition at line 524 of file ui\&.c\&.
+Definition at line 658 of file ui\&.c\&.
+.SS "void update_sync (size_t actual, size_t final)"
+
+.PP
+Definition at line 214 of file ui\&.c\&.
+.SH "Variable Documentation"
+.PP 
+.SS "GtkLabel* block_amount_label"
+
+.PP
+Definition at line 14 of file ui\&.h\&.
+.SS "struct \fBblockinfo\fP blocksinfo[3]"
+
+.PP
+Definition at line 23 of file ui\&.h\&.
+.SS "GtkLabel* connections_label"
+
+.PP
+Definition at line 15 of file ui\&.h\&.
+.SS "GtkLabel* mempool_label"
+
+.PP
+Definition at line 16 of file ui\&.h\&.
+.SS "GtkLabel* synchro_label"
+
+.PP
+Definition at line 13 of file ui\&.h\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for PEPITAS CRYPTOCURRENCY from the source code\&.

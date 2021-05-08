@@ -6,17 +6,5 @@ digraph "on_connect_but_press"
   rankdir="LR";
   Node1 [label="on_connect_but_press",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
   Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node2 [label="load_contacts_from_file",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$ui_8c.html#a73fe931a2fbeb2086428ad91c0cbc05e",tooltip=" "];
-  Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node3 [label="add_contact_to_combobox",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$ui_8c.html#acfeb1c1504a9c8dab16b48f4ee0a8324",tooltip=" "];
-  Node2 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node4 [label="add_contacts_from_file",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$ui_8c.html#a3cce6cef71ccb6ae5dd4c9ca852eb31f",tooltip=" "];
-  Node1 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node5 [label="load_transactions_from_file",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$ui_8c.html#a8909bf913522e177fc1629b07c32420c",tooltip=" "];
-  Node5 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node6 [label="add_transaction_from_file",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$ui_8c.html#addfd36df97e95e6d913426e07a659057",tooltip=" "];
-  Node1 -> Node7 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node7 [label="update_labels",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$ui_8c.html#af1854ec5ff4099ed69a1b51a3fd3b3df",tooltip=" "];
-  Node7 -> Node8 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node8 [label="get_my_wallet",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$wallet_8h.html#a993fb7ec0c86c7a2d8ff68363e9f5304",tooltip="Get my wallet object."];
+  Node2 [label="change_label_text",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$ui_8c.html#ae4c608b5626430bac55322e32309bf8f",tooltip=" "];
 }

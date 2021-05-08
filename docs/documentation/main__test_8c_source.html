@@ -87,18 +87,23 @@ $(document).ready(function(){initNavTree('main__test_8c_source.html',''); initRe
 <div class="title">main_test.c</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="main__test_8c.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_g_e_n__validators__file_8c.html">gen/GEN_validators_file.c</a>&quot;</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
-<div class="line"><a name="l00003"></a><span class="lineno"><a class="line" href="main__test_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4">    3</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="main__test_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>()</div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;{</div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;    <a class="code" href="_g_e_n__validators__file_8c.html#abf3fe34d9f81a5c8f8de30fe8b1c2395">gen_validators_file</a>(<span class="stringliteral">&quot;validators.state&quot;</span>);</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;}</div>
+<a href="main__test_8c.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef MAIN_TEST_C</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno"><a class="line" href="main__test_8c.html#ac8177a502c80ad8ba2098ecb37f24f69">    2</a></span>&#160;<span class="preprocessor">#define MAIN_TEST_C</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="wallet_8h.html">blockchain/wallet.h</a>&quot;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
+<div class="line"><a name="l00005"></a><span class="lineno"><a class="line" href="main__test_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4">    5</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="main__test_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>()</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;{</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;    <a class="code" href="rsa_8h.html#a43ef74c79e95360f43f9f9bd32b33b1d">get_keys</a>();</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    printf(<span class="stringliteral">&quot;%d&quot;</span>,RSA_size(<a class="code" href="wallet_8h.html#a993fb7ec0c86c7a2d8ff68363e9f5304">get_my_wallet</a>()-&gt;pub_key));</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;}</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="a_g_e_n__validators__file_8c_html"><div class="ttname"><a href="_g_e_n__validators__file_8c.html">GEN_validators_file.c</a></div></div>
-<div class="ttc" id="amain__test_8c_html_ae66f6b31b5ad750f1fe042a706a4e3d4"><div class="ttname"><a href="main__test_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a></div><div class="ttdeci">int main()</div><div class="ttdef"><b>Definition:</b> <a href="main__test_8c_source.html#l00003">main_test.c:3</a></div></div>
-<div class="ttc" id="a_g_e_n__validators__file_8c_html_abf3fe34d9f81a5c8f8de30fe8b1c2395"><div class="ttname"><a href="_g_e_n__validators__file_8c.html#abf3fe34d9f81a5c8f8de30fe8b1c2395">gen_validators_file</a></div><div class="ttdeci">void gen_validators_file(char path[])</div><div class="ttdoc">Generate a mock validators states file.</div><div class="ttdef"><b>Definition:</b> <a href="_g_e_n__validators__file_8c_source.html#l00028">GEN_validators_file.c:28</a></div></div>
+<div class="ttc" id="awallet_8h_html_a993fb7ec0c86c7a2d8ff68363e9f5304"><div class="ttname"><a href="wallet_8h.html#a993fb7ec0c86c7a2d8ff68363e9f5304">get_my_wallet</a></div><div class="ttdeci">Wallet * get_my_wallet()</div><div class="ttdoc">Get my wallet object.</div><div class="ttdef"><b>Definition:</b> <a href="wallet_8c_source.html#l00007">wallet.c:7</a></div></div>
+<div class="ttc" id="awallet_8h_html"><div class="ttname"><a href="wallet_8h.html">wallet.h</a></div></div>
+<div class="ttc" id="arsa_8h_html_a43ef74c79e95360f43f9f9bd32b33b1d"><div class="ttname"><a href="rsa_8h.html#a43ef74c79e95360f43f9f9bd32b33b1d">get_keys</a></div><div class="ttdeci">void get_keys(char *password)</div><div class="ttdoc">Get the keys object.</div></div>
+<div class="ttc" id="amain__test_8c_html_ae66f6b31b5ad750f1fe042a706a4e3d4"><div class="ttname"><a href="main__test_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a></div><div class="ttdeci">int main()</div><div class="ttdef"><b>Definition:</b> <a href="main__test_8c_source.html#l00005">main_test.c:5</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

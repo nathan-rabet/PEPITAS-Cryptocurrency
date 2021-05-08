@@ -84,16 +84,22 @@ $(document).ready(function(){initNavTree('server_8h.html',''); initResizable(); 
 
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Data Structures</a> &#124;
-<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">server.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;sys/socket.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="network_8h_source.html">network.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="block_8h_source.html">core/blockchain/block.h</a>&quot;</code><br />
+<code>#include &lt;sys/types.h&gt;</code><br />
+<code>#include &lt;semaphore.h&gt;</code><br />
+<code>#include &lt;netdb.h&gt;</code><br />
+<code>#include &lt;arpa/inet.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="block_8h_source.html">blockchain/block.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="client_8h_source.html">network/client.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="get__data_8h_source.html">network/get_data.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="send__data_8h_source.html">network/send_data.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="network_8h_source.html">network/network.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="safe_8h_source.html">misc/safe.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for server.h:</div>
 <div class="dyncontent">
@@ -109,110 +115,51 @@ This graph shows which files directly or indirectly include this file:</div>
 </div>
 <p><a href="server_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Data Structures</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structclient__connection.html">client_connection</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
-Typedefs</h2></td></tr>
-<tr class="memitem:a6994b8a72828be0e03c1d864113f7da1"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structclient__connection.html">client_connection</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8h.html#a6994b8a72828be0e03c1d864113f7da1">client_connection</a></td></tr>
-<tr class="separator:a6994b8a72828be0e03c1d864113f7da1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ad7de155004abd1b0a8577003348ba464"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8h.html#ad7de155004abd1b0a8577003348ba464">init_server</a> ()</td></tr>
-<tr class="memdesc:ad7de155004abd1b0a8577003348ba464"><td class="mdescLeft">&#160;</td><td class="mdescRight">Launches a server instance, connected to the peer-to-peer network 'hostname'.  <a href="server_8h.html#ad7de155004abd1b0a8577003348ba464">More...</a><br /></td></tr>
-<tr class="separator:ad7de155004abd1b0a8577003348ba464"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad34da51386cbac2c2b784a0f12f78659"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8h.html#ad34da51386cbac2c2b784a0f12f78659">send_block</a> (<a class="el" href="struct_block.html">Block</a> block, int sockfd)</td></tr>
-<tr class="memdesc:ad34da51386cbac2c2b784a0f12f78659"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends a block to a user via a socket FD.  <a href="server_8h.html#ad34da51386cbac2c2b784a0f12f78659">More...</a><br /></td></tr>
-<tr class="separator:ad34da51386cbac2c2b784a0f12f78659"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10fb306879537348fffef6ae68f70640"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8h.html#a10fb306879537348fffef6ae68f70640">init_server</a> (void *args)</td></tr>
+<tr class="memdesc:a10fb306879537348fffef6ae68f70640"><td class="mdescLeft">&#160;</td><td class="mdescRight">Launches a server instance, connected to the peer-to-peer network 'hostname'.  <a href="server_8h.html#a10fb306879537348fffef6ae68f70640">More...</a><br /></td></tr>
+<tr class="separator:a10fb306879537348fffef6ae68f70640"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Typedef Documentation</h2>
-<a id="a6994b8a72828be0e03c1d864113f7da1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6994b8a72828be0e03c1d864113f7da1">&#9670;&nbsp;</a></span>client_connection</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef struct <a class="el" href="structclient__connection.html">client_connection</a> <a class="el" href="structclient__connection.html">client_connection</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="ad7de155004abd1b0a8577003348ba464"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad7de155004abd1b0a8577003348ba464">&#9670;&nbsp;</a></span>init_server()</h2>
+<a id="a10fb306879537348fffef6ae68f70640"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a10fb306879537348fffef6ae68f70640">&#9670;&nbsp;</a></span>init_server()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int init_server </td>
+          <td class="memname">void* init_server </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>args</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Launches a server instance, connected to the peer-to-peer network 'hostname'. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">type</td><td>Type of the server </td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="section return"><dt>Returns</dt><dd>0 if success, -1 otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="network_2server_8c_source.html#l00030">30</a> of file <a class="el" href="network_2server_8c_source.html">server.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="core_2network_2server_8c_source.html#l00077">77</a> of file <a class="el" href="core_2network_2server_8c_source.html">server.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="server_8h_ad7de155004abd1b0a8577003348ba464_cgraph.png" border="0" usemap="#server_8h_ad7de155004abd1b0a8577003348ba464_cgraph" alt=""/></div>
+<div class="center"><img src="server_8h_a10fb306879537348fffef6ae68f70640_cgraph.png" border="0" usemap="#server_8h_a10fb306879537348fffef6ae68f70640_cgraph" alt=""/></div>
 <!-- MAP 2 -->
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="server_8h_ad7de155004abd1b0a8577003348ba464_icgraph.png" border="0" usemap="#server_8h_ad7de155004abd1b0a8577003348ba464_icgraph" alt=""/></div>
+<div class="center"><img src="server_8h_a10fb306879537348fffef6ae68f70640_icgraph.png" border="0" usemap="#server_8h_a10fb306879537348fffef6ae68f70640_icgraph" alt=""/></div>
 <!-- MAP 3 -->
 </div>
-
-</div>
-</div>
-<a id="ad34da51386cbac2c2b784a0f12f78659"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad34da51386cbac2c2b784a0f12f78659">&#9670;&nbsp;</a></span>send_block()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int send_block </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_block.html">Block</a>&#160;</td>
-          <td class="paramname"><em>block</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>sockfd</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Sends a block to a user via a socket FD. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">sockfd</td><td>The socket FD </td></tr>
-    <tr><td class="paramname">block</td><td>The block to send </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>int </dd></dl>
 
 </div>
 </div>

@@ -104,14 +104,16 @@ Data Fields</h2></td></tr>
 <tr class="separator:a3f0fbac2bcbc2fbf77bed06d9915548d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa4ad7aceb75575844e2db05c93709bba"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_block_data.html">BlockData</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_block.html#aa4ad7aceb75575844e2db05c93709bba">block_data</a></td></tr>
 <tr class="separator:aa4ad7aceb75575844e2db05c93709bba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa8352dca3d12392f6a9eff7c46944009"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_block.html#aa8352dca3d12392f6a9eff7c46944009">signature_len</a></td></tr>
-<tr class="separator:aa8352dca3d12392f6a9eff7c46944009"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8e0f17c4a0484d480edd93c673428d47"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_block.html#a8e0f17c4a0484d480edd93c673428d47">block_signature</a></td></tr>
-<tr class="separator:a8e0f17c4a0484d480edd93c673428d47"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af74f4943494e179408bedd4841fadc1b"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_block.html#af74f4943494e179408bedd4841fadc1b">block_signature</a> [256]</td></tr>
+<tr class="separator:af74f4943494e179408bedd4841fadc1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab92a287a57cf397469d124229f8f69ff"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_block.html#ab92a287a57cf397469d124229f8f69ff">validators_votes</a> [<a class="el" href="validators_8h.html#aebcc63085ec90348cc76624d948759dc">MAX_VALIDATORS_PER_BLOCK</a>/8]</td></tr>
+<tr class="separator:ab92a287a57cf397469d124229f8f69ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a583563e61e9fe701bf4edb94596c20e4"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_block.html#a583563e61e9fe701bf4edb94596c20e4">vote_signature</a> [<a class="el" href="validators_8h.html#aebcc63085ec90348cc76624d948759dc">MAX_VALIDATORS_PER_BLOCK</a> - 1][256]</td></tr>
+<tr class="separator:a583563e61e9fe701bf4edb94596c20e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="block_8h_source.html#l00031">31</a> of file <a class="el" href="block_8h_source.html">block.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="block_8h_source.html#l00051">51</a> of file <a class="el" href="block_8h_source.html">block.h</a>.</p>
 </div><h2 class="groupheader">Field Documentation</h2>
 <a id="aa4ad7aceb75575844e2db05c93709bba"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa4ad7aceb75575844e2db05c93709bba">&#9670;&nbsp;</a></span>block_data</h2>
@@ -125,23 +127,23 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="block_8h_source.html#l00034">34</a> of file <a class="el" href="block_8h_source.html">block.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="block_8h_source.html#l00054">54</a> of file <a class="el" href="block_8h_source.html">block.h</a>.</p>
 
 </div>
 </div>
-<a id="a8e0f17c4a0484d480edd93c673428d47"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8e0f17c4a0484d480edd93c673428d47">&#9670;&nbsp;</a></span>block_signature</h2>
+<a id="af74f4943494e179408bedd4841fadc1b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af74f4943494e179408bedd4841fadc1b">&#9670;&nbsp;</a></span>block_signature</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">char* block_signature</td>
+          <td class="memname">char block_signature[256]</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="block_8h_source.html#l00037">37</a> of file <a class="el" href="block_8h_source.html">block.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="block_8h_source.html#l00056">56</a> of file <a class="el" href="block_8h_source.html">block.h</a>.</p>
 
 </div>
 </div>
@@ -157,28 +159,44 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="block_8h_source.html#l00033">33</a> of file <a class="el" href="block_8h_source.html">block.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="block_8h_source.html#l00053">53</a> of file <a class="el" href="block_8h_source.html">block.h</a>.</p>
 
 </div>
 </div>
-<a id="aa8352dca3d12392f6a9eff7c46944009"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa8352dca3d12392f6a9eff7c46944009">&#9670;&nbsp;</a></span>signature_len</h2>
+<a id="ab92a287a57cf397469d124229f8f69ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab92a287a57cf397469d124229f8f69ff">&#9670;&nbsp;</a></span>validators_votes</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">size_t signature_len</td>
+          <td class="memname">char validators_votes[<a class="el" href="validators_8h.html#aebcc63085ec90348cc76624d948759dc">MAX_VALIDATORS_PER_BLOCK</a>/8]</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="block_8h_source.html#l00036">36</a> of file <a class="el" href="block_8h_source.html">block.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="block_8h_source.html#l00059">59</a> of file <a class="el" href="block_8h_source.html">block.h</a>.</p>
+
+</div>
+</div>
+<a id="a583563e61e9fe701bf4edb94596c20e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a583563e61e9fe701bf4edb94596c20e4">&#9670;&nbsp;</a></span>vote_signature</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char vote_signature[<a class="el" href="validators_8h.html#aebcc63085ec90348cc76624d948759dc">MAX_VALIDATORS_PER_BLOCK</a> - 1][256]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="block_8h_source.html#l00060">60</a> of file <a class="el" href="block_8h_source.html">block.h</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
-<li>/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/headers/core/blockchain/<a class="el" href="block_8h_source.html">block.h</a></li>
+<li>/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/headers/blockchain/<a class="el" href="block_8h_source.html">block.h</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

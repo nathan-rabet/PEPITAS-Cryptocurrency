@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>PEPITAS CRYPTOCURRENCY: /home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/headers/core/blockchain/transaction.h File Reference</title>
+<title>PEPITAS CRYPTOCURRENCY: /home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/headers/blockchain/transaction.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -92,20 +92,27 @@ $(document).ready(function(){initNavTree('transaction_8h.html',''); initResizabl
 <div class="title">transaction.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;stdlib.h&gt;</code><br />
+<div class="textblock"><code>#include &lt;string.h&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;openssl/rsa.h&gt;</code><br />
 <code>#include &lt;openssl/sha.h&gt;</code><br />
+<code>#include &lt;openssl/pem.h&gt;</code><br />
 <code>#include &lt;time.h&gt;</code><br />
+<code>#include &lt;sys/types.h&gt;</code><br />
+<code>#include &lt;sys/stat.h&gt;</code><br />
+<code>#include &lt;unistd.h&gt;</code><br />
+<code>#include &lt;fcntl.h&gt;</code><br />
+<code>#include &lt;err.h&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for transaction.h:</div>
 <div class="dyncontent">
-<div class="center"><img src="transaction_8h__incl.png" border="0" usemap="#_2home_2runner_2work_2_p_e_p_i_t_a_s-_cryptocurrency_2_p_e_p_i_t_a_s-_cryptocurrency_2headers_2core_2blockchain_2transaction_8h" alt=""/></div>
+<div class="center"><img src="transaction_8h__incl.png" border="0" usemap="#_2home_2runner_2work_2_p_e_p_i_t_a_s-_cryptocurrency_2_p_e_p_i_t_a_s-_cryptocurrency_2headers_2blockchain_2transaction_8h" alt=""/></div>
 <!-- MAP 0 -->
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
-<div class="center"><img src="transaction_8h__dep__incl.png" border="0" usemap="#_2home_2runner_2work_2_p_e_p_i_t_a_s-_cryptocurrency_2_p_e_p_i_t_a_s-_cryptocurrency_2headers_2core_2blockchain_2transaction_8hdep" alt=""/></div>
+<div class="center"><img src="transaction_8h__dep__incl.png" border="0" usemap="#_2home_2runner_2work_2_p_e_p_i_t_a_s-_cryptocurrency_2_p_e_p_i_t_a_s-_cryptocurrency_2headers_2blockchain_2transaction_8hdep" alt=""/></div>
 <!-- MAP 1 -->
 </div>
 </div>
@@ -124,6 +131,14 @@ Macros</h2></td></tr>
 <tr class="separator:a23a3fd6c444964ae25e3046fbd29bd86"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2feb985dba127602ea5a6c5b6822c969"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="transaction_8h.html#a2feb985dba127602ea5a6c5b6822c969">TRANSACTION_SIZE</a>&#160;&#160;&#160;sizeof(size_t) + 2048 + <a class="el" href="transaction_8h.html#a23a3fd6c444964ae25e3046fbd29bd86">TRANSACTION_DATA_SIZE</a></td></tr>
 <tr class="separator:a2feb985dba127602ea5a6c5b6822c969"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a844858e98ed01783bad48db7e850ea00"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="transaction_8h.html#a844858e98ed01783bad48db7e850ea00">T_TYPE_DEFAULT</a>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:a844858e98ed01783bad48db7e850ea00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab89b46767fb01957106298a1e1b71cc4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="transaction_8h.html#ab89b46767fb01957106298a1e1b71cc4">T_TYPE_ADD_STAKE</a>&#160;&#160;&#160;1</td></tr>
+<tr class="separator:ab89b46767fb01957106298a1e1b71cc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96043a50e70275b11a4adb73a30e71ec"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="transaction_8h.html#a96043a50e70275b11a4adb73a30e71ec">T_TYPE_WITHDRAW_STAKE</a>&#160;&#160;&#160;2</td></tr>
+<tr class="separator:a96043a50e70275b11a4adb73a30e71ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92d65c42336c7883f76ab535f8aed438"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="transaction_8h.html#a92d65c42336c7883f76ab535f8aed438">T_TYPE_STAKE_TO_STAKE</a>&#160;&#160;&#160;3</td></tr>
+<tr class="separator:a92d65c42336c7883f76ab535f8aed438"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
@@ -137,8 +152,86 @@ Functions</h2></td></tr>
 <tr class="memitem:af2cc2680c264900ad1505f6d7cf61ff1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="transaction_8h.html#af2cc2680c264900ad1505f6d7cf61ff1">send_money</a> (size_t amount, u_int64_t receiver_public_key)</td></tr>
 <tr class="memdesc:af2cc2680c264900ad1505f6d7cf61ff1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send 'amount' money to 'receiver_public_key'. This will broadcast a transaction to the network.  <a href="transaction_8h.html#af2cc2680c264900ad1505f6d7cf61ff1">More...</a><br /></td></tr>
 <tr class="separator:af2cc2680c264900ad1505f6d7cf61ff1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0bd00440f3c97bf7dace6c4e26ea17be"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="transaction_8h.html#a0bd00440f3c97bf7dace6c4e26ea17be">write_transactiondata</a> (<a class="el" href="struct_transaction_data.html">TransactionData</a> *transaction, int fd)</td></tr>
+<tr class="separator:a0bd00440f3c97bf7dace6c4e26ea17be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5bff0131aa50faf1cd0236e0b44169eb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="transaction_8h.html#a5bff0131aa50faf1cd0236e0b44169eb">write_transaction</a> (<a class="el" href="struct_transaction.html">Transaction</a> *transaction, int fd)</td></tr>
+<tr class="separator:a5bff0131aa50faf1cd0236e0b44169eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16588449d977a2d5052be7b3639768a8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="transaction_8h.html#a16588449d977a2d5052be7b3639768a8">get_transaction_data</a> (<a class="el" href="struct_transaction.html">Transaction</a> *trans, char **buff, size_t *index)</td></tr>
+<tr class="separator:a16588449d977a2d5052be7b3639768a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8649ee7d98b5b34c64efa31e274f2534"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="transaction_8h.html#a8649ee7d98b5b34c64efa31e274f2534">convert_data_to_transactiondata</a> (<a class="el" href="struct_transaction_data.html">TransactionData</a> *transactiondata, int fd)</td></tr>
+<tr class="separator:a8649ee7d98b5b34c64efa31e274f2534"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f4e33641ff7466e848182ce420827b6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="transaction_8h.html#a4f4e33641ff7466e848182ce420827b6">load_transaction</a> (<a class="el" href="struct_transaction.html">Transaction</a> *transaction, int fd)</td></tr>
+<tr class="separator:a4f4e33641ff7466e848182ce420827b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b26b26139793db7c1860ff96091ca77"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_transaction.html">Transaction</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="transaction_8h.html#a8b26b26139793db7c1860ff96091ca77">load_pending_transaction</a> (time_t timestamp)</td></tr>
+<tr class="separator:a8b26b26139793db7c1860ff96091ca77"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb63cde8baf977cfe0c39644f1e36010"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="transaction_8h.html#acb63cde8baf977cfe0c39644f1e36010">add_pending_transaction</a> (<a class="el" href="struct_transaction.html">Transaction</a> *transaction)</td></tr>
+<tr class="separator:acb63cde8baf977cfe0c39644f1e36010"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="ab89b46767fb01957106298a1e1b71cc4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab89b46767fb01957106298a1e1b71cc4">&#9670;&nbsp;</a></span>T_TYPE_ADD_STAKE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define T_TYPE_ADD_STAKE&#160;&#160;&#160;1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="transaction_8h_source.html#l00020">20</a> of file <a class="el" href="transaction_8h_source.html">transaction.h</a>.</p>
+
+</div>
+</div>
+<a id="a844858e98ed01783bad48db7e850ea00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a844858e98ed01783bad48db7e850ea00">&#9670;&nbsp;</a></span>T_TYPE_DEFAULT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define T_TYPE_DEFAULT&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="transaction_8h_source.html#l00019">19</a> of file <a class="el" href="transaction_8h_source.html">transaction.h</a>.</p>
+
+</div>
+</div>
+<a id="a92d65c42336c7883f76ab535f8aed438"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92d65c42336c7883f76ab535f8aed438">&#9670;&nbsp;</a></span>T_TYPE_STAKE_TO_STAKE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define T_TYPE_STAKE_TO_STAKE&#160;&#160;&#160;3</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="transaction_8h_source.html#l00022">22</a> of file <a class="el" href="transaction_8h_source.html">transaction.h</a>.</p>
+
+</div>
+</div>
+<a id="a96043a50e70275b11a4adb73a30e71ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a96043a50e70275b11a4adb73a30e71ec">&#9670;&nbsp;</a></span>T_TYPE_WITHDRAW_STAKE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define T_TYPE_WITHDRAW_STAKE&#160;&#160;&#160;2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="transaction_8h_source.html#l00021">21</a> of file <a class="el" href="transaction_8h_source.html">transaction.h</a>.</p>
+
+</div>
+</div>
 <a id="a23a3fd6c444964ae25e3046fbd29bd86"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a23a3fd6c444964ae25e3046fbd29bd86">&#9670;&nbsp;</a></span>TRANSACTION_DATA_SIZE</h2>
 
@@ -151,7 +244,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="transaction_8h_source.html#l00009">9</a> of file <a class="el" href="transaction_8h_source.html">transaction.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="transaction_8h_source.html#l00016">16</a> of file <a class="el" href="transaction_8h_source.html">transaction.h</a>.</p>
 
 </div>
 </div>
@@ -167,7 +260,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="transaction_8h_source.html#l00010">10</a> of file <a class="el" href="transaction_8h_source.html">transaction.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="transaction_8h_source.html#l00017">17</a> of file <a class="el" href="transaction_8h_source.html">transaction.h</a>.</p>
 
 </div>
 </div>
@@ -201,6 +294,178 @@ Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="acb63cde8baf977cfe0c39644f1e36010"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acb63cde8baf977cfe0c39644f1e36010">&#9670;&nbsp;</a></span>add_pending_transaction()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void add_pending_transaction </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_transaction.html">Transaction</a> *&#160;</td>
+          <td class="paramname"><em>transaction</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="transaction_8c_source.html#l00158">158</a> of file <a class="el" href="transaction_8c_source.html">transaction.c</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="transaction_8h_acb63cde8baf977cfe0c39644f1e36010_cgraph.png" border="0" usemap="#transaction_8h_acb63cde8baf977cfe0c39644f1e36010_cgraph" alt=""/></div>
+<!-- MAP 2 -->
+</div>
+
+</div>
+</div>
+<a id="a8649ee7d98b5b34c64efa31e274f2534"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8649ee7d98b5b34c64efa31e274f2534">&#9670;&nbsp;</a></span>convert_data_to_transactiondata()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void convert_data_to_transactiondata </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_transaction_data.html">TransactionData</a> *&#160;</td>
+          <td class="paramname"><em>transactiondata</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>fd</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="transaction_8c_source.html#l00099">99</a> of file <a class="el" href="transaction_8c_source.html">transaction.c</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="transaction_8h_a8649ee7d98b5b34c64efa31e274f2534_icgraph.png" border="0" usemap="#transaction_8h_a8649ee7d98b5b34c64efa31e274f2534_icgraph" alt=""/></div>
+<!-- MAP 3 -->
+</div>
+
+</div>
+</div>
+<a id="a16588449d977a2d5052be7b3639768a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a16588449d977a2d5052be7b3639768a8">&#9670;&nbsp;</a></span>get_transaction_data()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void get_transaction_data </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_transaction.html">Transaction</a> *&#160;</td>
+          <td class="paramname"><em>trans</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char **&#160;</td>
+          <td class="paramname"><em>buff</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t *&#160;</td>
+          <td class="paramname"><em>index</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="transaction_8c_source.html#l00048">48</a> of file <a class="el" href="transaction_8c_source.html">transaction.c</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="transaction_8h_a16588449d977a2d5052be7b3639768a8_icgraph.png" border="0" usemap="#transaction_8h_a16588449d977a2d5052be7b3639768a8_icgraph" alt=""/></div>
+<!-- MAP 4 -->
+</div>
+
+</div>
+</div>
+<a id="a8b26b26139793db7c1860ff96091ca77"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b26b26139793db7c1860ff96091ca77">&#9670;&nbsp;</a></span>load_pending_transaction()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_transaction.html">Transaction</a>* load_pending_transaction </td>
+          <td>(</td>
+          <td class="paramtype">time_t&#160;</td>
+          <td class="paramname"><em>timestamp</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="transaction_8c_source.html#l00145">145</a> of file <a class="el" href="transaction_8c_source.html">transaction.c</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="transaction_8h_a8b26b26139793db7c1860ff96091ca77_cgraph.png" border="0" usemap="#transaction_8h_a8b26b26139793db7c1860ff96091ca77_cgraph" alt=""/></div>
+<!-- MAP 5 -->
+</div>
+
+</div>
+</div>
+<a id="a4f4e33641ff7466e848182ce420827b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f4e33641ff7466e848182ce420827b6">&#9670;&nbsp;</a></span>load_transaction()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void load_transaction </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_transaction.html">Transaction</a> *&#160;</td>
+          <td class="paramname"><em>transaction</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>fd</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="transaction_8c_source.html#l00135">135</a> of file <a class="el" href="transaction_8c_source.html">transaction.c</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="transaction_8h_a4f4e33641ff7466e848182ce420827b6_cgraph.png" border="0" usemap="#transaction_8h_a4f4e33641ff7466e848182ce420827b6_cgraph" alt=""/></div>
+<!-- MAP 6 -->
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="transaction_8h_a4f4e33641ff7466e848182ce420827b6_icgraph.png" border="0" usemap="#transaction_8h_a4f4e33641ff7466e848182ce420827b6_icgraph" alt=""/></div>
+<!-- MAP 7 -->
+</div>
+
+</div>
+</div>
 <a id="af2cc2680c264900ad1505f6d7cf61ff1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af2cc2680c264900ad1505f6d7cf61ff1">&#9670;&nbsp;</a></span>send_money()</h2>
 
@@ -239,12 +504,90 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a5bff0131aa50faf1cd0236e0b44169eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5bff0131aa50faf1cd0236e0b44169eb">&#9670;&nbsp;</a></span>write_transaction()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void write_transaction </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_transaction.html">Transaction</a> *&#160;</td>
+          <td class="paramname"><em>transaction</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>fd</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="transaction_8c_source.html#l00042">42</a> of file <a class="el" href="transaction_8c_source.html">transaction.c</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="transaction_8h_a5bff0131aa50faf1cd0236e0b44169eb_cgraph.png" border="0" usemap="#transaction_8h_a5bff0131aa50faf1cd0236e0b44169eb_cgraph" alt=""/></div>
+<!-- MAP 8 -->
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="transaction_8h_a5bff0131aa50faf1cd0236e0b44169eb_icgraph.png" border="0" usemap="#transaction_8h_a5bff0131aa50faf1cd0236e0b44169eb_icgraph" alt=""/></div>
+<!-- MAP 9 -->
+</div>
+
+</div>
+</div>
+<a id="a0bd00440f3c97bf7dace6c4e26ea17be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0bd00440f3c97bf7dace6c4e26ea17be">&#9670;&nbsp;</a></span>write_transactiondata()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void write_transactiondata </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_transaction_data.html">TransactionData</a> *&#160;</td>
+          <td class="paramname"><em>transaction</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>fd</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="transaction_8c_source.html#l00003">3</a> of file <a class="el" href="transaction_8c_source.html">transaction.c</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="transaction_8h_a0bd00440f3c97bf7dace6c4e26ea17be_icgraph.png" border="0" usemap="#transaction_8h_a0bd00440f3c97bf7dace6c4e26ea17be_icgraph" alt=""/></div>
+<!-- MAP 10 -->
+</div>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_7f57b1e41c5acd0e859ae5f3a2b075a9.html">headers</a></li><li class="navelem"><a class="el" href="dir_c55509eeb63bcbc47aa921b127ea82fb.html">core</a></li><li class="navelem"><a class="el" href="dir_2ae1719583a3e1ef1c62bafa46f33cbf.html">blockchain</a></li><li class="navelem"><a class="el" href="transaction_8h.html">transaction.h</a></li>
+    <li class="navelem"><a class="el" href="dir_7f57b1e41c5acd0e859ae5f3a2b075a9.html">headers</a></li><li class="navelem"><a class="el" href="dir_970168e4fc598f7815ebfaae486ffad9.html">blockchain</a></li><li class="navelem"><a class="el" href="transaction_8h.html">transaction.h</a></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>

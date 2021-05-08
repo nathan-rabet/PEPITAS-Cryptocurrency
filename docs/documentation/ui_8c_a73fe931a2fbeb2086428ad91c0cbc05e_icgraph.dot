@@ -7,6 +7,4 @@ digraph "load_contacts_from_file"
   Node1 [label="load_contacts_from_file",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
   Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node2 [label="add_contact",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$ui_8c.html#ad00b3507b4bb09e32b88b8c4e015c7bf",tooltip=" "];
-  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node3 [label="on_connect_but_press",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$ui_8c.html#aa118feebec7cfa09ac8e958107872c47",tooltip=" "];
 }

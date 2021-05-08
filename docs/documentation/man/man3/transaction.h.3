@@ -1,18 +1,32 @@
-.TH "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/headers/core/blockchain/transaction.h" 3 "Thu Apr 22 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
+.TH "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/headers/blockchain/transaction.h" 3 "Sat May 8 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
-/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/headers/core/blockchain/transaction.h
+/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/headers/blockchain/transaction.h
 .SH SYNOPSIS
 .br
 .PP
+\fC#include <string\&.h>\fP
+.br
 \fC#include <stdlib\&.h>\fP
 .br
 \fC#include <openssl/rsa\&.h>\fP
 .br
 \fC#include <openssl/sha\&.h>\fP
 .br
+\fC#include <openssl/pem\&.h>\fP
+.br
 \fC#include <time\&.h>\fP
+.br
+\fC#include <sys/types\&.h>\fP
+.br
+\fC#include <sys/stat\&.h>\fP
+.br
+\fC#include <unistd\&.h>\fP
+.br
+\fC#include <fcntl\&.h>\fP
+.br
+\fC#include <err\&.h>\fP
 .br
 
 .SS "Data Structures"
@@ -34,6 +48,18 @@
 .ti -1c
 .RI "#define \fBTRANSACTION_SIZE\fP   sizeof(size_t) + 2048 + \fBTRANSACTION_DATA_SIZE\fP"
 .br
+.ti -1c
+.RI "#define \fBT_TYPE_DEFAULT\fP   0"
+.br
+.ti -1c
+.RI "#define \fBT_TYPE_ADD_STAKE\fP   1"
+.br
+.ti -1c
+.RI "#define \fBT_TYPE_WITHDRAW_STAKE\fP   2"
+.br
+.ti -1c
+.RI "#define \fBT_TYPE_STAKE_TO_STAKE\fP   3"
+.br
 .in -1c
 .SS "Typedefs"
 
@@ -52,17 +78,54 @@
 .RI "int \fBsend_money\fP (size_t amount, u_int64_t receiver_public_key)"
 .br
 .RI "Send 'amount' money to 'receiver_public_key'\&. This will broadcast a transaction to the network\&. "
+.ti -1c
+.RI "void \fBwrite_transactiondata\fP (\fBTransactionData\fP *transaction, int fd)"
+.br
+.ti -1c
+.RI "void \fBwrite_transaction\fP (\fBTransaction\fP *transaction, int fd)"
+.br
+.ti -1c
+.RI "void \fBget_transaction_data\fP (\fBTransaction\fP *trans, char **buff, size_t *index)"
+.br
+.ti -1c
+.RI "void \fBconvert_data_to_transactiondata\fP (\fBTransactionData\fP *transactiondata, int fd)"
+.br
+.ti -1c
+.RI "void \fBload_transaction\fP (\fBTransaction\fP *transaction, int fd)"
+.br
+.ti -1c
+.RI "\fBTransaction\fP * \fBload_pending_transaction\fP (time_t timestamp)"
+.br
+.ti -1c
+.RI "void \fBadd_pending_transaction\fP (\fBTransaction\fP *transaction)"
+.br
 .in -1c
 .SH "Macro Definition Documentation"
 .PP 
+.SS "#define T_TYPE_ADD_STAKE   1"
+
+.PP
+Definition at line 20 of file transaction\&.h\&.
+.SS "#define T_TYPE_DEFAULT   0"
+
+.PP
+Definition at line 19 of file transaction\&.h\&.
+.SS "#define T_TYPE_STAKE_TO_STAKE   3"
+
+.PP
+Definition at line 22 of file transaction\&.h\&.
+.SS "#define T_TYPE_WITHDRAW_STAKE   2"
+
+.PP
+Definition at line 21 of file transaction\&.h\&.
 .SS "#define TRANSACTION_DATA_SIZE   sizeof(size_t) * 3 + sizeof(time_t) + (512 * 2)"
 
 .PP
-Definition at line 9 of file transaction\&.h\&.
+Definition at line 16 of file transaction\&.h\&.
 .SS "#define TRANSACTION_SIZE   sizeof(size_t) + 2048 + \fBTRANSACTION_DATA_SIZE\fP"
 
 .PP
-Definition at line 10 of file transaction\&.h\&.
+Definition at line 17 of file transaction\&.h\&.
 .SH "Typedef Documentation"
 .PP 
 .SS "typedef struct \fBTransaction\fP \fBTransaction\fP"
@@ -71,6 +134,26 @@ Definition at line 10 of file transaction\&.h\&.
 
 .SH "Function Documentation"
 .PP 
+.SS "void add_pending_transaction (\fBTransaction\fP * transaction)"
+
+.PP
+Definition at line 158 of file transaction\&.c\&.
+.SS "void convert_data_to_transactiondata (\fBTransactionData\fP * transactiondata, int fd)"
+
+.PP
+Definition at line 99 of file transaction\&.c\&.
+.SS "void get_transaction_data (\fBTransaction\fP * trans, char ** buff, size_t * index)"
+
+.PP
+Definition at line 48 of file transaction\&.c\&.
+.SS "\fBTransaction\fP* load_pending_transaction (time_t timestamp)"
+
+.PP
+Definition at line 145 of file transaction\&.c\&.
+.SS "void load_transaction (\fBTransaction\fP * transaction, int fd)"
+
+.PP
+Definition at line 135 of file transaction\&.c\&.
 .SS "int send_money (size_t amount, u_int64_t receiver_public_key)"
 
 .PP
@@ -89,6 +172,14 @@ returns 0 if the broadcast succeeds, -1 otherwise
 .RE
 .PP
 
+.SS "void write_transaction (\fBTransaction\fP * transaction, int fd)"
+
+.PP
+Definition at line 42 of file transaction\&.c\&.
+.SS "void write_transactiondata (\fBTransactionData\fP * transaction, int fd)"
+
+.PP
+Definition at line 3 of file transaction\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for PEPITAS CRYPTOCURRENCY from the source code\&.

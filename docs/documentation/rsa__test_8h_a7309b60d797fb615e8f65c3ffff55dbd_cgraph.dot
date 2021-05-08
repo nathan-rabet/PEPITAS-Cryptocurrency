@@ -6,8 +6,7 @@ digraph "get_keys_test"
   rankdir="LR";
   Node1 [label="get_keys_test",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
   Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node2 [label="get_keys",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$rsa_8h.html#a4f017f51874e2df61091a589c98aa54c",tooltip="Get the keys object."];
-  Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node3 [label="get_my_wallet",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$wallet_8h.html#a993fb7ec0c86c7a2d8ff68363e9f5304",tooltip="Get my wallet object."];
+  Node2 [label="get_keys",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$rsa_8h.html#a43ef74c79e95360f43f9f9bd32b33b1d",tooltip="Get the keys object."];
   Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="get_my_wallet",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$wallet_8h.html#a993fb7ec0c86c7a2d8ff68363e9f5304",tooltip="Get my wallet object."];
 }

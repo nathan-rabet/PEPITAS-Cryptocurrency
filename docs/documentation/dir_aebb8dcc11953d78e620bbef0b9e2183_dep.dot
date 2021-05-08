@@ -8,10 +8,18 @@ digraph "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/src/cor
     graph [ bgcolor="#eeeeff", pencolor="black", label="" URL="dir_aebb8dcc11953d78e620bbef0b9e2183.html"];
     dir_aebb8dcc11953d78e620bbef0b9e2183 [shape=plaintext label="core"];
     dir_54a8b7800c925b9a80cc2b60c0616fcd [shape=box label="blockchain" color="black" fillcolor="white" style="filled" URL="dir_54a8b7800c925b9a80cc2b60c0616fcd.html"];
+    dir_20c6d9e430fc51dbb210ba9f0345a9ce [shape=box label="cryptosystem" color="black" fillcolor="white" style="filled" URL="dir_20c6d9e430fc51dbb210ba9f0345a9ce.html"];
+    dir_1d1b10f61824508180eede0e0533804d [shape=box label="misc" color="black" fillcolor="white" style="filled" URL="dir_1d1b10f61824508180eede0e0533804d.html"];
+    dir_b95722cc01ebae1793c459b9310e3c67 [shape=box label="network" color="black" fillcolor="white" style="filled" URL="dir_b95722cc01ebae1793c459b9310e3c67.html"];
+    dir_375e4deae5088f4de41587ab8e704ea8 [shape=box label="ui" color="black" fillcolor="white" style="filled" URL="dir_375e4deae5088f4de41587ab8e704ea8.html"];
     dir_02e4286cd8fc73887ce4e95076b6496b [shape=box label="validation" color="black" fillcolor="white" style="filled" URL="dir_02e4286cd8fc73887ce4e95076b6496b.html"];
   }
   }
   dir_7f57b1e41c5acd0e859ae5f3a2b075a9 [shape=box label="headers" fillcolor="white" style="filled" color="red" URL="dir_7f57b1e41c5acd0e859ae5f3a2b075a9.html"];
-  dir_54a8b7800c925b9a80cc2b60c0616fcd->dir_7f57b1e41c5acd0e859ae5f3a2b075a9 [headlabel="5", labeldistance=1.5 headhref="dir_000011_000000.html"];
-  dir_02e4286cd8fc73887ce4e95076b6496b->dir_7f57b1e41c5acd0e859ae5f3a2b075a9 [headlabel="8", labeldistance=1.5 headhref="dir_000012_000000.html"];
+  dir_1d1b10f61824508180eede0e0533804d->dir_7f57b1e41c5acd0e859ae5f3a2b075a9 [headlabel="2", labeldistance=1.5 headhref="dir_000012_000000.html"];
+  dir_b95722cc01ebae1793c459b9310e3c67->dir_7f57b1e41c5acd0e859ae5f3a2b075a9 [headlabel="7", labeldistance=1.5 headhref="dir_000009_000000.html"];
+  dir_54a8b7800c925b9a80cc2b60c0616fcd->dir_7f57b1e41c5acd0e859ae5f3a2b075a9 [headlabel="6", labeldistance=1.5 headhref="dir_000010_000000.html"];
+  dir_02e4286cd8fc73887ce4e95076b6496b->dir_7f57b1e41c5acd0e859ae5f3a2b075a9 [headlabel="3", labeldistance=1.5 headhref="dir_000014_000000.html"];
+  dir_375e4deae5088f4de41587ab8e704ea8->dir_7f57b1e41c5acd0e859ae5f3a2b075a9 [headlabel="1", labeldistance=1.5 headhref="dir_000013_000000.html"];
+  dir_20c6d9e430fc51dbb210ba9f0345a9ce->dir_7f57b1e41c5acd0e859ae5f3a2b075a9 [headlabel="8", labeldistance=1.5 headhref="dir_000011_000000.html"];
 }

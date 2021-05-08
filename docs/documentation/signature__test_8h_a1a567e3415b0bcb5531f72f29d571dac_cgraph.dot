@@ -8,11 +8,11 @@ digraph "verify_sign_test"
   Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node2 [label="get_my_wallet",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$wallet_8h.html#a993fb7ec0c86c7a2d8ff68363e9f5304",tooltip="Get my wallet object."];
   Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node3 [label="sign_message",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$signature_8h.html#a31fa447711840b3c0932cfe068d8cc65",tooltip="encrypt(SHA284(msg,len_data),priv_key)"];
+  Node3 [label="sign_message",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$signature_8h.html#ae19c745c1be8c5d67048188ede9a779d",tooltip="buffer <- encrypt(SHA284(msg,len_data),wallet_priv_key)"];
   Node3 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node3 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node4 [label="sha384_data",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$hash_8h.html#a67d06acefe39c395887f87d76bed5ba3",tooltip="Apply the SHA384 algorithm on a 'data' of size 'len_data'."];
   Node1 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node5 [label="verify_signature",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$signature_8h.html#a03bc161fe8675e7bf8763cdcee6a3ac2",tooltip="Apply the SHA384 algorithm on a 'data' of size 'len_data' and verifies if SHA384(data,..."];
+  Node5 [label="verify_signature",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$signature_8h.html#abb24ef32c40711494e34d7639e64f8a3",tooltip="Verifies if SHA384(data) == decrypt(signature,pub_key)"];
   Node5 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
 }

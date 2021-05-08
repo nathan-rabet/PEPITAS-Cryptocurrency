@@ -1,4 +1,4 @@
-.TH "BlockData" 3 "Thu Apr 22 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
+.TH "BlockData" 3 "Sat May 8 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -15,6 +15,12 @@ BlockData
 .RI "char \fBmagic\fP"
 .br
 .ti -1c
+.RI "int \fBepoch_id\fP"
+.br
+.ti -1c
+.RI "char \fBis_prev_block_valid\fP"
+.br
+.ti -1c
 .RI "char \fBprevious_block_hash\fP [SHA384_DIGEST_LENGTH *2+1]"
 .br
 .ti -1c
@@ -27,7 +33,13 @@ BlockData
 .RI "\fBTransaction\fP ** \fBtransactions\fP"
 .br
 .ti -1c
-.RI "RSA * \fBvalidator_public_key\fP"
+.RI "int \fBnb_validators\fP"
+.br
+.ti -1c
+.RI "RSA * \fBvalidators_public_keys\fP [\fBMAX_VALIDATORS_PER_BLOCK\fP]"
+.br
+.ti -1c
+.RI "char \fBprev_validators_votes\fP [\fBMAX_VALIDATORS_PER_BLOCK\fP/8]"
 .br
 .ti -1c
 .RI "time_t \fBblock_timestamp\fP"
@@ -35,37 +47,53 @@ BlockData
 .in -1c
 .SH "Detailed Description"
 .PP 
-Definition at line 17 of file block\&.h\&.
+Definition at line 33 of file block\&.h\&.
 .SH "Field Documentation"
 .PP 
 .SS "time_t block_timestamp"
 
 .PP
-Definition at line 28 of file block\&.h\&.
+Definition at line 48 of file block\&.h\&.
+.SS "int epoch_id"
+
+.PP
+Definition at line 36 of file block\&.h\&.
 .SS "size_t height"
 
 .PP
-Definition at line 21 of file block\&.h\&.
+Definition at line 39 of file block\&.h\&.
+.SS "char is_prev_block_valid"
+
+.PP
+Definition at line 37 of file block\&.h\&.
 .SS "char magic"
 
 .PP
-Definition at line 19 of file block\&.h\&.
+Definition at line 35 of file block\&.h\&.
 .SS "uint16_t nb_transactions"
 
 .PP
-Definition at line 23 of file block\&.h\&.
+Definition at line 41 of file block\&.h\&.
+.SS "int nb_validators"
+
+.PP
+Definition at line 45 of file block\&.h\&.
+.SS "char prev_validators_votes[\fBMAX_VALIDATORS_PER_BLOCK\fP/8]"
+
+.PP
+Definition at line 47 of file block\&.h\&.
 .SS "char previous_block_hash[SHA384_DIGEST_LENGTH *2+1]"
 
 .PP
-Definition at line 20 of file block\&.h\&.
+Definition at line 38 of file block\&.h\&.
 .SS "\fBTransaction\fP** transactions"
 
 .PP
-Definition at line 24 of file block\&.h\&.
-.SS "RSA* validator_public_key"
+Definition at line 42 of file block\&.h\&.
+.SS "RSA* validators_public_keys[\fBMAX_VALIDATORS_PER_BLOCK\fP]"
 
 .PP
-Definition at line 27 of file block\&.h\&.
+Definition at line 46 of file block\&.h\&.
 
 .SH "Author"
 .PP 

@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['block_240',['Block',['../struct_block.html',1,'']]],
-  ['blockdata_241',['BlockData',['../struct_block_data.html',1,'']]]
+  ['block_367',['Block',['../struct_block.html',1,'']]],
+  ['blockdata_368',['BlockData',['../struct_block_data.html',1,'']]],
+  ['blockinfo_369',['blockinfo',['../structblockinfo.html',1,'']]]
 ];

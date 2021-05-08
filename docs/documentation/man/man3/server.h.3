@@ -1,4 +1,4 @@
-.TH "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/headers/network/server.h" 3 "Thu Apr 22 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
+.TH "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/headers/network/server.h" 3 "Sat May 8 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -8,47 +8,46 @@
 .PP
 \fC#include <sys/socket\&.h>\fP
 .br
-\fC#include 'network\&.h'\fP
+\fC#include <sys/types\&.h>\fP
 .br
-\fC#include 'core/blockchain/block\&.h'\fP
+\fC#include <semaphore\&.h>\fP
+.br
+\fC#include <netdb\&.h>\fP
+.br
+\fC#include <arpa/inet\&.h>\fP
+.br
+\fC#include 'blockchain/block\&.h'\fP
+.br
+\fC#include 'network/client\&.h'\fP
+.br
+\fC#include 'network/get_data\&.h'\fP
+.br
+\fC#include 'network/send_data\&.h'\fP
+.br
+\fC#include 'network/network\&.h'\fP
+.br
+\fC#include 'misc/safe\&.h'\fP
 .br
 
-.SS "Data Structures"
-
-.in +1c
-.ti -1c
-.RI "struct \fBclient_connection\fP"
-.br
-.in -1c
-.SS "Typedefs"
-
-.in +1c
-.ti -1c
-.RI "typedef struct \fBclient_connection\fP \fBclient_connection\fP"
-.br
-.in -1c
 .SS "Functions"
 
 .in +1c
 .ti -1c
-.RI "int \fBinit_server\fP ()"
+.RI "void * \fBinit_server\fP (void *args)"
 .br
 .RI "Launches a server instance, connected to the peer-to-peer network 'hostname'\&. "
-.ti -1c
-.RI "int \fBsend_block\fP (\fBBlock\fP block, int sockfd)"
-.br
-.RI "Sends a block to a user via a socket FD\&. "
 .in -1c
-.SH "Typedef Documentation"
-.PP 
-.SS "typedef struct \fBclient_connection\fP \fBclient_connection\fP"
-
 .SH "Function Documentation"
 .PP 
-.SS "int init_server ()"
+.SS "void* init_server (void * args)"
 
 .PP
 Launches a server instance, connected to the peer-to-peer network 'hostname'\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fItype\fP Type of the server 
+.RE
 .PP
 \fBReturns\fP
 .RS 4
@@ -57,25 +56,7 @@ Launches a server instance, connected to the peer-to-peer network 'hostname'\&.
 .PP
 
 .PP
-Definition at line 30 of file server\&.c\&.
-.SS "int send_block (\fBBlock\fP block, int sockfd)"
-
-.PP
-Sends a block to a user via a socket FD\&. 
-.PP
-\fBParameters\fP
-.RS 4
-\fIsockfd\fP The socket FD 
-.br
-\fIblock\fP The block to send 
-.RE
-.PP
-\fBReturns\fP
-.RS 4
-int 
-.RE
-.PP
-
+Definition at line 77 of file server\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for PEPITAS CRYPTOCURRENCY from the source code\&.

@@ -1,13 +1,11 @@
-.TH "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/src/misc/safe.c" 3 "Thu Apr 22 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
+.TH "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/src/core/misc/safe.c" 3 "Sat May 8 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
-/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/src/misc/safe.c
+/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/src/core/misc/safe.c
 .SH SYNOPSIS
 .br
 .PP
-\fC#include <stdio\&.h>\fP
-.br
 \fC#include 'misc/safe\&.h'\fP
 .br
 
@@ -18,6 +16,10 @@
 .RI "int \fBsafe_write\fP (int fd, const void *buf, ssize_t count)"
 .br
 .RI "Writes safely to a file descriptor\&. "
+.ti -1c
+.RI "int \fBsafe_send\fP (int fd, const void *buf, ssize_t count)"
+.br
+.RI "Send safely to a file descriptor\&. "
 .ti -1c
 .RI "ssize_t \fBsafe_read\fP (int fd, const void **buf, size_t *bufsize)"
 .br
@@ -52,7 +54,7 @@ ssize_t, -1 if error or the number of read items
 .PP
 
 .PP
-Definition at line 40 of file safe\&.c\&.
+Definition at line 58 of file safe\&.c\&.
 .SS "ssize_t safe_read (int fd, const void ** buf, size_t * bufsize)"
 
 .PP
@@ -72,7 +74,29 @@ The number of byte the file 'fd', if -1 error
 .PP
 
 .PP
-Definition at line 18 of file safe\&.c\&.
+Definition at line 31 of file safe\&.c\&.
+.SS "int safe_send (int fd, const void * buf, ssize_t count)"
+
+.PP
+Send safely to a file descriptor\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIfd\fP The file descriptor 
+.br
+\fIbuf\fP The buffer to write 
+.br
+\fIcount\fP The number of byte to write in fd
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Error code 
+.RE
+.PP
+
+.PP
+Definition at line 17 of file safe\&.c\&.
 .SS "int safe_write (int fd, const void * buf, ssize_t count)"
 
 .PP
@@ -94,7 +118,7 @@ Error code
 .PP
 
 .PP
-Definition at line 4 of file safe\&.c\&.
+Definition at line 3 of file safe\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for PEPITAS CRYPTOCURRENCY from the source code\&.

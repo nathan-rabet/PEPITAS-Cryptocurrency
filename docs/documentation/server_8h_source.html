@@ -91,33 +91,31 @@ $(document).ready(function(){initNavTree('server_8h_source.html',''); initResiza
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define SERVER_H</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;sys/socket.h&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="network_8h.html">network.h</a>&quot;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="block_8h.html">core/blockchain/block.h</a>&quot;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="structclient__connection.html">    8</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="structclient__connection.html">client_connection</a></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;{</div>
-<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="structclient__connection.html#abfdfc09512d7f851f879cdc859ef4cd5">   10</a></span>&#160;    <span class="keyword">struct </span>addrinfo <a class="code" href="structclient__connection.html#abfdfc09512d7f851f879cdc859ef4cd5">info</a>; <span class="comment">// Adress information</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="structclient__connection.html#a3666576f6b88007cc7b8f26c7da596c8">   11</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="structclient__connection.html#a3666576f6b88007cc7b8f26c7da596c8">socket</a>; <span class="comment">// The client&lt;-&gt;server connection socket</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;} <a class="code" href="server_8h.html#a6994b8a72828be0e03c1d864113f7da1">client_connection</a>;</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keywordtype">int</span> <a class="code" href="server_8h.html#ad7de155004abd1b0a8577003348ba464">init_server</a>();</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keywordtype">int</span> <a class="code" href="server_8h.html#ad34da51386cbac2c2b784a0f12f78659">send_block</a>(<a class="code" href="struct_block.html">Block</a> block,<span class="keywordtype">int</span> sockfd);</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;sys/types.h&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;sys/socket.h&gt;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;semaphore.h&gt;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;netdb.h&gt;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;arpa/inet.h&gt;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="block_8h.html">blockchain/block.h</a>&quot;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="client_8h.html">network/client.h</a>&quot;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="get__data_8h.html">network/get_data.h</a>&quot;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="send__data_8h.html">network/send_data.h</a>&quot;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="network_8h.html">network/network.h</a>&quot;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="safe_8h.html">misc/safe.h</a>&quot;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keywordtype">void</span> *<a class="code" href="server_8h.html#a10fb306879537348fffef6ae68f70640">init_server</a>(<span class="keywordtype">void</span> *args);</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="ablock_8h_html"><div class="ttname"><a href="block_8h.html">block.h</a></div></div>
-<div class="ttc" id="aserver_8h_html_ad34da51386cbac2c2b784a0f12f78659"><div class="ttname"><a href="server_8h.html#ad34da51386cbac2c2b784a0f12f78659">send_block</a></div><div class="ttdeci">int send_block(Block block, int sockfd)</div><div class="ttdoc">Sends a block to a user via a socket FD.</div></div>
-<div class="ttc" id="aserver_8h_html_ad7de155004abd1b0a8577003348ba464"><div class="ttname"><a href="server_8h.html#ad7de155004abd1b0a8577003348ba464">init_server</a></div><div class="ttdeci">int init_server()</div><div class="ttdoc">Launches a server instance, connected to the peer-to-peer network 'hostname'.</div><div class="ttdef"><b>Definition:</b> <a href="network_2server_8c_source.html#l00030">server.c:30</a></div></div>
-<div class="ttc" id="astructclient__connection_html_abfdfc09512d7f851f879cdc859ef4cd5"><div class="ttname"><a href="structclient__connection.html#abfdfc09512d7f851f879cdc859ef4cd5">client_connection::info</a></div><div class="ttdeci">struct addrinfo info</div><div class="ttdef"><b>Definition:</b> <a href="server_8h_source.html#l00010">server.h:10</a></div></div>
-<div class="ttc" id="astructclient__connection_html_a3666576f6b88007cc7b8f26c7da596c8"><div class="ttname"><a href="structclient__connection.html#a3666576f6b88007cc7b8f26c7da596c8">client_connection::socket</a></div><div class="ttdeci">int socket</div><div class="ttdef"><b>Definition:</b> <a href="server_8h_source.html#l00011">server.h:11</a></div></div>
-<div class="ttc" id="astructclient__connection_html"><div class="ttname"><a href="structclient__connection.html">client_connection</a></div><div class="ttdef"><b>Definition:</b> <a href="server_8h_source.html#l00008">server.h:8</a></div></div>
+<div class="ttc" id="aserver_8h_html_a10fb306879537348fffef6ae68f70640"><div class="ttname"><a href="server_8h.html#a10fb306879537348fffef6ae68f70640">init_server</a></div><div class="ttdeci">void * init_server(void *args)</div><div class="ttdoc">Launches a server instance, connected to the peer-to-peer network 'hostname'.</div><div class="ttdef"><b>Definition:</b> <a href="core_2network_2server_8c_source.html#l00077">server.c:77</a></div></div>
+<div class="ttc" id="asend__data_8h_html"><div class="ttname"><a href="send__data_8h.html">send_data.h</a></div></div>
+<div class="ttc" id="asafe_8h_html"><div class="ttname"><a href="safe_8h.html">safe.h</a></div></div>
 <div class="ttc" id="anetwork_8h_html"><div class="ttname"><a href="network_8h.html">network.h</a></div></div>
-<div class="ttc" id="astruct_block_html"><div class="ttname"><a href="struct_block.html">Block</a></div><div class="ttdef"><b>Definition:</b> <a href="block_8h_source.html#l00031">block.h:31</a></div></div>
-<div class="ttc" id="aserver_8h_html_a6994b8a72828be0e03c1d864113f7da1"><div class="ttname"><a href="server_8h.html#a6994b8a72828be0e03c1d864113f7da1">client_connection</a></div><div class="ttdeci">struct client_connection client_connection</div></div>
+<div class="ttc" id="aget__data_8h_html"><div class="ttname"><a href="get__data_8h.html">get_data.h</a></div></div>
+<div class="ttc" id="aclient_8h_html"><div class="ttname"><a href="client_8h.html">client.h</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

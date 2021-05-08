@@ -1,19 +1,11 @@
-.TH "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/src/network/get_data.c" 3 "Thu Apr 22 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
+.TH "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/src/core/network/get_data.c" 3 "Sat May 8 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
-/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/src/network/get_data.c
+/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/src/core/network/get_data.c
 .SH SYNOPSIS
 .br
 .PP
-\fC#include 'network/client\&.h'\fP
-.br
-\fC#include 'network/server\&.h'\fP
-.br
-\fC#include 'network/network\&.h'\fP
-.br
-\fC#include 'network/send_data\&.h'\fP
-.br
 \fC#include 'network/get_data\&.h'\fP
 .br
 
@@ -21,27 +13,45 @@
 
 .in +1c
 .ti -1c
-.RI "int \fBprocess_header\fP (char *header, int sockfd)"
+.RI "size_t \fBprocess_header\fP (char *header, int sockfd, \fBinfos_st\fP *infos)"
 .br
 .ti -1c
-.RI "int \fBfetch_client_list\fP (int neighbour_id)"
+.RI "int \fBfetch_client_list\fP (char who, int fd)"
 .br
 .RI "Merges my neighbours list with the one sent by 'neighbour_id'\&. "
 .ti -1c
-.RI "int \fBread_header\fP (int sockfd)"
+.RI "size_t \fBread_header\fP (int sockfd, \fBinfos_st\fP *infos)"
 .br
 .RI "Waits a header in 'sockfd', reads it and processes it\&. "
+.ti -1c
+.RI "int \fBread_get_blocks\fP (int fd, \fBinfos_st\fP *infos)"
+.br
+.ti -1c
+.RI "size_t \fBread_actual_height\fP (int fd)"
+.br
+.ti -1c
+.RI "int \fBread_send_block\fP (int fd)"
+.br
+.ti -1c
+.RI "int \fBread_vote\fP (\fB__attribute__\fP((unused)) int fd)"
+.br
+.ti -1c
+.RI "int \fBread_epoch_block\fP (int fd)"
+.br
+.ti -1c
+.RI "int \fBread_pending_transaction_list\fP (\fB__attribute__\fP((unused)) int fd)"
+.br
 .in -1c
 .SH "Function Documentation"
 .PP 
-.SS "int fetch_client_list (int neighbour_id)"
+.SS "int fetch_client_list (char who, int fd)"
 
 .PP
 Merges my neighbours list with the one sent by 'neighbour_id'\&. 
 .PP
 \fBParameters\fP
 .RS 4
-\fIneighbour_id\fP The id of the neighbour list to merge
+\fIsockfd\fP The sockfd to read
 .RE
 .PP
 \fBReturns\fP
@@ -51,12 +61,24 @@ Merges my neighbours list with the one sent by 'neighbour_id'\&.
 .PP
 
 .PP
-Definition at line 32 of file get_data\&.c\&.
-.SS "int process_header (char * header, int sockfd)"
+Definition at line 95 of file get_data\&.c\&.
+.SS "size_t process_header (char * header, int sockfd, \fBinfos_st\fP * infos)"
 
 .PP
-Definition at line 7 of file get_data\&.c\&.
-.SS "int read_header (int sockfd)"
+Definition at line 3 of file get_data\&.c\&.
+.SS "size_t read_actual_height (int fd)"
+
+.PP
+Definition at line 172 of file get_data\&.c\&.
+.SS "int read_epoch_block (int fd)"
+
+.PP
+Definition at line 222 of file get_data\&.c\&.
+.SS "int read_get_blocks (int fd, \fBinfos_st\fP * infos)"
+
+.PP
+Definition at line 144 of file get_data\&.c\&.
+.SS "size_t read_header (int sockfd, \fBinfos_st\fP * infos)"
 
 .PP
 Waits a header in 'sockfd', reads it and processes it\&. 
@@ -73,7 +95,19 @@ Waits a header in 'sockfd', reads it and processes it\&.
 .PP
 
 .PP
-Definition at line 86 of file get_data\&.c\&.
+Definition at line 125 of file get_data\&.c\&.
+.SS "int read_pending_transaction_list (\fB__attribute__\fP((unused)) int fd)"
+
+.PP
+Definition at line 229 of file get_data\&.c\&.
+.SS "int read_send_block (int fd)"
+
+.PP
+Definition at line 178 of file get_data\&.c\&.
+.SS "int read_vote (\fB__attribute__\fP((unused)) int fd)"
+
+.PP
+Definition at line 217 of file get_data\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for PEPITAS CRYPTOCURRENCY from the source code\&.

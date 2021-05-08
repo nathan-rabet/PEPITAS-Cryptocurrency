@@ -1,4 +1,4 @@
-.TH "TransactionData" 3 "Thu Apr 22 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
+.TH "TransactionData" 3 "Sat May 8 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -11,6 +11,12 @@ TransactionData
 .SS "Data Fields"
 
 .in +1c
+.ti -1c
+.RI "char \fBmagic\fP"
+.br
+.ti -1c
+.RI "char \fBtype\fP"
+.br
 .ti -1c
 .RI "RSA * \fBsender_public_key\fP"
 .br
@@ -41,45 +47,53 @@ TransactionData
 .in -1c
 .SH "Detailed Description"
 .PP 
-Definition at line 11 of file transaction\&.h\&.
+Definition at line 24 of file transaction\&.h\&.
 .SH "Field Documentation"
 .PP 
 .SS "size_t amount"
 
 .PP
-Definition at line 17 of file transaction\&.h\&.
+Definition at line 32 of file transaction\&.h\&.
 .SS "char asset[512]"
 
 .PP
-Definition at line 25 of file transaction\&.h\&.
+Definition at line 40 of file transaction\&.h\&.
 .SS "char cause[512]"
 
 .PP
-Definition at line 24 of file transaction\&.h\&.
+Definition at line 39 of file transaction\&.h\&.
+.SS "char magic"
+
+.PP
+Definition at line 26 of file transaction\&.h\&.
 .SS "RSA* organisation_public_key"
 
 .PP
-Definition at line 16 of file transaction\&.h\&.
+Definition at line 31 of file transaction\&.h\&.
 .SS "RSA* receiver_public_key"
 
 .PP
-Definition at line 15 of file transaction\&.h\&.
+Definition at line 30 of file transaction\&.h\&.
 .SS "size_t receiver_remaining_money"
 
 .PP
-Definition at line 19 of file transaction\&.h\&.
+Definition at line 34 of file transaction\&.h\&.
 .SS "RSA* sender_public_key"
 
 .PP
-Definition at line 14 of file transaction\&.h\&.
+Definition at line 29 of file transaction\&.h\&.
 .SS "size_t sender_remaining_money"
 
 .PP
-Definition at line 18 of file transaction\&.h\&.
+Definition at line 33 of file transaction\&.h\&.
 .SS "time_t transaction_timestamp"
 
 .PP
-Definition at line 20 of file transaction\&.h\&.
+Definition at line 35 of file transaction\&.h\&.
+.SS "char type"
+
+.PP
+Definition at line 27 of file transaction\&.h\&.
 
 .SH "Author"
 .PP 

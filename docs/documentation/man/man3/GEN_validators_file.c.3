@@ -1,4 +1,4 @@
-.TH "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/tests/gen/GEN_validators_file.c" 3 "Thu Apr 22 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
+.TH "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/tests/gen/GEN_validators_file.c" 3 "Sat May 8 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -20,12 +20,17 @@
 .br
 \fC#include <math\&.h>\fP
 .br
+\fC#include 'tests_macros\&.h'\fP
+.br
 \fC#include 'cryptosystem/rsa\&.h'\fP
 .br
 
 .SS "Macros"
 
 .in +1c
+.ti -1c
+.RI "#define \fBGEN_VALIDATORS_FILE_H\fP"
+.br
 .ti -1c
 .RI "#define \fBNB_FAKE_VALIDATORS\fP   10"
 .br
@@ -43,14 +48,18 @@
 .in -1c
 .SH "Macro Definition Documentation"
 .PP 
+.SS "#define GEN_VALIDATORS_FILE_H"
+
+.PP
+Definition at line 2 of file GEN_validators_file\&.c\&.
 .SS "#define NB_FAKE_VALIDATORS   10"
 
 .PP
-Definition at line 11 of file GEN_validators_file\&.c\&.
+Definition at line 14 of file GEN_validators_file\&.c\&.
 .SS "#define str(x)   #x"
 
 .PP
-Definition at line 12 of file GEN_validators_file\&.c\&.
+Definition at line 15 of file GEN_validators_file\&.c\&.
 .SH "Function Documentation"
 .PP 
 .SS "void gen_validators_file (char path[])"
@@ -74,7 +83,7 @@ validators states file description Header : nb_validators[sizeof(size_t)], total
 .br
 '[sizeof(char)] 
 .PP
-Definition at line 28 of file GEN_validators_file\&.c\&.
+Definition at line 31 of file GEN_validators_file\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for PEPITAS CRYPTOCURRENCY from the source code\&.

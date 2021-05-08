@@ -6,15 +6,7 @@ digraph "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/src" {
     graph [ bgcolor="#eeeeff", pencolor="black", label="" URL="dir_68267d1309a1af8e8297ef4c3efbcdba.html"];
     dir_68267d1309a1af8e8297ef4c3efbcdba [shape=plaintext label="src"];
     dir_aebb8dcc11953d78e620bbef0b9e2183 [shape=box label="core" color="red" fillcolor="white" style="filled" URL="dir_aebb8dcc11953d78e620bbef0b9e2183.html"];
-    dir_2b8ca4726e0ce87f6f4366978f32e545 [shape=box label="cryptosystem" color="black" fillcolor="white" style="filled" URL="dir_2b8ca4726e0ce87f6f4366978f32e545.html"];
-    dir_88826aa2a10e1882b573f502bc7f4b55 [shape=box label="misc" color="black" fillcolor="white" style="filled" URL="dir_88826aa2a10e1882b573f502bc7f4b55.html"];
-    dir_fc4c7f03e1a69a98c370fae55a743828 [shape=box label="network" color="black" fillcolor="white" style="filled" URL="dir_fc4c7f03e1a69a98c370fae55a743828.html"];
-    dir_da5c6b39c0a2f54e57df6799511cd3ab [shape=box label="ui" color="black" fillcolor="white" style="filled" URL="dir_da5c6b39c0a2f54e57df6799511cd3ab.html"];
   }
   dir_7f57b1e41c5acd0e859ae5f3a2b075a9 [shape=box label="headers" fillcolor="white" style="filled" color="red" URL="dir_7f57b1e41c5acd0e859ae5f3a2b075a9.html"];
-  dir_aebb8dcc11953d78e620bbef0b9e2183->dir_7f57b1e41c5acd0e859ae5f3a2b075a9 [headlabel="13", labeldistance=1.5 headhref="dir_000010_000000.html"];
-  dir_2b8ca4726e0ce87f6f4366978f32e545->dir_7f57b1e41c5acd0e859ae5f3a2b075a9 [headlabel="8", labeldistance=1.5 headhref="dir_000013_000000.html"];
-  dir_88826aa2a10e1882b573f502bc7f4b55->dir_7f57b1e41c5acd0e859ae5f3a2b075a9 [headlabel="2", labeldistance=1.5 headhref="dir_000014_000000.html"];
-  dir_fc4c7f03e1a69a98c370fae55a743828->dir_7f57b1e41c5acd0e859ae5f3a2b075a9 [headlabel="15", labeldistance=1.5 headhref="dir_000009_000000.html"];
-  dir_da5c6b39c0a2f54e57df6799511cd3ab->dir_7f57b1e41c5acd0e859ae5f3a2b075a9 [headlabel="1", labeldistance=1.5 headhref="dir_000015_000000.html"];
+  dir_aebb8dcc11953d78e620bbef0b9e2183->dir_7f57b1e41c5acd0e859ae5f3a2b075a9 [headlabel="27", labeldistance=1.5 headhref="dir_000008_000000.html"];
 }

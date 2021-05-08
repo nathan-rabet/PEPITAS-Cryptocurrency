@@ -1,16 +1,17 @@
 var searchData=
 [
-  ['pepitas_136',['PEPITAS',['../md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__r_e_a_d_m_e.html',1,'']]],
-  ['password_5fentry1_137',['password_entry1',['../ui_8c.html#ad339cc79acfe1685a9cc695347628fed',1,'ui.c']]],
-  ['password_5fentry2_138',['password_entry2',['../ui_8c.html#aa345dbc39b26d7892d6b987c3b7dd280',1,'ui.c']]],
-  ['password_5ferror_5flabel_139',['password_error_label',['../ui_8c.html#a8b12d0127ba1f869e04b7c403ea82ff2',1,'ui.c']]],
-  ['ping_5fclient_140',['ping_client',['../client_8h.html#a9d802c8a306078b25d6973010e11311c',1,'client.h']]],
-  ['pop_5fstake_141',['pop_stake',['../stake_8h.html#ab4f6ce2261db8ea30fb8e1c8263e863c',1,'stake.h']]],
-  ['previous_5fblock_5fhash_142',['previous_block_hash',['../struct_block_data.html#a0167d1bdc7d4e5d8d423188581cbb064',1,'BlockData']]],
-  ['priv_5fkey_143',['priv_key',['../struct_wallet.html#ad3051f431d5c0b376f67c497d521290a',1,'Wallet']]],
-  ['private_5fkey_5flabel_144',['private_key_label',['../ui_8c.html#ad8381a6084abf1920354514475732b69',1,'ui.c']]],
-  ['process_5fheader_145',['process_header',['../get__data_8c.html#a56fe14e6f01f9d30d47882381d50d1f1',1,'get_data.c']]],
-  ['pub_5fkey_146',['pub_key',['../struct_wallet.html#a7c3fbe707cd5eabe1365d44b5d1cd16f',1,'Wallet']]],
-  ['public_5fkey_5fentry_5fcon_147',['public_key_entry_con',['../ui_8c.html#a1232a61f99830b200a87137da4ad0232',1,'ui.c']]],
-  ['push_5fstake_148',['push_stake',['../stake_8h.html#a714b5ccd99c526e0a6aaa2378c88e47e',1,'stake.h']]]
+  ['magic_171',['magic',['../struct_block_data.html#a3f86b2fdc165f662a1d3a69ab9cb5fe2',1,'BlockData::magic()'],['../struct_transaction_data.html#a3f86b2fdc165f662a1d3a69ab9cb5fe2',1,'TransactionData::magic()']]],
+  ['main_172',['main',['../client_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main():&#160;client.c'],['../gui_8c.html#a3c04138a5bfe5d72780bb7e82a18e627',1,'main(int argc, char **argv):&#160;gui.c'],['../server_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main():&#160;server.c'],['../serverdoor_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main():&#160;serverdoor.c'],['../sign_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main():&#160;sign.c'],['../main__test_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main():&#160;main_test.c'],['../unit__testing_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main():&#160;unit_testing.c']]],
+  ['main_5ftest_2ec_173',['main_test.c',['../main__test_8c.html',1,'']]],
+  ['main_5ftest_5fc_174',['MAIN_TEST_C',['../main__test_8c.html#ac8177a502c80ad8ba2098ecb37f24f69',1,'main_test.c']]],
+  ['managermsg_175',['MANAGERMSG',['../network_8h.html#aaf97e803fbd731970b1f667b52f34a6d',1,'network.h']]],
+  ['math_2eh_176',['math.h',['../math_8h.html',1,'']]],
+  ['max_177',['MAX',['../math_8h.html#afa99ec4acc4ecb2dc3c2d05da15d0e3f',1,'math.h']]],
+  ['max_5fconnection_178',['MAX_CONNECTION',['../network_8h.html#a1ad0110a77b8abbc3c30f7ec903dab1b',1,'network.h']]],
+  ['max_5fneighbours_179',['MAX_NEIGHBOURS',['../network_8h.html#ae35694bd71aaa8aa2608ba5d24de667d',1,'network.h']]],
+  ['max_5fserver_180',['MAX_SERVER',['../network_8h.html#ad546ea25dc7aa34a81dcf5aff48a31ca',1,'network.h']]],
+  ['max_5ftransactions_5fper_5fblock_181',['MAX_TRANSACTIONS_PER_BLOCK',['../block_8h.html#ad5eeaf6e69c02a55a536b7f4c50a3a6e',1,'block.h']]],
+  ['max_5fvalidators_5fper_5fblock_182',['MAX_VALIDATORS_PER_BLOCK',['../block_8h.html#aebcc63085ec90348cc76624d948759dc',1,'MAX_VALIDATORS_PER_BLOCK():&#160;block.h'],['../network_8h.html#aebcc63085ec90348cc76624d948759dc',1,'MAX_VALIDATORS_PER_BLOCK():&#160;network.h'],['../validators_8h.html#aebcc63085ec90348cc76624d948759dc',1,'MAX_VALIDATORS_PER_BLOCK():&#160;validators.h']]],
+  ['mempool_5flabel_183',['mempool_label',['../ui_8h.html#a48095bf105fef9a39a872144a56e23ab',1,'ui.h']]],
+  ['min_184',['MIN',['../math_8h.html#a3acffbd305ee72dcd4593c0d8af64a4f',1,'math.h']]]
 ];

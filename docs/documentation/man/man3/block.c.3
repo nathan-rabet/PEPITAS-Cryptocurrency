@@ -1,4 +1,4 @@
-.TH "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/src/core/blockchain/block.c" 3 "Thu Apr 22 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
+.TH "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/src/core/blockchain/block.c" 3 "Sat May 8 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -6,53 +6,51 @@
 .SH SYNOPSIS
 .br
 .PP
-\fC#include 'core/blockchain/block\&.h'\fP
-.br
-\fC#include 'cryptosystem/signature\&.h'\fP
-.br
-\fC#include <sys/stat\&.h>\fP
-.br
-\fC#include <unistd\&.h>\fP
-.br
-\fC#include <err\&.h>\fP
-.br
-\fC#include <errno\&.h>\fP
-.br
-\fC#include <openssl/rsa\&.h>\fP
-.br
-\fC#include <openssl/crypto\&.h>\fP
-.br
-\fC#include <fcntl\&.h>\fP
-.br
-\fC#include <sys/types\&.h>\fP
+\fC#include 'blockchain/block\&.h'\fP
 .br
 
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBGENESIS_RSA_PUB_1\fP   '\-\-\-\-\-BEGIN RSA PUBLIC KEY\-\-\-\-\-\\nMIIBCAKCAQEAwcXVgJ6Hy9nryAmSFGpRYxLtPJ1VcI9XTbV34hniNMtztMGpwSTG\\nCQ28WIWiD43qjmHxvY4Y26mLYXPjlJ2HiwneSoZcLtY+gJfObGcclpI1DSA0vE72\\neTBbDz8enRbJqFWenwopKDoBjvf7nwc/fqRwD0ptLC7xwlPccRiLGdOvP/IusLY0\\nLCP6A9R50H7tGsbaAQfGoHYezY8p05K6XRankb7I8wsLFdU6Ew6OghX1tq02liP4\\ns5DrloSsxi1mJtW7d+vln0D/a7t2bz4jI+OMtD5M5jldGMyQpzq3D8ZJokMyh6K2\\nNLwrAiqDKZiIHJTw8FZidA9/yuzlRpxNHQIBAw==\\n\-\-\-\-\-END RSA PUBLIC KEY\-\-\-\-\-\\n'"
+.br
+.ti -1c
+.RI "#define \fBGENESIS_RSA_PUB_2\fP   '\-\-\-\-\-BEGIN RSA PUBLIC KEY\-\-\-\-\-\\nMIIBCAKCAQEAsrHwAjOQzmoguFCpWTEe/3x/T6KSr7dF1zYFnCq3V3v6OQFAcyt7\\nQG0q138XFasRM70Hc0k589s5nKfPYSz5MCa6iDD1IKo1qrGSyF9CPfW87DwZuLXW\\nhShifhsLu+VfkbjYx5h/SGmC5WSedro3cTrex7V1BbZkCeKqRMYCgtTPucyYE4pP\\nqEnFQtMVAssyaDckjpWzpwun9wsoZ3qkqAAREwNecR7i2ojyUBJ8L5ZUryqmxi4F\\ngwvFLnlhAeoraWqk40L3bSdnGH1u/YV59f4/MSyVmTezI6DhFx2E3Pld/Kar5PnF\\nrJSEQjtjwg+OVdGnrT46SKq8JQQlgFVZzwIBAw==\\n\-\-\-\-\-END RSA PUBLIC KEY\-\-\-\-\-\\n'"
+.br
+.in -1c
 .SS "Functions"
 
 .in +1c
 .ti -1c
-.RI "\fBChunkBlockchain\fP * \fBget_blockchain\fP (size_t nb_chunk)"
+.RI "\fBBlock\fP * \fBget_genesis_block\fP ()"
+.br
+.ti -1c
+.RI "\fBChunkBlockchain\fP * \fBload_blockchain\fP (size_t nb_chunk)"
 .br
 .RI "Loads a blockchain object with a padding of 'nb_chunk'\&. "
+.ti -1c
+.RI "\fBChunkBlockchain\fP * \fBload_last_blockchain\fP ()"
+.br
+.RI "Load the last local blockchain chunk\&. "
+.ti -1c
+.RI "size_t \fBget_last_block_height\fP ()"
+.br
+.RI "Get the last block height\&. "
 .ti -1c
 .RI "void \fBwrite_block_file\fP (\fBBlock\fP block)"
 .br
 .RI "Writes a block struct in a file\&. "
 .ti -1c
-.RI "void \fBconvert_data_to_transactiondata\fP (\fBTransactionData\fP *transactiondata, FILE *blockfile)"
+.RI "void \fBconvert_data_to_blockdata\fP (\fBBlockData\fP *blockdata, int fd)"
 .br
 .ti -1c
-.RI "void \fBconvert_data_to_transaction\fP (\fBTransaction\fP *transaction, FILE *blockfile)"
-.br
-.ti -1c
-.RI "void \fBconvert_data_to_blockdata\fP (\fBBlockData\fP *blockdata, FILE *blockfile)"
-.br
-.ti -1c
-.RI "void \fBconvert_data_to_block\fP (\fBBlock\fP *block, FILE *blockfile)"
+.RI "void \fBconvert_data_to_block\fP (\fBBlock\fP *block, int fd)"
 .br
 .ti -1c
 .RI "\fBBlock\fP * \fBget_block\fP (size_t block_height)"
 .br
+.RI "Get a block object\&. "
 .ti -1c
 .RI "void \fBfree_block\fP (\fBBlock\fP *block)"
 .br
@@ -65,25 +63,39 @@
 .RI "\fBBlock\fP * \fBget_prev_block\fP (\fBBlock\fP *block)"
 .br
 .RI "For a block of height \fCh\fP, return the block of height \fCh-1\fP "
+.ti -1c
+.RI "char * \fBget_blockdata_data\fP (\fBBlock\fP *block, size_t *size)"
+.br
+.RI "Get the blockdata data object\&. "
+.ti -1c
+.RI "void \fBwrite_blockdata\fP (\fBBlockData\fP blockdata, int fd)"
+.br
+.RI "Writes blockdata in a file\&. "
+.ti -1c
+.RI "void \fBwrite_block\fP (\fBBlock\fP block, int fd)"
+.br
+.RI "Writes a block in a file\&. "
 .in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define GENESIS_RSA_PUB_1   '\-\-\-\-\-BEGIN RSA PUBLIC KEY\-\-\-\-\-\\nMIIBCAKCAQEAwcXVgJ6Hy9nryAmSFGpRYxLtPJ1VcI9XTbV34hniNMtztMGpwSTG\\nCQ28WIWiD43qjmHxvY4Y26mLYXPjlJ2HiwneSoZcLtY+gJfObGcclpI1DSA0vE72\\neTBbDz8enRbJqFWenwopKDoBjvf7nwc/fqRwD0ptLC7xwlPccRiLGdOvP/IusLY0\\nLCP6A9R50H7tGsbaAQfGoHYezY8p05K6XRankb7I8wsLFdU6Ew6OghX1tq02liP4\\ns5DrloSsxi1mJtW7d+vln0D/a7t2bz4jI+OMtD5M5jldGMyQpzq3D8ZJokMyh6K2\\nNLwrAiqDKZiIHJTw8FZidA9/yuzlRpxNHQIBAw==\\n\-\-\-\-\-END RSA PUBLIC KEY\-\-\-\-\-\\n'"
+
+.PP
+Definition at line 3 of file block\&.c\&.
+.SS "#define GENESIS_RSA_PUB_2   '\-\-\-\-\-BEGIN RSA PUBLIC KEY\-\-\-\-\-\\nMIIBCAKCAQEAsrHwAjOQzmoguFCpWTEe/3x/T6KSr7dF1zYFnCq3V3v6OQFAcyt7\\nQG0q138XFasRM70Hc0k589s5nKfPYSz5MCa6iDD1IKo1qrGSyF9CPfW87DwZuLXW\\nhShifhsLu+VfkbjYx5h/SGmC5WSedro3cTrex7V1BbZkCeKqRMYCgtTPucyYE4pP\\nqEnFQtMVAssyaDckjpWzpwun9wsoZ3qkqAAREwNecR7i2ojyUBJ8L5ZUryqmxi4F\\ngwvFLnlhAeoraWqk40L3bSdnGH1u/YV59f4/MSyVmTezI6DhFx2E3Pld/Kar5PnF\\nrJSEQjtjwg+OVdGnrT46SKq8JQQlgFVZzwIBAw==\\n\-\-\-\-\-END RSA PUBLIC KEY\-\-\-\-\-\\n'"
+
+.PP
+Definition at line 33 of file block\&.c\&.
 .SH "Function Documentation"
 .PP 
-.SS "void convert_data_to_block (\fBBlock\fP * block, FILE * blockfile)"
+.SS "void convert_data_to_block (\fBBlock\fP * block, int fd)"
 
 .PP
-Definition at line 142 of file block\&.c\&.
-.SS "void convert_data_to_blockdata (\fBBlockData\fP * blockdata, FILE * blockfile)"
+Definition at line 172 of file block\&.c\&.
+.SS "void convert_data_to_blockdata (\fBBlockData\fP * blockdata, int fd)"
 
 .PP
-Definition at line 116 of file block\&.c\&.
-.SS "void convert_data_to_transaction (\fBTransaction\fP * transaction, FILE * blockfile)"
-
-.PP
-Definition at line 106 of file block\&.c\&.
-.SS "void convert_data_to_transactiondata (\fBTransactionData\fP * transactiondata, FILE * blockfile)"
-
-.PP
-Definition at line 69 of file block\&.c\&.
+Definition at line 139 of file block\&.c\&.
 .SS "void free_block (\fBBlock\fP * block)"
 
 .PP
@@ -96,29 +108,62 @@ Free a block struct\&.
 .PP
 
 .PP
-Definition at line 168 of file block\&.c\&.
+Definition at line 202 of file block\&.c\&.
 .SS "\fBBlock\fP* get_block (size_t block_height)"
 
 .PP
-Definition at line 150 of file block\&.c\&.
-.SS "\fBChunkBlockchain\fP* get_blockchain (size_t nb_chunk)"
-
-.PP
-Loads a blockchain object with a padding of 'nb_chunk'\&. 
+Get a block object\&. 
 .PP
 \fBParameters\fP
 .RS 4
-\fInb_chunk\fP The chunk nb, if 0 : return the current blockchain object without modification 
+\fIblock_height\fP The height of the block 
 .RE
 .PP
 \fBReturns\fP
 .RS 4
-ChunkBlockchain*, NULL if the \fBChunkBlockchain\fP is empty after switching 
+Block* 
 .RE
 .PP
 
 .PP
-Definition at line 12 of file block\&.c\&.
+Definition at line 180 of file block\&.c\&.
+.SS "char* get_blockdata_data (\fBBlock\fP * block, size_t * size)"
+
+.PP
+Get the blockdata data object\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIblock\fP The block 
+.br
+\fIsize\fP The size of the block 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+char* 
+.RE
+.PP
+
+.PP
+Definition at line 241 of file block\&.c\&.
+.SS "\fBBlock\fP* get_genesis_block ()"
+
+.PP
+Definition at line 35 of file block\&.c\&.
+.SS "size_t get_last_block_height ()"
+
+.PP
+Get the last block height\&. 
+.PP
+\fBReturns\fP
+.RS 4
+size_t 
+.RE
+.PP
+
+.PP
+Definition at line 115 of file block\&.c\&.
 .SS "\fBBlock\fP* get_next_block (\fBBlock\fP * block)"
 
 .PP
@@ -136,7 +181,7 @@ The next Block*
 .PP
 
 .PP
-Definition at line 184 of file block\&.c\&.
+Definition at line 221 of file block\&.c\&.
 .SS "\fBBlock\fP* get_prev_block (\fBBlock\fP * block)"
 
 .PP
@@ -154,7 +199,58 @@ The next Block*
 .PP
 
 .PP
-Definition at line 194 of file block\&.c\&.
+Definition at line 231 of file block\&.c\&.
+.SS "\fBChunkBlockchain\fP* load_blockchain (size_t nb_chunk)"
+
+.PP
+Loads a blockchain object with a padding of 'nb_chunk'\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fInb_chunk\fP The chunk nb, if 0 : return the current blockchain object without modification 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+ChunkBlockchain*, NULL if the \fBChunkBlockchain\fP is empty after switching 
+.RE
+.PP
+
+.PP
+Definition at line 69 of file block\&.c\&.
+.SS "\fBChunkBlockchain\fP* load_last_blockchain ()"
+
+.PP
+Load the last local blockchain chunk\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fInb_chunk\fP 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+ChunkBlockchain* 
+.RE
+.PP
+
+.PP
+Definition at line 110 of file block\&.c\&.
+.SS "void write_block (\fBBlock\fP block, int fd)"
+
+.PP
+Writes a block in a file\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIblock\fP The block to write 
+.br
+\fIfd\fP the file descriptor of the file in which the block is written 
+.RE
+.PP
+
+.PP
+Definition at line 309 of file block\&.c\&.
 .SS "void write_block_file (\fBBlock\fP block)"
 
 .PP
@@ -167,7 +263,22 @@ Writes a block struct in a file\&.
 .PP
 
 .PP
-Definition at line 51 of file block\&.c\&.
+Definition at line 121 of file block\&.c\&.
+.SS "void write_blockdata (\fBBlockData\fP blockdata, int fd)"
+
+.PP
+Writes blockdata in a file\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIblockdata\fP The blockdata to write 
+.br
+\fIfd\fP The file descriptor of the file in which the blockdata is written 
+.RE
+.PP
+
+.PP
+Definition at line 277 of file block\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for PEPITAS CRYPTOCURRENCY from the source code\&.

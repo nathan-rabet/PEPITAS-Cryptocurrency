@@ -1,10 +1,12 @@
 var searchData=
 [
-  ['last_5ffile_5fin_5ffolder_94',['last_file_in_folder',['../files_8h.html#af7f19b3a3e64c414589ae92109adda1e',1,'last_file_in_folder(char folder_path[]):&#160;files.c'],['../files_8c.html#af7f19b3a3e64c414589ae92109adda1e',1,'last_file_in_folder(char folder_path[]):&#160;files.c']]],
-  ['listen_5fto_95',['listen_to',['../client_8h.html#adbe3c438ad6697293ab73147fd262b0b',1,'listen_to(size_t neighbour_id):&#160;client.c'],['../network_2client_8c.html#adbe3c438ad6697293ab73147fd262b0b',1,'listen_to(size_t neighbour_id):&#160;client.c']]],
-  ['load_5fcontacts_5ffrom_5ffile_96',['load_contacts_from_file',['../ui_8h.html#a73fe931a2fbeb2086428ad91c0cbc05e',1,'load_contacts_from_file():&#160;ui.c'],['../ui_8c.html#a73fe931a2fbeb2086428ad91c0cbc05e',1,'load_contacts_from_file():&#160;ui.c']]],
-  ['load_5ftransaction_5ffrom_5ffile_97',['load_transaction_from_file',['../ui_8h.html#aafd81ce434d4f1abdba55e0ffc6b719f',1,'ui.h']]],
-  ['load_5ftransactions_5ffrom_5ffile_98',['load_transactions_from_file',['../ui_8c.html#a8909bf913522e177fc1629b07c32420c',1,'ui.c']]],
-  ['log_99',['LOG',['../tests__macros_8h.html#ab2c74502b7c2f598b58bec7ea1e9c6d6',1,'tests_macros.h']]],
-  ['ls_5fcombo_100',['ls_combo',['../ui_8c.html#a56f0bc64e6d4d817b9eab9ed1796f868',1,'ui.c']]]
+  ['im_5fclient_144',['IM_CLIENT',['../network_8h.html#a4a4ea366b744078b50a96a3899aab46c',1,'network.h']]],
+  ['im_5fserver_145',['IM_SERVER',['../network_8h.html#a44b6e2d68c7a890d60b6017e83bce337',1,'network.h']]],
+  ['infos_146',['infos',['../structth__arg.html#a4ffe492fe883ff7cc8882a7cc5406ac7',1,'th_arg']]],
+  ['infos_5fst_147',['infos_st',['../structinfos__st.html',1,'infos_st'],['../network_8h.html#a8f0eaaa3b951f1f65c49c80d575c9e16',1,'infos_st():&#160;network.h']]],
+  ['init_5fserver_148',['init_server',['../server_8h.html#a10fb306879537348fffef6ae68f70640',1,'init_server(void *args):&#160;server.c'],['../core_2network_2server_8c.html#a10fb306879537348fffef6ae68f70640',1,'init_server(void *args):&#160;server.c']]],
+  ['invest_5fentry_149',['invest_entry',['../ui_8c.html#a1cd59d712f0351edfa00b753656b486a',1,'ui.c']]],
+  ['is_5fprev_5fblock_5fvalid_150',['is_prev_block_valid',['../struct_block_data.html#ae7d0cc98b644d1987ca49e030c16e616',1,'BlockData']]],
+  ['is_5fsychronize_151',['is_sychronize',['../structinfos__st.html#a3587e8ced0bb7858e27b8c7b9c5863b4',1,'infos_st']]],
+  ['is_5fvalidator_152',['is_validator',['../struct_wallet.html#a54dce2288a6b5f6866903d56a598317f',1,'Wallet']]]
 ];

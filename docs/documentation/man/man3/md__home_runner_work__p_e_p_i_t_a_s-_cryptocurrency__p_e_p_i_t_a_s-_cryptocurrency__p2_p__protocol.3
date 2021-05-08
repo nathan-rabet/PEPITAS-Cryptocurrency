@@ -1,0 +1,74 @@
+.TH "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__p2_p__protocol" 3 "Sat May 8 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__p2_p__protocol \- PEPITAS NETWORK PROTOCOL 
+
+.SH "HEADERS"
+.PP
+.SS "Sync Headers"
+.IP "1." 4
+CONNECTION TO NETWORK
+.IP "2." 4
+CONNECTION TO NODE
+.IP "3." 4
+GET BLOCKS
+.IP "4." 4
+ACTUAL HEIGHT
+.IP "5." 4
+SEND BLOCK
+.IP "6." 4
+GET PENDING TRANSACTION LIST
+.IP "7." 4
+REJECT DEMAND 
+.PP
+.SS "Running Headers"
+.IP "7." 4
+SEND PENDING TRANSACTION 
+.PP
+.SS "Validating Headers"
+.IP "9." 4
+SEND BLOCK EPOCHMAN
+.IP "10." 4
+SEND VOTE
+.PP
+.SS "CONNECTION TO NETWORK"
+\fBMessage:\fP char * : 'CONNECTION TO NETWORK\\r\\n\\r\\n'
+.PP
+\fBDescription\fP Send a request to be accepted by a network door\&.
+.SS "CONNECTION TO NODE"
+\fBMessage:\fP char * : 'CONNECTION TO NODE\\r\\n\\r\\n'
+.PP
+\fBDescription\fP Send a request to be accepted by a network node\&. 
+.SS "GET BLOCKS"
+\fBMessage:\fP char * : 'GET BLOCKS\\r\\n\\r\\n' uint32_t : P_VERSION char : Number of demand (max 50) size_t * : \fBBlock\fP height
+.PP
+\fBDescription\fP Send a request to a server for getting blocks\&. If the genesis block (height 0) is demand then the number of the actual blockchain height is return with 'ACTUAL HEIGHT' header\&. If not, SEND BLOCK or REJECT DEMAND messages are returned\&. 
+.SS "ACTUAL HEIGHT"
+\fBMessage:\fP char * : 'ACTUAL HEIGHT\\r\\n\\r\\n' size_t : \fBBlock\fP height
+.PP
+\fBDescription\fP Send my actual blockchain height\&. 
+.SS "SEND BLOCK"
+\fBMessage:\fP char * : 'SEND BLOCK\\r\\n\\r\\n' size_t : \fBBlock\fP height size_t : \fBBlock\fP size char * : \fBBlock\fP struct
+.PP
+\fBDescription\fP The block of height demand by 'GET BLOCKS'\&. 
+.SS "GET PENDING TRANSACTION LIST"
+\fBMessage\fP char * : 'GET PENDING TRANSACTION LIST\\r\\n\\r\\n'
+.PP
+\fBDescription\fP Call 'SEND PENDING TRANSACTION'\&. 
+.SS "REJECT DEMAND"
+\fBMessage:\fP char * : 'REJECT DEMAND\\r\\n\\r\\n'
+.PP
+\fBDescription\fP Reject a demand if can't reply\&. For example a 'GET BLOCKS' of a not existing block\&. 
+.SS "SEND PENDING TRANSACTION"
+\fBMessage:\fP char * : 'SEND PENDING TRANSACTION\\r\\n\\r\\n'
+.PP
+\fBDescription\fP Send the epoch block of a committee member\&. 
+.SS "SEND EPOCH BLOCK"
+\fBMessage:\fP char * : 'SEND EPOCH BLOCK\\r\\n\\r\\n' char * : \fBBlock\fP struct
+.PP
+\fBDescription\fP Send the epoch block of a committee member\&.
+.SS "SEND VOTE"
+\fBMessage:\fP char * : 'SEND VOTE\\r\\n\\r\\n' char *: Epoch creator pk size_t : block height int epoch_id: creator char : 0 = False 1 = True char * : signature of vote precedent vars
+.PP
+\fBDescription\fP Send the vote of a committee member\&. 
