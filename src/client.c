@@ -62,11 +62,11 @@ size_t update_blockchain_height(infos_st *infos)
     {
         if (client_connections[i].clientfd != 0) {
             client_connections[i].demand = DD_GET_HEIGHT;
-            client_connections[i].Playloadsize = sizeof(uint32_t) + sizeof(char) + sizeof(size_t);
-            client_connections[i].Payload = malloc(client_connections[i].Playloadsize);
-            *(uint32_t *)client_connections[i].Payload = P_VERSION;
-            *(char *)(client_connections[i].Payload + sizeof(uint32_t)) = 1;
-            *(size_t *)(client_connections[i].Payload + sizeof(size_t) + sizeof(char)) = 0;
+            client_connections[i].Playloadsize = sizeof(get_blocks_t);
+            client_connections[i].Payload = malloc(sizeof(get_blocks_t));
+            ((get_blocks_t *)client_connections[i].Payload)->version = P_VERSION;
+            ((get_blocks_t *)client_connections[i].Payload)->nb_demands = 1;
+            ((get_blocks_t *)client_connections[i].Payload)->blocks_height[0] = 0;
             sem_post(&client_connections[i].lock);
 
             // BREAK IF SUCCESS
@@ -100,9 +100,12 @@ void update_blockchain(infos_st *infos, size_t index_client){
         client_connections[index_client].Playloadsize = sizeof(get_blocks_t);
         client_connections[index_client].Payload = malloc(sizeof(get_blocks_t));
         ((get_blocks_t *)client_connections[index_client].Payload)->version = P_VERSION;
-        ((get_blocks_t *)client_connections[index_client].Payload)->nb_demands = 1;
+        ((get_blocks_t *)client_connections[index_client].Payload)->nb_demands = nb_dd;
         ((get_blocks_t *)client_connections[index_client].Payload)->blocks_height[0] = 0;
-
+        for (char i = 1; i <= nb_dd; i++)
+        {
+            ((get_blocks_t *)client_connections[index_client].Payload)->blocks_height[i-1] = client_connections[index_client].actual_client_height + i;
+        }
         
 
         sem_post(&client_connections[index_client].lock);
