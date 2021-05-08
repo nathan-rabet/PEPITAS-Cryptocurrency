@@ -91,11 +91,12 @@ size_t update_blockchain_height(infos_st *infos)
 }
 
 void update_blockchain(infos_st *infos, size_t index_client){
-
-    while (client_connections[index_client].actual_client_height > infos->actual_height) {
+    size_t demand_height = 0;
+    while (client_connections[index_client].actual_client_height > infos->actual_height + demand_height) {
         client_connections[index_client].demand = DD_GET_BLOCKS;
 
         char nb_dd = (infos->actual_height - client_connections[index_client].actual_client_height) % 50;
+        demand_height += nb_dd;
         printf("Demande de %i Blocks\n", nb_dd);
 
         client_connections[index_client].Playloadsize = sizeof(get_blocks_t);
