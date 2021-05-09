@@ -1,4 +1,4 @@
-.TH "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/headers/network/send_data.h" 3 "Thu Apr 22 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
+.TH "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/headers/network/send_data.h" 3 "Sun May 9 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -6,17 +6,40 @@
 .SH SYNOPSIS
 .br
 .PP
+\fC#include 'network/server\&.h'\fP
+.br
+
 .SS "Functions"
 
 .in +1c
 .ti -1c
-.RI "int \fBsend_client_list\fP (int sockfd)"
+.RI "int \fBsend_client_list\fP (char who, int sockfd, char *sockip)"
 .br
 .RI "Sends my client list to a node via 'sockfd'\&. "
+.ti -1c
+.RI "void \fBsend_get_blocks\fP (\fBclient_connection\fP *cc)"
+.br
+.RI "Sends get blocks\&. "
+.ti -1c
+.RI "void \fBsend_actual_height\fP (int fd, \fBinfos_st\fP *infos)"
+.br
+.ti -1c
+.RI "void \fBsend_reject_demand\fP (int fd)"
+.br
+.ti -1c
+.RI "void \fBsend_send_block\fP (int fd, size_t height)"
+.br
+.ti -1c
+.RI "void \fBsend_pending_transaction_list\fP (int sockfd)"
+.br
 .in -1c
 .SH "Function Documentation"
 .PP 
-.SS "int send_client_list (int sockfd)"
+.SS "void send_actual_height (int fd, \fBinfos_st\fP * infos)"
+
+.PP
+Definition at line 58 of file send_data\&.c\&.
+.SS "int send_client_list (char who, int sockfd, char * sockip)"
 
 .PP
 Sends my client list to a node via 'sockfd'\&. 
@@ -34,6 +57,22 @@ Sends my client list to a node via 'sockfd'\&.
 
 .PP
 Definition at line 3 of file send_data\&.c\&.
+.SS "void send_get_blocks (\fBclient_connection\fP * cc)"
+
+.PP
+Sends get blocks\&. 
+.PP
+Definition at line 52 of file send_data\&.c\&.
+.SS "void send_pending_transaction_list (int sockfd)"
+
+.SS "void send_reject_demand (int fd)"
+
+.PP
+Definition at line 65 of file send_data\&.c\&.
+.SS "void send_send_block (int fd, size_t height)"
+
+.PP
+Definition at line 71 of file send_data\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for PEPITAS CRYPTOCURRENCY from the source code\&.

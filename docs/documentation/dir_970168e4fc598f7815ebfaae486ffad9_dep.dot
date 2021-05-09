@@ -1,0 +1,15 @@
+digraph "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/headers/blockchain" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_7f57b1e41c5acd0e859ae5f3a2b075a9 {
+    graph [ bgcolor="#ddddee", pencolor="black", label="headers" fontname="Helvetica", fontsize="10", URL="dir_7f57b1e41c5acd0e859ae5f3a2b075a9.html"]
+  dir_970168e4fc598f7815ebfaae486ffad9 [shape=box, label="blockchain", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_970168e4fc598f7815ebfaae486ffad9.html"];
+  }
+  dir_83fbd955906e9032510966d415c56495 [shape=box label="network" URL="dir_83fbd955906e9032510966d415c56495.html"];
+  dir_cd2dfb8956d87c3e23bff5bc3c96e5c3 [shape=box label="misc" URL="dir_cd2dfb8956d87c3e23bff5bc3c96e5c3.html"];
+  dir_83fbd955906e9032510966d415c56495->dir_970168e4fc598f7815ebfaae486ffad9 [headlabel="1", labeldistance=1.5 headhref="dir_000004_000001.html"];
+  dir_83fbd955906e9032510966d415c56495->dir_cd2dfb8956d87c3e23bff5bc3c96e5c3 [headlabel="1", labeldistance=1.5 headhref="dir_000004_000003.html"];
+  dir_970168e4fc598f7815ebfaae486ffad9->dir_83fbd955906e9032510966d415c56495 [headlabel="1", labeldistance=1.5 headhref="dir_000001_000004.html"];
+  dir_970168e4fc598f7815ebfaae486ffad9->dir_cd2dfb8956d87c3e23bff5bc3c96e5c3 [headlabel="1", labeldistance=1.5 headhref="dir_000001_000003.html"];
+}

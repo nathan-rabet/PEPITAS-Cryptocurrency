@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['neighbour_451',['Neighbour',['../client_8h.html#af516980a1d1fa7f6e92cafb59e634556',1,'client.h']]],
-  ['node_452',['Node',['../client_8h.html#a3b09f37e675bcd48a01bf22155996872',1,'client.h']]]
+  ['infos_5fst_667',['infos_st',['../network_8h.html#a8f0eaaa3b951f1f65c49c80d575c9e16',1,'network.h']]]
 ];

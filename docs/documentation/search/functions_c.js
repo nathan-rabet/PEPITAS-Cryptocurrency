@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['ping_5fclient_350',['ping_client',['../client_8h.html#a9d802c8a306078b25d6973010e11311c',1,'client.h']]],
-  ['pop_5fstake_351',['pop_stake',['../stake_8h.html#ab4f6ce2261db8ea30fb8e1c8263e863c',1,'stake.h']]],
-  ['process_5fheader_352',['process_header',['../get__data_8c.html#a56fe14e6f01f9d30d47882381d50d1f1',1,'get_data.c']]],
-  ['push_5fstake_353',['push_stake',['../stake_8h.html#a714b5ccd99c526e0a6aaa2378c88e47e',1,'stake.h']]]
+  ['network_5ftest_502',['network_test',['../client__test_8h.html#ade76ed0fdf28b393fbdc89e611688256',1,'network_test():&#160;client_test.c'],['../client__test_8c.html#ade76ed0fdf28b393fbdc89e611688256',1,'network_test():&#160;client_test.c']]],
+  ['number_5fneighbours_503',['number_neighbours',['../client_8h.html#acec8d99c29599378ad06a91d4911587f',1,'number_neighbours(char who):&#160;client.c'],['../core_2network_2client_8c.html#acec8d99c29599378ad06a91d4911587f',1,'number_neighbours(char who):&#160;client.c']]]
 ];

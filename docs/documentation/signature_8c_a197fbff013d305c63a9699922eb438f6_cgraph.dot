@@ -6,11 +6,13 @@ digraph "verify_block_signature"
   rankdir="LR";
   Node1 [label="verify_block_signature",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Verifies if a block signature is valid."];
   Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node2 [label="get_blockdata_data",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$signature_8c.html#af656af2c0f2bf2ea38d4fba26b50f5d6",tooltip="Get the blockdata data object."];
+  Node2 [label="get_blockdata_data",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$block_8h.html#af656af2c0f2bf2ea38d4fba26b50f5d6",tooltip="Get the blockdata data object."];
   Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node3 [label="get_transaction_data",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$signature_8c.html#a16588449d977a2d5052be7b3639768a8",tooltip="Convert transactions to char * buffer."];
+  Node3 [label="get_transaction_data",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$transaction_8h.html#a16588449d977a2d5052be7b3639768a8",tooltip=" "];
   Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node4 [label="verify_signature",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$signature_8c.html#a03bc161fe8675e7bf8763cdcee6a3ac2",tooltip="Apply the SHA384 algorithm on a 'data' of size 'len_data' and verifies if SHA384(data,..."];
-  Node4 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node5 [label="sha384_data",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$hash_8h.html#a67d06acefe39c395887f87d76bed5ba3",tooltip="Apply the SHA384 algorithm on a 'data' of size 'len_data'."];
+  Node4 [label="get_epoch_man_pkey",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$epoch__man_8h.html#a600e69b60a52aa9e5976546b39ff2fab",tooltip="Give the pkey of the creator of a block."];
+  Node1 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="verify_signature",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$signature_8c.html#abb24ef32c40711494e34d7639e64f8a3",tooltip="Verifies if SHA384(data) == decrypt(signature,pub_key)"];
+  Node5 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="sha384_data",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$hash_8h.html#a67d06acefe39c395887f87d76bed5ba3",tooltip="Apply the SHA384 algorithm on a 'data' of size 'len_data'."];
 }

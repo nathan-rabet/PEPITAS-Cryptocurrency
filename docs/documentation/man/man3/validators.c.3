@@ -1,0 +1,246 @@
+.TH "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/src/core/validation/validators.c" 3 "Sun May 9 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/src/core/validation/validators.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'validation/validators\&.h'\fP
+.br
+\fC#include 'misc/math\&.h'\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBNB_RSA_CHUNK\fP   2048/64"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "uint16_t \fBdefine_nb_validators\fP (size_t n)"
+.br
+.ti -1c
+.RI "char * \fBhash_block_transactions_epoch\fP (\fBBlock\fP *block)"
+.br
+.ti -1c
+.RI "RSA ** \fBget_comittee\fP (size_t block_height, size_t *nb_validators)"
+.br
+.RI "Get the a comittee RSA public keys on a specific epoch\&. "
+.ti -1c
+.RI "RSA ** \fBget_next_comittee\fP (size_t *nb_validators)"
+.br
+.RI "Get the a comittee RSA public keys on a specific epoch\&. "
+.ti -1c
+.RI "ssize_t \fBget_validators_states_total_stake\fP ()"
+.br
+.RI "Get the total stake of the network (parse 'validators\&.state') "
+.ti -1c
+.RI "ssize_t \fBget_validators_states_nb_validators\fP ()"
+.br
+.RI "Get the number of validators of the network (parse 'validators\&.state') "
+.ti -1c
+.RI "ssize_t \fBget_validators_states_block_height_validity\fP ()"
+.br
+.RI "Get the validators states block height validity (parse 'validators\&.state') "
+.ti -1c
+.RI "ssize_t \fBget_validator_stake\fP (size_t validator_id)"
+.br
+.RI "Get a validator total stake (parse 'validators\&.state') "
+.ti -1c
+.RI "ssize_t \fBget_validator_power\fP (size_t validator_id)"
+.br
+.RI "Get a validator power (parse 'validators\&.state') "
+.ti -1c
+.RI "RSA * \fBget_validator_pkey\fP (size_t validator_id)"
+.br
+.RI "Get the validator pkey as RSA* (parse 'validators\&.state') "
+.ti -1c
+.RI "ssize_t \fBget_validator_id\fP (char pkey[])"
+.br
+.RI "Get the validator id in 'validators\&.state'\&. "
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define NB_RSA_CHUNK   2048/64"
+
+.PP
+Definition at line 4 of file validators\&.c\&.
+.SH "Function Documentation"
+.PP 
+.SS "uint16_t define_nb_validators (size_t n)"
+
+.PP
+Definition at line 6 of file validators\&.c\&.
+.SS "RSA** get_comittee (size_t block_height, size_t * nb_validators)"
+
+.PP
+Get the a comittee RSA public keys on a specific epoch\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIblock_height\fP The height of the block you want a comitte from 
+.br
+\fInb_validators\fP return value, the number of selected validators 
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+The 'next block' is referring to block after the last block available OFFLINE 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+[*RSA] 
+.RE
+.PP
+
+.PP
+Definition at line 32 of file validators\&.c\&.
+.SS "RSA** get_next_comittee (size_t * nb_validators)"
+
+.PP
+Get the a comittee RSA public keys on a specific epoch\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIblock_height\fP The height of the block you want a comitte from 
+.br
+\fInb_validators\fP return value, the number of selected validators 
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+The 'next block' is referring to block after the last block available OFFLINE 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+[*RSA] 
+.RE
+.PP
+
+.PP
+Definition at line 124 of file validators\&.c\&.
+.SS "ssize_t get_validator_id (char pkey[])"
+
+.PP
+Get the validator id in 'validators\&.state'\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIpkey\fP The string public key (without -----BEGIN RSA KEY----- & -----END RSA KEY-----) 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+ssize_t, the validator index 
+.RE
+.PP
+
+.PP
+Definition at line 209 of file validators\&.c\&.
+.SS "RSA* get_validator_pkey (size_t validator_id)"
+
+.PP
+Get the validator pkey as RSA* (parse 'validators\&.state') 
+.PP
+\fBParameters\fP
+.RS 4
+\fIvalidator_id\fP The id of the validator in 'validators\&.state' 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+RSA* 
+.RE
+.PP
+
+.PP
+Definition at line 188 of file validators\&.c\&.
+.SS "ssize_t get_validator_power (size_t validator_id)"
+
+.PP
+Get a validator power (parse 'validators\&.state') 
+.PP
+\fBParameters\fP
+.RS 4
+\fIvalidator_id\fP The id of the validator in 'validators\&.state' 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+ssize_t 
+.RE
+.PP
+
+.PP
+Definition at line 176 of file validators\&.c\&.
+.SS "ssize_t get_validator_stake (size_t validator_id)"
+
+.PP
+Get a validator total stake (parse 'validators\&.state') 
+.PP
+\fBParameters\fP
+.RS 4
+\fIvalidator_id\fP The id of the validator in 'validators\&.state' 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+ssize_t 
+.RE
+.PP
+
+.PP
+Definition at line 164 of file validators\&.c\&.
+.SS "ssize_t get_validators_states_block_height_validity ()"
+
+.PP
+Get the validators states block height validity (parse 'validators\&.state') 
+.PP
+\fBReturns\fP
+.RS 4
+ssize_t 
+.RE
+.PP
+
+.PP
+Definition at line 152 of file validators\&.c\&.
+.SS "ssize_t get_validators_states_nb_validators ()"
+
+.PP
+Get the number of validators of the network (parse 'validators\&.state') 
+.PP
+\fBReturns\fP
+.RS 4
+ssize_t 
+.RE
+.PP
+
+.PP
+Definition at line 141 of file validators\&.c\&.
+.SS "ssize_t get_validators_states_total_stake ()"
+
+.PP
+Get the total stake of the network (parse 'validators\&.state') 
+.PP
+\fBReturns\fP
+.RS 4
+ssize_t 
+.RE
+.PP
+
+.PP
+Definition at line 129 of file validators\&.c\&.
+.SS "char* hash_block_transactions_epoch (\fBBlock\fP * block)"
+
+.PP
+Definition at line 20 of file validators\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for PEPITAS CRYPTOCURRENCY from the source code\&.

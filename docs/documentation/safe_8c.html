@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>PEPITAS CRYPTOCURRENCY: /home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/src/misc/safe.c File Reference</title>
+<title>PEPITAS CRYPTOCURRENCY: /home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/src/core/misc/safe.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -89,12 +89,11 @@ $(document).ready(function(){initNavTree('safe_8c.html',''); initResizable(); })
 <div class="title">safe.c File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="safe_8h_source.html">misc/safe.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="safe_8h_source.html">misc/safe.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for safe.c:</div>
 <div class="dyncontent">
-<div class="center"><img src="safe_8c__incl.png" border="0" usemap="#_2home_2runner_2work_2_p_e_p_i_t_a_s-_cryptocurrency_2_p_e_p_i_t_a_s-_cryptocurrency_2src_2misc_2safe_8c" alt=""/></div>
+<div class="center"><img src="safe_8c__incl.png" border="0" usemap="#_2home_2runner_2work_2_p_e_p_i_t_a_s-_cryptocurrency_2_p_e_p_i_t_a_s-_cryptocurrency_2src_2core_2misc_2safe_8c" alt=""/></div>
 <!-- MAP 0 -->
 </div>
 </div>
@@ -105,6 +104,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a405edff38f586c79822927a3b981e504"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="safe_8c.html#a405edff38f586c79822927a3b981e504">safe_write</a> (int fd, const void *buf, ssize_t count)</td></tr>
 <tr class="memdesc:a405edff38f586c79822927a3b981e504"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes safely to a file descriptor.  <a href="safe_8c.html#a405edff38f586c79822927a3b981e504">More...</a><br /></td></tr>
 <tr class="separator:a405edff38f586c79822927a3b981e504"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb28bdb1609a5e208b7840b471413e81"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="safe_8c.html#aeb28bdb1609a5e208b7840b471413e81">safe_send</a> (int fd, const void *buf, ssize_t count)</td></tr>
+<tr class="memdesc:aeb28bdb1609a5e208b7840b471413e81"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send safely to a file descriptor.  <a href="safe_8c.html#aeb28bdb1609a5e208b7840b471413e81">More...</a><br /></td></tr>
+<tr class="separator:aeb28bdb1609a5e208b7840b471413e81"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5cdb8f1fd0a2b177164e88074639a648"><td class="memItemLeft" align="right" valign="top">ssize_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="safe_8c.html#a5cdb8f1fd0a2b177164e88074639a648">safe_read</a> (int fd, const void **buf, size_t *bufsize)</td></tr>
 <tr class="memdesc:a5cdb8f1fd0a2b177164e88074639a648"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads safely in a file descriptor until '\r\n\r\n'.  <a href="safe_8c.html#a5cdb8f1fd0a2b177164e88074639a648">More...</a><br /></td></tr>
 <tr class="separator:a5cdb8f1fd0a2b177164e88074639a648"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -163,7 +165,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>ssize_t, -1 if error or the number of read items </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="safe_8c_source.html#l00040">40</a> of file <a class="el" href="safe_8c_source.html">safe.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="safe_8c_source.html#l00058">58</a> of file <a class="el" href="safe_8c_source.html">safe.c</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -215,12 +217,65 @@ Here is the caller graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The number of byte the file 'fd', if -1 error </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="safe_8c_source.html#l00018">18</a> of file <a class="el" href="safe_8c_source.html">safe.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="safe_8c_source.html#l00031">31</a> of file <a class="el" href="safe_8c_source.html">safe.c</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="safe_8c_a5cdb8f1fd0a2b177164e88074639a648_icgraph.png" border="0" usemap="#safe_8c_a5cdb8f1fd0a2b177164e88074639a648_icgraph" alt=""/></div>
 <!-- MAP 2 -->
+</div>
+
+</div>
+</div>
+<a id="aeb28bdb1609a5e208b7840b471413e81"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb28bdb1609a5e208b7840b471413e81">&#9670;&nbsp;</a></span>safe_send()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int safe_send </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>fd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const void *&#160;</td>
+          <td class="paramname"><em>buf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ssize_t&#160;</td>
+          <td class="paramname"><em>count</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Send safely to a file descriptor. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fd</td><td>The file descriptor </td></tr>
+    <tr><td class="paramname">buf</td><td>The buffer to write </td></tr>
+    <tr><td class="paramname">count</td><td>The number of byte to write in fd</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Error code </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="safe_8c_source.html#l00017">17</a> of file <a class="el" href="safe_8c_source.html">safe.c</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="safe_8c_aeb28bdb1609a5e208b7840b471413e81_icgraph.png" border="0" usemap="#safe_8c_aeb28bdb1609a5e208b7840b471413e81_icgraph" alt=""/></div>
+<!-- MAP 3 -->
 </div>
 
 </div>
@@ -268,12 +323,12 @@ Here is the caller graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Error code </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="safe_8c_source.html#l00004">4</a> of file <a class="el" href="safe_8c_source.html">safe.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="safe_8c_source.html#l00003">3</a> of file <a class="el" href="safe_8c_source.html">safe.c</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="safe_8c_a405edff38f586c79822927a3b981e504_icgraph.png" border="0" usemap="#safe_8c_a405edff38f586c79822927a3b981e504_icgraph" alt=""/></div>
-<!-- MAP 3 -->
+<!-- MAP 4 -->
 </div>
 
 </div>
@@ -283,7 +338,7 @@ Here is the caller graph for this function:</div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_88826aa2a10e1882b573f502bc7f4b55.html">misc</a></li><li class="navelem"><a class="el" href="safe_8c.html">safe.c</a></li>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_aebb8dcc11953d78e620bbef0b9e2183.html">core</a></li><li class="navelem"><a class="el" href="dir_1d1b10f61824508180eede0e0533804d.html">misc</a></li><li class="navelem"><a class="el" href="safe_8c.html">safe.c</a></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>

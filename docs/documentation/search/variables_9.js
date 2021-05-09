@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['organisation_5fpublic_5fkey_416',['organisation_public_key',['../struct_transaction_data.html#a67d7c4e95988d712faf91b928f317fd9',1,'TransactionData']]]
+  ['key_5fentry_612',['key_entry',['../ui_8c.html#a612981b6f4708cbf727a214239dc1f21',1,'ui.c']]]
 ];

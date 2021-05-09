@@ -1,0 +1,88 @@
+.TH "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/src/core/blockchain/transaction.c" 3 "Sun May 9 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/src/core/blockchain/transaction.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'blockchain/transaction\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBwrite_transactiondata\fP (\fBTransactionData\fP *transaction, int fd)"
+.br
+.ti -1c
+.RI "void \fBwrite_transaction\fP (\fBTransaction\fP *transaction, int fd)"
+.br
+.ti -1c
+.RI "void \fBget_transaction_data\fP (\fBTransaction\fP *trans, char **buff, size_t *index)"
+.br
+.RI "Convert transactions to char * buffer\&. "
+.ti -1c
+.RI "void \fBconvert_data_to_transactiondata\fP (\fBTransactionData\fP *transactiondata, int fd)"
+.br
+.ti -1c
+.RI "void \fBload_transaction\fP (\fBTransaction\fP *transaction, int fd)"
+.br
+.ti -1c
+.RI "\fBTransaction\fP * \fBload_pending_transaction\fP (time_t timestamp)"
+.br
+.ti -1c
+.RI "void \fBadd_pending_transaction\fP (\fBTransaction\fP *transaction)"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "void add_pending_transaction (\fBTransaction\fP * transaction)"
+
+.PP
+Definition at line 158 of file transaction\&.c\&.
+.SS "void convert_data_to_transactiondata (\fBTransactionData\fP * transactiondata, int fd)"
+
+.PP
+Definition at line 99 of file transaction\&.c\&.
+.SS "void get_transaction_data (\fBTransaction\fP * trans, char ** buff, size_t * size)"
+
+.PP
+Convert transactions to char * buffer\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fItransactions\fP The transaction array 
+.br
+\fIbuff\fP The buffer that receives the transactions 
+.br
+\fIsize\fP The number of transactions in the array
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+The buffer allocated (Must be freed) 
+.RE
+.PP
+
+.PP
+Definition at line 48 of file transaction\&.c\&.
+.SS "\fBTransaction\fP* load_pending_transaction (time_t timestamp)"
+
+.PP
+Definition at line 145 of file transaction\&.c\&.
+.SS "void load_transaction (\fBTransaction\fP * transaction, int fd)"
+
+.PP
+Definition at line 135 of file transaction\&.c\&.
+.SS "void write_transaction (\fBTransaction\fP * transaction, int fd)"
+
+.PP
+Definition at line 42 of file transaction\&.c\&.
+.SS "void write_transactiondata (\fBTransactionData\fP * transaction, int fd)"
+
+.PP
+Definition at line 3 of file transaction\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for PEPITAS CRYPTOCURRENCY from the source code\&.

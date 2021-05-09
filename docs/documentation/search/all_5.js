@@ -1,8 +1,6 @@
 var searchData=
 [
-  ['family_54',['family',['../struct_neighbour.html#a4417150d9f858949bd9ea8794995ebcc',1,'Neighbour']]],
-  ['fetch_5fclient_5flist_55',['fetch_client_list',['../get__data_8h.html#ad45197fe0e164a777849753c436479ea',1,'fetch_client_list(int neighbour_id):&#160;get_data.c'],['../get__data_8c.html#ad45197fe0e164a777849753c436479ea',1,'fetch_client_list(int neighbour_id):&#160;get_data.c']]],
-  ['files_2ec_56',['files.c',['../files_8c.html',1,'']]],
-  ['files_2eh_57',['files.h',['../files_8h.html',1,'']]],
-  ['free_5fblock_58',['free_block',['../block_8h.html#a3eb417f7cce88e8ec69d6974cd25e49f',1,'free_block(Block *block):&#160;block.c'],['../block_8c.html#a3eb417f7cce88e8ec69d6974cd25e49f',1,'free_block(Block *block):&#160;block.c']]]
+  ['epoch_5fid_78',['epoch_id',['../struct_block_data.html#a278b59ca8ce2a9b806c99a450d00dfa7',1,'BlockData']]],
+  ['epoch_5fman_2ec_79',['epoch_man.c',['../epoch__man_8c.html',1,'']]],
+  ['epoch_5fman_2eh_80',['epoch_man.h',['../epoch__man_8h.html',1,'']]]
 ];

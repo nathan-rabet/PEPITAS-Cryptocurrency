@@ -1,4 +1,4 @@
-.TH "Transaction" 3 "Thu Apr 22 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
+.TH "Transaction" 3 "Sun May 9 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -12,32 +12,25 @@ Transaction
 
 .in +1c
 .ti -1c
-.RI "\fBTransactionData\fP * \fBtransaction_data\fP"
+.RI "\fBTransactionData\fP \fBtransaction_data\fP"
 .br
 .ti -1c
-.RI "size_t \fBsignature_len\fP"
-.br
-.ti -1c
-.RI "char * \fBtransaction_signature\fP"
+.RI "char \fBtransaction_signature\fP [256]"
 .br
 .in -1c
 .SH "Detailed Description"
 .PP 
-Definition at line 28 of file transaction\&.h\&.
+Definition at line 43 of file transaction\&.h\&.
 .SH "Field Documentation"
 .PP 
-.SS "size_t signature_len"
+.SS "\fBTransactionData\fP transaction_data"
 
 .PP
-Definition at line 32 of file transaction\&.h\&.
-.SS "\fBTransactionData\fP* transaction_data"
+Definition at line 45 of file transaction\&.h\&.
+.SS "char transaction_signature[256]"
 
 .PP
-Definition at line 30 of file transaction\&.h\&.
-.SS "char* transaction_signature"
-
-.PP
-Definition at line 33 of file transaction\&.h\&.
+Definition at line 47 of file transaction\&.h\&.
 
 .SH "Author"
 .PP 

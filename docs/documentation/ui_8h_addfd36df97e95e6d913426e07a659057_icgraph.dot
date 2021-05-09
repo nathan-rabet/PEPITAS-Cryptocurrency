@@ -7,6 +7,4 @@ digraph "add_transaction_from_file"
   Node1 [label="add_transaction_from_file",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
   Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node2 [label="load_transactions_from_file",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$ui_8c.html#a8909bf913522e177fc1629b07c32420c",tooltip=" "];
-  Node2 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node3 [label="on_connect_but_press",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$ui_8c.html#aa118feebec7cfa09ac8e958107872c47",tooltip=" "];
 }

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['family_404',['family',['../struct_neighbour.html#a4417150d9f858949bd9ea8794995ebcc',1,'Neighbour']]]
+  ['demand_600',['demand',['../structclient__connection.html#a03bbf16021794da27dc482d7eb9fc0d1',1,'client_connection']]]
 ];

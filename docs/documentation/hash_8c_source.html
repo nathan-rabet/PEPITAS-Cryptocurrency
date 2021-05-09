@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>PEPITAS CRYPTOCURRENCY: /home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/src/cryptosystem/hash.c Source File</title>
+<title>PEPITAS CRYPTOCURRENCY: /home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/src/core/cryptosystem/hash.c Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -89,7 +89,7 @@ $(document).ready(function(){initNavTree('hash_8c_source.html',''); initResizabl
 <div class="contents">
 <a href="hash_8c.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &lt;openssl/sha.h&gt;</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="hash_8h.html">cryptosystem/hash.h</a>&quot;</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="block_8h.html">core/blockchain/block.h</a>&quot;</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="block_8h.html">blockchain/block.h</a>&quot;</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="signature_8h.html">cryptosystem/signature.h</a>&quot;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
 <div class="line"><a name="l00006"></a><span class="lineno"><a class="line" href="hash_8c.html#a67d06acefe39c395887f87d76bed5ba3">    6</a></span>&#160;<span class="keywordtype">char</span> *<a class="code" href="hash_8c.html#a67d06acefe39c395887f87d76bed5ba3">sha384_data</a>(<span class="keywordtype">void</span> *data, <span class="keywordtype">size_t</span> len_data)</div>
@@ -116,7 +116,7 @@ $(document).ready(function(){initNavTree('hash_8c_source.html',''); initResizabl
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">size_t</span> size = 0;</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; block-&gt;<a class="code" href="struct_block.html#aa4ad7aceb75575844e2db05c93709bba">block_data</a>.<a class="code" href="struct_block_data.html#a6a025b5ff7c48992e8d360c35f02b7e8">nb_transactions</a>; i++)</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    {</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <a class="code" href="signature_8h.html#a39fc832fd334ecc83d42bdc39e262948">get_transaction_data</a>(block-&gt;<a class="code" href="struct_block.html#aa4ad7aceb75575844e2db05c93709bba">block_data</a>.<a class="code" href="struct_block_data.html#acf585c1809511c4f5b5366bb2bc2e855">transactions</a>[i], &amp;buf, &amp;size);</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <a class="code" href="transaction_8h.html#a16588449d977a2d5052be7b3639768a8">get_transaction_data</a>(block-&gt;<a class="code" href="struct_block.html#aa4ad7aceb75575844e2db05c93709bba">block_data</a>.<a class="code" href="struct_block_data.html#acf585c1809511c4f5b5366bb2bc2e855">transactions</a>[i], &amp;buf, &amp;size);</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    }</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="hash_8c.html#a67d06acefe39c395887f87d76bed5ba3">sha384_data</a>(buf, size);</div>
@@ -124,19 +124,19 @@ $(document).ready(function(){initNavTree('hash_8c_source.html',''); initResizabl
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="ablock_8h_html"><div class="ttname"><a href="block_8h.html">block.h</a></div></div>
-<div class="ttc" id="asignature_8h_html_a39fc832fd334ecc83d42bdc39e262948"><div class="ttname"><a href="signature_8h.html#a39fc832fd334ecc83d42bdc39e262948">get_transaction_data</a></div><div class="ttdeci">void get_transaction_data(Transaction *trans, char **buff, size_t *size)</div><div class="ttdoc">Convert transactions to char * buffer.</div><div class="ttdef"><b>Definition:</b> <a href="signature_8c_source.html#l00093">signature.c:93</a></div></div>
-<div class="ttc" id="astruct_block_data_html_a6a025b5ff7c48992e8d360c35f02b7e8"><div class="ttname"><a href="struct_block_data.html#a6a025b5ff7c48992e8d360c35f02b7e8">BlockData::nb_transactions</a></div><div class="ttdeci">uint16_t nb_transactions</div><div class="ttdef"><b>Definition:</b> <a href="block_8h_source.html#l00023">block.h:23</a></div></div>
+<div class="ttc" id="atransaction_8h_html_a16588449d977a2d5052be7b3639768a8"><div class="ttname"><a href="transaction_8h.html#a16588449d977a2d5052be7b3639768a8">get_transaction_data</a></div><div class="ttdeci">void get_transaction_data(Transaction *trans, char **buff, size_t *index)</div><div class="ttdef"><b>Definition:</b> <a href="transaction_8c_source.html#l00048">transaction.c:48</a></div></div>
+<div class="ttc" id="astruct_block_data_html_a6a025b5ff7c48992e8d360c35f02b7e8"><div class="ttname"><a href="struct_block_data.html#a6a025b5ff7c48992e8d360c35f02b7e8">BlockData::nb_transactions</a></div><div class="ttdeci">uint16_t nb_transactions</div><div class="ttdef"><b>Definition:</b> <a href="block_8h_source.html#l00041">block.h:41</a></div></div>
 <div class="ttc" id="ahash_8c_html_a67d06acefe39c395887f87d76bed5ba3"><div class="ttname"><a href="hash_8c.html#a67d06acefe39c395887f87d76bed5ba3">sha384_data</a></div><div class="ttdeci">char * sha384_data(void *data, size_t len_data)</div><div class="ttdoc">Apply the SHA384 algorithm on a 'data' of size 'len_data'.</div><div class="ttdef"><b>Definition:</b> <a href="hash_8c_source.html#l00006">hash.c:6</a></div></div>
 <div class="ttc" id="asignature_8h_html"><div class="ttname"><a href="signature_8h.html">signature.h</a></div></div>
-<div class="ttc" id="astruct_block_data_html_acf585c1809511c4f5b5366bb2bc2e855"><div class="ttname"><a href="struct_block_data.html#acf585c1809511c4f5b5366bb2bc2e855">BlockData::transactions</a></div><div class="ttdeci">Transaction ** transactions</div><div class="ttdef"><b>Definition:</b> <a href="block_8h_source.html#l00024">block.h:24</a></div></div>
+<div class="ttc" id="astruct_block_data_html_acf585c1809511c4f5b5366bb2bc2e855"><div class="ttname"><a href="struct_block_data.html#acf585c1809511c4f5b5366bb2bc2e855">BlockData::transactions</a></div><div class="ttdeci">Transaction ** transactions</div><div class="ttdef"><b>Definition:</b> <a href="block_8h_source.html#l00042">block.h:42</a></div></div>
 <div class="ttc" id="ahash_8c_html_a1a0c4c7a5b69d66d29782dfc45e625ec"><div class="ttname"><a href="hash_8c.html#a1a0c4c7a5b69d66d29782dfc45e625ec">hash_block_transactions</a></div><div class="ttdeci">char * hash_block_transactions(Block *block)</div><div class="ttdoc">Apply the SHA384 to all block transactions.</div><div class="ttdef"><b>Definition:</b> <a href="hash_8c_source.html#l00024">hash.c:24</a></div></div>
 <div class="ttc" id="ahash_8h_html"><div class="ttname"><a href="hash_8h.html">hash.h</a></div></div>
-<div class="ttc" id="astruct_block_html"><div class="ttname"><a href="struct_block.html">Block</a></div><div class="ttdef"><b>Definition:</b> <a href="block_8h_source.html#l00031">block.h:31</a></div></div>
-<div class="ttc" id="astruct_block_html_aa4ad7aceb75575844e2db05c93709bba"><div class="ttname"><a href="struct_block.html#aa4ad7aceb75575844e2db05c93709bba">Block::block_data</a></div><div class="ttdeci">BlockData block_data</div><div class="ttdef"><b>Definition:</b> <a href="block_8h_source.html#l00034">block.h:34</a></div></div>
+<div class="ttc" id="astruct_block_html"><div class="ttname"><a href="struct_block.html">Block</a></div><div class="ttdef"><b>Definition:</b> <a href="block_8h_source.html#l00051">block.h:51</a></div></div>
+<div class="ttc" id="astruct_block_html_aa4ad7aceb75575844e2db05c93709bba"><div class="ttname"><a href="struct_block.html#aa4ad7aceb75575844e2db05c93709bba">Block::block_data</a></div><div class="ttdeci">BlockData block_data</div><div class="ttdef"><b>Definition:</b> <a href="block_8h_source.html#l00054">block.h:54</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_2b8ca4726e0ce87f6f4366978f32e545.html">cryptosystem</a></li><li class="navelem"><a class="el" href="hash_8c.html">hash.c</a></li>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_aebb8dcc11953d78e620bbef0b9e2183.html">core</a></li><li class="navelem"><a class="el" href="dir_20c6d9e430fc51dbb210ba9f0345a9ce.html">cryptosystem</a></li><li class="navelem"><a class="el" href="hash_8c.html">hash.c</a></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>

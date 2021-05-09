@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>PEPITAS CRYPTOCURRENCY: /home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/headers/core/blockchain/block.h File Reference</title>
+<title>PEPITAS CRYPTOCURRENCY: /home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/headers/blockchain/block.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -92,18 +92,29 @@ $(document).ready(function(){initNavTree('block_8h.html',''); initResizable(); }
 <div class="title">block.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;stdlib.h&gt;</code><br />
+<div class="textblock"><code>#include &lt;string.h&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &lt;sys/stat.h&gt;</code><br />
+<code>#include &lt;unistd.h&gt;</code><br />
+<code>#include &lt;err.h&gt;</code><br />
+<code>#include &lt;errno.h&gt;</code><br />
 <code>#include &lt;openssl/sha.h&gt;</code><br />
+<code>#include &lt;openssl/pem.h&gt;</code><br />
+<code>#include &lt;openssl/rsa.h&gt;</code><br />
+<code>#include &lt;openssl/crypto.h&gt;</code><br />
+<code>#include &lt;fcntl.h&gt;</code><br />
+<code>#include &lt;sys/types.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="transaction_8h_source.html">transaction.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="files_8h_source.html">misc/files.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for block.h:</div>
 <div class="dyncontent">
-<div class="center"><img src="block_8h__incl.png" border="0" usemap="#_2home_2runner_2work_2_p_e_p_i_t_a_s-_cryptocurrency_2_p_e_p_i_t_a_s-_cryptocurrency_2headers_2core_2blockchain_2block_8h" alt=""/></div>
+<div class="center"><img src="block_8h__incl.png" border="0" usemap="#_2home_2runner_2work_2_p_e_p_i_t_a_s-_cryptocurrency_2_p_e_p_i_t_a_s-_cryptocurrency_2headers_2blockchain_2block_8h" alt=""/></div>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
-<div class="center"><img src="block_8h__dep__incl.png" border="0" usemap="#_2home_2runner_2work_2_p_e_p_i_t_a_s-_cryptocurrency_2_p_e_p_i_t_a_s-_cryptocurrency_2headers_2core_2blockchain_2block_8hdep" alt=""/></div>
+<div class="center"><img src="block_8h__dep__incl.png" border="0" usemap="#_2home_2runner_2work_2_p_e_p_i_t_a_s-_cryptocurrency_2_p_e_p_i_t_a_s-_cryptocurrency_2headers_2blockchain_2block_8hdep" alt=""/></div>
 </div>
 </div>
 <p><a href="block_8h_source.html">Go to the source code of this file.</a></p>
@@ -119,9 +130,13 @@ Data Structures</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
+<tr class="memitem:aebcc63085ec90348cc76624d948759dc"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="block_8h.html#aebcc63085ec90348cc76624d948759dc">MAX_VALIDATORS_PER_BLOCK</a>&#160;&#160;&#160;512</td></tr>
+<tr class="separator:aebcc63085ec90348cc76624d948759dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a79662481c373b09143d95d11833fc2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="block_8h.html#a7a79662481c373b09143d95d11833fc2">SIGNATURE_LEN</a>&#160;&#160;&#160;256</td></tr>
+<tr class="separator:a7a79662481c373b09143d95d11833fc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a35b08f2af3e186c2368bf063bf00b74e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="block_8h.html#a35b08f2af3e186c2368bf063bf00b74e">CURRENT_CHUNK</a>&#160;&#160;&#160;0</td></tr>
 <tr class="separator:a35b08f2af3e186c2368bf063bf00b74e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5eef11d8bacf39665e6c5a5eaf63c448"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="block_8h.html#a5eef11d8bacf39665e6c5a5eaf63c448">BLOCK_DATA_SIZE</a>&#160;&#160;&#160;(SHA384_DIGEST_LENGTH * 2 + 1) + sizeof(size_t) + sizeof(uint16_t) + sizeof(time_t)</td></tr>
+<tr class="memitem:a5eef11d8bacf39665e6c5a5eaf63c448"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="block_8h.html#a5eef11d8bacf39665e6c5a5eaf63c448">BLOCK_DATA_SIZE</a>&#160;&#160;&#160;(SHA384_DIGEST_LENGTH * 2 + 1) + sizeof(size_t) + sizeof(uint16_t) + sizeof(time_t) + sizeof(int)</td></tr>
 <tr class="separator:a5eef11d8bacf39665e6c5a5eaf63c448"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad51ded0bbd705f02f73fc60c0b721ced"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="block_8h.html#ad51ded0bbd705f02f73fc60c0b721ced">BLOCK_SIZE</a>&#160;&#160;&#160;2048 + sizeof(size_t) + <a class="el" href="block_8h.html#a5eef11d8bacf39665e6c5a5eaf63c448">BLOCK_DATA_SIZE</a> + SHA384_DIGEST_LENGTH * 2 + 1</td></tr>
 <tr class="separator:ad51ded0bbd705f02f73fc60c0b721ced"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -141,13 +156,22 @@ Typedefs</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:af572e8ef23f600c0a62f716e780c813b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_chunk_blockchain.html">ChunkBlockchain</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="block_8h.html#af572e8ef23f600c0a62f716e780c813b">get_blockchain</a> (size_t nb_chunk)</td></tr>
-<tr class="memdesc:af572e8ef23f600c0a62f716e780c813b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads a blockchain object with a padding of 'nb_chunk'.  <a href="block_8h.html#af572e8ef23f600c0a62f716e780c813b">More...</a><br /></td></tr>
-<tr class="separator:af572e8ef23f600c0a62f716e780c813b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8bf71699a273aa1128091b78f7ebaafd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_block.html">Block</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="block_8h.html#a8bf71699a273aa1128091b78f7ebaafd">get_genesis_block</a> ()</td></tr>
+<tr class="separator:a8bf71699a273aa1128091b78f7ebaafd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7acee00b67ed21663a5b05242acc822d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_chunk_blockchain.html">ChunkBlockchain</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="block_8h.html#a7acee00b67ed21663a5b05242acc822d">load_blockchain</a> (size_t nb_chunk)</td></tr>
+<tr class="memdesc:a7acee00b67ed21663a5b05242acc822d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads a blockchain object with a padding of 'nb_chunk'.  <a href="block_8h.html#a7acee00b67ed21663a5b05242acc822d">More...</a><br /></td></tr>
+<tr class="separator:a7acee00b67ed21663a5b05242acc822d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ece7b96ab33761bf1d33f1e8b766ceb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_chunk_blockchain.html">ChunkBlockchain</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="block_8h.html#a4ece7b96ab33761bf1d33f1e8b766ceb">load_last_blockchain</a> ()</td></tr>
+<tr class="memdesc:a4ece7b96ab33761bf1d33f1e8b766ceb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load the last local blockchain chunk.  <a href="block_8h.html#a4ece7b96ab33761bf1d33f1e8b766ceb">More...</a><br /></td></tr>
+<tr class="separator:a4ece7b96ab33761bf1d33f1e8b766ceb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add83a1752a104b44d130b12342762011"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="block_8h.html#add83a1752a104b44d130b12342762011">get_last_block_height</a> ()</td></tr>
+<tr class="memdesc:add83a1752a104b44d130b12342762011"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the last block height.  <a href="block_8h.html#add83a1752a104b44d130b12342762011">More...</a><br /></td></tr>
+<tr class="separator:add83a1752a104b44d130b12342762011"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a31943025b7c5be568f87a90fcdcaf8c2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="block_8h.html#a31943025b7c5be568f87a90fcdcaf8c2">write_block_file</a> (<a class="el" href="struct_block.html">Block</a> block)</td></tr>
 <tr class="memdesc:a31943025b7c5be568f87a90fcdcaf8c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes a block struct in a file.  <a href="block_8h.html#a31943025b7c5be568f87a90fcdcaf8c2">More...</a><br /></td></tr>
 <tr class="separator:a31943025b7c5be568f87a90fcdcaf8c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a32140266e4b385f64860944a5edd0153"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_block.html">Block</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="block_8h.html#a32140266e4b385f64860944a5edd0153">get_block</a> (size_t block_height)</td></tr>
+<tr class="memdesc:a32140266e4b385f64860944a5edd0153"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a block object.  <a href="block_8h.html#a32140266e4b385f64860944a5edd0153">More...</a><br /></td></tr>
 <tr class="separator:a32140266e4b385f64860944a5edd0153"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3eb417f7cce88e8ec69d6974cd25e49f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="block_8h.html#a3eb417f7cce88e8ec69d6974cd25e49f">free_block</a> (<a class="el" href="struct_block.html">Block</a> *block)</td></tr>
 <tr class="memdesc:a3eb417f7cce88e8ec69d6974cd25e49f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Free a block struct.  <a href="block_8h.html#a3eb417f7cce88e8ec69d6974cd25e49f">More...</a><br /></td></tr>
@@ -158,6 +182,17 @@ Functions</h2></td></tr>
 <tr class="memitem:afa89e120ede17e486633e4005ccf44f1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_block.html">Block</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="block_8h.html#afa89e120ede17e486633e4005ccf44f1">get_prev_block</a> (<a class="el" href="struct_block.html">Block</a> *block)</td></tr>
 <tr class="memdesc:afa89e120ede17e486633e4005ccf44f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">For a block of height <code>h</code>, return the block of height <code>h-1</code>  <a href="block_8h.html#afa89e120ede17e486633e4005ccf44f1">More...</a><br /></td></tr>
 <tr class="separator:afa89e120ede17e486633e4005ccf44f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af656af2c0f2bf2ea38d4fba26b50f5d6"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="block_8h.html#af656af2c0f2bf2ea38d4fba26b50f5d6">get_blockdata_data</a> (<a class="el" href="struct_block.html">Block</a> *block, size_t *size)</td></tr>
+<tr class="memdesc:af656af2c0f2bf2ea38d4fba26b50f5d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the blockdata data object.  <a href="block_8h.html#af656af2c0f2bf2ea38d4fba26b50f5d6">More...</a><br /></td></tr>
+<tr class="separator:af656af2c0f2bf2ea38d4fba26b50f5d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e5ff1f119568fb8566981cf7da11d7f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="block_8h.html#a0e5ff1f119568fb8566981cf7da11d7f">write_blockdata</a> (<a class="el" href="struct_block_data.html">BlockData</a> blockdata, int fd)</td></tr>
+<tr class="memdesc:a0e5ff1f119568fb8566981cf7da11d7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes blockdata in a file.  <a href="block_8h.html#a0e5ff1f119568fb8566981cf7da11d7f">More...</a><br /></td></tr>
+<tr class="separator:a0e5ff1f119568fb8566981cf7da11d7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a58b3466ce733938859f0651b2a756e95"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="block_8h.html#a58b3466ce733938859f0651b2a756e95">write_block</a> (<a class="el" href="struct_block.html">Block</a> block, int fd)</td></tr>
+<tr class="memdesc:a58b3466ce733938859f0651b2a756e95"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes a block in a file.  <a href="block_8h.html#a58b3466ce733938859f0651b2a756e95">More...</a><br /></td></tr>
+<tr class="separator:a58b3466ce733938859f0651b2a756e95"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada1355f8610cc450d7c8f662dc6a7aef"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="block_8h.html#ada1355f8610cc450d7c8f662dc6a7aef">convert_data_to_block</a> (<a class="el" href="struct_block.html">Block</a> *block, int fd)</td></tr>
+<tr class="separator:ada1355f8610cc450d7c8f662dc6a7aef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="a5eef11d8bacf39665e6c5a5eaf63c448"></a>
@@ -167,12 +202,12 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define BLOCK_DATA_SIZE&#160;&#160;&#160;(SHA384_DIGEST_LENGTH * 2 + 1) + sizeof(size_t) + sizeof(uint16_t) + sizeof(time_t)</td>
+          <td class="memname">#define BLOCK_DATA_SIZE&#160;&#160;&#160;(SHA384_DIGEST_LENGTH * 2 + 1) + sizeof(size_t) + sizeof(uint16_t) + sizeof(time_t) + sizeof(int)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="block_8h_source.html#l00010">10</a> of file <a class="el" href="block_8h_source.html">block.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="block_8h_source.html#l00026">26</a> of file <a class="el" href="block_8h_source.html">block.h</a>.</p>
 
 </div>
 </div>
@@ -188,7 +223,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="block_8h_source.html#l00011">11</a> of file <a class="el" href="block_8h_source.html">block.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="block_8h_source.html#l00027">27</a> of file <a class="el" href="block_8h_source.html">block.h</a>.</p>
 
 </div>
 </div>
@@ -204,7 +239,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="block_8h_source.html#l00008">8</a> of file <a class="el" href="block_8h_source.html">block.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="block_8h_source.html#l00024">24</a> of file <a class="el" href="block_8h_source.html">block.h</a>.</p>
 
 </div>
 </div>
@@ -220,7 +255,23 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="block_8h_source.html#l00013">13</a> of file <a class="el" href="block_8h_source.html">block.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="block_8h_source.html#l00029">29</a> of file <a class="el" href="block_8h_source.html">block.h</a>.</p>
+
+</div>
+</div>
+<a id="aebcc63085ec90348cc76624d948759dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aebcc63085ec90348cc76624d948759dc">&#9670;&nbsp;</a></span>MAX_VALIDATORS_PER_BLOCK</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MAX_VALIDATORS_PER_BLOCK&#160;&#160;&#160;512</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="block_8h_source.html#l00020">20</a> of file <a class="el" href="block_8h_source.html">block.h</a>.</p>
 
 </div>
 </div>
@@ -236,7 +287,23 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="block_8h_source.html#l00014">14</a> of file <a class="el" href="block_8h_source.html">block.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="block_8h_source.html#l00030">30</a> of file <a class="el" href="block_8h_source.html">block.h</a>.</p>
+
+</div>
+</div>
+<a id="a7a79662481c373b09143d95d11833fc2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a79662481c373b09143d95d11833fc2">&#9670;&nbsp;</a></span>SIGNATURE_LEN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SIGNATURE_LEN&#160;&#160;&#160;256</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="block_8h_source.html#l00022">22</a> of file <a class="el" href="block_8h_source.html">block.h</a>.</p>
 
 </div>
 </div>
@@ -284,6 +351,46 @@ Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="ada1355f8610cc450d7c8f662dc6a7aef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada1355f8610cc450d7c8f662dc6a7aef">&#9670;&nbsp;</a></span>convert_data_to_block()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void convert_data_to_block </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_block.html">Block</a> *&#160;</td>
+          <td class="paramname"><em>block</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>fd</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="block_8c_source.html#l00172">172</a> of file <a class="el" href="block_8c_source.html">block.c</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="block_8h_ada1355f8610cc450d7c8f662dc6a7aef_cgraph.png" border="0" usemap="#block_8h_ada1355f8610cc450d7c8f662dc6a7aef_cgraph" alt=""/></div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="block_8h_ada1355f8610cc450d7c8f662dc6a7aef_icgraph.png" border="0" usemap="#block_8h_ada1355f8610cc450d7c8f662dc6a7aef_icgraph" alt=""/></div>
+</div>
+
+</div>
+</div>
 <a id="a3eb417f7cce88e8ec69d6974cd25e49f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3eb417f7cce88e8ec69d6974cd25e49f">&#9670;&nbsp;</a></span>free_block()</h2>
 
@@ -308,7 +415,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="block_8c_source.html#l00168">168</a> of file <a class="el" href="block_8c_source.html">block.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="block_8c_source.html#l00202">202</a> of file <a class="el" href="block_8c_source.html">block.c</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -333,7 +440,16 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="block_8c_source.html#l00150">150</a> of file <a class="el" href="block_8c_source.html">block.c</a>.</p>
+<p>Get a block object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">block_height</td><td>The height of the block </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Block* </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="block_8c_source.html#l00180">180</a> of file <a class="el" href="block_8c_source.html">block.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -347,41 +463,108 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="af572e8ef23f600c0a62f716e780c813b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af572e8ef23f600c0a62f716e780c813b">&#9670;&nbsp;</a></span>get_blockchain()</h2>
+<a id="af656af2c0f2bf2ea38d4fba26b50f5d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af656af2c0f2bf2ea38d4fba26b50f5d6">&#9670;&nbsp;</a></span>get_blockdata_data()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_chunk_blockchain.html">ChunkBlockchain</a>* get_blockchain </td>
+          <td class="memname">char* get_blockdata_data </td>
           <td>(</td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>nb_chunk</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="struct_block.html">Block</a> *&#160;</td>
+          <td class="paramname"><em>block</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t *&#160;</td>
+          <td class="paramname"><em>size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the blockdata data object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">block</td><td>The block </td></tr>
+    <tr><td class="paramname">size</td><td>The size of the block </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>char* </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="block_8c_source.html#l00241">241</a> of file <a class="el" href="block_8c_source.html">block.c</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="block_8h_af656af2c0f2bf2ea38d4fba26b50f5d6_cgraph.png" border="0" usemap="#block_8h_af656af2c0f2bf2ea38d4fba26b50f5d6_cgraph" alt=""/></div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="block_8h_af656af2c0f2bf2ea38d4fba26b50f5d6_icgraph.png" border="0" usemap="#block_8h_af656af2c0f2bf2ea38d4fba26b50f5d6_icgraph" alt=""/></div>
+</div>
+
+</div>
+</div>
+<a id="a8bf71699a273aa1128091b78f7ebaafd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8bf71699a273aa1128091b78f7ebaafd">&#9670;&nbsp;</a></span>get_genesis_block()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_block.html">Block</a>* get_genesis_block </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Loads a blockchain object with a padding of 'nb_chunk'. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">nb_chunk</td><td>The chunk nb, if 0 : return the current blockchain object without modification </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>ChunkBlockchain*, NULL if the <a class="el" href="struct_chunk_blockchain.html">ChunkBlockchain</a> is empty after switching </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="block_8c_source.html#l00012">12</a> of file <a class="el" href="block_8c_source.html">block.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="block_8c_source.html#l00035">35</a> of file <a class="el" href="block_8c_source.html">block.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="block_8h_af572e8ef23f600c0a62f716e780c813b_cgraph.png" border="0" usemap="#block_8h_af572e8ef23f600c0a62f716e780c813b_cgraph" alt=""/></div>
+<div class="center"><img src="block_8h_a8bf71699a273aa1128091b78f7ebaafd_cgraph.png" border="0" usemap="#block_8h_a8bf71699a273aa1128091b78f7ebaafd_cgraph" alt=""/></div>
+</div>
+
+</div>
+</div>
+<a id="add83a1752a104b44d130b12342762011"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#add83a1752a104b44d130b12342762011">&#9670;&nbsp;</a></span>get_last_block_height()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t get_last_block_height </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the last block height. </p>
+<dl class="section return"><dt>Returns</dt><dd>size_t </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="block_8c_source.html#l00115">115</a> of file <a class="el" href="block_8c_source.html">block.c</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="block_8h_add83a1752a104b44d130b12342762011_cgraph.png" border="0" usemap="#block_8h_add83a1752a104b44d130b12342762011_cgraph" alt=""/></div>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="block_8h_af572e8ef23f600c0a62f716e780c813b_icgraph.png" border="0" usemap="#block_8h_af572e8ef23f600c0a62f716e780c813b_icgraph" alt=""/></div>
+<div class="center"><img src="block_8h_add83a1752a104b44d130b12342762011_icgraph.png" border="0" usemap="#block_8h_add83a1752a104b44d130b12342762011_icgraph" alt=""/></div>
 </div>
 
 </div>
@@ -411,7 +594,7 @@ Here is the caller graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The next Block* </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="block_8c_source.html#l00184">184</a> of file <a class="el" href="block_8c_source.html">block.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="block_8c_source.html#l00221">221</a> of file <a class="el" href="block_8c_source.html">block.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -450,7 +633,7 @@ Here is the caller graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The next Block* </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="block_8c_source.html#l00194">194</a> of file <a class="el" href="block_8c_source.html">block.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="block_8c_source.html#l00231">231</a> of file <a class="el" href="block_8c_source.html">block.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -461,6 +644,117 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="block_8h_afa89e120ede17e486633e4005ccf44f1_icgraph.png" border="0" usemap="#block_8h_afa89e120ede17e486633e4005ccf44f1_icgraph" alt=""/></div>
 </div>
+
+</div>
+</div>
+<a id="a7acee00b67ed21663a5b05242acc822d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7acee00b67ed21663a5b05242acc822d">&#9670;&nbsp;</a></span>load_blockchain()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_chunk_blockchain.html">ChunkBlockchain</a>* load_blockchain </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>nb_chunk</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Loads a blockchain object with a padding of 'nb_chunk'. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">nb_chunk</td><td>The chunk nb, if 0 : return the current blockchain object without modification </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>ChunkBlockchain*, NULL if the <a class="el" href="struct_chunk_blockchain.html">ChunkBlockchain</a> is empty after switching </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="block_8c_source.html#l00069">69</a> of file <a class="el" href="block_8c_source.html">block.c</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="block_8h_a7acee00b67ed21663a5b05242acc822d_cgraph.png" border="0" usemap="#block_8h_a7acee00b67ed21663a5b05242acc822d_cgraph" alt=""/></div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="block_8h_a7acee00b67ed21663a5b05242acc822d_icgraph.png" border="0" usemap="#block_8h_a7acee00b67ed21663a5b05242acc822d_icgraph" alt=""/></div>
+</div>
+
+</div>
+</div>
+<a id="a4ece7b96ab33761bf1d33f1e8b766ceb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ece7b96ab33761bf1d33f1e8b766ceb">&#9670;&nbsp;</a></span>load_last_blockchain()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_chunk_blockchain.html">ChunkBlockchain</a>* load_last_blockchain </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Load the last local blockchain chunk. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">nb_chunk</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>ChunkBlockchain* </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="block_8c_source.html#l00110">110</a> of file <a class="el" href="block_8c_source.html">block.c</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="block_8h_a4ece7b96ab33761bf1d33f1e8b766ceb_cgraph.png" border="0" usemap="#block_8h_a4ece7b96ab33761bf1d33f1e8b766ceb_cgraph" alt=""/></div>
+</div>
+
+</div>
+</div>
+<a id="a58b3466ce733938859f0651b2a756e95"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a58b3466ce733938859f0651b2a756e95">&#9670;&nbsp;</a></span>write_block()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void write_block </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_block.html">Block</a>&#160;</td>
+          <td class="paramname"><em>block</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>fd</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Writes a block in a file. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">block</td><td>The block to write </td></tr>
+    <tr><td class="paramname">fd</td><td>the file descriptor of the file in which the block is written </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="block_8c_source.html#l00309">309</a> of file <a class="el" href="block_8c_source.html">block.c</a>.</p>
 
 </div>
 </div>
@@ -488,7 +782,7 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="block_8c_source.html#l00051">51</a> of file <a class="el" href="block_8c_source.html">block.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="block_8c_source.html#l00121">121</a> of file <a class="el" href="block_8c_source.html">block.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -502,12 +796,51 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
+<a id="a0e5ff1f119568fb8566981cf7da11d7f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e5ff1f119568fb8566981cf7da11d7f">&#9670;&nbsp;</a></span>write_blockdata()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void write_blockdata </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_block_data.html">BlockData</a>&#160;</td>
+          <td class="paramname"><em>blockdata</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>fd</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Writes blockdata in a file. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">blockdata</td><td>The blockdata to write </td></tr>
+    <tr><td class="paramname">fd</td><td>The file descriptor of the file in which the blockdata is written </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="block_8c_source.html#l00277">277</a> of file <a class="el" href="block_8c_source.html">block.c</a>.</p>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_7f57b1e41c5acd0e859ae5f3a2b075a9.html">headers</a></li><li class="navelem"><a class="el" href="dir_c55509eeb63bcbc47aa921b127ea82fb.html">core</a></li><li class="navelem"><a class="el" href="dir_2ae1719583a3e1ef1c62bafa46f33cbf.html">blockchain</a></li><li class="navelem"><a class="el" href="block_8h.html">block.h</a></li>
+    <li class="navelem"><a class="el" href="dir_7f57b1e41c5acd0e859ae5f3a2b075a9.html">headers</a></li><li class="navelem"><a class="el" href="dir_970168e4fc598f7815ebfaae486ffad9.html">blockchain</a></li><li class="navelem"><a class="el" href="block_8h.html">block.h</a></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>

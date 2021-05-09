@@ -90,12 +90,32 @@ $(document).ready(function(){initNavTree('send__data_8h_source.html',''); initRe
 <a href="send__data_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef SEND_DATA_H</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define SEND_DATA_H</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keywordtype">int</span> <a class="code" href="send__data_8h.html#a70da282508006ff2f6b07d7b410ce8be">send_client_list</a>(<span class="keywordtype">int</span> sockfd);</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="server_8h.html">network/server.h</a>&quot;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keywordtype">int</span> <a class="code" href="send__data_8h.html#ad9194d475483d8bcc59cc5e1de6fbc0a">send_client_list</a>(<span class="keywordtype">char</span> who, <span class="keywordtype">int</span> sockfd, <span class="keywordtype">char</span> *sockip);</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keywordtype">void</span> <a class="code" href="send__data_8h.html#acd3f44461fccb7cce14713691881d68d">send_get_blocks</a>(<a class="code" href="structclient__connection.html">client_connection</a> *cc);</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keywordtype">void</span> <a class="code" href="send__data_8h.html#adb40f883657d52ed3ba313b116cab145">send_actual_height</a>(<span class="keywordtype">int</span> fd, <a class="code" href="structinfos__st.html">infos_st</a> *infos);</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keywordtype">void</span> <a class="code" href="send__data_8h.html#aa8859ad379bea05c4aa49401434f643b">send_reject_demand</a>(<span class="keywordtype">int</span> fd);</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keywordtype">void</span> <a class="code" href="send__data_8h.html#a531773aa2b9ab63b3bec76fd51600ae8">send_send_block</a>(<span class="keywordtype">int</span> fd, <span class="keywordtype">size_t</span> height);</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keywordtype">void</span> <a class="code" href="send__data_8h.html#ada5b316b8b95c3f71e1d3bfcb3ec7d01">send_pending_transaction_list</a>(<span class="keywordtype">int</span> sockfd);</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="asend__data_8h_html_a70da282508006ff2f6b07d7b410ce8be"><div class="ttname"><a href="send__data_8h.html#a70da282508006ff2f6b07d7b410ce8be">send_client_list</a></div><div class="ttdeci">int send_client_list(int sockfd)</div><div class="ttdoc">Sends my client list to a node via 'sockfd'.</div><div class="ttdef"><b>Definition:</b> <a href="send__data_8c_source.html#l00003">send_data.c:3</a></div></div>
+<div class="ttc" id="astructinfos__st_html"><div class="ttname"><a href="structinfos__st.html">infos_st</a></div><div class="ttdef"><b>Definition:</b> <a href="network_8h_source.html#l00055">network.h:55</a></div></div>
+<div class="ttc" id="asend__data_8h_html_ad9194d475483d8bcc59cc5e1de6fbc0a"><div class="ttname"><a href="send__data_8h.html#ad9194d475483d8bcc59cc5e1de6fbc0a">send_client_list</a></div><div class="ttdeci">int send_client_list(char who, int sockfd, char *sockip)</div><div class="ttdoc">Sends my client list to a node via 'sockfd'.</div><div class="ttdef"><b>Definition:</b> <a href="send__data_8c_source.html#l00003">send_data.c:3</a></div></div>
+<div class="ttc" id="astructclient__connection_html"><div class="ttname"><a href="structclient__connection.html">client_connection</a></div><div class="ttdef"><b>Definition:</b> <a href="network_8h_source.html#l00044">network.h:44</a></div></div>
+<div class="ttc" id="asend__data_8h_html_ada5b316b8b95c3f71e1d3bfcb3ec7d01"><div class="ttname"><a href="send__data_8h.html#ada5b316b8b95c3f71e1d3bfcb3ec7d01">send_pending_transaction_list</a></div><div class="ttdeci">void send_pending_transaction_list(int sockfd)</div></div>
+<div class="ttc" id="asend__data_8h_html_adb40f883657d52ed3ba313b116cab145"><div class="ttname"><a href="send__data_8h.html#adb40f883657d52ed3ba313b116cab145">send_actual_height</a></div><div class="ttdeci">void send_actual_height(int fd, infos_st *infos)</div><div class="ttdef"><b>Definition:</b> <a href="send__data_8c_source.html#l00058">send_data.c:58</a></div></div>
+<div class="ttc" id="asend__data_8h_html_a531773aa2b9ab63b3bec76fd51600ae8"><div class="ttname"><a href="send__data_8h.html#a531773aa2b9ab63b3bec76fd51600ae8">send_send_block</a></div><div class="ttdeci">void send_send_block(int fd, size_t height)</div><div class="ttdef"><b>Definition:</b> <a href="send__data_8c_source.html#l00071">send_data.c:71</a></div></div>
+<div class="ttc" id="asend__data_8h_html_acd3f44461fccb7cce14713691881d68d"><div class="ttname"><a href="send__data_8h.html#acd3f44461fccb7cce14713691881d68d">send_get_blocks</a></div><div class="ttdeci">void send_get_blocks(client_connection *cc)</div><div class="ttdoc">Sends get blocks.</div><div class="ttdef"><b>Definition:</b> <a href="send__data_8c_source.html#l00052">send_data.c:52</a></div></div>
+<div class="ttc" id="asend__data_8h_html_aa8859ad379bea05c4aa49401434f643b"><div class="ttname"><a href="send__data_8h.html#aa8859ad379bea05c4aa49401434f643b">send_reject_demand</a></div><div class="ttdeci">void send_reject_demand(int fd)</div><div class="ttdef"><b>Definition:</b> <a href="send__data_8c_source.html#l00065">send_data.c:65</a></div></div>
+<div class="ttc" id="aserver_8h_html"><div class="ttname"><a href="server_8h.html">server.h</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

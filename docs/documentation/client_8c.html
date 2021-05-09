@@ -84,18 +84,23 @@ $(document).ready(function(){initNavTree('client_8c.html',''); initResizable(); 
 
 <div class="header">
   <div class="summary">
-<a href="#func-members">Functions</a>  </div>
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">client.c File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;signal.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="network_8h_source.html">network/network.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="client_8h_source.html">network/client.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="server_8h_source.html">network/server.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="send__data_8h_source.html">network/send_data.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="get__data_8h_source.html">network/get_data.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="safe_8h_source.html">misc/safe.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="blockchain__header_8h_source.html">blockchain/blockchain_header.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="ui_8h_source.html">ui/ui.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for client.c:</div>
 <div class="dyncontent">
@@ -107,10 +112,81 @@ Include dependency graph for client.c:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:a4bc5d82e85996fecc53fe3e97c2a7b98"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8c.html#a4bc5d82e85996fecc53fe3e97c2a7b98">join_network_door</a> (<a class="el" href="structinfos__st.html">infos_st</a> *infos)</td></tr>
+<tr class="separator:a4bc5d82e85996fecc53fe3e97c2a7b98"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7126685bb9b5dc07de54dbb8a8ba89d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8c.html#ab7126685bb9b5dc07de54dbb8a8ba89d">connection_to_others</a> (<a class="el" href="structinfos__st.html">infos_st</a> *infos)</td></tr>
+<tr class="separator:ab7126685bb9b5dc07de54dbb8a8ba89d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a6632fc31369b450613587243a58807"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8c.html#a6a6632fc31369b450613587243a58807">update_blockchain_height</a> (<a class="el" href="structinfos__st.html">infos_st</a> *infos)</td></tr>
+<tr class="separator:a6a6632fc31369b450613587243a58807"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2aa6779c93462c07f8a674546b72bd8b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8c.html#a2aa6779c93462c07f8a674546b72bd8b">update_blockchain</a> (<a class="el" href="structinfos__st.html">infos_st</a> *infos, size_t index_client)</td></tr>
+<tr class="separator:a2aa6779c93462c07f8a674546b72bd8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a> ()</td></tr>
 <tr class="separator:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a52d9dab3f728bc1847873c7b00c84fec"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structclient__connection.html">client_connection</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8c.html#a52d9dab3f728bc1847873c7b00c84fec">client_connections</a></td></tr>
+<tr class="separator:a52d9dab3f728bc1847873c7b00c84fec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="ab7126685bb9b5dc07de54dbb8a8ba89d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7126685bb9b5dc07de54dbb8a8ba89d">&#9670;&nbsp;</a></span>connection_to_others()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void connection_to_others </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structinfos__st.html">infos_st</a> *&#160;</td>
+          <td class="paramname"><em>infos</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="client_8c_source.html#l00039">39</a> of file <a class="el" href="client_8c_source.html">client.c</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="client_8c_ab7126685bb9b5dc07de54dbb8a8ba89d_cgraph.png" border="0" usemap="#client_8c_ab7126685bb9b5dc07de54dbb8a8ba89d_cgraph" alt=""/></div>
+<!-- MAP 1 -->
+</div>
+
+</div>
+</div>
+<a id="a4bc5d82e85996fecc53fe3e97c2a7b98"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4bc5d82e85996fecc53fe3e97c2a7b98">&#9670;&nbsp;</a></span>join_network_door()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void join_network_door </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structinfos__st.html">infos_st</a> *&#160;</td>
+          <td class="paramname"><em>infos</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="client_8c_source.html#l00019">19</a> of file <a class="el" href="client_8c_source.html">client.c</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="client_8c_a4bc5d82e85996fecc53fe3e97c2a7b98_cgraph.png" border="0" usemap="#client_8c_a4bc5d82e85996fecc53fe3e97c2a7b98_cgraph" alt=""/></div>
+<!-- MAP 2 -->
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="client_8c_a4bc5d82e85996fecc53fe3e97c2a7b98_icgraph.png" border="0" usemap="#client_8c_a4bc5d82e85996fecc53fe3e97c2a7b98_icgraph" alt=""/></div>
+<!-- MAP 3 -->
+</div>
+
+</div>
+</div>
 <a id="ae66f6b31b5ad750f1fe042a706a4e3d4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae66f6b31b5ad750f1fe042a706a4e3d4">&#9670;&nbsp;</a></span>main()</h2>
 
@@ -126,13 +202,86 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="client_8c_source.html#l00010">10</a> of file <a class="el" href="client_8c_source.html">client.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="client_8c_source.html#l00121">121</a> of file <a class="el" href="client_8c_source.html">client.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="client_8c_ae66f6b31b5ad750f1fe042a706a4e3d4_cgraph.png" border="0" usemap="#client_8c_ae66f6b31b5ad750f1fe042a706a4e3d4_cgraph" alt=""/></div>
-<!-- MAP 1 -->
+<!-- MAP 4 -->
 </div>
+
+</div>
+</div>
+<a id="a2aa6779c93462c07f8a674546b72bd8b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2aa6779c93462c07f8a674546b72bd8b">&#9670;&nbsp;</a></span>update_blockchain()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void update_blockchain </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structinfos__st.html">infos_st</a> *&#160;</td>
+          <td class="paramname"><em>infos</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>index_client</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="client_8c_source.html#l00093">93</a> of file <a class="el" href="client_8c_source.html">client.c</a>.</p>
+
+</div>
+</div>
+<a id="a6a6632fc31369b450613587243a58807"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a6632fc31369b450613587243a58807">&#9670;&nbsp;</a></span>update_blockchain_height()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t update_blockchain_height </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structinfos__st.html">infos_st</a> *&#160;</td>
+          <td class="paramname"><em>infos</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="client_8c_source.html#l00057">57</a> of file <a class="el" href="client_8c_source.html">client.c</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="client_8c_a6a6632fc31369b450613587243a58807_cgraph.png" border="0" usemap="#client_8c_a6a6632fc31369b450613587243a58807_cgraph" alt=""/></div>
+<!-- MAP 5 -->
+</div>
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="a52d9dab3f728bc1847873c7b00c84fec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a52d9dab3f728bc1847873c7b00c84fec">&#9670;&nbsp;</a></span>client_connections</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structclient__connection.html">client_connection</a>* client_connections</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="core_2network_2client_8c_source.html#l00004">4</a> of file <a class="el" href="core_2network_2client_8c_source.html">client.c</a>.</p>
 
 </div>
 </div>

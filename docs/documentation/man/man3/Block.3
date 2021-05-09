@@ -1,4 +1,4 @@
-.TH "Block" 3 "Thu Apr 22 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
+.TH "Block" 3 "Sun May 9 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -18,33 +18,40 @@ Block
 .RI "\fBBlockData\fP \fBblock_data\fP"
 .br
 .ti -1c
-.RI "size_t \fBsignature_len\fP"
+.RI "char \fBblock_signature\fP [256]"
 .br
 .ti -1c
-.RI "char * \fBblock_signature\fP"
+.RI "char \fBvalidators_votes\fP [\fBMAX_VALIDATORS_PER_BLOCK\fP/8]"
+.br
+.ti -1c
+.RI "char \fBvote_signature\fP [\fBMAX_VALIDATORS_PER_BLOCK\fP \- 1][256]"
 .br
 .in -1c
 .SH "Detailed Description"
 .PP 
-Definition at line 31 of file block\&.h\&.
+Definition at line 51 of file block\&.h\&.
 .SH "Field Documentation"
 .PP 
 .SS "\fBBlockData\fP block_data"
 
 .PP
-Definition at line 34 of file block\&.h\&.
-.SS "char* block_signature"
+Definition at line 54 of file block\&.h\&.
+.SS "char block_signature[256]"
 
 .PP
-Definition at line 37 of file block\&.h\&.
+Definition at line 56 of file block\&.h\&.
 .SS "uint16_t chunk_id"
 
 .PP
-Definition at line 33 of file block\&.h\&.
-.SS "size_t signature_len"
+Definition at line 53 of file block\&.h\&.
+.SS "char validators_votes[\fBMAX_VALIDATORS_PER_BLOCK\fP/8]"
 
 .PP
-Definition at line 36 of file block\&.h\&.
+Definition at line 59 of file block\&.h\&.
+.SS "char vote_signature[\fBMAX_VALIDATORS_PER_BLOCK\fP \- 1][256]"
+
+.PP
+Definition at line 60 of file block\&.h\&.
 
 .SH "Author"
 .PP 

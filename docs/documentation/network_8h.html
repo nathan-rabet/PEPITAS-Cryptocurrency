@@ -84,25 +84,18 @@ $(document).ready(function(){initNavTree('network_8h.html',''); initResizable();
 
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Data Structures</a> &#124;
 <a href="#define-members">Macros</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#func-members">Functions</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">network.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
-<code>#include &lt;stdlib.h&gt;</code><br />
-<code>#include &lt;unistd.h&gt;</code><br />
-<code>#include &lt;sys/un.h&gt;</code><br />
-<code>#include &lt;sys/types.h&gt;</code><br />
-<code>#include &lt;sys/socket.h&gt;</code><br />
-<code>#include &lt;netdb.h&gt;</code><br />
-<code>#include &lt;err.h&gt;</code><br />
-<code>#include &lt;string.h&gt;</code><br />
-<code>#include &lt;pthread.h&gt;</code><br />
-<code>#include &lt;arpa/inet.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="safe_8h_source.html">misc/safe.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="client_8h_source.html">client.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &lt;pthread.h&gt;</code><br />
+<code>#include &lt;semaphore.h&gt;</code><br />
+<code>#include &lt;stdint.h&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for network.h:</div>
 <div class="dyncontent">
@@ -118,40 +111,237 @@ This graph shows which files directly or indirectly include this file:</div>
 </div>
 <p><a href="network_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Data Structures</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_neighbour.html">Neighbour</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_node.html">Node</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structclient__connection.html">client_connection</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structinfos__st.html">infos_st</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structth__arg.html">th_arg</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
+<tr class="memitem:aa901879896986863f8b104506b60cd4f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#aa901879896986863f8b104506b60cd4f">SIZE_OF_HOSTNAME</a>&#160;&#160;&#160;39</td></tr>
+<tr class="separator:aa901879896986863f8b104506b60cd4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:add095a1aa250a89d084747a7a9bc9397"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#add095a1aa250a89d084747a7a9bc9397">NB_HARD_CODED_ADDR</a>&#160;&#160;&#160;2</td></tr>
 <tr class="separator:add095a1aa250a89d084747a7a9bc9397"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ad0110a77b8abbc3c30f7ec903dab1b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#a1ad0110a77b8abbc3c30f7ec903dab1b">MAX_CONNECTION</a>&#160;&#160;&#160;5</td></tr>
+<tr class="separator:a1ad0110a77b8abbc3c30f7ec903dab1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a449aa0421d712bd4d969618f13101db8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#a449aa0421d712bd4d969618f13101db8">STATIC_PORT</a>&#160;&#160;&#160;&quot;4242&quot;</td></tr>
 <tr class="separator:a449aa0421d712bd4d969618f13101db8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab85b8d668595989b505586b7b46e6f88"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#ab85b8d668595989b505586b7b46e6f88">P_VERSION</a>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:ab85b8d668595989b505586b7b46e6f88"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44b6e2d68c7a890d60b6017e83bce337"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#a44b6e2d68c7a890d60b6017e83bce337">IM_SERVER</a>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:a44b6e2d68c7a890d60b6017e83bce337"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a4ea366b744078b50a96a3899aab46c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#a4a4ea366b744078b50a96a3899aab46c">IM_CLIENT</a>&#160;&#160;&#160;1</td></tr>
+<tr class="separator:a4a4ea366b744078b50a96a3899aab46c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae35694bd71aaa8aa2608ba5d24de667d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#ae35694bd71aaa8aa2608ba5d24de667d">MAX_NEIGHBOURS</a>&#160;&#160;&#160;64</td></tr>
+<tr class="separator:ae35694bd71aaa8aa2608ba5d24de667d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a990e4ab4f7babf69de0109080b0f7c72"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#a990e4ab4f7babf69de0109080b0f7c72">NODESERVER</a>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:a990e4ab4f7babf69de0109080b0f7c72"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad095a3848176dfa3cc06d477a0f83132"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#ad095a3848176dfa3cc06d477a0f83132">DOORSERVER</a>&#160;&#160;&#160;1</td></tr>
+<tr class="separator:ad095a3848176dfa3cc06d477a0f83132"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad546ea25dc7aa34a81dcf5aff48a31ca"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#ad546ea25dc7aa34a81dcf5aff48a31ca">MAX_SERVER</a>&#160;&#160;&#160;20</td></tr>
+<tr class="separator:ad546ea25dc7aa34a81dcf5aff48a31ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aebcc63085ec90348cc76624d948759dc"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#aebcc63085ec90348cc76624d948759dc">MAX_VALIDATORS_PER_BLOCK</a>&#160;&#160;&#160;512</td></tr>
+<tr class="separator:aebcc63085ec90348cc76624d948759dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac65409d904781e5a23529bd6bef2b673"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#ac65409d904781e5a23529bd6bef2b673">SOL_TCP</a>&#160;&#160;&#160;6</td></tr>
+<tr class="separator:ac65409d904781e5a23529bd6bef2b673"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2279fe1842cc4dd92e743a1b3e4c6e0e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#a2279fe1842cc4dd92e743a1b3e4c6e0e">TCP_USER_TIMEOUT</a>&#160;&#160;&#160;18</td></tr>
+<tr class="separator:a2279fe1842cc4dd92e743a1b3e4c6e0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0316a64e900301db8e5e8a554c63e1c8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#a0316a64e900301db8e5e8a554c63e1c8">HD_GET_CLIENT_LIST</a>&#160;&#160;&#160;&quot;GET CLIENT LIST\r\n\r\n&quot;</td></tr>
 <tr class="separator:a0316a64e900301db8e5e8a554c63e1c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae38bf5e9b9b33a438b21956865c6f228"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#ae38bf5e9b9b33a438b21956865c6f228">HD_SEND_CLIENT_LIST</a>&#160;&#160;&#160;&quot;SEND CLIENT LIST\n&quot;</td></tr>
+<tr class="memitem:ae38bf5e9b9b33a438b21956865c6f228"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#ae38bf5e9b9b33a438b21956865c6f228">HD_SEND_CLIENT_LIST</a>&#160;&#160;&#160;&quot;SEND CLIENT LIST\r\n\r\n&quot;</td></tr>
 <tr class="separator:ae38bf5e9b9b33a438b21956865c6f228"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a26f083e302d828168d96255d8a89d483"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#a26f083e302d828168d96255d8a89d483">HD_GET_BLOCKCHAIN</a>&#160;&#160;&#160;&quot;GET BLOCKCHAIN\r\n\r\n&quot;</td></tr>
-<tr class="separator:a26f083e302d828168d96255d8a89d483"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a05249138a1712d2304c22379bd4cc0e4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#a05249138a1712d2304c22379bd4cc0e4">HD_SEND_BLOCKCHAIN</a>&#160;&#160;&#160;&quot;SEND BLOCKCHAIN\n&quot;</td></tr>
-<tr class="separator:a05249138a1712d2304c22379bd4cc0e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6cc2dec02a3cba5aa8347ab3a067449f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#a6cc2dec02a3cba5aa8347ab3a067449f">HD_CONNECTION_TO_NETWORK</a>&#160;&#160;&#160;&quot;CONNECTION TO NETWORK\r\n\r\n&quot;</td></tr>
+<tr class="separator:a6cc2dec02a3cba5aa8347ab3a067449f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada905430ccf37ff55d9bf790d51e799c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#ada905430ccf37ff55d9bf790d51e799c">HD_CONNECTION_TO_NODE</a>&#160;&#160;&#160;&quot;CONNECTION TO NODE\r\n\r\n&quot;</td></tr>
+<tr class="separator:ada905430ccf37ff55d9bf790d51e799c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ef915c41c01b69b9578757bce28c180"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#a4ef915c41c01b69b9578757bce28c180">HD_GET_BLOCKS</a>&#160;&#160;&#160;&quot;GET BLOCKS\r\n\r\n&quot;</td></tr>
+<tr class="separator:a4ef915c41c01b69b9578757bce28c180"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65e28d837708605dfdcba6a402ea205a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#a65e28d837708605dfdcba6a402ea205a">HD_ACTUAL_HEIGHT</a>&#160;&#160;&#160;&quot;ACTUAL HEIGHT\r\n\r\n&quot;</td></tr>
+<tr class="separator:a65e28d837708605dfdcba6a402ea205a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad60e0f0165a8577e585174654046dc82"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#ad60e0f0165a8577e585174654046dc82">HD_SEND_BLOCK</a>&#160;&#160;&#160;&quot;SEND BLOCK\r\n\r\n&quot;</td></tr>
+<tr class="separator:ad60e0f0165a8577e585174654046dc82"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7e5cc589fcdba683b2bcfa323cade3a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#aa7e5cc589fcdba683b2bcfa323cade3a">HD_GET_PENDING_TRANSACTION_LIST</a>&#160;&#160;&#160;&quot;GET PENDING TRANSACTION LIST\r\n\r\n&quot;</td></tr>
+<tr class="separator:aa7e5cc589fcdba683b2bcfa323cade3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67f2bd309afb2d5698e64946c46a0a01"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#a67f2bd309afb2d5698e64946c46a0a01">HD_REJECT_DEMAND</a>&#160;&#160;&#160;&quot;REJECT DEMAND\r\n\r\n&quot;</td></tr>
+<tr class="separator:a67f2bd309afb2d5698e64946c46a0a01"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b8e9cdc2c79ab33d5e0eb438641b1e1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#a4b8e9cdc2c79ab33d5e0eb438641b1e1">HD_SEND_PENDING_TRANSACTION</a>&#160;&#160;&#160;&quot;SEND PENDING TRANSACTION\r\n\r\n&quot;</td></tr>
+<tr class="separator:a4b8e9cdc2c79ab33d5e0eb438641b1e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e07c948440061bca7f76c8c2ef5444d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#a2e07c948440061bca7f76c8c2ef5444d">HD_SEND_EPOCH_BLOCK</a>&#160;&#160;&#160;&quot;SEND EPOCH BLOCK\r\n\r\n&quot;</td></tr>
+<tr class="separator:a2e07c948440061bca7f76c8c2ef5444d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a104605ca6805e99de02371954243e8a5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#a104605ca6805e99de02371954243e8a5">HD_SEND_VOTE</a>&#160;&#160;&#160;&quot;SEND VOTE\r\n\r\n&quot;</td></tr>
+<tr class="separator:a104605ca6805e99de02371954243e8a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5c73a7e9a255e35bd6ecbf6709b57de"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#aa5c73a7e9a255e35bd6ecbf6709b57de">DD_GET_HEIGHT</a>&#160;&#160;&#160;1</td></tr>
+<tr class="separator:aa5c73a7e9a255e35bd6ecbf6709b57de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aabca23b9d8641dae222da4b3b6a374ca"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#aabca23b9d8641dae222da4b3b6a374ca">DD_GET_BLOCKS</a>&#160;&#160;&#160;2</td></tr>
+<tr class="separator:aabca23b9d8641dae222da4b3b6a374ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70dfa79077dc00c8de6083ff105c831b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#a70dfa79077dc00c8de6083ff105c831b">SERVERMSG</a>&#160;&#160;&#160;printf(&quot;\033[0;31m[S]:\033[0m &quot;);</td></tr>
+<tr class="separator:a70dfa79077dc00c8de6083ff105c831b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abec1d424ba3321c9dea7c0e38a1775ae"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#abec1d424ba3321c9dea7c0e38a1775ae">CLIENTMSG</a>&#160;&#160;&#160;printf(&quot;\033[0;34m[C]:\033[0m &quot;);</td></tr>
+<tr class="separator:abec1d424ba3321c9dea7c0e38a1775ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf97e803fbd731970b1f667b52f34a6d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#aaf97e803fbd731970b1f667b52f34a6d">MANAGERMSG</a>&#160;&#160;&#160;printf(&quot;\033[0;32m[M]:\033[0m &quot;);</td></tr>
+<tr class="separator:aaf97e803fbd731970b1f667b52f34a6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f842705a43fc47d80ea254292beb46e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#a2f842705a43fc47d80ea254292beb46e">WARNINGMSG</a>(x)&#160;&#160;&#160;printf(&quot;\033[0;35m[W]: %s\033[0m\n&quot;, x);</td></tr>
+<tr class="separator:a2f842705a43fc47d80ea254292beb46e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:af516980a1d1fa7f6e92cafb59e634556"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="struct_neighbour.html">Neighbour</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#af516980a1d1fa7f6e92cafb59e634556">Neighbour</a></td></tr>
+<tr class="separator:af516980a1d1fa7f6e92cafb59e634556"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b09f37e675bcd48a01bf22155996872"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="struct_node.html">Node</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#a3b09f37e675bcd48a01bf22155996872">Node</a></td></tr>
+<tr class="separator:a3b09f37e675bcd48a01bf22155996872"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6994b8a72828be0e03c1d864113f7da1"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structclient__connection.html">client_connection</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#a6994b8a72828be0e03c1d864113f7da1">client_connection</a></td></tr>
+<tr class="separator:a6994b8a72828be0e03c1d864113f7da1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f0eaaa3b951f1f65c49c80d575c9e16"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structinfos__st.html">infos_st</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#a8f0eaaa3b951f1f65c49c80d575c9e16">infos_st</a></td></tr>
+<tr class="separator:a8f0eaaa3b951f1f65c49c80d575c9e16"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a394d55fafa84f9a883a7c118de733f8b"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structth__arg.html">th_arg</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#a394d55fafa84f9a883a7c118de733f8b">th_arg</a></td></tr>
+<tr class="separator:a394d55fafa84f9a883a7c118de733f8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a3d8810ff759f090d31d612cc51cf9158"><td class="memItemLeft" align="right" valign="top">struct&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#a3d8810ff759f090d31d612cc51cf9158">__attribute__</a> ((__packed__)) <a class="el" href="network_8h.html#aef691ccc586177c6f1ed45825b4b79bd">get_blocks_t</a></td></tr>
+<tr class="separator:a3d8810ff759f090d31d612cc51cf9158"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:af58e2a18006d43908a600911daf88725"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="struct_neighbour.html">Neighbour</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#af58e2a18006d43908a600911daf88725">HARD_CODED_ADDR</a> []</td></tr>
 <tr class="separator:af58e2a18006d43908a600911daf88725"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef691ccc586177c6f1ed45825b4b79bd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#aef691ccc586177c6f1ed45825b4b79bd">get_blocks_t</a></td></tr>
+<tr class="separator:aef691ccc586177c6f1ed45825b4b79bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="a26f083e302d828168d96255d8a89d483"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a26f083e302d828168d96255d8a89d483">&#9670;&nbsp;</a></span>HD_GET_BLOCKCHAIN</h2>
+<a id="abec1d424ba3321c9dea7c0e38a1775ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abec1d424ba3321c9dea7c0e38a1775ae">&#9670;&nbsp;</a></span>CLIENTMSG</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define HD_GET_BLOCKCHAIN&#160;&#160;&#160;&quot;GET BLOCKCHAIN\r\n\r\n&quot;</td>
+          <td class="memname">#define CLIENTMSG&#160;&#160;&#160;printf(&quot;\033[0;34m[C]:\033[0m &quot;);</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00025">25</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00090">90</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+
+</div>
+</div>
+<a id="aabca23b9d8641dae222da4b3b6a374ca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aabca23b9d8641dae222da4b3b6a374ca">&#9670;&nbsp;</a></span>DD_GET_BLOCKS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define DD_GET_BLOCKS&#160;&#160;&#160;2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00085">85</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+
+</div>
+</div>
+<a id="aa5c73a7e9a255e35bd6ecbf6709b57de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa5c73a7e9a255e35bd6ecbf6709b57de">&#9670;&nbsp;</a></span>DD_GET_HEIGHT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define DD_GET_HEIGHT&#160;&#160;&#160;1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00084">84</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+
+</div>
+</div>
+<a id="ad095a3848176dfa3cc06d477a0f83132"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad095a3848176dfa3cc06d477a0f83132">&#9670;&nbsp;</a></span>DOORSERVER</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define DOORSERVER&#160;&#160;&#160;1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00023">23</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+
+</div>
+</div>
+<a id="a65e28d837708605dfdcba6a402ea205a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a65e28d837708605dfdcba6a402ea205a">&#9670;&nbsp;</a></span>HD_ACTUAL_HEIGHT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HD_ACTUAL_HEIGHT&#160;&#160;&#160;&quot;ACTUAL HEIGHT\r\n\r\n&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00075">75</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+
+</div>
+</div>
+<a id="a6cc2dec02a3cba5aa8347ab3a067449f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6cc2dec02a3cba5aa8347ab3a067449f">&#9670;&nbsp;</a></span>HD_CONNECTION_TO_NETWORK</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HD_CONNECTION_TO_NETWORK&#160;&#160;&#160;&quot;CONNECTION TO NETWORK\r\n\r\n&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00072">72</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+
+</div>
+</div>
+<a id="ada905430ccf37ff55d9bf790d51e799c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada905430ccf37ff55d9bf790d51e799c">&#9670;&nbsp;</a></span>HD_CONNECTION_TO_NODE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HD_CONNECTION_TO_NODE&#160;&#160;&#160;&quot;CONNECTION TO NODE\r\n\r\n&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00073">73</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+
+</div>
+</div>
+<a id="a4ef915c41c01b69b9578757bce28c180"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ef915c41c01b69b9578757bce28c180">&#9670;&nbsp;</a></span>HD_GET_BLOCKS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HD_GET_BLOCKS&#160;&#160;&#160;&quot;GET BLOCKS\r\n\r\n&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00074">74</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
 
 </div>
 </div>
@@ -167,23 +357,55 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00023">23</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00070">70</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
 
 </div>
 </div>
-<a id="a05249138a1712d2304c22379bd4cc0e4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a05249138a1712d2304c22379bd4cc0e4">&#9670;&nbsp;</a></span>HD_SEND_BLOCKCHAIN</h2>
+<a id="aa7e5cc589fcdba683b2bcfa323cade3a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7e5cc589fcdba683b2bcfa323cade3a">&#9670;&nbsp;</a></span>HD_GET_PENDING_TRANSACTION_LIST</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define HD_SEND_BLOCKCHAIN&#160;&#160;&#160;&quot;SEND BLOCKCHAIN\n&quot;</td>
+          <td class="memname">#define HD_GET_PENDING_TRANSACTION_LIST&#160;&#160;&#160;&quot;GET PENDING TRANSACTION LIST\r\n\r\n&quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00026">26</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00077">77</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+
+</div>
+</div>
+<a id="a67f2bd309afb2d5698e64946c46a0a01"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a67f2bd309afb2d5698e64946c46a0a01">&#9670;&nbsp;</a></span>HD_REJECT_DEMAND</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HD_REJECT_DEMAND&#160;&#160;&#160;&quot;REJECT DEMAND\r\n\r\n&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00078">78</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+
+</div>
+</div>
+<a id="ad60e0f0165a8577e585174654046dc82"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad60e0f0165a8577e585174654046dc82">&#9670;&nbsp;</a></span>HD_SEND_BLOCK</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HD_SEND_BLOCK&#160;&#160;&#160;&quot;SEND BLOCK\r\n\r\n&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00076">76</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
 
 </div>
 </div>
@@ -194,12 +416,172 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define HD_SEND_CLIENT_LIST&#160;&#160;&#160;&quot;SEND CLIENT LIST\n&quot;</td>
+          <td class="memname">#define HD_SEND_CLIENT_LIST&#160;&#160;&#160;&quot;SEND CLIENT LIST\r\n\r\n&quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00024">24</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00071">71</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+
+</div>
+</div>
+<a id="a2e07c948440061bca7f76c8c2ef5444d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e07c948440061bca7f76c8c2ef5444d">&#9670;&nbsp;</a></span>HD_SEND_EPOCH_BLOCK</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HD_SEND_EPOCH_BLOCK&#160;&#160;&#160;&quot;SEND EPOCH BLOCK\r\n\r\n&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00080">80</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+
+</div>
+</div>
+<a id="a4b8e9cdc2c79ab33d5e0eb438641b1e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b8e9cdc2c79ab33d5e0eb438641b1e1">&#9670;&nbsp;</a></span>HD_SEND_PENDING_TRANSACTION</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HD_SEND_PENDING_TRANSACTION&#160;&#160;&#160;&quot;SEND PENDING TRANSACTION\r\n\r\n&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00079">79</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+
+</div>
+</div>
+<a id="a104605ca6805e99de02371954243e8a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a104605ca6805e99de02371954243e8a5">&#9670;&nbsp;</a></span>HD_SEND_VOTE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HD_SEND_VOTE&#160;&#160;&#160;&quot;SEND VOTE\r\n\r\n&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00081">81</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+
+</div>
+</div>
+<a id="a4a4ea366b744078b50a96a3899aab46c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a4ea366b744078b50a96a3899aab46c">&#9670;&nbsp;</a></span>IM_CLIENT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define IM_CLIENT&#160;&#160;&#160;1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00018">18</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+
+</div>
+</div>
+<a id="a44b6e2d68c7a890d60b6017e83bce337"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a44b6e2d68c7a890d60b6017e83bce337">&#9670;&nbsp;</a></span>IM_SERVER</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define IM_SERVER&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00017">17</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+
+</div>
+</div>
+<a id="aaf97e803fbd731970b1f667b52f34a6d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf97e803fbd731970b1f667b52f34a6d">&#9670;&nbsp;</a></span>MANAGERMSG</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MANAGERMSG&#160;&#160;&#160;printf(&quot;\033[0;32m[M]:\033[0m &quot;);</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00091">91</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+
+</div>
+</div>
+<a id="a1ad0110a77b8abbc3c30f7ec903dab1b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1ad0110a77b8abbc3c30f7ec903dab1b">&#9670;&nbsp;</a></span>MAX_CONNECTION</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MAX_CONNECTION&#160;&#160;&#160;5</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00011">11</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+
+</div>
+</div>
+<a id="ae35694bd71aaa8aa2608ba5d24de667d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae35694bd71aaa8aa2608ba5d24de667d">&#9670;&nbsp;</a></span>MAX_NEIGHBOURS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MAX_NEIGHBOURS&#160;&#160;&#160;64</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00020">20</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+
+</div>
+</div>
+<a id="ad546ea25dc7aa34a81dcf5aff48a31ca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad546ea25dc7aa34a81dcf5aff48a31ca">&#9670;&nbsp;</a></span>MAX_SERVER</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MAX_SERVER&#160;&#160;&#160;20</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00025">25</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+
+</div>
+</div>
+<a id="aebcc63085ec90348cc76624d948759dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aebcc63085ec90348cc76624d948759dc">&#9670;&nbsp;</a></span>MAX_VALIDATORS_PER_BLOCK</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MAX_VALIDATORS_PER_BLOCK&#160;&#160;&#160;512</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00027">27</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
 
 </div>
 </div>
@@ -215,7 +597,87 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00017">17</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00010">10</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+
+</div>
+</div>
+<a id="a990e4ab4f7babf69de0109080b0f7c72"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a990e4ab4f7babf69de0109080b0f7c72">&#9670;&nbsp;</a></span>NODESERVER</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define NODESERVER&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00022">22</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+
+</div>
+</div>
+<a id="ab85b8d668595989b505586b7b46e6f88"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab85b8d668595989b505586b7b46e6f88">&#9670;&nbsp;</a></span>P_VERSION</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define P_VERSION&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00015">15</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+
+</div>
+</div>
+<a id="a70dfa79077dc00c8de6083ff105c831b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a70dfa79077dc00c8de6083ff105c831b">&#9670;&nbsp;</a></span>SERVERMSG</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SERVERMSG&#160;&#160;&#160;printf(&quot;\033[0;31m[S]:\033[0m &quot;);</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00089">89</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+
+</div>
+</div>
+<a id="aa901879896986863f8b104506b60cd4f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa901879896986863f8b104506b60cd4f">&#9670;&nbsp;</a></span>SIZE_OF_HOSTNAME</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SIZE_OF_HOSTNAME&#160;&#160;&#160;39</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00009">9</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+
+</div>
+</div>
+<a id="ac65409d904781e5a23529bd6bef2b673"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac65409d904781e5a23529bd6bef2b673">&#9670;&nbsp;</a></span>SOL_TCP</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SOL_TCP&#160;&#160;&#160;6</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00029">29</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
 
 </div>
 </div>
@@ -231,11 +693,161 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00020">20</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00013">13</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+
+</div>
+</div>
+<a id="a2279fe1842cc4dd92e743a1b3e4c6e0e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2279fe1842cc4dd92e743a1b3e4c6e0e">&#9670;&nbsp;</a></span>TCP_USER_TIMEOUT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define TCP_USER_TIMEOUT&#160;&#160;&#160;18</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00030">30</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+
+</div>
+</div>
+<a id="a2f842705a43fc47d80ea254292beb46e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f842705a43fc47d80ea254292beb46e">&#9670;&nbsp;</a></span>WARNINGMSG</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define WARNINGMSG</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">x</td><td>)</td>
+          <td>&#160;&#160;&#160;printf(&quot;\033[0;35m[W]: %s\033[0m\n&quot;, x);</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00092">92</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Typedef Documentation</h2>
+<a id="a6994b8a72828be0e03c1d864113f7da1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6994b8a72828be0e03c1d864113f7da1">&#9670;&nbsp;</a></span>client_connection</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct <a class="el" href="structclient__connection.html">client_connection</a> <a class="el" href="structclient__connection.html">client_connection</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8f0eaaa3b951f1f65c49c80d575c9e16"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f0eaaa3b951f1f65c49c80d575c9e16">&#9670;&nbsp;</a></span>infos_st</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct <a class="el" href="structinfos__st.html">infos_st</a> <a class="el" href="structinfos__st.html">infos_st</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af516980a1d1fa7f6e92cafb59e634556"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af516980a1d1fa7f6e92cafb59e634556">&#9670;&nbsp;</a></span>Neighbour</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct <a class="el" href="struct_neighbour.html">Neighbour</a> <a class="el" href="struct_neighbour.html">Neighbour</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3b09f37e675bcd48a01bf22155996872"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b09f37e675bcd48a01bf22155996872">&#9670;&nbsp;</a></span>Node</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct <a class="el" href="struct_node.html">Node</a> <a class="el" href="struct_node.html">Node</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a394d55fafa84f9a883a7c118de733f8b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a394d55fafa84f9a883a7c118de733f8b">&#9670;&nbsp;</a></span>th_arg</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct <a class="el" href="structth__arg.html">th_arg</a> <a class="el" href="structth__arg.html">th_arg</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a3d8810ff759f090d31d612cc51cf9158"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d8810ff759f090d31d612cc51cf9158">&#9670;&nbsp;</a></span>__attribute__()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct __attribute__ </td>
+          <td>(</td>
+          <td class="paramtype">(__packed__)&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00094">94</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="network_8h_a3d8810ff759f090d31d612cc51cf9158_icgraph.png" border="0" usemap="#network_8h_a3d8810ff759f090d31d612cc51cf9158_icgraph" alt=""/></div>
+<!-- MAP 2 -->
+</div>
 
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
+<a id="aef691ccc586177c6f1ed45825b4b79bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aef691ccc586177c6f1ed45825b4b79bd">&#9670;&nbsp;</a></span>get_blocks_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">get_blocks_t</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00099">99</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+
+</div>
+</div>
 <a id="af58e2a18006d43908a600911daf88725"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af58e2a18006d43908a600911daf88725">&#9670;&nbsp;</a></span>HARD_CODED_ADDR</h2>
 
@@ -248,7 +860,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="network_8c_source.html#l00004">4</a> of file <a class="el" href="network_8c_source.html">network.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="network_8c_source.html#l00005">5</a> of file <a class="el" href="network_8c_source.html">network.c</a>.</p>
 
 </div>
 </div>

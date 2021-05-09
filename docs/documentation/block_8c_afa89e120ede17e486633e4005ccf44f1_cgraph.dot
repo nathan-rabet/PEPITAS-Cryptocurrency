@@ -6,17 +6,17 @@ digraph "get_prev_block"
   rankdir="LR";
   Node1 [label="get_prev_block",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="For a block of height h, return the block of height h-1"];
   Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node2 [label="get_blockchain",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$block_8c.html#af572e8ef23f600c0a62f716e780c813b",tooltip="Loads a blockchain object with a padding of 'nb_chunk'."];
+  Node2 [label="load_blockchain",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$block_8c.html#a7acee00b67ed21663a5b05242acc822d",tooltip="Loads a blockchain object with a padding of 'nb_chunk'."];
   Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node3 [label="free_block",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$block_8c.html#a3eb417f7cce88e8ec69d6974cd25e49f",tooltip="Free a block struct."];
   Node2 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node4 [label="get_block",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$block_8c.html#a32140266e4b385f64860944a5edd0153",tooltip=" "];
+  Node4 [label="get_block",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$block_8c.html#a32140266e4b385f64860944a5edd0153",tooltip="Get a block object."];
   Node4 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node5 [label="convert_data_to_block",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$block_8c.html#ac5e925fca9d00c2b763065e4efecb334",tooltip=" "];
+  Node5 [label="convert_data_to_block",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$block_8c.html#ada1355f8610cc450d7c8f662dc6a7aef",tooltip=" "];
   Node5 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node6 [label="convert_data_to_blockdata",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$block_8c.html#ae583c8db9c8e372296a4393e257c3917",tooltip=" "];
+  Node6 [label="convert_data_to_blockdata",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$block_8c.html#afcda50ce8deb3b381aeb5b88689f919f",tooltip=" "];
   Node6 -> Node7 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node7 [label="convert_data_to_transaction",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$block_8c.html#a2093f169febc7a7d1bd0fbf024f94555",tooltip=" "];
+  Node7 [label="load_transaction",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$transaction_8h.html#a4f4e33641ff7466e848182ce420827b6",tooltip=" "];
   Node7 -> Node8 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node8 [label="convert_data_to_transactiondata",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$block_8c.html#a68ddf0ad8385c2f03a418264ad5ba7ed",tooltip=" "];
+  Node8 [label="convert_data_to_transactiondata",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$transaction_8c.html#a8649ee7d98b5b34c64efa31e274f2534",tooltip=" "];
 }

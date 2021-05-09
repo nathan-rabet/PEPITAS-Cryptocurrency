@@ -1,12 +1,12 @@
-.TH "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/src/cryptosystem/signature.c" 3 "Thu Apr 22 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
+.TH "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/src/core/cryptosystem/signature.c" 3 "Sun May 9 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
-/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/src/cryptosystem/signature.c
+/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/src/core/cryptosystem/signature.c
 .SH SYNOPSIS
 .br
 .PP
-\fC#include 'core/blockchain/block\&.h'\fP
+\fC#include 'blockchain/block\&.h'\fP
 .br
 \fC#include 'cryptosystem/signature\&.h'\fP
 .br
@@ -27,35 +27,17 @@
 
 .in +1c
 .ti -1c
-.RI "char * \fBsign_message\fP (char *data, size_t len_data, size_t *signature_len)"
+.RI "char * \fBsign_message\fP (char *data, size_t len_data, void *buffer)"
 .br
-.RI "encrypt(SHA284(msg,len_data),priv_key) "
+.RI "buffer <- encrypt(SHA284(msg,len_data),wallet_priv_key) "
 .ti -1c
-.RI "int \fBverify_signature\fP (void *data, size_t data_len, char *signature, size_t signature_len, RSA *pub_key)"
+.RI "char * \fBsign_message_with_key\fP (char *data, size_t len_data, RSA *key, void *buffer)"
 .br
-.RI "Apply the SHA384 algorithm on a 'data' of size 'len_data' and verifies if SHA384(data, len_data) == 'signature'\&. "
+.RI "encrypt(SHA284(msg,len_data),key) buffer <- encrypt(SHA284(msg,len_data),key) "
 .ti -1c
-.RI "void \fBwrite_transactiondata\fP (\fBTransactionData\fP *transaction, int fd)"
+.RI "int \fBverify_signature\fP (void *data, size_t data_len, char *signature, RSA *pub_key)"
 .br
-.ti -1c
-.RI "void \fBwrite_transaction\fP (\fBTransaction\fP *transaction, int fd)"
-.br
-.ti -1c
-.RI "void \fBget_transaction_data\fP (\fBTransaction\fP *trans, char **buff, size_t *index)"
-.br
-.RI "Convert transactions to char * buffer\&. "
-.ti -1c
-.RI "char * \fBget_blockdata_data\fP (\fBBlock\fP *block, size_t *size)"
-.br
-.RI "Get the blockdata data object\&. "
-.ti -1c
-.RI "void \fBwrite_blockdata\fP (\fBBlockData\fP blockdata, int fd)"
-.br
-.RI "Writes blockdata in a file\&. "
-.ti -1c
-.RI "void \fBwrite_block\fP (\fBBlock\fP block, int fd)"
-.br
-.RI "Writes a block in a file\&. "
+.RI "Verifies if SHA384(data) == decrypt(signature,pub_key) "
 .ti -1c
 .RI "int \fBverify_block_signature\fP (\fBBlock\fP block)"
 .br
@@ -69,7 +51,13 @@
 .br
 .RI "Signs a block\&. "
 .ti -1c
+.RI "void \fBsign_block_with_key\fP (\fBBlock\fP *block, RSA *key)"
+.br
+.ti -1c
 .RI "void \fBsign_transaction\fP (\fBTransaction\fP *transaction)"
+.br
+.ti -1c
+.RI "void \fBsign_transaction_with_key\fP (\fBTransaction\fP *transaction, RSA *key)"
 .br
 .RI "Sign a transaction\&. "
 .ti -1c
@@ -79,48 +67,6 @@
 .in -1c
 .SH "Function Documentation"
 .PP 
-.SS "char* get_blockdata_data (\fBBlock\fP * block, size_t * size)"
-
-.PP
-Get the blockdata data object\&. 
-.PP
-\fBParameters\fP
-.RS 4
-\fIblock\fP The block 
-.br
-\fIsize\fP The size of the block 
-.RE
-.PP
-\fBReturns\fP
-.RS 4
-char* 
-.RE
-.PP
-
-.PP
-Definition at line 144 of file signature\&.c\&.
-.SS "void get_transaction_data (\fBTransaction\fP * trans, char ** buff, size_t * size)"
-
-.PP
-Convert transactions to char * buffer\&. 
-.PP
-\fBParameters\fP
-.RS 4
-\fItransactions\fP The transaction array 
-.br
-\fIbuff\fP The buffer that receives the transactions 
-.br
-\fIsize\fP The number of transactions in the array
-.RE
-.PP
-\fBReturns\fP
-.RS 4
-The buffer allocated (Must be freed) 
-.RE
-.PP
-
-.PP
-Definition at line 93 of file signature\&.c\&.
 .SS "void sign_block (\fBBlock\fP * block)"
 
 .PP
@@ -133,7 +79,7 @@ Signs a block\&.
 .PP
 
 .PP
-Definition at line 233 of file signature\&.c\&.
+Definition at line 102 of file signature\&.c\&.
 .SS "void sign_block_transactions (\fBBlock\fP * block)"
 
 .PP
@@ -146,11 +92,15 @@ Signs transactions of a block\&.
 .PP
 
 .PP
-Definition at line 258 of file signature\&.c\&.
-.SS "char* sign_message (char * data, size_t len_data, size_t * signature_len)"
+Definition at line 132 of file signature\&.c\&.
+.SS "void sign_block_with_key (\fBBlock\fP * block, RSA * key)"
 
 .PP
-encrypt(SHA284(msg,len_data),priv_key) 
+Definition at line 109 of file signature\&.c\&.
+.SS "char* sign_message (char * data, size_t len_data, void * buffer)"
+
+.PP
+buffer <- encrypt(SHA284(msg,len_data),wallet_priv_key) If buffer == NULL, return a new allocated buffer
 .PP
 \fBParameters\fP
 .RS 4
@@ -158,7 +108,7 @@ encrypt(SHA284(msg,len_data),priv_key)
 .br
 \fIlen_data\fP The length of the data 
 .br
-\fIsignature_len\fP The length of the data signature 
+\fIbuffer\fP The buffer to put signature into 
 .RE
 .PP
 \fBReturns\fP
@@ -169,7 +119,35 @@ char*
 
 .PP
 Definition at line 10 of file signature\&.c\&.
+.SS "char* sign_message_with_key (char * data, size_t len_data, RSA * key, void * buffer)"
+
+.PP
+encrypt(SHA284(msg,len_data),key) buffer <- encrypt(SHA284(msg,len_data),key) If buffer == NULL, return a new allocated buffer 
+.PP
+\fBParameters\fP
+.RS 4
+\fIdata\fP The data to sign 
+.br
+\fIlen_data\fP The length of the data 
+.br
+\fIkey\fP The key to use for the signature 
+.br
+\fIbuffer\fP The buffer to put signature into 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+char* 
+.RE
+.PP
+
+.PP
+Definition at line 34 of file signature\&.c\&.
 .SS "void sign_transaction (\fBTransaction\fP * transaction)"
+
+.PP
+Definition at line 116 of file signature\&.c\&.
+.SS "void sign_transaction_with_key (\fBTransaction\fP * transaction, RSA * key)"
 
 .PP
 Sign a transaction\&. 
@@ -181,7 +159,7 @@ Sign a transaction\&.
 .PP
 
 .PP
-Definition at line 245 of file signature\&.c\&.
+Definition at line 124 of file signature\&.c\&.
 .SS "int verify_block_signature (\fBBlock\fP block)"
 
 .PP
@@ -201,11 +179,11 @@ Verifies if a block signature is valid\&.
 .PP
 
 .PP
-Definition at line 206 of file signature\&.c\&.
-.SS "int verify_signature (void * data, size_t data_len, char * signature, size_t signature_len, RSA * pub_key)"
+Definition at line 77 of file signature\&.c\&.
+.SS "int verify_signature (void * data, size_t data_len, char * signature, RSA * pub_key)"
 
 .PP
-Apply the SHA384 algorithm on a 'data' of size 'len_data' and verifies if SHA384(data, len_data) == 'signature'\&. 
+Verifies if SHA384(data) == decrypt(signature,pub_key) 
 .PP
 \fBParameters\fP
 .RS 4
@@ -214,8 +192,6 @@ Apply the SHA384 algorithm on a 'data' of size 'len_data' and verifies if SHA384
 \fIdata_len\fP The length of the buffer 
 .br
 \fIsignature\fP The signature to compare with SHA384(data, len_data) 
-.br
-\fIsignature_len\fP The length of the signature 
 .br
 \fIpub_key\fP The RSA public key used for the decryption 
 .RE
@@ -227,7 +203,7 @@ int
 .PP
 
 .PP
-Definition at line 31 of file signature\&.c\&.
+Definition at line 57 of file signature\&.c\&.
 .SS "int verify_transaction_signature (\fBTransaction\fP transaction)"
 
 .PP
@@ -247,45 +223,7 @@ Verifies if a transaction signature is valid\&.
 .PP
 
 .PP
-Definition at line 219 of file signature\&.c\&.
-.SS "void write_block (\fBBlock\fP block, int fd)"
-
-.PP
-Writes a block in a file\&. 
-.PP
-\fBParameters\fP
-.RS 4
-\fIblock\fP The block to write 
-.br
-\fIfd\fP the file descriptor of the file in which the block is written 
-.RE
-.PP
-
-.PP
-Definition at line 199 of file signature\&.c\&.
-.SS "void write_blockdata (\fBBlockData\fP blockdata, int fd)"
-
-.PP
-Writes blockdata in a file\&. 
-.PP
-\fBParameters\fP
-.RS 4
-\fIblockdata\fP The blockdata to write 
-.br
-\fIfd\fP The file descriptor of the file in which the blockdata is written 
-.RE
-.PP
-
-.PP
-Definition at line 174 of file signature\&.c\&.
-.SS "void write_transaction (\fBTransaction\fP * transaction, int fd)"
-
-.PP
-Definition at line 86 of file signature\&.c\&.
-.SS "void write_transactiondata (\fBTransactionData\fP * transaction, int fd)"
-
-.PP
-Definition at line 50 of file signature\&.c\&.
+Definition at line 89 of file signature\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for PEPITAS CRYPTOCURRENCY from the source code\&.

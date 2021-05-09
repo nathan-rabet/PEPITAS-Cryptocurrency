@@ -6,5 +6,7 @@ digraph "main"
   rankdir="LR";
   Node1 [label="main",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
   Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node2 [label="gen_validators_file",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_g_e_n__validators__file_8c.html#abf3fe34d9f81a5c8f8de30fe8b1c2395",tooltip="Generate a mock validators states file."];
+  Node2 [label="get_keys",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$rsa_8h.html#a43ef74c79e95360f43f9f9bd32b33b1d",tooltip="Get the keys object."];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="get_my_wallet",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$wallet_8h.html#a993fb7ec0c86c7a2d8ff68363e9f5304",tooltip="Get my wallet object."];
 }

@@ -84,7 +84,9 @@ $(document).ready(function(){initNavTree('ui_8h.html',''); initResizable(); });
 
 <div class="header">
   <div class="summary">
-<a href="#func-members">Functions</a>  </div>
+<a href="#nested-classes">Data Structures</a> &#124;
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">ui.h File Reference</div>  </div>
 </div><!--header-->
@@ -94,9 +96,9 @@ $(document).ready(function(){initNavTree('ui_8h.html',''); initResizable(); });
 <code>#include &lt;string.h&gt;</code><br />
 <code>#include &lt;err.h&gt;</code><br />
 <code>#include &lt;time.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="rsa_8h_source.html">../cryptosystem/rsa.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="hash_8h_source.html">../cryptosystem/hash.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="wallet_8h_source.html">../core/blockchain/wallet.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="rsa_8h_source.html">cryptosystem/rsa.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="hash_8h_source.html">cryptosystem/hash.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="wallet_8h_source.html">blockchain/wallet.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for ui.h:</div>
 <div class="dyncontent">
@@ -112,15 +114,20 @@ This graph shows which files directly or indirectly include this file:</div>
 </div>
 <p><a href="ui_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Data Structures</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structblockinfo.html">blockinfo</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a099d48038e444c2f3e69904477527798"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8h.html#a099d48038e444c2f3e69904477527798">setup</a> ()</td></tr>
-<tr class="memdesc:a099d48038e444c2f3e69904477527798"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setups the gtk widgets for the GUI.  <a href="ui_8h.html#a099d48038e444c2f3e69904477527798">More...</a><br /></td></tr>
-<tr class="separator:a099d48038e444c2f3e69904477527798"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6f90e7dead0868fb0ea2deccc1868aba"><td class="memItemLeft" align="right" valign="top">gboolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8h.html#a6f90e7dead0868fb0ea2deccc1868aba">on_main_window_delete</a> (GtkWidget *widget, __attribute__((unused)) gpointer data)</td></tr>
+<tr class="memitem:af0fd9e6f06e2040c43a09ef58d1d3468"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8h.html#af0fd9e6f06e2040c43a09ef58d1d3468">setup</a> (void *args)</td></tr>
+<tr class="memdesc:af0fd9e6f06e2040c43a09ef58d1d3468"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setups the gtk widgets for the GUI.  <a href="ui_8h.html#af0fd9e6f06e2040c43a09ef58d1d3468">More...</a><br /></td></tr>
+<tr class="separator:af0fd9e6f06e2040c43a09ef58d1d3468"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f90e7dead0868fb0ea2deccc1868aba"><td class="memItemLeft" align="right" valign="top">gboolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8h.html#a6f90e7dead0868fb0ea2deccc1868aba">on_main_window_delete</a> (GtkWidget *widget, <a class="el" href="network_8h.html#a3d8810ff759f090d31d612cc51cf9158">__attribute__</a>((unused)) gpointer data)</td></tr>
 <tr class="memdesc:a6f90e7dead0868fb0ea2deccc1868aba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys the window when it is closed.  <a href="ui_8h.html#a6f90e7dead0868fb0ea2deccc1868aba">More...</a><br /></td></tr>
 <tr class="separator:a6f90e7dead0868fb0ea2deccc1868aba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0c6c7d7176f86f1351b885bde43c87a3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8h.html#a0c6c7d7176f86f1351b885bde43c87a3">on_main_window_destroy</a> (__attribute((unused)) GtkWidget *widget, __attribute__((unused)) gpointer data)</td></tr>
+<tr class="memitem:a0c6c7d7176f86f1351b885bde43c87a3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8h.html#a0c6c7d7176f86f1351b885bde43c87a3">on_main_window_destroy</a> (__attribute((unused)) GtkWidget *widget, <a class="el" href="network_8h.html#a3d8810ff759f090d31d612cc51cf9158">__attribute__</a>((unused)) gpointer data)</td></tr>
 <tr class="memdesc:a0c6c7d7176f86f1351b885bde43c87a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Quits GTK when the program ends.  <a href="ui_8h.html#a0c6c7d7176f86f1351b885bde43c87a3">More...</a><br /></td></tr>
 <tr class="separator:a0c6c7d7176f86f1351b885bde43c87a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1439f12ede3d5dde4cabb1cf9684eed7"><td class="memItemLeft" align="right" valign="top">gboolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8h.html#a1439f12ede3d5dde4cabb1cf9684eed7">on_transaction_button_press</a> (GtkWidget *widget, GdkEventKey *event, gpointer user_data)</td></tr>
@@ -147,6 +154,8 @@ Functions</h2></td></tr>
 <tr class="memitem:a7d043349856d2b80a23d2dbe3d59735d"><td class="memItemLeft" align="right" valign="top">gboolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8h.html#a7d043349856d2b80a23d2dbe3d59735d">add_contact</a> (GtkWidget *widget, GdkEventKey *event, gpointer user_data)</td></tr>
 <tr class="memdesc:a7d043349856d2b80a23d2dbe3d59735d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a contact to the treeview if the entrys weren't empty, and closes the contact window.  <a href="ui_8h.html#a7d043349856d2b80a23d2dbe3d59735d">More...</a><br /></td></tr>
 <tr class="separator:a7d043349856d2b80a23d2dbe3d59735d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4c608b5626430bac55322e32309bf8f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8h.html#ae4c608b5626430bac55322e32309bf8f">change_label_text</a> (GtkLabel *label, char *text)</td></tr>
+<tr class="separator:ae4c608b5626430bac55322e32309bf8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0e9026a91a87b08fa5f6f04227565895"><td class="memItemLeft" align="right" valign="top">gboolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8h.html#a0e9026a91a87b08fa5f6f04227565895">on_create_key_but1_press</a> (GtkWidget *widget, GdkEventKey *event, gpointer user_data)</td></tr>
 <tr class="separator:a0e9026a91a87b08fa5f6f04227565895"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa98b162fce8b7169cab09ee15dde4acf"><td class="memItemLeft" align="right" valign="top">gboolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8h.html#aa98b162fce8b7169cab09ee15dde4acf">on_create_key_but2_press</a> (GtkWidget *widget, GdkEventKey *event, gpointer user_data)</td></tr>
@@ -171,6 +180,23 @@ Functions</h2></td></tr>
 <tr class="separator:aafd81ce434d4f1abdba55e0ffc6b719f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ff6af24bc9be5261b9ef9f6169c91da"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8h.html#a0ff6af24bc9be5261b9ef9f6169c91da">get_public_key_from_contacts</a> (const char *name)</td></tr>
 <tr class="separator:a0ff6af24bc9be5261b9ef9f6169c91da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2abce63b237dd17f1a7994eef33c13f2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8h.html#a2abce63b237dd17f1a7994eef33c13f2">add_new_blockinfo</a> (size_t height, size_t transaction)</td></tr>
+<tr class="separator:a2abce63b237dd17f1a7994eef33c13f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa390af6abf83347d6b141cee7b7dde29"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8h.html#aa390af6abf83347d6b141cee7b7dde29">update_sync</a> (size_t actual, size_t final)</td></tr>
+<tr class="separator:aa390af6abf83347d6b141cee7b7dde29"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:af7ca2b7a2cb2c8e008ef7c338eb725cc"><td class="memItemLeft" align="right" valign="top">GtkLabel *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8h.html#af7ca2b7a2cb2c8e008ef7c338eb725cc">synchro_label</a></td></tr>
+<tr class="separator:af7ca2b7a2cb2c8e008ef7c338eb725cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef72f064f1fc788edba39ced4f4735d5"><td class="memItemLeft" align="right" valign="top">GtkLabel *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8h.html#aef72f064f1fc788edba39ced4f4735d5">block_amount_label</a></td></tr>
+<tr class="separator:aef72f064f1fc788edba39ced4f4735d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae197a17a69bd4320a69c3945369d802e"><td class="memItemLeft" align="right" valign="top">GtkLabel *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8h.html#ae197a17a69bd4320a69c3945369d802e">connections_label</a></td></tr>
+<tr class="separator:ae197a17a69bd4320a69c3945369d802e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48095bf105fef9a39a872144a56e23ab"><td class="memItemLeft" align="right" valign="top">GtkLabel *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8h.html#a48095bf105fef9a39a872144a56e23ab">mempool_label</a></td></tr>
+<tr class="separator:a48095bf105fef9a39a872144a56e23ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46ad7408bf2f0e142f3c124e26bd4b19"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structblockinfo.html">blockinfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui_8h.html#a46ad7408bf2f0e142f3c124e26bd4b19">blocksinfo</a> [3]</td></tr>
+<tr class="separator:a46ad7408bf2f0e142f3c124e26bd4b19"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="a7d043349856d2b80a23d2dbe3d59735d"></a>
@@ -234,7 +260,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00389">389</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00466">466</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -270,13 +296,43 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00397">397</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00474">474</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="ui_8h_a3cce6cef71ccb6ae5dd4c9ca852eb31f_icgraph.png" border="0" usemap="#ui_8h_a3cce6cef71ccb6ae5dd4c9ca852eb31f_icgraph" alt=""/></div>
 <!-- MAP 3 -->
 </div>
+
+</div>
+</div>
+<a id="a2abce63b237dd17f1a7994eef33c13f2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2abce63b237dd17f1a7994eef33c13f2">&#9670;&nbsp;</a></span>add_new_blockinfo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void add_new_blockinfo </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>height</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>transaction</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00199">199</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
 
 </div>
 </div>
@@ -312,7 +368,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00253">253</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00324">324</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -354,7 +410,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00233">233</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00304">304</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -396,12 +452,48 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00212">212</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00283">283</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="ui_8h_adf3736e772d266218ca1c9c0e4b38ac3_icgraph.png" border="0" usemap="#ui_8h_adf3736e772d266218ca1c9c0e4b38ac3_icgraph" alt=""/></div>
 <!-- MAP 6 -->
+</div>
+
+</div>
+</div>
+<a id="ae4c608b5626430bac55322e32309bf8f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4c608b5626430bac55322e32309bf8f">&#9670;&nbsp;</a></span>change_label_text()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void change_label_text </td>
+          <td>(</td>
+          <td class="paramtype">GtkLabel *&#160;</td>
+          <td class="paramname"><em>label</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>text</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00194">194</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="ui_8h_ae4c608b5626430bac55322e32309bf8f_icgraph.png" border="0" usemap="#ui_8h_ae4c608b5626430bac55322e32309bf8f_icgraph" alt=""/></div>
+<!-- MAP 7 -->
 </div>
 
 </div>
@@ -422,12 +514,12 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00428">428</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00511">511</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="ui_8h_a0ff6af24bc9be5261b9ef9f6169c91da_icgraph.png" border="0" usemap="#ui_8h_a0ff6af24bc9be5261b9ef9f6169c91da_icgraph" alt=""/></div>
-<!-- MAP 7 -->
+<!-- MAP 8 -->
 </div>
 
 </div>
@@ -447,18 +539,18 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00406">406</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00483">483</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="ui_8h_a73fe931a2fbeb2086428ad91c0cbc05e_cgraph.png" border="0" usemap="#ui_8h_a73fe931a2fbeb2086428ad91c0cbc05e_cgraph" alt=""/></div>
-<!-- MAP 8 -->
+<!-- MAP 9 -->
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="ui_8h_a73fe931a2fbeb2086428ad91c0cbc05e_icgraph.png" border="0" usemap="#ui_8h_a73fe931a2fbeb2086428ad91c0cbc05e_icgraph" alt=""/></div>
-<!-- MAP 9 -->
+<!-- MAP 10 -->
 </div>
 
 </div>
@@ -732,7 +824,7 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">__attribute__((unused)) gpointer&#160;</td>
+          <td class="paramtype"><a class="el" href="network_8h.html#a3d8810ff759f090d31d612cc51cf9158">__attribute__</a>((unused)) gpointer&#160;</td>
           <td class="paramname"><em>data</em>&#160;</td>
         </tr>
         <tr>
@@ -752,7 +844,7 @@ Here is the caller graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>gboolean Error code </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00162">162</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00233">233</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
 
 </div>
 </div>
@@ -771,7 +863,7 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">__attribute__((unused)) gpointer&#160;</td>
+          <td class="paramtype"><a class="el" href="network_8h.html#a3d8810ff759f090d31d612cc51cf9158">__attribute__</a>((unused)) gpointer&#160;</td>
           <td class="paramname"><em>data</em>&#160;</td>
         </tr>
         <tr>
@@ -966,16 +1058,17 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="a099d48038e444c2f3e69904477527798"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a099d48038e444c2f3e69904477527798">&#9670;&nbsp;</a></span>setup()</h2>
+<a id="af0fd9e6f06e2040c43a09ef58d1d3468"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af0fd9e6f06e2040c43a09ef58d1d3468">&#9670;&nbsp;</a></span>setup()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int setup </td>
+          <td class="memname">void* setup </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>args</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -984,12 +1077,12 @@ Here is the caller graph for this function:</div>
 <p>Setups the gtk widgets for the GUI. </p>
 <dl class="section return"><dt>Returns</dt><dd>int Returns 1 if there is an error, 0 otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00057">57</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00063">63</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="ui_8h_a099d48038e444c2f3e69904477527798_icgraph.png" border="0" usemap="#ui_8h_a099d48038e444c2f3e69904477527798_icgraph" alt=""/></div>
-<!-- MAP 10 -->
+<div class="center"><img src="ui_8h_af0fd9e6f06e2040c43a09ef58d1d3468_icgraph.png" border="0" usemap="#ui_8h_af0fd9e6f06e2040c43a09ef58d1d3468_icgraph" alt=""/></div>
+<!-- MAP 11 -->
 </div>
 
 </div>
@@ -1009,19 +1102,136 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00524">524</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00658">658</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="ui_8h_af1854ec5ff4099ed69a1b51a3fd3b3df_cgraph.png" border="0" usemap="#ui_8h_af1854ec5ff4099ed69a1b51a3fd3b3df_cgraph" alt=""/></div>
-<!-- MAP 11 -->
+<!-- MAP 12 -->
+</div>
+
+</div>
+</div>
+<a id="aa390af6abf83347d6b141cee7b7dde29"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa390af6abf83347d6b141cee7b7dde29">&#9670;&nbsp;</a></span>update_sync()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void update_sync </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>actual</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>final</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ui_8c_source.html#l00214">214</a> of file <a class="el" href="ui_8c_source.html">ui.c</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="ui_8h_aa390af6abf83347d6b141cee7b7dde29_cgraph.png" border="0" usemap="#ui_8h_aa390af6abf83347d6b141cee7b7dde29_cgraph" alt=""/></div>
+<!-- MAP 13 -->
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="ui_8h_af1854ec5ff4099ed69a1b51a3fd3b3df_icgraph.png" border="0" usemap="#ui_8h_af1854ec5ff4099ed69a1b51a3fd3b3df_icgraph" alt=""/></div>
-<!-- MAP 12 -->
+<div class="center"><img src="ui_8h_aa390af6abf83347d6b141cee7b7dde29_icgraph.png" border="0" usemap="#ui_8h_aa390af6abf83347d6b141cee7b7dde29_icgraph" alt=""/></div>
+<!-- MAP 14 -->
 </div>
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="aef72f064f1fc788edba39ced4f4735d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aef72f064f1fc788edba39ced4f4735d5">&#9670;&nbsp;</a></span>block_amount_label</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">GtkLabel* block_amount_label</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ui_8h_source.html#l00014">14</a> of file <a class="el" href="ui_8h_source.html">ui.h</a>.</p>
+
+</div>
+</div>
+<a id="a46ad7408bf2f0e142f3c124e26bd4b19"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a46ad7408bf2f0e142f3c124e26bd4b19">&#9670;&nbsp;</a></span>blocksinfo</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="structblockinfo.html">blockinfo</a> blocksinfo[3]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ui_8h_source.html#l00023">23</a> of file <a class="el" href="ui_8h_source.html">ui.h</a>.</p>
+
+</div>
+</div>
+<a id="ae197a17a69bd4320a69c3945369d802e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae197a17a69bd4320a69c3945369d802e">&#9670;&nbsp;</a></span>connections_label</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">GtkLabel* connections_label</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ui_8h_source.html#l00015">15</a> of file <a class="el" href="ui_8h_source.html">ui.h</a>.</p>
+
+</div>
+</div>
+<a id="a48095bf105fef9a39a872144a56e23ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48095bf105fef9a39a872144a56e23ab">&#9670;&nbsp;</a></span>mempool_label</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">GtkLabel* mempool_label</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ui_8h_source.html#l00016">16</a> of file <a class="el" href="ui_8h_source.html">ui.h</a>.</p>
+
+</div>
+</div>
+<a id="af7ca2b7a2cb2c8e008ef7c338eb725cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af7ca2b7a2cb2c8e008ef7c338eb725cc">&#9670;&nbsp;</a></span>synchro_label</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">GtkLabel* synchro_label</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ui_8h_source.html#l00013">13</a> of file <a class="el" href="ui_8h_source.html">ui.h</a>.</p>
 
 </div>
 </div>

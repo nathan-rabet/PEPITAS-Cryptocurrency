@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['neighbour_244',['Neighbour',['../struct_neighbour.html',1,'']]],
-  ['node_245',['Node',['../struct_node.html',1,'']]]
+  ['infos_5fst_372',['infos_st',['../structinfos__st.html',1,'']]]
 ];

@@ -1,0 +1,16 @@
+digraph "sign_block_with_key"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="sign_block_with_key",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="get_blockdata_data",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$block_8h.html#af656af2c0f2bf2ea38d4fba26b50f5d6",tooltip="Get the blockdata data object."];
+  Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="get_transaction_data",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$transaction_8h.html#a16588449d977a2d5052be7b3639768a8",tooltip=" "];
+  Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="sign_message_with_key",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$signature_8c.html#aae1091d9b2f55f2db94f39f7343b29e3",tooltip="encrypt(SHA284(msg,len_data),key) buffer <- encrypt(SHA284(msg,len_data),key)"];
+  Node4 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="sha384_data",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$hash_8h.html#a67d06acefe39c395887f87d76bed5ba3",tooltip="Apply the SHA384 algorithm on a 'data' of size 'len_data'."];
+}

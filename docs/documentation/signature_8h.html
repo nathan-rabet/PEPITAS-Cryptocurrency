@@ -96,8 +96,9 @@ $(document).ready(function(){initNavTree('signature_8h.html',''); initResizable(
 <code>#include &lt;openssl/ssl3.h&gt;</code><br />
 <code>#include &lt;openssl/rsa.h&gt;</code><br />
 <code>#include &lt;openssl/err.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="wallet_8h_source.html">core/blockchain/wallet.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="block_8h_source.html">core/blockchain/block.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="wallet_8h_source.html">blockchain/wallet.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="block_8h_source.html">blockchain/block.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="epoch__man_8h_source.html">validation/epoch_man.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for signature.h:</div>
 <div class="dyncontent">
@@ -115,12 +116,15 @@ This graph shows which files directly or indirectly include this file:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a31fa447711840b3c0932cfe068d8cc65"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="signature_8h.html#a31fa447711840b3c0932cfe068d8cc65">sign_message</a> (char *data, size_t len_data, size_t *signature_len)</td></tr>
-<tr class="memdesc:a31fa447711840b3c0932cfe068d8cc65"><td class="mdescLeft">&#160;</td><td class="mdescRight">encrypt(SHA284(msg,len_data),priv_key)  <a href="signature_8h.html#a31fa447711840b3c0932cfe068d8cc65">More...</a><br /></td></tr>
-<tr class="separator:a31fa447711840b3c0932cfe068d8cc65"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a03bc161fe8675e7bf8763cdcee6a3ac2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="signature_8h.html#a03bc161fe8675e7bf8763cdcee6a3ac2">verify_signature</a> (void *data, size_t data_len, char *signature, size_t signature_len, RSA *pub_key)</td></tr>
-<tr class="memdesc:a03bc161fe8675e7bf8763cdcee6a3ac2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply the SHA384 algorithm on a 'data' of size 'len_data' and verifies if SHA384(data, len_data) == 'signature'.  <a href="signature_8h.html#a03bc161fe8675e7bf8763cdcee6a3ac2">More...</a><br /></td></tr>
-<tr class="separator:a03bc161fe8675e7bf8763cdcee6a3ac2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae19c745c1be8c5d67048188ede9a779d"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="signature_8h.html#ae19c745c1be8c5d67048188ede9a779d">sign_message</a> (char *data, size_t len_data, void *buffer)</td></tr>
+<tr class="memdesc:ae19c745c1be8c5d67048188ede9a779d"><td class="mdescLeft">&#160;</td><td class="mdescRight">buffer &lt;- encrypt(SHA284(msg,len_data),wallet_priv_key)  <a href="signature_8h.html#ae19c745c1be8c5d67048188ede9a779d">More...</a><br /></td></tr>
+<tr class="separator:ae19c745c1be8c5d67048188ede9a779d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae1091d9b2f55f2db94f39f7343b29e3"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="signature_8h.html#aae1091d9b2f55f2db94f39f7343b29e3">sign_message_with_key</a> (char *data, size_t len_data, RSA *key, void *buffer)</td></tr>
+<tr class="memdesc:aae1091d9b2f55f2db94f39f7343b29e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">encrypt(SHA284(msg,len_data),key) buffer &lt;- encrypt(SHA284(msg,len_data),key)  <a href="signature_8h.html#aae1091d9b2f55f2db94f39f7343b29e3">More...</a><br /></td></tr>
+<tr class="separator:aae1091d9b2f55f2db94f39f7343b29e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb24ef32c40711494e34d7639e64f8a3"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="signature_8h.html#abb24ef32c40711494e34d7639e64f8a3">verify_signature</a> (void *data, size_t data_len, char *signature, RSA *pub_key)</td></tr>
+<tr class="memdesc:abb24ef32c40711494e34d7639e64f8a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies if SHA384(data) == decrypt(signature,pub_key)  <a href="signature_8h.html#abb24ef32c40711494e34d7639e64f8a3">More...</a><br /></td></tr>
+<tr class="separator:abb24ef32c40711494e34d7639e64f8a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a197fbff013d305c63a9699922eb438f6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="signature_8h.html#a197fbff013d305c63a9699922eb438f6">verify_block_signature</a> (<a class="el" href="struct_block.html">Block</a> block)</td></tr>
 <tr class="memdesc:a197fbff013d305c63a9699922eb438f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies if a block signature is valid.  <a href="signature_8h.html#a197fbff013d305c63a9699922eb438f6">More...</a><br /></td></tr>
 <tr class="separator:a197fbff013d305c63a9699922eb438f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -130,9 +134,6 @@ Functions</h2></td></tr>
 <tr class="memitem:a39fc832fd334ecc83d42bdc39e262948"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="signature_8h.html#a39fc832fd334ecc83d42bdc39e262948">get_transaction_data</a> (<a class="el" href="struct_transaction.html">Transaction</a> *trans, char **buff, size_t *size)</td></tr>
 <tr class="memdesc:a39fc832fd334ecc83d42bdc39e262948"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert transactions to char * buffer.  <a href="signature_8h.html#a39fc832fd334ecc83d42bdc39e262948">More...</a><br /></td></tr>
 <tr class="separator:a39fc832fd334ecc83d42bdc39e262948"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af656af2c0f2bf2ea38d4fba26b50f5d6"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="signature_8h.html#af656af2c0f2bf2ea38d4fba26b50f5d6">get_blockdata_data</a> (<a class="el" href="struct_block.html">Block</a> *block, size_t *size)</td></tr>
-<tr class="memdesc:af656af2c0f2bf2ea38d4fba26b50f5d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the blockdata data object.  <a href="signature_8h.html#af656af2c0f2bf2ea38d4fba26b50f5d6">More...</a><br /></td></tr>
-<tr class="separator:af656af2c0f2bf2ea38d4fba26b50f5d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0e5ff1f119568fb8566981cf7da11d7f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="signature_8h.html#a0e5ff1f119568fb8566981cf7da11d7f">write_blockdata</a> (<a class="el" href="struct_block_data.html">BlockData</a> blockdata, int fd)</td></tr>
 <tr class="memdesc:a0e5ff1f119568fb8566981cf7da11d7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes blockdata in a file.  <a href="signature_8h.html#a0e5ff1f119568fb8566981cf7da11d7f">More...</a><br /></td></tr>
 <tr class="separator:a0e5ff1f119568fb8566981cf7da11d7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -142,66 +143,18 @@ Functions</h2></td></tr>
 <tr class="memitem:a5fc24af7af2e6c9cd4de2efcbd26ffb9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="signature_8h.html#a5fc24af7af2e6c9cd4de2efcbd26ffb9">sign_block</a> (<a class="el" href="struct_block.html">Block</a> *block)</td></tr>
 <tr class="memdesc:a5fc24af7af2e6c9cd4de2efcbd26ffb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Signs a block.  <a href="signature_8h.html#a5fc24af7af2e6c9cd4de2efcbd26ffb9">More...</a><br /></td></tr>
 <tr class="separator:a5fc24af7af2e6c9cd4de2efcbd26ffb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1409b9f67ad91c9e55f0e786a8b2ae8a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="signature_8h.html#a1409b9f67ad91c9e55f0e786a8b2ae8a">sign_block_with_key</a> (<a class="el" href="struct_block.html">Block</a> *block, RSA *key)</td></tr>
+<tr class="separator:a1409b9f67ad91c9e55f0e786a8b2ae8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afc30cc798edd88f7749c81431cc12684"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="signature_8h.html#afc30cc798edd88f7749c81431cc12684">sign_transaction</a> (<a class="el" href="struct_transaction.html">Transaction</a> *transaction)</td></tr>
-<tr class="memdesc:afc30cc798edd88f7749c81431cc12684"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sign a transaction.  <a href="signature_8h.html#afc30cc798edd88f7749c81431cc12684">More...</a><br /></td></tr>
 <tr class="separator:afc30cc798edd88f7749c81431cc12684"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad7757263f776dc00aaaae307629b53d9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="signature_8h.html#ad7757263f776dc00aaaae307629b53d9">sign_transaction_with_key</a> (<a class="el" href="struct_transaction.html">Transaction</a> *transaction, RSA *key)</td></tr>
+<tr class="memdesc:ad7757263f776dc00aaaae307629b53d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sign a transaction.  <a href="signature_8h.html#ad7757263f776dc00aaaae307629b53d9">More...</a><br /></td></tr>
+<tr class="separator:ad7757263f776dc00aaaae307629b53d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a885aee9c6a53f767ed991b0a2496e37e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="signature_8h.html#a885aee9c6a53f767ed991b0a2496e37e">sign_block_transactions</a> (<a class="el" href="struct_block.html">Block</a> *block)</td></tr>
 <tr class="memdesc:a885aee9c6a53f767ed991b0a2496e37e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Signs transactions of a block.  <a href="signature_8h.html#a885aee9c6a53f767ed991b0a2496e37e">More...</a><br /></td></tr>
 <tr class="separator:a885aee9c6a53f767ed991b0a2496e37e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="af656af2c0f2bf2ea38d4fba26b50f5d6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af656af2c0f2bf2ea38d4fba26b50f5d6">&#9670;&nbsp;</a></span>get_blockdata_data()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">char* get_blockdata_data </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_block.html">Block</a> *&#160;</td>
-          <td class="paramname"><em>block</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t *&#160;</td>
-          <td class="paramname"><em>size</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Get the blockdata data object. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">block</td><td>The block </td></tr>
-    <tr><td class="paramname">size</td><td>The size of the block </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>char* </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="signature_8c_source.html#l00144">144</a> of file <a class="el" href="signature_8c_source.html">signature.c</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="signature_8h_af656af2c0f2bf2ea38d4fba26b50f5d6_cgraph.png" border="0" usemap="#signature_8h_af656af2c0f2bf2ea38d4fba26b50f5d6_cgraph" alt=""/></div>
-<!-- MAP 2 -->
-</div>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="signature_8h_af656af2c0f2bf2ea38d4fba26b50f5d6_icgraph.png" border="0" usemap="#signature_8h_af656af2c0f2bf2ea38d4fba26b50f5d6_icgraph" alt=""/></div>
-<!-- MAP 3 -->
-</div>
-
-</div>
-</div>
 <a id="a39fc832fd334ecc83d42bdc39e262948"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a39fc832fd334ecc83d42bdc39e262948">&#9670;&nbsp;</a></span>get_transaction_data()</h2>
 
@@ -245,13 +198,7 @@ Here is the caller graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The buffer allocated (Must be freed) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="signature_8c_source.html#l00093">93</a> of file <a class="el" href="signature_8c_source.html">signature.c</a>.</p>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="signature_8h_a39fc832fd334ecc83d42bdc39e262948_icgraph.png" border="0" usemap="#signature_8h_a39fc832fd334ecc83d42bdc39e262948_icgraph" alt=""/></div>
-<!-- MAP 4 -->
-</div>
+<p class="definition">Definition at line <a class="el" href="transaction_8c_source.html#l00048">48</a> of file <a class="el" href="transaction_8c_source.html">transaction.c</a>.</p>
 
 </div>
 </div>
@@ -279,12 +226,12 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="signature_8c_source.html#l00233">233</a> of file <a class="el" href="signature_8c_source.html">signature.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="signature_8c_source.html#l00102">102</a> of file <a class="el" href="signature_8c_source.html">signature.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="signature_8h_a5fc24af7af2e6c9cd4de2efcbd26ffb9_cgraph.png" border="0" usemap="#signature_8h_a5fc24af7af2e6c9cd4de2efcbd26ffb9_cgraph" alt=""/></div>
-<!-- MAP 5 -->
+<!-- MAP 2 -->
 </div>
 
 </div>
@@ -313,18 +260,54 @@ Here is the call graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="signature_8c_source.html#l00258">258</a> of file <a class="el" href="signature_8c_source.html">signature.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="signature_8c_source.html#l00132">132</a> of file <a class="el" href="signature_8c_source.html">signature.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="signature_8h_a885aee9c6a53f767ed991b0a2496e37e_cgraph.png" border="0" usemap="#signature_8h_a885aee9c6a53f767ed991b0a2496e37e_cgraph" alt=""/></div>
-<!-- MAP 6 -->
+<!-- MAP 3 -->
 </div>
 
 </div>
 </div>
-<a id="a31fa447711840b3c0932cfe068d8cc65"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a31fa447711840b3c0932cfe068d8cc65">&#9670;&nbsp;</a></span>sign_message()</h2>
+<a id="a1409b9f67ad91c9e55f0e786a8b2ae8a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1409b9f67ad91c9e55f0e786a8b2ae8a">&#9670;&nbsp;</a></span>sign_block_with_key()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void sign_block_with_key </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_block.html">Block</a> *&#160;</td>
+          <td class="paramname"><em>block</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">RSA *&#160;</td>
+          <td class="paramname"><em>key</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="signature_8c_source.html#l00109">109</a> of file <a class="el" href="signature_8c_source.html">signature.c</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="signature_8h_a1409b9f67ad91c9e55f0e786a8b2ae8a_cgraph.png" border="0" usemap="#signature_8h_a1409b9f67ad91c9e55f0e786a8b2ae8a_cgraph" alt=""/></div>
+<!-- MAP 4 -->
+</div>
+
+</div>
+</div>
+<a id="ae19c745c1be8c5d67048188ede9a779d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae19c745c1be8c5d67048188ede9a779d">&#9670;&nbsp;</a></span>sign_message()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -344,8 +327,8 @@ Here is the call graph for this function:</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t *&#160;</td>
-          <td class="paramname"><em>signature_len</em>&#160;</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>buffer</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -355,12 +338,13 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>encrypt(SHA284(msg,len_data),priv_key) </p>
+<p>buffer &lt;- encrypt(SHA284(msg,len_data),wallet_priv_key) </p>
+<p>If buffer == NULL, return a new allocated buffer</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">data</td><td>The data to sign </td></tr>
     <tr><td class="paramname">len_data</td><td>The length of the data </td></tr>
-    <tr><td class="paramname">signature_len</td><td>The length of the data signature </td></tr>
+    <tr><td class="paramname">buffer</td><td>The buffer to put signature into </td></tr>
   </table>
   </dd>
 </dl>
@@ -370,13 +354,79 @@ Here is the call graph for this function:</div>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="signature_8h_a31fa447711840b3c0932cfe068d8cc65_cgraph.png" border="0" usemap="#signature_8h_a31fa447711840b3c0932cfe068d8cc65_cgraph" alt=""/></div>
+<div class="center"><img src="signature_8h_ae19c745c1be8c5d67048188ede9a779d_cgraph.png" border="0" usemap="#signature_8h_ae19c745c1be8c5d67048188ede9a779d_cgraph" alt=""/></div>
+<!-- MAP 5 -->
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="signature_8h_ae19c745c1be8c5d67048188ede9a779d_icgraph.png" border="0" usemap="#signature_8h_ae19c745c1be8c5d67048188ede9a779d_icgraph" alt=""/></div>
+<!-- MAP 6 -->
+</div>
+
+</div>
+</div>
+<a id="aae1091d9b2f55f2db94f39f7343b29e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae1091d9b2f55f2db94f39f7343b29e3">&#9670;&nbsp;</a></span>sign_message_with_key()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char* sign_message_with_key </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>len_data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">RSA *&#160;</td>
+          <td class="paramname"><em>key</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>buffer</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>encrypt(SHA284(msg,len_data),key) buffer &lt;- encrypt(SHA284(msg,len_data),key) </p>
+<p>If buffer == NULL, return a new allocated buffer </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>The data to sign </td></tr>
+    <tr><td class="paramname">len_data</td><td>The length of the data </td></tr>
+    <tr><td class="paramname">key</td><td>The key to use for the signature </td></tr>
+    <tr><td class="paramname">buffer</td><td>The buffer to put signature into </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>char* </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="signature_8c_source.html#l00034">34</a> of file <a class="el" href="signature_8c_source.html">signature.c</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="signature_8h_aae1091d9b2f55f2db94f39f7343b29e3_cgraph.png" border="0" usemap="#signature_8h_aae1091d9b2f55f2db94f39f7343b29e3_cgraph" alt=""/></div>
 <!-- MAP 7 -->
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="signature_8h_a31fa447711840b3c0932cfe068d8cc65_icgraph.png" border="0" usemap="#signature_8h_a31fa447711840b3c0932cfe068d8cc65_icgraph" alt=""/></div>
+<div class="center"><img src="signature_8h_aae1091d9b2f55f2db94f39f7343b29e3_icgraph.png" border="0" usemap="#signature_8h_aae1091d9b2f55f2db94f39f7343b29e3_icgraph" alt=""/></div>
 <!-- MAP 8 -->
 </div>
 
@@ -398,15 +448,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Sign a transaction. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">transaction</td><td>The transaction to sign </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="signature_8c_source.html#l00245">245</a> of file <a class="el" href="signature_8c_source.html">signature.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="signature_8c_source.html#l00116">116</a> of file <a class="el" href="signature_8c_source.html">signature.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -418,6 +460,50 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="signature_8h_afc30cc798edd88f7749c81431cc12684_icgraph.png" border="0" usemap="#signature_8h_afc30cc798edd88f7749c81431cc12684_icgraph" alt=""/></div>
 <!-- MAP 10 -->
+</div>
+
+</div>
+</div>
+<a id="ad7757263f776dc00aaaae307629b53d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad7757263f776dc00aaaae307629b53d9">&#9670;&nbsp;</a></span>sign_transaction_with_key()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void sign_transaction_with_key </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_transaction.html">Transaction</a> *&#160;</td>
+          <td class="paramname"><em>transaction</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">RSA *&#160;</td>
+          <td class="paramname"><em>key</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sign a transaction. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">transaction</td><td>The transaction to sign </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="signature_8c_source.html#l00124">124</a> of file <a class="el" href="signature_8c_source.html">signature.c</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="signature_8h_ad7757263f776dc00aaaae307629b53d9_cgraph.png" border="0" usemap="#signature_8h_ad7757263f776dc00aaaae307629b53d9_cgraph" alt=""/></div>
+<!-- MAP 11 -->
 </div>
 
 </div>
@@ -448,18 +534,18 @@ Here is the caller graph for this function:</div>
 <dl class="section return"><dt>Returns</dt><dd>1 if valid, 0 otherwise <br  />
  </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="signature_8c_source.html#l00206">206</a> of file <a class="el" href="signature_8c_source.html">signature.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="signature_8c_source.html#l00077">77</a> of file <a class="el" href="signature_8c_source.html">signature.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="signature_8h_a197fbff013d305c63a9699922eb438f6_cgraph.png" border="0" usemap="#signature_8h_a197fbff013d305c63a9699922eb438f6_cgraph" alt=""/></div>
-<!-- MAP 11 -->
+<!-- MAP 12 -->
 </div>
 
 </div>
 </div>
-<a id="a03bc161fe8675e7bf8763cdcee6a3ac2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a03bc161fe8675e7bf8763cdcee6a3ac2">&#9670;&nbsp;</a></span>verify_signature()</h2>
+<a id="abb24ef32c40711494e34d7639e64f8a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb24ef32c40711494e34d7639e64f8a3">&#9670;&nbsp;</a></span>verify_signature()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -485,12 +571,6 @@ Here is the call graph for this function:</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>signature_len</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype">RSA *&#160;</td>
           <td class="paramname"><em>pub_key</em>&#160;</td>
         </tr>
@@ -502,31 +582,30 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Apply the SHA384 algorithm on a 'data' of size 'len_data' and verifies if SHA384(data, len_data) == 'signature'. </p>
+<p>Verifies if SHA384(data) == decrypt(signature,pub_key) </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">data</td><td>The buffer to verify </td></tr>
     <tr><td class="paramname">data_len</td><td>The length of the buffer </td></tr>
     <tr><td class="paramname">signature</td><td>The signature to compare with SHA384(data, len_data) </td></tr>
-    <tr><td class="paramname">signature_len</td><td>The length of the signature </td></tr>
     <tr><td class="paramname">pub_key</td><td>The RSA public key used for the decryption </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>int </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="signature_8c_source.html#l00031">31</a> of file <a class="el" href="signature_8c_source.html">signature.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="signature_8c_source.html#l00057">57</a> of file <a class="el" href="signature_8c_source.html">signature.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="signature_8h_a03bc161fe8675e7bf8763cdcee6a3ac2_cgraph.png" border="0" usemap="#signature_8h_a03bc161fe8675e7bf8763cdcee6a3ac2_cgraph" alt=""/></div>
-<!-- MAP 12 -->
+<div class="center"><img src="signature_8h_abb24ef32c40711494e34d7639e64f8a3_cgraph.png" border="0" usemap="#signature_8h_abb24ef32c40711494e34d7639e64f8a3_cgraph" alt=""/></div>
+<!-- MAP 13 -->
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="signature_8h_a03bc161fe8675e7bf8763cdcee6a3ac2_icgraph.png" border="0" usemap="#signature_8h_a03bc161fe8675e7bf8763cdcee6a3ac2_icgraph" alt=""/></div>
-<!-- MAP 13 -->
+<div class="center"><img src="signature_8h_abb24ef32c40711494e34d7639e64f8a3_icgraph.png" border="0" usemap="#signature_8h_abb24ef32c40711494e34d7639e64f8a3_icgraph" alt=""/></div>
+<!-- MAP 14 -->
 </div>
 
 </div>
@@ -557,12 +636,12 @@ Here is the caller graph for this function:</div>
 <dl class="section return"><dt>Returns</dt><dd>1 if valid, 0 otherwise <br  />
  </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="signature_8c_source.html#l00219">219</a> of file <a class="el" href="signature_8c_source.html">signature.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="signature_8c_source.html#l00089">89</a> of file <a class="el" href="signature_8c_source.html">signature.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="signature_8h_ae45689cf209de84d0132284229d32824_cgraph.png" border="0" usemap="#signature_8h_ae45689cf209de84d0132284229d32824_cgraph" alt=""/></div>
-<!-- MAP 14 -->
+<!-- MAP 15 -->
 </div>
 
 </div>
@@ -602,18 +681,18 @@ Here is the call graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="signature_8c_source.html#l00199">199</a> of file <a class="el" href="signature_8c_source.html">signature.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="block_8c_source.html#l00309">309</a> of file <a class="el" href="block_8c_source.html">block.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="signature_8h_a58b3466ce733938859f0651b2a756e95_cgraph.png" border="0" usemap="#signature_8h_a58b3466ce733938859f0651b2a756e95_cgraph" alt=""/></div>
-<!-- MAP 15 -->
+<!-- MAP 16 -->
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="signature_8h_a58b3466ce733938859f0651b2a756e95_icgraph.png" border="0" usemap="#signature_8h_a58b3466ce733938859f0651b2a756e95_icgraph" alt=""/></div>
-<!-- MAP 16 -->
+<!-- MAP 17 -->
 </div>
 
 </div>
@@ -653,18 +732,18 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="signature_8c_source.html#l00174">174</a> of file <a class="el" href="signature_8c_source.html">signature.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="block_8c_source.html#l00277">277</a> of file <a class="el" href="block_8c_source.html">block.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="signature_8h_a0e5ff1f119568fb8566981cf7da11d7f_cgraph.png" border="0" usemap="#signature_8h_a0e5ff1f119568fb8566981cf7da11d7f_cgraph" alt=""/></div>
-<!-- MAP 17 -->
+<!-- MAP 18 -->
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="signature_8h_a0e5ff1f119568fb8566981cf7da11d7f_icgraph.png" border="0" usemap="#signature_8h_a0e5ff1f119568fb8566981cf7da11d7f_icgraph" alt=""/></div>
-<!-- MAP 18 -->
+<!-- MAP 19 -->
 </div>
 
 </div>

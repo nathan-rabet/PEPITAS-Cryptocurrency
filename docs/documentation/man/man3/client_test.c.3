@@ -1,4 +1,4 @@
-.TH "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/tests/src/network/client_test.c" 3 "Thu Apr 22 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
+.TH "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/tests/src/network/client_test.c" 3 "Sun May 9 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -12,15 +12,22 @@
 .br
 \fC#include 'network/network\&.h'\fP
 .br
-\fC#include 'network/client\&.h'\fP
-.br
 \fC#include 'network/server\&.h'\fP
+.br
+\fC#include 'network/client\&.h'\fP
 .br
 \fC#include 'network/send_data\&.h'\fP
 .br
 \fC#include 'network/get_data\&.h'\fP
 .br
 
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBCLIENT_TEST_C\fP"
+.br
+.in -1c
 .SS "Functions"
 
 .in +1c
@@ -28,12 +35,31 @@
 .RI "void \fBnetwork_test\fP ()"
 .br
 .in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "\fBclient_connection\fP * \fBclient_connections\fP"
+.br
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define CLIENT_TEST_C"
+
+.PP
+Definition at line 2 of file client_test\&.c\&.
 .SH "Function Documentation"
 .PP 
 .SS "void network_test ()"
 
 .PP
-Definition at line 10 of file client_test\&.c\&.
+Definition at line 15 of file client_test\&.c\&.
+.SH "Variable Documentation"
+.PP 
+.SS "\fBclient_connection\fP* client_connections"
+
+.PP
+Definition at line 4 of file client\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for PEPITAS CRYPTOCURRENCY from the source code\&.

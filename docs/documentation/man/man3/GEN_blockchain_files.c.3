@@ -1,4 +1,4 @@
-.TH "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/tests/gen/GEN_blockchain_files.c" 3 "Thu Apr 22 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
+.TH "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/tests/gen/GEN_blockchain_files.c" 3 "Sun May 9 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -8,31 +8,44 @@
 .PP
 \fC#include 'tests_macros\&.h'\fP
 .br
-\fC#include 'core/blockchain/block\&.h'\fP
+\fC#include 'blockchain/block\&.h'\fP
 .br
-\fC#include 'core/blockchain/transaction\&.h'\fP
+\fC#include 'blockchain/transaction\&.h'\fP
 .br
 
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBGEN_BLC_F_C\fP"
+.br
+.in -1c
 .SS "Functions"
 
 .in +1c
 .ti -1c
-.RI "void * \fBrand_data\fP (size_t size)"
+.RI "void \fBrand_data\fP (size_t size, char *buffer)"
 .br
 .ti -1c
-.RI "void \fBgen_blockhain\fP (size_t nb_blocks)"
+.RI "void \fBgen_blockchain\fP (size_t nb_blocks)"
 .br
 .in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define GEN_BLC_F_C"
+
+.PP
+Definition at line 2 of file GEN_blockchain_files\&.c\&.
 .SH "Function Documentation"
 .PP 
-.SS "void gen_blockhain (size_t nb_blocks)"
+.SS "void gen_blockchain (size_t nb_blocks)"
 
 .PP
-Definition at line 20 of file GEN_blockchain_files\&.c\&.
-.SS "void* rand_data (size_t size)"
+Definition at line 22 of file GEN_blockchain_files\&.c\&.
+.SS "void rand_data (size_t size, char * buffer)"
 
 .PP
-Definition at line 5 of file GEN_blockchain_files\&.c\&.
+Definition at line 8 of file GEN_blockchain_files\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for PEPITAS CRYPTOCURRENCY from the source code\&.

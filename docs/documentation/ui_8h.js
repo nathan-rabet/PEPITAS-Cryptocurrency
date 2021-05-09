@@ -1,11 +1,14 @@
 var ui_8h =
 [
+    [ "blockinfo", "structblockinfo.html", "structblockinfo" ],
     [ "add_contact", "ui_8h.html#a7d043349856d2b80a23d2dbe3d59735d", null ],
     [ "add_contact_to_combobox", "ui_8h.html#acfeb1c1504a9c8dab16b48f4ee0a8324", null ],
     [ "add_contacts_from_file", "ui_8h.html#a3cce6cef71ccb6ae5dd4c9ca852eb31f", null ],
+    [ "add_new_blockinfo", "ui_8h.html#a2abce63b237dd17f1a7994eef33c13f2", null ],
     [ "add_transaction_from_file", "ui_8h.html#addfd36df97e95e6d913426e07a659057", null ],
     [ "add_transaction_with_contact", "ui_8h.html#a9f9ada2bfa01c401df766ed824f0fdfd", null ],
     [ "add_transaction_with_pkey", "ui_8h.html#adf3736e772d266218ca1c9c0e4b38ac3", null ],
+    [ "change_label_text", "ui_8h.html#ae4c608b5626430bac55322e32309bf8f", null ],
     [ "get_public_key_from_contacts", "ui_8h.html#a0ff6af24bc9be5261b9ef9f6169c91da", null ],
     [ "load_contacts_from_file", "ui_8h.html#a73fe931a2fbeb2086428ad91c0cbc05e", null ],
     [ "load_transaction_from_file", "ui_8h.html#aafd81ce434d4f1abdba55e0ffc6b719f", null ],
@@ -21,6 +24,12 @@ var ui_8h =
     [ "on_recover_button1_press", "ui_8h.html#ae60110e8f39036449f62d0a22734f50c", null ],
     [ "on_recover_button2_press", "ui_8h.html#a88345e96de309a724612eabb17889636", null ],
     [ "on_transaction_button_press", "ui_8h.html#a1439f12ede3d5dde4cabb1cf9684eed7", null ],
-    [ "setup", "ui_8h.html#a099d48038e444c2f3e69904477527798", null ],
-    [ "update_labels", "ui_8h.html#af1854ec5ff4099ed69a1b51a3fd3b3df", null ]
+    [ "setup", "ui_8h.html#af0fd9e6f06e2040c43a09ef58d1d3468", null ],
+    [ "update_labels", "ui_8h.html#af1854ec5ff4099ed69a1b51a3fd3b3df", null ],
+    [ "update_sync", "ui_8h.html#aa390af6abf83347d6b141cee7b7dde29", null ],
+    [ "block_amount_label", "ui_8h.html#aef72f064f1fc788edba39ced4f4735d5", null ],
+    [ "blocksinfo", "ui_8h.html#a46ad7408bf2f0e142f3c124e26bd4b19", null ],
+    [ "connections_label", "ui_8h.html#ae197a17a69bd4320a69c3945369d802e", null ],
+    [ "mempool_label", "ui_8h.html#a48095bf105fef9a39a872144a56e23ab", null ],
+    [ "synchro_label", "ui_8h.html#af7ca2b7a2cb2c8e008ef7c338eb725cc", null ]
 ];

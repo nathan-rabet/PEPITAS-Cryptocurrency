@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['transaction_453',['Transaction',['../transaction_8h.html#a4dfd8a4a0653204fffc8a547ddb98362',1,'transaction.h']]],
-  ['transactiondata_454',['TransactionData',['../transaction_8h.html#ad0cac4969ad1587dc1281426168dbe3f',1,'transaction.h']]]
+  ['neighbour_668',['Neighbour',['../network_8h.html#af516980a1d1fa7f6e92cafb59e634556',1,'network.h']]],
+  ['node_669',['Node',['../network_8h.html#a3b09f37e675bcd48a01bf22155996872',1,'network.h']]]
 ];

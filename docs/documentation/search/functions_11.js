@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['write_5fblock_375',['write_block',['../signature_8h.html#a58b3466ce733938859f0651b2a756e95',1,'write_block(Block block, int fd):&#160;signature.c'],['../signature_8c.html#a58b3466ce733938859f0651b2a756e95',1,'write_block(Block block, int fd):&#160;signature.c']]],
-  ['write_5fblock_5ffile_376',['write_block_file',['../block_8h.html#a31943025b7c5be568f87a90fcdcaf8c2',1,'write_block_file(Block block):&#160;block.c'],['../block_8c.html#a31943025b7c5be568f87a90fcdcaf8c2',1,'write_block_file(Block block):&#160;block.c']]],
-  ['write_5fblockdata_377',['write_blockdata',['../signature_8h.html#a0e5ff1f119568fb8566981cf7da11d7f',1,'write_blockdata(BlockData blockdata, int fd):&#160;signature.c'],['../signature_8c.html#a0e5ff1f119568fb8566981cf7da11d7f',1,'write_blockdata(BlockData blockdata, int fd):&#160;signature.c']]],
-  ['write_5ftransaction_378',['write_transaction',['../signature_8c.html#a5bff0131aa50faf1cd0236e0b44169eb',1,'signature.c']]],
-  ['write_5ftransactiondata_379',['write_transactiondata',['../signature_8c.html#a0bd00440f3c97bf7dace6c4e26ea17be',1,'signature.c']]]
+  ['update_5fblockchain_553',['update_blockchain',['../client_8c.html#a2aa6779c93462c07f8a674546b72bd8b',1,'client.c']]],
+  ['update_5fblockchain_5fheight_554',['update_blockchain_height',['../client_8c.html#a6a6632fc31369b450613587243a58807',1,'client.c']]],
+  ['update_5flabels_555',['update_labels',['../ui_8h.html#af1854ec5ff4099ed69a1b51a3fd3b3df',1,'update_labels():&#160;ui.c'],['../ui_8c.html#af1854ec5ff4099ed69a1b51a3fd3b3df',1,'update_labels():&#160;ui.c']]],
+  ['update_5fsync_556',['update_sync',['../ui_8h.html#aa390af6abf83347d6b141cee7b7dde29',1,'update_sync(size_t actual, size_t final):&#160;ui.c'],['../ui_8c.html#aa390af6abf83347d6b141cee7b7dde29',1,'update_sync(size_t actual, size_t final):&#160;ui.c']]]
 ];

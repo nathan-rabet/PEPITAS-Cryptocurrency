@@ -1,11 +1,8 @@
 var searchData=
 [
-  ['password_5fentry1_417',['password_entry1',['../ui_8c.html#ad339cc79acfe1685a9cc695347628fed',1,'ui.c']]],
-  ['password_5fentry2_418',['password_entry2',['../ui_8c.html#aa345dbc39b26d7892d6b987c3b7dd280',1,'ui.c']]],
-  ['password_5ferror_5flabel_419',['password_error_label',['../ui_8c.html#a8b12d0127ba1f869e04b7c403ea82ff2',1,'ui.c']]],
-  ['previous_5fblock_5fhash_420',['previous_block_hash',['../struct_block_data.html#a0167d1bdc7d4e5d8d423188581cbb064',1,'BlockData']]],
-  ['priv_5fkey_421',['priv_key',['../struct_wallet.html#ad3051f431d5c0b376f67c497d521290a',1,'Wallet']]],
-  ['private_5fkey_5flabel_422',['private_key_label',['../ui_8c.html#ad8381a6084abf1920354514475732b69',1,'ui.c']]],
-  ['pub_5fkey_423',['pub_key',['../struct_wallet.html#a7c3fbe707cd5eabe1365d44b5d1cd16f',1,'Wallet']]],
-  ['public_5fkey_5fentry_5fcon_424',['public_key_entry_con',['../ui_8c.html#a1232a61f99830b200a87137da4ad0232',1,'ui.c']]]
+  ['latest_5fblock_5fname1_613',['latest_block_name1',['../ui_8c.html#aef63568bf1128193551f9c914c544752',1,'ui.c']]],
+  ['latest_5fblock_5fname2_614',['latest_block_name2',['../ui_8c.html#a51e09502aceb89aec7eab1dbaaefca7a',1,'ui.c']]],
+  ['latest_5fblock_5fname3_615',['latest_block_name3',['../ui_8c.html#af3076ab0ad7b6b46fc474c9cdf6356cc',1,'ui.c']]],
+  ['lock_616',['lock',['../structclient__connection.html#ac301e000199ad937f060277b0736d4e1',1,'client_connection']]],
+  ['ls_5fcombo_617',['ls_combo',['../ui_8c.html#a56f0bc64e6d4d817b9eab9ed1796f868',1,'ui.c']]]
 ];

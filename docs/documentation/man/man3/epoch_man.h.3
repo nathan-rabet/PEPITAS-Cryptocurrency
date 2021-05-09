@@ -1,0 +1,106 @@
+.TH "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/headers/validation/epoch_man.h" 3 "Sun May 9 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/headers/validation/epoch_man.h
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'blockchain/block\&.h'\fP
+.br
+\fC#include 'blockchain/transaction\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBBlock\fP * \fBcreate_epoch_block\fP ()"
+.br
+.RI "Create a block object with the previous block hash & votes\&. "
+.ti -1c
+.RI "RSA * \fBget_epoch_man_pkey\fP (\fBBlockData\fP *block_data)"
+.br
+.RI "Give the pkey of the creator of a block\&. "
+.ti -1c
+.RI "void \fBgive_punishments_and_rewards\fP (\fBBlock\fP *prev_block, \fBBlock\fP *current_block)"
+.br
+.RI "Add punishmnent and reward transactions to validators of the 'prev_block' into 'current_block'\&. "
+.ti -1c
+.RI "int \fBflush_pending_transactions\fP (\fBBlock\fP *block)"
+.br
+.RI "Delete block transactions in pdt if the block is valid\&. "
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "\fBBlock\fP* create_epoch_block ()"
+
+.PP
+Create a block object with the previous block hash & votes\&. 
+.PP
+\fBSee also\fP
+.RS 4
+The function create a block based on the local last block
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Block* 
+.RE
+.PP
+
+.SS "int flush_pending_transactions (\fBBlock\fP * block)"
+
+.PP
+Delete block transactions in pdt if the block is valid\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIblock\fP 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+1 if the flush proceed, 0 if not 
+.RE
+.PP
+
+.SS "RSA* get_epoch_man_pkey (\fBBlockData\fP * block_data)"
+
+.PP
+Give the pkey of the creator of a block\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIblock_data\fP The created block data 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+RSA* 
+.RE
+.PP
+
+.PP
+Definition at line 3 of file epoch_man\&.c\&.
+.SS "void give_punishments_and_rewards (\fBBlock\fP * prev_block, \fBBlock\fP * current_block)"
+
+.PP
+Add punishmnent and reward transactions to validators of the 'prev_block' into 'current_block'\&. 
+.PP
+\fBSee also\fP
+.RS 4
+Number of added transactions = number of validators in 'prev_block'
+.RE
+.PP
+\fBParameters\fP
+.RS 4
+\fIprev_block\fP 
+.br
+\fIcurrent_block\fP 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for PEPITAS CRYPTOCURRENCY from the source code\&.

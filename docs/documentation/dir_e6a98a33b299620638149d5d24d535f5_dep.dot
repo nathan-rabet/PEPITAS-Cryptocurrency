@@ -7,5 +7,5 @@ digraph "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/tests/s
   dir_e6a98a33b299620638149d5d24d535f5 [shape=box, label="cryptosystem", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_e6a98a33b299620638149d5d24d535f5.html"];
   }
   dir_7f57b1e41c5acd0e859ae5f3a2b075a9 [shape=box label="headers" fillcolor="white" style="filled" color="red" URL="dir_7f57b1e41c5acd0e859ae5f3a2b075a9.html"];
-  dir_e6a98a33b299620638149d5d24d535f5->dir_7f57b1e41c5acd0e859ae5f3a2b075a9 [headlabel="6", labeldistance=1.5 headhref="dir_000022_000000.html"];
+  dir_e6a98a33b299620638149d5d24d535f5->dir_7f57b1e41c5acd0e859ae5f3a2b075a9 [headlabel="6", labeldistance=1.5 headhref="dir_000024_000000.html"];
 }

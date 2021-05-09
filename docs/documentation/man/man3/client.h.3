@@ -1,4 +1,4 @@
-.TH "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/headers/network/client.h" 3 "Thu Apr 22 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
+.TH "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/headers/network/client.h" 3 "Sun May 9 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -6,71 +6,90 @@
 .SH SYNOPSIS
 .br
 .PP
+\fC#include 'network/network\&.h'\fP
+.br
+\fC#include 'network/server\&.h'\fP
+.br
+\fC#include 'network/get_data\&.h'\fP
+.br
+\fC#include 'network/send_data\&.h'\fP
+.br
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <sys/types\&.h>\fP
+.br
+\fC#include <sys/socket\&.h>\fP
+.br
+\fC#include <netdb\&.h>\fP
+.br
+\fC#include <sys/stat\&.h>\fP
+.br
+\fC#include <unistd\&.h>\fP
+.br
+\fC#include <err\&.h>\fP
+.br
+\fC#include <errno\&.h>\fP
+.br
+\fC#include <semaphore\&.h>\fP
+.br
 \fC#include <stddef\&.h>\fP
 .br
 
-.SS "Data Structures"
-
-.in +1c
-.ti -1c
-.RI "struct \fBNeighbour\fP"
-.br
-.ti -1c
-.RI "struct \fBNode\fP"
-.br
-.in -1c
-.SS "Macros"
-
-.in +1c
-.ti -1c
-.RI "#define \fBMAX_NEIGHBOURS\fP   64"
-.br
-.in -1c
-.SS "Typedefs"
-
-.in +1c
-.ti -1c
-.RI "typedef struct \fBNeighbour\fP \fBNeighbour\fP"
-.br
-.ti -1c
-.RI "typedef struct \fBNode\fP \fBNode\fP"
-.br
-.in -1c
 .SS "Functions"
 
 .in +1c
 .ti -1c
-.RI "\fBNode\fP * \fBget_my_node\fP ()"
+.RI "\fBNode\fP * \fBget_my_node\fP (char who)"
 .br
 .RI "Get the my node object\&. "
 .ti -1c
-.RI "int \fBset_neighbour\fP (char *hostname, int family)"
+.RI "int \fBset_neighbour\fP (char who, char *hostname, int family)"
 .br
 .RI "Sets a neighbour in the client\&.neightbours section\&. "
 .ti -1c
-.RI "int \fBlisten_to\fP (size_t neighbour_id)"
+.RI "void \fBremove_neighbour\fP (char who, int index)"
+.br
+.RI "Remove a neighbour in the client\&.neightbours section\&. "
+.ti -1c
+.RI "int \fBnumber_neighbours\fP (char who)"
+.br
+.RI "return the nb of neighbour in the client\&.neightbours section "
+.ti -1c
+.RI "void \fBprint_neighbours\fP (char who, char mask)"
+.br
+.RI "Print neighbours list\&. "
+.ti -1c
+.RI "void \fBsave_neighbours\fP (char who)"
+.br
+.RI "Save neighbours list in \&.neighbours/neighbours\&. "
+.ti -1c
+.RI "void \fBload_neighbours\fP (char who)"
+.br
+.RI "Load neighbours list from \&.neighbours/neighbours\&. "
+.ti -1c
+.RI "\fBclient_connection\fP * \fBlisten_to\fP (\fBinfos_st\fP *infos, \fBNeighbour\fP neighbour, char *connection_type)"
 .br
 .RI "Tries to connect to the peer-to-peer network via a node in the \fBNode\fP structure\&. "
 .ti -1c
-.RI "int \fBping_client\fP (size_t neighbour_id)"
+.RI "int \fBfind_empty_connection\fP (int max)"
 .br
-.RI "Pings the client side of 'neighbour_id' and deletes it from struct \fBNode\fP if there is no response\&. "
+.ti -1c
+.RI "void * \fBclient_thread\fP (void *args)"
+.br
 .in -1c
-.SH "Macro Definition Documentation"
-.PP 
-.SS "#define MAX_NEIGHBOURS   64"
-
-.PP
-Definition at line 6 of file client\&.h\&.
-.SH "Typedef Documentation"
-.PP 
-.SS "typedef struct \fBNeighbour\fP \fBNeighbour\fP"
-
-.SS "typedef struct \fBNode\fP \fBNode\fP"
-
 .SH "Function Documentation"
 .PP 
-.SS "\fBNode\fP* get_my_node ()"
+.SS "void* client_thread (void * args)"
+
+.PP
+Definition at line 247 of file client\&.c\&.
+.SS "int find_empty_connection (int max)"
+
+.PP
+Definition at line 237 of file client\&.c\&.
+.SS "\fBNode\fP* get_my_node (char who)"
 
 .PP
 Get the my node object\&. 
@@ -82,15 +101,15 @@ Node*
 .PP
 
 .PP
-Definition at line 5 of file client\&.c\&.
-.SS "int listen_to (size_t neighbour_id)"
+Definition at line 6 of file client\&.c\&.
+.SS "\fBclient_connection\fP* listen_to (\fBinfos_st\fP * infos, \fBNeighbour\fP neighbour, char * connection_type)"
 
 .PP
 Tries to connect to the peer-to-peer network via a node in the \fBNode\fP structure\&. 
 .PP
 \fBParameters\fP
 .RS 4
-\fIneighbour_id\fP The neighbour's index (in struct \fBNode\fP) to connect with 
+\fIneighbour\fP The neighbour to connect with 
 .RE
 .PP
 \fBReturns\fP
@@ -100,36 +119,50 @@ socket FD or -1 if an error occurs
 .PP
 
 .PP
-Definition at line 57 of file client\&.c\&.
-.SS "int ping_client (size_t neighbour_id)"
+Definition at line 161 of file client\&.c\&.
+.SS "void load_neighbours (char who)"
 
 .PP
-Pings the client side of 'neighbour_id' and deletes it from struct \fBNode\fP if there is no response\&. 
+Load neighbours list from \&.neighbours/neighbours\&. 
 .PP
-\fBParameters\fP
-.RS 4
-\fIneighbour_id\fP 
-.RE
-.PP
-\fBReturns\fP
-.RS 4
-0 if sucess, -1 otherwise 
-.RE
-.PP
+Definition at line 113 of file client\&.c\&.
+.SS "int number_neighbours (char who)"
 
-.SS "int set_neighbour (char * hostname, int family)"
+.PP
+return the nb of neighbour in the client\&.neightbours section 
+.PP
+Definition at line 149 of file client\&.c\&.
+.SS "void print_neighbours (char who, char mask)"
+
+.PP
+Print neighbours list\&. 
+.PP
+Definition at line 58 of file client\&.c\&.
+.SS "void remove_neighbour (char who, int index)"
+
+.PP
+Remove a neighbour in the client\&.neightbours section\&. 
+.PP
+Definition at line 47 of file client\&.c\&.
+.SS "void save_neighbours (char who)"
+
+.PP
+Save neighbours list in \&.neighbours/neighbours\&. 
+.PP
+Definition at line 74 of file client\&.c\&.
+.SS "int set_neighbour (char who, char * hostname, int family)"
 
 .PP
 Sets a neighbour in the client\&.neightbours section\&. 
 .PP
 \fBReturns\fP
 .RS 4
-0 if sucess, -1 otherwise 
+0 if sucess, -1 otherwise if full 
 .RE
 .PP
 
 .PP
-Definition at line 14 of file client\&.c\&.
+Definition at line 19 of file client\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for PEPITAS CRYPTOCURRENCY from the source code\&.

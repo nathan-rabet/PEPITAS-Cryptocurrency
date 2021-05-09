@@ -1,14 +1,14 @@
-.TH "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/src/cryptosystem/rsa.c" 3 "Thu Apr 22 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
+.TH "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/src/core/cryptosystem/rsa.c" 3 "Sun May 9 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
-/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/src/cryptosystem/rsa.c
+/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/src/core/cryptosystem/rsa.c
 .SH SYNOPSIS
 .br
 .PP
 \fC#include 'cryptosystem/rsa\&.h'\fP
 .br
-\fC#include 'core/blockchain/wallet\&.h'\fP
+\fC#include 'blockchain/wallet\&.h'\fP
 .br
 \fC#include <stdio\&.h>\fP
 .br
@@ -48,9 +48,8 @@
 
 .in +1c
 .ti -1c
-.RI "void \fBget_keys\fP ()"
+.RI "void \fBget_keys\fP (\fB__attribute__\fP((unused)) char *password)"
 .br
-.RI "Get the keys object\&. "
 .in -1c
 .SH "Macro Definition Documentation"
 .PP 
@@ -60,10 +59,8 @@
 Definition at line 16 of file rsa\&.c\&.
 .SH "Function Documentation"
 .PP 
-.SS "void get_keys ()"
+.SS "void get_keys (\fB__attribute__\fP((unused)) char * password)"
 
-.PP
-Get the keys object\&. 
 .PP
 Definition at line 21 of file rsa\&.c\&.
 .SH "Author"

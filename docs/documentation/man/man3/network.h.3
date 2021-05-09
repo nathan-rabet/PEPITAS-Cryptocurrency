@@ -1,4 +1,4 @@
-.TH "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/headers/network/network.h" 3 "Thu Apr 22 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
+.TH "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/headers/network/network.h" 3 "Sun May 9 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -6,53 +6,156 @@
 .SH SYNOPSIS
 .br
 .PP
-\fC#include <stdio\&.h>\fP
-.br
-\fC#include <stdlib\&.h>\fP
-.br
-\fC#include <unistd\&.h>\fP
-.br
-\fC#include <sys/un\&.h>\fP
-.br
-\fC#include <sys/types\&.h>\fP
-.br
-\fC#include <sys/socket\&.h>\fP
-.br
-\fC#include <netdb\&.h>\fP
-.br
-\fC#include <err\&.h>\fP
-.br
-\fC#include <string\&.h>\fP
-.br
 \fC#include <pthread\&.h>\fP
 .br
-\fC#include <arpa/inet\&.h>\fP
+\fC#include <semaphore\&.h>\fP
 .br
-\fC#include 'misc/safe\&.h'\fP
-.br
-\fC#include 'client\&.h'\fP
+\fC#include <stdint\&.h>\fP
 .br
 
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fBNeighbour\fP"
+.br
+.ti -1c
+.RI "struct \fBNode\fP"
+.br
+.ti -1c
+.RI "struct \fBclient_connection\fP"
+.br
+.ti -1c
+.RI "struct \fBinfos_st\fP"
+.br
+.ti -1c
+.RI "struct \fBth_arg\fP"
+.br
+.in -1c
 .SS "Macros"
 
 .in +1c
 .ti -1c
+.RI "#define \fBSIZE_OF_HOSTNAME\fP   39"
+.br
+.ti -1c
 .RI "#define \fBNB_HARD_CODED_ADDR\fP   2"
+.br
+.ti -1c
+.RI "#define \fBMAX_CONNECTION\fP   5"
 .br
 .ti -1c
 .RI "#define \fBSTATIC_PORT\fP   '4242'"
 .br
 .ti -1c
+.RI "#define \fBP_VERSION\fP   0"
+.br
+.ti -1c
+.RI "#define \fBIM_SERVER\fP   0"
+.br
+.ti -1c
+.RI "#define \fBIM_CLIENT\fP   1"
+.br
+.ti -1c
+.RI "#define \fBMAX_NEIGHBOURS\fP   64"
+.br
+.ti -1c
+.RI "#define \fBNODESERVER\fP   0"
+.br
+.ti -1c
+.RI "#define \fBDOORSERVER\fP   1"
+.br
+.ti -1c
+.RI "#define \fBMAX_SERVER\fP   20"
+.br
+.ti -1c
+.RI "#define \fBMAX_VALIDATORS_PER_BLOCK\fP   512"
+.br
+.ti -1c
+.RI "#define \fBSOL_TCP\fP   6"
+.br
+.ti -1c
+.RI "#define \fBTCP_USER_TIMEOUT\fP   18"
+.br
+.ti -1c
 .RI "#define \fBHD_GET_CLIENT_LIST\fP   'GET CLIENT LIST\\r\\n\\r\\n'"
 .br
 .ti -1c
-.RI "#define \fBHD_SEND_CLIENT_LIST\fP   'SEND CLIENT LIST\\n'"
+.RI "#define \fBHD_SEND_CLIENT_LIST\fP   'SEND CLIENT LIST\\r\\n\\r\\n'"
 .br
 .ti -1c
-.RI "#define \fBHD_GET_BLOCKCHAIN\fP   'GET BLOCKCHAIN\\r\\n\\r\\n'"
+.RI "#define \fBHD_CONNECTION_TO_NETWORK\fP   'CONNECTION TO NETWORK\\r\\n\\r\\n'"
 .br
 .ti -1c
-.RI "#define \fBHD_SEND_BLOCKCHAIN\fP   'SEND BLOCKCHAIN\\n'"
+.RI "#define \fBHD_CONNECTION_TO_NODE\fP   'CONNECTION TO NODE\\r\\n\\r\\n'"
+.br
+.ti -1c
+.RI "#define \fBHD_GET_BLOCKS\fP   'GET BLOCKS\\r\\n\\r\\n'"
+.br
+.ti -1c
+.RI "#define \fBHD_ACTUAL_HEIGHT\fP   'ACTUAL HEIGHT\\r\\n\\r\\n'"
+.br
+.ti -1c
+.RI "#define \fBHD_SEND_BLOCK\fP   'SEND BLOCK\\r\\n\\r\\n'"
+.br
+.ti -1c
+.RI "#define \fBHD_GET_PENDING_TRANSACTION_LIST\fP   'GET PENDING TRANSACTION LIST\\r\\n\\r\\n'"
+.br
+.ti -1c
+.RI "#define \fBHD_REJECT_DEMAND\fP   'REJECT DEMAND\\r\\n\\r\\n'"
+.br
+.ti -1c
+.RI "#define \fBHD_SEND_PENDING_TRANSACTION\fP   'SEND PENDING TRANSACTION\\r\\n\\r\\n'"
+.br
+.ti -1c
+.RI "#define \fBHD_SEND_EPOCH_BLOCK\fP   'SEND EPOCH BLOCK\\r\\n\\r\\n'"
+.br
+.ti -1c
+.RI "#define \fBHD_SEND_VOTE\fP   'SEND VOTE\\r\\n\\r\\n'"
+.br
+.ti -1c
+.RI "#define \fBDD_GET_HEIGHT\fP   1"
+.br
+.ti -1c
+.RI "#define \fBDD_GET_BLOCKS\fP   2"
+.br
+.ti -1c
+.RI "#define \fBSERVERMSG\fP   printf('\\033[0;31m[S]:\\033[0m ');"
+.br
+.ti -1c
+.RI "#define \fBCLIENTMSG\fP   printf('\\033[0;34m[C]:\\033[0m ');"
+.br
+.ti -1c
+.RI "#define \fBMANAGERMSG\fP   printf('\\033[0;32m[M]:\\033[0m ');"
+.br
+.ti -1c
+.RI "#define \fBWARNINGMSG\fP(x)   printf('\\033[0;35m[W]: %s\\033[0m\\n', x);"
+.br
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef struct \fBNeighbour\fP \fBNeighbour\fP"
+.br
+.ti -1c
+.RI "typedef struct \fBNode\fP \fBNode\fP"
+.br
+.ti -1c
+.RI "typedef struct \fBclient_connection\fP \fBclient_connection\fP"
+.br
+.ti -1c
+.RI "typedef struct \fBinfos_st\fP \fBinfos_st\fP"
+.br
+.ti -1c
+.RI "typedef struct \fBth_arg\fP \fBth_arg\fP"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "struct \fB__attribute__\fP ((__packed__)) \fBget_blocks_t\fP"
 .br
 .in -1c
 .SS "Variables"
@@ -61,39 +164,168 @@
 .ti -1c
 .RI "const \fBNeighbour\fP \fBHARD_CODED_ADDR\fP []"
 .br
+.ti -1c
+.RI "\fBget_blocks_t\fP"
+.br
 .in -1c
 .SH "Macro Definition Documentation"
 .PP 
-.SS "#define HD_GET_BLOCKCHAIN   'GET BLOCKCHAIN\\r\\n\\r\\n'"
+.SS "#define CLIENTMSG   printf('\\033[0;34m[C]:\\033[0m ');"
 
 .PP
-Definition at line 25 of file network\&.h\&.
-.SS "#define HD_GET_CLIENT_LIST   'GET CLIENT LIST\\r\\n\\r\\n'"
+Definition at line 90 of file network\&.h\&.
+.SS "#define DD_GET_BLOCKS   2"
+
+.PP
+Definition at line 85 of file network\&.h\&.
+.SS "#define DD_GET_HEIGHT   1"
+
+.PP
+Definition at line 84 of file network\&.h\&.
+.SS "#define DOORSERVER   1"
 
 .PP
 Definition at line 23 of file network\&.h\&.
-.SS "#define HD_SEND_BLOCKCHAIN   'SEND BLOCKCHAIN\\n'"
+.SS "#define HD_ACTUAL_HEIGHT   'ACTUAL HEIGHT\\r\\n\\r\\n'"
 
 .PP
-Definition at line 26 of file network\&.h\&.
-.SS "#define HD_SEND_CLIENT_LIST   'SEND CLIENT LIST\\n'"
+Definition at line 75 of file network\&.h\&.
+.SS "#define HD_CONNECTION_TO_NETWORK   'CONNECTION TO NETWORK\\r\\n\\r\\n'"
 
 .PP
-Definition at line 24 of file network\&.h\&.
-.SS "#define NB_HARD_CODED_ADDR   2"
+Definition at line 72 of file network\&.h\&.
+.SS "#define HD_CONNECTION_TO_NODE   'CONNECTION TO NODE\\r\\n\\r\\n'"
+
+.PP
+Definition at line 73 of file network\&.h\&.
+.SS "#define HD_GET_BLOCKS   'GET BLOCKS\\r\\n\\r\\n'"
+
+.PP
+Definition at line 74 of file network\&.h\&.
+.SS "#define HD_GET_CLIENT_LIST   'GET CLIENT LIST\\r\\n\\r\\n'"
+
+.PP
+Definition at line 70 of file network\&.h\&.
+.SS "#define HD_GET_PENDING_TRANSACTION_LIST   'GET PENDING TRANSACTION LIST\\r\\n\\r\\n'"
+
+.PP
+Definition at line 77 of file network\&.h\&.
+.SS "#define HD_REJECT_DEMAND   'REJECT DEMAND\\r\\n\\r\\n'"
+
+.PP
+Definition at line 78 of file network\&.h\&.
+.SS "#define HD_SEND_BLOCK   'SEND BLOCK\\r\\n\\r\\n'"
+
+.PP
+Definition at line 76 of file network\&.h\&.
+.SS "#define HD_SEND_CLIENT_LIST   'SEND CLIENT LIST\\r\\n\\r\\n'"
+
+.PP
+Definition at line 71 of file network\&.h\&.
+.SS "#define HD_SEND_EPOCH_BLOCK   'SEND EPOCH BLOCK\\r\\n\\r\\n'"
+
+.PP
+Definition at line 80 of file network\&.h\&.
+.SS "#define HD_SEND_PENDING_TRANSACTION   'SEND PENDING TRANSACTION\\r\\n\\r\\n'"
+
+.PP
+Definition at line 79 of file network\&.h\&.
+.SS "#define HD_SEND_VOTE   'SEND VOTE\\r\\n\\r\\n'"
+
+.PP
+Definition at line 81 of file network\&.h\&.
+.SS "#define IM_CLIENT   1"
+
+.PP
+Definition at line 18 of file network\&.h\&.
+.SS "#define IM_SERVER   0"
 
 .PP
 Definition at line 17 of file network\&.h\&.
-.SS "#define STATIC_PORT   '4242'"
+.SS "#define MANAGERMSG   printf('\\033[0;32m[M]:\\033[0m ');"
+
+.PP
+Definition at line 91 of file network\&.h\&.
+.SS "#define MAX_CONNECTION   5"
+
+.PP
+Definition at line 11 of file network\&.h\&.
+.SS "#define MAX_NEIGHBOURS   64"
 
 .PP
 Definition at line 20 of file network\&.h\&.
+.SS "#define MAX_SERVER   20"
+
+.PP
+Definition at line 25 of file network\&.h\&.
+.SS "#define MAX_VALIDATORS_PER_BLOCK   512"
+
+.PP
+Definition at line 27 of file network\&.h\&.
+.SS "#define NB_HARD_CODED_ADDR   2"
+
+.PP
+Definition at line 10 of file network\&.h\&.
+.SS "#define NODESERVER   0"
+
+.PP
+Definition at line 22 of file network\&.h\&.
+.SS "#define P_VERSION   0"
+
+.PP
+Definition at line 15 of file network\&.h\&.
+.SS "#define SERVERMSG   printf('\\033[0;31m[S]:\\033[0m ');"
+
+.PP
+Definition at line 89 of file network\&.h\&.
+.SS "#define SIZE_OF_HOSTNAME   39"
+
+.PP
+Definition at line 9 of file network\&.h\&.
+.SS "#define SOL_TCP   6"
+
+.PP
+Definition at line 29 of file network\&.h\&.
+.SS "#define STATIC_PORT   '4242'"
+
+.PP
+Definition at line 13 of file network\&.h\&.
+.SS "#define TCP_USER_TIMEOUT   18"
+
+.PP
+Definition at line 30 of file network\&.h\&.
+.SS "#define WARNINGMSG(x)   printf('\\033[0;35m[W]: %s\\033[0m\\n', x);"
+
+.PP
+Definition at line 92 of file network\&.h\&.
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef struct \fBclient_connection\fP \fBclient_connection\fP"
+
+.SS "typedef struct \fBinfos_st\fP \fBinfos_st\fP"
+
+.SS "typedef struct \fBNeighbour\fP \fBNeighbour\fP"
+
+.SS "typedef struct \fBNode\fP \fBNode\fP"
+
+.SS "typedef struct \fBth_arg\fP \fBth_arg\fP"
+
+.SH "Function Documentation"
+.PP 
+.SS "struct __attribute__ ((__packed__))"
+
+.PP
+Definition at line 94 of file network\&.h\&.
 .SH "Variable Documentation"
 .PP 
+.SS "get_blocks_t"
+
+.PP
+Definition at line 99 of file network\&.h\&.
 .SS "const \fBNeighbour\fP HARD_CODED_ADDR[]"
 
 .PP
-Definition at line 4 of file network\&.c\&.
+Definition at line 5 of file network\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for PEPITAS CRYPTOCURRENCY from the source code\&.

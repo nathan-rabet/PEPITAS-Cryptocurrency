@@ -23,10 +23,27 @@ for the JavaScript code in this file
 var NAVTREE =
 [
   [ "PEPITAS CRYPTOCURRENCY", "index.html", [
+    [ "PEPITAS NETWORK PROTOCOL", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__p2_p__protocol.html", [
+      [ "HEADERS", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__p2_p__protocol.html#autotoc_md1", [
+        [ "Sync Headers", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__p2_p__protocol.html#autotoc_md2", null ],
+        [ "Running Headers", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__p2_p__protocol.html#autotoc_md3", null ],
+        [ "Validating Headers", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__p2_p__protocol.html#autotoc_md4", null ],
+        [ "CONNECTION TO NETWORK", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__p2_p__protocol.html#autotoc_md5", null ],
+        [ "CONNECTION TO NODE", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__p2_p__protocol.html#autotoc_md6", null ],
+        [ "GET BLOCKS", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__p2_p__protocol.html#autotoc_md7", null ],
+        [ "ACTUAL HEIGHT", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__p2_p__protocol.html#autotoc_md8", null ],
+        [ "SEND BLOCK", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__p2_p__protocol.html#autotoc_md9", null ],
+        [ "GET PENDING TRANSACTION LIST", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__p2_p__protocol.html#autotoc_md10", null ],
+        [ "REJECT DEMAND", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__p2_p__protocol.html#autotoc_md11", null ],
+        [ "SEND PENDING TRANSACTION", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__p2_p__protocol.html#autotoc_md12", null ],
+        [ "SEND EPOCH BLOCK", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__p2_p__protocol.html#autotoc_md13", null ],
+        [ "SEND VOTE", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__p2_p__protocol.html#autotoc_md14", null ]
+      ] ]
+    ] ],
     [ "PEPITAS", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__r_e_a_d_m_e.html", [
-      [ "CODING STYLE", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__r_e_a_d_m_e.html#autotoc_md1", [
-        [ "Coding case", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__r_e_a_d_m_e.html#autotoc_md2", null ],
-        [ "Tests", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__r_e_a_d_m_e.html#autotoc_md3", null ]
+      [ "CODING STYLE", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__r_e_a_d_m_e.html#autotoc_md16", [
+        [ "Coding case", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__r_e_a_d_m_e.html#autotoc_md17", null ],
+        [ "Tests", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__r_e_a_d_m_e.html#autotoc_md18", null ]
       ] ]
     ] ],
     [ "Data Structures", "annotated.html", [
@@ -41,7 +58,7 @@ var NAVTREE =
       [ "File List", "files.html", "files_dup" ],
       [ "Globals", "globals.html", [
         [ "All", "globals.html", "globals_dup" ],
-        [ "Functions", "globals_func.html", null ],
+        [ "Functions", "globals_func.html", "globals_func" ],
         [ "Variables", "globals_vars.html", null ],
         [ "Typedefs", "globals_type.html", null ],
         [ "Macros", "globals_defs.html", null ]
@@ -53,7 +70,8 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_g_e_n__blockchain__files_8c.html",
-"signature_8h.html#af656af2c0f2bf2ea38d4fba26b50f5d6"
+"math_8h.html#afa99ec4acc4ecb2dc3c2d05da15d0e3f",
+"transaction_8h.html#a8649ee7d98b5b34c64efa31e274f2534"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
