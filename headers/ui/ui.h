@@ -6,9 +6,11 @@
 #include <string.h>
 #include <err.h>
 #include <time.h>
+#include "network/network.h"
 #include "cryptosystem/rsa.h"
 #include "cryptosystem/hash.h"
 #include "blockchain/wallet.h"
+#include "client.h"
 
 GtkLabel *synchro_label;
 GtkLabel *block_amount_label;

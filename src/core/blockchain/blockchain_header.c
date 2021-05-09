@@ -34,3 +34,36 @@ void gen_blockchain_header(infos_st *infos){
     MANAGERMSG
     printf("Blockchain header file generated with %lu blocks!\n", index);
 }
+
+size_t get_receiver_remaining_money(infos_st *infos, RSA *receiver_public_key){
+    size_t index = infos->actual_height;
+    size_t money = 0;
+    Block *block = NULL;
+    while (money == 0)
+    {
+
+        block = get_block(index);
+        if (block == NULL)
+        {
+            errx(EXIT_FAILURE, "Can't load block to create a transaction");
+        }
+        
+        for (size_t it = 0; it < block->block_data.nb_transactions; it++)
+        {
+            TransactionData *trans = &block->block_data.transactions[it]->transaction_data;
+            if (cmp_public_keys(receiver_public_key, trans->sender_public_key))
+            {
+                money = trans->sender_remaining_money;
+                break;
+            }
+            if (cmp_public_keys(receiver_public_key, trans->receiver_public_key))
+            {
+                money = trans->receiver_remaining_money;
+                break;
+            }
+        }
+        free_block(block);
+        index--;
+    }
+    return money;
+}

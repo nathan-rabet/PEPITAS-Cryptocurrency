@@ -1,18 +1,4 @@
 #include "cryptosystem/rsa.h"
-#include "blockchain/wallet.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <openssl/rsa.h>
-#include <openssl/pem.h>
-#include <time.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <unistd.h>
-#include <err.h>
-#include <errno.h>
-#include <openssl/bn.h>
-#include <openssl/crypto.h>
-#include <string.h>
 #define RSA_NUM_E 3
 
 // PUBLIC KEY : (n, e)
@@ -76,4 +62,13 @@ void get_keys(__attribute__((unused))char *password)
         fclose(rsa_public_file);
         fclose(rsa_private_file);
     }
+}
+
+int cmp_public_keys(RSA *key1, RSA *key2){
+    if (BN_cmp(RSA_get0_n(key1),RSA_get0_n(key2))==0 && 
+        BN_cmp(RSA_get0_e(key1),RSA_get0_e(key2))==0)
+    {
+        return 0;
+    }
+    return 1;
 }

@@ -29,6 +29,36 @@
 #define MAX_TRANSACTIONS_PER_BLOCK 16384
 #define NB_BLOCK_PER_CHUNK 10000
 
+#ifndef TRANS_T
+#define TRANS_T
+typedef struct TransactionData
+{
+    char magic;
+    char type;
+    // All users area
+    RSA *sender_public_key;          // The public key of the sender
+    RSA *receiver_public_key;        // The public key of the receiver
+    RSA *organisation_public_key;    // The public key of the organisation which will receive a part of the fees
+    size_t amount;                   // The amount spent by the sender
+    size_t sender_remaining_money;   // The money the sender have AFTER the transaction
+    size_t receiver_remaining_money; // The money the receiver have AFTER the transaction
+    time_t transaction_timestamp;    // The time when the transaction was crafted
+
+    // Organisations: must indicates what you bought
+    // Normal node: free 1024 bytes data
+    char cause[512];
+    char asset[512];
+} TransactionData;
+
+typedef struct Transaction
+{
+    TransactionData transaction_data; // Exclude the signature
+
+    char transaction_signature[256]; // SHA384 signature
+} Transaction;
+
+#endif
+
 // Standard implementation
 typedef struct BlockData
 {
