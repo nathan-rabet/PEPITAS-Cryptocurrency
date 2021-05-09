@@ -12,6 +12,8 @@
 #include <math.h>
 #include <openssl/bio.h>
 #include <stdbool.h>
+#include <openssl/evp.h>
+
 
 /**
  * @brief Broadcast a verdict about a block validity to the network
