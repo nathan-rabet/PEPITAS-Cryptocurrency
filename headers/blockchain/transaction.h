@@ -12,6 +12,8 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <err.h>
+#include "blockchain/wallet.h"
+#include "blockchain/blockchain_header.h"
 
 #define TRANSACTION_DATA_SIZE sizeof(size_t) * 3 + sizeof(time_t) + (512 * 2)
 #define TRANSACTION_SIZE sizeof(size_t) + 2048 + TRANSACTION_DATA_SIZE
@@ -21,6 +23,8 @@
 #define T_TYPE_WITHDRAW_STAKE 2
 #define T_TYPE_STAKE_TO_STAKE 3
 
+#ifndef TRANS_T
+#define TRANS_T
 typedef struct TransactionData
 {
     char magic;
@@ -47,6 +51,8 @@ typedef struct Transaction
     char transaction_signature[256]; // SHA384 signature
 } Transaction;
 
+#endif
+
 /**
  * @brief Send 'amount' money to 'receiver_public_key'.
  * This will broadcast a transaction to the network
@@ -63,5 +69,6 @@ void convert_data_to_transactiondata(TransactionData *transactiondata, int fd);
 void load_transaction(Transaction *transaction, int fd);
 Transaction* load_pending_transaction(time_t timestamp);
 void add_pending_transaction(Transaction *transaction);
+Transaction create_new_transaction(infos_st *infos, char type, RSA* receiver_public_key, size_t amount, char cause[512], char asset[512]);
 
 #endif

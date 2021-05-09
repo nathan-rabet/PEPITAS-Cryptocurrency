@@ -171,3 +171,20 @@ void add_pending_transaction(Transaction *transaction)
     write_transaction(transaction,pending_transaction_fd);
     close(pending_transaction_fd);
 }
+
+Transaction create_new_transaction(infos_st *infos, char type, RSA* receiver_public_key, size_t amount, char cause[512], char asset[512]){
+    Wallet *wallet = get_my_wallet();
+    Transaction new_trans;
+    TransactionData *data = &new_trans.transaction_data;
+    data->magic = 1;
+    data->type = type;
+    data->sender_public_key = wallet->pub_key;
+    data->receiver_public_key = receiver_public_key;
+    data->amount = amount;
+    data->sender_remaining_money = wallet->amount - amount;
+    data->receiver_remaining_money = get_receiver_remaining_money(infos, receiver_public_key) + amount;
+    data->transaction_timestamp = time(NULL);
+    memcpy(data->cause, cause, 512);
+    memcpy(data->asset, asset, 512);
+    return new_trans;
+}

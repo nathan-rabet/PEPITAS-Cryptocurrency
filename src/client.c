@@ -1,20 +1,17 @@
-#include <signal.h>
-#include <stdlib.h>
-#include <string.h>
-
-#include "network/network.h"
-#include "network/client.h"
-#include "network/server.h"
-#include "network/send_data.h"
-#include "network/get_data.h"
-#include "misc/safe.h"
-#include "blockchain/blockchain_header.h"
-#include "ui/ui.h"
+#include "client.h"
 
 extern client_connection *client_connections;
 static pthread_t server_t;
+infos_st *ac_infos;
 
-
+void new_transaction(char type, char *rc_pk, size_t amount, char cause[512], char asset[512]){
+    BIO *pubkey2 = BIO_new(BIO_s_mem());
+    BIO_write(pubkey2, rc_pk, strlen(rc_pk));
+    RSA* key = PEM_read_bio_RSAPublicKey(pubkey2, NULL, 0, NULL);
+    BIO_free(pubkey2);
+    Transaction trans = create_new_transaction(ac_infos, type, key, amount, cause, asset);
+    add_pending_transaction(&trans);
+}
 
 void join_network_door(infos_st *infos){
     client_connection *connection_fd;
@@ -123,20 +120,20 @@ int main()
     gtk_init(NULL, NULL);
     MANAGERMSG
     printf("Starting UI\n");
+    infos_st *infos = malloc(sizeof(infos_st));
+    infos->actual_height = 0;
+    infos->is_sychronize = 2;
+    infos->serv_type = NODESERVER;
+    ac_infos = infos;
     pthread_t ui_th;
-    char is_setup = 0;
-    pthread_create(&ui_th, NULL, setup, &is_setup);
+    pthread_create(&ui_th, NULL, setup, &infos);
 
-    while (is_setup == 0)
+    while (infos->is_sychronize == 2)
     {
         sleep(1);
     }
     
 
-    infos_st *infos = malloc(sizeof(infos_st));
-    infos->actual_height = 0;
-    infos->is_sychronize = 0;
-    infos->serv_type = NODESERVER;
 
     client_connections = calloc(MAX_CONNECTION, sizeof(client_connection));
     for (size_t i = 0; i < MAX_CONNECTION; i++)

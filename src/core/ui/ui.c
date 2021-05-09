@@ -62,6 +62,7 @@ GtkProgressBar *progress_bar_blockchain;
 
 void *setup(void *args)
 {
+    infos_st *infos = args;
     struct stat st = {0};
 
     if (stat(".ui", &st) == -1)
@@ -183,7 +184,7 @@ void *setup(void *args)
 
     gtk_widget_show(connection_window);
 
-    *(char *)args = 1;
+    infos->is_sychronize = 0;
 
     gtk_main();
 
@@ -256,11 +257,12 @@ gboolean on_transaction_button_press(__attribute__ ((unused)) GtkWidget *widget,
         const time_t date = time(NULL);
         char *time_str = ctime(&date);
         double amount = strtod(gtk_entry_get_text(transa_amount), NULL);
-
+        char *public_key;
         if(strcmp(gtk_entry_get_text(recipient_key), "") != 0)
         {
-            char *public_key = (char *)gtk_entry_get_text(recipient_key);
+            public_key = (char *)gtk_entry_get_text(recipient_key);
             add_transaction_with_pkey(amount, public_key, time_str);
+            new_transaction(T_TYPE_DEFAULT, public_key, (size_t)(amount * 10e6), "", "");
         }
         else if(gtk_combo_box_get_active(contacts_combo) != -1)
         {
@@ -269,13 +271,15 @@ gboolean on_transaction_button_press(__attribute__ ((unused)) GtkWidget *widget,
             GtkTreeIter iter;
             if(gtk_combo_box_get_active_iter(contacts_combo, &iter))
                 gtk_tree_model_get(p_model, &iter, 0, &name, -1);
-            char *public_key = get_public_key_from_contacts(name);
+            public_key = get_public_key_from_contacts(name);
             add_transaction_with_contact(amount, public_key, time_str);
+            new_transaction(T_TYPE_DEFAULT, public_key, (size_t)(amount * 10e6), "", "");
             free(public_key);
         }
      }
      gtk_entry_set_text(transa_amount, "");
      gtk_entry_set_text(recipient_key, "");
+    
 
      return TRUE;
 }
