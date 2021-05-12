@@ -30,7 +30,7 @@ void gen_blockchain_header(infos_st *infos){
         index++;
     }
     fclose(blockchainh);
-    infos->actual_height = (index == 0 ? 1 : index) -1;
+    infos->actual_height = (index == 0 ? 1 : index) - 1;
     MANAGERMSG
     printf("Blockchain header file generated with %lu blocks!\n", index);
 }
