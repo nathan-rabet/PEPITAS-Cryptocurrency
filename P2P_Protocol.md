@@ -59,22 +59,43 @@ The block of height demand by "GET BLOCKS".
 - char * : "GET PENDING TRANSACTION LIST\r\n\r\n"
 
 **Description**
-Call "SEND PENDING TRANSACTION".
+Call "SEND PENDING TRANSACTION LIST".
+### SEND PENDING TRANSACTION LIST
+**Message**
+- char * : "GET PENDING TRANSACTION LIST\r\n\r\n"
+- size_t : Number of Transaction id
+- size_t : Transaction id
+
+**Description**
+Send PDT list.
 ### REJECT DEMAND
 **Message:**
 - char * : "REJECT DEMAND\r\n\r\n"
 
 **Description**
 Reject a demand if can't reply. For example a "GET BLOCKS" of a not existing block.
+
+### GET PENDING TRANSACTION
+**Message:**
+- char * : "GET PENDING TRANSACTION\r\n\r\n"
+- size_t : Transaction id
+
+**Description**
+Demand a PENDING TRANSACTION.
 ### SEND PENDING TRANSACTION
 **Message:**
 - char * : "SEND PENDING TRANSACTION\r\n\r\n"
+- size_t : Transaction id
+- size_t : Transaction struct size octet
+- char * : Transaction struct
 
 **Description**
-Send the epoch block of a committee member.
+Send the PENDING TRANSACTION demand by SEND PENDING TRANSACTION.
 ### SEND EPOCH BLOCK
 **Message:**
 - char * : "SEND EPOCH BLOCK\r\n\r\n"
+- size_t : Block height
+- size_t : Block struct size octet
 - char * : Block struct
 
 **Description**
