@@ -9,6 +9,13 @@ void new_transaction(char type, char *rc_pk, size_t amount, char cause[512], cha
     BIO_write(pubkey2, rc_pk, strlen(rc_pk));
     RSA* key = PEM_read_bio_RSAPublicKey(pubkey2, NULL, 0, NULL);
     BIO_free(pubkey2);
+    if (!key)
+    {
+        MANAGERMSG
+        printf("Can't create a the transaction with a non valid key!\n");
+        return;
+    }
+    
     Transaction trans = create_new_transaction(ac_infos, type, key, amount, cause, asset);
     add_pending_transaction(&trans);
 }

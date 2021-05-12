@@ -68,7 +68,7 @@ int cmp_public_keys(RSA *key1, RSA *key2){
     if (BN_cmp(RSA_get0_n(key1),RSA_get0_n(key2))==0 && 
         BN_cmp(RSA_get0_e(key1),RSA_get0_e(key2))==0)
     {
-        return 0;
+        return 1;
     }
-    return 1;
+    return 0;
 }

@@ -45,7 +45,7 @@ size_t get_receiver_remaining_money(infos_st *infos, RSA *receiver_public_key){
         block = get_block(index);
         if (block == NULL)
         {
-            errx(EXIT_FAILURE, "Can't load block to create a transaction");
+            errx(EXIT_FAILURE, "Can't load block to create a transaction in get_receiver_remaining_money");
         }
         
         for (size_t it = 0; it < block->block_data.nb_transactions; it++)
@@ -63,6 +63,11 @@ size_t get_receiver_remaining_money(infos_st *infos, RSA *receiver_public_key){
             }
         }
         free_block(block);
+        if (index == 0)
+        {
+            break;
+        }
+        
         index--;
     }
     return money;
