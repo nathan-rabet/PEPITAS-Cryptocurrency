@@ -126,7 +126,7 @@ void send_pending_transaction_list(int fd){
 
 void send_pending_transaction(int fd, time_t txid){
     CLIENTMSG
-    printf("Send HD_SEND_PENDING_TRANSACTION with txid: %hhu\n", txid);
+    printf("Send HD_SEND_PENDING_TRANSACTION with txid: %lu\n", txid);
     safe_write(fd, HD_SEND_PENDING_TRANSACTION, strlen(HD_SEND_PENDING_TRANSACTION));
     safe_write(fd, &txid, sizeof(time_t));
 }

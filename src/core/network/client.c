@@ -270,6 +270,13 @@ void *client_thread(void *args)
                 read_header(cc->clientfd, infos);
                 update_sync(infos->actual_height, cc->actual_client_height);
             }
+            break;
+        }
+
+        case DD_SEND_TRANSACTION:
+        {
+            send_pending_transaction(cc->clientfd, *(time_t *)cc->Payload);
+            break;
         }
 
         default:

@@ -85,6 +85,7 @@ extern const Neighbour HARD_CODED_ADDR[];
 // DEMAND
 #define DD_GET_HEIGHT                  1
 #define DD_GET_BLOCKS                  2
+#define DD_SEND_TRANSACTION            3
 
 // MESSAGE INFO
 

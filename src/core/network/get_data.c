@@ -249,23 +249,23 @@ int read_send_pending_transaction_list(int fd){
     }
     for (size_t i = 0; i < nbtxids; i++)
     {
-        send_pending_transaction(fd, txid + i);
+        send_pending_transaction(fd, *(txid + i));
     }
     return nbtxids;
 }
 
 int read_send_pending_transaction(int fd){
     time_t txid;
-    read(fd, txid, sizeof(size_t));
+    read(fd, &txid, sizeof(time_t));
     SERVERMSG
-    printf("Recived read_pending_transaction %hhu \
+    printf("Recived read_pending_transaction %lu \
     transaction in connection fd: %i\n", txid, fd);
     return txid;
 }
 
 int read_get_pending_transaction(int fd){
     time_t txid;
-    read(fd, txid, sizeof(size_t));
+    read(fd, &txid, sizeof(time_t));
     send_pending_transaction(fd, txid);
     return txid;
 }
