@@ -26,6 +26,7 @@ void new_transaction(char type, char *rc_pk, size_t amount, char cause[512], cha
             while (client_connections[i].demand != 0);
             client_connections[i].demand = DD_SEND_TRANSACTION;
             client_connections[i].Payload = malloc(sizeof(time_t));
+            *(time_t *)client_connections[i].Payload = trans.transaction_data.transaction_timestamp;
             sem_post(&client_connections[i].lock);
         }
     }
@@ -200,6 +201,7 @@ int main()
         MANAGERMSG
         printf("Connection to others...\n");
         connection_to_others(infos);
+        sleep(1);
         MANAGERMSG
         printf("Update blockchain height...\n");
         size_t index_client = update_blockchain_height(infos);

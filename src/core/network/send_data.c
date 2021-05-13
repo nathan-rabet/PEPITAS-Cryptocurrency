@@ -133,13 +133,15 @@ void send_pending_transaction(int fd, time_t txid){
     snprintf(dir, 256, "pdt/%ld", txid);
     FILE *transfile = fopen(dir, "r");
     if (transfile == NULL)
+    {
+        CLIENTMSG
+        printf("Transaction not found :(\n");
         return;
+    }
     fseek(transfile, 0L, SEEK_END);
     bc_size = ftell(transfile);
     fseek(transfile, 0L, SEEK_SET);
 
-    CLIENTMSG
-    printf("Send HD_SEND_PENDING_TRANSACTION with txid: %ld\n", txid);
     safe_write(fd, HD_SEND_PENDING_TRANSACTION, strlen(HD_SEND_PENDING_TRANSACTION));
     safe_send(fd, &txid, sizeof(time_t));
     safe_send(fd, &bc_size, sizeof(size_t));
@@ -155,4 +157,6 @@ void send_pending_transaction(int fd, time_t txid){
         WARNINGMSG("Failed to send all the transaction!");
     }
     fclose(transfile);
+    CLIENTMSG
+    printf("Send HD_SEND_PENDING_TRANSACTION with txid: %ld\n", txid);
 }
