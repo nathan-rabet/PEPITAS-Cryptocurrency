@@ -282,6 +282,7 @@ void *client_thread(void *args)
         case DD_GET_TRANSACTION_LIST:
         {
             safe_write(cc->clientfd, HD_GET_PENDING_TRANSACTION_LIST, strlen(HD_GET_PENDING_TRANSACTION_LIST));
+            read_header(cc->clientfd, infos);
             break;
         }
 
