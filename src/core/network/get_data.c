@@ -249,7 +249,12 @@ int read_send_pending_transaction_list(int fd){
     }
     for (size_t i = 0; i < nbtxids; i++)
     {
-        send_pending_transaction(fd, *(txid + i));
+        char temp[50];
+        sprintf(temp, "./pdt/%ld", *(txid + i));
+        if( access( temp, F_OK ) != 0 ) {
+            // file doesn't exists
+            send_pending_transaction(fd, *(txid + i));
+        }
     }
     return nbtxids;
 }
@@ -267,6 +272,10 @@ int read_send_pending_transaction(int fd){
         return -1;
     
     snprintf(dir, 256, "pdt/%ld", txid);
+    if( access( dir, F_OK ) == 0 ) {
+        // file exists
+        return txid;
+    }
 
     int transfile = open(dir, O_WRONLY | O_CREAT | O_TRUNC, 0644);
     if (transfile == -1)

@@ -56,6 +56,7 @@ typedef struct infos_st
 {
     char is_sychronize;
     size_t actual_height;
+    size_t pdt;
     char serv_type;
 }infos_st;
 typedef struct th_arg
@@ -86,6 +87,7 @@ extern const Neighbour HARD_CODED_ADDR[];
 #define DD_GET_HEIGHT                  1
 #define DD_GET_BLOCKS                  2
 #define DD_SEND_TRANSACTION            3
+#define DD_GET_TRANSACTION_LIST        4
 
 // MESSAGE INFO
 
