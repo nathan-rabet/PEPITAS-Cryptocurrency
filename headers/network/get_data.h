@@ -31,7 +31,9 @@ int read_get_blocks(int fd, infos_st *infos);
 size_t read_actual_height(int fd);
 int read_send_block(int fd);
 int read_vote(int fd);
-int read_pending_transaction_list(int fd);
+int read_send_pending_transaction_list(int fd);
 int read_epoch_block(int fd);
+int read_get_pending_transaction(int fd);
+int read_send_pending_transaction(int fd);
 
 #endif

@@ -2,6 +2,8 @@
 #define SEND_DATA_H
 
 #include "network/server.h"
+#include <dirent.h>
+#include <stdio.h>
 
 /**
  * @brief Sends my client list to a node via 'sockfd'
@@ -23,6 +25,8 @@ void send_reject_demand(int fd);
 
 void send_send_block(int fd, size_t height);
 
-void send_pending_transaction_list(int sockfd);
+void send_pending_transaction_list(int fd);
+
+void send_pending_transaction(int fd, time_t txid);
 
 #endif

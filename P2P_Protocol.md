@@ -64,7 +64,7 @@ Call "SEND PENDING TRANSACTION LIST".
 **Message**
 - char * : "GET PENDING TRANSACTION LIST\r\n\r\n"
 - size_t : Number of Transaction id
-- size_t : Transaction id
+- time_t * : Transaction id
 
 **Description**
 Send PDT list.
@@ -78,7 +78,7 @@ Reject a demand if can't reply. For example a "GET BLOCKS" of a not existing blo
 ### GET PENDING TRANSACTION
 **Message:**
 - char * : "GET PENDING TRANSACTION\r\n\r\n"
-- size_t : Transaction id
+- time_t : Transaction id
 
 **Description**
 Demand a PENDING TRANSACTION.
