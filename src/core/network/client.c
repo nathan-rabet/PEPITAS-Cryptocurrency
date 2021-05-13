@@ -275,7 +275,7 @@ void *client_thread(void *args)
 
         case DD_SEND_TRANSACTION:
         {
-            send_pending_transaction(cc->clientfd, *(time_t *)cc->Payload);
+            send_send_pending_transaction(cc->clientfd, *(time_t *)cc->Payload);
             break;
         }
 
