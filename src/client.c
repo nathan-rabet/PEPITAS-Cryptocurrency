@@ -228,6 +228,7 @@ int main()
     gen_blockchain_header(infos);
     update_sync(infos->actual_height, infos->actual_height);
     // Open server
+    infos->serv_type = NODESERVER;
     pthread_create(&server_t, NULL, init_server, infos);
 
     // TEST LEN LIST
