@@ -143,6 +143,46 @@ void update_blockchain(infos_st *infos, size_t index_client){
 
 }
 
+void update_pending_transactions_list(infos_st *infos){
+    // CLEAR DIR
+
+    char temp[100];
+    DIR *d;
+    struct dirent *dir;
+    d = opendir("./pdt");
+    if (d) {
+        while ((dir = readdir(d)) != NULL) {
+            if (dir->d_type == DT_REG)
+            {
+                sscanf(temp, "./pdt%hhu", dir->d_name);
+                remove(temp);
+            }
+        }
+        closedir(d);
+    }
+    
+
+    // SYNC
+    for (size_t i = 0; i < MAX_CONNECTION; i++)
+    {
+        if (client_connections[i].clientfd != 0) {
+            client_connections[i].demand = DD_GET_TRANSACTION_LIST;
+            sem_post(&client_connections[i].lock);
+        }
+    }
+    
+    //WAIT
+    for (size_t i = 0; i < MAX_CONNECTION; i++)
+    {
+        if (client_connections[i].clientfd != 0) {
+            while (client_connections[i].demand != 0);
+        }
+    }
+    char tmp[10];
+    snprintf(tmp, 10, "%li", infos->pdt);
+    change_label_text(mempool_label, tmp);
+}
+
 int main()
 {
     gtk_init(NULL, NULL);
@@ -150,6 +190,7 @@ int main()
     printf("Starting UI\n");
     infos_st *infos = malloc(sizeof(infos_st));
     infos->actual_height = 0;
+    infos->pdt = 0;
     infos->is_sychronize = 2;
     infos->serv_type = NODESERVER;
     ac_infos = infos;
@@ -192,16 +233,19 @@ int main()
     // TEST LEN LIST
     if (number_neighbours(IM_CLIENT) == 0)
     {
+        // FIRST NODE
         MANAGERMSG
         printf("I'am the first node on the network\n");
 
     }
     else
     {
+        // SYNC TO OTHERS
         MANAGERMSG
         printf("Connection to others...\n");
         connection_to_others(infos);
-        sleep(1);
+
+        // SYNC BLOCKCHAIN
         MANAGERMSG
         printf("Update blockchain height...\n");
         size_t index_client = update_blockchain_height(infos);
@@ -214,6 +258,11 @@ int main()
         printf("Blockchain syncronized with: %lu\n", infos->actual_height);
         change_label_text(synchro_label, "Syncronized");
         change_label_text(block_amount_label, "");
+
+        // SYNC PDT
+        MANAGERMSG
+        printf("Update pending transactions list...\n");
+        update_pending_transactions_list(infos);
     }
     
     while (1);
