@@ -61,6 +61,13 @@ size_t process_header(char *header, int sockfd, infos_st *infos)
         send_pending_transaction_list(sockfd);
         return 0;
     }
+    if (strncmp(HD_SEND_PENDING_TRANSACTION_LIST, header, strlen(HD_SEND_PENDING_TRANSACTION_LIST)) == 0)
+    {
+        CLIENTMSG
+        printf("Recived header HD_SEND_PENDING_TRANSACTION_LIST\n");
+        read_send_pending_transaction_list(sockfd);
+        return 0;
+    }
     if (strncmp(HD_REJECT_DEMAND, header, strlen(HD_REJECT_DEMAND)) == 0)
     {
         CLIENTMSG
@@ -71,7 +78,13 @@ size_t process_header(char *header, int sockfd, infos_st *infos)
     {
         CLIENTMSG
         printf("Recived header HD_SEND_PENDING_TRANSACTION\n");
-        return read_pending_transaction_list(sockfd);
+        return read_send_pending_transaction(sockfd);
+    }
+    if (strncmp(HD_GET_PENDING_TRANSACTION, header, strlen(HD_GET_PENDING_TRANSACTION)) == 0)
+    {
+        SERVERMSG
+        printf("Recived header HD_GET_PENDING_TRANSACTION\n");
+        return read_get_pending_transaction(sockfd);
     }
     if (strncmp(HD_SEND_EPOCH_BLOCK, header, strlen(HD_SEND_EPOCH_BLOCK)) == 0)
     {
@@ -226,6 +239,33 @@ int read_epoch_block(int fd){
     return 0;
 }
 
-int read_pending_transaction_list(__attribute__((unused))int fd){
-    return 0;
+int read_send_pending_transaction_list(int fd){
+    size_t nbtxids = 0;
+    read(fd, &nbtxids, sizeof(size_t));
+    time_t txid[500];
+    for (size_t i = 0; i < nbtxids; i++)
+    {
+        read(fd, txid + i, sizeof(size_t));
+    }
+    for (size_t i = 0; i < nbtxids; i++)
+    {
+        send_pending_transaction(fd, txid + i);
+    }
+    return nbtxids;
+}
+
+int read_send_pending_transaction(int fd){
+    time_t txid;
+    read(fd, txid, sizeof(size_t));
+    SERVERMSG
+    printf("Recived read_pending_transaction %hhu \
+    transaction in connection fd: %i\n", txid, fd);
+    return txid;
+}
+
+int read_get_pending_transaction(int fd){
+    time_t txid;
+    read(fd, txid, sizeof(size_t));
+    send_pending_transaction(fd, txid);
+    return txid;
 }

@@ -101,6 +101,32 @@ void send_send_block(int fd, size_t height){
     fclose(blockfile);
 }
 
-void send_pending_transaction_list(__attribute__((unused))int fd){
+void send_pending_transaction_list(int fd){
+    CLIENTMSG
+    printf("Send HD_SEND_PENDING_TRANSACTION_LIST\n");
+    safe_write(fd, HD_SEND_PENDING_TRANSACTION_LIST, strlen(HD_SEND_PENDING_TRANSACTION_LIST));
+    size_t nbdir = 0;
+    time_t txids[500];
+    DIR *d;
+    struct dirent *dir;
+    d = opendir("./pdt");
+    if (d) {
+        while ((dir = readdir(d)) != NULL) {
+            if (dir->d_type == DT_REG)
+            {
+                sscanf((char *)(txids + nbdir), "%hhu", dir->d_name);
+                nbdir++;
+            }
+        }
+        closedir(d);
+    }
+    safe_send(fd, &nbdir, sizeof(size_t));
+    safe_send(fd, txids, sizeof(time_t) * nbdir);
+}
 
+void send_pending_transaction(int fd, time_t txid){
+    CLIENTMSG
+    printf("Send HD_SEND_PENDING_TRANSACTION with txid: %hhu\n", txid);
+    safe_write(fd, HD_SEND_PENDING_TRANSACTION, strlen(HD_SEND_PENDING_TRANSACTION));
+    safe_write(fd, &txid, sizeof(time_t));
 }
