@@ -18,6 +18,26 @@ void new_transaction(char type, char *rc_pk, size_t amount, char cause[512], cha
     
     Transaction trans = create_new_transaction(ac_infos, type, key, amount, cause, asset);
     add_pending_transaction(&trans);
+
+    // SEND PENDING TRANSACTION
+    for (size_t i = 0; i < MAX_CONNECTION; i++)
+    {
+        if (client_connections[i].clientfd != 0) {
+            while (client_connections[i].demand != 0);
+            client_connections[i].demand = DD_SEND_TRANSACTION;
+            client_connections[i].Payload = malloc(sizeof(time_t));
+            sem_post(&client_connections[i].lock);
+        }
+    }
+
+    // WAIT
+    for (size_t i = 0; i < MAX_CONNECTION; i++)
+    {
+        if (client_connections[i].clientfd != 0) {
+            while (client_connections[i].demand != 0);
+            free(client_connections[i].Payload);
+        }
+    }
 }
 
 void join_network_door(infos_st *infos){
