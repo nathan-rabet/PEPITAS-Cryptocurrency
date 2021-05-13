@@ -125,8 +125,34 @@ void send_pending_transaction_list(int fd){
 }
 
 void send_pending_transaction(int fd, time_t txid){
+    char dir[256];
+    char temp[1024];
+    size_t bc_size = 0;
+    ssize_t r = 0;
+
+    snprintf(dir, 256, "pdt/%ld", txid);
+    FILE *transfile = fopen(dir, "r");
+    if (transfile == NULL)
+        return;
+    fseek(transfile, 0L, SEEK_END);
+    bc_size = ftell(transfile);
+    fseek(transfile, 0L, SEEK_SET);
+
     CLIENTMSG
-    printf("Send HD_SEND_PENDING_TRANSACTION with txid: %lu\n", txid);
+    printf("Send HD_SEND_PENDING_TRANSACTION with txid: %ld\n", txid);
     safe_write(fd, HD_SEND_PENDING_TRANSACTION, strlen(HD_SEND_PENDING_TRANSACTION));
-    safe_write(fd, &txid, sizeof(time_t));
+    safe_send(fd, &txid, sizeof(time_t));
+    safe_send(fd, &bc_size, sizeof(size_t));
+
+    while ((r = fread(temp, 1, 1024, transfile)) != 0 && bc_size > 0)
+    {
+        if (r == -1)
+            errx(EXIT_FAILURE, "Can't send transaction %ld\n", txid);
+        safe_send(fd, temp, r);
+        bc_size -= r;
+    }
+    if (bc_size > 0){
+        WARNINGMSG("Failed to send all the transaction!");
+    }
+    fclose(transfile);
 }

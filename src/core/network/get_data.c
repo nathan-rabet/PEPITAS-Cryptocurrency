@@ -255,8 +255,38 @@ int read_send_pending_transaction_list(int fd){
 }
 
 int read_send_pending_transaction(int fd){
+    char dir[256];
+    char temp[1024];
+    size_t bc_size;
     time_t txid;
-    read(fd, &txid, sizeof(time_t));
+    ssize_t r = read(fd, &txid, sizeof(time_t));
+    if (r != sizeof(time_t))
+        return -1;
+    r = read(fd, &bc_size, sizeof(size_t));
+    if (r != sizeof(size_t))
+        return -1;
+    
+    snprintf(dir, 256, "pdt/%ld", txid);
+
+    int transfile = open(dir, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+    if (transfile == -1)
+    {
+        CLIENTMSG
+        printf("Can't create transaction %ld file\n", txid);
+        return -1;
+    }
+
+    while ((r = read(fd, temp, bc_size > 1024 ? 1024 : bc_size)) != 0 && bc_size > 0)
+    {
+        if (r == -1)
+            errx(EXIT_FAILURE, "Can't read transaction %ld in connection fd: %i", txid, fd);
+        safe_write(transfile, temp, r);
+        bc_size -= r;
+    }
+    if (bc_size > 0){
+        WARNINGMSG("Failed to read all the block!")
+    }
+    close(transfile);
     SERVERMSG
     printf("Recived read_pending_transaction %lu \
     transaction in connection fd: %i\n", txid, fd);
@@ -264,6 +294,7 @@ int read_send_pending_transaction(int fd){
 }
 
 int read_get_pending_transaction(int fd){
+    
     time_t txid;
     read(fd, &txid, sizeof(time_t));
     send_pending_transaction(fd, txid);
