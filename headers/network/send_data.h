@@ -27,6 +27,8 @@ void send_send_block(int fd, size_t height);
 
 void send_pending_transaction_list(int fd);
 
-void send_pending_transaction(int fd, time_t txid);
+void send_send_pending_transaction(int fd, time_t txid);
+
+void send_get_pending_transaction(int fd, time_t txid);
 
 #endif

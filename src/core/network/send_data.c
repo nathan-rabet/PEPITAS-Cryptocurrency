@@ -124,7 +124,7 @@ void send_pending_transaction_list(int fd){
     safe_send(fd, txids, sizeof(time_t) * nbdir);
 }
 
-void send_pending_transaction(int fd, time_t txid){
+void send_send_pending_transaction(int fd, time_t txid){
     char dir[256];
     char temp[1024];
     size_t bc_size = 0;
@@ -136,6 +136,7 @@ void send_pending_transaction(int fd, time_t txid){
     {
         CLIENTMSG
         printf("Transaction not found :(\n");
+        send_reject_demand(fd);
         return;
     }
     fseek(transfile, 0L, SEEK_END);
@@ -159,4 +160,12 @@ void send_pending_transaction(int fd, time_t txid){
     fclose(transfile);
     CLIENTMSG
     printf("Send HD_SEND_PENDING_TRANSACTION with txid: %ld\n", txid);
+}
+
+void send_get_pending_transaction(int fd, time_t txid){
+
+    safe_write(fd, HD_GET_PENDING_TRANSACTION, strlen(HD_GET_PENDING_TRANSACTION));
+    safe_send(fd, &txid, sizeof(time_t));
+    CLIENTMSG
+    printf("Send HD_GET_PENDING_TRANSACTION with txid: %ld\n", txid);
 }

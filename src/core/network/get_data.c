@@ -65,7 +65,7 @@ size_t process_header(char *header, int sockfd, infos_st *infos)
     {
         CLIENTMSG
         printf("Recived header HD_SEND_PENDING_TRANSACTION_LIST\n");
-        read_send_pending_transaction_list(sockfd);
+        read_send_pending_transaction_list(sockfd, infos);
         return 0;
     }
     if (strncmp(HD_REJECT_DEMAND, header, strlen(HD_REJECT_DEMAND)) == 0)
@@ -239,7 +239,7 @@ int read_epoch_block(int fd){
     return 0;
 }
 
-int read_send_pending_transaction_list(int fd){
+int read_send_pending_transaction_list(int fd, infos_st *infos){
     size_t nbtxids = 0;
     read(fd, &nbtxids, sizeof(size_t));
     time_t txid[500];
@@ -253,7 +253,8 @@ int read_send_pending_transaction_list(int fd){
         sprintf(temp, "./pdt/%ld", *(txid + i));
         if( access( temp, F_OK ) != 0 ) {
             // file doesn't exists
-            send_pending_transaction(fd, *(txid + i));
+            send_get_pending_transaction(fd, *(txid + i));
+            read_header(fd, infos);
         }
     }
     return nbtxids;
@@ -306,6 +307,6 @@ int read_get_pending_transaction(int fd){
     
     time_t txid;
     read(fd, &txid, sizeof(time_t));
-    send_pending_transaction(fd, txid);
+    send_send_pending_transaction(fd, txid);
     return txid;
 }
