@@ -7,11 +7,14 @@
 #include "cryptosystem/hash.h"
 #include "misc/math.h"
 #include "misc/files.h"
+#include "misc/bits.h"
 #include "misc/safe.h"
 #include <string.h>
 #include <math.h>
 #include <openssl/bio.h>
 #include <stdbool.h>
+#include <openssl/evp.h>
+
 
 /**
  * @brief Broadcast a verdict about a block validity to the network

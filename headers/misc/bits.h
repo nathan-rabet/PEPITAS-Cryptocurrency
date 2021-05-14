@@ -1,0 +1,1 @@
+char read_single_bit(unsigned char* buffer, unsigned int index);

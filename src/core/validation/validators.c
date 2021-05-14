@@ -1,9 +1,10 @@
 #include "validation/validators.h"
 #include "misc/math.h"
 
-#define NB_RSA_CHUNK 2048/64
+#define NB_RSA_CHUNK 2048 / 64
 
-uint16_t define_nb_validators(size_t n){
+uint16_t define_nb_validators(size_t n)
+{
     if (n <= 1)
         return n;
 
@@ -105,7 +106,7 @@ RSA **get_comittee(size_t block_height, size_t *nb_validators)
 
             BIO *bufio;
             bufio = BIO_new_mem_buf((void *)rsa_string, RSA_FILE_TOTAL_SIZE);
-            if (PEM_read_bio_RSAPublicKey(bufio, &rsa_keys[v], 0, NULL) == NULL)
+            if ((rsa_keys[v] = PEM_read_bio_RSAPublicKey(bufio, NULL, 0, NULL)) == NULL)
                 errx(EXIT_FAILURE, "PEM_read_bio_RSAPublicKey returned NULL");
             already_selected_validators_index[v] = current_validator;
         }
@@ -199,7 +200,7 @@ RSA *get_validator_pkey(size_t validator_id)
     BIO *bufio;
     RSA *rsa_pkey;
     bufio = BIO_new_mem_buf((void *)pkey, RSA_FILE_TOTAL_SIZE);
-    if (PEM_read_bio_RSAPublicKey(bufio, &rsa_pkey, 0, NULL) == NULL)
+    if ((rsa_pkey = PEM_read_bio_RSAPublicKey(bufio, NULL, 0, NULL)) == NULL)
         errx(EXIT_FAILURE, "PEM_read_bio_RSAPublicKey returned NULL");
 
     fclose(validators_states);
