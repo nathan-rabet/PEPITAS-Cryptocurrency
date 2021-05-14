@@ -13,6 +13,7 @@ typedef struct Wallet
     RSA *pub_key;
 
     size_t amount;
+    size_t stake_amount;
     char is_validator;
 } Wallet;
 

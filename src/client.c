@@ -15,6 +15,19 @@ void new_transaction(char type, char *rc_pk, size_t amount, char cause[512], cha
         printf("Can't create a the transaction with a non valid key!\n");
         return;
     }
+
+    // TEST MONEY
+    Wallet *wallet = get_my_wallet();
+    if (type != T_TYPE_WITHDRAW_STAKE && amount > wallet->amount) {
+        MANAGERMSG
+        printf("Can't create a the transaction not enough money!\n");
+        return;
+    }
+    if (type == T_TYPE_WITHDRAW_STAKE && amount > wallet->stake_amount) {
+        MANAGERMSG
+        printf("Can't create a the transaction not enough money in the stake!\n");
+        return;
+    }
     
     Transaction trans = create_new_transaction(ac_infos, type, key, amount, cause, asset);
     add_pending_transaction(&trans);

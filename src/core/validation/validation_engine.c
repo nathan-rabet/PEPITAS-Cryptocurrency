@@ -242,3 +242,14 @@ char plebe_verify_block(Block *block)
     free(validators);
     return 0;
 }
+
+int comital_validate_block(Block* block) {
+
+    // TODO : TEST ALL BLOCK DATA VARIABLES (EXCEPT MAGIC)
+
+    // TODO : TEST SIGNATURE
+
+    // TODO : SEND VOTE
+
+    return 0;
+}
