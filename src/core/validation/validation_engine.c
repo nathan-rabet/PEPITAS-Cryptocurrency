@@ -4,16 +4,16 @@
 Transaction **validate_transactions(Transaction *transaction_to_validate, size_t nb_transactions, size_t *nb_returned_transactions)
 {
     // Limits  the maximum amount of transactions
-    *nb_returned_transactions = MIN(nb_returned_transactions, MAX_TRANSACTIONS_PER_BLOCK);
+    *nb_returned_transactions = MIN(nb_transactions, MAX_TRANSACTIONS_PER_BLOCK);
     Transaction **transactions = malloc(*nb_returned_transactions * sizeof(Transaction *));
 
     // Save the state current_chunk
     size_t current_chunk_nb = load_blockchain(0)->chunk_nb;
 
-    int returned_transaction_i = 0; // In case of bad transactions, we will not increment 'transaction_i'
+    size_t returned_transaction_i = 0; // In case of bad transactions, we will not increment 'transaction_i'
 
     // Foreach transaction to validate
-    for (int pending_t = 0; pending_t < *nb_returned_transactions; pending_t++)
+    for (size_t pending_t = 0; pending_t < *nb_returned_transactions; pending_t++)
     {
         Transaction pending_transaction = transaction_to_validate[pending_t];
 
@@ -41,12 +41,9 @@ Transaction **validate_transactions(Transaction *transaction_to_validate, size_t
         ChunkBlockchain *working_chunk;
         size_t last_chunk_nb = (working_chunk = load_last_blockchain())->chunk_nb;
 
-        // Load the transaction into the right place on the buffer
-        load_transaction(transactions[returned_transaction_i], files[pending_t]);
-
         // Foreach block in the blockchain (reversed-way)
         for (int16_t b = working_chunk->nb_blocks; b >= 0 ||
-                                                   (b = (working_chunk = load_blockchain(--last_chunk_nb)) != NULL ? load_blockchain(0)->chunk_nb + 1 : -1) != -1;
+                                                   (b = (working_chunk = load_blockchain(--last_chunk_nb)) != NULL ? load_blockchain(0)->chunk_nb + 1 : 0) != 0;
              b--)
         {
             // Foreach transations in a block (reversed-way)
@@ -85,7 +82,7 @@ Transaction **validate_transactions(Transaction *transaction_to_validate, size_t
                 }
 
                 // ? bool receiver_exists
-                if (!receiver_exists && transaction->transaction_data.receiver_public_key == pending_transaction.transaction_data.receiver_public_key || transaction->transaction_data.sender_public_key == pending_transaction.transaction_data.receiver_public_key)
+                if (!receiver_exists && (transaction->transaction_data.receiver_public_key == pending_transaction.transaction_data.receiver_public_key || transaction->transaction_data.sender_public_key == pending_transaction.transaction_data.receiver_public_key))
                     receiver_exists = 1;
             }
         }
@@ -96,8 +93,19 @@ Transaction **validate_transactions(Transaction *transaction_to_validate, size_t
 
     // Reset modified blockchain chunk
     load_blockchain(current_chunk_nb);
+
+    return transactions;
 }
 
 Block *create_next_block()
 {
+    Block *last_block = get_block(get_last_block_height());
+    Block *new_block = malloc(sizeof(Block));
+
+    for (size_t i = 0; i < last_block->block_data.nb_validators; i++)
+    {
+        RSA * validator = last_block->block_data.validators_public_keys[i];
+        char * validator_signature = last_block->vote_signature[i];
+        char validator_vote = read_single_bit(last_block->validators_votes,i);
+    }
 }

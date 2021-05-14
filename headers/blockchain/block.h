@@ -28,6 +28,7 @@
 
 #define MAX_TRANSACTIONS_PER_BLOCK 16384
 #define NB_BLOCK_PER_CHUNK 10000
+#define NB_VOTES_BITMAP MAX_VALIDATORS_PER_BLOCK / 8
 
 #ifndef TRANS_T
 #define TRANS_T
@@ -74,8 +75,13 @@ typedef struct BlockData
     //* Validator area
     int nb_validators;
     RSA *validators_public_keys[MAX_VALIDATORS_PER_BLOCK];            // The public key of the validators
-    char prev_validators_votes[MAX_VALIDATORS_PER_BLOCK / 8]; // BITMAP
     time_t block_timestamp;                                         // The block creation timestamp
+    
+    
+    
+    
+    
+    char prev_validators_votes[NB_VOTES_BITMAP]; // INUTILE
 } BlockData;
 
 typedef struct Block
@@ -86,7 +92,7 @@ typedef struct Block
     char block_signature[256]; // SHA384 signature EPOCHMAN
 
     //Validator Vote
-    char validators_votes[MAX_VALIDATORS_PER_BLOCK / 8]; // BITMAP
+    char validators_votes[NB_VOTES_BITMAP]; // BITMAP
     char vote_signature[MAX_VALIDATORS_PER_BLOCK - 1][256];
 } Block;
 
