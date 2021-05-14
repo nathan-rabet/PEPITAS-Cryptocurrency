@@ -1,8 +1,14 @@
 #ifndef EPOCH_MAN_H
 #define EPOCH_MAN_H
 
-#include "blockchain/block.h"
 #include "blockchain/transaction.h"
+#include "blockchain/block.h"
+#include "cryptosystem/signature.h"
+#include "misc/bits.h"
+#include "validators.h"
+#include <openssl/rsa.h>
+
+char *create_vote_data(Block *block, char vote, int validator_index, size_t *data_length);
 
 /**
  * @brief Create a block object 
@@ -33,12 +39,4 @@ RSA* get_epoch_man_pkey(BlockData *block_data);
  * @param current_block 
  */
 void give_punishments_and_rewards(Block *prev_block, Block *current_block);
-
-/**
- * @brief Delete block transactions in pdt if the block is valid
- * 
- * @param block 
- * @return 1 if the flush proceed, 0 if not
- */
-int flush_pending_transactions(Block* block);
 #endif

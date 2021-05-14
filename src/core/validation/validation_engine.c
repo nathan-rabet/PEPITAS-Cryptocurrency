@@ -96,16 +96,3 @@ Transaction **validate_transactions(Transaction *transaction_to_validate, size_t
 
     return transactions;
 }
-
-Block *create_next_block()
-{
-    Block *last_block = get_block(get_last_block_height());
-    Block *new_block = malloc(sizeof(Block));
-
-    for (size_t i = 0; i < last_block->block_data.nb_validators; i++)
-    {
-        RSA * validator = last_block->block_data.validators_public_keys[i];
-        char * validator_signature = last_block->vote_signature[i];
-        char validator_vote = read_single_bit(last_block->validators_votes,i);
-    }
-}

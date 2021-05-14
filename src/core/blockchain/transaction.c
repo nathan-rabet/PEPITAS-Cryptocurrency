@@ -189,3 +189,17 @@ Transaction create_new_transaction(infos_st *infos, char type, RSA* receiver_pub
     memcpy(data->asset, asset, 512);
     return new_trans;
 }
+
+void flush_pending_transactions(Transaction **transactions, size_t nb_transactions)
+{
+    for (size_t i = 0; i < nb_transactions; i++)
+    {
+        Transaction* trans = transactions[i];
+        if (trans->transaction_data.type != T_TYPE_REWARD_STAKE && trans->transaction_data.type != T_TYPE_PUNISH_STAKE)
+        {
+            char temp[200];
+            snprintf(temp, 200, "%li", trans->transaction_data.transaction_timestamp);
+            remove(temp);
+        }
+    }
+}

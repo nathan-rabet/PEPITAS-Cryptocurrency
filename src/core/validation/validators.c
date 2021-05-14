@@ -3,12 +3,12 @@
 
 #define NB_RSA_CHUNK 2048 / 64
 
-uint16_t define_nb_validators(size_t n)
+int define_nb_validators(size_t n)
 {
     if (n <= 1)
         return n;
 
-    uint16_t sqroot = 1;
+    size_t sqroot = 1;
     while (sqroot * sqroot < n)
         sqroot++;
 
@@ -30,7 +30,7 @@ char *hash_block_transactions_epoch(Block *block)
     return sha384_data(buf, size);
 }
 
-RSA **get_comittee(size_t block_height, size_t *nb_validators)
+RSA **get_comittee(size_t block_height, int *nb_validators)
 {
     // Get "random" value
     Block *working_block = get_block(block_height); // [5] because filename is "blockXXX"
@@ -52,7 +52,7 @@ RSA **get_comittee(size_t block_height, size_t *nb_validators)
     // Deterministic algorithm for setting the committee size
     *nb_validators = define_nb_validators(nb_total_validators);
     RSA **rsa_keys = malloc(*nb_validators * sizeof(RSA *));
-    size_t *already_selected_validators_index = malloc(*nb_validators * sizeof(size_t));
+    size_t *already_selected_validators_index = malloc(*nb_validators * sizeof(int));
 
     size_t i = 0;
     size_t j = 1;
@@ -79,7 +79,7 @@ RSA **get_comittee(size_t block_height, size_t *nb_validators)
             if (rsa_fread < RSA_KEY_SIZE || safe_fread(&next_validator_power, sizeof(size_t), 1, validators_states) < 1)
             {
                 while (fseek(validators_states, sizeof(size_t) * 3 + sizeof(char), SEEK_SET) != 0)
-                    ; // escape nb_validators[sizeof(size_t)], total_stake[sizeof(size_t)], '\n'[sizeof(char)]
+                    ; // escape nb_total_validators[sizeof(size_t)], total_stake[sizeof(size_t)], '\n'[sizeof(char)]
                 continue;
             }
             is_next_validator = __builtin_usubl_overflow(random_power, next_validator_power, &random_power);
@@ -122,7 +122,7 @@ RSA **get_comittee(size_t block_height, size_t *nb_validators)
     return rsa_keys;
 }
 
-RSA **get_next_comittee(size_t *nb_validators)
+RSA **get_next_comittee(int *nb_validators)
 {
     return get_comittee(get_last_block_height(), nb_validators);
 }
@@ -207,8 +207,17 @@ RSA *get_validator_pkey(size_t validator_id)
     return rsa_pkey;
 }
 
-ssize_t get_validator_id(char pkey[])
+ssize_t get_validator_id(RSA* pkey)
 {
+
+    // RSA* to char*
+    char pkey_string[RSA_FILE_TOTAL_SIZE];
+    BIO *pubkey = BIO_new(BIO_s_mem());
+    PEM_write_bio_RSAPublicKey(pubkey, pkey);
+    int rsa_size = BIO_pending(pubkey);
+    BIO_read(pubkey, pkey_string, rsa_size);
+    BIO_free(pubkey);
+
     FILE *validators_states = fopen("validators.state", "r");
     ssize_t nb_validators;
     if (safe_fread(&nb_validators, sizeof(ssize_t), 1, validators_states) == -1)
@@ -223,7 +232,7 @@ ssize_t get_validator_id(char pkey[])
 
         if (safe_fread(temp_pkey, sizeof(char), RSA_KEY_SIZE, validators_states) == -1)
             return -1;
-        if (strncmp(pkey, temp_pkey, RSA_KEY_SIZE) == 0)
+        if (strncmp(pkey_string + RSA_BEGIN_SIZE + 1, temp_pkey, RSA_KEY_SIZE) == 0)
             return index;
         while (fseek(validators_states, 2 * sizeof(size_t) + sizeof(char), SEEK_CUR) != 0)
             ;

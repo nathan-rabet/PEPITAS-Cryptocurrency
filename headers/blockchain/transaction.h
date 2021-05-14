@@ -22,6 +22,8 @@
 #define T_TYPE_ADD_STAKE 1
 #define T_TYPE_WITHDRAW_STAKE 2
 #define T_TYPE_STAKE_TO_STAKE 3
+#define T_TYPE_REWARD_STAKE 4
+#define T_TYPE_PUNISH_STAKE 5
 
 #ifndef TRANS_T
 #define TRANS_T
@@ -62,6 +64,7 @@ typedef struct Transaction
  * @return returns 0 if the broadcast succeeds, -1 otherwise
  */
 int send_money(size_t amount, u_int64_t receiver_public_key);
+
 void write_transactiondata(TransactionData *transaction, int fd);
 void write_transaction(Transaction *transaction, int fd);
 void get_transaction_data(Transaction *trans, char **buff, size_t *index);
@@ -70,5 +73,14 @@ void load_transaction(Transaction *transaction, int fd);
 Transaction* load_pending_transaction(time_t timestamp);
 void add_pending_transaction(Transaction *transaction);
 Transaction create_new_transaction(infos_st *infos, char type, RSA* receiver_public_key, size_t amount, char cause[512], char asset[512]);
+
+
+/**
+ * @brief Delete block transactions in pdt if the block is valid
+ * 
+ * @param transactions block.blockdata.transactions
+ * @param nb_transactions number of transactions
+ */
+void flush_pending_transactions(Transaction **transactions, size_t nb_transactions);
 
 #endif
