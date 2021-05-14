@@ -9,6 +9,7 @@
 #include "cryptosystem/hash.h"
 #include "misc/files.h"
 #include "misc/safe.h"
+#include "misc/math.h"
 
 #define MAX_VALIDATORS_PER_BLOCK 512
 

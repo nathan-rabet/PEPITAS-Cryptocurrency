@@ -86,6 +86,49 @@ void give_punishments_and_rewards(Block *last_block, Block *current_block)
     }
 }
 
+void add_pdt_to_block(Block *block){
+
+    // SEARCH TRANSACTION TO ADD
+    size_t nbdir = 0;
+    time_t txids[MAX_TRANSACTIONS_PER_BLOCK];
+    DIR *d;
+    struct dirent *dir;
+    d = opendir("./pdt");
+    if (d) {
+        while ((dir = readdir(d)) != NULL && nbdir < MAX_TRANSACTIONS_PER_BLOCK) {
+            if (dir->d_type == DT_REG)
+            {
+                sscanf((char *)(txids + nbdir), "%hhu", dir->d_name);
+                nbdir++;
+            }
+        }
+        closedir(d);
+    }
+
+    // LOAD TRANSACTION
+    Transaction **transs = malloc(sizeof(Transaction *) * nbdir);
+    for (size_t i = 0; i < nbdir; i++)
+    {
+        transs[i] = load_pending_transaction(txids[i]);
+    }
+
+    // VERIFY TRANSACTION
+    size_t nb_trans;
+    Transaction **transs_valid = validate_transactions(transs, nbdir, &nb_trans);
+    
+    // COPY TRANSACTION TO BLOCK
+    for (size_t i = 0; i < nb_trans; i++)
+    {
+        block->block_data.transactions[block->block_data.nb_transactions] = transs_valid[i];
+        block->block_data.nb_transactions++;
+    }
+
+    // FREE
+    free(transs);
+    free(transs_valid);
+    
+}
+
 Block *create_epoch_block()
 {
     Block *last_block = get_block(get_last_block_height());
@@ -143,6 +186,10 @@ Block *create_epoch_block()
     memcpy(new_block->block_data.prev_validators_votes, last_block->validators_votes, 64);
 
     give_punishments_and_rewards(last_block, new_block);
+
+    add_pdt_to_block(new_block);
+
+    sign_block(new_block);
 
     return new_block;
 }

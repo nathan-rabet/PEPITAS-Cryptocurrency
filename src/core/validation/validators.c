@@ -1,5 +1,4 @@
 #include "validation/validators.h"
-#include "misc/math.h"
 
 #define NB_RSA_CHUNK 2048 / 64
 

@@ -178,12 +178,41 @@ Transaction create_new_transaction(infos_st *infos, char type, RSA* receiver_pub
     TransactionData *data = &new_trans.transaction_data;
     data->magic = 1;
     data->type = type;
-    data->sender_public_key = wallet->pub_key;
-    data->receiver_public_key = receiver_public_key;
-    data->organisation_public_key = wallet->pub_key;
-    data->amount = amount;
-    data->sender_remaining_money = wallet->amount - amount;
-    data->receiver_remaining_money = get_receiver_remaining_money(infos, receiver_public_key) + amount;
+    switch (type)
+    {
+    case T_TYPE_DEFAULT:
+    {
+        data->sender_public_key = wallet->pub_key;
+        data->receiver_public_key = receiver_public_key;
+        data->amount = amount;
+        data->sender_remaining_money = wallet->amount - amount;
+        data->receiver_remaining_money = get_receiver_remaining_money(infos, receiver_public_key) + amount;
+        break;
+    }
+    case T_TYPE_WITHDRAW_STAKE:
+    {
+        data->sender_public_key = wallet->pub_key;
+        data->receiver_public_key = receiver_public_key;
+        data->amount = amount;
+        data->sender_remaining_money = wallet->amount - amount;
+        data->receiver_remaining_money = get_receiver_remaining_money(infos, receiver_public_key) + amount;
+            
+        break;
+    }
+    case T_TYPE_ADD_STAKE:
+    {
+        data->sender_public_key = wallet->pub_key;
+        data->receiver_public_key = receiver_public_key;
+        data->amount = amount;
+        data->sender_remaining_money = wallet->amount - amount;
+        data->receiver_remaining_money = get_receiver_remaining_money(infos, receiver_public_key) + amount;
+            
+        break;
+    }
+    
+    default:
+        break;
+    }
     data->transaction_timestamp = time(NULL);
     memcpy(data->cause, cause, 512);
     memcpy(data->asset, asset, 512);

@@ -7,6 +7,7 @@
 #include "network/client.h"
 #include "network/server.h"
 #include "network/send_data.h"
+#include "validation/validation_engine.h"
 #include "ui/ui.h"
 
 /**
