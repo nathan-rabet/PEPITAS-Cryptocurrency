@@ -7,6 +7,7 @@
 #include "cryptosystem/hash.h"
 #include "misc/math.h"
 #include "misc/files.h"
+#include "misc/bits.h"
 #include "misc/safe.h"
 #include <string.h>
 #include <math.h>
