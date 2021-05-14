@@ -20,17 +20,16 @@
  * the last block available OFFLINE
  * @return [*RSA]
  */
-RSA **get_comittee(size_t block_height, size_t *nb_validators);
+RSA **get_comittee(size_t block_height, int *nb_validators);
 
 /**
  * @brief Get the a comittee  RSA public keys on a specific epoch
- * @param block_height The height of the block you want a comitte from
  * @param nb_validators return value, the number of selected validators
  * @see The 'next block' is referring to block after 
  * the last block available OFFLINE
  * @return [*RSA]
  */
-RSA **get_next_comittee(size_t *nb_validators);
+RSA **get_next_comittee(int *nb_validators);
 
 /**
  * @brief Get the total stake of the network 
@@ -86,11 +85,10 @@ RSA* get_validator_pkey(size_t validator_id);
 /**
  * @brief Get the validator id in 'validators.state'
  * 
- * @param pkey The string public key 
- * (without -----BEGIN RSA KEY----- & -----END RSA KEY-----)
+ * @param pkey The RSA public key
  * @return ssize_t, the validator index
  */
-ssize_t get_validator_id(char pkey[]);
+ssize_t get_validator_id(RSA* pkey);
 
 /**
  * @brief Push an amount on the stake.
