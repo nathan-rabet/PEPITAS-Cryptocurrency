@@ -40,6 +40,8 @@ int send_verdict(Block *block, char verdict);
  * @param nb_returned_transactions The number of returned (valid) transactions
  * @return Transaction**, the valid transactions 
  */
-Transaction ** validate_transactions(Transaction* transaction_to_validate,size_t nb_transactions,size_t * nb_returned_transactions);
+Transaction ** validate_transactions(Transaction** transaction_to_validate,size_t nb_transactions,size_t * nb_returned_transactions);
+
+char plebe_verify_block(Block *block);
 
 #endif

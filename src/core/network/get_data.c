@@ -220,10 +220,42 @@ int read_send_block(int fd){
     if (bc_size > 0){
         WARNINGMSG("Failed to read all the block!")
     }
-    close(blockfile);
+    
     CLIENTMSG
     printf("Recived block %lu in connection fd: %i\n", block_height, fd);
+
+    // LOAD BLOCK
+    Block *block = malloc(sizeof(Block));
+    lseek(blockfile, 0, SEEK_SET);
+    convert_data_to_block(block, blockfile);
+    close(blockfile);
+
     // ADD TO BLOCKCHAIN IF TRUE
+    if (plebe_verify_block(block)) {
+        snprintf(temp, 256, "blockchain/block%lu", block_height);
+        int ret = rename(dir, temp);
+	
+        if(ret == 0) {
+            CLIENTMSG
+            printf("File renamed successfully");
+        } else {
+            CLIENTMSG
+            printf("Error: unable to rename the file");
+        }
+    }
+    else
+    {
+        int ret = remove(dir);
+        if(ret == 0) {
+            CLIENTMSG
+            printf("File remove successfully");
+        } else {
+            CLIENTMSG
+            printf("Error: unable to remove the file");
+        }
+    }
+    
+    free_block(block);
     return 0;
 }
 

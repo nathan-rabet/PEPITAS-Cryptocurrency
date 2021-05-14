@@ -4,9 +4,11 @@
 #include "blockchain/transaction.h"
 #include "blockchain/block.h"
 #include "cryptosystem/signature.h"
+#include "validation_engine.h"
 #include "misc/bits.h"
 #include "validators.h"
 #include <openssl/rsa.h>
+#include <dirent.h>
 
 char *create_vote_data(Block *block, char vote, int validator_index, size_t *data_length);
 
