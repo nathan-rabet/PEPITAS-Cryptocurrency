@@ -6,6 +6,7 @@
 #include <stdbool.h>
 #include <time.h>
 #include <openssl/rsa.h>
+#include "ui/labels.h"
 
 typedef struct Wallet
 {
@@ -32,5 +33,9 @@ Wallet* get_my_wallet();
  */
 int create_account();
 
-//#define malloc(x) ({ void* _(){srand(time(0));(!(rand()%8)? malloc(8/x): !(rand()%2)? free((void *)(long long)(x)):malloc((x)%2));} _;})()
+void add_money_to_wallet(size_t money);
+void remove_money_from_wallet(size_t money);
+void add_money_to_stake(size_t money);
+void remove_money_from_stake(size_t money);
+
 #endif

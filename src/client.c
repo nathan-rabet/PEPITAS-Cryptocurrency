@@ -214,7 +214,7 @@ int main()
     {
         sleep(1);
     }
-    
+
 
 
     client_connections = calloc(MAX_CONNECTION, sizeof(client_connection));
@@ -278,6 +278,6 @@ int main()
         printf("Update pending transactions list...\n");
         update_pending_transactions_list(infos);
     }
-    
+
     while (1);
 }
