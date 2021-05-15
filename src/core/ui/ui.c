@@ -19,13 +19,16 @@ static GtkButton *create_key_but1;
 static GtkButton *create_key_but2;
 static GtkButton *connect_but;
 
-
 GtkLabel *balance_1;
 GtkLabel *balance_2;
-GtkLabel *private_key_label;
 GtkLabel *stake_label1;
 GtkLabel *stake_label2;
 GtkLabel *stake_label3;
+GtkLabel *synchro_label;
+GtkLabel *block_amount_label;
+GtkLabel *connections_label;
+GtkLabel *mempool_label;
+GtkLabel *private_key_label;
 GtkLabel *password_error_label;
 GtkLabel *latest_block_name1;
 GtkLabel *latest_block_name2;

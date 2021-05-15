@@ -12,10 +12,15 @@
 #include "blockchain/wallet.h"
 #include "client.h"
 
-GtkLabel *synchro_label;
-GtkLabel *block_amount_label;
-GtkLabel *connections_label;
-GtkLabel *mempool_label;
+extern GtkLabel *balance_1;
+extern GtkLabel *balance_2;
+extern GtkLabel *stake_label1;
+extern GtkLabel *stake_label2;
+extern GtkLabel *stake_label3;
+extern GtkLabel *synchro_label;
+extern GtkLabel *block_amount_label;
+extern GtkLabel *connections_label;
+extern GtkLabel *mempool_label;
 struct blockinfo
 {
     size_t height;
