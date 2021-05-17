@@ -27,6 +27,14 @@
  */
 void get_keys(char *password);
 
-int cmp_public_keys(RSA *key1, RSA *key2);
+/**
+ * @brief Cmp the public keys object
+ * 
+ */
+inline int cmp_public_keys(RSA *key1, RSA *key2){
+    return key1 && key2 && 
+    !(BN_cmp(RSA_get0_n(key1),RSA_get0_n(key2)) || 
+    BN_cmp(RSA_get0_e(key1),RSA_get0_e(key2)));
+}
 
 #endif

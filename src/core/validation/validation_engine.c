@@ -1,6 +1,5 @@
 #include "validation/validation_engine.h"
 
-// TODO deal with organisations
 Transaction **validate_transactions(Transaction **transaction_to_validate, size_t nb_transactions, size_t *nb_returned_transactions)
 {
     // Limits  the maximum amount of transactions
@@ -26,14 +25,8 @@ Transaction **validate_transactions(Transaction **transaction_to_validate, size_
             continue;
 
         // ? bool sender_not_equal_receiver
-        EVP_PKEY *pkey_sender = EVP_PKEY_new();
-        EVP_PKEY *pkey_receiver = EVP_PKEY_new();
-        EVP_PKEY_assign_RSA(pkey_sender, pending_transaction->transaction_data.sender_public_key);
-        EVP_PKEY_assign_RSA(pkey_receiver, pending_transaction->transaction_data.receiver_public_key);
-        if (EVP_PKEY_cmp(pkey_sender, pkey_receiver) != 0) //
+        if (cmp_public_keys(pending_transaction->transaction_data.sender_public_key, pending_transaction->transaction_data.receiver_public_key)) //
             continue;
-        EVP_PKEY_free(pkey_sender);
-        EVP_PKEY_free(pkey_receiver);
 
         // Load the last chunk (to reverse-parse the blockchain)
         ChunkBlockchain *working_chunk = load_last_blockchain();
@@ -243,13 +236,103 @@ char plebe_verify_block(Block *block)
     return 0;
 }
 
-int comital_validate_block(Block* block) {
+int comital_validate_block(Block *block)
+{
+
+    Block *prev_block = get_prev_block(block);
 
     // TODO : TEST ALL BLOCK DATA VARIABLES (EXCEPT MAGIC)
+    // ? prev_block->block_data.height
+    if (prev_block->block_data.height != block->block_data.height - 1)
+        return send_verdict(block, VERIDCT_NO);
 
-    // TODO : TEST SIGNATURE
+    // ? block->block_data.block_timestamp
+    if (block->block_data.block_timestamp > time(NULL))
+        return send_verdict(block, VERIDCT_NO);
 
-    // TODO : SEND VOTE
+    // ? block->block_data.previous_block_hash
+    Block *prev_block = get_prev_block();
+    size_t prev_block_hash_size;
+    char *prev_block_hash = sha384_data(get_blockdata_data(prev_block, prev_block_hash_size), prev_block_hash_size);
+    if (strncmp(sha384_data(get_blockdata_data(prev_block)),
+                block->block_data.previous_block_hash, SHA384_DIGEST_LENGTH * 2 + 1) != 0)
+        return send_verdict(block, VERIDCT_NO);
 
+    // ? block->block_data.validators_public_keys
+    int nb_validators_local;
+    RSA **next_comitee = get_next_comittee(&nb_validators_local);
+    int nb_validators_in_new_block = 0;
+    for (int i = 0; i < block->block_data.nb_validators; i++)
+    {
+        RSA *validator = block->block_data.validators_public_keys[i];
+        nb_validators_in_new_block += validator != NULL;
+
+        // ? [Comittee]== [block->block_data.validators_public_keys]
+        if (!cmp_public_keys(validator, next_comitee[i]))
+            return send_verdict(block, VERIDCT_NO);
+
+        // // ? block->block_data.vote_signature[i]
+        // if (!verify_signature(get_blockdata_data(block, &size), size, validator_signature, validator))
+        //     return send_verdict(VERIDCT_NO);
+    }
+    // ? block->block_data.nb_validators
+    if (nb_validators_local != nb_validators_in_new_block)
+        return send_verdict(block, VERIDCT_NO);
+
+    // ? block.block_data.epoch_id
+    if (block->block_data.epoch_id >= block->block_data.nb_validators || block->block_data.epoch_id < 0)
+        return send_verdict(block, VERIDCT_NO);
+
+    // ? block.block_data.epoch_id and other stuff
+    if (verify_block_signature(block))
+        return send_verdict(block, VERIDCT_NO);
+
+    // ? block->block_data.transactions
+
+    size_t nb_returned_transactions;
+    if (validate_transactions(block->block_data.transactions, block->block_data.nb_transactions,
+                              &nb_returned_transactions),
+        nb_returned_transactions != block->block_data.nb_transactions)
+        return send_verdict(block, VERIDCT_NO);
+
+    // if (nb_nb_verdict_yes >= block->block_data.nb_validators - nb_nb_verdict_yes && !block->block_data.is_prev_block_valid)
+    //     return send_verdict(VERIDCT_NO);
+    // if (nb_nb_verdict_yes < block->block_data.nb_validators - nb_nb_verdict_yes && block->block_data.is_prev_block_valid)
+    //     return send_verdict(VERIDCT_NO);
+
+    return send_verdict(block, VERIDCT_YES);
+}
+
+int send_verdict(Block *block, char verdict)
+{
+
+    Wallet *wallet = get_my_wallet();
+    RSA **next_comitee = get_next_comittee(&nb_validators);
+
+    for (int i = 0; i < block->block_data.nb_validators; i++)
+    {
+        RSA *validator = block->block_data.validators_public_keys[i];
+
+        if (cmp_public_keys(validator, wallet->pub_key))
+            break;
+    }
+
+    if (i == block->block_data.nb_validators)
+        return -1;
+
+    size_t datalen;
+    char *payload = create_vote_data(block, verdict, validator_index, &datalen);
+
+    for (size_t i = 0; i < MAX_CONNECTION; i++)
+    {
+        if (client_connections[i].clientfd != 0)
+        {
+            client_connections[i].demand = DD_SEND_VOTE;
+            client_connections[i].Payloadsize = datalen;
+            client_connections[i].payload = malloc(datalen);
+            memcpy(client_connections[i].payload, payload, datalen);
+            sem_post(&client_connections[i].lock);
+        }
+    }
     return 0;
 }

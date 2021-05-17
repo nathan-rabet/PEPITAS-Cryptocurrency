@@ -53,7 +53,7 @@ void send_get_blocks(client_connection *cc){
     CLIENTMSG
     printf("Send HD_GET_BLOCKS\n");
     safe_write(cc->clientfd, HD_GET_BLOCKS, strlen(HD_GET_BLOCKS));
-    safe_send(cc->clientfd, cc->Payload, cc->Playloadsize);
+    safe_send(cc->clientfd, cc->Payload, cc->Payloadsize);
 }
 void send_actual_height(int fd, infos_st *infos){
     CLIENTMSG

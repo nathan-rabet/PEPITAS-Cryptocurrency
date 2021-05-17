@@ -47,7 +47,7 @@ typedef struct client_connection
     sem_t lock;
     int demand;
     int clientfd; // The client<->server connection socket
-    size_t Playloadsize;
+    size_t Payloadsize;
     void *Payload;
     size_t actual_client_height;
 } client_connection;
@@ -88,6 +88,7 @@ extern const Neighbour HARD_CODED_ADDR[];
 #define DD_GET_BLOCKS                  2
 #define DD_SEND_TRANSACTION            3
 #define DD_GET_TRANSACTION_LIST        4
+#define DD_SEND_VOTE                   5
 
 // MESSAGE INFO
 

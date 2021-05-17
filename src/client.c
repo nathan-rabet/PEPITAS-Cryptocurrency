@@ -104,7 +104,7 @@ size_t update_blockchain_height(infos_st *infos)
             Payload->nb_demands = 1;
             Payload->blocks_height[0] = 0;
             client_connections[i].demand = DD_GET_HEIGHT;
-            client_connections[i].Playloadsize = sizeof(get_blocks_t);
+            client_connections[i].Payloadsize = sizeof(get_blocks_t);
             client_connections[i].Payload = Payload;
             sem_post(&client_connections[i].lock);
 
@@ -137,7 +137,7 @@ void update_blockchain(infos_st *infos, size_t index_client){
         MANAGERMSG
         printf("Demande de %i Blocks\n", nb_dd);
 
-        client_connections[index_client].Playloadsize = sizeof(get_blocks_t);
+        client_connections[index_client].Payloadsize = sizeof(get_blocks_t);
         get_blocks_t * Payload = calloc(1, sizeof(get_blocks_t));
         client_connections[index_client].Payload = Payload;
         Payload->version = P_VERSION;
@@ -201,12 +201,14 @@ int main()
     gtk_init(NULL, NULL);
     MANAGERMSG
     printf("Starting UI\n");
+    
     infos_st *infos = malloc(sizeof(infos_st));
     infos->actual_height = 0;
     infos->pdt = 0;
     infos->is_sychronize = 2;
     infos->serv_type = NODESERVER;
     ac_infos = infos;
+    
     pthread_t ui_th;
     pthread_create(&ui_th, NULL, setup, &infos);
 
