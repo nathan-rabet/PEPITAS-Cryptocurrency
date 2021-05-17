@@ -16,6 +16,8 @@
 
 #include "transaction.h"
 #include "misc/files.h"
+#include "blockchain/wallet.h"
+#include "cryptosystem/rsa.h"
 
 #define MAX_VALIDATORS_PER_BLOCK 512
 
@@ -193,4 +195,7 @@ void write_blockdata(BlockData blockdata, int fd);
 void write_block(Block block, int fd);
 
 void convert_data_to_block(Block *block, int fd);
+
+void update_wallet_with_block(Block block);
+
 #endif

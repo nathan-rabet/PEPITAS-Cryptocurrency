@@ -313,3 +313,32 @@ void write_block(Block block, int fd)
     write(fd, block.vote_signature, 256 * (MAX_VALIDATORS_PER_BLOCK - 1));
     write_blockdata(block.block_data, fd);
 }
+
+void update_wallet_with_block(Block block) {
+    Wallet *wallet = get_my_wallet();
+    for (size_t i = 0; i < block.block_data.nb_transactions; i++)
+    {
+        Transaction trans = block.block_data.transactions[i];
+
+        // I'AM SENDER
+        if (cmp_public_keys(trans.transaction_data.sender_public_key, wallet->pub_key))
+        {
+            if (trans.transaction_data.type == T_TYPE_DEFAULT)
+                remove_money_from_wallet(trans.transaction_data.amount);
+            else
+                remove_money_from_stake(trans.transaction_data.amount);
+        }
+
+        // I'AM RECEIVER
+        if (cmp_public_keys(trans.transaction_data.receiver_public_key, wallet->pub_key))
+        {
+            if (trans.transaction_data.type == T_TYPE_DEFAULT)
+                add_money_to_wallet(trans.transaction_data.amount);
+            else
+                add_money_to_stake(trans.transaction_data.amount);
+        }
+
+
+    }
+    
+}

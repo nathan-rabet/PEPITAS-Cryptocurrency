@@ -15,6 +15,10 @@
 #include <stdbool.h>
 #include <openssl/evp.h>
 
+#define VERIDCT_NO 0
+#define VERIDCT_YES 1
+
+extern client_connection *client_connections;
 
 /**
  * @brief Broadcast a verdict about a block validity to the network
