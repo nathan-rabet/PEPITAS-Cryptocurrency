@@ -27,7 +27,7 @@ Block * create_epoch_block();
  * @brief Give the pkey of the creator of a block
  * 
  * @param block_data The created block data
- * @return RSA* 
+ * @return RSA*, NULL if the data is corrupted
  */
 RSA* get_epoch_man_pkey(BlockData *block_data);
 

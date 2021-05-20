@@ -238,9 +238,7 @@ char plebe_verify_block(Block *block)
 
 int comital_validate_block(Block *block)
 {
-
     Block *prev_block = get_prev_block(block);
-
     // TODO : TEST ALL BLOCK DATA VARIABLES (EXCEPT MAGIC)
     // ? prev_block->block_data.height
     if (prev_block->block_data.height != block->block_data.height - 1)
@@ -251,11 +249,9 @@ int comital_validate_block(Block *block)
         return send_verdict(block, VERIDCT_NO);
 
     // ? block->block_data.previous_block_hash
-    Block *prev_block = get_prev_block();
-    size_t prev_block_hash_size;
-    char *prev_block_hash = sha384_data(get_blockdata_data(prev_block, prev_block_hash_size), prev_block_hash_size);
-    if (strncmp(sha384_data(get_blockdata_data(prev_block)),
-                block->block_data.previous_block_hash, SHA384_DIGEST_LENGTH * 2 + 1) != 0)
+    __attribute__ ((unused)) size_t prev_block_data_size;
+    char *prev_block_hash = sha384_data(get_blockdata_data(prev_block, &prev_block_data_size), prev_block_data_size);
+    if (strncmp(prev_block_hash, block->block_data.previous_block_hash, SHA384_DIGEST_LENGTH * 2 + 1) != 0)
         return send_verdict(block, VERIDCT_NO);
 
     // ? block->block_data.validators_public_keys
@@ -284,11 +280,10 @@ int comital_validate_block(Block *block)
         return send_verdict(block, VERIDCT_NO);
 
     // ? block.block_data.epoch_id and other stuff
-    if (verify_block_signature(block))
+    if (verify_block_signature(*block))
         return send_verdict(block, VERIDCT_NO);
 
     // ? block->block_data.transactions
-
     size_t nb_returned_transactions;
     if (validate_transactions(block->block_data.transactions, block->block_data.nb_transactions,
                               &nb_returned_transactions),
@@ -305,16 +300,19 @@ int comital_validate_block(Block *block)
 
 int send_verdict(Block *block, char verdict)
 {
-
     Wallet *wallet = get_my_wallet();
-    RSA **next_comitee = get_next_comittee(&nb_validators);
 
-    for (int i = 0; i < block->block_data.nb_validators; i++)
+    int i = 0;
+    int validator_index = 0;
+    for (; i < block->block_data.nb_validators; i++)
     {
         RSA *validator = block->block_data.validators_public_keys[i];
 
         if (cmp_public_keys(validator, wallet->pub_key))
+        {
+            validator_index = i;
             break;
+        }
     }
 
     if (i == block->block_data.nb_validators)
@@ -329,8 +327,8 @@ int send_verdict(Block *block, char verdict)
         {
             client_connections[i].demand = DD_SEND_VOTE;
             client_connections[i].Payloadsize = datalen;
-            client_connections[i].payload = malloc(datalen);
-            memcpy(client_connections[i].payload, payload, datalen);
+            client_connections[i].Payload = malloc(datalen);
+            memcpy(client_connections[i].Payload, payload, datalen);
             sem_post(&client_connections[i].lock);
         }
     }

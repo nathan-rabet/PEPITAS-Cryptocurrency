@@ -165,7 +165,7 @@ Block *get_next_block(Block *block);
  * @brief For a block of height `h`, return the block of height `h-1`
  * 
  * @param block The base block
- * @return The next Block* 
+ * @return The previous Block* 
  */
 Block *get_prev_block(Block *block);
 
