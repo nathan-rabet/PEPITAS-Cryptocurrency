@@ -198,7 +198,7 @@ char plebe_verify_block(Block *block)
 
     if (block == NULL || block->block_data.height == 0)
     {
-        return 1;
+        return -1;
     }
 
     // GET COMITTEE
@@ -213,7 +213,7 @@ char plebe_verify_block(Block *block)
             RSA_free(validators[i]);
         }
         free(validators);
-        return 1;
+        return -1;
     }
 
     // VERIFY BLOCK SIGNATURE
@@ -224,7 +224,7 @@ char plebe_verify_block(Block *block)
             RSA_free(validators[i]);
         }
         free(validators);
-        return 1;
+        return -1;
     }
 
     // FREE
