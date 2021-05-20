@@ -270,7 +270,8 @@ char *get_blockdata_data(Block *block, size_t *size)
     {
         get_transaction_data(block->block_data.transactions[i], &buffer, &index);
     }
-    *size = index;
+    if (size != NULL)
+        *size = index;
     return buffer;
 }
 
@@ -318,24 +319,24 @@ void update_wallet_with_block(Block block) {
     Wallet *wallet = get_my_wallet();
     for (size_t i = 0; i < block.block_data.nb_transactions; i++)
     {
-        Transaction trans = block.block_data.transactions[i];
+        Transaction *trans = block.block_data.transactions[i];
 
         // I'AM SENDER
-        if (cmp_public_keys(trans.transaction_data.sender_public_key, wallet->pub_key))
+        if (cmp_public_keys(trans->transaction_data.sender_public_key, wallet->pub_key))
         {
-            if (trans.transaction_data.type == T_TYPE_DEFAULT)
-                remove_money_from_wallet(trans.transaction_data.amount);
+            if (trans->transaction_data.type == T_TYPE_DEFAULT)
+                remove_money_from_wallet(trans->transaction_data.amount);
             else
-                remove_money_from_stake(trans.transaction_data.amount);
+                remove_money_from_stake(trans->transaction_data.amount);
         }
 
         // I'AM RECEIVER
-        if (cmp_public_keys(trans.transaction_data.receiver_public_key, wallet->pub_key))
+        if (cmp_public_keys(trans->transaction_data.receiver_public_key, wallet->pub_key))
         {
-            if (trans.transaction_data.type == T_TYPE_DEFAULT)
-                add_money_to_wallet(trans.transaction_data.amount);
+            if (trans->transaction_data.type == T_TYPE_DEFAULT)
+                add_money_to_wallet(trans->transaction_data.amount);
             else
-                add_money_to_stake(trans.transaction_data.amount);
+                add_money_to_stake(trans->transaction_data.amount);
         }
 
 

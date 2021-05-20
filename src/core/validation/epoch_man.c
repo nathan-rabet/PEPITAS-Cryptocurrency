@@ -2,6 +2,8 @@
 
 RSA *get_epoch_man_pkey(BlockData *block_data)
 {
+    if (block_data->epoch_id >= block_data->nb_validators)
+        return NULL;
     return block_data->validators_public_keys[block_data->epoch_id];
 }
 
@@ -24,7 +26,6 @@ char *create_vote_data(Block *block, char vote, int validator_index, size_t *dat
 
 void give_punishments_and_rewards(Block *last_block, Block *current_block)
 {
-
     // Search the number of 1 in BITMAP
     int validation_yes = 0;
     for (int i = 0; i < last_block->block_data.nb_validators; i++)
