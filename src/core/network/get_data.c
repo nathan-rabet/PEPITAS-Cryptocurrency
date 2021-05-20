@@ -231,7 +231,7 @@ int read_send_block(int fd){
     close(blockfile);
 
     // ADD TO BLOCKCHAIN IF TRUE
-    if (plebe_verify_block(block)) {
+    if (plebe_verify_block(block) == 0) {
         snprintf(temp, 256, "blockchain/block%lu", block_height);
         int ret = rename(dir, temp);
 	
