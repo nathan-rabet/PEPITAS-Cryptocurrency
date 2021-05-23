@@ -114,7 +114,7 @@ void send_pending_transaction_list(int fd){
         while ((dir = readdir(d)) != NULL) {
             if (dir->d_type == DT_REG)
             {
-                sscanf((char *)(txids + nbdir), "%hhu", dir->d_name);
+                *(txids + nbdir) = atol(dir->d_name);
                 nbdir++;
             }
         }
