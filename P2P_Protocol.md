@@ -94,6 +94,7 @@ Send the PENDING TRANSACTION demand by SEND PENDING TRANSACTION.
 ### SEND EPOCH BLOCK
 **Message:**
 - char * : "SEND EPOCH BLOCK\r\n\r\n"
+- int    : Epoch id
 - size_t : Block height
 - size_t : Block struct size octet
 - char * : Block struct
@@ -105,9 +106,10 @@ Send the epoch block of a committee member.
 **Message:**
 
 - char * : "SEND VOTE\r\n\r\n"
-- char *: Epoch creator pk
+- size_t : size epoch creator pk
+- char * : Epoch creator pk
 - size_t : block height
-- int  epoch_id: creator
+- int  : epoch_id
 - char : 0 = False 1 = True 
 - char * : signature of vote precedent vars but not "SEND VOTE\r\n\r\n"
 

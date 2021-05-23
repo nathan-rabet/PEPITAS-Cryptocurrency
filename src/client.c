@@ -285,7 +285,8 @@ int main()
         update_pending_transactions_list(infos);
         MANAGERMSG
         printf("Pending transactions list syncronized!\n");
+
     }
 
-    while (1);
+    pthread_exit(NULL);
 }

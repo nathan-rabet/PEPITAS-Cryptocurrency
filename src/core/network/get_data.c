@@ -265,12 +265,103 @@ int read_send_block(int fd){
 
 int read_vote(__attribute__((unused))int fd){
     
+    // RECUP THE VOTE DATA
+
+    size_t RSAsize = 0;
+    size_t height = 0;
+    int epoch_id = 0;
+    char vote = 0;
+    char validator_signature[2 * SHA384_DIGEST_LENGTH];
+    char data[900];
+    size_t data_length = sizeof(size_t);
+    read(fd, data, sizeof(size_t));
+    RSAsize = *(size_t *)(data);
+
+    BIO *pubkey = BIO_new(BIO_s_mem());
+    read(fd, (data + data_length), RSAsize);
+    BIO_write(pubkey, (data + data_length), RSAsize);
+    RSA *rsa_validator_key = RSA_new();
+    rsa_validator_key = PEM_read_bio_RSAPublicKey(pubkey, NULL, 0, NULL);
+    data_length += RSAsize;
+
+    read(fd, (data + data_length), sizeof(size_t));
+    height = *(size_t *)(data + data_length);
+    data_length += sizeof(size_t);
+
+    read(fd, (data + data_length), sizeof(int));
+    epoch_id = *(int *)(data + data_length);
+    data_length += sizeof(int);
+
+    read(fd, (data + data_length), sizeof(char));
+    vote = *(char *)(data + data_length);
+    data_length += sizeof(char);
+
+    // VERIFY SIGNATURE
+    read(fd, validator_signature, 2 * SHA384_DIGEST_LENGTH);
+    if (!verify_signature(data, data_length, validator_signature, rsa_validator_key))
+    {
+        RSA_free(rsa_validator_key);
+        SERVERMSG
+        printf("Vote is not valid.\n");
+        return -1;
+    }
+
+    SERVERMSG
+    printf("Vote is valid!\n");
+
+    // SEARCH VALIDATOR
+    Block* block = get_epoch(epoch_id);
+
+    if (block->block_data.height != height)
+    {
+        SERVERMSG
+        printf("Vote height is not valid.\n");
+        RSA_free(rsa_validator_key);
+        return -1;
+    }
+    
+
+    int validator_index = 0;
+    for (; validator_index < block->block_data.nb_validators; validator_index++)
+    {
+        if (cmp_public_keys(block->block_data.validators_public_keys[validator_index], rsa_validator_key))
+        {
+            break;
+        }
+    }
+
+    if (validator_index == block->block_data.nb_validators)
+    {
+        SERVERMSG
+        printf("Validator key is not in the epoch.\n");
+        RSA_free(rsa_validator_key);
+        return -1;
+    }
+    if (validator_index == block->block_data.nb_validators-1)
+    {
+        validator_index = epoch_id;
+    }
+
+    // APPLY VOTE
+    memcpy(block->vote_signature[validator_index], validator_signature, 2 * SHA384_DIGEST_LENGTH);
+    if (vote == 1)
+    {
+        block->validators_votes[validator_index / 8] |= 1 << (validator_index % 8);
+    }
+    else
+    {
+        block->validators_votes[validator_index / 8] &= ~(1 << (validator_index % 8));
+    }
+
+    RSA_free(rsa_validator_key);
     return 0;
 }
 
 int read_epoch_block(int fd){
-    Block my_new_epoch;
-    convert_data_to_block(&my_new_epoch, fd);
+    int id = 0;
+    read(fd, &id, sizeof(int));
+    Block *my_new_epoch = get_epoch(id);
+    convert_data_to_block(my_new_epoch, fd);
     // GESTION EPOCH
     return 0;
 }

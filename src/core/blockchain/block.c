@@ -1,5 +1,7 @@
 #include "blockchain/block.h"
 
+static Block epochs[MAX_VALIDATORS_PER_BLOCK];
+
 #define GENESIS_RSA_PUB_1 "-----BEGIN RSA PUBLIC KEY-----\nMIIBCAKCAQEAwcXVgJ6Hy9nryAmSFGpRYxLtPJ1VcI9XTbV34hniNMtztMGpwSTG\nCQ28WIWiD43qjmHxvY4Y26mLYXPjlJ2HiwneSoZcLtY+gJfObGcclpI1DSA0vE72\neTBbDz8enRbJqFWenwopKDoBjvf7nwc/fqRwD0ptLC7xwlPccRiLGdOvP/IusLY0\nLCP6A9R50H7tGsbaAQfGoHYezY8p05K6XRankb7I8wsLFdU6Ew6OghX1tq02liP4\ns5DrloSsxi1mJtW7d+vln0D/a7t2bz4jI+OMtD5M5jldGMyQpzq3D8ZJokMyh6K2\nNLwrAiqDKZiIHJTw8FZidA9/yuzlRpxNHQIBAw==\n-----END RSA PUBLIC KEY-----\n"
 // GENESIS_RSA_PRIV_1
 // -----BEGIN RSA PRIVATE KEY-----
@@ -342,4 +344,8 @@ void update_wallet_with_block(Block block) {
 
     }
     
+}
+
+Block* get_epoch(int id){
+    return epochs + id;
 }
