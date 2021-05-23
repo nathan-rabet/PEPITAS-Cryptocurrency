@@ -280,6 +280,8 @@ int read_send_pending_transaction_list(int fd, infos_st *infos){
     read(fd, &nbtxids, sizeof(size_t));
     time_t txids[500];
     read(fd, txids, sizeof(time_t) * nbtxids);
+    CLIENTMSG
+    printf("Receive a list of %lu transactions!\n", nbtxids);
     for (size_t i = 0; i < nbtxids; i++)
     {
         char temp[50];
