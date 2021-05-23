@@ -8,6 +8,7 @@
 void new_transaction(char type, char *rc_pk, size_t amount, char cause[512], char asset[512]);
 
 #include "network/network.h"
+infos_st* get_infos();
 #include "network/client.h"
 #include "network/server.h"
 #include "network/send_data.h"

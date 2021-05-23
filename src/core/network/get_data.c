@@ -100,7 +100,7 @@ size_t process_header(char *header, int sockfd, infos_st *infos)
     }
     
 
-    WARNINGMSG("Can't read header!")
+    // WARNINGMSG("Can't read header!")
 
     return 0;
 }
@@ -218,7 +218,7 @@ int read_send_block(int fd){
         bc_size -= r;
     }
     if (bc_size > 0){
-        WARNINGMSG("Failed to read all the block!")
+        WARNINGMSG("Failed to read all the block!\n")
     }
     
     CLIENTMSG
@@ -237,10 +237,10 @@ int read_send_block(int fd){
 	
         if(ret == 0) {
             CLIENTMSG
-            printf("File renamed successfully");
+            printf("File renamed successfully\n");
         } else {
             CLIENTMSG
-            printf("Error: unable to rename the file");
+            printf("Error: unable to rename the file\n");
         }
     }
     else
@@ -274,18 +274,18 @@ int read_epoch_block(int fd){
 int read_send_pending_transaction_list(int fd, infos_st *infos){
     size_t nbtxids = 0;
     read(fd, &nbtxids, sizeof(size_t));
-    time_t txid[500];
+    time_t txids[500];
     for (size_t i = 0; i < nbtxids; i++)
     {
-        read(fd, txid + i, sizeof(size_t));
+        read(fd, txids + i, sizeof(time_t) * nbtxids);
     }
     for (size_t i = 0; i < nbtxids; i++)
     {
         char temp[50];
-        sprintf(temp, "./pdt/%ld", *(txid + i));
+        sprintf(temp, "./pdt/%ld", *(txids + i));
         if( access( temp, F_OK ) != 0 ) {
             // file doesn't exists
-            send_get_pending_transaction(fd, *(txid + i));
+            send_get_pending_transaction(fd, *(txids + i));
             read_header(fd, infos);
         }
     }

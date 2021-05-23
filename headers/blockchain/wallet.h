@@ -5,7 +5,6 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <time.h>
-#include <openssl/rsa.h>
 #include "ui/labels.h"
 
 typedef struct Wallet
