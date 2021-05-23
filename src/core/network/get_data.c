@@ -233,7 +233,7 @@ int read_send_block(int fd){
     // ADD TO BLOCKCHAIN IF TRUE
     if (plebe_verify_block(block) == 0) {
         CLIENTMSG
-        printf("The block %lu is valid!\n");
+        printf("The block %lu is valid!\n", block_height);
         snprintf(temp, 256, "blockchain/block%lu", block_height);
         int ret = rename(dir, temp);
 	
@@ -248,7 +248,7 @@ int read_send_block(int fd){
     else
     {
         CLIENTMSG
-        printf("The block %lu is not valid.\n");
+        printf("The block %lu is not valid.\n", block_height);
         int ret = remove(dir);
         if(ret == 0) {
             CLIENTMSG

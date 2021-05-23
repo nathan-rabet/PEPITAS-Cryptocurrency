@@ -102,9 +102,7 @@ void send_send_block(int fd, size_t height){
 }
 
 void send_pending_transaction_list(int fd){
-    CLIENTMSG
-    printf("Send HD_SEND_PENDING_TRANSACTION_LIST\n");
-    safe_write(fd, HD_SEND_PENDING_TRANSACTION_LIST, strlen(HD_SEND_PENDING_TRANSACTION_LIST));
+    safe_send(fd, HD_SEND_PENDING_TRANSACTION_LIST, strlen(HD_SEND_PENDING_TRANSACTION_LIST));
     size_t nbdir = 0;
     time_t txids[500];
     DIR *d;
@@ -121,7 +119,9 @@ void send_pending_transaction_list(int fd){
         closedir(d);
     }
     safe_send(fd, &nbdir, sizeof(size_t));
-    safe_send(fd, txids, sizeof(time_t) * nbdir);
+    safe_write(fd, txids, sizeof(time_t) * nbdir);
+    CLIENTMSG
+    printf("Send HD_SEND_PENDING_TRANSACTION_LIST\n");
 }
 
 void send_send_pending_transaction(int fd, time_t txid){

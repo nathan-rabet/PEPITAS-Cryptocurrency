@@ -283,6 +283,8 @@ int main()
         MANAGERMSG
         printf("Update pending transactions list...\n");
         update_pending_transactions_list(infos);
+        MANAGERMSG
+        printf("Pending transactions list syncronized!\n");
     }
 
     while (1);
