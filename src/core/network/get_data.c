@@ -232,6 +232,8 @@ int read_send_block(int fd){
 
     // ADD TO BLOCKCHAIN IF TRUE
     if (plebe_verify_block(block) == 0) {
+        CLIENTMSG
+        printf("The block %lu is valid!\n");
         snprintf(temp, 256, "blockchain/block%lu", block_height);
         int ret = rename(dir, temp);
 	
@@ -245,13 +247,15 @@ int read_send_block(int fd){
     }
     else
     {
+        CLIENTMSG
+        printf("The block %lu is not valid.\n");
         int ret = remove(dir);
         if(ret == 0) {
             CLIENTMSG
-            printf("File remove successfully");
+            printf("File remove successfully\n");
         } else {
             CLIENTMSG
-            printf("Error: unable to remove the file");
+            printf("Error: unable to remove the file\n");
         }
     }
     
@@ -275,10 +279,7 @@ int read_send_pending_transaction_list(int fd, infos_st *infos){
     size_t nbtxids = 0;
     read(fd, &nbtxids, sizeof(size_t));
     time_t txids[500];
-    for (size_t i = 0; i < nbtxids; i++)
-    {
-        read(fd, txids + i, sizeof(time_t) * nbtxids);
-    }
+    read(fd, txids, sizeof(time_t) * nbtxids);
     for (size_t i = 0; i < nbtxids; i++)
     {
         char temp[50];
