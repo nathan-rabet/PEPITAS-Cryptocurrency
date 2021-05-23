@@ -233,7 +233,7 @@ int read_send_block(int fd){
     // ADD TO BLOCKCHAIN IF TRUE
     if (plebe_verify_block(block) == 0) {
         CLIENTMSG
-        printf("The block %lu is valid!\n");
+        printf("The block %lu is valid!\n", block_height);
         snprintf(temp, 256, "blockchain/block%lu", block_height);
         int ret = rename(dir, temp);
 	
@@ -248,7 +248,7 @@ int read_send_block(int fd){
     else
     {
         CLIENTMSG
-        printf("The block %lu is not valid.\n");
+        printf("The block %lu is not valid.\n", block_height);
         int ret = remove(dir);
         if(ret == 0) {
             CLIENTMSG
@@ -280,6 +280,8 @@ int read_send_pending_transaction_list(int fd, infos_st *infos){
     read(fd, &nbtxids, sizeof(size_t));
     time_t txids[500];
     read(fd, txids, sizeof(time_t) * nbtxids);
+    CLIENTMSG
+    printf("Receive a list of %lu transactions!\n", nbtxids);
     for (size_t i = 0; i < nbtxids; i++)
     {
         char temp[50];
