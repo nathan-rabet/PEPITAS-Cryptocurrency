@@ -13,7 +13,9 @@ char *create_vote_data(Block *block, char vote, int validator_index, size_t *dat
     BIO *my_pub = BIO_new(BIO_s_mem());
     PEM_write_bio_RSAPublicKey(my_pub, block->block_data.validators_public_keys[validator_index]);
     size_t index = BIO_pending(my_pub);
-    BIO_read(my_pub, data, index);
+    memcpy(data, &index, sizeof(size_t));
+    BIO_read(my_pub, data + sizeof(size_t), index);
+    index += sizeof(size_t);
     memcpy(data + index, &block->block_data.height, sizeof(size_t));
     index += sizeof(size_t);
     memcpy(data + index, &block->block_data.epoch_id, sizeof(int));

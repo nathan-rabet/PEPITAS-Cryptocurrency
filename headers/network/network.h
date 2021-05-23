@@ -55,6 +55,7 @@ typedef struct client_connection
 typedef struct infos_st
 {
     char is_sychronize;
+    pthread_t validator;
     size_t actual_height;
     size_t pdt;
     char serv_type;

@@ -14,7 +14,6 @@ typedef struct Wallet
 
     size_t amount;
     size_t stake_amount;
-    char is_validator;
 } Wallet;
 
 /**
