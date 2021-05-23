@@ -130,7 +130,7 @@ void send_send_pending_transaction(int fd, time_t txid){
     size_t bc_size = 0;
     ssize_t r = 0;
 
-    snprintf(dir, 256, "pdt/%ld", txid);
+    snprintf(dir, 256, "./pdt/%ld", txid);
     FILE *transfile = fopen(dir, "r");
     if (transfile == NULL)
     {

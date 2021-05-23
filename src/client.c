@@ -4,6 +4,10 @@ extern client_connection *client_connections;
 static pthread_t server_t;
 infos_st *ac_infos;
 
+infos_st* get_infos(){
+    return ac_infos;
+}
+
 void new_transaction(char type, char *rc_pk, size_t amount, char cause[512], char asset[512]){
     BIO *pubkey2 = BIO_new(BIO_s_mem());
     BIO_write(pubkey2, rc_pk, strlen(rc_pk));
