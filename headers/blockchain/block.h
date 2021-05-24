@@ -200,4 +200,6 @@ void update_wallet_with_block(Block block);
 
 Block* get_epoch(int id);
 
+void clear_block(Block* block);
+
 #endif
