@@ -96,7 +96,6 @@ Send the PENDING TRANSACTION demand by SEND PENDING TRANSACTION.
 - char * : "SEND EPOCH BLOCK\r\n\r\n"
 - int    : Epoch id
 - size_t : Block height
-- size_t : Block struct size octet
 - char * : Block struct
 
 **Description**

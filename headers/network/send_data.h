@@ -31,4 +31,8 @@ void send_send_pending_transaction(int fd, time_t txid);
 
 void send_get_pending_transaction(int fd, time_t txid);
 
+void send_epoch_block(client_connection *cc);
+
+void send_vote_fd(client_connection *cc);
+
 #endif

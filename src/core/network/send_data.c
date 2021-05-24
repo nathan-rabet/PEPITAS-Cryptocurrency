@@ -169,3 +169,20 @@ void send_get_pending_transaction(int fd, time_t txid){
     CLIENTMSG
     printf("Send HD_GET_PENDING_TRANSACTION with txid: %ld\n", txid);
 }
+
+void send_epoch_block(client_connection *cc){
+    safe_write(cc->clientfd, HD_SEND_EPOCH_BLOCK, strlen(HD_SEND_EPOCH_BLOCK));
+    Block *block = (Block *)cc->Payload;
+    safe_send(cc->clientfd, &block->block_data.epoch_id, sizeof(int));
+    safe_send(cc->clientfd, &block->block_data.height, sizeof(size_t));
+    write_block(*block, cc->clientfd);
+    CLIENTMSG
+    printf("Send HD_SEND_EPOCH_BLOCK\n");
+}
+
+void send_vote_fd(client_connection *cc){
+    safe_write(cc->clientfd, HD_SEND_VOTE, strlen(HD_SEND_VOTE));
+    safe_send(cc->clientfd, cc->Payload, cc->Payloadsize);
+    CLIENTMSG
+    printf("Send HD_SEND_VOTE\n");
+}

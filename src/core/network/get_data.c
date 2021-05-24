@@ -9,7 +9,7 @@ size_t process_header(char *header, int sockfd, infos_st *infos)
         struct sockaddr_in client_addr;
         socklen_t client_addr_len = sizeof(client_addr);
 
-        if (getpeername(sockfd, (struct sockaddr * restrict) & client_addr, &client_addr_len) == -1)
+        if (getpeername(sockfd, (struct sockaddr *restrict)&client_addr, &client_addr_len) == -1)
             err(EXIT_FAILURE, "Failed to recover client IP address\n");
 
         char ip_str[39];
@@ -98,7 +98,6 @@ size_t process_header(char *header, int sockfd, infos_st *infos)
         printf("Recived header HD_SEND_EPOCH_BLOCK\n");
         return read_vote(sockfd);
     }
-    
 
     // WARNINGMSG("Can't read header!")
 
@@ -127,13 +126,12 @@ int fetch_client_list(char who, int fd)
 
         read(fd, hostname, hostname_size);
         index++;
-        
+
         set_neighbour(who, hostname, family);
     }
     free(hostname);
     return 0;
 }
-
 
 size_t read_header(int sockfd, infos_st *infos)
 {
@@ -154,7 +152,8 @@ size_t read_header(int sockfd, infos_st *infos)
     return 0;
 }
 
-int read_get_blocks(int fd, infos_st *infos){
+int read_get_blocks(int fd, infos_st *infos)
+{
     get_blocks_t demand;
     ssize_t r;
     if ((r = recv(fd, &demand, sizeof(get_blocks_t), MSG_WAITALL)) != sizeof(get_blocks_t))
@@ -165,12 +164,14 @@ int read_get_blocks(int fd, infos_st *infos){
     for (char i = 0; i < demand.nb_demands; i++)
     {
         size_t height = *(demand.blocks_height + i);
-        if (height == 0){
+        if (height == 0)
+        {
             send_actual_height(fd, infos);
         }
         else
         {
-            if (height <= infos->actual_height){
+            if (height <= infos->actual_height)
+            {
                 send_send_block(fd, height);
             }
             else
@@ -182,13 +183,15 @@ int read_get_blocks(int fd, infos_st *infos){
     return 0;
 }
 
-size_t read_actual_height(int fd){
+size_t read_actual_height(int fd)
+{
     size_t ac;
     read(fd, &ac, sizeof(size_t));
     return ac;
 }
 
-int read_send_block(int fd){
+int read_send_block(int fd)
+{
     int blockfile;
     char dir[256];
     char temp[1024];
@@ -217,10 +220,11 @@ int read_send_block(int fd){
         safe_write(blockfile, temp, r);
         bc_size -= r;
     }
-    if (bc_size > 0){
+    if (bc_size > 0)
+    {
         WARNINGMSG("Failed to read all the block!\n")
     }
-    
+
     CLIENTMSG
     printf("Recived block %lu in connection fd: %i\n", block_height, fd);
 
@@ -231,16 +235,20 @@ int read_send_block(int fd){
     close(blockfile);
 
     // ADD TO BLOCKCHAIN IF TRUE
-    if (plebe_verify_block(block) == 0) {
+    if (plebe_verify_block(block) == 0)
+    {
         CLIENTMSG
         printf("The block %lu is valid!\n", block_height);
         snprintf(temp, 256, "blockchain/block%lu", block_height);
         int ret = rename(dir, temp);
-	
-        if(ret == 0) {
+
+        if (ret == 0)
+        {
             CLIENTMSG
             printf("File renamed successfully\n");
-        } else {
+        }
+        else
+        {
             CLIENTMSG
             printf("Error: unable to rename the file\n");
         }
@@ -250,21 +258,25 @@ int read_send_block(int fd){
         CLIENTMSG
         printf("The block %lu is not valid.\n", block_height);
         int ret = remove(dir);
-        if(ret == 0) {
+        if (ret == 0)
+        {
             CLIENTMSG
             printf("File remove successfully\n");
-        } else {
+        }
+        else
+        {
             CLIENTMSG
             printf("Error: unable to remove the file\n");
         }
     }
-    
+
     free_block(block);
     return 0;
 }
 
-int read_vote(__attribute__((unused))int fd){
-    
+int read_vote(__attribute__((unused)) int fd)
+{
+
     // RECUP THE VOTE DATA
 
     size_t RSAsize = 0;
@@ -310,7 +322,7 @@ int read_vote(__attribute__((unused))int fd){
     printf("Vote is valid!\n");
 
     // SEARCH VALIDATOR
-    Block* block = get_epoch(epoch_id);
+    Block *block = get_epoch(epoch_id);
 
     if (block->block_data.height != height)
     {
@@ -319,7 +331,6 @@ int read_vote(__attribute__((unused))int fd){
         RSA_free(rsa_validator_key);
         return -1;
     }
-    
 
     int validator_index = 0;
     for (; validator_index < block->block_data.nb_validators; validator_index++)
@@ -337,7 +348,7 @@ int read_vote(__attribute__((unused))int fd){
         RSA_free(rsa_validator_key);
         return -1;
     }
-    if (validator_index == block->block_data.nb_validators-1)
+    if (validator_index == block->block_data.nb_validators - 1)
     {
         validator_index = epoch_id;
     }
@@ -357,18 +368,19 @@ int read_vote(__attribute__((unused))int fd){
     return 0;
 }
 
-int read_epoch_block(int fd, infos_st* infos){
+int read_epoch_block(int fd, infos_st *infos)
+{
     int id = 0;
     size_t height = 0;
-    size_t size = 0;
     read(fd, &id, sizeof(int));
     read(fd, &height, sizeof(size_t));
-    read(fd, &size, sizeof(size_t));
+    Block *epoch = get_epoch(id);
     // IS NEXT BLOCK
     if (infos->actual_height + 1 == height)
     {
-        Block *my_new_epoch = get_epoch(id);
-        convert_data_to_block(my_new_epoch, fd);
+        convert_data_to_block(epoch, fd);
+        MANAGERMSG
+        printf("Block is valid!\n");
     }
 
     // ADD NEXT BLOCK TO THE BLOCKCHAIN
@@ -378,11 +390,13 @@ int read_epoch_block(int fd, infos_st* infos){
         for (size_t i = 0; i < MAX_VALIDATORS_PER_BLOCK; i++)
         {
             Block *my_new_epoch = get_epoch(i);
-            if (my_new_epoch->block_data.height != 0) {
+            if (my_new_epoch->block_data.height != 0)
+            {
                 if (added == 0)
                 {
                     update_wallet_with_block(*my_new_epoch);
                     write_block_file(*my_new_epoch);
+                    infos->actual_height++;
                     added++;
                     MANAGERMSG
                     printf("Block %lu is added in the blockchain!\n", my_new_epoch->block_data.height);
@@ -390,12 +404,61 @@ int read_epoch_block(int fd, infos_st* infos){
                 clear_block(my_new_epoch);
             }
         }
+        if (infos->is_validator > 0)
+        {
+            convert_data_to_block(epoch, fd);
+            infos->validator_id = is_commitee_member();
+        }
     }
-    
+
+    // VOTE NEW EPOCH
+    if (infos->validator_id >= 0)
+    {
+        int v = comital_validate_block(epoch);
+        MANAGERMSG
+        printf("Vote %d for the epoch %d!\n", v, id);
+    }
+
+    // CREATE NEW EPOCH
+    if (infos->is_validator == 1)
+    {
+        infos->is_validator++;
+
+        // SEND REQUEST DD_SEND_EPOCH
+        for (size_t i = 0; i < MAX_CONNECTION; i++)
+        {
+            if (client_connections[i].clientfd != 0)
+            {
+                while (client_connections[i].demand != 0)
+                    ;
+                client_connections[i].demand = DD_SEND_EPOCH;
+                client_connections[i].Payload = (void *)epoch;
+                sem_post(&client_connections[i].lock);
+            }
+        }
+
+        // WAIT
+        for (size_t i = 0; i < MAX_CONNECTION; i++)
+        {
+            if (client_connections[i].clientfd != 0)
+            {
+                while (client_connections[i].demand != 0)
+                    ;
+                free(client_connections[i].Payload);
+            }
+        }
+
+        MANAGERMSG
+        printf("Create new epoch!\n");
+    }
+
+    MANAGERMSG
+    printf("Block is not valid!\n");
     return 0;
 }
 
-int read_send_pending_transaction_list(int fd, infos_st *infos){
+int read_send_pending_transaction_list(int fd, infos_st *infos)
+{
     size_t nbtxids = 0;
     read(fd, &nbtxids, sizeof(size_t));
     time_t txids[500];
@@ -406,7 +469,8 @@ int read_send_pending_transaction_list(int fd, infos_st *infos){
     {
         char temp[50];
         sprintf(temp, "./pdt/%ld", *(txids + i));
-        if( access( temp, F_OK ) != 0 ) {
+        if (access(temp, F_OK) != 0)
+        {
             // file doesn't exists
             send_get_pending_transaction(fd, *(txids + i));
             read_header(fd, infos);
@@ -415,7 +479,8 @@ int read_send_pending_transaction_list(int fd, infos_st *infos){
     return nbtxids;
 }
 
-int read_send_pending_transaction(int fd){
+int read_send_pending_transaction(int fd)
+{
     char dir[256];
     char temp[1024];
     size_t bc_size;
@@ -426,9 +491,10 @@ int read_send_pending_transaction(int fd){
     r = read(fd, &bc_size, sizeof(size_t));
     if (r != sizeof(size_t))
         return -1;
-    
+
     snprintf(dir, 256, "pdt/%ld", txid);
-    if( access( dir, F_OK ) == 0 ) {
+    if (access(dir, F_OK) == 0)
+    {
         // file exists
         return txid;
     }
@@ -448,18 +514,21 @@ int read_send_pending_transaction(int fd){
         safe_write(transfile, temp, r);
         bc_size -= r;
     }
-    if (bc_size > 0){
+    if (bc_size > 0)
+    {
         WARNINGMSG("Failed to read all the block!")
     }
     close(transfile);
     SERVERMSG
     printf("Recived read_pending_transaction %lu \
-    transaction in connection fd: %i\n", txid, fd);
+    transaction in connection fd: %i\n",
+           txid, fd);
     return txid;
 }
 
-int read_get_pending_transaction(int fd){
-    
+int read_get_pending_transaction(int fd)
+{
+
     time_t txid;
     read(fd, &txid, sizeof(time_t));
     send_send_pending_transaction(fd, txid);

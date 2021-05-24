@@ -1,4 +1,13 @@
 #include "client.h"
+#include "network/client.h"
+#include "network/server.h"
+#include "network/send_data.h"
+#include "network/get_data.h"
+#include "misc/safe.h"
+#include "blockchain/blockchain_header.h"
+#include "blockchain/transaction.h"
+#include <openssl/rsa.h>
+#include "ui/ui.h"
 
 extern client_connection *client_connections;
 static pthread_t server_t;
@@ -210,6 +219,8 @@ int main()
     infos->actual_height = 0;
     infos->pdt = 0;
     infos->is_sychronize = 2;
+    infos->is_validator = 0;
+    infos->validator_id = -1;
     infos->serv_type = NODESERVER;
     ac_infos = infos;
     
