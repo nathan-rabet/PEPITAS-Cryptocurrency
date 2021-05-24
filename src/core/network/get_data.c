@@ -90,7 +90,7 @@ size_t process_header(char *header, int sockfd, infos_st *infos)
     {
         CLIENTMSG
         printf("Recived header HD_SEND_EPOCH_BLOCK\n");
-        return read_epoch_block(sockfd);
+        return read_epoch_block(sockfd, infos);
     }
     if (strncmp(HD_SEND_VOTE, header, strlen(HD_SEND_VOTE)) == 0)
     {
@@ -357,12 +357,41 @@ int read_vote(__attribute__((unused))int fd){
     return 0;
 }
 
-int read_epoch_block(int fd){
+int read_epoch_block(int fd, infos_st* infos){
     int id = 0;
+    size_t height = 0;
+    size_t size = 0;
     read(fd, &id, sizeof(int));
-    Block *my_new_epoch = get_epoch(id);
-    convert_data_to_block(my_new_epoch, fd);
-    // GESTION EPOCH
+    read(fd, &height, sizeof(size_t));
+    read(fd, &size, sizeof(size_t));
+    // IS NEXT BLOCK
+    if (infos->actual_height + 1 == height)
+    {
+        Block *my_new_epoch = get_epoch(id);
+        convert_data_to_block(my_new_epoch, fd);
+    }
+
+    // ADD NEXT BLOCK TO THE BLOCKCHAIN
+    if (infos->actual_height + 2 == height)
+    {
+        char added = 0;
+        for (size_t i = 0; i < MAX_VALIDATORS_PER_BLOCK; i++)
+        {
+            Block *my_new_epoch = get_epoch(i);
+            if (my_new_epoch->block_data.height != 0) {
+                if (added == 0)
+                {
+                    update_wallet_with_block(*my_new_epoch);
+                    write_block_file(*my_new_epoch);
+                    added++;
+                    MANAGERMSG
+                    printf("Block %lu is added in the blockchain!\n", my_new_epoch->block_data.height);
+                }
+                clear_block(my_new_epoch);
+            }
+        }
+    }
+    
     return 0;
 }
 
