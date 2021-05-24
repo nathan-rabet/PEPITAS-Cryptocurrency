@@ -239,3 +239,17 @@ ssize_t get_validator_id(RSA* pkey)
 
     return -1;
 }
+
+int is_commitee_member(){
+    int nb_validators;
+    int id = -1;
+    RSA** keys = get_next_comittee(&nb_validators);
+    RSA* my_key = get_my_wallet()->pub_key;
+    for (int i = 0; i < nb_validators; i++)
+    {
+        if (id == -1 && cmp_public_keys(keys[i], my_key))
+            id = i;
+        RSA_free(keys[i]);
+    }
+    return id;
+}

@@ -55,7 +55,8 @@ typedef struct client_connection
 typedef struct infos_st
 {
     char is_sychronize;
-    pthread_t validator;
+    char is_validator;
+    int validator_id;
     size_t actual_height;
     size_t pdt;
     char serv_type;
@@ -90,6 +91,7 @@ extern const Neighbour HARD_CODED_ADDR[];
 #define DD_SEND_TRANSACTION            3
 #define DD_GET_TRANSACTION_LIST        4
 #define DD_SEND_VOTE                   5
+#define DD_SEND_EPOCH                  6
 
 // MESSAGE INFO
 

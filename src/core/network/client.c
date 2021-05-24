@@ -286,6 +286,18 @@ void *client_thread(void *args)
             break;
         }
 
+        case DD_SEND_VOTE:
+        {
+            send_vote_fd(cc);
+            break;
+        }
+
+        case DD_SEND_EPOCH:
+        {
+            send_epoch_block(cc);
+            break;
+        }
+
         default:
             break;
         }

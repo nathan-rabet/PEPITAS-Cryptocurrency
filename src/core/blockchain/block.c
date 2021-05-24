@@ -343,7 +343,14 @@ void update_wallet_with_block(Block block) {
 
 
     }
-    
+    if (wallet->stake_amount > 50000000)
+    {
+        get_infos()->is_validator = 1;
+    }
+    else
+    {
+        get_infos()->is_validator = 0;
+    }
 }
 
 Block* get_epoch(int id){

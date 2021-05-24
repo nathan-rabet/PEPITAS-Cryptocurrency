@@ -114,5 +114,6 @@ int push_stake(size_t amount);
  * @return 0 if the broadcast succeeds, else returns -1
  */
 int pop_stake(size_t amount);
+int is_commitee_member();
 
 #endif

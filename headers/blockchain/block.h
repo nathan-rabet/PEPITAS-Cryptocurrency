@@ -14,6 +14,7 @@
 #include <fcntl.h>
 #include <sys/types.h>
 
+#include "client.h"
 #include "transaction.h"
 #include "misc/files.h"
 #include "blockchain/wallet.h"

@@ -45,7 +45,7 @@ int send_verdict(Block *block, char verdict);
  * @return Transaction**, the valid transactions 
  */
 Transaction ** validate_transactions(Transaction** transaction_to_validate,size_t nb_transactions,size_t * nb_returned_transactions);
-
+int comital_validate_block(Block *block);
 char plebe_verify_block(Block *block);
 
 #endif
