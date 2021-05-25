@@ -2,72 +2,6 @@
 
 static Block epochs[MAX_VALIDATORS_PER_BLOCK];
 
-#define GENESIS_RSA_PUB_1 "-----BEGIN RSA PUBLIC KEY-----\nMIIBCAKCAQEAwcXVgJ6Hy9nryAmSFGpRYxLtPJ1VcI9XTbV34hniNMtztMGpwSTG\nCQ28WIWiD43qjmHxvY4Y26mLYXPjlJ2HiwneSoZcLtY+gJfObGcclpI1DSA0vE72\neTBbDz8enRbJqFWenwopKDoBjvf7nwc/fqRwD0ptLC7xwlPccRiLGdOvP/IusLY0\nLCP6A9R50H7tGsbaAQfGoHYezY8p05K6XRankb7I8wsLFdU6Ew6OghX1tq02liP4\ns5DrloSsxi1mJtW7d+vln0D/a7t2bz4jI+OMtD5M5jldGMyQpzq3D8ZJokMyh6K2\nNLwrAiqDKZiIHJTw8FZidA9/yuzlRpxNHQIBAw==\n-----END RSA PUBLIC KEY-----\n"
-// GENESIS_RSA_PRIV_1
-// -----BEGIN RSA PRIVATE KEY-----
-// MIIEpAIBAAKCAQEAwcXVgJ6Hy9nryAmSFGpRYxLtPJ1VcI9XTbV34hniNMtztMGp
-// wSTGCQ28WIWiD43qjmHxvY4Y26mLYXPjlJ2HiwneSoZcLtY+gJfObGcclpI1DSA0
-// vE72eTBbDz8enRbJqFWenwopKDoBjvf7nwc/fqRwD0ptLC7xwlPccRiLGdOvP/Iu
-// sLY0LCP6A9R50H7tGsbaAQfGoHYezY8p05K6XRankb7I8wsLFdU6Ew6OghX1tq02
-// liP4s5DrloSsxi1mJtW7d+vln0D/a7t2bz4jI+OMtD5M5jldGMyQpzq3D8ZJokMy
-// h6K2NLwrAiqDKZiIHJTw8FZidA9/yuzlRpxNHQIBAwKCAQEAgS6OVb8FMpFH2rEM
-// DZw2QgyeKGjjoF+PiSOlQWaWzdz3zdZxK23ZW159kFkWtQlHCZahKQll58Zc66KX
-// uGkFB1vphwQ9dI7UVbqJnZoTDwwjXhV4fYn5piA8tNS/E2SGcDkUagbGGtFWX0/9
-// FK9/qcL1X4bzcsn2gY09oLsHZov17yW+4MMUGhecf2LmW4tCCCXvh2pzkwNVJR9a
-// IKQHQKZ3dKuU6/5KkiwlY/syEg4yfEnQ3Q3rWBeoC4c/Dl6delSSzSglYKVAqLMC
-// h0/ql6w7paYHfH08k+5L4RISLxHhd9RcKBCGrOE0qgttIsn9CuGhOOHKepYcNMuo
-// yvK4EwKBgQDtWVAT+EA29FgQ5DhfXQpZJw7xMx5CcnS2rA27LdEL3LV6sD3WB8Ta
-// 2iH6LYqpS6tvSyySAY3yIOpZOAqrMkcdgCpXG+syhqyfovJFIw6i0NttNa/6tTo0
-// vHpzR3qMxFmpKKYeN1UW2cwr6N24U/8BfKwxCjZ+mSdR0uyKtSgcFwKBgQDQ/+l8
-// Z1FfEKh+YIfA6iOw538BgsnW0XxoadJndMujn2d5sn+TiUjAYHEHz4saG1U6sRHr
-// SQEljoMWTS8i/lhcbyyIKER7B5x+y7ytgTegb4XGBhVG9kNNfmyrjiUPBNHORd6K
-// FDTVV54wGjunIWqLD5ZOEM00IwcDqM7dYQgc6wKBgQCeO4q3+tV5+Dq17XrqPgbm
-// Ggn2IhQsTE3PHV58yTYH6Hj8dX6Or9iR5sFRc7HGMnJKMh22q7P2wJw7erHHdtoT
-// qsbkvUd3BHMVF0wuF18XNeeeI8qnI3wjKFGiL6cIguZwxcQUJONkkTLH8JPQN/9W
-// Ux12Bs7/EMThN0hceMVoDwKBgQCLVUZS74uUtcWpla/V8W0gmlSrrIaPNlLwRoxE
-// +IfCakT7zFUNBjCAQEtaily8EjjRy2FHhgDDtFdkM3TB/uWS9MhaxYL8r72p3Shz
-// q3pq9QPZWWOEpCzeVEhyXsNfWIve2T8GuCM45RQgEX0aFkcHX7mJYIjNbK9Xxd8+
-// QLATRwKBgQC5y7sgIyPwU3kYcc4ygoOSdmNSnK3pakhqeJfXxJ4nP25Cj0QYgrIV
-// 2UOy20aZ1zGE7nPdUX2xJ3rcYhEowR40uij751l/aMsI/4pYNd+uPxJOLmFCPRsB
-// e9vPFx889bxPk2/OU2xT05AyoG8yAcTaSuzlii6FV+6cafjgfrgfow==
-// -----END RSA PRIVATE KEY-----
-
-#define GENESIS_RSA_PUB_2 "-----BEGIN RSA PUBLIC KEY-----\nMIIBCAKCAQEAsrHwAjOQzmoguFCpWTEe/3x/T6KSr7dF1zYFnCq3V3v6OQFAcyt7\nQG0q138XFasRM70Hc0k589s5nKfPYSz5MCa6iDD1IKo1qrGSyF9CPfW87DwZuLXW\nhShifhsLu+VfkbjYx5h/SGmC5WSedro3cTrex7V1BbZkCeKqRMYCgtTPucyYE4pP\nqEnFQtMVAssyaDckjpWzpwun9wsoZ3qkqAAREwNecR7i2ojyUBJ8L5ZUryqmxi4F\ngwvFLnlhAeoraWqk40L3bSdnGH1u/YV59f4/MSyVmTezI6DhFx2E3Pld/Kar5PnF\nrJSEQjtjwg+OVdGnrT46SKq8JQQlgFVZzwIBAw==\n-----END RSA PUBLIC KEY-----\n"
-
-Block *get_genesis_block()
-{
-    static Block genesis_block = {0};
-
-    if (genesis_block.block_data.nb_transactions == 0)
-    {
-        genesis_block.block_data.nb_transactions = 2;
-        genesis_block.block_data.transactions = malloc(2 * sizeof(BlockData *));
-        genesis_block.block_data.transactions[0] = malloc(sizeof(Transaction));
-        genesis_block.block_data.transactions[1] = malloc(sizeof(Transaction));
-
-        BIO *bufio;
-        RSA *rsa1;
-        RSA *rsa2;
-
-        bufio = BIO_new_mem_buf(GENESIS_RSA_PUB_1, strlen(GENESIS_RSA_PUB_1));
-        rsa1 = PEM_read_bio_RSAPublicKey(bufio, NULL, 0, NULL);
-        BIO_free(bufio);
-
-        bufio = BIO_new_mem_buf(GENESIS_RSA_PUB_2, strlen(GENESIS_RSA_PUB_2));
-        rsa2 = PEM_read_bio_RSAPublicKey(bufio, NULL, 0, NULL);
-        BIO_free(bufio);
-
-        genesis_block.block_data.transactions[0]->transaction_data.receiver_public_key = rsa1;
-        genesis_block.block_data.transactions[1]->transaction_data.receiver_public_key = rsa2;
-        genesis_block.block_data.transactions[0]->transaction_data.receiver_remaining_money = 4200000000;
-        genesis_block.block_data.transactions[1]->transaction_data.receiver_remaining_money = 4200000000;
-        genesis_block.block_data.transactions[0]->transaction_data.transaction_timestamp = 1005458400;
-        genesis_block.block_data.transactions[1]->transaction_data.transaction_timestamp = 980834400;
-        write_block_file(genesis_block);
-    }
-    return &genesis_block;
-}
-
 ChunkBlockchain *load_blockchain(size_t nb_chunk)
 {
 #ifdef TEST
@@ -322,25 +256,43 @@ void update_wallet_with_block(Block block) {
     for (size_t i = 0; i < block.block_data.nb_transactions; i++)
     {
         Transaction *trans = block.block_data.transactions[i];
-
-        // I'AM SENDER
-        if (cmp_public_keys(trans->transaction_data.sender_public_key, wallet->pub_key))
+        switch (trans->transaction_data.type)
         {
-            if (trans->transaction_data.type == T_TYPE_DEFAULT)
+        case T_TYPE_DEFAULT:
+            if (cmp_public_keys(trans->transaction_data.sender_public_key, wallet->pub_key))
                 remove_money_from_wallet(trans->transaction_data.amount);
-            else
-                remove_money_from_stake(trans->transaction_data.amount);
-        }
-
-        // I'AM RECEIVER
-        if (cmp_public_keys(trans->transaction_data.receiver_public_key, wallet->pub_key))
-        {
-            if (trans->transaction_data.type == T_TYPE_DEFAULT)
+            if (cmp_public_keys(trans->transaction_data.receiver_public_key, wallet->pub_key))
                 add_money_to_wallet(trans->transaction_data.amount);
-            else
+            break;
+        case T_TYPE_ADD_STAKE:
+            if (cmp_public_keys(trans->transaction_data.sender_public_key, wallet->pub_key))
+            {
                 add_money_to_stake(trans->transaction_data.amount);
+                remove_money_from_wallet(trans->transaction_data.amount);
+            }
+            break;
+        case T_TYPE_WITHDRAW_STAKE:
+            if (cmp_public_keys(trans->transaction_data.receiver_public_key, wallet->pub_key))
+            {
+                remove_money_from_stake(trans->transaction_data.amount);
+                add_money_to_wallet(trans->transaction_data.amount);
+            }
+            break;
+        case T_TYPE_REWARD_STAKE:
+            if (cmp_public_keys(trans->transaction_data.receiver_public_key, wallet->pub_key))
+            {
+                add_money_to_stake(trans->transaction_data.amount);
+            }
+            break;
+        case T_TYPE_PUNISH_STAKE:
+            if (cmp_public_keys(trans->transaction_data.sender_public_key, wallet->pub_key))
+            {
+                remove_money_from_stake(trans->transaction_data.amount);
+            }
+            break;
+        default:
+            break;
         }
-
 
     }
     if (wallet->stake_amount > 50000000)

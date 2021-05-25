@@ -106,8 +106,6 @@ typedef struct ChunkBlockchain
     int16_t nb_blocks;        // The number of blocks loaded in the chunk
 } ChunkBlockchain;
 
-Block *get_genesis_block();
-
 /**
  * @brief Loads a blockchain object with a padding of 'nb_chunk'
  * 
