@@ -34,7 +34,7 @@ int read_send_block(int fd);
 int read_vote(int fd);
 int read_epoch_block(int fd, infos_st* infos);
 int read_get_pending_transaction(int fd);
-int read_send_pending_transaction(int fd);
+int read_send_pending_transaction(int fd, infos_st* infos);
 int read_send_pending_transaction_list(int fd, infos_st *infos);
 
 #endif

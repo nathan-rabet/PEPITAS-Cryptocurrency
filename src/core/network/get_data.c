@@ -78,7 +78,7 @@ size_t process_header(char *header, int sockfd, infos_st *infos)
     {
         CLIENTMSG
         printf("Recived header HD_SEND_PENDING_TRANSACTION\n");
-        return read_send_pending_transaction(sockfd);
+        return read_send_pending_transaction(sockfd, infos);
     }
     if (strncmp(HD_GET_PENDING_TRANSACTION, header, strlen(HD_GET_PENDING_TRANSACTION)) == 0)
     {
@@ -274,7 +274,7 @@ int read_send_block(int fd)
     return 0;
 }
 
-int read_vote(__attribute__((unused)) int fd)
+int read_vote(int fd)
 {
 
     // RECUP THE VOTE DATA
@@ -479,7 +479,7 @@ int read_send_pending_transaction_list(int fd, infos_st *infos)
     return nbtxids;
 }
 
-int read_send_pending_transaction(int fd)
+int read_send_pending_transaction(int fd, infos_st* infos)
 {
     char dir[256];
     char temp[1024];
@@ -523,6 +523,7 @@ int read_send_pending_transaction(int fd)
     printf("Recived read_pending_transaction %lu \
     transaction in connection fd: %i\n",
            txid, fd);
+    infos->pdt++;
     return txid;
 }
 
