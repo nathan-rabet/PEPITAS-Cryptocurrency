@@ -140,7 +140,6 @@ void free_block(Block *block)
     // Transaction
     for (size_t i = 0; i < block->block_data.nb_transactions; i++)
     {
-        RSA_free(block->block_data.transactions[i]->transaction_data.organisation_public_key);
         RSA_free(block->block_data.transactions[i]->transaction_data.receiver_public_key);
         RSA_free(block->block_data.transactions[i]->transaction_data.sender_public_key);
     }
@@ -313,7 +312,6 @@ void clear_block(Block* block){
     // Transaction
     for (size_t i = 0; i < block->block_data.nb_transactions; i++)
     {
-        RSA_free(block->block_data.transactions[i]->transaction_data.organisation_public_key);
         RSA_free(block->block_data.transactions[i]->transaction_data.receiver_public_key);
         RSA_free(block->block_data.transactions[i]->transaction_data.sender_public_key);
     }

@@ -17,6 +17,38 @@ infos_st* get_infos(){
     return ac_infos;
 }
 
+void Validate(){
+    if (ac_infos->is_validator == 0)
+        return;
+    Block *epoch = create_epoch_block();
+    // SEND REQUEST DD_SEND_EPOCH
+    for (size_t i = 0; i < MAX_CONNECTION; i++)
+    {
+        if (client_connections[i].clientfd != 0)
+        {
+            while (client_connections[i].demand != 0)
+                ;
+            client_connections[i].demand = DD_SEND_EPOCH;
+            client_connections[i].Payload = (void *)epoch;
+            sem_post(&client_connections[i].lock);
+        }
+    }
+
+    // WAIT
+    for (size_t i = 0; i < MAX_CONNECTION; i++)
+    {
+        if (client_connections[i].clientfd != 0)
+        {
+            while (client_connections[i].demand != 0)
+                ;
+            free(client_connections[i].Payload);
+        }
+    }
+
+    MANAGERMSG
+    printf("Create new epoch!\n");
+}
+
 void new_transaction(char type, char *rc_pk, size_t amount, char cause[512], char asset[512]){
     BIO *pubkey2 = BIO_new(BIO_s_mem());
     BIO_write(pubkey2, rc_pk, strlen(rc_pk));
@@ -33,12 +65,12 @@ void new_transaction(char type, char *rc_pk, size_t amount, char cause[512], cha
     Wallet *wallet = get_my_wallet();
     if (type != T_TYPE_WITHDRAW_STAKE && amount > wallet->amount) {
         MANAGERMSG
-        printf("Can't create a the transaction not enough money!\n");
+        printf("Can't create a the transaction not enough money! (%lu tr / %lu bal)\n", amount, wallet->amount);
         return;
     }
     if (type == T_TYPE_WITHDRAW_STAKE && amount > wallet->stake_amount) {
         MANAGERMSG
-        printf("Can't create a the transaction not enough money in the stake!\n");
+        printf("Can't create a the transaction not enough money in the stake! (%lu tr / %lu bal)\n", amount, wallet->amount);
         return;
     }
     
@@ -65,7 +97,11 @@ void new_transaction(char type, char *rc_pk, size_t amount, char cause[512], cha
             free(client_connections[i].Payload);
         }
     }
+
+    // VALIDATOR TO REMOVE
+    Validate();
 }
+
 
 void join_network_door(infos_st *infos){
     client_connection *connection_fd;

@@ -43,9 +43,6 @@ void gen_blockchain(size_t nb_blocks)
             //block->block_data.transactions[j]->transaction_data = malloc(sizeof(TransactionData));
             rand_data(SIGNATURE_LEN,block->block_data.transactions[j]->transaction_signature);
 
-            block->block_data.transactions[j]->transaction_data.organisation_public_key = RSA_new();
-            RSA_generate_key_ex(block->block_data.transactions[j]->transaction_data.organisation_public_key, 2048, E, NULL);
-
             block->block_data.transactions[j]->transaction_data.receiver_public_key = RSA_new();
             RSA_generate_key_ex(block->block_data.transactions[j]->transaction_data.receiver_public_key, 2048, E, NULL);
 
