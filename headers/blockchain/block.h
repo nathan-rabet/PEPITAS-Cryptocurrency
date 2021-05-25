@@ -42,7 +42,6 @@ typedef struct TransactionData
     // All users area
     RSA *sender_public_key;          // The public key of the sender
     RSA *receiver_public_key;        // The public key of the receiver
-    RSA *organisation_public_key;    // The public key of the organisation which will receive a part of the fees
     size_t amount;                   // The amount spent by the sender
     size_t sender_remaining_money;   // The money the sender have AFTER the transaction
     size_t receiver_remaining_money; // The money the receiver have AFTER the transaction

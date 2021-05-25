@@ -22,14 +22,6 @@ void write_transactiondata(TransactionData *transaction, int fd)
     write(fd, temp, rsa_size);
     BIO_free(pubkey2);
 
-    BIO *pubkey3 = BIO_new(BIO_s_mem());
-    PEM_write_bio_RSAPublicKey(pubkey3, transaction->organisation_public_key);
-    rsa_size = BIO_pending(pubkey3);
-    write(fd, &rsa_size, sizeof(int));
-    BIO_read(pubkey3, temp, rsa_size);
-    write(fd, temp, rsa_size);
-    BIO_free(pubkey3);
-
     write(fd, &transaction->amount, sizeof(size_t));
     write(fd, &transaction->transaction_timestamp, sizeof(time_t));
     write(fd, &transaction->receiver_remaining_money, sizeof(time_t));
@@ -66,18 +58,8 @@ void get_transaction_data(Transaction *trans, char **buff, size_t *index)
     BIO_read(pubkey2, temp, rsa_size);
     memcpy(*buff + *index, temp, rsa_size);
     *index += rsa_size;
-
-    BIO *pubkey3 = BIO_new(BIO_s_mem());
-    PEM_write_bio_RSAPublicKey(pubkey3, trans->transaction_data.organisation_public_key);
-    rsa_size = BIO_pending(pubkey3);
-    memcpy(*buff + *index, &rsa_size, sizeof(int));
-    *index += sizeof(int);
-    BIO_read(pubkey3, temp, rsa_size);
-    memcpy(*buff + *index, temp, rsa_size);
-    *index += rsa_size;
     BIO_free(pubkey);
     BIO_free(pubkey2);
-    BIO_free(pubkey3);
 
     memcpy(*buff + *index, &trans->transaction_data.amount, sizeof(size_t));
     *index += sizeof(size_t);
@@ -116,13 +98,6 @@ void convert_data_to_transactiondata(TransactionData *transactiondata, int fd)
     BIO_write(pubkey1, temp, RSAsize);
     transactiondata->receiver_public_key = PEM_read_bio_RSAPublicKey(pubkey1, NULL, 0, NULL);
     BIO_free(pubkey1);
-
-    read(fd, &RSAsize, sizeof(int));
-    read(fd, temp, RSAsize);
-    BIO *pubkey2 = BIO_new(BIO_s_mem());
-    BIO_write(pubkey2, temp, RSAsize);
-    transactiondata->organisation_public_key = PEM_read_bio_RSAPublicKey(pubkey2, NULL, 0, NULL);
-    BIO_free(pubkey2);
 
     read(fd, &transactiondata->amount, sizeof(size_t));
     read(fd, &transactiondata->receiver_remaining_money, sizeof(size_t));

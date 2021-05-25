@@ -420,7 +420,7 @@ int read_epoch_block(int fd, infos_st *infos)
     }
 
     // CREATE NEW EPOCH
-    if (infos->is_validator == 1)
+    if (infos->is_validator == 1 && infos->pdt > 0)
     {
         infos->is_validator++;
 
