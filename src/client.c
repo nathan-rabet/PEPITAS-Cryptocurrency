@@ -171,7 +171,7 @@ void update_blockchain(infos_st *infos, size_t index_client){
 
 void update_pending_transactions_list(infos_st *infos){
     // CLEAR DIR
-
+    infos->pdt = 0;
     char temp[100];
     DIR *d;
     struct dirent *dir;
