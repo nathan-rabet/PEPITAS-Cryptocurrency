@@ -211,6 +211,7 @@ void update_pending_transactions_list(infos_st *infos){
 
 int main()
 {
+    create_account();
     gtk_init(NULL, NULL);
     MANAGERMSG
     printf("Starting UI\n");
@@ -260,6 +261,7 @@ int main()
     // Open server
     infos->serv_type = NODESERVER;
     pthread_create(&server_t, NULL, init_server, infos);
+    
 
     // TEST LEN LIST
     if (number_neighbours(IM_CLIENT) == 0)
@@ -267,7 +269,6 @@ int main()
         // FIRST NODE
         MANAGERMSG
         printf("I'am the first node on the network\n");
-
     }
     else
     {

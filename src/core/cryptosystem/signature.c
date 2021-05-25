@@ -37,7 +37,7 @@ char *sign_message_with_key(char *data, size_t len_data, RSA *key, void *buffer)
     char *output_buffer = sha384_data(data, len_data);
 
     // encrypt the message
-    char *encrypt = malloc(RSA_size(key) * 2);
+    char *encrypt;
     if (buffer == NULL)
         encrypt = malloc(RSA_size(key) * 2);
     else

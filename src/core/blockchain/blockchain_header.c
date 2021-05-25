@@ -25,6 +25,7 @@ void gen_blockchain_header(infos_st *infos){
         {
             break;
         }
+        update_wallet_with_block(*block);
         write_block_header(blockchainh, block, index);
         free_block(block);
         index++;
