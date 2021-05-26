@@ -178,6 +178,10 @@ ssize_t get_validators_states_nb_validators()
 ssize_t get_validators_states_block_height_validity()
 {
     FILE *validators_states = fopen("validators.state", "r");
+
+    if (validators_states == NULL)
+        err(2, "validators.state doesn't exists, please call init_validator_state() before");
+
     size_t block_height_validity;
 
     while (fseek(validators_states, 2 * sizeof(size_t), SEEK_SET) != 0)
