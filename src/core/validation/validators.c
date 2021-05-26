@@ -194,6 +194,10 @@ ssize_t get_validators_states_block_height_validity()
 ssize_t get_validator_stake(size_t validator_id)
 {
     FILE *validators_states = fopen("validators.state", "r");
+
+    if (validators_states == NULL)
+        err(2, "validators.state doesn't exists, please call init_validator_state() before");
+
     size_t validator_stake;
 
     while (fseek(validators_states, 3 * sizeof(size_t) + sizeof(char) + (RSA_KEY_SIZE + 2 * sizeof(size_t) + sizeof(char)) * validator_id + RSA_KEY_SIZE, SEEK_SET) != 0)
