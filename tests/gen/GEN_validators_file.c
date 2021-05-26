@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include "tests_macros.h"
+#include "validation/validators.h"
 
 #include "cryptosystem/rsa.h"
 
@@ -34,19 +35,22 @@ void gen_validators_file(char path[])
     FILE *validators_file = fopen(path, "w+");
     FILE *temp = fopen(".temp_validators", "w+");
 
-    size_t nb_validators = NB_FAKE_VALIDATORS;
-    size_t total_stake = 10000;
-    size_t block_height_validity = 42;
+    struct validators_state_header validators_state_header = {0};
+
+    validators_state_header.nb_validators = NB_FAKE_VALIDATORS;
+    validators_state_header.total_stake = 10000;
+    validators_state_header.block_height_validity = 42;
 
     srand(time(NULL));
-    fwrite(&nb_validators, sizeof(size_t), 1, validators_file);
-    fwrite(&total_stake, sizeof(size_t), 1, validators_file);
-    fwrite(&block_height_validity, sizeof(size_t), 1, validators_file);
-    fwrite("\n", sizeof(char), 1, validators_file);
+    fwrite(&validators_state_header.nb_validators, sizeof(size_t), 1, validators_file);
+    fwrite(&validators_state_header.total_stake, sizeof(size_t), 1, validators_file);
+    fwrite(&validators_state_header.block_height_validity, sizeof(size_t), 1, validators_file);
 
     for (size_t i = 0; i < NB_FAKE_VALIDATORS; i++)
     {
-        char key_buff[RSA_KEY_SIZE];
+        struct validators_state_item validators_state_item = {0};
+        validators_state_item.user_stake = (size_t)rand() % 1000;
+        validators_state_item.validator_power = (size_t)rand() % 1000;
 
         // Validator pkey
         BIGNUM *E = BN_new();
@@ -55,14 +59,9 @@ void gen_validators_file(char path[])
         RSA_generate_key_ex(keypair, 2048, E, NULL);
         PEM_write_RSAPublicKey(temp, keypair);
         fseek(temp, RSA_BEGIN_SIZE, SEEK_SET);
-        fread(key_buff, sizeof(char), RSA_KEY_SIZE, temp);
-        fwrite(key_buff, sizeof(char), RSA_KEY_SIZE, validators_file);
-        size_t user_stake = (size_t)rand() % 1000;
-        size_t power = (size_t)rand() % 1000;
+        fread(validators_state_item.validator_pkey, sizeof(char), RSA_KEY_SIZE, temp);
 
-        fwrite(&user_stake, sizeof(size_t), 1, validators_file);
-        fwrite(&power, sizeof(size_t), 1, validators_file);
-        fwrite("\n", sizeof(char), 1, validators_file);
+        fwrite(&validators_state_item, sizeof(struct validators_state_item), 1, validators_file);
 
         fseek(temp, 0, SEEK_SET);
     }
