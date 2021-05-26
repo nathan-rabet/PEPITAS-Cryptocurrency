@@ -29,6 +29,20 @@ char *hash_block_transactions_epoch(Block *block)
     return sha384_data(buf, size);
 }
 
+void init_validator_state()
+{
+    FILE *validators_states;
+    if ((validators_states = fopen("validators.state", "r")) == NULL)
+    {
+        validators_states = fopen("validators.state", "w+");
+        char zero_buff[3 * sizeof(size_t)] = {0};
+        fwrite(zero_buff,3 * sizeof(size_t),1,validators_states);
+        fwrite("\n",sizeof(char),1,validators_states);
+    }
+    
+    fclose(validators_states);
+}
+
 RSA **get_comittee(size_t block_height, int *nb_validators)
 {
     // Get "random" value
@@ -206,7 +220,7 @@ RSA *get_validator_pkey(size_t validator_id)
     return rsa_pkey;
 }
 
-ssize_t get_validator_id(RSA* pkey)
+ssize_t get_validator_id(RSA *pkey)
 {
 
     // RSA* to char*
@@ -240,11 +254,12 @@ ssize_t get_validator_id(RSA* pkey)
     return -1;
 }
 
-int is_commitee_member(){
+int is_commitee_member()
+{
     int nb_validators;
     int id = -1;
-    RSA** keys = get_next_comittee(&nb_validators);
-    RSA* my_key = get_my_wallet()->pub_key;
+    RSA **keys = get_next_comittee(&nb_validators);
+    RSA *my_key = get_my_wallet()->pub_key;
     for (int i = 0; i < nb_validators; i++)
     {
         if (id == -1 && cmp_public_keys(keys[i], my_key))
