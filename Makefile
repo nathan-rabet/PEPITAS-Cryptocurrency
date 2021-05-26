@@ -42,11 +42,11 @@ test: .test_build
 
 .test_build: $(SRC_TEST) ${SRC} tests/unit_testing.c
 	@mkdir -p bin
-	@${CC} ${CFLAGS} $^ ${PCFLAGS} -o bin/test ${LDPARAMS} -D TEST
+	${CC} ${CFLAGS} $^ ${PCFLAGS} -o bin/test ${LDPARAMS} -D TEST
 
 sign: src/sign.c ${SRC}
 	@mkdir -p bin
-	@${CC} ${CFLAGS} $^ ${PCFLAGS} -o bin/sign ${LDPARAMS}
+	${CC} ${CFLAGS} $^ ${PCFLAGS} -o bin/sign ${LDPARAMS}
 
 .PHONY: clean test .test_build
 

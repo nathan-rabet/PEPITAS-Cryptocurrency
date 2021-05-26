@@ -72,6 +72,10 @@ void *setup(void *args)
     {
         mkdir(".ui", 0700);
     }
+    if (stat(".contact", &st) == -1)
+    {
+        mkdir(".contact", 0700);
+    }
 
     GtkBuilder *builder;
     GError *err = NULL;
@@ -453,13 +457,13 @@ gboolean add_contact(__attribute__ ((unused)) GtkWidget *widget,
     const char *public_key = gtk_entry_get_text(public_key_entry_con);
     if(strcmp(name, "") != 0 && strcmp(public_key ,"") != 0)
     {
-        FILE *contacts_f = fopen(".ui/.contacts", "a");
+        char file[300] = ".contact/";
+        strcpy(file + 9, name);
+        FILE *contacts_f = fopen(file, "w");
         if(contacts_f == NULL)
             err(-1, "Couldn't open contacts file");
 
-
-        fprintf(contacts_f, "%s\n", name);
-        fprintf(contacts_f, "%s\n", public_key);
+        fprintf(contacts_f, "%s", public_key);
 
         fclose(contacts_f);
 
@@ -494,64 +498,44 @@ void add_contacts_from_file(char *name, char *public_key)
 void load_contacts_from_file()
 {
     char buff[128];
-    struct stat st = {0};
-    if (stat(".ui/.contacts", &st) == -1)
-    {
-        FILE *th_f2 = fopen(".ui/.contacts", "w");
-        fclose(th_f2);
+    DIR *d;
+    struct dirent *dir;
+    d = opendir(".contact/");
+    if (d) {
+        while ((dir = readdir(d)) != NULL) {
+            if (dir->d_type == DT_REG)
+            {
+                strcpy(buff, ".contact/");
+                FILE *contacts_f = fopen(strcat(buff, dir->d_name), "r");
+                if(contacts_f == NULL)
+                    err(-1, "Couldn't open contacts file");
+                char *public_key = malloc(2000);
+                fread(public_key, 2000, 1, contacts_f);
+                add_contacts_from_file(dir->d_name , public_key);
+                add_contact_to_combobox(dir->d_name);
+                free(public_key);
+                fclose(contacts_f);
+            }
+        }
+        closedir(d);
     }
-    FILE *contacts_f = fopen(".ui/.contacts", "r");
-    if(contacts_f == NULL)
-        err(-1, "Couldn't open contacts file");
-
-    while(fgets(buff, 128, contacts_f) != NULL)
-    {
-        char *name = malloc(sizeof(buff));
-        strcpy(name, buff);
-        fgets(buff, 128, contacts_f);
-        char *public_key = malloc(sizeof(buff));
-        strcpy(public_key, buff);
-        add_contacts_from_file(name, public_key);
-        add_contact_to_combobox(name);
-        free(name);
-        free(public_key);
-    }
-    fclose(contacts_f);
 }
 
 char *get_public_key_from_contacts(const char *name)
 {
-    char buff[128];
-    struct stat st = {0};
-    if (stat(".ui/.contacts", &st) == -1)
-    {
-        FILE *th_f2 = fopen(".ui/.contacts", "w");
-        fclose(th_f2);
-    }
-    FILE *contacts_f = fopen(".ui/.contacts", "r");
+    char buff[300];
+    strcpy(buff, ".contact/");
+    FILE *contacts_f = fopen(strcat(buff, name), "r");
     if(contacts_f == NULL)
-        err(-1, "Couldn't open contacts file");
+        return NULL;
 
-    while(fgets(buff, 128, contacts_f) != NULL)
-    {
-        char *cont_name = malloc(sizeof(buff));
-        strcpy(cont_name, buff);
-        fgets(buff, 128, contacts_f);
-        char *public_key = malloc(sizeof(buff));
-        strcpy(public_key, buff);
+    char *public_key = malloc(2000);
+    fread(public_key, 2000, 1, contacts_f);
 
-        if(strcmp(cont_name, name) == 0)
-        {
-            free(cont_name);
-            fclose(contacts_f);
-            return public_key;
-        }
-
-        free(cont_name);
-        free(public_key);
-    }
+    
     fclose(contacts_f);
-    return NULL;
+    return public_key;
+
 }
 
 

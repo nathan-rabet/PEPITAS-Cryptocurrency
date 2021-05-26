@@ -1,6 +1,7 @@
 #include "validation/validators.h"
 
 #define NB_RSA_CHUNK 2048 / 64
+#define HEADER_VALIDATORS_STATE_SIZE 3 * sizeof(size_t) + sizeof(char) + (RSA_KEY_SIZE + 2 * sizeof(size_t) + sizeof(char)) * validator_id
 
 int define_nb_validators(size_t n)
 {
@@ -29,15 +30,14 @@ char *hash_block_transactions_epoch(Block *block)
     return sha384_data(buf, size);
 }
 
-void init_validator_state()
+void init_validators_state()
 {
     FILE *validators_states;
     if ((validators_states = fopen("validators.state", "r")) == NULL)
     {
         validators_states = fopen("validators.state", "w+");
-        char zero_buff[3 * sizeof(size_t)] = {0};
-        fwrite(zero_buff, 3 * sizeof(size_t), 1, validators_states);
-        fwrite("\n", sizeof(char), 1, validators_states);
+        struct validators_state_header validators_state_header = {0};
+        fwrite(&validators_state_header, sizeof(struct validators_state_header), 1, validators_states);
     }
 
     fclose(validators_states);
@@ -56,52 +56,37 @@ RSA **get_comittee(size_t block_height, int *nb_validators)
     if (validators_states == NULL)
         err(2, "validators.state doesn't exists, please call init_validator_state() before");
 
-    size_t total_stake;
-    size_t nb_total_validators;
-    if (safe_fread(&nb_total_validators, sizeof(size_t), 1, validators_states) < 1)
-        return NULL;
-    if (safe_fread(&total_stake, sizeof(size_t), 1, validators_states) < 1)
+    struct validators_state_header validators_state_header = {0};
+    if (safe_fread(&validators_state_header, sizeof(struct validators_state_header), 1, validators_states) < 1)
         return NULL;
 
-    while (fseek(validators_states, 3 * sizeof(size_t) + sizeof(char), SEEK_SET) != 0)
-        ; // escape block_height_validity[sizeof(size_t)] '\n'[sizeof(char)]
+    while (fseek(validators_states, sizeof(struct validators_state_header), SEEK_SET) != 0)
+        ;
+
+    //
 
     // Deterministic algorithm for setting the committee size
-    *nb_validators = define_nb_validators(nb_total_validators);
+    *nb_validators = define_nb_validators(validators_state_header.nb_validators);
     RSA **rsa_keys = malloc(*nb_validators * sizeof(RSA *));
-    size_t *already_selected_validators_index = malloc(*nb_validators * sizeof(int));
+    size_t *already_selected_validators_index = malloc(*nb_validators * sizeof(*nb_validators));
 
     size_t i = 0;
     size_t j = 1;
-    for (size_t v = 0; v < nb_total_validators; v++)
+    for (size_t v = 0; v < validators_state_header.nb_validators; v++)
     {
-        size_t random_offset = 3 * sizeof(size_t) + sizeof(char) + (((size_t *)sha)[i] % nb_total_validators) * (RSA_KEY_SIZE + 2 * sizeof(size_t) + sizeof(char));
+        size_t random_offset = sizeof(struct validators_state_header) + (((size_t *)sha)[i] % validators_state_header.nb_validators) * sizeof(struct validators_state_item);
         while (fseek(validators_states, random_offset, SEEK_SET) != 0)
-            ;                                                   // Setting random starting point
-        size_t random_power = ((size_t *)sha)[j] % total_stake; // Setting random power value
-
-        char next_validator_pk[RSA_KEY_SIZE];
+            ;                                                                           // Setting random starting point
+        size_t random_power = ((size_t *)sha)[j] % validators_state_header.total_stake; // Setting random power value
 
         char is_next_validator = 0;
         size_t current_validator = 0;
+        struct validators_state_item next_validator;
         while (!is_next_validator)
         {
+            safe_fread(&next_validator, sizeof(struct validators_state_item), 1, validators_states);
 
-            size_t next_validator_power;
-
-            ssize_t rsa_fread = safe_fread(&next_validator_pk, sizeof(char), RSA_KEY_SIZE, validators_states);
-            while (fseek(validators_states, sizeof(size_t), SEEK_CUR) != 0)
-                ; // 'user_stake' escape
-
-            if (rsa_fread < RSA_KEY_SIZE || safe_fread(&next_validator_power, sizeof(size_t), 1, validators_states) < 1)
-            {
-                while (fseek(validators_states, sizeof(size_t) * 3 + sizeof(char), SEEK_SET) != 0)
-                    ; // escape nb_total_validators[sizeof(size_t)], total_stake[sizeof(size_t)], '\n'[sizeof(char)]
-                continue;
-            }
-            is_next_validator = __builtin_usubl_overflow(random_power, next_validator_power, &random_power);
-            while (fseek(validators_states, sizeof(char), SEEK_CUR) != 0)
-                ; // '\n' escape
+            is_next_validator = __builtin_usubl_overflow(random_power, next_validator.validator_power, &random_power);
 
             current_validator++;
         }
@@ -118,7 +103,7 @@ RSA **get_comittee(size_t block_height, int *nb_validators)
         {
             char rsa_string[RSA_FILE_TOTAL_SIZE + 1] = {0};
             strcpy(rsa_string, "-----BEGIN RSA PUBLIC KEY-----\n");
-            memcpy(&rsa_string[RSA_BEGIN_SIZE], next_validator_pk, RSA_KEY_SIZE);
+            memcpy(&rsa_string[RSA_BEGIN_SIZE], next_validator.validator_pkey, RSA_KEY_SIZE);
             strncpy(&rsa_string[RSA_FILE_TOTAL_SIZE - RSA_END_SIZE], "-----END RSA PUBLIC KEY-----\n", RSA_END_SIZE + 1);
 
             BIO *bufio;
@@ -134,7 +119,7 @@ RSA **get_comittee(size_t block_height, int *nb_validators)
             j = 0;
         }
     }
-
+    fclose(validators_states);
     free(already_selected_validators_index);
     return rsa_keys;
 }
@@ -150,45 +135,40 @@ ssize_t get_validators_states_total_stake()
     if (validators_states == NULL)
         err(2, "validators.state doesn't exists, please call init_validator_state() before");
 
-    size_t total_stake;
-
-    while (fseek(validators_states, sizeof(size_t), SEEK_SET) != 0)
-        ;
-    if (safe_fread(&total_stake, sizeof(size_t), 1, validators_states) < 1)
+    struct validators_state_header validators_state_header = {0};
+    if (safe_fread(&validators_state_header, sizeof(struct validators_state_header), 1, validators_states) < 1)
         return -1;
 
     fclose(validators_states);
-    return total_stake;
+    return validators_state_header.total_stake;
 }
 
 ssize_t get_validators_states_nb_validators()
 {
     FILE *validators_states = fopen("validators.state", "r");
-
     if (validators_states == NULL)
         err(2, "validators.state doesn't exists, please call init_validator_state() before");
 
-    size_t nb_total_validators;
-    if (safe_fread(&nb_total_validators, sizeof(size_t), 1, validators_states) < 1)
+    struct validators_state_header validators_state_header = {0};
+    if (safe_fread(&validators_state_header, sizeof(struct validators_state_header), 1, validators_states) < 1)
         return -1;
+
     fclose(validators_states);
-    return nb_total_validators;
+    return validators_state_header.nb_validators;
 }
 
 ssize_t get_validators_states_block_height_validity()
 {
     FILE *validators_states = fopen("validators.state", "r");
-
     if (validators_states == NULL)
         err(2, "validators.state doesn't exists, please call init_validator_state() before");
 
-    size_t block_height_validity;
+    struct validators_state_header validators_state_header = {0};
+    if (safe_fread(&validators_state_header, sizeof(struct validators_state_header), 1, validators_states) < 1)
+        return -1;
 
-    while (fseek(validators_states, 2 * sizeof(size_t), SEEK_SET) != 0)
-        if (safe_fread(&block_height_validity, sizeof(size_t), 1, validators_states) < 1)
-            return -1;
     fclose(validators_states);
-    return block_height_validity;
+    return validators_state_header.block_height_validity;
 }
 
 ssize_t get_validator_stake(size_t validator_id)
@@ -198,13 +178,14 @@ ssize_t get_validator_stake(size_t validator_id)
     if (validators_states == NULL)
         err(2, "validators.state doesn't exists, please call init_validator_state() before");
 
-    size_t validator_stake;
+    struct validators_state_item validators_state_item = {0};
 
-    while (fseek(validators_states, 3 * sizeof(size_t) + sizeof(char) + (RSA_KEY_SIZE + 2 * sizeof(size_t) + sizeof(char)) * validator_id + RSA_KEY_SIZE, SEEK_SET) != 0)
-        if (safe_fread(&validator_stake, sizeof(size_t), 1, validators_states) < 1)
-            return -1;
+    while (fseek(validators_states, sizeof(struct validators_state_header) + sizeof(struct validators_state_item) * validator_id, SEEK_SET) != 0)
+        ;
+    if (safe_fread(&validators_state_item, sizeof(struct validators_state_item), 1, validators_states) < 1)
+        return -1;
     fclose(validators_states);
-    return validator_stake;
+    return validators_state_item.user_stake;
 }
 
 ssize_t get_validator_power(size_t validator_id)
@@ -214,33 +195,40 @@ ssize_t get_validator_power(size_t validator_id)
     if (validators_states == NULL)
         err(2, "validators.state doesn't exists, please call init_validator_state() before");
 
-    size_t validator_power;
+    struct validators_state_item validators_state_item = {0};
 
-    while (fseek(validators_states, 3 * sizeof(size_t) + sizeof(char) + (RSA_KEY_SIZE + 2 * sizeof(size_t) + sizeof(char)) * validator_id + RSA_KEY_SIZE + sizeof(size_t), SEEK_SET) != 0)
-        if (safe_fread(&validator_power, sizeof(size_t), 1, validators_states) < 1)
-            return -1;
+    while (fseek(validators_states, sizeof(struct validators_state_header) + sizeof(struct validators_state_item) * validator_id, SEEK_SET) != 0)
+        ;
+    if (safe_fread(&validators_state_item, sizeof(struct validators_state_item), 1, validators_states) < 1)
+        return -1;
     fclose(validators_states);
-    return validator_power;
+    return validators_state_item.validator_power;
 }
 
 RSA *get_validator_pkey(size_t validator_id)
 {
+
     FILE *validators_states = fopen("validators.state", "r");
 
     if (validators_states == NULL)
         err(2, "validators.state doesn't exists, please call init_validator_state() before");
 
-    char pkey[RSA_FILE_TOTAL_SIZE + 1];
+    struct validators_state_item validators_state_item = {0};
 
-    while (fseek(validators_states, 3 * sizeof(size_t) + sizeof(char) + (RSA_KEY_SIZE + 2 * sizeof(size_t) + sizeof(char)) * validator_id, SEEK_SET) != 0)
-        if (safe_fread(&pkey[RSA_BEGIN_SIZE], RSA_KEY_SIZE, 1, validators_states) < 1)
-            return NULL;
-    strcpy(pkey, "-----BEGIN RSA PUBLIC KEY-----\n");
-    strncpy(&pkey[RSA_FILE_TOTAL_SIZE - RSA_END_SIZE], "-----END RSA PUBLIC KEY-----\n", RSA_END_SIZE + 1);
+    while (fseek(validators_states, sizeof(struct validators_state_header) + sizeof(struct validators_state_item) * validator_id, SEEK_SET) != 0)
+        ;
+    if (safe_fread(&validators_state_item, sizeof(struct validators_state_item), 1, validators_states) < 1)
+        return NULL;
+
+    char rsa_full_string[RSA_FILE_TOTAL_SIZE + 1];
+
+    strcpy(rsa_full_string, "-----BEGIN RSA PUBLIC KEY-----\n");
+    strncpy(&rsa_full_string[RSA_BEGIN_SIZE + 1], validators_state_item.validator_pkey, RSA_KEY_SIZE);
+    strncpy(&rsa_full_string[RSA_FILE_TOTAL_SIZE - RSA_END_SIZE], "-----END RSA PUBLIC KEY-----\n", RSA_END_SIZE + 1);
 
     BIO *bufio;
     RSA *rsa_pkey;
-    bufio = BIO_new_mem_buf((void *)pkey, RSA_FILE_TOTAL_SIZE);
+    bufio = BIO_new_mem_buf((void *)rsa_full_string, RSA_FILE_TOTAL_SIZE);
     if ((rsa_pkey = PEM_read_bio_RSAPublicKey(bufio, NULL, 0, NULL)) == NULL)
         errx(EXIT_FAILURE, "PEM_read_bio_RSAPublicKey returned NULL");
 
@@ -264,25 +252,21 @@ ssize_t get_validator_id(RSA *pkey)
     BIO_read(pubkey, pkey_string, rsa_size);
     BIO_free(pubkey);
 
-    ssize_t nb_validators;
-    if (safe_fread(&nb_validators, sizeof(ssize_t), 1, validators_states) == -1)
+    struct validators_state_header validators_state_header = {0};
+
+    if (safe_fread(&validators_state_header, sizeof(struct validators_state_header), 1, validators_states) < 1)
         return -1;
 
-    while (fseek(validators_states, 2 * sizeof(size_t) + sizeof(char), SEEK_SET) != 0)
-        ;
-
-    for (ssize_t index = 0; index < nb_validators; index++)
+    for (size_t index = 0; index < validators_state_header.nb_validators; index++)
     {
-        char temp_pkey[RSA_KEY_SIZE] = {0};
+        struct validators_state_item validators_state_item = {0};
 
-        if (safe_fread(temp_pkey, sizeof(char), RSA_KEY_SIZE, validators_states) == -1)
+        if (safe_fread(&validators_state_item, sizeof(struct validators_state_item), 1, validators_states) < 1)
             return -1;
-        if (strncmp(pkey_string + RSA_BEGIN_SIZE + 1, temp_pkey, RSA_KEY_SIZE) == 0)
-            return index;
-        while (fseek(validators_states, 2 * sizeof(size_t) + sizeof(char), SEEK_CUR) != 0)
-            ;
+        if (strncmp(pkey_string + RSA_BEGIN_SIZE + 1, validators_state_item.validator_pkey, RSA_KEY_SIZE) == 0)
+            return (ssize_t)index;
     }
-
+    fclose(validators_states);
     return -1;
 }
 
@@ -299,4 +283,92 @@ int i_am_commitee_member()
         RSA_free(keys[i]);
     }
     return id;
+}
+
+char update_validators_state(Block *block)
+{
+    ssize_t validators_states_block_height_validity = get_validators_states_block_height_validity();
+    if (validators_states_block_height_validity == -1 || (size_t)validators_states_block_height_validity + 1 != block->block_data.height)
+        return -1;
+
+    FILE *validators_states = fopen("validators.state", "r+");
+
+    if (validators_states == NULL)
+        err(2, "validators.state doesn't exists, please call init_validator_state() before");
+
+    for (size_t t = 0; t < block->block_data.nb_transactions; t++)
+    {
+        Transaction *transaction = block->block_data.transactions[t];
+        size_t validator_id;
+
+        struct validators_state_item validator_item;
+        switch (transaction->transaction_data.type)
+        {
+        case T_TYPE_ADD_STAKE:
+            validator_id = get_validator_id(transaction->transaction_data.sender_public_key);
+            while (fseek(validators_states, sizeof(struct validators_state_header) + sizeof(struct validators_state_item) * validator_id, SEEK_SET) != 0)
+                ;
+
+            if (safe_fread(&validator_item, sizeof(struct validators_state_item), 1, validators_states) != sizeof(struct validators_state_item))
+                errx(errno, "`validator.state` corrupted");
+
+            validator_item.validator_power += transaction->transaction_data.amount / block->block_data.height + transaction->transaction_data.amount;
+            validator_item.user_stake = transaction->transaction_data.sender_remaining_money;
+
+            while (fseek(validators_states, sizeof(struct validators_state_header) + sizeof(struct validators_state_item) * validator_id, SEEK_SET) != 0)
+                ;
+            fwrite(&validator_item, sizeof(struct validators_state_item), 1, validators_states);
+            break;
+
+        case T_TYPE_WITHDRAW_STAKE:
+            validator_id = get_validator_id(transaction->transaction_data.receiver_public_key);
+            while (fseek(validators_states, sizeof(struct validators_state_header) + sizeof(struct validators_state_item) * validator_id, SEEK_SET) != 0)
+                ;
+
+            if (safe_fread(&validator_item, sizeof(struct validators_state_item), 1, validators_states) != sizeof(struct validators_state_item))
+                errx(errno, "`validator.state` corrupted");
+
+            validator_item.user_stake = transaction->transaction_data.receiver_remaining_money;
+            validator_item.validator_power -= validator_item.validator_power * transaction->transaction_data.amount / validator_item.user_stake;
+
+            while (fseek(validators_states, sizeof(struct validators_state_header) + sizeof(struct validators_state_item) * validator_id, SEEK_SET) != 0)
+                ;
+            fwrite(&validator_item, sizeof(struct validators_state_item), 1, validators_states);
+            break;
+
+        case T_TYPE_REWARD_STAKE:
+            validator_id = get_validator_id(transaction->transaction_data.receiver_public_key);
+            while (fseek(validators_states, sizeof(struct validators_state_header) + sizeof(struct validators_state_item) * validator_id, SEEK_SET) != 0)
+                ;
+
+            if (safe_fread(&validator_item, sizeof(struct validators_state_item), 1, validators_states) != sizeof(struct validators_state_item))
+                errx(errno, "`validator.state` corrupted");
+
+            validator_item.validator_power += transaction->transaction_data.amount / block->block_data.height + transaction->transaction_data.amount;
+            validator_item.user_stake = transaction->transaction_data.receiver_remaining_money;
+
+            while (fseek(validators_states, sizeof(struct validators_state_header) + sizeof(struct validators_state_item) * validator_id, SEEK_SET) != 0)
+                ;
+            fwrite(&validator_item, sizeof(struct validators_state_item), 1, validators_states);
+            break;
+
+        case T_TYPE_PUNISH_STAKE:
+            validator_id = get_validator_id(transaction->transaction_data.sender_public_key);
+            while (fseek(validators_states, sizeof(struct validators_state_header) + sizeof(struct validators_state_item) * validator_id, SEEK_SET) != 0)
+                ;
+
+            if (safe_fread(&validator_item, sizeof(struct validators_state_item), 1, validators_states) != sizeof(struct validators_state_item))
+                errx(errno, "`validator.state` corrupted");
+
+            validator_item.user_stake = transaction->transaction_data.sender_remaining_money;
+            validator_item.validator_power -= validator_item.validator_power * transaction->transaction_data.amount / validator_item.user_stake;
+
+            while (fseek(validators_states, sizeof(struct validators_state_header) + sizeof(struct validators_state_item) * validator_id, SEEK_SET) != 0)
+                ;
+            fwrite(&validator_item, sizeof(struct validators_state_item), 1, validators_states);
+            break;
+        }
+    }
+
+    return 0;
 }

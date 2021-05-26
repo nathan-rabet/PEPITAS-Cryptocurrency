@@ -262,7 +262,7 @@ int main()
     ac_infos = infos;
     
     pthread_t ui_th;
-    pthread_create(&ui_th, NULL, setup, &infos);
+    pthread_create(&ui_th, NULL, setup, infos);
 
     while (infos->is_sychronize == 2)
     {
@@ -335,6 +335,6 @@ int main()
         printf("Pending transactions list syncronized!\n");
 
     }
-
+    init_validators_state();
     pthread_exit(NULL);
 }

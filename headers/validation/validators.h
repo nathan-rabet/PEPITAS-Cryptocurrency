@@ -11,13 +11,27 @@
 #include "misc/safe.h"
 #include "misc/math.h"
 
+struct validators_state_header
+{
+    size_t nb_validators;
+    size_t total_stake;
+    size_t block_height_validity;
+};
+
+struct validators_state_item
+{
+    char validator_pkey[RSA_KEY_SIZE];
+    size_t user_stake;
+    size_t validator_power;
+};
+
 #define MAX_VALIDATORS_PER_BLOCK 512
 
 /**
  * @brief Init the `validators.state` file if it doesn't exists
  * 
  */
-void init_validator_state();
+void init_validators_state();
 
 /**
  * @brief Get the a comittee  RSA public keys on a specific epoch
@@ -103,5 +117,13 @@ ssize_t get_validator_id(RSA* pkey);
  * @return The id in the comittee, -1 if you are not member of the comittee
  */
 int i_am_commitee_member();
+
+/**
+ * @brief Given a block, update the 'validators.state' with the transactions
+ * 
+ * @param block 
+ * @return 0, -1 if the given block height is not 'validators.state' height + 1
+ */
+char update_validators_state(Block *block);
 
 #endif
