@@ -36,10 +36,10 @@ void init_validator_state()
     {
         validators_states = fopen("validators.state", "w+");
         char zero_buff[3 * sizeof(size_t)] = {0};
-        fwrite(zero_buff,3 * sizeof(size_t),1,validators_states);
-        fwrite("\n",sizeof(char),1,validators_states);
+        fwrite(zero_buff, 3 * sizeof(size_t), 1, validators_states);
+        fwrite("\n", sizeof(char), 1, validators_states);
     }
-    
+
     fclose(validators_states);
 }
 
@@ -54,7 +54,7 @@ RSA **get_comittee(size_t block_height, int *nb_validators)
     FILE *validators_states = fopen("validators.state", "r");
 
     if (validators_states == NULL)
-        err(2,"validators.state doesn't exists, please call init_validator_state() before")
+        err(2, "validators.state doesn't exists, please call init_validator_state() before");
 
     size_t total_stake;
     size_t nb_total_validators;
@@ -147,11 +147,16 @@ RSA **get_next_comittee(int *nb_validators)
 ssize_t get_validators_states_total_stake()
 {
     FILE *validators_states = fopen("validators.state", "r");
+    if (validators_states == NULL)
+        err(2, "validators.state doesn't exists, please call init_validator_state() before");
+
     size_t total_stake;
 
     while (fseek(validators_states, sizeof(size_t), SEEK_SET) != 0)
-        if (safe_fread(&total_stake, sizeof(size_t), 1, validators_states) < 1)
-            return -1;
+        ;
+    if (safe_fread(&total_stake, sizeof(size_t), 1, validators_states) < 1)
+        return -1;
+
     fclose(validators_states);
     return total_stake;
 }
