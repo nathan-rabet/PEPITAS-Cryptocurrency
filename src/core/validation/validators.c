@@ -252,6 +252,11 @@ ssize_t get_validator_id(RSA *pkey)
 {
 
     // RSA* to char*
+    FILE *validators_states = fopen("validators.state", "r");
+
+    if (validators_states == NULL)
+        err(2, "validators.state doesn't exists, please call init_validator_state() before");
+
     char pkey_string[RSA_FILE_TOTAL_SIZE];
     BIO *pubkey = BIO_new(BIO_s_mem());
     PEM_write_bio_RSAPublicKey(pubkey, pkey);
@@ -259,7 +264,6 @@ ssize_t get_validator_id(RSA *pkey)
     BIO_read(pubkey, pkey_string, rsa_size);
     BIO_free(pubkey);
 
-    FILE *validators_states = fopen("validators.state", "r");
     ssize_t nb_validators;
     if (safe_fread(&nb_validators, sizeof(ssize_t), 1, validators_states) == -1)
         return -1;
