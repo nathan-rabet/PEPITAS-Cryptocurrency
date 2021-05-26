@@ -14,6 +14,12 @@
 #define MAX_VALIDATORS_PER_BLOCK 512
 
 /**
+ * @brief Init the `validators.state` file if it doesn't exists
+ * 
+ */
+void init_validator_state();
+
+/**
  * @brief Get the a comittee  RSA public keys on a specific epoch
  * @param block_height The height of the block you want a comitte from
  * @param nb_validators return value, the number of selected validators
