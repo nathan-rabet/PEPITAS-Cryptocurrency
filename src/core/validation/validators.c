@@ -52,6 +52,10 @@ RSA **get_comittee(size_t block_height, int *nb_validators)
 
     // Init validators states file
     FILE *validators_states = fopen("validators.state", "r");
+
+    if (validators_states == NULL)
+        err(2,"validators.state doesn't exists, please call init_validator_state() before")
+
     size_t total_stake;
     size_t nb_total_validators;
     if (safe_fread(&nb_total_validators, sizeof(size_t), 1, validators_states) < 1)
