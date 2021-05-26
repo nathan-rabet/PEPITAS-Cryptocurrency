@@ -286,7 +286,7 @@ ssize_t get_validator_id(RSA *pkey)
     return -1;
 }
 
-int is_commitee_member()
+int i_am_commitee_member()
 {
     int nb_validators;
     int id = -1;

@@ -98,28 +98,10 @@ RSA* get_validator_pkey(size_t validator_id);
 ssize_t get_validator_id(RSA* pkey);
 
 /**
- * @brief Push an amount on the stake.
+ * @brief Check if the current user is a member of the next comitee
  * 
- * This will broadcast a stake push on the network.
- * 
- * @see The stake account public key is '1'
- * 
- * @param amount The amount to push
- * @return 0 if the broadcast succeeds, else returns -1
+ * @return The id in the comittee, -1 if you are not member of the comittee
  */
-int push_stake(size_t amount);
-
-/**
- * @brief Pops an amount on the stake.
- * 
- * This will broadcast a stake pop on the network.
- * 
- * @see The stake account public key is '1'
- * 
- * @param amount The amount to pop
- * @return 0 if the broadcast succeeds, else returns -1
- */
-int pop_stake(size_t amount);
-int is_commitee_member();
+int i_am_commitee_member();
 
 #endif
