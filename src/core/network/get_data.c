@@ -407,7 +407,7 @@ int read_epoch_block(int fd, infos_st *infos)
         if (infos->is_validator > 0)
         {
             convert_data_to_block(epoch, fd);
-            infos->validator_id = is_commitee_member();
+            infos->validator_id = i_am_commitee_member();
         }
     }
 
