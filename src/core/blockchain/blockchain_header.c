@@ -25,6 +25,7 @@ void gen_blockchain_header(infos_st *infos){
         {
             break;
         }
+        update_validators_state(block);
         update_wallet_with_block(*block);
         write_block_header(blockchainh, block, index);
         free_block(block);
@@ -49,27 +50,26 @@ size_t get_receiver_remaining_money(infos_st *infos, RSA *receiver_public_key){
             errx(EXIT_FAILURE, "Can't load block to create a transaction in get_receiver_remaining_money");
         }
         
-        for (size_t it = 0; it < block->block_data.nb_transactions; it++)
+        for (ssize_t it = block->block_data.nb_transactions-1; it >= 0; it--)
         {
             TransactionData *trans = &block->block_data.transactions[it]->transaction_data;
-            if (cmp_public_keys(receiver_public_key, trans->sender_public_key))
-            {
-                money = trans->sender_remaining_money;
-                break;
-            }
             if (cmp_public_keys(receiver_public_key, trans->receiver_public_key))
             {
                 money = trans->receiver_remaining_money;
                 break;
             }
+            if (cmp_public_keys(receiver_public_key, trans->sender_public_key))
+            {
+                money = trans->sender_remaining_money;
+                break;
+            }
         }
         free_block(block);
-        if (index == 0)
-        {
-            break;
-        }
         
+        if (index == 0)
+            break;
         index--;
+        
     }
     return money;
 }

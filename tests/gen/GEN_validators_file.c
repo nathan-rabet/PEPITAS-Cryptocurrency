@@ -22,7 +22,7 @@
  * 
  * 
  * @see 
- * For one stake transaction, power += amount / block_height + amount
+ * For one stake transaction, power += amount / (block_height + 1) + amount
  * Foreach stake withdraw, power -= power * withdraw_stake / user_total_stake
  * 
  * validators states file description

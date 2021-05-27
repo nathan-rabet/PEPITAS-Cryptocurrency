@@ -4,6 +4,7 @@
 #include "network/network.h"
 #include "blockchain/block.h"
 #include "cryptosystem/rsa.h"
+#include "validation/validators.h"
 #include <sys/stat.h>
 #include <stdio.h>
 

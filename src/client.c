@@ -1,13 +1,14 @@
+#include "blockchain/block.h"
 #include "client.h"
 #include "network/client.h"
 #include "network/server.h"
 #include "network/send_data.h"
 #include "network/get_data.h"
 #include "misc/safe.h"
-#include "blockchain/blockchain_header.h"
 #include "blockchain/transaction.h"
 #include <openssl/rsa.h>
 #include "ui/ui.h"
+#include "blockchain/blockchain_header.h"
 
 extern client_connection *client_connections;
 static pthread_t server_t;
@@ -47,6 +48,17 @@ void Validate(){
 
     MANAGERMSG
     printf("Create new epoch!\n");
+
+    if (epoch->block_data.nb_validators == 1)
+    {        
+        update_wallet_with_block(*epoch);
+        write_block_file(*epoch);
+        ac_infos->actual_height++;
+        MANAGERMSG
+        printf("Block %lu is added in the blockchain!\n", epoch->block_data.height);
+    }
+
+    free_block(epoch);
 }
 
 void new_transaction(char type, char *rc_pk, size_t amount, char cause[512], char asset[512]){
@@ -296,6 +308,7 @@ int main()
     }
 
     clear_transactions();
+    init_validators_state();
     // Try Load Old blockchain
     gen_blockchain_header(infos);
     update_sync(infos->actual_height, infos->actual_height);
@@ -340,6 +353,5 @@ int main()
         printf("Pending transactions list syncronized!\n");
 
     }
-    init_validators_state();
     pthread_exit(NULL);
 }
