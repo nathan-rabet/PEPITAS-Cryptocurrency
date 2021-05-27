@@ -168,7 +168,7 @@ Block *create_epoch_block()
 
 
         // IS EPOCH MAN
-        if (strncmp(&my_pkey_string[RSA_BEGIN_SIZE + 1], &pkey_string[RSA_BEGIN_SIZE + 1], RSA_KEY_SIZE) == 0) {
+        if (strncmp(&my_pkey_string[RSA_BEGIN_SIZE], &pkey_string[RSA_BEGIN_SIZE], RSA_KEY_SIZE) == 0) {
             new_block->block_data.epoch_id = i;
             break;
         }
