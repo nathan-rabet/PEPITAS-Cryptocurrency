@@ -223,7 +223,7 @@ RSA *get_validator_pkey(size_t validator_id)
     char rsa_full_string[RSA_FILE_TOTAL_SIZE + 1];
 
     strcpy(rsa_full_string, "-----BEGIN RSA PUBLIC KEY-----\n");
-    strncpy(&rsa_full_string[RSA_BEGIN_SIZE + 1], validators_state_item.validator_pkey, RSA_KEY_SIZE);
+    strncpy(&rsa_full_string[RSA_BEGIN_SIZE], validators_state_item.validator_pkey, RSA_KEY_SIZE);
     strncpy(&rsa_full_string[RSA_FILE_TOTAL_SIZE - RSA_END_SIZE], "-----END RSA PUBLIC KEY-----\n", RSA_END_SIZE + 1);
 
     BIO *bufio;
@@ -263,7 +263,7 @@ ssize_t get_validator_id(RSA *pkey)
 
         if (safe_fread(&validators_state_item, sizeof(struct validators_state_item), 1, validators_states) < 1)
             return -1;
-        if (strncmp(pkey_string + RSA_BEGIN_SIZE + 1, validators_state_item.validator_pkey, RSA_KEY_SIZE) == 0)
+        if (strncmp(pkey_string + RSA_BEGIN_SIZE, validators_state_item.validator_pkey, RSA_KEY_SIZE) == 0)
             return (ssize_t)index;
     }
     fclose(validators_states);
@@ -285,6 +285,43 @@ int i_am_commitee_member()
     return id;
 }
 
+ssize_t _create_validator_item(FILE *validators_states, struct validators_state_header *updated_validators_state_header, Transaction *transaction, bool is_key_on_sender)
+{
+    ssize_t validator_id;
+    if (is_key_on_sender)
+        validator_id = get_validator_id(transaction->transaction_data.sender_public_key);
+    else
+        validator_id = get_validator_id(transaction->transaction_data.receiver_public_key);
+
+    if (validator_id == -1)
+    {
+        // NEED TO CREATE ITEM
+        struct validators_state_item new_validators_state_item = {0};
+
+        char temp[1000];
+        BIO *pubkey = BIO_new(BIO_s_mem());
+        PEM_write_bio_RSAPublicKey(pubkey, transaction->transaction_data.sender_public_key);
+        int rsa_size = BIO_pending(pubkey);
+        BIO_read(pubkey, temp, rsa_size);
+        memcpy(new_validators_state_item.validator_pkey, temp + RSA_BEGIN_SIZE, RSA_KEY_SIZE);
+        BIO_free(pubkey);
+
+        while (fseek(validators_states, 0, SEEK_END) != 0)
+            ;
+        fwrite(&new_validators_state_item, sizeof(struct validators_state_item), 1, validators_states);
+        while (fseek(validators_states, 0, SEEK_SET) != 0)
+            ;
+
+        updated_validators_state_header->nb_validators += 1;
+
+        validator_id = updated_validators_state_header->nb_validators - 1;
+        while (fseek(validators_states, 0, SEEK_SET) != 0)
+            ;
+        fwrite(updated_validators_state_header, sizeof(struct validators_state_header), 1, validators_states);
+    }
+    return validator_id;
+}
+
 char update_validators_state(Block *block)
 {
     ssize_t validators_states_block_height_validity = get_validators_states_block_height_validity();
@@ -296,106 +333,78 @@ char update_validators_state(Block *block)
     if (validators_states == NULL)
         err(2, "validators.state doesn't exists, please call init_validator_state() before");
 
+    struct validators_state_header updated_validators_state_header = {0};
+    while (fseek(validators_states, 0, SEEK_SET) != 0)
+        ;
+
+    safe_fread(&updated_validators_state_header, sizeof(struct validators_state_header), 1, validators_states);
+
     for (size_t t = 0; t < block->block_data.nb_transactions; t++)
     {
         Transaction *transaction = block->block_data.transactions[t];
         ssize_t validator_id;
         struct validators_state_item validator_item;
 
-        validator_id = get_validator_id(transaction->transaction_data.sender_public_key);
-        if (validator_id == -1)
-        {
-            // NEED TO CREATE ITEM
-            while (fseek(validators_states, 0, SEEK_END) != 0)
-                ;
-
-            struct validators_state_item new_validators_state_item = {0};
-
-            char temp[1000];
-            BIO *pubkey = BIO_new(BIO_s_mem());
-            PEM_write_bio_RSAPublicKey(pubkey, transaction->transaction_data.sender_public_key);
-            int rsa_size = BIO_pending(pubkey);
-            BIO_read(pubkey, temp, rsa_size);
-            memcpy(new_validators_state_item.validator_pkey, temp + RSA_BEGIN_SIZE, RSA_KEY_SIZE);
-            BIO_free(pubkey);
-
-            fwrite(&new_validators_state_item, sizeof(struct validators_state_item), 1, validators_states);
-            while (fseek(validators_states, 0, SEEK_SET) != 0)
-                ;
-
-            struct validators_state_header new_validators_state_header = {0};
-
-            safe_fread(&new_validators_state_header, sizeof(struct validators_state_header), 1, validators_states);
-            new_validators_state_header.nb_validators += 1;
-
-            validator_id = new_validators_state_header.nb_validators - 1;
-            while (fseek(validators_states, 0, SEEK_SET) != 0)
-                ;
-            fwrite(&new_validators_state_header, sizeof(struct validators_state_header), 1, validators_states);
-        }
-
-        while (fseek(validators_states, sizeof(struct validators_state_header) + sizeof(struct validators_state_item) * validator_id, SEEK_SET) != 0)
-            ;
-
-        if (safe_fread(&validator_item, sizeof(struct validators_state_item), 1, validators_states) != 1)
-            errx(errno, "`validator.state` corrupted");
-        
         switch (transaction->transaction_data.type)
         {
         case T_TYPE_ADD_STAKE:
-
-            validator_item.validator_power += transaction->transaction_data.amount / (block->block_data.height + 1) + transaction->transaction_data.amount;
-            validator_item.user_stake = transaction->transaction_data.sender_remaining_money;
-
+            validator_id = _create_validator_item(validators_states, &updated_validators_state_header, transaction, true);
             while (fseek(validators_states, sizeof(struct validators_state_header) + sizeof(struct validators_state_item) * validator_id, SEEK_SET) != 0)
                 ;
-            fwrite(&validator_item, sizeof(struct validators_state_item), 1, validators_states);
+
+            if (safe_fread(&validator_item, sizeof(struct validators_state_item), 1, validators_states) != 1)
+                errx(errno, "`validator.state` corrupted");
+            validator_item.validator_power += transaction->transaction_data.amount / (block->block_data.height + 1) + transaction->transaction_data.amount;
+            validator_item.user_stake = transaction->transaction_data.receiver_remaining_money;
+            updated_validators_state_header.total_stake += transaction->transaction_data.amount;
             break;
 
         case T_TYPE_WITHDRAW_STAKE:
-
-            validator_item.user_stake = transaction->transaction_data.receiver_remaining_money;
-            validator_item.validator_power -= validator_item.validator_power * transaction->transaction_data.amount / validator_item.user_stake;
-
+            validator_id = _create_validator_item(validators_states, &updated_validators_state_header, transaction, false);
             while (fseek(validators_states, sizeof(struct validators_state_header) + sizeof(struct validators_state_item) * validator_id, SEEK_SET) != 0)
                 ;
-            fwrite(&validator_item, sizeof(struct validators_state_item), 1, validators_states);
+
+            if (safe_fread(&validator_item, sizeof(struct validators_state_item), 1, validators_states) != 1)
+                errx(errno, "`validator.state` corrupted");
+            validator_item.user_stake = transaction->transaction_data.sender_remaining_money;
+            validator_item.validator_power -= validator_item.validator_power * transaction->transaction_data.amount / validator_item.user_stake;
+            updated_validators_state_header.total_stake -= transaction->transaction_data.amount;
             break;
 
         case T_TYPE_REWARD_STAKE:
-
-            validator_item.validator_power += transaction->transaction_data.amount / (block->block_data.height + 1) + transaction->transaction_data.amount;
-            validator_item.user_stake = transaction->transaction_data.receiver_remaining_money;
-
+            validator_id = _create_validator_item(validators_states, &updated_validators_state_header, transaction, true);
             while (fseek(validators_states, sizeof(struct validators_state_header) + sizeof(struct validators_state_item) * validator_id, SEEK_SET) != 0)
                 ;
-            fwrite(&validator_item, sizeof(struct validators_state_item), 1, validators_states);
+
+            if (safe_fread(&validator_item, sizeof(struct validators_state_item), 1, validators_states) != 1)
+                errx(errno, "`validator.state` corrupted");
+            validator_item.validator_power += transaction->transaction_data.amount / (block->block_data.height + 1) + transaction->transaction_data.amount;
+            validator_item.user_stake = transaction->transaction_data.receiver_remaining_money;
+            updated_validators_state_header.total_stake += transaction->transaction_data.amount;
             break;
 
         case T_TYPE_PUNISH_STAKE:
-
-            validator_item.user_stake = transaction->transaction_data.sender_remaining_money;
-            validator_item.validator_power -= validator_item.validator_power * transaction->transaction_data.amount / validator_item.user_stake;
-
+            validator_id = _create_validator_item(validators_states, &updated_validators_state_header, transaction, false);
             while (fseek(validators_states, sizeof(struct validators_state_header) + sizeof(struct validators_state_item) * validator_id, SEEK_SET) != 0)
                 ;
-            fwrite(&validator_item, sizeof(struct validators_state_item), 1, validators_states);
+
+            if (safe_fread(&validator_item, sizeof(struct validators_state_item), 1, validators_states) != 1)
+                errx(errno, "`validator.state` corrupted");
+            validator_item.user_stake = transaction->transaction_data.sender_remaining_money;
+            validator_item.validator_power -= validator_item.validator_power * transaction->transaction_data.amount / validator_item.user_stake;
+            updated_validators_state_header.total_stake -= transaction->transaction_data.amount;
             break;
         }
+        while (fseek(validators_states, sizeof(struct validators_state_header) + sizeof(struct validators_state_item) * validator_id, SEEK_SET) != 0)
+            ;
+        fwrite(&validator_item, sizeof(struct validators_state_item), 1, validators_states);
     }
 
+    updated_validators_state_header.block_height_validity = block->block_data.height + 1;
 
     while (fseek(validators_states, 0, SEEK_SET) != 0)
         ;
-
-    struct validators_state_header new_validators_state_header = {0};
-
-    safe_fread(&new_validators_state_header, sizeof(struct validators_state_header), 1, validators_states);
-    new_validators_state_header.block_height_validity = block->block_data.height + 1;
-
-    while (fseek(validators_states, 0, SEEK_SET) != 0)
-        ;
-    fwrite(&new_validators_state_header, sizeof(struct validators_state_header), 1, validators_states);
+    fwrite(&updated_validators_state_header, sizeof(struct validators_state_header), 1, validators_states);
 
     fclose(validators_states);
 
