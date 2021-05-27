@@ -62,7 +62,6 @@ GtkCellRenderer *cr1_combo;
 GtkProgressBar *progress_bar_blockchain;
 
 
-
 void *setup(void *args)
 {
     infos_st *infos = args;
@@ -176,6 +175,7 @@ void *setup(void *args)
     g_signal_connect(create_key_but1, "clicked", G_CALLBACK(on_create_key_but1_press), NULL);
     g_signal_connect(create_key_but2, "clicked", G_CALLBACK(on_create_key_but2_press), NULL);
     g_signal_connect(connect_but, "clicked", G_CALLBACK(on_connect_but_press), NULL);
+    g_signal_connect(password_entry1, "activate", G_CALLBACK(on_connect_but_press), NULL);
 
     gtk_window_set_resizable(GTK_WINDOW(window), FALSE);
 
@@ -197,7 +197,6 @@ void *setup(void *args)
 
     pthread_exit(NULL);
 }
-
 
 void change_label_text(GtkLabel *label, char* text)
 {
