@@ -39,7 +39,7 @@ void give_punishments_and_rewards(Block *last_block, Block *current_block)
     current_block->block_data.is_prev_block_valid = (last_block->block_data.nb_validators - validation_yes < validation_yes) ? 1 : 0;
 
     // TEST LAST VALIDATORS VOTE 'REWARD/PUNISHMENT'
-    for (int i = 0; i < last_block->block_data.nb_validators; i++)
+    for (int i = 0; i < last_block->block_data.nb_validators-1; i++)
     {
         RSA *validator = last_block->block_data.validators_public_keys[i];
         char *validator_signature = last_block->vote_signature[i];
