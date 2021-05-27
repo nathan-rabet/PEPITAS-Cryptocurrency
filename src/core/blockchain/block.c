@@ -12,10 +12,13 @@ ChunkBlockchain *load_blockchain(size_t nb_chunk)
     static ChunkBlockchain blockchain_chunk = {0};
 
     if (blockchain_chunk.chunk == NULL)
+    {
         blockchain_chunk.chunk = calloc(NB_BLOCK_PER_CHUNK, sizeof(Block *));
-
+        return load_last_blockchain();
+    }
     if (nb_chunk == 0)
-        return &blockchain_chunk;
+            return &blockchain_chunk;
+    
 
     for (size_t i = 0; i < NB_BLOCK_PER_CHUNK; i++)
     {
@@ -45,13 +48,7 @@ ChunkBlockchain *load_blockchain(size_t nb_chunk)
 
 ChunkBlockchain *load_last_blockchain()
 {
-    return load_blockchain(get_last_block_height() / NB_BLOCK_PER_CHUNK);
-}
-
-size_t get_last_block_height()
-{
-    char *filename = last_file_in_folder("blockchain");
-    return atol(&filename[5]);
+    return load_blockchain((get_infos()->actual_height / NB_BLOCK_PER_CHUNK)+1);
 }
 
 void write_block_file(Block block)

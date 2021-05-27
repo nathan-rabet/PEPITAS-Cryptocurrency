@@ -14,11 +14,6 @@
 #include <fcntl.h>
 #include <sys/types.h>
 
-#include "client.h"
-#include "transaction.h"
-#include "misc/files.h"
-#include "blockchain/wallet.h"
-#include "cryptosystem/rsa.h"
 
 #define MAX_VALIDATORS_PER_BLOCK 512
 
@@ -105,6 +100,12 @@ typedef struct ChunkBlockchain
     int16_t nb_blocks;        // The number of blocks loaded in the chunk
 } ChunkBlockchain;
 
+#include "client.h"
+#include "transaction.h"
+#include "misc/files.h"
+#include "blockchain/wallet.h"
+#include "cryptosystem/rsa.h"
+
 /**
  * @brief Loads a blockchain object with a padding of 'nb_chunk'
  * 
@@ -121,13 +122,6 @@ ChunkBlockchain *load_blockchain(size_t nb_chunk);
  * @return ChunkBlockchain* 
  */
 ChunkBlockchain *load_last_blockchain();
-
-/**
- * @brief Get the last block height
- * 
- * @return size_t 
- */
-size_t get_last_block_height();
 
 /**
  * @brief Writes a block struct in a file

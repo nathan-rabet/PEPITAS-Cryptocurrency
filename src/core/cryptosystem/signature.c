@@ -97,10 +97,6 @@ int verify_transaction_signature(Transaction *transaction)
     size_t size = 0;
     char *buf = NULL;
     get_transaction_data(transaction, &buf, &size);
-    FILE* t = fopen("test_verif", "a+");
-    fwrite(buf, size, 1, t);
-    fwrite("\n\n-------\n\n", 11, 1, t);
-    fclose(t);
     int ret = verify_signature(buf,
                                size,
                                transaction->transaction_signature,
@@ -128,10 +124,6 @@ void sign_transaction(Transaction *transaction)
     size_t size = 0;
     char *buf = NULL;
     get_transaction_data(transaction, &buf, &size);
-    FILE* t = fopen("test_sign", "a+");
-    fwrite(buf, size, 1, t);
-    fwrite("\n\n-------\n\n", 11, 1, t);
-    fclose(t);
     sign_message(buf, size, transaction->transaction_signature);
 }
 

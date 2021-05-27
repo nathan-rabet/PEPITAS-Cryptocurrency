@@ -4,10 +4,11 @@
 #include "network/send_data.h"
 #include "network/get_data.h"
 #include "misc/safe.h"
-#include "blockchain/blockchain_header.h"
-#include "blockchain/transaction.h"
 #include <openssl/rsa.h>
+#include "blockchain/transaction.h"
+#include "blockchain/block.h"
 #include "ui/ui.h"
+#include "blockchain/blockchain_header.h"
 
 
 extern client_connection *client_connections;

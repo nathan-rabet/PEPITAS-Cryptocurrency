@@ -5,6 +5,22 @@
 #include "blockchain/block_test.h"
 #include "validation/validations_test.h"
 
+typedef struct infos_st
+{
+    char is_sychronize;
+    char is_validator;
+    int validator_id;
+    size_t actual_height;
+    size_t pdt;
+    char serv_type;
+}infos_st;
+
+infos_st *ac_infos;
+
+infos_st* get_infos(){
+    return ac_infos;
+}
+
 int main()
 {
     DEBUG(get_keys_test);

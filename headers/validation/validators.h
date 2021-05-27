@@ -5,8 +5,8 @@
 #include <string.h>
 #include <openssl/rsa.h>
 #include <openssl/pem.h>
-#include "cryptosystem/rsa.h"
 #include "cryptosystem/hash.h"
+#include "cryptosystem/rsa.h"
 #include "misc/files.h"
 #include "misc/safe.h"
 #include "misc/math.h"

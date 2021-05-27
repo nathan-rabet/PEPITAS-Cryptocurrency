@@ -125,18 +125,14 @@ void add_pdt_to_block(Block *block){
     Transaction **transs_valid = validate_transactions(transs, ti, &nb_trans);
     
     // COPY TRANSACTION TO BLOCK
+    block->block_data.transactions = malloc(sizeof(Transaction *) * nb_trans);
     for (size_t i = 0; i < nb_trans; i++)
     {
         block->block_data.transactions[block->block_data.nb_transactions] = transs_valid[i];
         block->block_data.nb_transactions++;
     }
 
-    // FREE
-    for (int i = 0; i < ti; i++)
-    {
-        free(transs[i]);
-    }
-    
+    // FREE    
     free(transs);
     free(transs_valid);
     
@@ -144,7 +140,7 @@ void add_pdt_to_block(Block *block){
 
 Block *create_epoch_block()
 {
-    Block *last_block = get_block(get_last_block_height());
+    Block *last_block = get_block(get_infos()->actual_height);
     Block *new_block = calloc(1, sizeof(Block));
 
     // VERIF IF IN NEXT COMITTEE
