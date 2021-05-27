@@ -144,8 +144,7 @@ Block *create_epoch_block()
     Block *new_block = calloc(1, sizeof(Block));
 
     // VERIF IF IN NEXT COMITTEE
-    int nb_validators;
-    RSA** comittee = get_next_comittee(&nb_validators);
+    RSA** comittee = get_next_comittee(&new_block->block_data.nb_validators);
 
     // my RSA* to char*
     char my_pkey_string[RSA_FILE_TOTAL_SIZE];
@@ -154,7 +153,7 @@ Block *create_epoch_block()
     int rsa_size = BIO_pending(my_pub);
     BIO_read(my_pub, my_pkey_string, rsa_size);
     BIO_free(my_pub);
-    for (int i = 0; i < nb_validators; i++)
+    for (int i = 0; i < new_block->block_data.nb_validators; i++)
     {
         RSA *v_key = comittee[i];
 
@@ -175,14 +174,14 @@ Block *create_epoch_block()
         else
         {
             // NOT IN COMITTEE
-            if (i == nb_validators-1)
+            if (i == new_block->block_data.nb_validators-1)
                 return NULL;
         }
         
     }
     
     // LINK BLOCK
-    for (int i = 0; i < nb_validators; i++)
+    for (int i = 0; i < new_block->block_data.nb_validators; i++)
     {
         new_block->block_data.validators_public_keys[i] = comittee[i];
     }
