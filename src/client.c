@@ -49,7 +49,7 @@ void Validate(){
     MANAGERMSG
     printf("Create new epoch!\n");
 
-    if (epoch->block_data.nb_validators == 1)
+    if (epoch->block_data.nb_validators <= 1)
     {        
         update_wallet_with_block(*epoch);
         write_block_file(*epoch);

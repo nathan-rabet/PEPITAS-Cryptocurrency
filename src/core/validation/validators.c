@@ -75,6 +75,8 @@ RSA **get_comittee(size_t block_height, int *nb_validators)
     for (size_t v = 0; v < validators_state_header.nb_validators; v++)
     {
         size_t random_offset = sizeof(struct validators_state_header) + (((size_t *)sha)[i] % validators_state_header.nb_validators) * sizeof(struct validators_state_item);
+        if (validators_state_header.nb_validators == 1)
+            random_offset = sizeof(struct validators_state_header);
         while (fseek(validators_states, random_offset, SEEK_SET) != 0)
             ;                                                                           // Setting random starting point
         size_t random_power = ((size_t *)sha)[j] % validators_state_header.total_stake; // Setting random power value
@@ -84,7 +86,8 @@ RSA **get_comittee(size_t block_height, int *nb_validators)
         struct validators_state_item next_validator;
         while (!is_next_validator)
         {
-            safe_fread(&next_validator, sizeof(struct validators_state_item), 1, validators_states);
+            if (safe_fread(&next_validator, sizeof(struct validators_state_item), 1, validators_states) != 1)
+                break;
 
             is_next_validator = __builtin_usubl_overflow(random_power, next_validator.validator_power, &random_power);
 
@@ -395,9 +398,6 @@ char update_validators_state(Block *block)
             updated_validators_state_header.total_stake -= transaction->transaction_data.amount;
             break;
         }
-        while (fseek(validators_states, sizeof(struct validators_state_header) + sizeof(struct validators_state_item) * validator_id, SEEK_SET) != 0)
-            ;
-        fwrite(&validator_item, sizeof(struct validators_state_item), 1, validators_states);
     }
 
     updated_validators_state_header.block_height_validity = block->block_data.height + 1;
