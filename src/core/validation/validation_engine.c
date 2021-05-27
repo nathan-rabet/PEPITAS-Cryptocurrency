@@ -206,7 +206,7 @@ char plebe_verify_block(Block *block)
 
     // GET COMITTEE
     int nb_validators;
-    RSA **validators = get_comittee(block->block_data.height, &nb_validators);
+    RSA **validators = get_comittee(block->block_data.height-1, &nb_validators);
 
     // VERIFY EPOCH MAN IS IN THE VALIDATORS
     if (cmp_public_keys(validators[block->block_data.epoch_id], block->block_data.validators_public_keys[block->block_data.epoch_id]))

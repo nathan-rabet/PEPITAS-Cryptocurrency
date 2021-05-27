@@ -205,7 +205,7 @@ int read_send_block(int fd)
         return -1;
     snprintf(dir, 256, "blockchain/c%iblock%lu", fd, block_height);
 
-    blockfile = open(dir, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+    blockfile = open(dir, O_RDWR | O_CREAT | O_TRUNC, 0644);
     if (blockfile == -1)
     {
         CLIENTMSG
@@ -230,7 +230,7 @@ int read_send_block(int fd)
 
     // LOAD BLOCK
     Block *block = malloc(sizeof(Block));
-    lseek(blockfile, 0, SEEK_SET);
+    lseek(blockfile, 0L, SEEK_SET);
     convert_data_to_block(block, blockfile);
     close(blockfile);
 
