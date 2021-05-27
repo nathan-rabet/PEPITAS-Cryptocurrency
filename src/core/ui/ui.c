@@ -270,7 +270,11 @@ gboolean on_transaction_button_press(__attribute__ ((unused)) GtkWidget *widget,
             public_key = (char *)gtk_entry_get_text(recipient_key);
             add_transaction_with_pkey(amount, public_key, time_str);
 #ifndef TEST
-            new_transaction(T_TYPE_DEFAULT, public_key, (size_t)(amount * 10e6), "", "");
+            char *asset = calloc(1, 512);
+            char *cause = calloc(1, 512);
+            new_transaction(T_TYPE_DEFAULT, public_key, (size_t)(amount * 10e6), asset, cause);
+            free(asset);
+            free(cause);
 #endif
         }
         else if(gtk_combo_box_get_active(contacts_combo) != -1)
@@ -283,7 +287,11 @@ gboolean on_transaction_button_press(__attribute__ ((unused)) GtkWidget *widget,
             public_key = get_public_key_from_contacts(name);
             add_transaction_with_contact(amount, public_key, time_str);
 #ifndef TEST
-            new_transaction(T_TYPE_DEFAULT, public_key, (size_t)(amount * 10e6), "", "");
+            char *asset = calloc(1, 512);
+            char *cause = calloc(1, 512);
+            new_transaction(T_TYPE_DEFAULT, public_key, (size_t)(amount * 10e6), asset, cause);
+            free(asset);
+            free(cause);
 #endif
             free(public_key);
         }

@@ -61,7 +61,7 @@ int verify_block_signature(Block block);
  * @param transaction The transaction to verify
  * @return 1 if valid, 0 otherwise  
  */
-int verify_transaction_signature(Transaction transaction);
+int verify_transaction_signature(Transaction *transaction);
 
 /**
  * @brief Convert transactions to char * buffer

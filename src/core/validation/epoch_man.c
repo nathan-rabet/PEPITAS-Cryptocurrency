@@ -23,7 +23,9 @@ char *create_vote_data(Block *block, char vote, int validator_index, size_t *dat
     memcpy(data + index, &vote, sizeof(char));
     index += sizeof(char);
     *data_length = index;
-    return sign_message_with_key(data, index, block->block_data.validators_public_keys[validator_index], NULL);
+    char *real_data = malloc(index + (RSA_size(block->block_data.validators_public_keys[validator_index]) * 2));
+    memcpy(real_data, data, index);
+    return real_data;
 }
 
 void give_punishments_and_rewards(Block *last_block, Block *current_block)
@@ -101,7 +103,7 @@ void add_pdt_to_block(Block *block){
         while ((dir = readdir(d)) != NULL && nbdir < MAX_TRANSACTIONS_PER_BLOCK) {
             if (dir->d_type == DT_REG)
             {
-                sscanf((char *)(txids + nbdir), "%hhu", dir->d_name);
+                *(txids + nbdir) = atol(dir->d_name);
                 nbdir++;
             }
         }
@@ -110,14 +112,17 @@ void add_pdt_to_block(Block *block){
 
     // LOAD TRANSACTION
     Transaction **transs = malloc(sizeof(Transaction *) * nbdir);
+    int ti = 0;
     for (size_t i = 0; i < nbdir; i++)
     {
-        transs[i] = load_pending_transaction(txids[i]);
+        transs[ti] = load_pending_transaction(txids[ti]);
+        if (transs[ti] != NULL)
+            ti++;
     }
 
     // VERIFY TRANSACTION
     size_t nb_trans;
-    Transaction **transs_valid = validate_transactions(transs, nbdir, &nb_trans);
+    Transaction **transs_valid = validate_transactions(transs, ti, &nb_trans);
     
     // COPY TRANSACTION TO BLOCK
     for (size_t i = 0; i < nb_trans; i++)
@@ -127,6 +132,11 @@ void add_pdt_to_block(Block *block){
     }
 
     // FREE
+    for (int i = 0; i < ti; i++)
+    {
+        free(transs[i]);
+    }
+    
     free(transs);
     free(transs_valid);
     

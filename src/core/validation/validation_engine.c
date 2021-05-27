@@ -2,6 +2,7 @@
 
 Transaction **validate_transactions(Transaction **transaction_to_validate, size_t nb_transactions, size_t *nb_returned_transactions)
 {
+    size_t nb_validated = 0;
     // Limits  the maximum amount of transactions
     *nb_returned_transactions = MIN(nb_transactions, MAX_TRANSACTIONS_PER_BLOCK);
     Transaction **transactions = malloc(*nb_returned_transactions * sizeof(Transaction *));
@@ -17,7 +18,7 @@ Transaction **validate_transactions(Transaction **transaction_to_validate, size_
         Transaction *pending_transaction = transaction_to_validate[pending_t];
 
         // ? bool sender_signature_ok;
-        if (!verify_transaction_signature(*transaction_to_validate[pending_t]))
+        if (verify_transaction_signature(pending_transaction) == 0)
             continue;
 
         // ? bool time <= time NOW
@@ -44,7 +45,7 @@ Transaction **validate_transactions(Transaction **transaction_to_validate, size_
         {
 
             // Foreach block in the blockchain (reversed-way)
-            for (int16_t b = working_chunk->nb_blocks; b >= 0 ||
+            for (int16_t b = working_chunk->nb_blocks-1; b >= 0 ||
                                                        (b = (working_chunk = load_blockchain(--last_chunk_nb)) != NULL ? load_blockchain(0)->nb_blocks + 1 : 0) != 0;
                  b--)
             {
@@ -185,11 +186,12 @@ Transaction **validate_transactions(Transaction **transaction_to_validate, size_
         default:
             return NULL;
         }
+        nb_validated++;
     }
 
     // Reset modified blockchain chunk
     load_blockchain(current_chunk_nb);
-
+    *nb_returned_transactions = nb_validated;
     return transactions;
 }
 
@@ -320,7 +322,8 @@ int send_verdict(Block *block, char verdict)
 
     size_t datalen;
     char *payload = create_vote_data(block, verdict, validator_index, &datalen);
-
+    sign_message_with_key(payload, datalen, block->block_data.validators_public_keys[validator_index], payload + datalen);
+    datalen += RSA_size(block->block_data.validators_public_keys[validator_index]) * 2;
     for (size_t i = 0; i < MAX_CONNECTION; i++)
     {
         if (client_connections[i].clientfd != 0)
@@ -332,5 +335,6 @@ int send_verdict(Block *block, char verdict)
             sem_post(&client_connections[i].lock);
         }
     }
+    free(payload);
     return 0;
 }
