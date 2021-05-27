@@ -56,11 +56,17 @@ char *sign_message_with_key(char *data, size_t len_data, RSA *key, void *buffer)
 
 int verify_signature(void *data, size_t data_len, char *signature, RSA *pub_key)
 {
+    if (signature == NULL)
+        err(EXIT_FAILURE, "Error in verify_signature: signature is NULL\n");
+    if (pub_key == NULL)
+        err(EXIT_FAILURE, "Error in verify_signature: pub_key is NULL\n");
+    if (data == NULL)
+        err(EXIT_FAILURE, "Error in verify_signature: data is NULL\n");
     // Hash
     char *output_buffer = sha384_data(data, data_len);
 
     // Decrypt the message
-    char *decrypt = malloc(RSA_size(pub_key));
+    char decrypt[SHA384_DIGEST_LENGTH * 2];
     char errmsg[130];
 
     if (RSA_public_decrypt(SIGNATURE_LEN, (unsigned char *)signature, (unsigned char *)decrypt,
@@ -68,7 +74,7 @@ int verify_signature(void *data, size_t data_len, char *signature, RSA *pub_key)
     {
         ERR_load_crypto_strings();
         ERR_error_string(ERR_get_error(), errmsg);
-        err(EXIT_FAILURE, "Error decrypting message: %s\n", errmsg);
+        err(EXIT_FAILURE, "Error in verify_signature for decrypting message: %s\n", errmsg);
     }
 
     return !strncmp(output_buffer, decrypt, SHA384_DIGEST_LENGTH * 2);
@@ -86,15 +92,19 @@ int verify_block_signature(Block block)
     return ret;
 }
 
-int verify_transaction_signature(Transaction transaction)
+int verify_transaction_signature(Transaction *transaction)
 {
     size_t size = 0;
     char *buf = NULL;
-    get_transaction_data(&transaction, &buf, &size);
-    int ret = verify_signature(&transaction.transaction_data,
+    get_transaction_data(transaction, &buf, &size);
+    FILE* t = fopen("test_verif", "a+");
+    fwrite(buf, size, 1, t);
+    fwrite("\n\n-------\n\n", 11, 1, t);
+    fclose(t);
+    int ret = verify_signature(buf,
                                size,
-                               transaction.transaction_signature,
-                               transaction.transaction_data.sender_public_key);
+                               transaction->transaction_signature,
+                               transaction->transaction_data.sender_public_key);
     free(buf);
     return ret;
 }
@@ -118,6 +128,10 @@ void sign_transaction(Transaction *transaction)
     size_t size = 0;
     char *buf = NULL;
     get_transaction_data(transaction, &buf, &size);
+    FILE* t = fopen("test_sign", "a+");
+    fwrite(buf, size, 1, t);
+    fwrite("\n\n-------\n\n", 11, 1, t);
+    fclose(t);
     sign_message(buf, size, transaction->transaction_signature);
 }
 

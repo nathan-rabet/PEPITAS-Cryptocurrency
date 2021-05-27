@@ -111,6 +111,8 @@ int main()
     
     genesis_block.block_data.transactions[0] = &new_trans;
     genesis_block.block_data.transactions[1] = &new_trans2;
+    sign_transaction_with_key(genesis_block.block_data.transactions[0], wallet->priv_key);
+    sign_transaction_with_key(genesis_block.block_data.transactions[1], wallet->priv_key);
 
     genesis_block.block_data.block_timestamp = time(NULL);
     genesis_block.validators_votes[0] = 1;
@@ -128,7 +130,7 @@ int main()
     index += sizeof(int);
     data2[index] = 1;
     index += sizeof(char);
-    sign_message_with_key(genesis_block.vote_signature[0], index, wallet->priv_key, NULL);
+    sign_message_with_key(genesis_block.vote_signature[0], index, wallet->priv_key, genesis_block.vote_signature[0]);
 
     write_block_file(genesis_block);
     return 0;

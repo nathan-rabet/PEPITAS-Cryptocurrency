@@ -75,6 +75,7 @@ void new_transaction(char type, char *rc_pk, size_t amount, char cause[512], cha
     }
     
     Transaction trans = create_new_transaction(ac_infos, type, key, amount, cause, asset);
+    sign_transaction(&trans);
     add_pending_transaction(&trans);
 
     // SEND PENDING TRANSACTION
@@ -204,11 +205,10 @@ void update_blockchain(infos_st *infos, size_t index_client){
     }
 
 }
-
-void update_pending_transactions_list(infos_st *infos){
+void clear_transactions()
+{
     // CLEAR DIR
-    infos->pdt = 0;
-    char temp[100];
+    char temp[256];
     DIR *d;
     struct dirent *dir;
     d = opendir("./pdt");
@@ -216,14 +216,18 @@ void update_pending_transactions_list(infos_st *infos){
         while ((dir = readdir(d)) != NULL) {
             if (dir->d_type == DT_REG)
             {
-                sscanf(temp, "./pdt%hhu", dir->d_name);
+                time_t txid = atol(dir->d_name);
+                snprintf(temp, 256, "pdt/%ld", txid);
                 remove(temp);
             }
         }
         closedir(d);
     }
-    
+}
 
+void update_pending_transactions_list(infos_st *infos){
+    
+    clear_transactions();
     // SYNC
     for (size_t i = 0; i < MAX_CONNECTION; i++)
     {
@@ -291,6 +295,7 @@ int main()
         join_network_door(infos);
     }
 
+    clear_transactions();
     // Try Load Old blockchain
     gen_blockchain_header(infos);
     update_sync(infos->actual_height, infos->actual_height);

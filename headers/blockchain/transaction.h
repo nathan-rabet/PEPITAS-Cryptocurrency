@@ -70,6 +70,7 @@ void convert_data_to_transactiondata(TransactionData *transactiondata, int fd);
 void load_transaction(Transaction *transaction, int fd);
 Transaction* load_pending_transaction(time_t timestamp);
 void add_pending_transaction(Transaction *transaction);
+// NEED TO SIGN
 Transaction create_new_transaction(infos_st *infos, char type, RSA* receiver_public_key, size_t amount, char cause[512], char asset[512]);
 
 

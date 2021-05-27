@@ -23,9 +23,9 @@ void write_transactiondata(TransactionData *transaction, int fd)
     BIO_free(pubkey2);
 
     write(fd, &transaction->amount, sizeof(size_t));
+    write(fd, &transaction->receiver_remaining_money, sizeof(size_t));
+    write(fd, &transaction->sender_remaining_money, sizeof(size_t));
     write(fd, &transaction->transaction_timestamp, sizeof(time_t));
-    write(fd, &transaction->receiver_remaining_money, sizeof(time_t));
-    write(fd, &transaction->sender_remaining_money, sizeof(time_t));
     
     write(fd, transaction->cause, 512);
     write(fd, transaction->asset, 512);
@@ -40,6 +40,13 @@ void write_transaction(Transaction *transaction, int fd)
 void get_transaction_data(Transaction *trans, char **buff, size_t *index)
 {
     *buff = realloc(*buff, *index + TRANSACTION_DATA_SIZE + 3000);
+
+
+    memcpy(*buff + *index, &trans->transaction_data.magic, sizeof(char));
+    *index += sizeof(char);
+    memcpy(*buff + *index, &trans->transaction_data.type, sizeof(char));
+    *index += sizeof(char);
+
     BIO *pubkey = BIO_new(BIO_s_mem());
     PEM_write_bio_RSAPublicKey(pubkey, trans->transaction_data.sender_public_key);
     int rsa_size = BIO_pending(pubkey);
@@ -72,9 +79,9 @@ void get_transaction_data(Transaction *trans, char **buff, size_t *index)
 
     memcpy(*buff + *index, &trans->transaction_data.transaction_timestamp, sizeof(time_t));
     *index += sizeof(time_t);
-    memcpy(*buff + *index, trans->transaction_data.cause, sizeof(512));
+    memcpy(*buff + *index, trans->transaction_data.cause, 512);
     *index += 512;
-    memcpy(*buff + *index, trans->transaction_data.asset, sizeof(512));
+    memcpy(*buff + *index, trans->transaction_data.asset, 512);
     *index += 512;
 }
 
