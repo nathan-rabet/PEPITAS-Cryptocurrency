@@ -56,7 +56,6 @@ void get_keys(__attribute__((unused))char *password)
         rsa_public_file = fopen(".keys/rsa.pub", "rb");
         rsa_private_file = fopen(".keys/rsa", "rb");
 
-        Wallet *wallet = get_my_wallet();
         wallet->priv_key = PEM_read_RSAPrivateKey(rsa_private_file, NULL, NULL, NULL);
         wallet->pub_key = PEM_read_RSAPublicKey(rsa_public_file, NULL, NULL, NULL);
         fclose(rsa_public_file);
