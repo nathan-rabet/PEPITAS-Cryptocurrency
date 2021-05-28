@@ -271,7 +271,7 @@ gboolean on_transaction_button_press(__attribute__ ((unused)) GtkWidget *widget,
 #ifndef TEST
             char *asset = calloc(1, 512);
             char *cause = calloc(1, 512);
-            new_transaction(T_TYPE_DEFAULT, public_key, (size_t)(amount * 10e6), asset, cause);
+            new_transaction(T_TYPE_DEFAULT, public_key, (size_t)(amount * 10e5), asset, cause);
             free(asset);
             free(cause);
 #endif
@@ -288,7 +288,7 @@ gboolean on_transaction_button_press(__attribute__ ((unused)) GtkWidget *widget,
 #ifndef TEST
             char *asset = calloc(1, 512);
             char *cause = calloc(1, 512);
-            new_transaction(T_TYPE_DEFAULT, public_key, (size_t)(amount * 10e6), asset, cause);
+            new_transaction(T_TYPE_DEFAULT, public_key, (size_t)(amount * 10e5), asset, cause);
             free(asset);
             free(cause);
 #endif
@@ -315,9 +315,8 @@ void add_transaction_with_pkey(double amount, char *public_key, char *date)
         gtk_tree_store_set(ts_th, &iter, 1, public_key, -1);
         gtk_tree_store_set(ts_th, &iter, 2, date, -1);
         fprintf(th_f, "%lf", amount);
-        fprintf(th_f, "\n");
         fprintf(th_f, "%s", public_key);
-        fprintf(th_f, "\n");
+        fprintf(th_f, "\r");
         fprintf(th_f, "%s", date);
 
         fclose(th_f);
@@ -336,8 +335,8 @@ void add_transaction_with_contact(double amount, char *public_key, char *date)
         gtk_tree_store_set(ts_th, &iter, 1, public_key, -1);
         gtk_tree_store_set(ts_th, &iter, 2, date, -1);
         fprintf(th_f, "%lf", amount);
-        fprintf(th_f, "\n");
         fprintf(th_f, "%s", public_key);
+        fprintf(th_f, "\r");
         fprintf(th_f, "%s", date);
 
         fclose(th_f);
@@ -355,7 +354,7 @@ void add_transaction_from_file(double amount, char *public_key, char *date)
 
 void load_transactions_from_file()
 {
-    char buff[128];
+    char buff[2000];
     struct stat st = {0};
     if (stat(".ui/.transa_history", &st) == -1)
     {
@@ -368,14 +367,12 @@ void load_transactions_from_file()
 
     while(1)
     {
-        fgets(buff, 128, th_f);
-        double amount = strtod(buff, NULL);
-        fgets(buff, 128, th_f);
+        double amount = 0;
         char *public_key = malloc(sizeof(buff));
-        strcpy(public_key, buff);
-        fgets(buff, 128, th_f);
         char *date = malloc(sizeof(buff));
-        strcpy(date, buff);
+        fscanf(th_f, "%lf", &amount);
+        fscanf(th_f, "%[^\r]", public_key);
+        fscanf(th_f, "%[^\n]", date);
         if(strcmp(public_key, "") == 0 || strcmp(date, "") == 0 || amount == 0)
         {
             free(public_key);
@@ -532,15 +529,15 @@ char *get_public_key_from_contacts(const char *name)
 {
     char buff[300];
     strcpy(buff, ".contact/");
-    FILE *contacts_f = fopen(strcat(buff, name), "r");
-    if(contacts_f == NULL)
+    int contacts_f = open(strcat(buff, name), O_RDONLY);
+    if(contacts_f == 0)
         return NULL;
 
     char *public_key = malloc(2000);
-    fread(public_key, 2000, 1, contacts_f);
-
+    size_t r = read(contacts_f, public_key, 2000);
+    public_key[r+1] = '\0';
     
-    fclose(contacts_f);
+    close(contacts_f);
     return public_key;
 
 }
