@@ -95,7 +95,7 @@ void *init_server(void *args)
     addrinfo_error = getaddrinfo(NULL, STATIC_PORT, &hints, &result);
 
     // Error management
-    if (addrinfo_error != 0)
+    if (addrinfo_error)
     {
         
         SERVERMSG

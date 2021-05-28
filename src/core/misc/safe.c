@@ -49,7 +49,7 @@ ssize_t safe_read(int fd, const void **buf, size_t *bufsize)
 			buffersize += 1;
 			buffer = realloc(buffer, buffersize);
 		}
-	} while (strncmp("\r\n\r\n", buffer + (read_count - 4), 4) != 0);
+	} while (strncmp("\r\n\r\n", buffer + (read_count - 4), 4));
 	*buf = buffer;
 	*bufsize = buffersize;
 	return read_count;

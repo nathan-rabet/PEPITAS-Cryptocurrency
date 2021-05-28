@@ -49,8 +49,8 @@ void new_transaction(char type, char *rc_pk, size_t amount, char cause[512], cha
     // SEND PENDING TRANSACTION
     for (size_t i = 0; i < MAX_CONNECTION; i++)
     {
-        if (client_connections[i].clientfd != 0) {
-            while (client_connections[i].demand != 0);
+        if (client_connections[i].clientfd) {
+            while (client_connections[i].demand);
             client_connections[i].demand = DD_SEND_TRANSACTION;
             client_connections[i].Payload = malloc(sizeof(time_t));
             *(time_t *)client_connections[i].Payload = trans.transaction_data.transaction_timestamp;
@@ -61,8 +61,8 @@ void new_transaction(char type, char *rc_pk, size_t amount, char cause[512], cha
     // WAIT
     for (size_t i = 0; i < MAX_CONNECTION; i++)
     {
-        if (client_connections[i].clientfd != 0) {
-            while (client_connections[i].demand != 0);
+        if (client_connections[i].clientfd) {
+            while (client_connections[i].demand);
             free(client_connections[i].Payload);
         }
     }

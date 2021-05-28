@@ -176,7 +176,7 @@ client_connection *listen_to(infos_st *infos, Neighbour neighbour, char *connect
     addrinfo_ret = getaddrinfo(neighbour.hostname, STATIC_PORT, &hints, &result);
 
     // If adress information fetching failed
-    if (addrinfo_ret != 0)
+    if (addrinfo_ret)
     {
         dprintf(STDERR_FILENO, "Fail getting information for address '%s' on port %s: %s",
                 neighbour.hostname, STATIC_PORT, gai_strerror(addrinfo_ret));

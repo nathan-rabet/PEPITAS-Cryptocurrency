@@ -86,7 +86,7 @@ void send_send_block(int fd, size_t height){
     safe_write(fd, HD_SEND_BLOCK, strlen(HD_SEND_BLOCK));
     safe_send(fd, (void *)&height, sizeof(size_t));
     safe_send(fd, (void *)&bc_size, sizeof(size_t));
-    while ((r = fread(temp, 1, 1024, blockfile)) != 0 && bc_size > 0)
+    while ((r = fread(temp, 1, 1024, blockfile)) && bc_size > 0)
     {
         if (r == -1)
             errx(EXIT_FAILURE, "Can't send block %lu\n", height);
@@ -147,7 +147,7 @@ void send_send_pending_transaction(int fd, time_t txid){
     safe_send(fd, &txid, sizeof(time_t));
     safe_send(fd, &bc_size, sizeof(size_t));
 
-    while ((r = fread(temp, 1, 1024, transfile)) != 0 && bc_size > 0)
+    while ((r = fread(temp, 1, 1024, transfile)) && bc_size > 0)
     {
         if (r == -1)
             errx(EXIT_FAILURE, "Can't send transaction %ld\n", txid);
