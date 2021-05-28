@@ -8,7 +8,6 @@ static GtkWidget *connection_window;
 static GtkWidget *create_key_window;
 
 static GtkButton *transa_but;
-static GtkButton *pkey_but;
 static GtkButton *invest_but1;
 static GtkButton *invest_but2;
 static GtkButton *recover_but1;
@@ -19,6 +18,7 @@ static GtkButton *create_key_but1;
 static GtkButton *create_key_but2;
 static GtkButton *connect_but;
 
+
 GtkLabel *balance_1;
 GtkLabel *balance_2;
 GtkLabel *stake_label1;
@@ -28,13 +28,16 @@ GtkLabel *synchro_label;
 GtkLabel *block_amount_label;
 GtkLabel *connections_label;
 GtkLabel *mempool_label;
-GtkLabel *private_key_label;
+GtkLabel *public_key_label;
 GtkLabel *password_error_label;
 GtkLabel *latest_block_name1;
 GtkLabel *latest_block_name2;
 GtkLabel *latest_block_name3;
+GtkLabel *error_label;
 GtkEntry *transa_amount;
 GtkEntry *recipient_key;
+GtkEntry *asset_entry;
+GtkEntry *cause_entry;
 GtkEntry *invest_entry;
 GtkEntry *recover_entry;
 GtkEntry *name_entry_con;
@@ -93,9 +96,8 @@ void *setup(void *args)
     connection_window = GTK_WIDGET(gtk_builder_get_object(builder, "connection_window"));
     create_key_window = GTK_WIDGET(gtk_builder_get_object(builder, "create_key_window"));
 
-    transa_but = GTK_BUTTON(gtk_builder_get_object(builder, "transa_but"));
 
-    pkey_but = GTK_BUTTON(gtk_builder_get_object(builder, "show_pkey_but"));
+    transa_but = GTK_BUTTON(gtk_builder_get_object(builder, "transa_but"));
 
     invest_but1 = GTK_BUTTON(gtk_builder_get_object(builder, "invest_but1"));
     invest_but2 = GTK_BUTTON(gtk_builder_get_object(builder, "invest_but2"));
@@ -110,6 +112,8 @@ void *setup(void *args)
 
     transa_amount = GTK_ENTRY(gtk_builder_get_object(builder, "transa_amount"));
     recipient_key = GTK_ENTRY(gtk_builder_get_object(builder, "recipient_key"));
+    asset_entry = GTK_ENTRY(gtk_builder_get_object(builder, "asset_entry"));
+    cause_entry = GTK_ENTRY(gtk_builder_get_object(builder, "cause_entry"));
     contacts_combo = GTK_COMBO_BOX(gtk_builder_get_object(builder, "contacts_combo"));
     ls_combo = GTK_LIST_STORE(gtk_builder_get_object(builder, "liststoreCON"));
 
@@ -140,7 +144,7 @@ void *setup(void *args)
     create_key_but2 = GTK_BUTTON(gtk_builder_get_object(builder, "create_key_but2"));
     connect_but = GTK_BUTTON(gtk_builder_get_object(builder, "connect_but"));
 
-    private_key_label = GTK_LABEL(gtk_builder_get_object(builder, "private_key_label"));
+    public_key_label = GTK_LABEL(gtk_builder_get_object(builder, "public_key_label"));
     balance_1 = GTK_LABEL(gtk_builder_get_object(builder, "balance_1"));
     balance_2 = GTK_LABEL(gtk_builder_get_object(builder, "balance_2"));
     stake_label1 = GTK_LABEL(gtk_builder_get_object(builder, "stake_label1"));
@@ -154,10 +158,10 @@ void *setup(void *args)
     latest_block_name3 = GTK_LABEL(gtk_builder_get_object(builder, "latest_block_name3"));
     connections_label = GTK_LABEL(gtk_builder_get_object(builder, "connections_label"));
     mempool_label = GTK_LABEL(gtk_builder_get_object(builder, "mempool_label"));
+    error_label = GTK_LABEL(gtk_builder_get_object(builder, "error_label"));
 
     progress_bar_blockchain = GTK_PROGRESS_BAR(gtk_builder_get_object(builder, "progress_bar_blockchain"));
 
-    gtk_widget_hide(GTK_WIDGET(private_key_label));
     gtk_widget_hide(invest_window);
     gtk_widget_hide(recover_window);
     gtk_widget_hide(add_contact_window);
@@ -165,7 +169,6 @@ void *setup(void *args)
     gtk_widget_hide(create_key_window);
 
     g_signal_connect(transa_but, "clicked", G_CALLBACK(on_transaction_button_press), NULL);
-    g_signal_connect(pkey_but, "clicked", G_CALLBACK(on_pkey_button_press), NULL);
     g_signal_connect(invest_but1, "clicked", G_CALLBACK(on_invest_button1_press), NULL);
     g_signal_connect(invest_but2, "clicked", G_CALLBACK(on_invest_button2_press), NULL);
     g_signal_connect(recover_but1, "clicked", G_CALLBACK(on_recover_button1_press), NULL);
@@ -257,8 +260,16 @@ gboolean on_transaction_button_press(__attribute__ ((unused)) GtkWidget *widget,
                     __attribute__ ((unused)) GdkEventKey *event,
                     __attribute__ ((unused))gpointer user_data)
 {
+    if(strcmp(gtk_entry_get_text(transa_amount), "") == 0)
+    {
+        gtk_label_set_text(error_label, "Invalid transaction amount");
+    }
+    else if(strcmp(gtk_entry_get_text(recipient_key), "") == 0 && gtk_combo_box_get_active(contacts_combo) == -1)
+    {
+        gtk_label_set_text(error_label, "Invalid transaction recipient");
+    }
      //Call to transaction function
-     if(strcmp(gtk_entry_get_text(transa_amount), "") != 0)
+    else if(strcmp(gtk_entry_get_text(transa_amount), "") != 0)
      {
         const time_t date = time(NULL);
         char *time_str = ctime(&date);
@@ -270,7 +281,9 @@ gboolean on_transaction_button_press(__attribute__ ((unused)) GtkWidget *widget,
             add_transaction_with_pkey(amount, public_key, time_str);
 #ifndef TEST
             char *asset = calloc(1, 512);
+            strcpy(asset, gtk_entry_get_text(asset_entry));
             char *cause = calloc(1, 512);
+            strcpy(cause, gtk_entry_get_text(cause_entry));
             new_transaction(T_TYPE_DEFAULT, public_key, (size_t)(amount * 10e5), asset, cause);
             free(asset);
             free(cause);
@@ -287,7 +300,9 @@ gboolean on_transaction_button_press(__attribute__ ((unused)) GtkWidget *widget,
             add_transaction_with_contact(amount, public_key, time_str);
 #ifndef TEST
             char *asset = calloc(1, 512);
+            strcpy(asset, gtk_entry_get_text(asset_entry));
             char *cause = calloc(1, 512);
+            strcpy(cause, gtk_entry_get_text(cause_entry));
             new_transaction(T_TYPE_DEFAULT, public_key, (size_t)(amount * 10e5), asset, cause);
             free(asset);
             free(cause);
@@ -297,6 +312,11 @@ gboolean on_transaction_button_press(__attribute__ ((unused)) GtkWidget *widget,
      }
      gtk_entry_set_text(transa_amount, "");
      gtk_entry_set_text(recipient_key, "");
+     gtk_entry_set_text(asset_entry, "");
+     gtk_entry_set_text(cause_entry, "");
+     gtk_label_set_text(error_label, "Transaction send!");
+     sleep(1);
+     gtk_label_set_text(error_label, "");
     
 
      return TRUE;
@@ -385,24 +405,6 @@ void load_transactions_from_file()
         free(date);
     }
     fclose(th_f);
-}
-
-gboolean on_pkey_button_press(__attribute__ ((unused)) GtkWidget *widget,
-                    __attribute__ ((unused)) GdkEventKey *event,
-                    __attribute__ ((unused)) gpointer user_data)
-{
-    if(strcmp(gtk_button_get_label(pkey_but), "Show key") == 0)
-    {
-        gtk_button_set_label(pkey_but, "Hide key");
-        gtk_widget_show(GTK_WIDGET(private_key_label));
-    }
-    else
-    {
-        gtk_button_set_label(pkey_but, "Show key");
-        gtk_widget_hide(GTK_WIDGET(private_key_label));
-    }
-
-    return TRUE;
 }
 
 gboolean on_invest_button1_press(__attribute__ ((unused)) GtkWidget *widget,
@@ -666,6 +668,14 @@ void update_labels()
         gtk_label_set_text(balance_1, buff1);
         gtk_label_set_text(balance_2, buff1);
     }
+    BIO *pubkey = BIO_new(BIO_s_mem());
+    PEM_write_bio_RSAPublicKey(pubkey, wallet->pub_key);
+    char temp[5000];
+    int rsa_size = BIO_pending(pubkey);
+    BIO_read(pubkey, temp, rsa_size);
+    temp[rsa_size] = 0;
+    gtk_label_set_text(public_key_label, temp);
+    BIO_free_all(pubkey);
     /*if(atol(gtk_label_get_text(stake_label1)) != Get_Stake)
     {
         char buff2[30];

@@ -222,8 +222,8 @@
                 <property name="label" translatable="yes">Public key:</property>
               </object>
               <packing>
-                <property name="x">375</property>
-                <property name="y">113</property>
+                <property name="x">395</property>
+                <property name="y">117</property>
               </packing>
             </child>
             <child>
@@ -232,51 +232,11 @@
                 <property name="height_request">32</property>
                 <property name="visible">True</property>
                 <property name="label" translatable="yes">pkey</property>
+                <property name="selectable">True</property>
               </object>
               <packing>
-                <property name="x">477</property>
-                <property name="y">115</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="label7">
-                <property name="width_request">111</property>
-                <property name="height_request">38</property>
-                <property name="visible">True</property>
-                <property name="label" translatable="yes">Private key:</property>
-              </object>
-              <packing>
-                <property name="x">380</property>
-                <property name="y">189</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="private_key_label">
-                <property name="width_request">124</property>
-                <property name="height_request">28</property>
-                <property name="visible">True</property>
-                <property name="xalign">0.50999999046325684</property>
-                <property name="label" translatable="yes">privatekey</property>
-              </object>
-              <packing>
-                <property name="x">498</property>
-                <property name="y">196</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkToggleButton" id="show_pkey_but">
-                <property name="label" translatable="yes">Show key</property>
-                <property name="width_request">104</property>
-                <property name="height_request">34</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="xalign">0.50999999046325684</property>
-                <property name="yalign">0.52999997138977051</property>
-              </object>
-              <packing>
-                <property name="x">454</property>
-                <property name="y">248</property>
+                <property name="x">383</property>
+                <property name="y">149</property>
               </packing>
             </child>
             <child>
@@ -501,8 +461,8 @@
                 <property name="receives_default">True</property>
               </object>
               <packing>
-                <property name="x">255</property>
-                <property name="y">295</property>
+                <property name="x">85</property>
+                <property name="y">323</property>
               </packing>
             </child>
             <child>
@@ -603,8 +563,60 @@
                 <property name="visible">True</property>
               </object>
               <packing>
-                <property name="x">226</property>
+                <property name="x">85</property>
                 <property name="y">286</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkEntry" id="asset_entry">
+                <property name="width_request">180</property>
+                <property name="height_request">28</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="max_length">512</property>
+                <property name="invisible_char">&#x25CF;</property>
+              </object>
+              <packing>
+                <property name="x">409</property>
+                <property name="y">258</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label31">
+                <property name="width_request">128</property>
+                <property name="height_request">25</property>
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Asset:</property>
+              </object>
+              <packing>
+                <property name="x">278</property>
+                <property name="y">261</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkEntry" id="cause_entry">
+                <property name="width_request">183</property>
+                <property name="height_request">28</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="max_length">512</property>
+                <property name="invisible_char">&#x25CF;</property>
+              </object>
+              <packing>
+                <property name="x">408</property>
+                <property name="y">297</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label32">
+                <property name="width_request">95</property>
+                <property name="height_request">39</property>
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Cause:</property>
+              </object>
+              <packing>
+                <property name="x">293</property>
+                <property name="y">289</property>
               </packing>
             </child>
           </object>
