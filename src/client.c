@@ -22,12 +22,17 @@ void Validate(){
     if (ac_infos->is_validator == 0)
         return;
     Block *epoch = create_epoch_block();
+    if (plebe_verify_block(epoch)) {
+
+        CLIENTMSG
+        printf("The block %lu is not valid.\n", epoch->block_data.height);
+    }
     // SEND REQUEST DD_SEND_EPOCH
     for (size_t i = 0; i < MAX_CONNECTION; i++)
     {
-        if (client_connections[i].clientfd != 0)
+        if (client_connections[i].clientfd)
         {
-            while (client_connections[i].demand != 0)
+            while (client_connections[i].demand)
                 ;
             client_connections[i].demand = DD_SEND_EPOCH;
             client_connections[i].Payload = (void *)epoch;
@@ -38,9 +43,9 @@ void Validate(){
     // WAIT
     for (size_t i = 0; i < MAX_CONNECTION; i++)
     {
-        if (client_connections[i].clientfd != 0)
+        if (client_connections[i].clientfd)
         {
-            while (client_connections[i].demand != 0)
+            while (client_connections[i].demand)
                 ;
             free(client_connections[i].Payload);
         }
@@ -94,8 +99,8 @@ void new_transaction(char type, char *rc_pk, size_t amount, char cause[512], cha
     // SEND PENDING TRANSACTION
     for (size_t i = 0; i < MAX_CONNECTION; i++)
     {
-        if (client_connections[i].clientfd != 0) {
-            while (client_connections[i].demand != 0);
+        if (client_connections[i].clientfd) {
+            while (client_connections[i].demand);
             client_connections[i].demand = DD_SEND_TRANSACTION;
             client_connections[i].Payload = malloc(sizeof(time_t));
             *(time_t *)client_connections[i].Payload = trans.transaction_data.transaction_timestamp;
@@ -106,8 +111,8 @@ void new_transaction(char type, char *rc_pk, size_t amount, char cause[512], cha
     // WAIT
     for (size_t i = 0; i < MAX_CONNECTION; i++)
     {
-        if (client_connections[i].clientfd != 0) {
-            while (client_connections[i].demand != 0);
+        if (client_connections[i].clientfd) {
+            while (client_connections[i].demand);
             free(client_connections[i].Payload);
         }
     }
@@ -161,7 +166,7 @@ size_t update_blockchain_height(infos_st *infos)
     size_t max_h_i = 0;
     for (size_t i = 0; i < MAX_CONNECTION; i++)
     {
-        if (client_connections[i].clientfd != 0) {
+        if (client_connections[i].clientfd) {
             get_blocks_t * Payload = calloc(1, sizeof(get_blocks_t));
             Payload->version = P_VERSION;
             Payload->nb_demands = 1;
@@ -178,8 +183,8 @@ size_t update_blockchain_height(infos_st *infos)
     //WAIT
     for (size_t i = 0; i < MAX_CONNECTION; i++)
     {
-        if (client_connections[i].clientfd != 0) {
-            while (client_connections[i].demand != 0);
+        if (client_connections[i].clientfd) {
+            while (client_connections[i].demand);
             if (max_h < client_connections[i].actual_client_height){
                 max_h = client_connections[i].actual_client_height;
                 max_h_i = i;
@@ -214,7 +219,7 @@ void update_blockchain(infos_st *infos, size_t index_client){
         demand_height += nb_dd;
         sem_post(&client_connections[index_client].lock);
         //WAIT
-        while (client_connections[index_client].demand != 0);
+        while (client_connections[index_client].demand);
     }
 
 }
@@ -244,7 +249,7 @@ void update_pending_transactions_list(infos_st *infos){
     // SYNC
     for (size_t i = 0; i < MAX_CONNECTION; i++)
     {
-        if (client_connections[i].clientfd != 0) {
+        if (client_connections[i].clientfd) {
             client_connections[i].demand = DD_GET_TRANSACTION_LIST;
             sem_post(&client_connections[i].lock);
         }
@@ -253,8 +258,8 @@ void update_pending_transactions_list(infos_st *infos){
     //WAIT
     for (size_t i = 0; i < MAX_CONNECTION; i++)
     {
-        if (client_connections[i].clientfd != 0) {
-            while (client_connections[i].demand != 0);
+        if (client_connections[i].clientfd) {
+            while (client_connections[i].demand);
         }
     }
     char tmp[10];

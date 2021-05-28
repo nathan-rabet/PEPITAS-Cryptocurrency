@@ -83,7 +83,7 @@ typedef struct BlockData
 
 typedef struct Block
 {
-    uint16_t chunk_id;
+    uint16_t chunk_id;  // Don't show
     BlockData block_data; // The block distributed data, excluding the block signature
 
     char block_signature[256]; // SHA384 signature EPOCHMAN

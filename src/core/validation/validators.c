@@ -60,7 +60,7 @@ RSA **get_comittee(size_t block_height, int *nb_validators)
     if (safe_fread(&validators_state_header, sizeof(struct validators_state_header), 1, validators_states) < 1)
         return NULL;
 
-    while (fseek(validators_states, sizeof(struct validators_state_header), SEEK_SET) != 0)
+    while (fseek(validators_states, sizeof(struct validators_state_header), SEEK_SET))
         ;
 
     //
@@ -77,7 +77,7 @@ RSA **get_comittee(size_t block_height, int *nb_validators)
         size_t random_offset = sizeof(struct validators_state_header) + (((size_t *)sha)[i] % validators_state_header.nb_validators) * sizeof(struct validators_state_item);
         if (validators_state_header.nb_validators == 1)
             random_offset = sizeof(struct validators_state_header);
-        while (fseek(validators_states, random_offset, SEEK_SET) != 0)
+        while (fseek(validators_states, random_offset, SEEK_SET))
             ;                                                                           // Setting random starting point
         size_t random_power = ((size_t *)sha)[j] % validators_state_header.total_stake; // Setting random power value
 
@@ -183,7 +183,7 @@ ssize_t get_validator_stake(size_t validator_id)
 
     struct validators_state_item validators_state_item = {0};
 
-    while (fseek(validators_states, sizeof(struct validators_state_header) + sizeof(struct validators_state_item) * validator_id, SEEK_SET) != 0)
+    while (fseek(validators_states, sizeof(struct validators_state_header) + sizeof(struct validators_state_item) * validator_id, SEEK_SET))
         ;
     if (safe_fread(&validators_state_item, sizeof(struct validators_state_item), 1, validators_states) < 1)
         return -1;
@@ -200,7 +200,7 @@ ssize_t get_validator_power(size_t validator_id)
 
     struct validators_state_item validators_state_item = {0};
 
-    while (fseek(validators_states, sizeof(struct validators_state_header) + sizeof(struct validators_state_item) * validator_id, SEEK_SET) != 0)
+    while (fseek(validators_states, sizeof(struct validators_state_header) + sizeof(struct validators_state_item) * validator_id, SEEK_SET))
         ;
     if (safe_fread(&validators_state_item, sizeof(struct validators_state_item), 1, validators_states) < 1)
         return -1;
@@ -218,7 +218,7 @@ RSA *get_validator_pkey(size_t validator_id)
 
     struct validators_state_item validators_state_item = {0};
 
-    while (fseek(validators_states, sizeof(struct validators_state_header) + sizeof(struct validators_state_item) * validator_id, SEEK_SET) != 0)
+    while (fseek(validators_states, sizeof(struct validators_state_header) + sizeof(struct validators_state_item) * validator_id, SEEK_SET))
         ;
     if (safe_fread(&validators_state_item, sizeof(struct validators_state_item), 1, validators_states) < 1)
         return NULL;
@@ -309,16 +309,16 @@ ssize_t _create_validator_item(FILE *validators_states, struct validators_state_
         memcpy(new_validators_state_item.validator_pkey, temp + RSA_BEGIN_SIZE, RSA_KEY_SIZE);
         BIO_free(pubkey);
 
-        while (fseek(validators_states, 0, SEEK_END) != 0)
+        while (fseek(validators_states, 0, SEEK_END))
             ;
         fwrite(&new_validators_state_item, sizeof(struct validators_state_item), 1, validators_states);
-        while (fseek(validators_states, 0, SEEK_SET) != 0)
+        while (fseek(validators_states, 0, SEEK_SET))
             ;
 
         updated_validators_state_header->nb_validators += 1;
 
         validator_id = updated_validators_state_header->nb_validators - 1;
-        while (fseek(validators_states, 0, SEEK_SET) != 0)
+        while (fseek(validators_states, 0, SEEK_SET))
             ;
         fwrite(updated_validators_state_header, sizeof(struct validators_state_header), 1, validators_states);
     }
@@ -337,7 +337,7 @@ char update_validators_state(Block *block)
         err(2, "validators.state doesn't exists, please call init_validator_state() before");
 
     struct validators_state_header updated_validators_state_header = {0};
-    while (fseek(validators_states, 0, SEEK_SET) != 0)
+    while (fseek(validators_states, 0, SEEK_SET))
         ;
 
     safe_fread(&updated_validators_state_header, sizeof(struct validators_state_header), 1, validators_states);
@@ -352,7 +352,7 @@ char update_validators_state(Block *block)
         {
         case T_TYPE_ADD_STAKE:
             validator_id = _create_validator_item(validators_states, &updated_validators_state_header, transaction, true);
-            while (fseek(validators_states, sizeof(struct validators_state_header) + sizeof(struct validators_state_item) * validator_id, SEEK_SET) != 0)
+            while (fseek(validators_states, sizeof(struct validators_state_header) + sizeof(struct validators_state_item) * validator_id, SEEK_SET))
                 ;
 
             if (safe_fread(&validator_item, sizeof(struct validators_state_item), 1, validators_states) != 1)
@@ -364,7 +364,7 @@ char update_validators_state(Block *block)
 
         case T_TYPE_WITHDRAW_STAKE:
             validator_id = _create_validator_item(validators_states, &updated_validators_state_header, transaction, false);
-            while (fseek(validators_states, sizeof(struct validators_state_header) + sizeof(struct validators_state_item) * validator_id, SEEK_SET) != 0)
+            while (fseek(validators_states, sizeof(struct validators_state_header) + sizeof(struct validators_state_item) * validator_id, SEEK_SET))
                 ;
 
             if (safe_fread(&validator_item, sizeof(struct validators_state_item), 1, validators_states) != 1)
@@ -376,7 +376,7 @@ char update_validators_state(Block *block)
 
         case T_TYPE_REWARD_STAKE:
             validator_id = _create_validator_item(validators_states, &updated_validators_state_header, transaction, true);
-            while (fseek(validators_states, sizeof(struct validators_state_header) + sizeof(struct validators_state_item) * validator_id, SEEK_SET) != 0)
+            while (fseek(validators_states, sizeof(struct validators_state_header) + sizeof(struct validators_state_item) * validator_id, SEEK_SET))
                 ;
 
             if (safe_fread(&validator_item, sizeof(struct validators_state_item), 1, validators_states) != 1)
@@ -388,7 +388,7 @@ char update_validators_state(Block *block)
 
         case T_TYPE_PUNISH_STAKE:
             validator_id = _create_validator_item(validators_states, &updated_validators_state_header, transaction, false);
-            while (fseek(validators_states, sizeof(struct validators_state_header) + sizeof(struct validators_state_item) * validator_id, SEEK_SET) != 0)
+            while (fseek(validators_states, sizeof(struct validators_state_header) + sizeof(struct validators_state_item) * validator_id, SEEK_SET))
                 ;
 
             if (safe_fread(&validator_item, sizeof(struct validators_state_item), 1, validators_states) != 1)
@@ -402,7 +402,7 @@ char update_validators_state(Block *block)
 
     updated_validators_state_header.block_height_validity = block->block_data.height + 1;
 
-    while (fseek(validators_states, 0, SEEK_SET) != 0)
+    while (fseek(validators_states, 0, SEEK_SET))
         ;
     fwrite(&updated_validators_state_header, sizeof(struct validators_state_header), 1, validators_states);
 

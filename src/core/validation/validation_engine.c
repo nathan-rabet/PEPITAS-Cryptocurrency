@@ -45,8 +45,8 @@ Transaction **validate_transactions(Transaction **transaction_to_validate, size_
         {
 
             // Foreach block in the blockchain (reversed-way)
-            for (int16_t b = working_chunk->nb_blocks-1; last_chunk_nb != 0 && (b >= 0 ||
-                                                       (b = (working_chunk = load_blockchain(--last_chunk_nb)) != NULL ? working_chunk->nb_blocks-1 : 0) != 0);
+            for (int16_t b = working_chunk->nb_blocks-1; last_chunk_nb && (b >= 0 ||
+                                                       (b = (working_chunk = load_blockchain(--last_chunk_nb)) != NULL ? working_chunk->nb_blocks-1 : 0));
                  b--)
             {
                 // Foreach transations in a block (reversed-way)
@@ -100,8 +100,8 @@ Transaction **validate_transactions(Transaction **transaction_to_validate, size_
         case T_TYPE_ADD_STAKE:
         {
             // Foreach block in the blockchain (reversed-way)
-            for (int16_t b = working_chunk->nb_blocks-1; last_chunk_nb != 0 && (b >= 0 ||
-                                                       (b = (working_chunk = load_blockchain(--last_chunk_nb)) != NULL ? working_chunk->nb_blocks-1 : 0) != 0);
+            for (int16_t b = working_chunk->nb_blocks-1; last_chunk_nb && (b >= 0 ||
+                                                       (b = (working_chunk = load_blockchain(--last_chunk_nb)) != NULL ? working_chunk->nb_blocks-1 : 0));
                  b--)
             {
                 // Foreach transations in a block (reversed-way)
@@ -161,8 +161,8 @@ Transaction **validate_transactions(Transaction **transaction_to_validate, size_
 
             // Foreach block in the blockchain (reversed-way)
             char found = 0;
-            for (int16_t b = working_chunk->nb_blocks-1; last_chunk_nb != 0 && (b >= 0 ||
-                                                       (b = (working_chunk = load_blockchain(--last_chunk_nb)) != NULL ? working_chunk->nb_blocks-1 : 0) != 0);
+            for (int16_t b = working_chunk->nb_blocks-1; last_chunk_nb && (b >= 0 ||
+                                                       (b = (working_chunk = load_blockchain(--last_chunk_nb)) != NULL ? working_chunk->nb_blocks-1 : 0));
                  b--)
             {
                 // Foreach transations in a block (reversed-way)
@@ -209,7 +209,7 @@ char plebe_verify_block(Block *block)
     RSA **validators = get_comittee(block->block_data.height-1, &nb_validators);
 
     // VERIFY EPOCH MAN IS IN THE VALIDATORS
-    if (cmp_public_keys(validators[block->block_data.epoch_id], block->block_data.validators_public_keys[block->block_data.epoch_id]))
+    if (!cmp_public_keys(validators[block->block_data.epoch_id], block->block_data.validators_public_keys[block->block_data.epoch_id]))
     {
         for (int i = 0; i < nb_validators; i++)
         {
@@ -220,7 +220,7 @@ char plebe_verify_block(Block *block)
     }
 
     // VERIFY BLOCK SIGNATURE
-    if (verify_block_signature(*block) == 0)
+    if (!verify_block_signature(*block))
     {
         for (int i = 0; i < nb_validators; i++)
         {
@@ -254,7 +254,7 @@ int comital_validate_block(Block *block)
     // ? block->block_data.previous_block_hash
     __attribute__ ((unused)) size_t prev_block_data_size;
     char *prev_block_hash = sha384_data(get_blockdata_data(prev_block, &prev_block_data_size), prev_block_data_size);
-    if (strncmp(prev_block_hash, block->block_data.previous_block_hash, SHA384_DIGEST_LENGTH * 2 + 1) != 0)
+    if (strncmp(prev_block_hash, block->block_data.previous_block_hash, SHA384_DIGEST_LENGTH * 2 + 1))
         return send_verdict(block, VERIDCT_NO);
 
     // ? block->block_data.validators_public_keys
@@ -327,7 +327,7 @@ int send_verdict(Block *block, char verdict)
     datalen += RSA_size(block->block_data.validators_public_keys[validator_index]) * 2;
     for (size_t i = 0; i < MAX_CONNECTION; i++)
     {
-        if (client_connections[i].clientfd != 0)
+        if (client_connections[i].clientfd)
         {
             client_connections[i].demand = DD_SEND_VOTE;
             client_connections[i].Payloadsize = datalen;

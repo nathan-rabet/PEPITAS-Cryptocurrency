@@ -269,13 +269,13 @@ gboolean on_transaction_button_press(__attribute__ ((unused)) GtkWidget *widget,
         gtk_label_set_text(error_label, "Invalid transaction recipient");
     }
      //Call to transaction function
-    else if(strcmp(gtk_entry_get_text(transa_amount), "") != 0)
+    else if(strcmp(gtk_entry_get_text(transa_amount), ""))
      {
         const time_t date = time(NULL);
         char *time_str = ctime(&date);
         double amount = strtod(gtk_entry_get_text(transa_amount), NULL);
         char *public_key;
-        if(strcmp(gtk_entry_get_text(recipient_key), "") != 0)
+        if(strcmp(gtk_entry_get_text(recipient_key), ""))
         {
             public_key = (char *)gtk_entry_get_text(recipient_key);
             add_transaction_with_pkey(amount, public_key, time_str);
@@ -461,7 +461,7 @@ gboolean add_contact(__attribute__ ((unused)) GtkWidget *widget,
 {
     char *name = (char *) gtk_entry_get_text(name_entry_con);
     const char *public_key = gtk_entry_get_text(public_key_entry_con);
-    if(strcmp(name, "") != 0 && strcmp(public_key ,"") != 0)
+    if(strcmp(name, "") && strcmp(public_key ,""))
     {
         char file[300] = ".contact/";
         strcpy(file + 9, name);
@@ -574,7 +574,7 @@ gboolean on_create_key_but2_press(__attribute__ ((unused)) GtkWidget *widget,
     char *buff = malloc(sizeof(char) * bufflen);
     memcpy(buff, gtk_entry_get_text(password_entry2), bufflen);
     size_t keylen = strlen(gtk_entry_get_text(key_entry));
-    if (keylen != 0)
+    if (keylen)
     {
         char *buffkey = malloc(keylen);
         memcpy(buff, gtk_entry_get_text(key_entry), keylen);
@@ -632,7 +632,7 @@ gboolean on_connect_but_press(__attribute__ ((unused)) GtkWidget *widget,
     char *hashed = sha384_data(buff, bufflen);
     char *buff_hashed = malloc(48 * sizeof(char));
     fread(buff_hashed, 1, 48, password_f);
-    if(strncmp(buff_hashed, hashed, 48) != 0)
+    if(strncmp(buff_hashed, hashed, 48))
     {
         free(buff_hashed);
         free(hashed);

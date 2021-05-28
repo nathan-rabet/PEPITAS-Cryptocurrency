@@ -213,7 +213,7 @@ int read_send_block(int fd)
         return -1;
     }
 
-    while ((r = read(fd, temp, bc_size > 1024 ? 1024 : bc_size)) != 0 && bc_size > 0)
+    while ((r = read(fd, temp, bc_size > 1024 ? 1024 : bc_size)) && bc_size > 0)
     {
         if (r == -1)
             errx(EXIT_FAILURE, "Can't read block %lu in connection fd: %i", block_height, fd);
@@ -380,7 +380,8 @@ int read_epoch_block(int fd, infos_st *infos)
     {
         convert_data_to_block(epoch, fd);
         MANAGERMSG
-        printf("Block is valid!\n");
+        printf("Block is the next!\n");
+        return 0;
     }
 
     // ADD NEXT BLOCK TO THE BLOCKCHAIN
@@ -390,7 +391,7 @@ int read_epoch_block(int fd, infos_st *infos)
         for (size_t i = 0; i < MAX_VALIDATORS_PER_BLOCK; i++)
         {
             Block *my_new_epoch = get_epoch(i);
-            if (my_new_epoch->block_data.height != 0)
+            if (my_new_epoch->block_data.height)
             {
                 if (added == 0)
                 {
@@ -427,9 +428,9 @@ int read_epoch_block(int fd, infos_st *infos)
         // SEND REQUEST DD_SEND_EPOCH
         for (size_t i = 0; i < MAX_CONNECTION; i++)
         {
-            if (client_connections[i].clientfd != 0)
+            if (client_connections[i].clientfd)
             {
-                while (client_connections[i].demand != 0)
+                while (client_connections[i].demand)
                     ;
                 client_connections[i].demand = DD_SEND_EPOCH;
                 client_connections[i].Payload = (void *)epoch;
@@ -440,9 +441,9 @@ int read_epoch_block(int fd, infos_st *infos)
         // WAIT
         for (size_t i = 0; i < MAX_CONNECTION; i++)
         {
-            if (client_connections[i].clientfd != 0)
+            if (client_connections[i].clientfd)
             {
-                while (client_connections[i].demand != 0)
+                while (client_connections[i].demand)
                     ;
                 free(client_connections[i].Payload);
             }
@@ -469,7 +470,7 @@ int read_send_pending_transaction_list(int fd, infos_st *infos)
     {
         char temp[50];
         sprintf(temp, "./pdt/%ld", *(txids + i));
-        if (access(temp, F_OK) != 0)
+        if (access(temp, F_OK))
         {
             // file doesn't exists
             send_get_pending_transaction(fd, *(txids + i));
@@ -507,7 +508,7 @@ int read_send_pending_transaction(int fd, infos_st* infos)
         return -1;
     }
 
-    while ((r = read(fd, temp, bc_size > 1024 ? 1024 : bc_size)) != 0 && bc_size > 0)
+    while ((r = read(fd, temp, bc_size > 1024 ? 1024 : bc_size)) && bc_size > 0)
     {
         if (r == -1)
             errx(EXIT_FAILURE, "Can't read transaction %ld in connection fd: %i", txid, fd);

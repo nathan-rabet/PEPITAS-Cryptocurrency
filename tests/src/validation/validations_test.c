@@ -8,7 +8,7 @@ void validations_test()
     gen_validators_file("validators.state");
 
     int nb_validators;
-    if (get_next_comittee(&nb_validators) != NULL && nb_validators != 0)
+    if (get_next_comittee(&nb_validators) != NULL && nb_validators)
     {
         TEST_PASSED("Getting next validators");
     }
