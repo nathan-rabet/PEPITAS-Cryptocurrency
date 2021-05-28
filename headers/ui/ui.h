@@ -63,16 +63,6 @@ void on_main_window_destroy(__attribute ((unused)) GtkWidget *widget, __attribut
 gboolean on_transaction_button_press(GtkWidget *widget, GdkEventKey *event, gpointer user_data);
 
 /**
- * @brief Hides the private key of the user, or shows it if it was already hidden
- * 
- * @param widget unused
- * @param event unused
- * @param user_data unused
- * @return gboolean Error code
- */
-gboolean on_pkey_button_press(GtkWidget *widget, GdkEventKey *event, gpointer user_data);
-
-/**
  * @brief Opens the invest window
  * 
  * @param widget unused
