@@ -11,6 +11,7 @@
 #include "cryptosystem/rsa.h"
 #include "cryptosystem/hash.h"
 #include "blockchain/wallet.h"
+#include "blockchain/block.h"
 #include "client.h"
 
 extern GtkLabel *balance_1;
@@ -138,4 +139,7 @@ char *get_public_key_from_contacts(const char *name);
 void change_label_text(GtkLabel *label, char* text);
 void add_new_blockinfo(size_t height, size_t transaction);
 void update_sync(size_t actual, size_t final);
+gboolean set_block_viewer_plus(GtkWidget *widget, GdkEventKey *event, gpointer user_data);
+gboolean set_block_viewer_minus(GtkWidget *widget, GdkEventKey *event, gpointer user_data);
+void set_block_viewer(int height);
 #endif
