@@ -278,7 +278,7 @@ void *client_thread(void *args)
             for (char i = 0; i < ((get_blocks_t *)cc->Payload)->nb_demands; i++)
             {
                 read_header(cc->clientfd, infos);
-                update_sync(infos->actual_height, cc->actual_client_height);
+                update_sync(infos->actual_height+1, cc->actual_client_height+1);
             }
             break;
         }

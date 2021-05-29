@@ -96,7 +96,6 @@ void *redirect_connection(void *arg)
 void *init_server(void *args)
 {
     infos_st *infos = (infos_st *)args;
-    free(args);
     client_connection *client_connections = calloc(MAX_SERVER, sizeof(client_connection));
     SERVERMSG
     printf("Opening client server...\n");

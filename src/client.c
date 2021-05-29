@@ -192,7 +192,7 @@ size_t update_blockchain_height(infos_st *infos)
             free(client_connections[i].Payload);
         }
     }
-    update_sync(infos->actual_height, max_h_i);
+    update_sync(infos->actual_height+1, max_h_i);
     return max_h_i;
 }
 
@@ -317,7 +317,7 @@ int main()
     init_validators_state();
     // Try Load Old blockchain
     gen_blockchain_header(infos);
-    update_sync(infos->actual_height, infos->actual_height);
+    update_sync(infos->actual_height+1, infos->actual_height+1);
     // Open server
     infos->serv_type = NODESERVER;
     pthread_create(&server_t, NULL, init_server, infos);
@@ -347,7 +347,7 @@ int main()
         printf("Update blockchain...\n");
         update_blockchain(infos, index_client);
         MANAGERMSG
-        printf("Blockchain syncronized with: %lu\n", infos->actual_height);
+        printf("Blockchain syncronized!\n New height: %lu\n", infos->actual_height+1);
         change_label_text(synchro_label, "Syncronized");
         change_label_text(block_amount_label, "");
 

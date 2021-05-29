@@ -32,7 +32,7 @@ void gen_blockchain_header(infos_st *infos){
         index++;
     }
     fclose(blockchainh);
-    infos->actual_height = (index == 0 ? 1 : index) - 1;
+    infos->actual_height = index-1;
     MANAGERMSG
     printf("Blockchain header file generated with %lu blocks!\n", index);
 }
@@ -47,7 +47,7 @@ size_t get_receiver_remaining_money(infos_st *infos, RSA *receiver_public_key){
         block = get_block(index);
         if (block == NULL)
         {
-            errx(EXIT_FAILURE, "Can't load block to create a transaction in get_receiver_remaining_money");
+            errx(EXIT_FAILURE, "Can't load block %lu to create a transaction in get_receiver_remaining_money", index);
         }
         
         for (ssize_t it = block->block_data.nb_transactions-1; it >= 0; it--)

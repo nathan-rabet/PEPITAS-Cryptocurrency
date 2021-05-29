@@ -197,6 +197,11 @@ Block *create_epoch_block()
 
     add_pdt_to_block(new_block);
 
+    // VERIFY LAST BLOCK
+    char is_valid = 1;
+
+    new_block->block_data.is_prev_block_valid = is_valid;
+
     sign_block(new_block);
 
     return new_block;
