@@ -146,6 +146,16 @@ void load_neighbours(char who)
     fclose(nfile);
 }
 
+int is_in_neighbours(char who, char *hostname) {
+    Node *node = get_my_node(who);
+    for (size_t i = 0; i < MAX_NEIGHBOURS; i++)
+    {
+        if (node->neighbours[i].hostname != NULL && !strncmp(node->neighbours[i].hostname, hostname, strlen(hostname)))
+            return 1;
+    }
+    return 0;
+}
+
 int number_neighbours(char who)
 {
     int nb_neigbours = 0;
