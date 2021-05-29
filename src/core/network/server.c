@@ -27,6 +27,25 @@ void *accept_connection(void *args)
         printf("Accept connection: '%s'\n", ip_str);
     }
 
+    // CONNECTION BACK
+    if (!is_in_neighbours(IM_CLIENT, ip_str)) {
+        Node *node = get_my_node(IM_CLIENT);
+        int nb_connection = number_neighbours(IM_CLIENT);
+        for (size_t i = 0; i < MAX_NEIGHBOURS && nb_connection < MAX_CONNECTION; i++)
+        {
+            if (node->neighbours[i].hostname != NULL)
+            {
+                if (listen_to(infos, node->neighbours[i], HD_CONNECTION_TO_NODE) == NULL)
+                    printf("Fail de connection to neighbour\n");
+            }
+        }
+        CLIENTMSG
+        printf("Connected to %i clients! \n", nb_connection);
+        char tmp[5];
+        snprintf(tmp, 5, "%i", nb_connection);
+        change_label_text(connections_label, tmp);
+    }
+
     // SERVER ROUTINE
     while (1)
     {
@@ -77,6 +96,7 @@ void *redirect_connection(void *arg)
 void *init_server(void *args)
 {
     infos_st *infos = (infos_st *)args;
+    free(args);
     client_connection *client_connections = calloc(MAX_SERVER, sizeof(client_connection));
     SERVERMSG
     printf("Opening client server...\n");
