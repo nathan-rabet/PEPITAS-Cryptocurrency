@@ -17,6 +17,8 @@ static GtkButton *add_contact_but2;
 static GtkButton *create_key_but1;
 static GtkButton *create_key_but2;
 static GtkButton *connect_but;
+static GtkButton *prev_block_but;
+static GtkButton *next_block_but;
 
 
 GtkLabel *balance_1;
@@ -34,6 +36,15 @@ GtkLabel *latest_block_name1;
 GtkLabel *latest_block_name2;
 GtkLabel *latest_block_name3;
 GtkLabel *error_label;
+GtkLabel *block_height_label;
+GtkLabel *transa_number_label;
+GtkLabel *total_transa_label;
+GtkLabel *magic_label;
+GtkLabel *prev_block_valid_label;
+GtkLabel *nb_validators_label;
+GtkLabel *block_error_label;
+GtkLabel *block_time_label;
+GtkLabel *validators_votes_label;
 GtkEntry *transa_amount;
 GtkEntry *recipient_key;
 GtkEntry *asset_entry;
@@ -64,6 +75,7 @@ GtkListStore *ls_combo;
 GtkCellRenderer *cr1_combo;
 GtkProgressBar *progress_bar_blockchain;
 
+size_t block_height = 0;
 
 void *setup(void *args)
 {
@@ -104,6 +116,9 @@ void *setup(void *args)
 
     recover_but1 = GTK_BUTTON(gtk_builder_get_object(builder, "recover_but1"));
     recover_but2 = GTK_BUTTON(gtk_builder_get_object(builder, "recover_but2"));
+
+    prev_block_but = GTK_BUTTON(gtk_builder_get_object(builder, "prev_block_but"));
+    next_block_but = GTK_BUTTON(gtk_builder_get_object(builder, "next_block_but"));
 
     invest_entry = GTK_ENTRY(gtk_builder_get_object(builder, "invest_entry"));
     recover_entry = GTK_ENTRY(gtk_builder_get_object(builder, "recover_entry"));
@@ -160,6 +175,16 @@ void *setup(void *args)
     mempool_label = GTK_LABEL(gtk_builder_get_object(builder, "mempool_label"));
     error_label = GTK_LABEL(gtk_builder_get_object(builder, "error_label"));
 
+    block_height_label = GTK_LABEL(gtk_builder_get_object(builder, "block_height_label"));
+    transa_number_label = GTK_LABEL(gtk_builder_get_object(builder, "transa_number_label"));
+    total_transa_label = GTK_LABEL(gtk_builder_get_object(builder, "total_transa_label"));
+    magic_label = GTK_LABEL(gtk_builder_get_object(builder, "magic_label"));
+    prev_block_valid_label = GTK_LABEL(gtk_builder_get_object(builder, "prev_block_valid_label"));
+    nb_validators_label = GTK_LABEL(gtk_builder_get_object(builder, "nb_validators_label"));
+    block_error_label = GTK_LABEL(gtk_builder_get_object(builder, "block_error_label"));
+    block_time_label = GTK_LABEL(gtk_builder_get_object(builder, "block_time_label"));
+    validators_votes_label = GTK_LABEL(gtk_builder_get_object(builder, "validators_votes_label"));
+
     progress_bar_blockchain = GTK_PROGRESS_BAR(gtk_builder_get_object(builder, "progress_bar_blockchain"));
 
     gtk_widget_hide(invest_window);
@@ -179,6 +204,8 @@ void *setup(void *args)
     g_signal_connect(create_key_but2, "clicked", G_CALLBACK(on_create_key_but2_press), NULL);
     g_signal_connect(connect_but, "clicked", G_CALLBACK(on_connect_but_press), NULL);
     g_signal_connect(password_entry1, "activate", G_CALLBACK(on_connect_but_press), NULL);
+    g_signal_connect(next_block_but, "clicked", G_CALLBACK(set_block_viewer_plus), NULL);
+    g_signal_connect(prev_block_but, "clicked", G_CALLBACK(set_block_viewer_minus), NULL);
 
     gtk_window_set_resizable(GTK_WINDOW(window), FALSE);
 
@@ -192,6 +219,8 @@ void *setup(void *args)
     gtk_label_set_text(latest_block_name2, "");
     gtk_label_set_text(latest_block_name3, "");
 
+    set_block_viewer(0);
+
     gtk_widget_show(connection_window);
 
     infos->is_sychronize = 0;
@@ -204,6 +233,88 @@ void *setup(void *args)
 void change_label_text(GtkLabel *label, char* text)
 {
     gtk_label_set_text(label, text);
+}
+
+gboolean set_block_viewer_plus(__attribute__ ((unused)) GtkWidget *widget,
+                    __attribute__ ((unused)) GdkEventKey *event, 
+                    __attribute__ ((unused)) gpointer user_data)
+{
+    block_height += 1;
+    if(get_block(block_height) == NULL)
+    { 
+        block_height -= 1;
+        return TRUE;
+    }
+    set_block_viewer(block_height);
+    return TRUE;
+
+}
+
+gboolean set_block_viewer_minus(__attribute__ ((unused)) GtkWidget *widget,
+                    __attribute__ ((unused)) GdkEventKey *event, 
+                    __attribute__ ((unused)) gpointer user_data)
+{
+    if (block_height > 0)
+    {
+        block_height -= 1;
+        if(get_block(block_height) == NULL)
+        { 
+            block_height += 1;
+            return TRUE;
+        } 
+        set_block_viewer(block_height);
+    }
+    return TRUE;
+}
+
+void set_block_viewer(int height)
+{
+    Block *block = get_block(height);
+    BlockData block_data = block->block_data;
+
+    size_t amount = 0;
+    for(int i = 0; i < block_data.nb_transactions; i++)
+        amount += block_data.transactions[i]->transaction_data.amount;
+
+    char block_height_str[128];
+    sprintf(block_height_str, "Block n°%lu", block_data.height);
+    char transa_number[128];
+    sprintf(transa_number, "%u", block_data.nb_transactions);
+    char total_transa[128];
+    sprintf(total_transa, "%lu Pepitas", amount);
+    char nb_validators[128];
+    sprintf(nb_validators, "%d", block_data.nb_validators);
+    char magic[128];
+    sprintf(magic, "%d", block_data.magic);
+    char prev_block_is_valid[128];
+    sprintf(prev_block_is_valid, "%d", block_data.is_prev_block_valid);
+    char block_time[30];
+    const time_t date = block_data.block_timestamp;
+    sprintf(block_time, "%s", ctime(&date));
+    char validators_votes[513];
+    int index = 0;
+    for (int i = 0; i <= block_data.nb_validators/8; i++)
+    {
+        for (char j = 0; j < (i == block_data.nb_validators/8? block_data.nb_validators%8 : 8); j++)
+        {
+            sprintf(validators_votes + index, "%d", (block->validators_votes[i] & (1 << j)) >> j);
+            index++;
+        }
+    }
+    validators_votes[index] = 0;
+    
+
+
+    gtk_label_set_text(block_height_label, block_height_str);
+    gtk_label_set_text(transa_number_label, transa_number);
+    gtk_label_set_text(total_transa_label, total_transa);
+    gtk_label_set_text(magic_label, magic);
+    gtk_label_set_text(prev_block_valid_label, prev_block_is_valid);
+    gtk_label_set_text(nb_validators_label, nb_validators);
+    gtk_label_set_text(block_time_label, block_time);
+    gtk_label_set_text(validators_votes_label, validators_votes);
+    gtk_label_set_text(block_error_label, "");
+
 }
 
 void add_new_blockinfo(size_t height, size_t transaction)
