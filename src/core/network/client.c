@@ -146,6 +146,16 @@ void load_neighbours(char who)
     fclose(nfile);
 }
 
+int is_in_neighbours(char who, char *hostname) {
+    Node *node = get_my_node(who);
+    for (size_t i = 0; i < MAX_NEIGHBOURS; i++)
+    {
+        if (node->neighbours[i].hostname != NULL && !strncmp(node->neighbours[i].hostname, hostname, strlen(hostname)))
+            return 1;
+    }
+    return 0;
+}
+
 int number_neighbours(char who)
 {
     int nb_neigbours = 0;
@@ -268,7 +278,7 @@ void *client_thread(void *args)
             for (char i = 0; i < ((get_blocks_t *)cc->Payload)->nb_demands; i++)
             {
                 read_header(cc->clientfd, infos);
-                update_sync(infos->actual_height, cc->actual_client_height);
+                update_sync(infos->actual_height+1, cc->actual_client_height+1);
             }
             break;
         }

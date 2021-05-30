@@ -67,6 +67,8 @@ client_connection *listen_to(infos_st *infos, Neighbour neighbour, char* connect
 
 int find_empty_connection(int max);
 
+int is_in_neighbours(char who, char *hostname);
+
 void *client_thread(void *args);
 
 #endif
