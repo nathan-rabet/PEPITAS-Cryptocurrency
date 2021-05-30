@@ -14,11 +14,9 @@
 extern client_connection *client_connections;
 infos_st *ac_infos;
 
-infos_st* get_infos(){
-    return ac_infos;
-}
+infos_st* get_infos();
 
-void new_transaction(char type, char *rc_pk, size_t amount, char cause[512], char asset[512]){
+void new_transaction(char type, char *rc_pk, size_t amount, char cause[512], char asset[512]);/*{
     BIO *pubkey2 = BIO_new(BIO_s_mem());
     BIO_write(pubkey2, rc_pk, strlen(rc_pk));
     RSA* key = PEM_read_bio_RSAPublicKey(pubkey2, NULL, 0, NULL);
@@ -66,7 +64,7 @@ void new_transaction(char type, char *rc_pk, size_t amount, char cause[512], cha
             free(client_connections[i].Payload);
         }
     }
-}
+}*/
 
 int main()
 {

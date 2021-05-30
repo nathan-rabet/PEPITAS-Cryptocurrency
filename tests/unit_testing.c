@@ -17,9 +17,7 @@ typedef struct infos_st
 
 infos_st *ac_infos;
 
-infos_st* get_infos(){
-    return ac_infos;
-}
+infos_st* get_infos();
 
 int main()
 {
