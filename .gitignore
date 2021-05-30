@@ -10,3 +10,4 @@
 .vsls.json
 *.glade
 bin/*
+build/
