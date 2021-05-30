@@ -22,14 +22,14 @@ _doorserver := doorserver.elf
 
 executables := $(_test) $(_client) $(_server) $(_genesis) $(_ui) $(_doorserver)
 
-SUBFOLDERS := $(shell ls)
+SUBFOLDERS := $(shell ls -a -I".git*" -I".github*" -I"." -I"..")
 
 bootstrap:
 	mkdir -p $(OUTPUTFOLDER)
 	cp -R $(SUBFOLDERS) $(OUTPUTFOLDER)
 	$(MAKE) binaries -j 64 -C $(OUTPUTFOLDER)
 
-binaries: $(executables)
+binaries: $(executables) pepitas.glade
 
 $(_test): tests/unit_testing.o $(OBJ_TEST) $(OBJ)
 	$(LINK) $^ -o $@ $(PCFLAGS) $(CFLAGS) $(LDPARAMS) 
@@ -50,8 +50,11 @@ $(OUTPUTFOLDER):
 %.o: %.c
 	$(CC) $< -o $@ $(CFLAGS) $(PCFLAGS) $(LDPARAMS) -c
 
+pepitas.glade: src/core/ui/pepitas.glade
+	cp $< $@
+
 clean:
-	$(RM) tests/*.o src/*.o $(OBJ) $(OBJ_TEST) $(executables) build
+	$(RM) tests/*.o src/*.o $(OBJ) $(OBJ_TEST) $(executables) build pepitas.glade
 
 .PHONY: clean
 
