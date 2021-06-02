@@ -33,9 +33,9 @@ char *hash_block_transactions_epoch(Block *block)
 void init_validators_state()
 {
     FILE *validators_states;
-    if ((validators_states = fopen("validators.state", "r")) == NULL)
+    if ((validators_states = fopen("data/validators.state", "r")) == NULL)
     {
-        validators_states = fopen("validators.state", "w+");
+        validators_states = fopen("data/validators.state", "w+");
         struct validators_state_header validators_state_header = {0};
         fwrite(&validators_state_header, sizeof(struct validators_state_header), 1, validators_states);
     }
@@ -51,7 +51,7 @@ RSA **get_comittee(size_t block_height, int *nb_validators)
     free_block(working_block);
 
     // Init validators states file
-    FILE *validators_states = fopen("validators.state", "r");
+    FILE *validators_states = fopen("data/validators.state", "r");
 
     if (validators_states == NULL)
         err(2, "validators.state doesn't exists, please call init_validator_state() before");
@@ -134,9 +134,9 @@ RSA **get_next_comittee(int *nb_validators)
 
 ssize_t get_validators_states_total_stake()
 {
-    FILE *validators_states = fopen("validators.state", "r");
+    FILE *validators_states = fopen("data/validators.state", "r");
     if (validators_states == NULL)
-        err(2, "validators.state doesn't exists, please call init_validator_state() before");
+        err(2, "data/validators.state doesn't exists, please call init_validator_state() before");
 
     struct validators_state_header validators_state_header = {0};
     if (safe_fread(&validators_state_header, sizeof(struct validators_state_header), 1, validators_states) < 1)
@@ -148,9 +148,9 @@ ssize_t get_validators_states_total_stake()
 
 ssize_t get_validators_states_nb_validators()
 {
-    FILE *validators_states = fopen("validators.state", "r");
+    FILE *validators_states = fopen("data/validators.state", "r");
     if (validators_states == NULL)
-        err(2, "validators.state doesn't exists, please call init_validator_state() before");
+        err(2, "data/validators.state doesn't exists, please call init_validator_state() before");
 
     struct validators_state_header validators_state_header = {0};
     if (safe_fread(&validators_state_header, sizeof(struct validators_state_header), 1, validators_states) < 1)
@@ -162,9 +162,9 @@ ssize_t get_validators_states_nb_validators()
 
 ssize_t get_validators_states_block_height_validity()
 {
-    FILE *validators_states = fopen("validators.state", "r");
+    FILE *validators_states = fopen("data/validators.state", "r");
     if (validators_states == NULL)
-        err(2, "validators.state doesn't exists, please call init_validator_state() before");
+        err(2, "data/validators.state doesn't exists, please call init_validator_state() before");
 
     struct validators_state_header validators_state_header = {0};
     if (safe_fread(&validators_state_header, sizeof(struct validators_state_header), 1, validators_states) < 1)
@@ -176,10 +176,10 @@ ssize_t get_validators_states_block_height_validity()
 
 ssize_t get_validator_stake(size_t validator_id)
 {
-    FILE *validators_states = fopen("validators.state", "r");
+    FILE *validators_states = fopen("data/validators.state", "r");
 
     if (validators_states == NULL)
-        err(2, "validators.state doesn't exists, please call init_validator_state() before");
+        err(2, "data/validators.state doesn't exists, please call init_validator_state() before");
 
     struct validators_state_item validators_state_item = {0};
 
@@ -193,10 +193,10 @@ ssize_t get_validator_stake(size_t validator_id)
 
 ssize_t get_validator_power(size_t validator_id)
 {
-    FILE *validators_states = fopen("validators.state", "r");
+    FILE *validators_states = fopen("data/validators.state", "r");
 
     if (validators_states == NULL)
-        err(2, "validators.state doesn't exists, please call init_validator_state() before");
+        err(2, "data/validators.state doesn't exists, please call init_validator_state() before");
 
     struct validators_state_item validators_state_item = {0};
 
@@ -211,10 +211,10 @@ ssize_t get_validator_power(size_t validator_id)
 RSA *get_validator_pkey(size_t validator_id)
 {
 
-    FILE *validators_states = fopen("validators.state", "r");
+    FILE *validators_states = fopen("data/validators.state", "r");
 
     if (validators_states == NULL)
-        err(2, "validators.state doesn't exists, please call init_validator_state() before");
+        err(2, "data/validators.state doesn't exists, please call init_validator_state() before");
 
     struct validators_state_item validators_state_item = {0};
 
@@ -243,10 +243,10 @@ ssize_t get_validator_id(RSA *pkey)
 {
 
     // RSA* to char*
-    FILE *validators_states = fopen("validators.state", "r");
+    FILE *validators_states = fopen("data/validators.state", "r");
 
     if (validators_states == NULL)
-        err(2, "validators.state doesn't exists, please call init_validator_state() before");
+        err(2, "data/validators.state doesn't exists, please call init_validator_state() before");
 
     char pkey_string[RSA_FILE_TOTAL_SIZE];
     BIO *pubkey = BIO_new(BIO_s_mem());
@@ -331,10 +331,10 @@ char update_validators_state(Block *block)
     if (validators_states_block_height_validity == -1 || (size_t)validators_states_block_height_validity != block->block_data.height)
         return -1;
 
-    FILE *validators_states = fopen("validators.state", "r+");
+    FILE *validators_states = fopen("data/validators.state", "r+");
 
     if (validators_states == NULL)
-        err(2, "validators.state doesn't exists, please call init_validator_state() before");
+        err(2, "data/validators.state doesn't exists, please call init_validator_state() before");
 
     struct validators_state_header updated_validators_state_header = {0};
     while (fseek(validators_states, 0, SEEK_SET))
@@ -356,7 +356,7 @@ char update_validators_state(Block *block)
                 ;
 
             if (safe_fread(&validator_item, sizeof(struct validators_state_item), 1, validators_states) != 1)
-                errx(errno, "`validator.state` corrupted");
+                errx(errno, "`data/validator.state` corrupted");
             validator_item.validator_power += transaction->transaction_data.amount / (block->block_data.height + 1) + transaction->transaction_data.amount;
             validator_item.user_stake = transaction->transaction_data.receiver_remaining_money;
             updated_validators_state_header.total_stake += transaction->transaction_data.amount;
@@ -368,7 +368,7 @@ char update_validators_state(Block *block)
                 ;
 
             if (safe_fread(&validator_item, sizeof(struct validators_state_item), 1, validators_states) != 1)
-                errx(errno, "`validator.state` corrupted");
+                errx(errno, "`data/validator.state` corrupted");
             validator_item.user_stake = transaction->transaction_data.sender_remaining_money;
             validator_item.validator_power -= validator_item.validator_power * transaction->transaction_data.amount / validator_item.user_stake;
             updated_validators_state_header.total_stake -= transaction->transaction_data.amount;
@@ -380,7 +380,7 @@ char update_validators_state(Block *block)
                 ;
 
             if (safe_fread(&validator_item, sizeof(struct validators_state_item), 1, validators_states) != 1)
-                errx(errno, "`validator.state` corrupted");
+                errx(errno, "`data/validator.state` corrupted");
             validator_item.validator_power += transaction->transaction_data.amount / (block->block_data.height + 1) + transaction->transaction_data.amount;
             validator_item.user_stake = transaction->transaction_data.receiver_remaining_money;
             updated_validators_state_header.total_stake += transaction->transaction_data.amount;
@@ -392,7 +392,7 @@ char update_validators_state(Block *block)
                 ;
 
             if (safe_fread(&validator_item, sizeof(struct validators_state_item), 1, validators_states) != 1)
-                errx(errno, "`validator.state` corrupted");
+                errx(errno, "`data/validator.state` corrupted");
             validator_item.user_stake = transaction->transaction_data.sender_remaining_money;
             validator_item.validator_power -= validator_item.validator_power * transaction->transaction_data.amount / validator_item.user_stake;
             updated_validators_state_header.total_stake -= transaction->transaction_data.amount;

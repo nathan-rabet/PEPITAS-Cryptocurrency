@@ -19,7 +19,7 @@ void get_keys_test()
 {
     get_keys(NULL);
 
-    if (access(".keys/rsa.pub", F_OK) == 0 && access(".keys/rsa", F_OK) == 0 && get_my_wallet()->priv_key != NULL && get_my_wallet()->pub_key)
+    if (access("data/keys/rsa.pub", F_OK) == 0 && access("data/keys/rsa", F_OK) == 0 && get_my_wallet()->priv_key != NULL && get_my_wallet()->pub_key)
     {
         TEST_PASSED("Generate private/public keys");
     }

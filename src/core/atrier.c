@@ -229,13 +229,13 @@ void clear_transactions()
     char temp[256];
     DIR *d;
     struct dirent *dir;
-    d = opendir("./pdt");
+    d = opendir("data/pdt");
     if (d) {
         while ((dir = readdir(d)) != NULL) {
             if (dir->d_type == DT_REG)
             {
                 time_t txid = atol(dir->d_name);
-                snprintf(temp, 256, "pdt/%ld", txid);
+                snprintf(temp, 256, "data/pdt/%ld", txid);
                 remove(temp);
             }
         }

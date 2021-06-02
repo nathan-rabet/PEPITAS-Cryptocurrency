@@ -77,22 +77,22 @@ void save_neighbours(char who)
 
     struct stat st = {0};
 
-    if (stat(".neighbours", &st) == -1)
+    if (stat("data/neighbours", &st) == -1)
     {
-        mkdir(".neighbours", 0700);
+        mkdir("data/neighbours", 0700);
     }
 
     FILE *nfile;
     if (who == IM_CLIENT)
     {
-        nfile = fopen("./.neighbours/client_neighbours", "wb");
+        nfile = fopen("data/neighbours/client_neighbours", "wb");
     }
     else
     {
-        nfile = fopen("./.neighbours/server_neighbours", "wb");
+        nfile = fopen("data/neighbours/server_neighbours", "wb");
     }
     if (!nfile)
-        err(errno, "Impossible to write '.neighbours/neighbours'");
+        err(errno, "Impossible to write 'data/neighbours/neighbours'");
     char *temp = calloc(SIZE_OF_HOSTNAME + sizeof(int), 1);
     for (size_t i = 0; i < MAX_NEIGHBOURS; i++)
     {
@@ -116,22 +116,22 @@ void load_neighbours(char who)
     FILE *nfile;
     if (who == IM_CLIENT)
     {
-        if (access(".neighbours/client_neighbours", F_OK))
+        if (access("data/neighbours/client_neighbours", F_OK))
         {
             return;
         }
-        nfile = fopen("./.neighbours/client_neighbours", "rb");
+        nfile = fopen("data/neighbours/client_neighbours", "rb");
     }
     else
     {
-        if (access(".neighbours/server_neighbours", F_OK))
+        if (access("data/neighbours/server_neighbours", F_OK))
         {
             return;
         }
-        nfile = fopen("./.neighbours/server_neighbours", "rb");
+        nfile = fopen("data/neighbours/server_neighbours", "rb");
     }
     if (!nfile)
-        err(errno, "Impossible to write '.neighbours/neighbours'");
+        err(errno, "Impossible to write 'data/neighbours/neighbours'");
     char temp[SIZE_OF_HOSTNAME + sizeof(int)];
     for (size_t i = 0; i < MAX_NEIGHBOURS; i++)
     {
@@ -146,7 +146,8 @@ void load_neighbours(char who)
     fclose(nfile);
 }
 
-int is_in_neighbours(char who, char *hostname) {
+int is_in_neighbours(char who, char *hostname)
+{
     Node *node = get_my_node(who);
     for (size_t i = 0; i < MAX_NEIGHBOURS; i++)
     {
@@ -195,18 +196,18 @@ client_connection *listen_to(infos_st *infos, Neighbour neighbour, char *connect
 
     // Try to connect for each result
     int sockfd;
-    struct addrinfo *rp;     // result points to a linked list
+    struct addrinfo *rp; // result points to a linked list
     for (rp = result; rp != NULL; rp = rp->ai_next)
     {
         sockfd = socket(rp->ai_family, rp->ai_socktype, rp->ai_protocol);
         if (sockfd == -1)
             continue; // The socket is not created
 
-        #ifdef TEST
+#ifdef TEST
         // Set timeout for debug
         int tcp_timeout = 5000; // user timeout in milliseconds [ms]
         setsockopt(sockfd, SOL_TCP, TCP_USER_TIMEOUT, (char *)&tcp_timeout, sizeof(tcp_timeout));
-        #endif
+#endif
 
         // Try to connect
         if (connect(sockfd, rp->ai_addr, rp->ai_addrlen) != -1)
@@ -278,7 +279,7 @@ void *client_thread(void *args)
             for (char i = 0; i < ((get_blocks_t *)cc->Payload)->nb_demands; i++)
             {
                 read_header(cc->clientfd, infos);
-                update_sync(infos->actual_height+1, cc->actual_client_height+1);
+                update_sync(infos->actual_height + 1, cc->actual_client_height + 1);
             }
             break;
         }

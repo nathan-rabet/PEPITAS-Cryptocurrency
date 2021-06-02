@@ -1,13 +1,18 @@
-*
-.*
-!/**/
-!*.*
-**.*/*
+# Configuration files
 !.github/*
-~*/*
-*.out
-:.o
 .vsls.json
+
+# Ignore trash files
+~*/*
+*.o
+.*
+
+# Ignoring stupidness
 *.glade
-bin/*
-build/
+build/*
+
+# Ignore everything in data except `block0`
+data/*
+!data/blockchain
+data/blockchain/*
+!data/blockchain/block0
