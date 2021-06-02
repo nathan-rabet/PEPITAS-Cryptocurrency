@@ -98,7 +98,7 @@ void add_pdt_to_block(Block *block){
     time_t txids[MAX_TRANSACTIONS_PER_BLOCK];
     DIR *d;
     struct dirent *dir;
-    d = opendir("./pdt");
+    d = opendir("data/pdt");
     if (d) {
         while ((dir = readdir(d)) != NULL && nbdir < MAX_TRANSACTIONS_PER_BLOCK) {
             if (dir->d_type == DT_REG)

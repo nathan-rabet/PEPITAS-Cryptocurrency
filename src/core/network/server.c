@@ -98,7 +98,7 @@ void *init_server(void *args)
     int addrinfo_error;
     int sockfd; //File Descriptor of the socket
 
-    hints.ai_family = AF_UNSPEC;     //IPV4 only
+    hints.ai_family = AF_UNSPEC;     //IPV6 IPV4
     hints.ai_socktype = SOCK_STREAM; //TCP
     hints.ai_flags = AI_PASSIVE;     //Server
 
@@ -136,7 +136,6 @@ void *init_server(void *args)
         break;
     }
 
-    free(result);
 
     if (rp == NULL)
     { /* No address succeeded */
@@ -146,7 +145,6 @@ void *init_server(void *args)
     }
 
     listen(sockfd, 5);
-
 
     while (1)
     {

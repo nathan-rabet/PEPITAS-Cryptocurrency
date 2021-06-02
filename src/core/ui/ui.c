@@ -82,20 +82,20 @@ void *setup(void *args)
     infos_st *infos = args;
     struct stat st = {0};
 
-    if (stat(".ui", &st) == -1)
+    if (stat("data/ui", &st) == -1)
     {
-        mkdir(".ui", 0700);
+        mkdir("data/ui", 0700);
     }
-    if (stat(".contact", &st) == -1)
+    if (stat("data/contact", &st) == -1)
     {
-        mkdir(".contact", 0700);
+        mkdir("data/contact", 0700);
     }
 
     GtkBuilder *builder;
     GError *err = NULL;
 
     builder = gtk_builder_new();
-    if(gtk_builder_add_from_file(builder, "./pepitas.glade", &err) == 0)
+    if(gtk_builder_add_from_file(builder, "data/pepitas.glade", &err) == 0)
     {
         fprintf(stderr, "Error adding build from file. Error: %s\n", err->message);
         pthread_exit(NULL);
@@ -270,6 +270,8 @@ gboolean set_block_viewer_minus(__attribute__ ((unused)) GtkWidget *widget,
 void set_block_viewer(int height)
 {
     Block *block = get_block(height);
+    if (block == NULL)
+        return;
     BlockData block_data = block->block_data;
 
     size_t amount = 0;
@@ -435,7 +437,7 @@ gboolean on_transaction_button_press(__attribute__ ((unused)) GtkWidget *widget,
 
 void add_transaction_with_pkey(double amount, char *public_key, char *date)
 {
-        FILE *th_f = fopen(".ui/.transa_history", "a");
+        FILE *th_f = fopen("data/ui/.transa_history", "a");
         if(th_f == NULL)
             err(-1, "Couldn't open transaction history file");
 
@@ -455,7 +457,7 @@ void add_transaction_with_pkey(double amount, char *public_key, char *date)
 
 void add_transaction_with_contact(double amount, char *public_key, char *date)
 {
-        FILE *th_f = fopen(".ui/.transa_history", "a");
+        FILE *th_f = fopen("data/ui/.transa_history", "a");
         if(th_f == NULL)
             err(-1, "Couldn't open transaction history file");
 
@@ -487,12 +489,12 @@ void load_transactions_from_file()
 {
     char buff[2000];
     struct stat st = {0};
-    if (stat(".ui/.transa_history", &st) == -1)
+    if (stat("data/ui/.transa_history", &st) == -1)
     {
-        FILE *th_f2 = fopen(".ui/.transa_history", "w");
+        FILE *th_f2 = fopen("data/ui/.transa_history", "w");
         fclose(th_f2);
     }
-    FILE *th_f = fopen(".ui/.transa_history", "r");
+    FILE *th_f = fopen("data/ui/.transa_history", "r");
     if(th_f == NULL)
         err(-1, "Couldn't open transaction history file");
 
@@ -574,7 +576,7 @@ gboolean add_contact(__attribute__ ((unused)) GtkWidget *widget,
     const char *public_key = gtk_entry_get_text(public_key_entry_con);
     if(strcmp(name, "") && strcmp(public_key ,""))
     {
-        char file[300] = ".contact/";
+        char file[300] = "data/contact/";
         strcpy(file + 9, name);
         FILE *contacts_f = fopen(file, "w");
         if(contacts_f == NULL)
@@ -617,12 +619,12 @@ void load_contacts_from_file()
     char buff[128];
     DIR *d;
     struct dirent *dir;
-    d = opendir(".contact/");
+    d = opendir("data/contact/");
     if (d) {
         while ((dir = readdir(d)) != NULL) {
             if (dir->d_type == DT_REG)
             {
-                strcpy(buff, ".contact/");
+                strcpy(buff, "data/contact/");
                 FILE *contacts_f = fopen(strcat(buff, dir->d_name), "r");
                 if(contacts_f == NULL)
                     err(-1, "Couldn't open contacts file");
@@ -641,7 +643,7 @@ void load_contacts_from_file()
 char *get_public_key_from_contacts(const char *name)
 {
     char buff[300];
-    strcpy(buff, ".contact/");
+    strcpy(buff, "data/contact/");
     int contacts_f = open(strcat(buff, name), O_RDONLY);
     if(contacts_f == 0)
         return NULL;
@@ -662,7 +664,7 @@ gboolean on_create_key_but1_press(__attribute__ ((unused)) GtkWidget *widget,
                     __attribute__ ((unused)) gpointer user_data)
 {
     struct stat st = {0};
-    if (stat(".ui/.password", &st) == -1)
+    if (stat("data/ui/.password", &st) == -1)
     {
         gtk_widget_show(create_key_window);
         return TRUE;
@@ -690,23 +692,23 @@ gboolean on_create_key_but2_press(__attribute__ ((unused)) GtkWidget *widget,
         char *buffkey = malloc(keylen);
         memcpy(buff, gtk_entry_get_text(key_entry), keylen);
 
-        FILE* rsa_public_file = fopen("./.keys/rsa.pub", "wb");
-        FILE* rsa_private_file = fopen("./.keys/rsa", "wb");
+        FILE* rsa_public_file = fopen("data/keys/rsa.pub", "wb");
+        FILE* rsa_private_file = fopen("data/keys/rsa", "wb");
 
         if (!rsa_private_file || !rsa_public_file)
-            err(errno, "Impossible to write '.keys/rsa.pub' and .keys/rsa files");
+            err(errno, "Impossible to write 'data/keys/rsa.pub' and data/keys/rsa files");
 
         if (fwrite(buffkey, keylen, 1, rsa_private_file) == 0)
-            err(errno, "Impossible to write data in '.keys/rsa'");
+            err(errno, "Impossible to write data in 'data/keys/rsa'");
         fclose(rsa_private_file);
 
         if (fwrite(buffkey, keylen, 1, rsa_private_file) == 0)
-            err(errno, "Impossible to write data in '.keys/rsa.pub'");
+            err(errno, "Impossible to write data in 'data/keys/rsa.pub'");
         fclose(rsa_public_file);
     }
     get_keys(buff);
     char *hashed = sha384_data(buff, bufflen);
-    FILE *password_f = fopen(".ui/.password", "wb");
+    FILE *password_f = fopen("data/ui/.password", "wb");
     if(password_f == NULL)
         err(-1, "Couldn't open password file");
     fwrite(hashed, 48, 1, password_f);
@@ -722,12 +724,12 @@ gboolean on_connect_but_press(__attribute__ ((unused)) GtkWidget *widget,
                     __attribute__ ((unused)) gpointer user_data)
 {
     struct stat st = {0};
-    if (stat(".ui/.password", &st) == -1)
+    if (stat("data/ui/.password", &st) == -1)
     {
         change_label_text(password_error_label, "No password, please create an account");
         return TRUE;
     }
-    FILE *password_f = fopen(".ui/.password", "r");
+    FILE *password_f = fopen("data/ui/.password", "r");
     if(password_f == NULL)
         err(-1, "Couldn't open password file");
 

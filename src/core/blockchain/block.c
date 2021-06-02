@@ -29,8 +29,8 @@ ChunkBlockchain *load_blockchain(size_t nb_chunk)
         }
 
         struct stat buffer;
-        char path[32] = {0};
-        snprintf(path, 256, "./blockchain/block%lu", (nb_chunk - 1) * NB_BLOCK_PER_CHUNK + i);
+        char path[60] = {0};
+        snprintf(path, 60, "data/blockchain/block%lu", (nb_chunk - 1) * NB_BLOCK_PER_CHUNK + i);
         if (stat(path, &buffer))
         {
             blockchain_chunk.nb_blocks = i;
@@ -54,13 +54,13 @@ ChunkBlockchain *load_last_blockchain()
 void write_block_file(Block block)
 {
     struct stat st = {0};
-    char dir[256];
+    char dir[300];
 
-    if (stat("blockchain", &st) == -1)
+    if (stat("data/blockchain", &st) == -1)
     {
-        mkdir("blockchain", 0700);
+        mkdir("data/blockchain", 0700);
     }
-    snprintf(dir, 256, "blockchain/block%lu", block.block_data.height);
+    snprintf(dir, 300, "data/blockchain/block%lu", block.block_data.height);
 
     int fd = open(dir, O_WRONLY | O_CREAT, 0644);
     if (fd == -1)
@@ -114,9 +114,9 @@ Block *get_block(size_t block_height)
 {
     Block *block = malloc(sizeof(Block));
     int blockfile;
-    char dir[256];
+    char dir[300];
 
-    snprintf(dir, 256, "blockchain/block%lu", block_height);
+    snprintf(dir, 300, "data/blockchain/block%lu", block_height);
     struct stat st = {0};
     if (stat(dir, &st) == -1)
     {

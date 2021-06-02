@@ -33,7 +33,7 @@ void gen_validators_file(char path[])
 {
     LOG("Creating mock validators states file");
     FILE *validators_file = fopen(path, "w+");
-    FILE *temp = fopen(".temp_validators", "w+");
+    FILE *temp = fopen("data/.temp_validators", "w+");
 
     struct validators_state_header validators_state_header = {0};
 
@@ -67,7 +67,7 @@ void gen_validators_file(char path[])
     }
 
     fclose(temp);
-    remove(".temp_validators");
+    remove("data/.temp_validators");
     fclose(validators_file);
 }
 #endif

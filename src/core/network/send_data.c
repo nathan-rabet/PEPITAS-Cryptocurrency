@@ -75,7 +75,7 @@ void send_send_block(int fd, size_t height){
     size_t bc_size = 0;
     ssize_t r = 0;
 
-    snprintf(dir, 256, "blockchain/block%lu", height);
+    snprintf(dir, 256, "data/blockchain/block%lu", height);
 
     FILE *blockfile = fopen(dir, "r");
     if (blockfile == NULL)
@@ -107,7 +107,7 @@ void send_pending_transaction_list(int fd){
     time_t txids[500];
     DIR *d;
     struct dirent *dir;
-    d = opendir("./pdt");
+    d = opendir("data/pdt");
     if (d) {
         while ((dir = readdir(d)) != NULL) {
             if (dir->d_type == DT_REG)
@@ -130,7 +130,7 @@ void send_send_pending_transaction(int fd, time_t txid){
     size_t bc_size = 0;
     ssize_t r = 0;
 
-    snprintf(dir, 256, "./pdt/%ld", txid);
+    snprintf(dir, 256, "data/pdt/%ld", txid);
     FILE *transfile = fopen(dir, "r");
     if (transfile == NULL)
     {

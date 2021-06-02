@@ -17,6 +17,12 @@ infos_st *ac_infos;
 
 int main()
 {
+    struct stat st = {0};
+
+    if (stat("data", &st) == -1)
+    {
+        mkdir("data", 0700);
+    }
     create_account();
     gtk_init(NULL, NULL);
     MANAGERMSG 
