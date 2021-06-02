@@ -1,105 +1,77 @@
-CC := gcc
-LINK := gcc
-RM := rm -rf 
+# Compiling & cleaning configuration
+CC 		:= gcc
+LINK 	:= gcc
+RM 		:= rm -rf 
+EXT 	:= elf
 
+# Project configuration
 OUTPUTFOLDER := build
+GUI_OUT := $(OUTPUTFOLDER)/data/pepitas.glade
+GENESIS_OUT := $(OUTPUTFOLDER)/data/blockchain/block0
 
+# Compilation flags
 CFLAGS := -I"headers" -I"tests/headers" -I"tests" `pkg-config --cflags gtk+-3.0` `pkg-config --cflags openssl` -Wall -Wextra -g -pthread
 PCFLAGS := `pkg-config --libs gtk+-3.0` `pkg-config --libs openssl`
 LDPARAMS := -lssl -lcrypto -lrt -lpthread
 
-SRC := $(shell find src/core -type f -name *.c)
-OBJ := $(SRC:.c=.o)
-SRC_TEST := $(shell find tests/src -type f -name *.c)
-OBJ_TEST := $(SRC_TEST:.c=.o)
+# Sources & objects files 
+SRC 			:= $(shell find src/core -type f -name *.c)
+OBJ 			:= $(SRC:.c=.o)
+SRC_TEST 		:= $(shell find tests/src -type f -name *.c)
+OBJ_TEST 		:= $(SRC_TEST:.c=.o)
 
-_test       := test.elf
-_client     := client.elf
-_server     := server.elf
-_genesis    := genesis.elf
-_ui         := ui.elf
-_doorserver := doorserver.elf
+# Makefile rules
+_test       	:= $(OUTPUTFOLDER)/test.$(EXT)
+_client     	:= $(OUTPUTFOLDER)/client.$(EXT)
+_genesis    	:= $(OUTPUTFOLDER)/genesis.$(EXT)
+_doorserver 	:= $(OUTPUTFOLDER)/doorserver.$(EXT)
 
-executables := $(_test) $(_client) $(_server) $(_genesis) $(_ui) $(_doorserver)
+# Rules objects dependencies
+_test_OBJ 		:= tests/unit_testing.o $(OBJ_TEST) $(OBJ)
+_client_OBJ 	:= src/client.o $(OBJ)
+_genesis_OBJ 	:= src/genesis.o $(OBJ)
+_doorserver_OBJ := src/serverdoor.o $(OBJ)
 
-SUBFOLDERS := $(shell ls -a -I".git*" -I".github*" -I"." -I"..")
-
-bootstrap:
-	mkdir -p $(OUTPUTFOLDER)
-	cp -R $(SUBFOLDERS) $(OUTPUTFOLDER)
-	$(MAKE) binaries -j 64 -C $(OUTPUTFOLDER)
-
-binaries: $(executables) pepitas.glade
-
-$(_test): tests/unit_testing.o $(OBJ_TEST) $(OBJ)
-	$(LINK) $^ -o $@ $(PCFLAGS) $(CFLAGS) $(LDPARAMS) 
-$(_client): src/client.o $(OBJ)
-	$(LINK) $^ -o $@ $(PCFLAGS) $(CFLAGS) $(LDPARAMS)
-$(_server): src/server.o $(OBJ)
-	$(LINK) $^ -o $@ $(PCFLAGS) $(CFLAGS) $(LDPARAMS)
-$(_genesis): src/genesis.o $(OBJ)
-	$(LINK) $^ -o $@ $(PCFLAGS) $(CFLAGS) $(LDPARAMS)
-$(_ui): src/gui.o $(OBJ)
-	$(LINK) $^ -o $@ $(PCFLAGS) $(CFLAGS) $(LDPARAMS)
-$(_doorserver): src/serverdoor.o $(OBJ)
-	$(LINK) $^ -o $@ $(PCFLAGS) $(PCFLAGS) $(LDPARAMS)
+all: $(_test) $(_client) $(_server) $(_genesis) $(_ui) $(_doorserver)
+	
+# Linking
+$(_test): $(_test_OBJ) $(OUTPUTFOLDER)
+	$(LINK) $(_test_OBJ) -o $@ $(PCFLAGS) $(CFLAGS) $(LDPARAMS) 
+$(_client): $(_client_OBJ) $(OUTPUTFOLDER) $(GUI_OUT) $(GENESIS_OUT)
+	$(LINK) $(_client_OBJ) -o $@ $(PCFLAGS) $(CFLAGS) $(LDPARAMS)
+$(_genesis): $(_genesis_OBJ) $(OUTPUTFOLDER)
+	$(LINK) $(_genesis_OBJ) -o $@ $(PCFLAGS) $(CFLAGS) $(LDPARAMS)
+$(_doorserver): $(_doorserver_OBJ) $(OUTPUTFOLDER)
+	$(LINK) $(_doorserver_OBJ) -o $@ $(PCFLAGS) $(CFLAGS) $(LDPARAMS)
 
 $(OUTPUTFOLDER):
-	mkdir -p $(OUTPUTFOLDER)
+	mkdir $@
 
+# Including graphic dependency
+$(GUI_OUT): $(shell find src/core -type f -name $(notdir $(GUI_OUT)))
+	mkdir -p $(@D)
+	cp $< $@
+
+$(GENESIS_OUT): $(shell find data -type f -name $(notdir $(GENESIS_OUT)))
+	mkdir -p $(@D)
+	cp $< $@
+
+# Executing
+test: $(_test)
+	@mkdir -p $(OUTPUTFOLDER)/test
+	@cp -r $(OUTPUTFOLDER)/data $(OUTPUTFOLDER)/test/data
+	@cd $(OUTPUTFOLDER)/test ; ../$@.$(EXT)
+	rm -rf $(OUTPUTFOLDER)/test
+
+# Compiling
 %.o: %.c
 	$(CC) $< -o $@ $(CFLAGS) $(PCFLAGS) $(LDPARAMS) -c
 
-pepitas.glade: src/core/ui/pepitas.glade
-	cp $< $@
-
+# General case
+$(notdir %): $(OUTPUTFOLDER)/%.$(EXT)
+	
+# Cleaning built files
 clean:
-	$(RM) tests/*.o src/*.o $(OBJ) $(OBJ_TEST) $(executables) build pepitas.glade
+	$(RM) tests/*.o src/*.o $(OBJ) $(OBJ_TEST) $(OUTPUTFOLDER)
 
-.PHONY: clean
-
-# all: test server client sign ui doorserver
-# 
-# main_test: ${SRC} tests/main_test.c
-	# @mkdir -p bin
-	# ${CC} ${CFLAGS} $^ ${PCFLAGS} -o bin/$@ ${LDPARAMS}
-# 
-# server: src/server.c ${SRC}
-	# @mkdir -p bin
-	# ${CC} ${CFLAGS} -Wall $^ ${PCFLAGS} -o bin/$@ ${LDPARAMS}
-# 
-# doorserver: src/serverdoor.c ${SRC}
-	# @mkdir -p bin
-	# ${CC} ${CFLAGS} -Wall $^ ${PCFLAGS} -o bin/$@ ${LDPARAMS}
-# 
-# client: src/client.c ${SRC}
-	# @mkdir -p bin
-	# ${CC} ${CFLAGS} -Wall $^ ${PCFLAGS} -o bin/$@ ${LDPARAMS}
-	# cp src/core/ui/pepitas.glade ./pepitas.glade
-# 
-# ui: src/gui.c ${SRC}
-	# @mkdir -p bin
-	# ${CC} ${CFLAGS} -Wall $^ ${PCFLAGS} -o bin/$@ ${LDPARAMS}
-	# cp src/core/ui/pepitas.glade ./pepitas.glade
-# 
-# 
-# test: .test_build
-	# @(cd bin ; ./test)
-	# rm -rf ./bin/~test
-	# rm -rf ./bin/.keys
-	# rm -rf ./bin/blockchain
-	# rm -rf ./bin/validators.state
-	# @cd ..
-# 
-# .test_build: $(SRC_TEST) ${SRC} tests/unit_testing.c
-	# @mkdir -p bin
-	# @${CC} ${CFLAGS} $^ ${PCFLAGS} -o bin/test ${LDPARAMS} -D TEST
-# 
-# genesis: src/genesis.c ${SRC}
-	# @mkdir -p bin
-	# ${CC} ${CFLAGS} $^ ${PCFLAGS} -o bin/sign ${LDPARAMS}
-# 
-# .PHONY: clean test .test_build
-# 
-# clean:
-	# ${RM} -r bin
+.PHONY: clean test

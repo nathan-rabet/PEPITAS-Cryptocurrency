@@ -125,8 +125,8 @@ void load_transaction(Transaction *transaction, int fd)
 }
 
 Transaction* load_pending_transaction(time_t timestamp) {
-    char name[15] = {0};    
-    sprintf(name, "pdt/%ld", timestamp);
+    char name[30] = {0};    
+    sprintf(name, "data/pdt/%ld", timestamp);
 
     int transaction_file = open(name, O_RDONLY);
     if (transaction_file == -1)
@@ -142,12 +142,12 @@ void add_pending_transaction(Transaction *transaction)
     char name[15] = {0};
 
     struct stat st;
-    if (stat("pdt", &st) == -1)
+    if (stat("data/pdt", &st) == -1)
     {
-        mkdir("pdt", 0700);
+        mkdir("data/pdt", 0700);
     }
 
-    sprintf(name, "pdt/%ld", transaction->transaction_data.transaction_timestamp);
+    sprintf(name, "data/pdt/%ld", transaction->transaction_data.transaction_timestamp);
 
     int pending_transaction_fd = open(name, O_CREAT | O_WRONLY, 0644);
     write_transaction(transaction,pending_transaction_fd);

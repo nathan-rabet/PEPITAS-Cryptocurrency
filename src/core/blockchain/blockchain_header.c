@@ -10,11 +10,11 @@ void gen_blockchain_header(infos_st *infos){
     struct stat st = {0};
     size_t index = 0;
 
-    if (stat("blockchain", &st) == -1)
+    if (stat("data/blockchain", &st) == -1)
     {
-        mkdir("blockchain", 0700);
+        mkdir("data/blockchain", 0700);
     }
-    FILE *blockchainh = fopen("blockchain/blockchainheader", "wb");
+    FILE *blockchainh = fopen("data/blockchain/blockchainheader", "wb");
     if (blockchainh == NULL)
         return;
     Block *block = NULL;

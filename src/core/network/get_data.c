@@ -203,7 +203,7 @@ int read_send_block(int fd)
     r = read(fd, &bc_size, sizeof(size_t));
     if (r != sizeof(size_t))
         return -1;
-    snprintf(dir, 256, "blockchain/c%iblock%lu", fd, block_height);
+    snprintf(dir, 256, "data/blockchain/c%iblock%lu", fd, block_height);
 
     blockfile = open(dir, O_RDWR | O_CREAT | O_TRUNC, 0644);
     if (blockfile == -1)
@@ -239,7 +239,7 @@ int read_send_block(int fd)
     {
         CLIENTMSG
         printf("The block %lu is valid!\n", block_height);
-        snprintf(temp, 256, "blockchain/block%lu", block_height);
+        snprintf(temp, 256, "data/blockchain/block%lu", block_height);
         int ret = rename(dir, temp);
 
         if (ret == 0)
@@ -469,7 +469,7 @@ int read_send_pending_transaction_list(int fd, infos_st *infos)
     for (size_t i = 0; i < nbtxids; i++)
     {
         char temp[50];
-        sprintf(temp, "./pdt/%ld", *(txids + i));
+        sprintf(temp, "data/pdt/%ld", *(txids + i));
         if (access(temp, F_OK))
         {
             // file doesn't exists
@@ -493,7 +493,7 @@ int read_send_pending_transaction(int fd, infos_st* infos)
     if (r != sizeof(size_t))
         return -1;
 
-    snprintf(dir, 256, "pdt/%ld", txid);
+    snprintf(dir, 256, "data/pdt/%ld", txid);
     if (access(dir, F_OK) == 0)
     {
         // file exists
