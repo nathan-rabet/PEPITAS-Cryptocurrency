@@ -29,7 +29,7 @@ int set_neighbour(char who, char *hostname, int family)
         }
         if (node->neighbours[index].hostname != NULL && !strncmp(node->neighbours[index].hostname, hostname, strlen(hostname)))
         {
-            return 0;
+            return -1;
         }
 
         index++;
@@ -39,7 +39,7 @@ int set_neighbour(char who, char *hostname, int family)
         node->neighbours[min_null].hostname = malloc(sizeof(char) * 39);
         snprintf(node->neighbours[min_null].hostname, SIZE_OF_HOSTNAME, "%s", hostname);
         node->neighbours[min_null].family = family;
-        return 0;
+        return min_null;
     }
     return -1;
 }
