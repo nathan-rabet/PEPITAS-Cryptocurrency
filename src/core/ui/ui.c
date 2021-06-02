@@ -577,7 +577,7 @@ gboolean add_contact(__attribute__ ((unused)) GtkWidget *widget,
     if(strcmp(name, "") && strcmp(public_key ,""))
     {
         char file[300] = "data/contact/";
-        strcpy(file + 9, name);
+        strcpy(file + strlen(file), name);
         FILE *contacts_f = fopen(file, "w");
         if(contacts_f == NULL)
             err(-1, "Couldn't open contacts file");
