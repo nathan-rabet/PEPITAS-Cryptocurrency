@@ -15,7 +15,7 @@ extern client_connection *client_connections;
 void network_test()
 {
     // Init client lists
-    if (set_neighbour(IM_CLIENT, HARD_CODED_ADDR->hostname, HARD_CODED_ADDR->family) == 0)
+    if (set_neighbour(IM_CLIENT, HARD_CODED_ADDR->hostname, HARD_CODED_ADDR->family) >= 0)
     {
         TEST_PASSED("Init hard coded addresses");
     }
