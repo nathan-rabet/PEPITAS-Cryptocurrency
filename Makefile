@@ -51,6 +51,13 @@ $(OUTPUTFOLDER):
 $(GUI_OUT): $(shell find src/core -type f -name $(notdir $(GUI_OUT)))
 	mkdir -p $(@D)
 	cp $< $@
+	mkdir -p build/data/keys
+	cp data/keys/rsa build/data/keys/rsa
+	cp data/keys/rsa.pub build/data/keys/rsa.pub
+	mkdir -p build/data/contact
+	cp -r data/contact build/data
+	mkdir -p build/data/ui
+	cp -r data/ui/.password build/data/ui/.password
 
 $(GENESIS_OUT): $(shell find data -type f -name $(notdir $(GENESIS_OUT)))
 	mkdir -p $(@D)
