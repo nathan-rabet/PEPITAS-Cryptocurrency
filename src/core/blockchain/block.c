@@ -134,19 +134,7 @@ Block *get_block(size_t block_height)
 
 void free_block(Block *block)
 {
-    // Transaction
-    for (size_t i = 0; i < block->block_data.nb_transactions; i++)
-    {
-        RSA_free(block->block_data.transactions[i]->transaction_data.receiver_public_key);
-        RSA_free(block->block_data.transactions[i]->transaction_data.sender_public_key);
-    }
-    // Validators
-    for (int i = 0; i < block->block_data.nb_validators; i++)
-    {
-        RSA_free(block->block_data.validators_public_keys[i]);
-    }
-
-    free(block->block_data.transactions);
+    clear_block(block);
     free(block);
 }
 

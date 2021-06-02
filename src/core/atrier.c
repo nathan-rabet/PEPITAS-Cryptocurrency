@@ -47,7 +47,6 @@ void Validate(){
         {
             while (client_connections[i].demand)
                 ;
-            free(client_connections[i].Payload);
         }
     }
 
