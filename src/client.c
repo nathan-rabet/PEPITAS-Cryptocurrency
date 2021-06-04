@@ -10,7 +10,7 @@
 #include "ui/ui.h"
 #include "blockchain/blockchain_header.h"
 
-extern client_connection *client_connections;
+extern connection *client_connections;
 static pthread_t server_t;
 infos_st *ac_infos;
 
@@ -22,6 +22,10 @@ int main()
     if (stat("data", &st) == -1)
     {
         mkdir("data", 0700);
+    }
+    if (stat("data/pdt", &st) == -1)
+    {
+        mkdir("data/pdt", 0700);
     }
     create_account();
     gtk_init(NULL, NULL);
@@ -47,7 +51,7 @@ int main()
 
 
 
-    client_connections = calloc(MAX_CONNECTION, sizeof(client_connection));
+    client_connections = calloc(MAX_CONNECTION, sizeof(connection));
     for (size_t i = 0; i < MAX_CONNECTION; i++)
     {
         sem_init(&client_connections[i].lock, 0, 0);

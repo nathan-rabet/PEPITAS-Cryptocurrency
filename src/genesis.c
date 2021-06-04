@@ -11,7 +11,7 @@
 #include "blockchain/blockchain_header.h"
 
 
-extern client_connection *client_connections;
+extern connection *client_connections;
 infos_st *ac_infos;
 
 infos_st* get_infos();

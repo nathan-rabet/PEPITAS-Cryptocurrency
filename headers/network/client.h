@@ -63,9 +63,9 @@ void load_neighbours(char who);
  * @param neighbour The neighbour to connect with
  * @return socket FD or -1 if an error occurs
  */
-client_connection *listen_to(infos_st *infos, Neighbour neighbour, char* connection_type);
+connection *listen_to(infos_st *infos, Neighbour neighbour, char* connection_type, connection* connection);
 
-int find_empty_connection(int max);
+int find_empty_connection(int max, connection* connection);
 
 int is_in_neighbours(char who, char *hostname);
 

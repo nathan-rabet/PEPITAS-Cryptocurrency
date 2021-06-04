@@ -17,7 +17,7 @@ int send_client_list(char who, int sockfd, char *sockip);
  * @brief Sends get blocks
  * 
  */
-void send_get_blocks(client_connection *cc);
+void send_get_blocks(connection *cc);
 
 void send_actual_height(int fd, infos_st *infos);
 
@@ -31,8 +31,8 @@ void send_send_pending_transaction(int fd, time_t txid);
 
 void send_get_pending_transaction(int fd, time_t txid);
 
-void send_epoch_block(client_connection *cc);
+void send_epoch_block(connection *cc);
 
-void send_vote_fd(client_connection *cc);
+void send_vote_fd(connection *cc);
 
 #endif
