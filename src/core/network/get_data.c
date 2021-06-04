@@ -96,7 +96,7 @@ size_t process_header(char *header, int sockfd, infos_st *infos)
     {
         CLIENTMSG
         printf("Recived header HD_SEND_EPOCH_BLOCK\n");
-        return read_vote(sockfd);
+        return read_vote(sockfd, infos);
     }
 
     // WARNINGMSG("Can't read header!")
@@ -274,7 +274,7 @@ int read_send_block(int fd)
     return 0;
 }
 
-int read_vote(int fd)
+int read_vote(int fd, infos_st* infos)
 {
 
     // RECUP THE VOTE DATA
@@ -322,7 +322,7 @@ int read_vote(int fd)
     printf("Vote is valid!\n");
 
     // SEARCH VALIDATOR
-    Block *block = get_epoch(epoch_id);
+    Block *block = get_epoch(epoch_id, infos->actual_height+1);
 
     if (block->block_data.height != height)
     {
@@ -372,17 +372,52 @@ int read_epoch_block(int fd, infos_st *infos)
 {
     int id = 0;
     size_t height = 0;
+    size_t bc_size = 0;
+    char dir[256];
+    char temp[1024];
+    ssize_t r;
     read(fd, &id, sizeof(int));
     read(fd, &height, sizeof(size_t));
-    Block *epoch = get_epoch(id);
+    read(fd, &bc_size, sizeof(size_t));
+
+    snprintf(dir, 256, "data/epoch/epoch%luid%d", height, id);
+
+    int blockfile = open(dir, O_RDWR | O_CREAT | O_TRUNC, 0644);
+    if (blockfile == -1)
+    {
+        CLIENTMSG
+        printf("Can't create c%iepoch%lu file\n", fd, height);
+        return -1;
+    }
+
+    while ((r = read(fd, temp, bc_size > 1024 ? 1024 : bc_size)) && bc_size > 0)
+    {
+        if (r == -1)
+            errx(EXIT_FAILURE, "Can't read epoch %lu in connection fd: %i", height, fd);
+        safe_write(blockfile, temp, r);
+        bc_size -= r;
+    }
+    if (bc_size > 0)
+    {
+        WARNINGMSG("Failed to read all the epoch!\n")
+    }
+
+    CLIENTMSG
+    printf("Recived epoch %lu in connection fd: %i\n", height, fd);
+
     // IS NEXT BLOCK
     if (infos->actual_height + 1 == height)
     {
-        convert_data_to_block(epoch, fd);
         MANAGERMSG
         printf("Block is the next!\n");
         return 0;
     }
+
+    // LOAD BLOCK
+    Block *epoch = malloc(sizeof(Block));
+    lseek(blockfile, 0L, SEEK_SET);
+    convert_data_to_block(epoch, blockfile);
+    close(blockfile);
 
     // ADD NEXT BLOCK TO THE BLOCKCHAIN
     if (infos->actual_height + 2 == height)
@@ -390,7 +425,7 @@ int read_epoch_block(int fd, infos_st *infos)
         char added = 0;
         for (size_t i = 0; i < MAX_VALIDATORS_PER_BLOCK; i++)
         {
-            Block *my_new_epoch = get_epoch(i);
+            Block *my_new_epoch = get_epoch(i, infos->actual_height + 1);
             if (my_new_epoch->block_data.height)
             {
                 if (added == 0)
@@ -402,12 +437,11 @@ int read_epoch_block(int fd, infos_st *infos)
                     MANAGERMSG
                     printf("Block %lu is added in the blockchain!\n", my_new_epoch->block_data.height);
                 }
-                clear_block(my_new_epoch);
+                free_block(my_new_epoch);
             }
         }
         if (infos->is_validator > 0)
         {
-            convert_data_to_block(epoch, fd);
             infos->validator_id = i_am_commitee_member();
         }
     }
@@ -455,6 +489,7 @@ int read_epoch_block(int fd, infos_st *infos)
 
     MANAGERMSG
     printf("Block is not valid!\n");
+    free_block(epoch);
     return 0;
 }
 

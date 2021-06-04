@@ -27,6 +27,10 @@ int main()
     {
         mkdir("data/pdt", 0700);
     }
+    if (stat("data/epoch", &st) == -1)
+    {
+        mkdir("data/epoch", 0700);
+    }
     create_account();
     gtk_init(NULL, NULL);
     MANAGERMSG 
