@@ -177,7 +177,6 @@ void send_epoch_block(connection *cc){
     size_t bc_size = 0;
     ssize_t r = 0;
 
-    safe_write(cc->clientfd, HD_SEND_EPOCH_BLOCK, strlen(HD_SEND_EPOCH_BLOCK));
     Block *block = (Block *)cc->Payload;
 
     snprintf(dir, 256, "data/epoch/epoch%ldid%d", block->block_data.height, block->block_data.epoch_id);
@@ -189,6 +188,7 @@ void send_epoch_block(connection *cc){
     fseek(blockfile, 0L, SEEK_SET);
 
 
+    safe_write(cc->clientfd, HD_SEND_EPOCH_BLOCK, strlen(HD_SEND_EPOCH_BLOCK));
     safe_send(cc->clientfd, &block->block_data.epoch_id, sizeof(int));
     safe_send(cc->clientfd, &block->block_data.height, sizeof(size_t));
     safe_send(cc->clientfd, (void *)&bc_size, sizeof(size_t));

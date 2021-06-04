@@ -76,6 +76,7 @@ int main()
     }
 
     clear_transactions();
+    clear_epochs();
     init_validators_state();
     // Try Load Old blockchain
     gen_blockchain_header(infos);

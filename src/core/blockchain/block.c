@@ -287,6 +287,21 @@ void update_wallet_with_block(Block block) {
     }
 }
 
+void delete_epochs(size_t height){
+    char dir[300];
+    struct stat st = {0};
+
+    for (int id = 0; id < MAX_VALIDATORS_PER_BLOCK; id++)
+    {
+        snprintf(dir, 300, "data/epoch/epoch%luid%d", height, id);
+        if (stat(dir, &st) != -1)
+        {
+            remove(dir);
+        }
+    }
+    
+}
+
 Block* get_epoch(int id, size_t height){
     Block *epoch = malloc(sizeof(Block));
     int epochfile;
