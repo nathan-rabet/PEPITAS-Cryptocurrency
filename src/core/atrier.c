@@ -138,6 +138,7 @@ void join_network_door(infos_st *infos){
     // Close connection to door server
     close(connection_fd->clientfd);
     pthread_cancel(connection_fd->thread);
+    connection_fd->thread = 0;
     connection_fd->clientfd = 0;
 }
 
@@ -149,7 +150,7 @@ void connection_to_others(infos_st *infos){
         if (node->neighbours[i].hostname != NULL)
         {
             if (listen_to(infos, node->neighbours[i], HD_CONNECTION_TO_NODE) == NULL)
-                printf("Fail de connection to neighbour\n");
+                printf("Connection to neighbour failed\n");     
         }
     }
     MANAGERMSG

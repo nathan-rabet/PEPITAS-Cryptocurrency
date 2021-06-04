@@ -139,7 +139,7 @@ Transaction* load_pending_transaction(time_t timestamp) {
 
 void add_pending_transaction(Transaction *transaction)
 {
-    char name[15] = {0};
+    char name[300] = {0};
 
     struct stat st;
     if (stat("data/pdt", &st) == -1)

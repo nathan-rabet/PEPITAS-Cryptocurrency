@@ -30,7 +30,8 @@ void *accept_connection(void *args)
     // CONNECTION BACK
     int index = -1;
     Node *node = get_my_node(IM_SERVER);
-    if ((index = set_neighbour(IM_SERVER, ip_str, AF_INET)) >= 0) {
+    set_neighbour(IM_SERVER, ip_str, AF_INET);
+    if ((index = is_in_neighbours(IM_CLIENT, ip_str)) >= 0) {
         if (node->neighbours[index].hostname != NULL)
         {
             if (listen_to(infos, node->neighbours[index], HD_CONNECTION_TO_NODE) == NULL)

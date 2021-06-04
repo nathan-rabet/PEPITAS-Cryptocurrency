@@ -152,9 +152,9 @@ int is_in_neighbours(char who, char *hostname)
     for (size_t i = 0; i < MAX_NEIGHBOURS; i++)
     {
         if (node->neighbours[i].hostname != NULL && !strncmp(node->neighbours[i].hostname, hostname, strlen(hostname)))
-            return 1;
+            return i;
     }
-    return 0;
+    return -1;
 }
 
 int number_neighbours(char who)
