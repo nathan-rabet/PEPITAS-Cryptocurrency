@@ -409,7 +409,7 @@ int read_epoch_block(int fd, infos_st *infos)
     if (infos->actual_height + 1 == height)
     {
         MANAGERMSG
-        printf("Block is the next!\n");
+        printf("Epoch is the next!\n");
         return 0;
     }
 
@@ -440,7 +440,7 @@ int read_epoch_block(int fd, infos_st *infos)
                 free_block(my_new_epoch);
             }
         }
-        delete_epochs(infos->actual_height + 1);
+        delete_epochs(infos->actual_height);
         if (infos->is_validator > 0)
         {
             infos->validator_id = i_am_commitee_member();
@@ -488,8 +488,6 @@ int read_epoch_block(int fd, infos_st *infos)
         printf("Create new epoch!\n");
     }
 
-    MANAGERMSG
-    printf("Block is not valid!\n");
     free_block(epoch);
     return 0;
 }
