@@ -10,7 +10,7 @@
 #include "network/send_data.h"
 #include "network/get_data.h"
 
-extern client_connection *client_connections;
+extern connection *client_connections;
 
 void network_test()
 {
@@ -28,8 +28,8 @@ void network_test()
     infos.serv_type = NODESERVER;
     char connection_type = 42;
 
-    client_connections = malloc(sizeof(client_connection) * MAX_CONNECTION);
-    if (listen_to(&infos, get_my_node(IM_CLIENT)->neighbours[0], &connection_type) != NULL)
+    client_connections = malloc(sizeof(connection) * MAX_CONNECTION);
+    if (listen_to(&infos, get_my_node(IM_CLIENT)->neighbours[0], &connection_type, client_connections) != NULL)
     {
         TEST_PASSED("Connect to server");
     }

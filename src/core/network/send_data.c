@@ -49,7 +49,7 @@ int send_client_list(char who, int sockfd, char *sockip)
     return 0;
 }
 
-void send_get_blocks(client_connection *cc){
+void send_get_blocks(connection *cc){
     CLIENTMSG
     printf("Send HD_GET_BLOCKS\n");
     safe_write(cc->clientfd, HD_GET_BLOCKS, strlen(HD_GET_BLOCKS));
@@ -170,7 +170,7 @@ void send_get_pending_transaction(int fd, time_t txid){
     printf("Send HD_GET_PENDING_TRANSACTION with txid: %ld\n", txid);
 }
 
-void send_epoch_block(client_connection *cc){
+void send_epoch_block(connection *cc){
     safe_write(cc->clientfd, HD_SEND_EPOCH_BLOCK, strlen(HD_SEND_EPOCH_BLOCK));
     Block *block = (Block *)cc->Payload;
     safe_send(cc->clientfd, &block->block_data.epoch_id, sizeof(int));
@@ -180,7 +180,7 @@ void send_epoch_block(client_connection *cc){
     printf("Send HD_SEND_EPOCH_BLOCK\n");
 }
 
-void send_vote_fd(client_connection *cc){
+void send_vote_fd(connection *cc){
     safe_write(cc->clientfd, HD_SEND_VOTE, strlen(HD_SEND_VOTE));
     safe_send(cc->clientfd, cc->Payload, cc->Payloadsize);
     CLIENTMSG

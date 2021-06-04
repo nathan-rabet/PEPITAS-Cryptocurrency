@@ -3,14 +3,14 @@
 void *accept_connection(void *args)
 {
     th_arg *a = (th_arg *)args;
-    client_connection *cl_c = a->client_con;
+    connection *server_connection = a->client_con;
     infos_st *infos = a->infos;
     free(args);
 
     struct sockaddr_in client_addr;
     socklen_t client_addr_len = sizeof(client_addr);
 
-    if (getpeername(cl_c->clientfd, (struct sockaddr * restrict) & client_addr, &client_addr_len) == -1)
+    if (getpeername(server_connection->clientfd, (struct sockaddr * restrict) & client_addr, &client_addr_len) == -1)
         err(EXIT_FAILURE, "Failed to recover client IP address\n");
 
     char ip_str[INET_ADDRSTRLEN];
@@ -21,7 +21,7 @@ void *accept_connection(void *args)
     printf("New connection: '%s'\n", ip_str);
 
     // VERIFY
-    if (read_header(cl_c->clientfd, infos) == 1)
+    if (read_header(server_connection->clientfd, infos) == 1)
     {
         SERVERMSG
         printf("Accept connection: '%s'\n", ip_str);
@@ -34,7 +34,7 @@ void *accept_connection(void *args)
     if ((index = is_in_neighbours(IM_CLIENT, ip_str)) >= 0) {
         if (node->neighbours[index].hostname != NULL)
         {
-            if (listen_to(infos, node->neighbours[index], HD_CONNECTION_TO_NODE) == NULL)
+            if (listen_to(infos, node->neighbours[index], HD_CONNECTION_TO_NODE, server_connection) == NULL)
                 printf("Fail de connection to neighbour\n");
         }
     }
@@ -42,12 +42,12 @@ void *accept_connection(void *args)
     // SERVER ROUTINE
     while (1)
     {
-        read_header(cl_c->clientfd, infos);
+        read_header(server_connection->clientfd, infos);
     }
     
 
-    close(cl_c->clientfd);
-    cl_c->clientfd = 0;
+    close(server_connection->clientfd);
+    server_connection->clientfd = 0;
 
     pthread_exit(NULL);
 }
@@ -89,7 +89,11 @@ void *redirect_connection(void *arg)
 void *init_server(void *args)
 {
     infos_st *infos = (infos_st *)args;
-    client_connection *client_connections = calloc(MAX_SERVER, sizeof(client_connection));
+    connection *server_connections = calloc(MAX_SERVER, sizeof(connection));
+    for (size_t i = 0; i < MAX_CONNECTION; i++)
+    {
+        sem_init(&server_connections[i].lock, 0, 0);
+    }
     SERVERMSG
     printf("Opening client server...\n");
 
@@ -159,17 +163,17 @@ void *init_server(void *args)
         
         if (infos->serv_type == NODESERVER)
         {
-            int index = find_empty_connection(MAX_SERVER);
-            client_connections[index].clientfd = accept(sockfd, rp->ai_addr, &rp->ai_addrlen);
-            if (client_connections[index].clientfd != -1)
+            int index = find_empty_connection(MAX_SERVER, server_connections);
+            server_connections[index].clientfd = accept(sockfd, rp->ai_addr, &rp->ai_addrlen);
+            if (server_connections[index].clientfd != -1)
             {
                 th_arg *args = malloc(sizeof(th_arg));
                 args->infos = infos;
-                args->client_con = &client_connections[index];
-                pthread_create(&client_connections->thread, NULL, accept_connection, args);
+                args->client_con = &server_connections[index];
+                pthread_create(&server_connections->thread, NULL, accept_connection, args);
             }
             else
-                client_connections[index].clientfd = 0;
+                server_connections[index].clientfd = 0;
         }
     }
 }

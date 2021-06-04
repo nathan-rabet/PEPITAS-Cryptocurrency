@@ -41,7 +41,7 @@ typedef struct Node
     Neighbour *neighbours; // Neighbours list
 } Node;
 
-typedef struct client_connection
+typedef struct connection
 {
     pthread_t thread; // Adress information
     sem_t lock;
@@ -50,7 +50,7 @@ typedef struct client_connection
     size_t Payloadsize;
     void *Payload;
     size_t actual_client_height;
-} client_connection;
+} connection;
 
 typedef struct infos_st
 {
@@ -64,7 +64,7 @@ typedef struct infos_st
 typedef struct th_arg
 {
     infos_st *infos;
-    client_connection *client_con;
+    connection *client_con;
 }th_arg;
 
 extern const Neighbour HARD_CODED_ADDR[];

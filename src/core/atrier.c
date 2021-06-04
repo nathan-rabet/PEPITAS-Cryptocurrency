@@ -10,8 +10,7 @@
 #include "ui/ui.h"
 #include "blockchain/blockchain_header.h"
 
-extern client_connection *client_connections;
-static pthread_t server_t;
+extern connection *client_connections;
 infos_st *ac_infos;
 
 infos_st* get_infos(){
@@ -122,24 +121,23 @@ void new_transaction(char type, char *rc_pk, size_t amount, char cause[512], cha
 
 
 void join_network_door(infos_st *infos){
-    client_connection *connection_fd;
+    connection* connection = NULL;
     for (size_t i = 0; i < NB_HARD_CODED_ADDR; i++)
     {
-        connection_fd = listen_to(infos ,HARD_CODED_ADDR[i], HD_CONNECTION_TO_NETWORK);
-        if (connection_fd != NULL)
+        if ((connection = listen_to(infos ,HARD_CODED_ADDR[i], HD_CONNECTION_TO_NETWORK, NULL)) != NULL)
             break;
     }
-    if (connection_fd == NULL)
+    if (connection == NULL)
         err(EXIT_FAILURE, "Aie aie aie pas de réseau mon reuf :(\nHave a great day\n");
 
-    read_header(connection_fd->clientfd, infos);
+    read_header(connection->clientfd, infos);
     print_neighbours(IM_CLIENT, 0);
 
     // Close connection to door server
-    close(connection_fd->clientfd);
-    pthread_cancel(connection_fd->thread);
-    connection_fd->thread = 0;
-    connection_fd->clientfd = 0;
+    close(connection->clientfd);
+    pthread_cancel(connection->thread);
+    connection->thread = 0;
+    connection->clientfd = 0;
 }
 
 void connection_to_others(infos_st *infos){
@@ -149,7 +147,7 @@ void connection_to_others(infos_st *infos){
     {
         if (node->neighbours[i].hostname != NULL)
         {
-            if (listen_to(infos, node->neighbours[i], HD_CONNECTION_TO_NODE) == NULL)
+            if (listen_to(infos, node->neighbours[i], HD_CONNECTION_TO_NODE, client_connections) == NULL)
                 printf("Connection to neighbour failed\n");     
         }
     }

@@ -1,7 +1,7 @@
 #include "network/network.h"
 #include "network/client.h"
 
-client_connection *client_connections = NULL;
+connection *client_connections = NULL;
 
 Node *get_my_node(char who)
 {
@@ -169,7 +169,7 @@ int number_neighbours(char who)
     return nb_neigbours;
 }
 
-client_connection *listen_to(infos_st *infos, Neighbour neighbour, char *connection_type)
+connection *listen_to(infos_st *infos, Neighbour neighbour, char *connection_type, connection* connection)
 {
     struct addrinfo hints = {0};
 
@@ -224,32 +224,41 @@ client_connection *listen_to(infos_st *infos, Neighbour neighbour, char *connect
 
         //SEND ACCEPT
         safe_write(sockfd, connection_type, strlen(connection_type));
-
-        int index = find_empty_connection(MAX_CONNECTION);
+        int index = -1;
+        if (connection != NULL)
+        {
+            index = find_empty_connection(MAX_CONNECTION, connection);
+        }
+        else
+        {
+            connection = malloc(sizeof(connection));
+            index = 0;
+        }
         if (index != -1)
         {
-            client_connections[index].clientfd = sockfd;
-            client_connections[index].demand = 0;
+            connection[index].clientfd = sockfd;
+            connection[index].demand = 0;
 
             th_arg *args = malloc(sizeof(th_arg));
             args->infos = infos;
-            args->client_con = &client_connections[index];
+            args->client_con = &connection[index];
 
-            pthread_create(&client_connections[index].thread, NULL, client_thread, args);
+            pthread_create(&connection[index].thread, NULL, client_thread, args);
 
-            return &client_connections[index];
+            return &connection[index];
         }
+        
     }
 
     // Connection failed
     return NULL;
 }
 
-int find_empty_connection(int max)
+int find_empty_connection(int max, connection* connections)
 {
     for (int i = 0; i < max; i++)
     {
-        if (client_connections[i].clientfd == 0)
+        if (connections[i].clientfd == 0)
             return i;
     }
     return -1;
@@ -258,7 +267,7 @@ int find_empty_connection(int max)
 void *client_thread(void *args)
 {
     th_arg *a = (th_arg *)args;
-    client_connection *cc = a->client_con;
+    connection *cc = a->client_con;
     infos_st *infos = a->infos;
     free(args);
 
