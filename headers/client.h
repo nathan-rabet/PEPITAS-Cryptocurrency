@@ -16,6 +16,7 @@ void connection_to_others(infos_st *infos);
 size_t update_blockchain_height(infos_st *infos);
 void update_blockchain(infos_st *infos, size_t index_client);
 void clear_transactions();
+void clear_epochs();
 void update_pending_transactions_list(infos_st *infos);
 
 

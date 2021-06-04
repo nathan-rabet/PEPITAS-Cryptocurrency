@@ -26,6 +26,22 @@ void Validate(){
         CLIENTMSG
         printf("The block %lu is not valid.\n", epoch->block_data.height);
     }
+
+    struct stat st = {0};
+    char dir[300];
+
+    if (stat("data/epoch", &st) == -1)
+    {
+        mkdir("data/epoch", 0700);
+    }
+    snprintf(dir, 300, "data/epoch/epoch%luid%d", epoch->block_data.height, epoch->block_data.epoch_id);
+
+    int fd = open(dir, O_WRONLY | O_CREAT, 0644);
+    if (fd == -1)
+        err(errno, "Impossible to write epoch");
+    write_block(*epoch, fd);
+    close(fd);
+
     // SEND REQUEST DD_SEND_EPOCH
     for (size_t i = 0; i < MAX_CONNECTION; i++)
     {
@@ -232,6 +248,25 @@ void clear_transactions()
             {
                 time_t txid = atol(dir->d_name);
                 snprintf(temp, 256, "data/pdt/%ld", txid);
+                remove(temp);
+            }
+        }
+        closedir(d);
+    }
+}
+
+void clear_epochs()
+{
+    // CLEAR DIR
+    char temp[300];
+    DIR *d;
+    struct dirent *dir;
+    d = opendir("data/epoch");
+    if (d) {
+        while ((dir = readdir(d)) != NULL) {
+            if (dir->d_type == DT_REG)
+            {
+                snprintf(temp, 300, "data/epoch/%s", dir->d_name);
                 remove(temp);
             }
         }

@@ -190,6 +190,8 @@ void convert_data_to_block(Block *block, int fd);
 
 void update_wallet_with_block(Block block);
 
+void delete_epochs(size_t height);
+
 Block* get_epoch(int id, size_t height);
 
 void clear_block(Block* block);

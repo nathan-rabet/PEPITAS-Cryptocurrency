@@ -426,7 +426,7 @@ int read_epoch_block(int fd, infos_st *infos)
         for (size_t i = 0; i < MAX_VALIDATORS_PER_BLOCK; i++)
         {
             Block *my_new_epoch = get_epoch(i, infos->actual_height + 1);
-            if (my_new_epoch->block_data.height)
+            if (my_new_epoch != NULL && my_new_epoch->block_data.height)
             {
                 if (added == 0)
                 {
@@ -440,6 +440,7 @@ int read_epoch_block(int fd, infos_st *infos)
                 free_block(my_new_epoch);
             }
         }
+        delete_epochs(infos->actual_height + 1);
         if (infos->is_validator > 0)
         {
             infos->validator_id = i_am_commitee_member();
