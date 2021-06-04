@@ -171,11 +171,37 @@ void send_get_pending_transaction(int fd, time_t txid){
 }
 
 void send_epoch_block(connection *cc){
+    
+    char dir[256];
+    char temp[1024];
+    size_t bc_size = 0;
+    ssize_t r = 0;
+
     safe_write(cc->clientfd, HD_SEND_EPOCH_BLOCK, strlen(HD_SEND_EPOCH_BLOCK));
     Block *block = (Block *)cc->Payload;
+
+    snprintf(dir, 256, "data/epoch/epoch%ldid%d", block->block_data.height, block->block_data.epoch_id);
+    FILE *blockfile = fopen(dir, "r");
+    if (blockfile == NULL)
+        return;
+    fseek(blockfile, 0L, SEEK_END);
+    bc_size = ftell(blockfile);
+    fseek(blockfile, 0L, SEEK_SET);
+
+
     safe_send(cc->clientfd, &block->block_data.epoch_id, sizeof(int));
     safe_send(cc->clientfd, &block->block_data.height, sizeof(size_t));
-    write_block(*block, cc->clientfd);
+    safe_send(cc->clientfd, (void *)&bc_size, sizeof(size_t));
+    while ((r = fread(temp, 1, 1024, blockfile)) && bc_size > 0)
+    {
+        if (r == -1)
+            errx(EXIT_FAILURE, "Can't send block %lu\n", block->block_data.height);
+        safe_write(cc->clientfd, temp, r);
+        bc_size -= r;
+    }
+    if (bc_size > 0){
+        WARNINGMSG("Failed to send all the block!")
+    }
     CLIENTMSG
     printf("Send HD_SEND_EPOCH_BLOCK\n");
 }

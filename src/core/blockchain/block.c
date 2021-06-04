@@ -1,7 +1,5 @@
 #include "blockchain/block.h"
 
-static Block epochs[MAX_VALIDATORS_PER_BLOCK];
-
 ChunkBlockchain *load_blockchain(size_t nb_chunk)
 {
 #ifdef TEST
@@ -289,8 +287,25 @@ void update_wallet_with_block(Block block) {
     }
 }
 
-Block* get_epoch(int id){
-    return epochs + id;
+Block* get_epoch(int id, size_t height){
+    Block *epoch = malloc(sizeof(Block));
+    int epochfile;
+    char dir[300];
+
+    snprintf(dir, 300, "data/epoch/epoch%luid%d", height, id);
+    struct stat st = {0};
+    if (stat(dir, &st) == -1)
+    {
+        return NULL;
+    }
+
+    epochfile = open(dir, O_RDONLY);
+    if (epochfile == -1)
+        return NULL;
+    convert_data_to_block(epoch, epochfile);
+    close(epochfile);
+
+    return epoch;
 }
 
 void clear_block(Block* block){
