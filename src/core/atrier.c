@@ -135,9 +135,7 @@ void join_network_door(infos_st *infos){
 
     // Close connection to door server
     close(connection->clientfd);
-    pthread_cancel(connection->thread);
-    connection->thread = 0;
-    connection->clientfd = 0;
+    free(connection);
 }
 
 void connection_to_others(infos_st *infos){

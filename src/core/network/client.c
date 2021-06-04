@@ -232,7 +232,8 @@ connection *listen_to(infos_st *infos, Neighbour neighbour, char *connection_typ
         else
         {
             connection = malloc(sizeof(connection));
-            index = 0;
+            connection->clientfd = sockfd;
+            return connection;
         }
         if (index != -1)
         {
