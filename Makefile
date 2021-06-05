@@ -51,13 +51,6 @@ $(OUTPUTFOLDER):
 $(GUI_OUT): $(shell find src/core -type f -name $(notdir $(GUI_OUT)))
 	mkdir -p $(@D)
 	cp $< $@
-	mkdir -p build/data/keys
-	cp data/keys/rsa build/data/keys/rsa
-	cp data/keys/rsa.pub build/data/keys/rsa.pub
-	mkdir -p build/data/contact
-	cp -r data/contact build/data
-	mkdir -p build/data/ui
-	cp -r data/ui/.password build/data/ui/.password
 
 $(GENESIS_OUT): $(shell find data -type f -name $(notdir $(GENESIS_OUT)))
 	mkdir -p $(@D)
@@ -81,4 +74,10 @@ $(notdir %): $(OUTPUTFOLDER)/%.$(EXT)
 clean:
 	$(RM) tests/*.o src/*.o $(OBJ) $(OBJ_TEST) $(OUTPUTFOLDER)
 
-.PHONY: clean test
+clear:
+	$(RM) tests/*.o src/*.o $(OBJ) $(OBJ_TEST)
+	cd $(OUTPUTFOLDER) && $(RM) `ls | grep -v "data"`
+	cd $(OUTPUTFOLDER)/data && $(RM) `ls | grep -v "keys\|contact"`
+
+
+.PHONY: clean clear test
