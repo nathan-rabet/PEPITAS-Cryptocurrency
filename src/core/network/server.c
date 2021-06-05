@@ -26,10 +26,18 @@ void *accept_connection(void *args)
         SERVERMSG
         printf("Accept connection: '%s'\n", ip_str);
     }
+    else
+    {
+        close(server_connection->clientfd);
+        server_connection->clientfd = 0;
+
+        pthread_exit(NULL);
+    }
+    
 
     // CONNECTION BACK
     Node *node = get_my_node(IM_SERVER);
-    if (is_in_neighbours(IM_SERVER, ip_str) == -1) {
+    if (is_in_neighbours(IM_CLIENT, ip_str) == -1) {
         int index = set_neighbour(IM_SERVER, ip_str, AF_INET);
         SERVERMSG
         printf("Connection back\n");
