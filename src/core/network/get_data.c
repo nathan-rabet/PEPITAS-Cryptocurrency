@@ -460,29 +460,7 @@ int read_epoch_block(int fd, infos_st *infos)
     {
         infos->is_validator++;
 
-        // SEND REQUEST DD_SEND_EPOCH
-        for (size_t i = 0; i < MAX_CONNECTION; i++)
-        {
-            if (client_connections[i].clientfd)
-            {
-                while (client_connections[i].demand)
-                    ;
-                client_connections[i].demand = DD_SEND_EPOCH;
-                client_connections[i].Payload = (void *)epoch;
-                sem_post(&client_connections[i].lock);
-            }
-        }
-
-        // WAIT
-        for (size_t i = 0; i < MAX_CONNECTION; i++)
-        {
-            if (client_connections[i].clientfd)
-            {
-                while (client_connections[i].demand)
-                    ;
-                free(client_connections[i].Payload);
-            }
-        }
+        Validate();
 
         MANAGERMSG
         printf("Create new epoch!\n");
@@ -553,12 +531,22 @@ int read_send_pending_transaction(int fd, infos_st* infos)
     {
         WARNINGMSG("Failed to read all the block!")
     }
+
     close(transfile);
     SERVERMSG
     printf("Recived read_pending_transaction %lu \
     transaction in connection fd: %i\n",
            txid, fd);
     infos->pdt++;
+
+        // CREATE NEW EPOCH
+    if (infos->is_validator == 1 && infos->pdt > 0)
+    {
+        infos->is_validator++;
+
+        Validate();
+    }
+
     return txid;
 }
 
