@@ -241,6 +241,7 @@ int read_send_block(int fd)
         printf("The block %lu is valid!\n", block_height);
         snprintf(temp, 256, "data/blockchain/block%lu", block_height);
         int ret = rename(dir, temp);
+        update_wallet_with_block(*block);
 
         if (ret == 0)
         {
