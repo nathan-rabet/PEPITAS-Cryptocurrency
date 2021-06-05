@@ -77,7 +77,7 @@ void Validate(){
         MANAGERMSG
         printf("Block %lu is added in the blockchain!\n", epoch->block_data.height);
     }
-
+    ac_infos->pdt -= epoch->block_data.nb_transactions;
     free_block(epoch);
 }
 

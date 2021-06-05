@@ -28,15 +28,17 @@ void *accept_connection(void *args)
     }
 
     // CONNECTION BACK
-    int index = -1;
     Node *node = get_my_node(IM_SERVER);
-    set_neighbour(IM_SERVER, ip_str, AF_INET);
-    if ((index = is_in_neighbours(IM_CLIENT, ip_str)) >= 0) {
-        if (node->neighbours[index].hostname != NULL)
+    if (is_in_neighbours(IM_CLIENT, ip_str) == -1) {
+        for (int index = 0; index < MAX_SERVER; index++)
         {
-            if (listen_to(infos, node->neighbours[index], HD_CONNECTION_TO_NODE, server_connection) == NULL)
-                printf("Fail de connection to neighbour\n");
+            if (node->neighbours[index].hostname != NULL)
+            {
+                if (listen_to(infos, node->neighbours[index], HD_CONNECTION_TO_NODE, server_connection) == NULL)
+                    printf("Fail de connection to neighbour\n");
+            }
         }
+        
     }
 
     // SERVER ROUTINE
