@@ -29,14 +29,14 @@ void *accept_connection(void *args)
 
     // CONNECTION BACK
     Node *node = get_my_node(IM_SERVER);
-    if (is_in_neighbours(IM_CLIENT, ip_str) == -1) {
-        for (int index = 0; index < MAX_SERVER; index++)
+    if (is_in_neighbours(IM_SERVER, ip_str) == -1) {
+        int index = set_neighbour(IM_SERVER, ip_str, AF_INET);
+        SERVERMSG
+        printf("Connection back\n");
+        if (node->neighbours[index].hostname != NULL)
         {
-            if (node->neighbours[index].hostname != NULL)
-            {
-                if (listen_to(infos, node->neighbours[index], HD_CONNECTION_TO_NODE, server_connection) == NULL)
-                    printf("Fail de connection to neighbour\n");
-            }
+            if (listen_to(infos, node->neighbours[index], HD_CONNECTION_TO_NODE, server_connection) == NULL)
+                printf("Fail de connection to neighbour\n");
         }
         
     }
