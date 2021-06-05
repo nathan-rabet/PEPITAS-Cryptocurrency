@@ -77,7 +77,7 @@ clean:
 clear:
 	$(RM) tests/*.o src/*.o $(OBJ) $(OBJ_TEST)
 	cd $(OUTPUTFOLDER) && $(RM) `ls | grep -v "data"`
-	cd $(OUTPUTFOLDER)/data && $(RM) `ls | grep -v "keys\|contact"`
+	cd $(OUTPUTFOLDER)/data && $(RM) `ls | grep -v "keys\|contact\|ui"`
 
 
 .PHONY: clean clear test
