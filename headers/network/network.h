@@ -54,7 +54,7 @@ typedef struct connection
 
 typedef struct infos_st
 {
-    char is_sychronize;
+    char as_epoch;
     char is_validator;
     int validator_id;
     size_t actual_height;

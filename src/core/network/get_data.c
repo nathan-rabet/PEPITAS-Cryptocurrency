@@ -455,10 +455,9 @@ int epoch_validation_process(int blockfile, size_t height, int id) {
         }
 
         // CREATE NEW EPOCH
-        if (infos->is_validator == 1 && infos->pdt > 0)
+        if (infos->is_validator == 1 && !infos->as_epoch && infos->pdt > 0)
         {
-            infos->is_validator++;
-
+            infos->as_epoch = 1;
             Validate();
 
             MANAGERMSG

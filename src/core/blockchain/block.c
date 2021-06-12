@@ -277,13 +277,16 @@ void update_wallet_with_block(Block block) {
         }
 
     }
+    infos_st *infos = get_infos();
     if (wallet->stake_amount > 50000000)
     {
-        get_infos()->is_validator = 1;
+        infos->is_validator = 1;
+        infos->as_epoch = 0;
     }
     else
     {
-        get_infos()->is_validator = 0;
+        infos->is_validator = 0;
+        infos->as_epoch = 0;
     }
 }
 
