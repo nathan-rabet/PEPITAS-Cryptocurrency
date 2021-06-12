@@ -36,7 +36,7 @@ void give_punishments_and_rewards(Block *last_block, Block *current_block)
     {
         validation_yes += read_single_bit((unsigned char *)last_block->validators_votes, i);
     }
-    current_block->block_data.is_prev_block_valid = (last_block->block_data.nb_validators - validation_yes < validation_yes) ? 1 : 0;
+    current_block->block_data.is_prev_block_valid = (last_block->block_data.nb_validators - validation_yes <= validation_yes) ? 1 : 0;
 
     // TEST LAST VALIDATORS VOTE 'REWARD/PUNISHMENT'
     for (int i = 0; i < last_block->block_data.nb_validators-1; i++)
@@ -140,7 +140,21 @@ void add_pdt_to_block(Block *block){
 
 Block *create_epoch_block()
 {
-    Block *last_block = get_block(get_infos()->actual_height);
+    Block *last_block;
+    if (get_infos()->is_validator == 1)
+    {
+        last_block = get_block(get_infos()->actual_height);
+    }
+    else
+    {
+        last_block = get_epoch(0, get_infos()->actual_height+1);
+    }
+    if (last_block == NULL)
+    {
+        return NULL;
+    }
+    
+    
     Block *new_block = calloc(1, sizeof(Block));
 
     // VERIF IF IN NEXT COMITTEE

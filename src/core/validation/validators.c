@@ -46,7 +46,12 @@ void init_validators_state()
 RSA **get_comittee(size_t block_height, int *nb_validators)
 {
     // Get "random" value
-    Block *working_block = get_block(block_height); // [5] because filename is "blockXXX"
+    Block *working_block;
+    if (get_infos()->actual_height == block_height)
+        working_block = get_block(block_height); // [5] because filename is "blockXXX"
+    else
+        working_block = get_epoch(0, block_height);
+    
     char *sha = hash_block_transactions(working_block);
     free_block(working_block);
 
@@ -290,7 +295,7 @@ int i_am_commitee_member()
 
 ssize_t _create_validator_item(FILE *validators_states, struct validators_state_header *updated_validators_state_header, Transaction *transaction, bool is_key_on_sender)
 {
-    ssize_t validator_id;
+    ssize_t validator_id = -1;
     if (is_key_on_sender)
         validator_id = get_validator_id(transaction->transaction_data.sender_public_key);
     else

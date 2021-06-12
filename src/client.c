@@ -122,5 +122,17 @@ int main()
         printf("Pending transactions list syncronized!\n");
 
     }
+    infos->validator_id = i_am_commitee_member();
+    if (infos->validator_id < 0) {
+
+        MANAGERMSG
+        printf("You are not in the next comitte.\n");
+    }
+    else
+    {
+        MANAGERMSG
+        printf("You are in the next comitte.\n");
+    }
+    
     pthread_exit(NULL);
 }

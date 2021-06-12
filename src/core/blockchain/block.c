@@ -79,7 +79,7 @@ void convert_data_to_blockdata(BlockData *blockdata, int fd)
     read(fd, &blockdata->nb_validators, sizeof(int));
 
     //Load validators
-    for (int i = 0; i < blockdata->nb_validators; i++)
+    for (int i = 0; i < blockdata->nb_validators && i < MAX_VALIDATORS_PER_BLOCK; i++)
     {
         int RSAsize;
         read(fd, &RSAsize, sizeof(int));

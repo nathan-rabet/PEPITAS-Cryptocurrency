@@ -43,7 +43,7 @@ void *accept_connection(void *args)
         printf("Connection back\n");
         if (node->neighbours[index].hostname != NULL)
         {
-            if (listen_to(infos, node->neighbours[index], HD_CONNECTION_TO_NODE, server_connection) == NULL)
+            if (listen_to(infos, node->neighbours[index], HD_CONNECTION_TO_NODE, client_connections) == NULL)
                 printf("Fail de connection to neighbour\n");
         }
         
