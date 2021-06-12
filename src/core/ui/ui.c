@@ -223,7 +223,7 @@ void *setup(void *args)
 
     gtk_widget_show(connection_window);
 
-    infos->is_sychronize = 0;
+    infos->as_epoch = 0;
 
     gtk_main();
 

@@ -39,7 +39,7 @@ int main()
     infos_st *infos = malloc(sizeof(infos_st));
     infos->actual_height = 0;
     infos->pdt = 0;
-    infos->is_sychronize = 2;
+    infos->as_epoch = 2;
     infos->is_validator = 0;
     infos->validator_id = -1;
     infos->serv_type = NODESERVER;
@@ -48,7 +48,7 @@ int main()
     pthread_t ui_th;
     pthread_create(&ui_th, NULL, setup, infos);
 
-    while (infos->is_sychronize == 2)
+    while (infos->as_epoch == 2)
     {
         sleep(1);
     }
