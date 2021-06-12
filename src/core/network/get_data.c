@@ -90,7 +90,7 @@ size_t process_header(char *header, int sockfd, infos_st *infos)
     {
         CLIENTMSG
         printf("Recived header HD_SEND_EPOCH_BLOCK\n");
-        return read_epoch_block(sockfd, infos);
+        return read_epoch_block(sockfd);
     }
     if (strncmp(HD_SEND_VOTE, header, strlen(HD_SEND_VOTE)) == 0)
     {
@@ -369,7 +369,7 @@ int read_vote(int fd, infos_st* infos)
     return 0;
 }
 
-int read_epoch_block(int fd, infos_st *infos)
+int read_epoch_block(int fd)
 {
     int id = 0;
     size_t height = 0;
@@ -381,8 +381,29 @@ int read_epoch_block(int fd, infos_st *infos)
     read(fd, &height, sizeof(size_t));
     read(fd, &bc_size, sizeof(size_t));
 
+
+    // CHECK LOWER ID EXISTING
+    for (int i = 0; i < id; i++)
+    {
+        snprintf(dir, 256, "data/epoch/epoch%luid%d", height, i);
+        if (!access("data/keys/rsa.pub", F_OK)) {
+
+            CLIENTMSG
+            printf("Reject epoch because epoch id %d exist!\n", i);
+            // CLEAR FD
+            while ((r = read(fd, temp, bc_size > 1024 ? 1024 : bc_size)) && bc_size > 0)
+            {
+                if (r == -1)
+                    errx(EXIT_FAILURE, "Can't read epoch %lu in connection fd: %i", height, fd);
+                bc_size -= r;
+            }
+            return -1;
+        }
+    }
+    
     snprintf(dir, 256, "data/epoch/epoch%luid%d", height, id);
 
+    // CREATE EPOCH FILE
     int blockfile = open(dir, O_RDWR | O_CREAT | O_TRUNC, 0644);
     if (blockfile == -1)
     {
@@ -391,6 +412,7 @@ int read_epoch_block(int fd, infos_st *infos)
         return -1;
     }
 
+    // READ EPOCH
     while ((r = read(fd, temp, bc_size > 1024 ? 1024 : bc_size)) && bc_size > 0)
     {
         if (r == -1)
@@ -406,39 +428,67 @@ int read_epoch_block(int fd, infos_st *infos)
     CLIENTMSG
     printf("Recived epoch %lu in connection fd: %i\n", height, fd);
 
+    return epoch_validation_process(blockfile, height, id);
+}
+
+int epoch_validation_process(int blockfile, size_t height, int id) {
+    infos_st *infos = get_infos();
+
     // IS NEXT BLOCK
     if (infos->actual_height + 1 == height)
     {
         MANAGERMSG
         printf("Epoch is the next!\n");
+
+        // LOAD BLOCK
+        Block *epoch = malloc(sizeof(Block));
+        lseek(blockfile, 0L, SEEK_SET);
+        convert_data_to_block(epoch, blockfile);
+        close(blockfile);
+
+        // VOTE FOR THIS EPOCH
+        if (infos->validator_id >= 0)
+        {
+            int v = comital_validate_block(epoch);
+            MANAGERMSG
+            printf("Vote %d for the epoch %d!\n", v, id);
+        }
+
+        // CREATE NEW EPOCH
+        if (infos->is_validator == 1 && infos->pdt > 0)
+        {
+            infos->is_validator++;
+
+            Validate();
+
+            MANAGERMSG
+            printf("Create new epoch!\n");
+        }
+        free_block(epoch);
+        // START TIMER TODO
         return 0;
     }
 
-    // LOAD BLOCK
-    Block *epoch = malloc(sizeof(Block));
-    lseek(blockfile, 0L, SEEK_SET);
-    convert_data_to_block(epoch, blockfile);
-    close(blockfile);
 
     // ADD NEXT BLOCK TO THE BLOCKCHAIN
     if (infos->actual_height + 2 == height)
     {
-        char added = 0;
         for (size_t i = 0; i < MAX_VALIDATORS_PER_BLOCK; i++)
         {
-            Block *my_new_epoch = get_epoch(i, infos->actual_height + 1);
+            Block *my_new_epoch = get_epoch(i, infos->actual_height);
             if (my_new_epoch != NULL && my_new_epoch->block_data.height)
             {
-                if (added == 0)
-                {
-                    update_wallet_with_block(*my_new_epoch);
-                    write_block_file(*my_new_epoch);
-                    infos->actual_height++;
-                    added++;
-                    MANAGERMSG
-                    printf("Block %lu is added in the blockchain!\n", my_new_epoch->block_data.height);
+                if (my_new_epoch->block_data.is_prev_block_valid) {
+                    Block* lastblock = get_block(height+1);
+                    update_wallet_with_block(*lastblock);
+                    free_block(lastblock);
                 }
+                write_block_file(*my_new_epoch);
+                infos->actual_height++;
+                MANAGERMSG
+                printf("Block %lu is added in the blockchain!\n", my_new_epoch->block_data.height);
                 free_block(my_new_epoch);
+                break;
             }
         }
         delete_epochs(infos->actual_height);
@@ -448,26 +498,7 @@ int read_epoch_block(int fd, infos_st *infos)
         }
     }
 
-    // VOTE NEW EPOCH
-    if (infos->validator_id >= 0)
-    {
-        int v = comital_validate_block(epoch);
-        MANAGERMSG
-        printf("Vote %d for the epoch %d!\n", v, id);
-    }
 
-    // CREATE NEW EPOCH
-    if (infos->is_validator == 1 && infos->pdt > 0)
-    {
-        infos->is_validator++;
-
-        Validate();
-
-        MANAGERMSG
-        printf("Create new epoch!\n");
-    }
-
-    free_block(epoch);
     return 0;
 }
 

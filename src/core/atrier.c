@@ -40,7 +40,6 @@ void Validate(){
     if (fd == -1)
         err(errno, "Impossible to write epoch");
     write_block(*epoch, fd);
-    close(fd);
 
     // SEND REQUEST DD_SEND_EPOCH
     for (size_t i = 0; i < MAX_CONNECTION; i++)
@@ -68,17 +67,25 @@ void Validate(){
     MANAGERMSG
     printf("Create new epoch!\n");
 
-    // IF SOLO
-    if (epoch->block_data.nb_validators <= 1)
-    {        
-        update_wallet_with_block(*epoch);
-        write_block_file(*epoch);
-        ac_infos->actual_height++;
-        MANAGERMSG
-        printf("Block %lu is added in the blockchain!\n", epoch->block_data.height);
-    }
+    // IF SOLO LAUCH TIMER TODO
+
+    // if (epoch->block_data.nb_validators <= 1)
+    // {
+    //     epoch_validation_process(fd, epoch->block_data.height, epoch->block_data.epoch_id);
+    //     // IS NEXT BLOCK
+    //     if (ac_infos->actual_height + 1 == epoch->block_data.height)
+    //     {
+    //         ac_infos->is_validator++;
+    //     }
+    //     // update_wallet_with_block(*epoch);
+    //     // write_block_file(*epoch);
+    //     // ac_infos->actual_height++;
+    //     // MANAGERMSG
+    //     // printf("Block %lu is added in the blockchain!\n", epoch->block_data.height);
+    // }
     ac_infos->pdt -= epoch->block_data.nb_transactions;
     free_block(epoch);
+    close(fd);
 }
 
 void new_transaction(char type, char *rc_pk, size_t amount, char cause[512], char asset[512]){
@@ -204,7 +211,7 @@ size_t update_blockchain_height(infos_st *infos)
             free(client_connections[i].Payload);
         }
     }
-    update_sync(infos->actual_height, max_h_i);
+    update_sync(infos->actual_height+1, max_h_i);
     return max_h_i;
 }
 

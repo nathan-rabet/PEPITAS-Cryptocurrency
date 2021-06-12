@@ -241,7 +241,7 @@ char plebe_verify_block(Block *block)
 
 int comital_validate_block(Block *block)
 {
-    Block *prev_block = get_prev_block(block);
+    Block *prev_block = get_block(block->block_data.height - 1);
     // TODO : TEST ALL BLOCK DATA VARIABLES (EXCEPT MAGIC)
     // ? prev_block->block_data.height
     if (prev_block->block_data.height != block->block_data.height - 1)
@@ -252,8 +252,9 @@ int comital_validate_block(Block *block)
         return send_verdict(block, VERIDCT_NO);
 
     // ? block->block_data.previous_block_hash
-    __attribute__ ((unused)) size_t prev_block_data_size;
-    char *prev_block_hash = sha384_data(get_blockdata_data(prev_block, &prev_block_data_size), prev_block_data_size);
+    size_t prev_block_data_size;
+    char *data = get_blockdata_data(prev_block, &prev_block_data_size);
+    char *prev_block_hash = sha384_data(data, prev_block_data_size);
     if (strncmp(prev_block_hash, block->block_data.previous_block_hash, SHA384_DIGEST_LENGTH * 2 + 1))
         return send_verdict(block, VERIDCT_NO);
 
