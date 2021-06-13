@@ -235,6 +235,7 @@ void write_block(Block block, int fd)
 
 void update_wallet_with_block(Block block) {
     Wallet *wallet = get_my_wallet();
+    char dir[300];
     for (size_t i = 0; i < block.block_data.nb_transactions; i++)
     {
         Transaction *trans = block.block_data.transactions[i];
@@ -275,7 +276,13 @@ void update_wallet_with_block(Block block) {
         default:
             break;
         }
-
+        snprintf(dir, 300, "data/pdt/%ld", trans->transaction_data.transaction_timestamp);
+        if (!access(dir, F_OK))
+        {
+            get_infos()->pdt--;
+            remove(dir);
+        }
+        
     }
     infos_st *infos = get_infos();
     if (wallet->stake_amount > 50000000)

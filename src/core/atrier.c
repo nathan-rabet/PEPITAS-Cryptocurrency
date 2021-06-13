@@ -56,6 +56,11 @@ void Validate(){
     if (ac_infos->is_validator == 0 || ac_infos->as_epoch == 1)
         return;
     Block *epoch = create_epoch_block();
+    if (!epoch)
+    {
+        return;
+    }
+    
     if (plebe_verify_block(epoch)) {
 
         CLIENTMSG
@@ -306,6 +311,8 @@ void clear_transactions()
         }
         closedir(d);
     }
+
+    ac_infos->pdt = 0;
 }
 
 void clear_epochs()
