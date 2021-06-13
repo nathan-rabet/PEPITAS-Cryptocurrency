@@ -222,18 +222,21 @@ void join_network_door(infos_st *infos){
 void connection_to_others(infos_st *infos){
     Node *node = get_my_node(IM_CLIENT);
     int nb_connection = number_neighbours(IM_CLIENT);
+    int nb_connection_success = 0;
     for (size_t i = 0; i < MAX_NEIGHBOURS && nb_connection < MAX_CONNECTION; i++)
     {
         if (node->neighbours[i].hostname != NULL)
         {
             if (listen_to(infos, node->neighbours[i], HD_CONNECTION_TO_NODE, client_connections) == NULL)
                 printf("Connection to neighbour failed\n");     
+            else
+                nb_connection_success++;
         }
     }
     MANAGERMSG
-    printf("Connected to %i clients! \n", nb_connection);
+    printf("Connected to %i clients! \n", nb_connection_success);
     char tmp[5];
-    snprintf(tmp, 5, "%i", nb_connection);
+    snprintf(tmp, 5, "%i", nb_connection_success);
     change_label_text(connections_label, tmp);
 }
 
