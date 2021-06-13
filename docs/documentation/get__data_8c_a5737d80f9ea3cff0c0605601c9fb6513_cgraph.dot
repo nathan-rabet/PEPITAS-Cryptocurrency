@@ -1,0 +1,18 @@
+digraph "read_vote"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="read_vote",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="get_epoch",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$block_8h.html#ae323b374e9ca8c490d4f0b8ff04df0ba",tooltip=" "];
+  Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="convert_data_to_block",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$block_8c.html#ada1355f8610cc450d7c8f662dc6a7aef",tooltip=" "];
+  Node3 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="convert_data_to_blockdata",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$block_8c.html#afcda50ce8deb3b381aeb5b88689f919f",tooltip=" "];
+  Node4 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="load_transaction",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$transaction_8h.html#a4f4e33641ff7466e848182ce420827b6",tooltip=" "];
+  Node5 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="convert_data_to_transactiondata",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$transaction_8c.html#a8649ee7d98b5b34c64efa31e274f2534",tooltip=" "];
+}

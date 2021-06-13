@@ -9,5 +9,5 @@ var signature_8c =
     [ "sign_transaction_with_key", "signature_8c.html#ad7757263f776dc00aaaae307629b53d9", null ],
     [ "verify_block_signature", "signature_8c.html#a197fbff013d305c63a9699922eb438f6", null ],
     [ "verify_signature", "signature_8c.html#abb24ef32c40711494e34d7639e64f8a3", null ],
-    [ "verify_transaction_signature", "signature_8c.html#ae45689cf209de84d0132284229d32824", null ]
+    [ "verify_transaction_signature", "signature_8c.html#a1f30e39552bd587069303929aecbb155", null ]
 ];

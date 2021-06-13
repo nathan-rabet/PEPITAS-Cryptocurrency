@@ -1,0 +1,41 @@
+digraph "validate_transactions"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="validate_transactions",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Validate some transactions."];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="load_blockchain",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$block_8h.html#a7acee00b67ed21663a5b05242acc822d",tooltip="Loads a blockchain object with a padding of 'nb_chunk'."];
+  Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="free_block",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$block_8c.html#a3eb417f7cce88e8ec69d6974cd25e49f",tooltip="Free a block struct."];
+  Node3 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="clear_block",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$block_8c.html#a3beaf10afd57aec50225774ba2a21680",tooltip=" "];
+  Node2 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="get_block",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$block_8c.html#a32140266e4b385f64860944a5edd0153",tooltip="Get a block object."];
+  Node5 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="convert_data_to_block",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$block_8c.html#ada1355f8610cc450d7c8f662dc6a7aef",tooltip=" "];
+  Node6 -> Node7 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="convert_data_to_blockdata",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$block_8c.html#afcda50ce8deb3b381aeb5b88689f919f",tooltip=" "];
+  Node7 -> Node8 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="load_transaction",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$transaction_8h.html#a4f4e33641ff7466e848182ce420827b6",tooltip=" "];
+  Node8 -> Node9 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 [label="convert_data_to_transactiondata",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$transaction_8c.html#a8649ee7d98b5b34c64efa31e274f2534",tooltip=" "];
+  Node2 -> Node10 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node10 [label="load_last_blockchain",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$block_8c.html#a4ece7b96ab33761bf1d33f1e8b766ceb",tooltip="Load the last local blockchain chunk."];
+  Node10 -> Node11 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node11 [label="get_infos",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$client_8h.html#a480459f3451fa57a66df548ca0b408e3",tooltip=" "];
+  Node10 -> Node12 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node12 [label="load_blockchain",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$block_8c.html#a7acee00b67ed21663a5b05242acc822d",tooltip="Loads a blockchain object with a padding of 'nb_chunk'."];
+  Node12 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node12 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node12 -> Node10 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node13 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node13 [label="verify_transaction\l_signature",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$signature_8h.html#a1f30e39552bd587069303929aecbb155",tooltip="Verifies if a transaction signature is valid."];
+  Node13 -> Node14 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node14 [label="get_transaction_data",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$transaction_8h.html#a16588449d977a2d5052be7b3639768a8",tooltip=" "];
+  Node13 -> Node15 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node15 [label="verify_signature",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$signature_8c.html#abb24ef32c40711494e34d7639e64f8a3",tooltip="Verifies if SHA384(data) == decrypt(signature,pub_key)"];
+  Node15 -> Node16 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node16 [label="sha384_data",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$hash_8h.html#a67d06acefe39c395887f87d76bed5ba3",tooltip="Apply the SHA384 algorithm on a 'data' of size 'len_data'."];
+}

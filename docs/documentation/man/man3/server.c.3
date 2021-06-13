@@ -1,35 +1,56 @@
-.TH "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/src/server.c" 3 "Sun Jun 13 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
+.TH "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/src/core/network/server.c" 3 "Sun Jun 13 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
-/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/src/server.c
+/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/src/core/network/server.c
 .SH SYNOPSIS
 .br
 .PP
 \fC#include 'network/server\&.h'\fP
-.br
-\fC#include 'network/client\&.h'\fP
-.br
-\fC#include 'cryptosystem/signature\&.h'\fP
-.br
-\fC#include 'blockchain/block\&.h'\fP
-.br
-\fC#include <time\&.h>\fP
 .br
 
 .SS "Functions"
 
 .in +1c
 .ti -1c
-.RI "int \fBmain\fP ()"
+.RI "void * \fBaccept_connection\fP (void *args)"
 .br
+.ti -1c
+.RI "void * \fBredirect_connection\fP (void *arg)"
+.br
+.ti -1c
+.RI "void * \fBinit_server\fP (void *args)"
+.br
+.RI "Launches a server instance, connected to the peer-to-peer network 'hostname'\&. "
 .in -1c
 .SH "Function Documentation"
 .PP 
-.SS "int main ()"
+.SS "void* accept_connection (void * args)"
 
 .PP
-Definition at line 7 of file server\&.c\&.
+Definition at line 3 of file server\&.c\&.
+.SS "void* init_server (void * args)"
+
+.PP
+Launches a server instance, connected to the peer-to-peer network 'hostname'\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fItype\fP Type of the server 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+0 if success, -1 otherwise 
+.RE
+.PP
+
+.PP
+Definition at line 106 of file server\&.c\&.
+.SS "void* redirect_connection (void * arg)"
+
+.PP
+Definition at line 72 of file server\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for PEPITAS CRYPTOCURRENCY from the source code\&.

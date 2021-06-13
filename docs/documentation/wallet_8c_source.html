@@ -91,41 +91,87 @@ $(document).ready(function(){initNavTree('wallet_8c_source.html',''); initResiza
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="wallet_8h.html">blockchain/wallet.h</a>&quot;</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="rsa_8h.html">cryptosystem/rsa.h</a>&quot;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="transaction_8h.html">blockchain/transaction.h</a>&quot;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno"><a class="line" href="wallet_8c.html#a993fb7ec0c86c7a2d8ff68363e9f5304">    7</a></span>&#160;<a class="code" href="struct_wallet.html">Wallet</a>* <a class="code" href="wallet_8c.html#a993fb7ec0c86c7a2d8ff68363e9f5304">get_my_wallet</a>() {</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    <span class="keyword">static</span> <a class="code" href="struct_wallet.html">Wallet</a>* my_account = NULL;</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <span class="keywordflow">if</span> (my_account == NULL)</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    {</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;        my_account = calloc(1, <span class="keyword">sizeof</span>(<a class="code" href="struct_wallet.html">Wallet</a>));</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    }</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keywordflow">return</span> my_account;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;}</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="wallet_8c.html#a26c6f56037df4dbfb58855db1633a7df">   19</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="wallet_8c.html#a26c6f56037df4dbfb58855db1633a7df">create_account</a>() {</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <a class="code" href="rsa_8h.html#a43ef74c79e95360f43f9f9bd32b33b1d">get_keys</a>(NULL);</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <a class="code" href="struct_transaction.html">Transaction</a> create_account_transaction <a class="code" href="network_8h.html#a3d8810ff759f090d31d612cc51cf9158">__attribute__</a>((unused)) = {0};</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    create_account_transaction.transaction_data.receiver_public_key = RSAPublicKey_dup(<a class="code" href="wallet_8c.html#a993fb7ec0c86c7a2d8ff68363e9f5304">get_my_wallet</a>()-&gt;pub_key);</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    create_account_transaction.transaction_data.transaction_timestamp = time(NULL);</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;}</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno"><a class="line" href="wallet_8c.html#a993fb7ec0c86c7a2d8ff68363e9f5304">    6</a></span>&#160;<a class="code" href="struct_wallet.html">Wallet</a>* <a class="code" href="wallet_8c.html#a993fb7ec0c86c7a2d8ff68363e9f5304">get_my_wallet</a>() {</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    <span class="keyword">static</span> <a class="code" href="struct_wallet.html">Wallet</a>* my_account = NULL;</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    <span class="keywordflow">if</span> (my_account == NULL)</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    {</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;        my_account = calloc(1, <span class="keyword">sizeof</span>(<a class="code" href="struct_wallet.html">Wallet</a>));</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    }</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keywordflow">return</span> my_account;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;}</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="wallet_8c.html#a26c6f56037df4dbfb58855db1633a7df">   18</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="wallet_8c.html#a26c6f56037df4dbfb58855db1633a7df">create_account</a>() {</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <a class="code" href="rsa_8h.html#a43ef74c79e95360f43f9f9bd32b33b1d">get_keys</a>(NULL);</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;}</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="wallet_8c.html#a01cbce1c25723e73973e95339cf5da3b">   26</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="wallet_8c.html#a01cbce1c25723e73973e95339cf5da3b">add_money_to_wallet</a>(<span class="keywordtype">size_t</span> money){</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <a class="code" href="struct_wallet.html">Wallet</a>* w = <a class="code" href="wallet_8c.html#a993fb7ec0c86c7a2d8ff68363e9f5304">get_my_wallet</a>();</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    w-&gt;<a class="code" href="struct_wallet.html#a09041dfaf996bee7cc220f076325f2ec">amount</a> += money;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordtype">char</span> temp[40];</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    snprintf(temp, 40, <span class="stringliteral">&quot;%lu&quot;</span>, w-&gt;<a class="code" href="struct_wallet.html#a09041dfaf996bee7cc220f076325f2ec">amount</a>);</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <a class="code" href="labels_8h.html#ae4c608b5626430bac55322e32309bf8f">change_label_text</a>(<a class="code" href="labels_8h.html#ab43804688ba42c6200ce731eb35c5dc8">balance_1</a>, temp);</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <a class="code" href="labels_8h.html#ae4c608b5626430bac55322e32309bf8f">change_label_text</a>(<a class="code" href="labels_8h.html#a868e43b57c30e358fe58e0deb101f42a">balance_2</a>, temp);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;}</div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="wallet_8c.html#aedf9e7d88d87a507292e787a5c2721a5">   34</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="wallet_8c.html#aedf9e7d88d87a507292e787a5c2721a5">remove_money_from_wallet</a>(<span class="keywordtype">size_t</span> money){</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <a class="code" href="struct_wallet.html">Wallet</a>* w = <a class="code" href="wallet_8c.html#a993fb7ec0c86c7a2d8ff68363e9f5304">get_my_wallet</a>();</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordflow">if</span> (w-&gt;<a class="code" href="struct_wallet.html#a09041dfaf996bee7cc220f076325f2ec">amount</a> &lt; money)</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        w-&gt;<a class="code" href="struct_wallet.html#a09041dfaf996bee7cc220f076325f2ec">amount</a> = 0;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordflow">else</span> </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        w-&gt;<a class="code" href="struct_wallet.html#a09041dfaf996bee7cc220f076325f2ec">amount</a> -= money;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordtype">char</span> temp[40];</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    snprintf(temp, 40, <span class="stringliteral">&quot;%lu&quot;</span>, w-&gt;<a class="code" href="struct_wallet.html#a09041dfaf996bee7cc220f076325f2ec">amount</a>);</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <a class="code" href="labels_8h.html#ae4c608b5626430bac55322e32309bf8f">change_label_text</a>(<a class="code" href="labels_8h.html#ab43804688ba42c6200ce731eb35c5dc8">balance_1</a>, temp);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <a class="code" href="labels_8h.html#ae4c608b5626430bac55322e32309bf8f">change_label_text</a>(<a class="code" href="labels_8h.html#a868e43b57c30e358fe58e0deb101f42a">balance_2</a>, temp);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;}</div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="wallet_8c.html#ac3f2ce7f643200ea2cf509691237f60a">   45</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="wallet_8c.html#ac3f2ce7f643200ea2cf509691237f60a">add_money_to_stake</a>(<span class="keywordtype">size_t</span> money){</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <a class="code" href="struct_wallet.html">Wallet</a>* w = <a class="code" href="wallet_8c.html#a993fb7ec0c86c7a2d8ff68363e9f5304">get_my_wallet</a>();</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    w-&gt;<a class="code" href="struct_wallet.html#a9b06cd960f30d00225a5f0a1608c00c2">stake_amount</a> += money;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordtype">char</span> temp[40];</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    snprintf(temp, 40, <span class="stringliteral">&quot;%lu&quot;</span>, w-&gt;<a class="code" href="struct_wallet.html#a9b06cd960f30d00225a5f0a1608c00c2">stake_amount</a>);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <a class="code" href="labels_8h.html#ae4c608b5626430bac55322e32309bf8f">change_label_text</a>(<a class="code" href="labels_8h.html#a4722da076b88ed9d7695ae3d38945692">stake_label1</a>, temp);</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <a class="code" href="labels_8h.html#ae4c608b5626430bac55322e32309bf8f">change_label_text</a>(<a class="code" href="labels_8h.html#a16f98e00efbcc9f5356cd26ddde7cc53">stake_label2</a>, temp);</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <a class="code" href="labels_8h.html#ae4c608b5626430bac55322e32309bf8f">change_label_text</a>(<a class="code" href="labels_8h.html#ac7f6d61c5f9e17e359513909d01dbbd0">stake_label3</a>, temp);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;}</div>
+<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="wallet_8c.html#a6c1a2494ee88851fac4a7df37278f5de">   54</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="wallet_8c.html#a6c1a2494ee88851fac4a7df37278f5de">remove_money_from_stake</a>(<span class="keywordtype">size_t</span> money){</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <a class="code" href="struct_wallet.html">Wallet</a>* w = <a class="code" href="wallet_8c.html#a993fb7ec0c86c7a2d8ff68363e9f5304">get_my_wallet</a>();</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordflow">if</span> (w-&gt;<a class="code" href="struct_wallet.html#a9b06cd960f30d00225a5f0a1608c00c2">stake_amount</a> &lt; money)</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        w-&gt;<a class="code" href="struct_wallet.html#a9b06cd960f30d00225a5f0a1608c00c2">stake_amount</a> = 0;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordflow">else</span> </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        w-&gt;<a class="code" href="struct_wallet.html#a9b06cd960f30d00225a5f0a1608c00c2">stake_amount</a> -= money;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordtype">char</span> temp[40];</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    snprintf(temp, 40, <span class="stringliteral">&quot;%lu&quot;</span>, w-&gt;<a class="code" href="struct_wallet.html#a9b06cd960f30d00225a5f0a1608c00c2">stake_amount</a>);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <a class="code" href="labels_8h.html#ae4c608b5626430bac55322e32309bf8f">change_label_text</a>(<a class="code" href="labels_8h.html#a4722da076b88ed9d7695ae3d38945692">stake_label1</a>, temp);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <a class="code" href="labels_8h.html#ae4c608b5626430bac55322e32309bf8f">change_label_text</a>(<a class="code" href="labels_8h.html#a16f98e00efbcc9f5356cd26ddde7cc53">stake_label2</a>, temp);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <a class="code" href="labels_8h.html#ae4c608b5626430bac55322e32309bf8f">change_label_text</a>(<a class="code" href="labels_8h.html#ac7f6d61c5f9e17e359513909d01dbbd0">stake_label3</a>, temp);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
+<div class="ttc" id="awallet_8c_html_a6c1a2494ee88851fac4a7df37278f5de"><div class="ttname"><a href="wallet_8c.html#a6c1a2494ee88851fac4a7df37278f5de">remove_money_from_stake</a></div><div class="ttdeci">void remove_money_from_stake(size_t money)</div><div class="ttdef"><b>Definition:</b> <a href="wallet_8c_source.html#l00054">wallet.c:54</a></div></div>
 <div class="ttc" id="astruct_wallet_html"><div class="ttname"><a href="struct_wallet.html">Wallet</a></div><div class="ttdef"><b>Definition:</b> <a href="wallet_8h_source.html#l00010">wallet.h:10</a></div></div>
-<div class="ttc" id="atransaction_8h_html"><div class="ttname"><a href="transaction_8h.html">transaction.h</a></div></div>
+<div class="ttc" id="alabels_8h_html_a16f98e00efbcc9f5356cd26ddde7cc53"><div class="ttname"><a href="labels_8h.html#a16f98e00efbcc9f5356cd26ddde7cc53">stake_label2</a></div><div class="ttdeci">GtkLabel * stake_label2</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00027">ui.c:27</a></div></div>
 <div class="ttc" id="awallet_8h_html"><div class="ttname"><a href="wallet_8h.html">wallet.h</a></div></div>
+<div class="ttc" id="alabels_8h_html_ae4c608b5626430bac55322e32309bf8f"><div class="ttname"><a href="labels_8h.html#ae4c608b5626430bac55322e32309bf8f">change_label_text</a></div><div class="ttdeci">void change_label_text(GtkLabel *label, char *text)</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00233">ui.c:233</a></div></div>
+<div class="ttc" id="awallet_8c_html_ac3f2ce7f643200ea2cf509691237f60a"><div class="ttname"><a href="wallet_8c.html#ac3f2ce7f643200ea2cf509691237f60a">add_money_to_stake</a></div><div class="ttdeci">void add_money_to_stake(size_t money)</div><div class="ttdef"><b>Definition:</b> <a href="wallet_8c_source.html#l00045">wallet.c:45</a></div></div>
 <div class="ttc" id="arsa_8h_html_a43ef74c79e95360f43f9f9bd32b33b1d"><div class="ttname"><a href="rsa_8h.html#a43ef74c79e95360f43f9f9bd32b33b1d">get_keys</a></div><div class="ttdeci">void get_keys(char *password)</div><div class="ttdoc">Get the keys object.</div></div>
-<div class="ttc" id="awallet_8c_html_a993fb7ec0c86c7a2d8ff68363e9f5304"><div class="ttname"><a href="wallet_8c.html#a993fb7ec0c86c7a2d8ff68363e9f5304">get_my_wallet</a></div><div class="ttdeci">Wallet * get_my_wallet()</div><div class="ttdoc">Get my wallet object.</div><div class="ttdef"><b>Definition:</b> <a href="wallet_8c_source.html#l00007">wallet.c:7</a></div></div>
+<div class="ttc" id="alabels_8h_html_a4722da076b88ed9d7695ae3d38945692"><div class="ttname"><a href="labels_8h.html#a4722da076b88ed9d7695ae3d38945692">stake_label1</a></div><div class="ttdeci">GtkLabel * stake_label1</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00026">ui.c:26</a></div></div>
+<div class="ttc" id="astruct_wallet_html_a9b06cd960f30d00225a5f0a1608c00c2"><div class="ttname"><a href="struct_wallet.html#a9b06cd960f30d00225a5f0a1608c00c2">Wallet::stake_amount</a></div><div class="ttdeci">size_t stake_amount</div><div class="ttdef"><b>Definition:</b> <a href="wallet_8h_source.html#l00016">wallet.h:16</a></div></div>
+<div class="ttc" id="awallet_8c_html_a993fb7ec0c86c7a2d8ff68363e9f5304"><div class="ttname"><a href="wallet_8c.html#a993fb7ec0c86c7a2d8ff68363e9f5304">get_my_wallet</a></div><div class="ttdeci">Wallet * get_my_wallet()</div><div class="ttdoc">Get my wallet object.</div><div class="ttdef"><b>Definition:</b> <a href="wallet_8c_source.html#l00006">wallet.c:6</a></div></div>
 <div class="ttc" id="arsa_8h_html"><div class="ttname"><a href="rsa_8h.html">rsa.h</a></div></div>
-<div class="ttc" id="awallet_8c_html_a26c6f56037df4dbfb58855db1633a7df"><div class="ttname"><a href="wallet_8c.html#a26c6f56037df4dbfb58855db1633a7df">create_account</a></div><div class="ttdeci">int create_account()</div><div class="ttdoc">Creates an account in local and broadcasts the creation to the network.</div><div class="ttdef"><b>Definition:</b> <a href="wallet_8c_source.html#l00019">wallet.c:19</a></div></div>
-<div class="ttc" id="anetwork_8h_html_a3d8810ff759f090d31d612cc51cf9158"><div class="ttname"><a href="network_8h.html#a3d8810ff759f090d31d612cc51cf9158">__attribute__</a></div><div class="ttdeci">struct __attribute__((__packed__)) get_blocks_t</div><div class="ttdef"><b>Definition:</b> <a href="network_8h_source.html#l00094">network.h:94</a></div></div>
-<div class="ttc" id="astruct_transaction_html"><div class="ttname"><a href="struct_transaction.html">Transaction</a></div><div class="ttdef"><b>Definition:</b> <a href="transaction_8h_source.html#l00043">transaction.h:43</a></div></div>
+<div class="ttc" id="alabels_8h_html_ab43804688ba42c6200ce731eb35c5dc8"><div class="ttname"><a href="labels_8h.html#ab43804688ba42c6200ce731eb35c5dc8">balance_1</a></div><div class="ttdeci">GtkLabel * balance_1</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00024">ui.c:24</a></div></div>
+<div class="ttc" id="alabels_8h_html_a868e43b57c30e358fe58e0deb101f42a"><div class="ttname"><a href="labels_8h.html#a868e43b57c30e358fe58e0deb101f42a">balance_2</a></div><div class="ttdeci">GtkLabel * balance_2</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00025">ui.c:25</a></div></div>
+<div class="ttc" id="awallet_8c_html_a26c6f56037df4dbfb58855db1633a7df"><div class="ttname"><a href="wallet_8c.html#a26c6f56037df4dbfb58855db1633a7df">create_account</a></div><div class="ttdeci">int create_account()</div><div class="ttdoc">Creates an account in local and broadcasts the creation to the network.</div><div class="ttdef"><b>Definition:</b> <a href="wallet_8c_source.html#l00018">wallet.c:18</a></div></div>
+<div class="ttc" id="awallet_8c_html_aedf9e7d88d87a507292e787a5c2721a5"><div class="ttname"><a href="wallet_8c.html#aedf9e7d88d87a507292e787a5c2721a5">remove_money_from_wallet</a></div><div class="ttdeci">void remove_money_from_wallet(size_t money)</div><div class="ttdef"><b>Definition:</b> <a href="wallet_8c_source.html#l00034">wallet.c:34</a></div></div>
+<div class="ttc" id="alabels_8h_html_ac7f6d61c5f9e17e359513909d01dbbd0"><div class="ttname"><a href="labels_8h.html#ac7f6d61c5f9e17e359513909d01dbbd0">stake_label3</a></div><div class="ttdeci">GtkLabel * stake_label3</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00028">ui.c:28</a></div></div>
+<div class="ttc" id="astruct_wallet_html_a09041dfaf996bee7cc220f076325f2ec"><div class="ttname"><a href="struct_wallet.html#a09041dfaf996bee7cc220f076325f2ec">Wallet::amount</a></div><div class="ttdeci">size_t amount</div><div class="ttdef"><b>Definition:</b> <a href="wallet_8h_source.html#l00015">wallet.h:15</a></div></div>
+<div class="ttc" id="awallet_8c_html_a01cbce1c25723e73973e95339cf5da3b"><div class="ttname"><a href="wallet_8c.html#a01cbce1c25723e73973e95339cf5da3b">add_money_to_wallet</a></div><div class="ttdeci">void add_money_to_wallet(size_t money)</div><div class="ttdef"><b>Definition:</b> <a href="wallet_8c_source.html#l00026">wallet.c:26</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

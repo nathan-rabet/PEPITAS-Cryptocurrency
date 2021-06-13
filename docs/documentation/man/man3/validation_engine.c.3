@@ -6,6 +6,95 @@
 .SH SYNOPSIS
 .br
 .PP
+\fC#include 'validation/validation_engine\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBTransaction\fP ** \fBvalidate_transactions\fP (\fBTransaction\fP **transaction_to_validate, size_t nb_transactions, size_t *nb_returned_transactions)"
+.br
+.RI "Validate some transactions\&. "
+.ti -1c
+.RI "char \fBplebe_verify_block\fP (\fBBlock\fP *block)"
+.br
+.ti -1c
+.RI "int \fBcomital_validate_block\fP (\fBBlock\fP *block)"
+.br
+.ti -1c
+.RI "int \fBsend_verdict\fP (\fBBlock\fP *block, char verdict)"
+.br
+.RI "Broadcast a verdict about a block validity to the network\&. "
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "int comital_validate_block (\fBBlock\fP * block)"
+
+.PP
+Definition at line 242 of file validation_engine\&.c\&.
+.SS "char plebe_verify_block (\fBBlock\fP * block)"
+
+.PP
+Definition at line 199 of file validation_engine\&.c\&.
+.SS "int send_verdict (\fBBlock\fP * block, char verdict)"
+
+.PP
+Broadcast a verdict about a block validity to the network\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIblock\fP The block awaiting validation 
+.br
+\fIverdict\fP The verdict : 0 -> 'SHAME ! The block is not valid at all', 1 -> 'The block is valid for me' 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+0 if the broadcast suceed, -1 if not 
+.RE
+.PP
+
+.PP
+Definition at line 305 of file validation_engine\&.c\&.
+.SS "\fBTransaction\fP** validate_transactions (\fBTransaction\fP ** transaction_to_validate, size_t nb_transactions, size_t * nb_returned_transactions)"
+
+.PP
+Validate some transactions\&. 
+.PP
+\fBSee also\fP
+.RS 4
+The verification must take into account :
+.IP "\(bu" 2
+Sender != receiver
+.IP "\(bu" 2
+If the sender signature is correct
+.IP "\(bu" 2
+If the sender exists in the blockchain and has enough money
+.IP "\(bu" 2
+If the receiver exists
+.IP "\(bu" 2
+If sender and receiver remaining money fields are correct
+.PP
+.RE
+.PP
+\fBParameters\fP
+.RS 4
+\fItransaction_to_validate\fP The transactions to validate 
+.br
+\fInb_transactions\fP The number of transactions to validate 
+.br
+\fInb_returned_transactions\fP The number of returned (valid) transactions 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Transaction**, the valid transactions 
+.RE
+.PP
+
+.PP
+Definition at line 3 of file validation_engine\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for PEPITAS CRYPTOCURRENCY from the source code\&.

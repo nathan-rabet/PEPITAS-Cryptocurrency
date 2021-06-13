@@ -1,7 +1,10 @@
 var searchData=
 [
-  ['client_2ec_385',['client.c',['../client_8c.html',1,'(Global Namespace)'],['../core_2network_2client_8c.html',1,'(Global Namespace)']]],
-  ['client_2eh_386',['client.h',['../client_8h.html',1,'']]],
-  ['client_5ftest_2ec_387',['client_test.c',['../client__test_8c.html',1,'']]],
-  ['client_5ftest_2eh_388',['client_test.h',['../client__test_8h.html',1,'']]]
+  ['bits_2eh_455',['bits.h',['../bits_8h.html',1,'']]],
+  ['block_2ec_456',['block.c',['../block_8c.html',1,'']]],
+  ['block_2eh_457',['block.h',['../block_8h.html',1,'']]],
+  ['block_5ftest_2ec_458',['block_test.c',['../block__test_8c.html',1,'']]],
+  ['block_5ftest_2eh_459',['block_test.h',['../block__test_8h.html',1,'']]],
+  ['blockchain_5fheader_2ec_460',['blockchain_header.c',['../blockchain__header_8c.html',1,'']]],
+  ['blockchain_5fheader_2eh_461',['blockchain_header.h',['../blockchain__header_8h.html',1,'']]]
 ];

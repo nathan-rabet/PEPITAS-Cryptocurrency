@@ -6,9 +6,13 @@
 .SH SYNOPSIS
 .br
 .PP
+\fC#include 'network/network\&.h'\fP
+.br
 \fC#include 'blockchain/block\&.h'\fP
 .br
-\fC#include 'network/network\&.h'\fP
+\fC#include 'cryptosystem/rsa\&.h'\fP
+.br
+\fC#include 'validation/validators\&.h'\fP
 .br
 \fC#include <sys/stat\&.h>\fP
 .br
@@ -21,6 +25,9 @@
 .ti -1c
 .RI "void \fBgen_blockchain_header\fP (\fBinfos_st\fP *infos)"
 .br
+.ti -1c
+.RI "size_t \fBget_receiver_remaining_money\fP (\fBinfos_st\fP *infos, RSA *receiver_public_key)"
+.br
 .in -1c
 .SH "Function Documentation"
 .PP 
@@ -28,6 +35,10 @@
 
 .PP
 Definition at line 9 of file blockchain_header\&.c\&.
+.SS "size_t get_receiver_remaining_money (\fBinfos_st\fP * infos, RSA * receiver_public_key)"
+
+.PP
+Definition at line 40 of file blockchain_header\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for PEPITAS CRYPTOCURRENCY from the source code\&.

@@ -87,7 +87,7 @@ $(document).ready(function(){initNavTree('functions_vars.html',''); initResizabl
 
 <h3><a id="index_a"></a>- a -</h3><ul>
 <li>actual_client_height
-: <a class="el" href="structclient__connection.html#a6097580640c5221264615c155707c6bd">client_connection</a>
+: <a class="el" href="structconnection.html#a6097580640c5221264615c155707c6bd">connection</a>
 </li>
 <li>actual_height
 : <a class="el" href="structinfos__st.html#abecc2f44ff318c3b1e4fa2c7f3d5cbd8">infos_st</a>
@@ -96,8 +96,11 @@ $(document).ready(function(){initNavTree('functions_vars.html',''); initResizabl
 : <a class="el" href="struct_transaction_data.html#a09041dfaf996bee7cc220f076325f2ec">TransactionData</a>
 , <a class="el" href="struct_wallet.html#a09041dfaf996bee7cc220f076325f2ec">Wallet</a>
 </li>
+<li>as_epoch
+: <a class="el" href="structinfos__st.html#a0a02f636548ba9d62ff4f2c748ab72bf">infos_st</a>
+</li>
 <li>asset
-: <a class="el" href="struct_transaction_data.html#a1087ebb00091edb5a354038a6256b585">TransactionData</a>
+: <a class="el" href="struct_transaction_data.html#a389eb9159e102222cddc03b515bfc23e">TransactionData</a>
 </li>
 </ul>
 
@@ -105,6 +108,9 @@ $(document).ready(function(){initNavTree('functions_vars.html',''); initResizabl
 <h3><a id="index_b"></a>- b -</h3><ul>
 <li>block_data
 : <a class="el" href="struct_block.html#aa4ad7aceb75575844e2db05c93709bba">Block</a>
+</li>
+<li>block_height_validity
+: <a class="el" href="structvalidators__state__header.html#ae7febe2cb0f1630846d41a8547feebf5">validators_state_header</a>
 </li>
 <li>block_signature
 : <a class="el" href="struct_block.html#af74f4943494e179408bedd4841fadc1b">Block</a>
@@ -117,7 +123,7 @@ $(document).ready(function(){initNavTree('functions_vars.html',''); initResizabl
 
 <h3><a id="index_c"></a>- c -</h3><ul>
 <li>cause
-: <a class="el" href="struct_transaction_data.html#ae902306646dc85979fe69ee6c2640bf6">TransactionData</a>
+: <a class="el" href="struct_transaction_data.html#a3cd0c9c6141c243b3e1a3259fd4307c0">TransactionData</a>
 </li>
 <li>chunk
 : <a class="el" href="struct_chunk_blockchain.html#a0fdbff41c8cb3f882e0896cb4ae28379">ChunkBlockchain</a>
@@ -129,17 +135,17 @@ $(document).ready(function(){initNavTree('functions_vars.html',''); initResizabl
 : <a class="el" href="struct_chunk_blockchain.html#a4c44f3b50099ea307be40ce138490dcb">ChunkBlockchain</a>
 </li>
 <li>client_con
-: <a class="el" href="structth__arg.html#a68f54fbb73fd92cb3d1b081dc391c0d2">th_arg</a>
+: <a class="el" href="structth__arg.html#aeb3048bca09fc7c1174ca74d0e86100b">th_arg</a>
 </li>
 <li>clientfd
-: <a class="el" href="structclient__connection.html#acb1595ad65fb34f372e0f81f058c7405">client_connection</a>
+: <a class="el" href="structconnection.html#acb1595ad65fb34f372e0f81f058c7405">connection</a>
 </li>
 </ul>
 
 
 <h3><a id="index_d"></a>- d -</h3><ul>
 <li>demand
-: <a class="el" href="structclient__connection.html#a03bbf16021794da27dc482d7eb9fc0d1">client_connection</a>
+: <a class="el" href="structconnection.html#a03bbf16021794da27dc482d7eb9fc0d1">connection</a>
 </li>
 </ul>
 
@@ -180,14 +186,14 @@ $(document).ready(function(){initNavTree('functions_vars.html',''); initResizabl
 : <a class="el" href="structinfos__st.html#a3587e8ced0bb7858e27b8c7b9c5863b4">infos_st</a>
 </li>
 <li>is_validator
-: <a class="el" href="struct_wallet.html#a54dce2288a6b5f6866903d56a598317f">Wallet</a>
+: <a class="el" href="structinfos__st.html#a54dce2288a6b5f6866903d56a598317f">infos_st</a>
 </li>
 </ul>
 
 
 <h3><a id="index_l"></a>- l -</h3><ul>
 <li>lock
-: <a class="el" href="structclient__connection.html#ac301e000199ad937f060277b0736d4e1">client_connection</a>
+: <a class="el" href="structconnection.html#ac301e000199ad937f060277b0736d4e1">connection</a>
 </li>
 </ul>
 
@@ -209,6 +215,7 @@ $(document).ready(function(){initNavTree('functions_vars.html',''); initResizabl
 </li>
 <li>nb_validators
 : <a class="el" href="struct_block_data.html#a7e3cf87673d9cf2f1b5341ad61427fea">BlockData</a>
+, <a class="el" href="structvalidators__state__header.html#a4cc2cbf07a33d826c574e4cd59ec2cb8">validators_state_header</a>
 </li>
 <li>neighbours
 : <a class="el" href="struct_node.html#a64982c1c406035f198bfe705faf683b2">Node</a>
@@ -216,22 +223,18 @@ $(document).ready(function(){initNavTree('functions_vars.html',''); initResizabl
 </ul>
 
 
-<h3><a id="index_o"></a>- o -</h3><ul>
-<li>organisation_public_key
-: <a class="el" href="struct_transaction_data.html#a67d7c4e95988d712faf91b928f317fd9">TransactionData</a>
-</li>
-</ul>
-
-
 <h3><a id="index_p"></a>- p -</h3><ul>
 <li>Payload
-: <a class="el" href="structclient__connection.html#a63833b19705e4e89b0433c3286c06e46">client_connection</a>
+: <a class="el" href="structconnection.html#a63833b19705e4e89b0433c3286c06e46">connection</a>
 </li>
-<li>Playloadsize
-: <a class="el" href="structclient__connection.html#a06982c6d1ba88ab888b83f0d207c5880">client_connection</a>
+<li>Payloadsize
+: <a class="el" href="structconnection.html#ab753fbc382d4c7ca3735b77748f7754a">connection</a>
+</li>
+<li>pdt
+: <a class="el" href="structinfos__st.html#aabe6ec0dc4d706c241e2eb7771d132ea">infos_st</a>
 </li>
 <li>prev_validators_votes
-: <a class="el" href="struct_block_data.html#a6cfae1fadd5c4029135e08bef738496f">BlockData</a>
+: <a class="el" href="struct_block_data.html#a42525cc84cbc2e5833579b42b3c2b220">BlockData</a>
 </li>
 <li>previous_block_hash
 : <a class="el" href="struct_block_data.html#a0167d1bdc7d4e5d8d423188581cbb064">BlockData</a>
@@ -247,7 +250,7 @@ $(document).ready(function(){initNavTree('functions_vars.html',''); initResizabl
 
 <h3><a id="index_r"></a>- r -</h3><ul>
 <li>receiver_public_key
-: <a class="el" href="struct_transaction_data.html#af9a5ebb2d24125d125f035e74830121e">TransactionData</a>
+: <a class="el" href="struct_transaction_data.html#a25c2facc5ebc1897df78cf7dc070b007">TransactionData</a>
 </li>
 <li>receiver_remaining_money
 : <a class="el" href="struct_transaction_data.html#a510c12c3daa195d76aa4c2ac73b8b11f">TransactionData</a>
@@ -257,7 +260,7 @@ $(document).ready(function(){initNavTree('functions_vars.html',''); initResizabl
 
 <h3><a id="index_s"></a>- s -</h3><ul>
 <li>sender_public_key
-: <a class="el" href="struct_transaction_data.html#adab773a393f892dc7c1e31ff1ce733f8">TransactionData</a>
+: <a class="el" href="struct_transaction_data.html#a384ee248985e672c52946db057d05928">TransactionData</a>
 </li>
 <li>sender_remaining_money
 : <a class="el" href="struct_transaction_data.html#a1b1eb3251076e2d5f443c12a1a21757c">TransactionData</a>
@@ -265,18 +268,24 @@ $(document).ready(function(){initNavTree('functions_vars.html',''); initResizabl
 <li>serv_type
 : <a class="el" href="structinfos__st.html#a09e60e6614ae4cb4eb36529d7133bbd3">infos_st</a>
 </li>
+<li>stake_amount
+: <a class="el" href="struct_wallet.html#a9b06cd960f30d00225a5f0a1608c00c2">Wallet</a>
+</li>
 </ul>
 
 
 <h3><a id="index_t"></a>- t -</h3><ul>
 <li>thread
-: <a class="el" href="structclient__connection.html#a01f75a9ad916f63a94e06a27635ba278">client_connection</a>
+: <a class="el" href="structconnection.html#a01f75a9ad916f63a94e06a27635ba278">connection</a>
+</li>
+<li>total_stake
+: <a class="el" href="structvalidators__state__header.html#a7afc99e4040999c8b7887162be158437">validators_state_header</a>
 </li>
 <li>transaction_data
 : <a class="el" href="struct_transaction.html#a9146d56260acb20560c4f8d46c429e55">Transaction</a>
 </li>
 <li>transaction_signature
-: <a class="el" href="struct_transaction.html#a515827e0147e8f476f3a0ccbb122ada8">Transaction</a>
+: <a class="el" href="struct_transaction.html#a86020827f2942b4ee3e7dd12f8e08fb5">Transaction</a>
 </li>
 <li>transaction_timestamp
 : <a class="el" href="struct_transaction_data.html#a08f7318370233b1a2f1b7d6b5737abf6">TransactionData</a>
@@ -291,12 +300,28 @@ $(document).ready(function(){initNavTree('functions_vars.html',''); initResizabl
 </ul>
 
 
+<h3><a id="index_u"></a>- u -</h3><ul>
+<li>user_stake
+: <a class="el" href="structvalidators__state__item.html#a27cda28eb765a83f8b4dc136253aadbe">validators_state_item</a>
+</li>
+</ul>
+
+
 <h3><a id="index_v"></a>- v -</h3><ul>
+<li>validator_id
+: <a class="el" href="structinfos__st.html#a18bdac62518b6603f5d6653624ce7d2d">infos_st</a>
+</li>
+<li>validator_pkey
+: <a class="el" href="structvalidators__state__item.html#ae734d826e591d1aaff041b03a9718f24">validators_state_item</a>
+</li>
+<li>validator_power
+: <a class="el" href="structvalidators__state__item.html#a759aed033e26f4349569f0d3f16c9026">validators_state_item</a>
+</li>
 <li>validators_public_keys
 : <a class="el" href="struct_block_data.html#ae6f252ad04c4e1be04547b6591bc290a">BlockData</a>
 </li>
 <li>validators_votes
-: <a class="el" href="struct_block.html#ab92a287a57cf397469d124229f8f69ff">Block</a>
+: <a class="el" href="struct_block.html#a844db3988bb76609b2ca47e6c19c98eb">Block</a>
 </li>
 <li>vote_signature
 : <a class="el" href="struct_block.html#a583563e61e9fe701bf4edb94596c20e4">Block</a>

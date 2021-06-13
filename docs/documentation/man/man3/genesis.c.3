@@ -1,0 +1,81 @@
+.TH "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/src/genesis.c" 3 "Sun Jun 13 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/src/genesis.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'client\&.h'\fP
+.br
+\fC#include 'network/client\&.h'\fP
+.br
+\fC#include 'network/server\&.h'\fP
+.br
+\fC#include 'network/send_data\&.h'\fP
+.br
+\fC#include 'network/get_data\&.h'\fP
+.br
+\fC#include 'misc/safe\&.h'\fP
+.br
+\fC#include <openssl/rsa\&.h>\fP
+.br
+\fC#include 'blockchain/transaction\&.h'\fP
+.br
+\fC#include 'blockchain/block\&.h'\fP
+.br
+\fC#include 'ui/ui\&.h'\fP
+.br
+\fC#include 'blockchain/blockchain_header\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBinfos_st\fP * \fBget_infos\fP ()"
+.br
+.ti -1c
+.RI "void \fBnew_transaction\fP (char type, char *rc_pk, size_t amount, char cause[512], char asset[512])"
+.br
+.ti -1c
+.RI "int \fBmain\fP ()"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "\fBconnection\fP * \fBclient_connections\fP"
+.br
+.ti -1c
+.RI "\fBinfos_st\fP * \fBac_infos\fP"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "\fBinfos_st\fP* get_infos ()"
+
+.PP
+Definition at line 16 of file atrier\&.c\&.
+.SS "int main ()"
+
+.PP
+Definition at line 69 of file genesis\&.c\&.
+.SS "void new_transaction (char type, char * rc_pk, size_t amount, char cause[512], char asset[512])"
+
+.PP
+Definition at line 148 of file atrier\&.c\&.
+.SH "Variable Documentation"
+.PP 
+.SS "\fBinfos_st\fP* ac_infos"
+
+.PP
+Definition at line 15 of file genesis\&.c\&.
+.SS "\fBconnection\fP* client_connections"
+
+.PP
+Definition at line 4 of file client\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for PEPITAS CRYPTOCURRENCY from the source code\&.

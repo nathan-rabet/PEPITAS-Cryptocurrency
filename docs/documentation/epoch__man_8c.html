@@ -104,8 +104,127 @@ Functions</h2></td></tr>
 <tr class="memitem:a600e69b60a52aa9e5976546b39ff2fab"><td class="memItemLeft" align="right" valign="top">RSA *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="epoch__man_8c.html#a600e69b60a52aa9e5976546b39ff2fab">get_epoch_man_pkey</a> (<a class="el" href="struct_block_data.html">BlockData</a> *block_data)</td></tr>
 <tr class="memdesc:a600e69b60a52aa9e5976546b39ff2fab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Give the pkey of the creator of a block.  <a href="epoch__man_8c.html#a600e69b60a52aa9e5976546b39ff2fab">More...</a><br /></td></tr>
 <tr class="separator:a600e69b60a52aa9e5976546b39ff2fab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99a18f9ea2a095bf023461087b211213"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="epoch__man_8c.html#a99a18f9ea2a095bf023461087b211213">create_vote_data</a> (<a class="el" href="struct_block.html">Block</a> *block, char vote, int validator_index, size_t *data_length)</td></tr>
+<tr class="separator:a99a18f9ea2a095bf023461087b211213"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6bdf21a7a1ab2b06e3b5b8b8c6c5a37"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="epoch__man_8c.html#ac6bdf21a7a1ab2b06e3b5b8b8c6c5a37">give_punishments_and_rewards</a> (<a class="el" href="struct_block.html">Block</a> *last_block, <a class="el" href="struct_block.html">Block</a> *current_block)</td></tr>
+<tr class="memdesc:ac6bdf21a7a1ab2b06e3b5b8b8c6c5a37"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add punishmnent and reward transactions to validators of the 'prev_block' into 'current_block'.  <a href="epoch__man_8c.html#ac6bdf21a7a1ab2b06e3b5b8b8c6c5a37">More...</a><br /></td></tr>
+<tr class="separator:ac6bdf21a7a1ab2b06e3b5b8b8c6c5a37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20031a15e7ca013e4b21f6c4e5aff508"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="epoch__man_8c.html#a20031a15e7ca013e4b21f6c4e5aff508">add_pdt_to_block</a> (<a class="el" href="struct_block.html">Block</a> *block)</td></tr>
+<tr class="separator:a20031a15e7ca013e4b21f6c4e5aff508"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb0145b06d8c782e8536992cc1def819"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_block.html">Block</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="epoch__man_8c.html#aeb0145b06d8c782e8536992cc1def819">create_epoch_block</a> ()</td></tr>
+<tr class="memdesc:aeb0145b06d8c782e8536992cc1def819"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a block object with the previous block hash &amp; votes.  <a href="epoch__man_8c.html#aeb0145b06d8c782e8536992cc1def819">More...</a><br /></td></tr>
+<tr class="separator:aeb0145b06d8c782e8536992cc1def819"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="a20031a15e7ca013e4b21f6c4e5aff508"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20031a15e7ca013e4b21f6c4e5aff508">&#9670;&nbsp;</a></span>add_pdt_to_block()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void add_pdt_to_block </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_block.html">Block</a> *&#160;</td>
+          <td class="paramname"><em>block</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="epoch__man_8c_source.html#l00094">94</a> of file <a class="el" href="epoch__man_8c_source.html">epoch_man.c</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="epoch__man_8c_a20031a15e7ca013e4b21f6c4e5aff508_cgraph.png" border="0" usemap="#epoch__man_8c_a20031a15e7ca013e4b21f6c4e5aff508_cgraph" alt=""/></div>
+<!-- MAP 1 -->
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="epoch__man_8c_a20031a15e7ca013e4b21f6c4e5aff508_icgraph.png" border="0" usemap="#epoch__man_8c_a20031a15e7ca013e4b21f6c4e5aff508_icgraph" alt=""/></div>
+<!-- MAP 2 -->
+</div>
+
+</div>
+</div>
+<a id="aeb0145b06d8c782e8536992cc1def819"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb0145b06d8c782e8536992cc1def819">&#9670;&nbsp;</a></span>create_epoch_block()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_block.html">Block</a>* create_epoch_block </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Create a block object with the previous block hash &amp; votes. </p>
+<dl class="section see"><dt>See also</dt><dd>The function create a block based on the local last block</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Block* </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="epoch__man_8c_source.html#l00141">141</a> of file <a class="el" href="epoch__man_8c_source.html">epoch_man.c</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="epoch__man_8c_aeb0145b06d8c782e8536992cc1def819_cgraph.png" border="0" usemap="#epoch__man_8c_aeb0145b06d8c782e8536992cc1def819_cgraph" alt=""/></div>
+<!-- MAP 3 -->
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="epoch__man_8c_aeb0145b06d8c782e8536992cc1def819_icgraph.png" border="0" usemap="#epoch__man_8c_aeb0145b06d8c782e8536992cc1def819_icgraph" alt=""/></div>
+<!-- MAP 4 -->
+</div>
+
+</div>
+</div>
+<a id="a99a18f9ea2a095bf023461087b211213"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99a18f9ea2a095bf023461087b211213">&#9670;&nbsp;</a></span>create_vote_data()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char* create_vote_data </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_block.html">Block</a> *&#160;</td>
+          <td class="paramname"><em>block</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>vote</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>validator_index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t *&#160;</td>
+          <td class="paramname"><em>data_length</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="epoch__man_8c_source.html#l00010">10</a> of file <a class="el" href="epoch__man_8c_source.html">epoch_man.c</a>.</p>
+
+</div>
+</div>
 <a id="a600e69b60a52aa9e5976546b39ff2fab"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a600e69b60a52aa9e5976546b39ff2fab">&#9670;&nbsp;</a></span>get_epoch_man_pkey()</h2>
 
@@ -129,14 +248,60 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>RSA* </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>RSA*, NULL if the data is corrupted </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="epoch__man_8c_source.html#l00003">3</a> of file <a class="el" href="epoch__man_8c_source.html">epoch_man.c</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="epoch__man_8c_a600e69b60a52aa9e5976546b39ff2fab_icgraph.png" border="0" usemap="#epoch__man_8c_a600e69b60a52aa9e5976546b39ff2fab_icgraph" alt=""/></div>
-<!-- MAP 1 -->
+<!-- MAP 5 -->
+</div>
+
+</div>
+</div>
+<a id="ac6bdf21a7a1ab2b06e3b5b8b8c6c5a37"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac6bdf21a7a1ab2b06e3b5b8b8c6c5a37">&#9670;&nbsp;</a></span>give_punishments_and_rewards()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void give_punishments_and_rewards </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_block.html">Block</a> *&#160;</td>
+          <td class="paramname"><em>prev_block</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_block.html">Block</a> *&#160;</td>
+          <td class="paramname"><em>current_block</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Add punishmnent and reward transactions to validators of the 'prev_block' into 'current_block'. </p>
+<dl class="section see"><dt>See also</dt><dd>Number of added transactions = number of validators in 'prev_block'</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">prev_block</td><td></td></tr>
+    <tr><td class="paramname">current_block</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="epoch__man_8c_source.html#l00031">31</a> of file <a class="el" href="epoch__man_8c_source.html">epoch_man.c</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="epoch__man_8c_ac6bdf21a7a1ab2b06e3b5b8b8c6c5a37_icgraph.png" border="0" usemap="#epoch__man_8c_ac6bdf21a7a1ab2b06e3b5b8b8c6c5a37_icgraph" alt=""/></div>
+<!-- MAP 6 -->
 </div>
 
 </div>

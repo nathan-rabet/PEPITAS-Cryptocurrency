@@ -21,7 +21,7 @@ Block
 .RI "char \fBblock_signature\fP [256]"
 .br
 .ti -1c
-.RI "char \fBvalidators_votes\fP [\fBMAX_VALIDATORS_PER_BLOCK\fP/8]"
+.RI "char \fBvalidators_votes\fP [\fBNB_VOTES_BITMAP\fP]"
 .br
 .ti -1c
 .RI "char \fBvote_signature\fP [\fBMAX_VALIDATORS_PER_BLOCK\fP \- 1][256]"
@@ -29,29 +29,29 @@ Block
 .in -1c
 .SH "Detailed Description"
 .PP 
-Definition at line 51 of file block\&.h\&.
+Definition at line 84 of file block\&.h\&.
 .SH "Field Documentation"
 .PP 
 .SS "\fBBlockData\fP block_data"
 
 .PP
-Definition at line 54 of file block\&.h\&.
+Definition at line 87 of file block\&.h\&.
 .SS "char block_signature[256]"
 
 .PP
-Definition at line 56 of file block\&.h\&.
+Definition at line 89 of file block\&.h\&.
 .SS "uint16_t chunk_id"
 
 .PP
-Definition at line 53 of file block\&.h\&.
-.SS "char validators_votes[\fBMAX_VALIDATORS_PER_BLOCK\fP/8]"
+Definition at line 86 of file block\&.h\&.
+.SS "char validators_votes[\fBNB_VOTES_BITMAP\fP]"
 
 .PP
-Definition at line 59 of file block\&.h\&.
+Definition at line 92 of file block\&.h\&.
 .SS "char vote_signature[\fBMAX_VALIDATORS_PER_BLOCK\fP \- 1][256]"
 
 .PP
-Definition at line 60 of file block\&.h\&.
+Definition at line 93 of file block\&.h\&.
 
 .SH "Author"
 .PP 

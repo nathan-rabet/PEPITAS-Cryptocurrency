@@ -6,6 +6,8 @@
 .SH SYNOPSIS
 .br
 .PP
+\fC#include <dirent\&.h>\fP
+.br
 \fC#include <gtk/gtk\&.h>\fP
 .br
 \fC#include <stdio\&.h>\fP
@@ -16,11 +18,17 @@
 .br
 \fC#include <time\&.h>\fP
 .br
+\fC#include 'network/network\&.h'\fP
+.br
 \fC#include 'cryptosystem/rsa\&.h'\fP
 .br
 \fC#include 'cryptosystem/hash\&.h'\fP
 .br
 \fC#include 'blockchain/wallet\&.h'\fP
+.br
+\fC#include 'blockchain/block\&.h'\fP
+.br
+\fC#include 'client\&.h'\fP
 .br
 
 .SS "Data Structures"
@@ -49,10 +57,6 @@
 .RI "gboolean \fBon_transaction_button_press\fP (GtkWidget *widget, GdkEventKey *event, gpointer user_data)"
 .br
 .RI "Will be used when the transaction function is ready\&. "
-.ti -1c
-.RI "gboolean \fBon_pkey_button_press\fP (GtkWidget *widget, GdkEventKey *event, gpointer user_data)"
-.br
-.RI "Hides the private key of the user, or shows it if it was already hidden\&. "
 .ti -1c
 .RI "gboolean \fBon_invest_button1_press\fP (GtkWidget *widget, GdkEventKey *event, gpointer user_data)"
 .br
@@ -122,10 +126,34 @@
 .ti -1c
 .RI "void \fBupdate_sync\fP (size_t actual, size_t final)"
 .br
+.ti -1c
+.RI "gboolean \fBset_block_viewer_plus\fP (GtkWidget *widget, GdkEventKey *event, gpointer user_data)"
+.br
+.ti -1c
+.RI "gboolean \fBset_block_viewer_minus\fP (GtkWidget *widget, GdkEventKey *event, gpointer user_data)"
+.br
+.ti -1c
+.RI "void \fBset_block_viewer\fP (int height)"
+.br
 .in -1c
 .SS "Variables"
 
 .in +1c
+.ti -1c
+.RI "GtkLabel * \fBbalance_1\fP"
+.br
+.ti -1c
+.RI "GtkLabel * \fBbalance_2\fP"
+.br
+.ti -1c
+.RI "GtkLabel * \fBstake_label1\fP"
+.br
+.ti -1c
+.RI "GtkLabel * \fBstake_label2\fP"
+.br
+.ti -1c
+.RI "GtkLabel * \fBstake_label3\fP"
+.br
 .ti -1c
 .RI "GtkLabel * \fBsynchro_label\fP"
 .br
@@ -167,39 +195,39 @@ gboolean Error code
 .SS "void add_contact_to_combobox (char * name)"
 
 .PP
-Definition at line 466 of file ui\&.c\&.
+Definition at line 602 of file ui\&.c\&.
 .SS "void add_contacts_from_file (char * name, char * public_key)"
 
 .PP
-Definition at line 474 of file ui\&.c\&.
+Definition at line 610 of file ui\&.c\&.
 .SS "void add_new_blockinfo (size_t height, size_t transaction)"
 
 .PP
-Definition at line 199 of file ui\&.c\&.
+Definition at line 322 of file ui\&.c\&.
 .SS "void add_transaction_from_file (double amount, char * public_key, char * date)"
 
 .PP
-Definition at line 324 of file ui\&.c\&.
+Definition at line 480 of file ui\&.c\&.
 .SS "void add_transaction_with_contact (double amount, char * public_key, char * date)"
 
 .PP
-Definition at line 304 of file ui\&.c\&.
+Definition at line 460 of file ui\&.c\&.
 .SS "void add_transaction_with_pkey (double amount, char * public_key, char * date)"
 
 .PP
-Definition at line 283 of file ui\&.c\&.
+Definition at line 440 of file ui\&.c\&.
 .SS "void change_label_text (GtkLabel * label, char * text)"
 
 .PP
-Definition at line 194 of file ui\&.c\&.
+Definition at line 233 of file ui\&.c\&.
 .SS "char* get_public_key_from_contacts (const char * name)"
 
 .PP
-Definition at line 511 of file ui\&.c\&.
+Definition at line 645 of file ui\&.c\&.
 .SS "void load_contacts_from_file ()"
 
 .PP
-Definition at line 483 of file ui\&.c\&.
+Definition at line 619 of file ui\&.c\&.
 .SS "void load_transaction_from_file ()"
 
 .SS "gboolean on_add_contact_button1_press (GtkWidget * widget, GdkEventKey * event, gpointer user_data)"
@@ -285,31 +313,11 @@ gboolean Error code
 .PP
 
 .PP
-Definition at line 233 of file ui\&.c\&.
+Definition at line 358 of file ui\&.c\&.
 .SS "void on_main_window_destroy (__attribute((unused)) GtkWidget * widget, \fB__attribute__\fP((unused)) gpointer data)"
 
 .PP
 Quits GTK when the program ends\&. 
-.SS "gboolean on_pkey_button_press (GtkWidget * widget, GdkEventKey * event, gpointer user_data)"
-
-.PP
-Hides the private key of the user, or shows it if it was already hidden\&. 
-.PP
-\fBParameters\fP
-.RS 4
-\fIwidget\fP unused 
-.br
-\fIevent\fP unused 
-.br
-\fIuser_data\fP unused 
-.RE
-.PP
-\fBReturns\fP
-.RS 4
-gboolean Error code 
-.RE
-.PP
-
 .SS "gboolean on_recover_button1_press (GtkWidget * widget, GdkEventKey * event, gpointer user_data)"
 
 .PP
@@ -370,6 +378,14 @@ gboolean Error code
 .RE
 .PP
 
+.SS "void set_block_viewer (int height)"
+
+.PP
+Definition at line 270 of file ui\&.c\&.
+.SS "gboolean set_block_viewer_minus (GtkWidget * widget, GdkEventKey * event, gpointer user_data)"
+
+.SS "gboolean set_block_viewer_plus (GtkWidget * widget, GdkEventKey * event, gpointer user_data)"
+
 .SS "void* setup (void * args)"
 
 .PP
@@ -382,37 +398,57 @@ int Returns 1 if there is an error, 0 otherwise
 .PP
 
 .PP
-Definition at line 63 of file ui\&.c\&.
+Definition at line 80 of file ui\&.c\&.
 .SS "void update_labels ()"
 
 .PP
-Definition at line 658 of file ui\&.c\&.
+Definition at line 774 of file ui\&.c\&.
 .SS "void update_sync (size_t actual, size_t final)"
 
 .PP
-Definition at line 214 of file ui\&.c\&.
+Definition at line 339 of file ui\&.c\&.
 .SH "Variable Documentation"
 .PP 
+.SS "GtkLabel* balance_1"
+
+.PP
+Definition at line 24 of file ui\&.c\&.
+.SS "GtkLabel* balance_2"
+
+.PP
+Definition at line 25 of file ui\&.c\&.
 .SS "GtkLabel* block_amount_label"
 
 .PP
-Definition at line 14 of file ui\&.h\&.
+Definition at line 30 of file ui\&.c\&.
 .SS "struct \fBblockinfo\fP blocksinfo[3]"
 
 .PP
-Definition at line 23 of file ui\&.h\&.
+Definition at line 32 of file ui\&.h\&.
 .SS "GtkLabel* connections_label"
 
 .PP
-Definition at line 15 of file ui\&.h\&.
+Definition at line 31 of file ui\&.c\&.
 .SS "GtkLabel* mempool_label"
 
 .PP
-Definition at line 16 of file ui\&.h\&.
+Definition at line 32 of file ui\&.c\&.
+.SS "GtkLabel* stake_label1"
+
+.PP
+Definition at line 26 of file ui\&.c\&.
+.SS "GtkLabel* stake_label2"
+
+.PP
+Definition at line 27 of file ui\&.c\&.
+.SS "GtkLabel* stake_label3"
+
+.PP
+Definition at line 28 of file ui\&.c\&.
 .SS "GtkLabel* synchro_label"
 
 .PP
-Definition at line 13 of file ui\&.h\&.
+Definition at line 29 of file ui\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for PEPITAS CRYPTOCURRENCY from the source code\&.

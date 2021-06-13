@@ -1,0 +1,44 @@
+.TH "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/headers/validation/plebe.h" 3 "Sun Jun 13 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/headers/validation/plebe.h
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'blockchain/block\&.h'\fP
+.br
+\fC#include 'validation/validation_engine\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBplebe_adhere_block\fP (\fBBlock\fP *block)"
+.br
+.RI "Adhere a block, write it locally\&. "
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "int plebe_adhere_block (\fBBlock\fP * block)"
+
+.PP
+Adhere a block, write it locally\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIblock\fP The block to adhere 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+0 if success, 2 if need to sync error, 1 if data corrupted error 
+.RE
+.PP
+
+.PP
+Definition at line 7 of file plebe\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for PEPITAS CRYPTOCURRENCY from the source code\&.

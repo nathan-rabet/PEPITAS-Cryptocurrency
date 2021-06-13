@@ -1,0 +1,14 @@
+digraph "_create_validator_item"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="_create_validator_item",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="update_validators_state",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$validators_8c.html#acb995f2242245cf16710ddba0a0724bb",tooltip="Given a block, update the 'validators.state' with the transactions."];
+  Node2 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="gen_blockchain_header",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$blockchain__header_8c.html#a1011109fa5281e4b6406c390393cd051",tooltip=" "];
+  Node3 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="main",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$client_8c.html#a3c04138a5bfe5d72780bb7e82a18e627",tooltip=" "];
+}

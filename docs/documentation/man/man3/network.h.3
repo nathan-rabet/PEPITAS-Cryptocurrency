@@ -23,7 +23,7 @@
 .RI "struct \fBNode\fP"
 .br
 .ti -1c
-.RI "struct \fBclient_connection\fP"
+.RI "struct \fBconnection\fP"
 .br
 .ti -1c
 .RI "struct \fBinfos_st\fP"
@@ -102,7 +102,13 @@
 .RI "#define \fBHD_GET_PENDING_TRANSACTION_LIST\fP   'GET PENDING TRANSACTION LIST\\r\\n\\r\\n'"
 .br
 .ti -1c
+.RI "#define \fBHD_SEND_PENDING_TRANSACTION_LIST\fP   'SEND PENDING TRANSACTION LIST\\r\\n\\r\\n'"
+.br
+.ti -1c
 .RI "#define \fBHD_REJECT_DEMAND\fP   'REJECT DEMAND\\r\\n\\r\\n'"
+.br
+.ti -1c
+.RI "#define \fBHD_GET_PENDING_TRANSACTION\fP   'GET PENDING TRANSACTION\\r\\n\\r\\n'"
 .br
 .ti -1c
 .RI "#define \fBHD_SEND_PENDING_TRANSACTION\fP   'SEND PENDING TRANSACTION\\r\\n\\r\\n'"
@@ -118,6 +124,18 @@
 .br
 .ti -1c
 .RI "#define \fBDD_GET_BLOCKS\fP   2"
+.br
+.ti -1c
+.RI "#define \fBDD_SEND_TRANSACTION\fP   3"
+.br
+.ti -1c
+.RI "#define \fBDD_GET_TRANSACTION_LIST\fP   4"
+.br
+.ti -1c
+.RI "#define \fBDD_SEND_VOTE\fP   5"
+.br
+.ti -1c
+.RI "#define \fBDD_SEND_EPOCH\fP   6"
 .br
 .ti -1c
 .RI "#define \fBSERVERMSG\fP   printf('\\033[0;31m[S]:\\033[0m ');"
@@ -142,7 +160,7 @@
 .RI "typedef struct \fBNode\fP \fBNode\fP"
 .br
 .ti -1c
-.RI "typedef struct \fBclient_connection\fP \fBclient_connection\fP"
+.RI "typedef struct \fBconnection\fP \fBconnection\fP"
 .br
 .ti -1c
 .RI "typedef struct \fBinfos_st\fP \fBinfos_st\fP"
@@ -173,15 +191,31 @@
 .SS "#define CLIENTMSG   printf('\\033[0;34m[C]:\\033[0m ');"
 
 .PP
-Definition at line 90 of file network\&.h\&.
+Definition at line 99 of file network\&.h\&.
 .SS "#define DD_GET_BLOCKS   2"
 
 .PP
-Definition at line 85 of file network\&.h\&.
+Definition at line 90 of file network\&.h\&.
 .SS "#define DD_GET_HEIGHT   1"
 
 .PP
-Definition at line 84 of file network\&.h\&.
+Definition at line 89 of file network\&.h\&.
+.SS "#define DD_GET_TRANSACTION_LIST   4"
+
+.PP
+Definition at line 92 of file network\&.h\&.
+.SS "#define DD_SEND_EPOCH   6"
+
+.PP
+Definition at line 94 of file network\&.h\&.
+.SS "#define DD_SEND_TRANSACTION   3"
+
+.PP
+Definition at line 91 of file network\&.h\&.
+.SS "#define DD_SEND_VOTE   5"
+
+.PP
+Definition at line 93 of file network\&.h\&.
 .SS "#define DOORSERVER   1"
 
 .PP
@@ -189,51 +223,59 @@ Definition at line 23 of file network\&.h\&.
 .SS "#define HD_ACTUAL_HEIGHT   'ACTUAL HEIGHT\\r\\n\\r\\n'"
 
 .PP
-Definition at line 75 of file network\&.h\&.
+Definition at line 78 of file network\&.h\&.
 .SS "#define HD_CONNECTION_TO_NETWORK   'CONNECTION TO NETWORK\\r\\n\\r\\n'"
 
 .PP
-Definition at line 72 of file network\&.h\&.
+Definition at line 75 of file network\&.h\&.
 .SS "#define HD_CONNECTION_TO_NODE   'CONNECTION TO NODE\\r\\n\\r\\n'"
 
 .PP
-Definition at line 73 of file network\&.h\&.
+Definition at line 76 of file network\&.h\&.
 .SS "#define HD_GET_BLOCKS   'GET BLOCKS\\r\\n\\r\\n'"
 
 .PP
-Definition at line 74 of file network\&.h\&.
+Definition at line 77 of file network\&.h\&.
 .SS "#define HD_GET_CLIENT_LIST   'GET CLIENT LIST\\r\\n\\r\\n'"
 
 .PP
-Definition at line 70 of file network\&.h\&.
+Definition at line 73 of file network\&.h\&.
+.SS "#define HD_GET_PENDING_TRANSACTION   'GET PENDING TRANSACTION\\r\\n\\r\\n'"
+
+.PP
+Definition at line 83 of file network\&.h\&.
 .SS "#define HD_GET_PENDING_TRANSACTION_LIST   'GET PENDING TRANSACTION LIST\\r\\n\\r\\n'"
 
 .PP
-Definition at line 77 of file network\&.h\&.
+Definition at line 80 of file network\&.h\&.
 .SS "#define HD_REJECT_DEMAND   'REJECT DEMAND\\r\\n\\r\\n'"
 
 .PP
-Definition at line 78 of file network\&.h\&.
+Definition at line 82 of file network\&.h\&.
 .SS "#define HD_SEND_BLOCK   'SEND BLOCK\\r\\n\\r\\n'"
 
 .PP
-Definition at line 76 of file network\&.h\&.
+Definition at line 79 of file network\&.h\&.
 .SS "#define HD_SEND_CLIENT_LIST   'SEND CLIENT LIST\\r\\n\\r\\n'"
 
 .PP
-Definition at line 71 of file network\&.h\&.
+Definition at line 74 of file network\&.h\&.
 .SS "#define HD_SEND_EPOCH_BLOCK   'SEND EPOCH BLOCK\\r\\n\\r\\n'"
 
 .PP
-Definition at line 80 of file network\&.h\&.
+Definition at line 85 of file network\&.h\&.
 .SS "#define HD_SEND_PENDING_TRANSACTION   'SEND PENDING TRANSACTION\\r\\n\\r\\n'"
 
 .PP
-Definition at line 79 of file network\&.h\&.
-.SS "#define HD_SEND_VOTE   'SEND VOTE\\r\\n\\r\\n'"
+Definition at line 84 of file network\&.h\&.
+.SS "#define HD_SEND_PENDING_TRANSACTION_LIST   'SEND PENDING TRANSACTION LIST\\r\\n\\r\\n'"
 
 .PP
 Definition at line 81 of file network\&.h\&.
+.SS "#define HD_SEND_VOTE   'SEND VOTE\\r\\n\\r\\n'"
+
+.PP
+Definition at line 86 of file network\&.h\&.
 .SS "#define IM_CLIENT   1"
 
 .PP
@@ -245,7 +287,7 @@ Definition at line 17 of file network\&.h\&.
 .SS "#define MANAGERMSG   printf('\\033[0;32m[M]:\\033[0m ');"
 
 .PP
-Definition at line 91 of file network\&.h\&.
+Definition at line 100 of file network\&.h\&.
 .SS "#define MAX_CONNECTION   5"
 
 .PP
@@ -277,7 +319,7 @@ Definition at line 15 of file network\&.h\&.
 .SS "#define SERVERMSG   printf('\\033[0;31m[S]:\\033[0m ');"
 
 .PP
-Definition at line 89 of file network\&.h\&.
+Definition at line 98 of file network\&.h\&.
 .SS "#define SIZE_OF_HOSTNAME   39"
 
 .PP
@@ -297,10 +339,10 @@ Definition at line 30 of file network\&.h\&.
 .SS "#define WARNINGMSG(x)   printf('\\033[0;35m[W]: %s\\033[0m\\n', x);"
 
 .PP
-Definition at line 92 of file network\&.h\&.
+Definition at line 101 of file network\&.h\&.
 .SH "Typedef Documentation"
 .PP 
-.SS "typedef struct \fBclient_connection\fP \fBclient_connection\fP"
+.SS "typedef struct \fBconnection\fP \fBconnection\fP"
 
 .SS "typedef struct \fBinfos_st\fP \fBinfos_st\fP"
 
@@ -315,13 +357,13 @@ Definition at line 92 of file network\&.h\&.
 .SS "struct __attribute__ ((__packed__))"
 
 .PP
-Definition at line 94 of file network\&.h\&.
+Definition at line 103 of file network\&.h\&.
 .SH "Variable Documentation"
 .PP 
 .SS "get_blocks_t"
 
 .PP
-Definition at line 99 of file network\&.h\&.
+Definition at line 108 of file network\&.h\&.
 .SS "const \fBNeighbour\fP HARD_CODED_ADDR[]"
 
 .PP

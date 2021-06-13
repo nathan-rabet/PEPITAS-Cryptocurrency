@@ -1,4 +1,6 @@
 var server_8c =
 [
-    [ "main", "server_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4", null ]
+    [ "accept_connection", "server_8c.html#a51b8c8c4c2582cc90f8155bd9eaab4c0", null ],
+    [ "init_server", "server_8c.html#a10fb306879537348fffef6ae68f70640", null ],
+    [ "redirect_connection", "server_8c.html#a84cf9ceb7f864ec15c6a0a51fec348ed", null ]
 ];

@@ -14,9 +14,13 @@
 .br
 \fC#include 'cryptosystem/hash\&.h'\fP
 .br
+\fC#include 'network/get_data\&.h'\fP
+.br
 \fC#include 'misc/math\&.h'\fP
 .br
 \fC#include 'misc/files\&.h'\fP
+.br
+\fC#include 'misc/bits\&.h'\fP
 .br
 \fC#include 'misc/safe\&.h'\fP
 .br
@@ -26,7 +30,19 @@
 .br
 \fC#include <stdbool\&.h>\fP
 .br
+\fC#include <openssl/evp\&.h>\fP
+.br
 
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBVERIDCT_NO\fP   0"
+.br
+.ti -1c
+.RI "#define \fBVERIDCT_YES\fP   1"
+.br
+.in -1c
 .SS "Functions"
 
 .in +1c
@@ -35,12 +51,43 @@
 .br
 .RI "Broadcast a verdict about a block validity to the network\&. "
 .ti -1c
-.RI "\fBTransaction\fP ** \fBvalidate_transactions\fP (\fBTransaction\fP *transaction_to_validate, size_t nb_transactions, size_t *nb_returned_transactions)"
+.RI "\fBTransaction\fP ** \fBvalidate_transactions\fP (\fBTransaction\fP **transaction_to_validate, size_t nb_transactions, size_t *nb_returned_transactions)"
 .br
 .RI "Validate some transactions\&. "
+.ti -1c
+.RI "int \fBcomital_validate_block\fP (\fBBlock\fP *block)"
+.br
+.ti -1c
+.RI "char \fBplebe_verify_block\fP (\fBBlock\fP *block)"
+.br
 .in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "\fBconnection\fP * \fBclient_connections\fP"
+.br
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define VERIDCT_NO   0"
+
+.PP
+Definition at line 19 of file validation_engine\&.h\&.
+.SS "#define VERIDCT_YES   1"
+
+.PP
+Definition at line 20 of file validation_engine\&.h\&.
 .SH "Function Documentation"
 .PP 
+.SS "int comital_validate_block (\fBBlock\fP * block)"
+
+.PP
+Definition at line 242 of file validation_engine\&.c\&.
+.SS "char plebe_verify_block (\fBBlock\fP * block)"
+
+.PP
+Definition at line 199 of file validation_engine\&.c\&.
 .SS "int send_verdict (\fBBlock\fP * block, char verdict)"
 
 .PP
@@ -59,7 +106,9 @@ Broadcast a verdict about a block validity to the network\&.
 .RE
 .PP
 
-.SS "\fBTransaction\fP** validate_transactions (\fBTransaction\fP * transaction_to_validate, size_t nb_transactions, size_t * nb_returned_transactions)"
+.PP
+Definition at line 305 of file validation_engine\&.c\&.
+.SS "\fBTransaction\fP** validate_transactions (\fBTransaction\fP ** transaction_to_validate, size_t nb_transactions, size_t * nb_returned_transactions)"
 
 .PP
 Validate some transactions\&. 
@@ -95,6 +144,14 @@ Transaction**, the valid transactions
 .RE
 .PP
 
+.PP
+Definition at line 3 of file validation_engine\&.c\&.
+.SH "Variable Documentation"
+.PP 
+.SS "\fBconnection\fP* client_connections"
+
+.PP
+Definition at line 4 of file client\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for PEPITAS CRYPTOCURRENCY from the source code\&.

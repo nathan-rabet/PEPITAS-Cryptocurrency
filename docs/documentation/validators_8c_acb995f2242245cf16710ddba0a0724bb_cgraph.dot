@@ -1,0 +1,18 @@
+digraph "update_validators_state"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="update_validators_state",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Given a block, update the 'validators.state' with the transactions."];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="_create_validator_item",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$validators_8c.html#a30aeb0df2820fa2744f3c534faaa4173",tooltip=" "];
+  Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="get_validator_id",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$validators_8c.html#ad9750bcfcbe82832c9603ec21ad61371",tooltip="Get the validator id in 'validators.state'."];
+  Node3 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="safe_fread",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$safe_8h.html#ac4bf776335d7193068afa656b91a8827",tooltip="Calls 'fread' but safely !"];
+  Node1 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="get_validators_states\l_block_height_validity",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$validators_8c.html#add21456c69726d58c43b35b7a2756dc8",tooltip="Get the validators states block height validity (parse 'validators.state')"];
+  Node5 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+}

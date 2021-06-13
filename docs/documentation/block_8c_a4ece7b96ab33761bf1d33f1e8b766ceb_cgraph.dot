@@ -6,14 +6,14 @@ digraph "load_last_blockchain"
   rankdir="LR";
   Node1 [label="load_last_blockchain",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Load the last local blockchain chunk."];
   Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node2 [label="get_last_block_height",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$block_8c.html#add83a1752a104b44d130b12342762011",tooltip="Get the last block height."];
-  Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node3 [label="last_file_in_folder",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$files_8h.html#af7f19b3a3e64c414589ae92109adda1e",tooltip="Return the last file (reverse alphabetical order) of a folder path."];
-  Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node4 [label="load_blockchain",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$block_8c.html#a7acee00b67ed21663a5b05242acc822d",tooltip="Loads a blockchain object with a padding of 'nb_chunk'."];
+  Node2 [label="get_infos",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$client_8h.html#a480459f3451fa57a66df548ca0b408e3",tooltip=" "];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="load_blockchain",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$block_8c.html#a7acee00b67ed21663a5b05242acc822d",tooltip="Loads a blockchain object with a padding of 'nb_chunk'."];
+  Node3 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="free_block",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$block_8c.html#a3eb417f7cce88e8ec69d6974cd25e49f",tooltip="Free a block struct."];
   Node4 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node5 [label="free_block",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$block_8c.html#a3eb417f7cce88e8ec69d6974cd25e49f",tooltip="Free a block struct."];
-  Node4 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="clear_block",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$block_8c.html#a3beaf10afd57aec50225774ba2a21680",tooltip=" "];
+  Node3 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node6 [label="get_block",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$block_8c.html#a32140266e4b385f64860944a5edd0153",tooltip="Get a block object."];
   Node6 -> Node7 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node7 [label="convert_data_to_block",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$block_8c.html#ada1355f8610cc450d7c8f662dc6a7aef",tooltip=" "];
@@ -23,4 +23,5 @@ digraph "load_last_blockchain"
   Node9 [label="load_transaction",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$transaction_8h.html#a4f4e33641ff7466e848182ce420827b6",tooltip=" "];
   Node9 -> Node10 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node10 [label="convert_data_to_transactiondata",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$transaction_8c.html#a8649ee7d98b5b34c64efa31e274f2534",tooltip=" "];
+  Node3 -> Node1 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
 }

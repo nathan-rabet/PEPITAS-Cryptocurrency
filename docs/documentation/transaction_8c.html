@@ -116,6 +116,11 @@ Functions</h2></td></tr>
 <tr class="separator:a8b26b26139793db7c1860ff96091ca77"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acb63cde8baf977cfe0c39644f1e36010"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="transaction_8c.html#acb63cde8baf977cfe0c39644f1e36010">add_pending_transaction</a> (<a class="el" href="struct_transaction.html">Transaction</a> *transaction)</td></tr>
 <tr class="separator:acb63cde8baf977cfe0c39644f1e36010"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af274d54bdf6f74206feb6c06c2fb6505"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_transaction.html">Transaction</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="transaction_8c.html#af274d54bdf6f74206feb6c06c2fb6505">create_new_transaction</a> (<a class="el" href="structinfos__st.html">infos_st</a> *infos, char type, RSA *receiver_public_key, size_t amount, char cause[512], char asset[512])</td></tr>
+<tr class="separator:af274d54bdf6f74206feb6c06c2fb6505"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3814ab0e7eeeec1a1bd47ee9c1d4c2ef"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="transaction_8c.html#a3814ab0e7eeeec1a1bd47ee9c1d4c2ef">flush_pending_transactions</a> (<a class="el" href="struct_transaction.html">Transaction</a> **transactions, size_t nb_transactions)</td></tr>
+<tr class="memdesc:a3814ab0e7eeeec1a1bd47ee9c1d4c2ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete block transactions in pdt if the block is valid.  <a href="transaction_8c.html#a3814ab0e7eeeec1a1bd47ee9c1d4c2ef">More...</a><br /></td></tr>
+<tr class="separator:a3814ab0e7eeeec1a1bd47ee9c1d4c2ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="acb63cde8baf977cfe0c39644f1e36010"></a>
@@ -134,12 +139,18 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="transaction_8c_source.html#l00158">158</a> of file <a class="el" href="transaction_8c_source.html">transaction.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="transaction_8c_source.html#l00140">140</a> of file <a class="el" href="transaction_8c_source.html">transaction.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="transaction_8c_acb63cde8baf977cfe0c39644f1e36010_cgraph.png" border="0" usemap="#transaction_8c_acb63cde8baf977cfe0c39644f1e36010_cgraph" alt=""/></div>
 <!-- MAP 1 -->
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="transaction_8c_acb63cde8baf977cfe0c39644f1e36010_icgraph.png" border="0" usemap="#transaction_8c_acb63cde8baf977cfe0c39644f1e36010_icgraph" alt=""/></div>
+<!-- MAP 2 -->
 </div>
 
 </div>
@@ -170,13 +181,118 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="transaction_8c_source.html#l00099">99</a> of file <a class="el" href="transaction_8c_source.html">transaction.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="transaction_8c_source.html#l00088">88</a> of file <a class="el" href="transaction_8c_source.html">transaction.c</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="transaction_8c_a8649ee7d98b5b34c64efa31e274f2534_icgraph.png" border="0" usemap="#transaction_8c_a8649ee7d98b5b34c64efa31e274f2534_icgraph" alt=""/></div>
-<!-- MAP 2 -->
+<!-- MAP 3 -->
 </div>
+
+</div>
+</div>
+<a id="af274d54bdf6f74206feb6c06c2fb6505"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af274d54bdf6f74206feb6c06c2fb6505">&#9670;&nbsp;</a></span>create_new_transaction()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_transaction.html">Transaction</a> create_new_transaction </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structinfos__st.html">infos_st</a> *&#160;</td>
+          <td class="paramname"><em>infos</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">RSA *&#160;</td>
+          <td class="paramname"><em>receiver_public_key</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>amount</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>cause</em>[512], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>asset</em>[512]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="transaction_8c_source.html#l00157">157</a> of file <a class="el" href="transaction_8c_source.html">transaction.c</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="transaction_8c_af274d54bdf6f74206feb6c06c2fb6505_cgraph.png" border="0" usemap="#transaction_8c_af274d54bdf6f74206feb6c06c2fb6505_cgraph" alt=""/></div>
+<!-- MAP 4 -->
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="transaction_8c_af274d54bdf6f74206feb6c06c2fb6505_icgraph.png" border="0" usemap="#transaction_8c_af274d54bdf6f74206feb6c06c2fb6505_icgraph" alt=""/></div>
+<!-- MAP 5 -->
+</div>
+
+</div>
+</div>
+<a id="a3814ab0e7eeeec1a1bd47ee9c1d4c2ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3814ab0e7eeeec1a1bd47ee9c1d4c2ef">&#9670;&nbsp;</a></span>flush_pending_transactions()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void flush_pending_transactions </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_transaction.html">Transaction</a> **&#160;</td>
+          <td class="paramname"><em>transactions</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>nb_transactions</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Delete block transactions in pdt if the block is valid. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">transactions</td><td>block.blockdata.transactions </td></tr>
+    <tr><td class="paramname">nb_transactions</td><td>number of transactions </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="transaction_8c_source.html#l00204">204</a> of file <a class="el" href="transaction_8c_source.html">transaction.c</a>.</p>
 
 </div>
 </div>
@@ -223,12 +339,12 @@ Here is the caller graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The buffer allocated (Must be freed) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="transaction_8c_source.html#l00048">48</a> of file <a class="el" href="transaction_8c_source.html">transaction.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="transaction_8c_source.html#l00040">40</a> of file <a class="el" href="transaction_8c_source.html">transaction.c</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="transaction_8c_a16588449d977a2d5052be7b3639768a8_icgraph.png" border="0" usemap="#transaction_8c_a16588449d977a2d5052be7b3639768a8_icgraph" alt=""/></div>
-<!-- MAP 3 -->
+<!-- MAP 6 -->
 </div>
 
 </div>
@@ -249,12 +365,18 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="transaction_8c_source.html#l00145">145</a> of file <a class="el" href="transaction_8c_source.html">transaction.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="transaction_8c_source.html#l00127">127</a> of file <a class="el" href="transaction_8c_source.html">transaction.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="transaction_8c_a8b26b26139793db7c1860ff96091ca77_cgraph.png" border="0" usemap="#transaction_8c_a8b26b26139793db7c1860ff96091ca77_cgraph" alt=""/></div>
-<!-- MAP 4 -->
+<!-- MAP 7 -->
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="transaction_8c_a8b26b26139793db7c1860ff96091ca77_icgraph.png" border="0" usemap="#transaction_8c_a8b26b26139793db7c1860ff96091ca77_icgraph" alt=""/></div>
+<!-- MAP 8 -->
 </div>
 
 </div>
@@ -285,18 +407,18 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="transaction_8c_source.html#l00135">135</a> of file <a class="el" href="transaction_8c_source.html">transaction.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="transaction_8c_source.html#l00117">117</a> of file <a class="el" href="transaction_8c_source.html">transaction.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="transaction_8c_a4f4e33641ff7466e848182ce420827b6_cgraph.png" border="0" usemap="#transaction_8c_a4f4e33641ff7466e848182ce420827b6_cgraph" alt=""/></div>
-<!-- MAP 5 -->
+<!-- MAP 9 -->
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="transaction_8c_a4f4e33641ff7466e848182ce420827b6_icgraph.png" border="0" usemap="#transaction_8c_a4f4e33641ff7466e848182ce420827b6_icgraph" alt=""/></div>
-<!-- MAP 6 -->
+<!-- MAP 10 -->
 </div>
 
 </div>
@@ -327,18 +449,18 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="transaction_8c_source.html#l00042">42</a> of file <a class="el" href="transaction_8c_source.html">transaction.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="transaction_8c_source.html#l00034">34</a> of file <a class="el" href="transaction_8c_source.html">transaction.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="transaction_8c_a5bff0131aa50faf1cd0236e0b44169eb_cgraph.png" border="0" usemap="#transaction_8c_a5bff0131aa50faf1cd0236e0b44169eb_cgraph" alt=""/></div>
-<!-- MAP 7 -->
+<!-- MAP 11 -->
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="transaction_8c_a5bff0131aa50faf1cd0236e0b44169eb_icgraph.png" border="0" usemap="#transaction_8c_a5bff0131aa50faf1cd0236e0b44169eb_icgraph" alt=""/></div>
-<!-- MAP 8 -->
+<!-- MAP 12 -->
 </div>
 
 </div>
@@ -374,7 +496,7 @@ Here is the caller graph for this function:</div>
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="transaction_8c_a0bd00440f3c97bf7dace6c4e26ea17be_icgraph.png" border="0" usemap="#transaction_8c_a0bd00440f3c97bf7dace6c4e26ea17be_icgraph" alt=""/></div>
-<!-- MAP 9 -->
+<!-- MAP 13 -->
 </div>
 
 </div>

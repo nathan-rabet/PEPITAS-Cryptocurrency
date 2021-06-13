@@ -39,61 +39,61 @@ BlockData
 .RI "RSA * \fBvalidators_public_keys\fP [\fBMAX_VALIDATORS_PER_BLOCK\fP]"
 .br
 .ti -1c
-.RI "char \fBprev_validators_votes\fP [\fBMAX_VALIDATORS_PER_BLOCK\fP/8]"
+.RI "time_t \fBblock_timestamp\fP"
 .br
 .ti -1c
-.RI "time_t \fBblock_timestamp\fP"
+.RI "char \fBprev_validators_votes\fP [\fBNB_VOTES_BITMAP\fP]"
 .br
 .in -1c
 .SH "Detailed Description"
 .PP 
-Definition at line 33 of file block\&.h\&.
+Definition at line 61 of file block\&.h\&.
 .SH "Field Documentation"
 .PP 
 .SS "time_t block_timestamp"
 
 .PP
-Definition at line 48 of file block\&.h\&.
+Definition at line 75 of file block\&.h\&.
 .SS "int epoch_id"
 
 .PP
-Definition at line 36 of file block\&.h\&.
+Definition at line 64 of file block\&.h\&.
 .SS "size_t height"
 
 .PP
-Definition at line 39 of file block\&.h\&.
+Definition at line 67 of file block\&.h\&.
 .SS "char is_prev_block_valid"
 
 .PP
-Definition at line 37 of file block\&.h\&.
+Definition at line 65 of file block\&.h\&.
 .SS "char magic"
 
 .PP
-Definition at line 35 of file block\&.h\&.
+Definition at line 63 of file block\&.h\&.
 .SS "uint16_t nb_transactions"
 
 .PP
-Definition at line 41 of file block\&.h\&.
+Definition at line 69 of file block\&.h\&.
 .SS "int nb_validators"
 
 .PP
-Definition at line 45 of file block\&.h\&.
-.SS "char prev_validators_votes[\fBMAX_VALIDATORS_PER_BLOCK\fP/8]"
+Definition at line 73 of file block\&.h\&.
+.SS "char prev_validators_votes[\fBNB_VOTES_BITMAP\fP]"
 
 .PP
-Definition at line 47 of file block\&.h\&.
+Definition at line 81 of file block\&.h\&.
 .SS "char previous_block_hash[SHA384_DIGEST_LENGTH *2+1]"
 
 .PP
-Definition at line 38 of file block\&.h\&.
+Definition at line 66 of file block\&.h\&.
 .SS "\fBTransaction\fP** transactions"
 
 .PP
-Definition at line 42 of file block\&.h\&.
+Definition at line 70 of file block\&.h\&.
 .SS "RSA* validators_public_keys[\fBMAX_VALIDATORS_PER_BLOCK\fP]"
 
 .PP
-Definition at line 46 of file block\&.h\&.
+Definition at line 74 of file block\&.h\&.
 
 .SH "Author"
 .PP 

@@ -90,20 +90,26 @@ $(document).ready(function(){initNavTree('blockchain__header_8h_source.html','')
 <a href="blockchain__header_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef BLOCKCHAIN_HEADER_H</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define BLOCKCHAIN_HEADER_H</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="block_8h.html">blockchain/block.h</a>&quot;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="network_8h.html">network/network.h</a>&quot;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;sys/stat.h&gt;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keywordtype">void</span> <a class="code" href="blockchain__header_8h.html#a1011109fa5281e4b6406c390393cd051">gen_blockchain_header</a>(<a class="code" href="structinfos__st.html">infos_st</a> *infos);</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="network_8h.html">network/network.h</a>&quot;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="block_8h.html">blockchain/block.h</a>&quot;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="rsa_8h.html">cryptosystem/rsa.h</a>&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="validators_8h.html">validation/validators.h</a>&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;sys/stat.h&gt;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keywordtype">void</span> <a class="code" href="blockchain__header_8h.html#a1011109fa5281e4b6406c390393cd051">gen_blockchain_header</a>(<a class="code" href="structinfos__st.html">infos_st</a> *infos);</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="blockchain__header_8h.html#a535ef7a9f8d2749d92cf31c98c6ac293">get_receiver_remaining_money</a>(<a class="code" href="structinfos__st.html">infos_st</a> *infos, RSA *receiver_public_key);</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="ablock_8h_html"><div class="ttname"><a href="block_8h.html">block.h</a></div></div>
+<div class="ttc" id="avalidators_8h_html"><div class="ttname"><a href="validators_8h.html">validators.h</a></div></div>
 <div class="ttc" id="astructinfos__st_html"><div class="ttname"><a href="structinfos__st.html">infos_st</a></div><div class="ttdef"><b>Definition:</b> <a href="network_8h_source.html#l00055">network.h:55</a></div></div>
 <div class="ttc" id="ablockchain__header_8h_html_a1011109fa5281e4b6406c390393cd051"><div class="ttname"><a href="blockchain__header_8h.html#a1011109fa5281e4b6406c390393cd051">gen_blockchain_header</a></div><div class="ttdeci">void gen_blockchain_header(infos_st *infos)</div><div class="ttdef"><b>Definition:</b> <a href="blockchain__header_8c_source.html#l00009">blockchain_header.c:9</a></div></div>
+<div class="ttc" id="arsa_8h_html"><div class="ttname"><a href="rsa_8h.html">rsa.h</a></div></div>
 <div class="ttc" id="anetwork_8h_html"><div class="ttname"><a href="network_8h.html">network.h</a></div></div>
+<div class="ttc" id="ablockchain__header_8h_html_a535ef7a9f8d2749d92cf31c98c6ac293"><div class="ttname"><a href="blockchain__header_8h.html#a535ef7a9f8d2749d92cf31c98c6ac293">get_receiver_remaining_money</a></div><div class="ttdeci">size_t get_receiver_remaining_money(infos_st *infos, RSA *receiver_public_key)</div><div class="ttdef"><b>Definition:</b> <a href="blockchain__header_8c_source.html#l00040">blockchain_header.c:40</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

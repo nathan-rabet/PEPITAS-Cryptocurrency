@@ -7,7 +7,7 @@ var struct_block_data =
     [ "magic", "struct_block_data.html#a3f86b2fdc165f662a1d3a69ab9cb5fe2", null ],
     [ "nb_transactions", "struct_block_data.html#a6a025b5ff7c48992e8d360c35f02b7e8", null ],
     [ "nb_validators", "struct_block_data.html#a7e3cf87673d9cf2f1b5341ad61427fea", null ],
-    [ "prev_validators_votes", "struct_block_data.html#a6cfae1fadd5c4029135e08bef738496f", null ],
+    [ "prev_validators_votes", "struct_block_data.html#a42525cc84cbc2e5833579b42b3c2b220", null ],
     [ "previous_block_hash", "struct_block_data.html#a0167d1bdc7d4e5d8d423188581cbb064", null ],
     [ "transactions", "struct_block_data.html#acf585c1809511c4f5b5366bb2bc2e855", null ],
     [ "validators_public_keys", "struct_block_data.html#ae6f252ad04c4e1be04547b6591bc290a", null ]

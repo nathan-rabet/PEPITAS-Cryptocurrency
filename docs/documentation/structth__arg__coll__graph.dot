@@ -7,5 +7,5 @@ digraph "th_arg"
   Node2 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" infos" ,fontname="Helvetica"];
   Node2 [label="infos_st",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structinfos__st.html",tooltip=" "];
   Node3 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" client_con" ,fontname="Helvetica"];
-  Node3 [label="client_connection",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structclient__connection.html",tooltip=" "];
+  Node3 [label="connection",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structconnection.html",tooltip=" "];
 }

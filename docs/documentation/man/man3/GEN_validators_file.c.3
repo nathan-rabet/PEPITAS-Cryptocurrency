@@ -22,6 +22,8 @@
 .br
 \fC#include 'tests_macros\&.h'\fP
 .br
+\fC#include 'validation/validators\&.h'\fP
+.br
 \fC#include 'cryptosystem/rsa\&.h'\fP
 .br
 
@@ -55,11 +57,11 @@ Definition at line 2 of file GEN_validators_file\&.c\&.
 .SS "#define NB_FAKE_VALIDATORS   10"
 
 .PP
-Definition at line 14 of file GEN_validators_file\&.c\&.
+Definition at line 15 of file GEN_validators_file\&.c\&.
 .SS "#define str(x)   #x"
 
 .PP
-Definition at line 15 of file GEN_validators_file\&.c\&.
+Definition at line 16 of file GEN_validators_file\&.c\&.
 .SH "Function Documentation"
 .PP 
 .SS "void gen_validators_file (char path[])"
@@ -74,7 +76,7 @@ Generate a mock validators states file\&.
 .PP
 \fBSee also\fP
 .RS 4
-For one stake transaction, power += amount / block_height + amount Foreach stake withdraw, power -= power * withdraw_stake / user_total_stake
+For one stake transaction, power += amount / (\fBblock_height\fP + 1) + amount Foreach stake withdraw, power -= power * withdraw_stake / user_total_stake
 .RE
 .PP
 validators states file description Header : nb_validators[sizeof(size_t)], total_stake[sizeof(size_t)], block_height_validity[sizeof(size_t)] '
@@ -83,7 +85,7 @@ validators states file description Header : nb_validators[sizeof(size_t)], total
 .br
 '[sizeof(char)] 
 .PP
-Definition at line 31 of file GEN_validators_file\&.c\&.
+Definition at line 32 of file GEN_validators_file\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for PEPITAS CRYPTOCURRENCY from the source code\&.

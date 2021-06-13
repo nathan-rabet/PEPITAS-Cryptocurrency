@@ -1,7 +1,11 @@
 var searchData=
 [
-  ['receiver_5fpublic_5fkey_638',['receiver_public_key',['../struct_transaction_data.html#af9a5ebb2d24125d125f035e74830121e',1,'TransactionData']]],
-  ['receiver_5fremaining_5fmoney_639',['receiver_remaining_money',['../struct_transaction_data.html#a510c12c3daa195d76aa4c2ac73b8b11f',1,'TransactionData']]],
-  ['recipient_5fkey_640',['recipient_key',['../ui_8c.html#a9856845eebffe4f02ca0b6c491816d1b',1,'ui.c']]],
-  ['recover_5fentry_641',['recover_entry',['../ui_8c.html#a30b512f884b7c54ff9bfe3f8b42a665f',1,'ui.c']]]
+  ['sender_5fpublic_5fkey_768',['sender_public_key',['../struct_transaction_data.html#a384ee248985e672c52946db057d05928',1,'TransactionData']]],
+  ['sender_5fremaining_5fmoney_769',['sender_remaining_money',['../struct_transaction_data.html#a1b1eb3251076e2d5f443c12a1a21757c',1,'TransactionData']]],
+  ['serv_5ftype_770',['serv_type',['../structinfos__st.html#a09e60e6614ae4cb4eb36529d7133bbd3',1,'infos_st']]],
+  ['stake_5famount_771',['stake_amount',['../struct_wallet.html#a9b06cd960f30d00225a5f0a1608c00c2',1,'Wallet']]],
+  ['stake_5flabel1_772',['stake_label1',['../labels_8h.html#a4722da076b88ed9d7695ae3d38945692',1,'stake_label1():&#160;ui.c'],['../ui_8h.html#a4722da076b88ed9d7695ae3d38945692',1,'stake_label1():&#160;ui.c'],['../ui_8c.html#a4722da076b88ed9d7695ae3d38945692',1,'stake_label1():&#160;ui.c']]],
+  ['stake_5flabel2_773',['stake_label2',['../labels_8h.html#a16f98e00efbcc9f5356cd26ddde7cc53',1,'stake_label2():&#160;ui.c'],['../ui_8h.html#a16f98e00efbcc9f5356cd26ddde7cc53',1,'stake_label2():&#160;ui.c'],['../ui_8c.html#a16f98e00efbcc9f5356cd26ddde7cc53',1,'stake_label2():&#160;ui.c']]],
+  ['stake_5flabel3_774',['stake_label3',['../labels_8h.html#ac7f6d61c5f9e17e359513909d01dbbd0',1,'stake_label3():&#160;ui.c'],['../ui_8h.html#ac7f6d61c5f9e17e359513909d01dbbd0',1,'stake_label3():&#160;ui.c'],['../ui_8c.html#ac7f6d61c5f9e17e359513909d01dbbd0',1,'stake_label3():&#160;ui.c']]],
+  ['synchro_5flabel_775',['synchro_label',['../labels_8h.html#af7ca2b7a2cb2c8e008ef7c338eb725cc',1,'synchro_label():&#160;ui.c'],['../ui_8h.html#af7ca2b7a2cb2c8e008ef7c338eb725cc',1,'synchro_label():&#160;ui.c'],['../ui_8c.html#af7ca2b7a2cb2c8e008ef7c338eb725cc',1,'synchro_label():&#160;ui.c']]]
 ];

@@ -1,0 +1,86 @@
+.TH "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__v_a_l_i_d_a_t_i_o_n__protocol" 3 "Sun Jun 13 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__v_a_l_i_d_a_t_i_o_n__protocol \- PEPITAS VALIDATION PROTOCOL 
+
+.SH "Prerequisites"
+.PP
+To understand this documentation, you need to have a good understanding of the blockchain data structure used in cryptocurrencies and the concept of the proof of stake\&. 
+.SH "Introduction"
+.PP
+PEPITAS is a C written cryptocurrency\&. At the beginning of cryptocurrencies, the method (or concensus) used to guarantee the network security was the \fIproof of work\fP, users computers had to calculate some hashes to validate transactions (also called \fImining\fP)\&. These calculations ensure a good security,but are not eco-frendly (because of the huge amount of CPU's and GPU's in charge of calculating hashes)\&. This issue enrolled a new concensus : the \fIproof of stake\fP\&. This type of validation protocol doesn't use calculations to prove a transaction validity, but the money users putted in a bank, named the \fIstake\fP\&. The more a user send money to the stake, the more he has a chance to be selected to create a new block, and by the time, to earn money as a reward\&. It is important to note that if the other users of the network detect that a validator validated fraudulent transactions, the corresponding validator will lose some part of his stake\&. This punishment ensure that all users have more interest to validate valid transactions instead of fraudulent ones\&.
+.SH "Definitions"
+.PP
+.SS "VALIDATOR"
+Members of the network who can validate and create block\&. Each of there \fBSTAKE\fP must contains at least $50$ PEPITAS\&. 
+.SS "COMMITTEE"
+A list containing public keys, correpsonding to some accounts on the network\&. Each account in this list is allowed to participate to the validation and the creation of a new block for the blockchain network\&. A committee is pseudo-randomly selected and is known by every node of the network\&. It changes every time a block is added to the blockchain\&. The more a user puts money in his stake, the more he has a chance to appear and have a low ID in a committee\&. 
+.SS "EPOCH MAN"
+The committee (list) ID of the block creator\&. The EPOCH MAN is selected by priority order in a committee with this rule : $min(awaken_validator_ID)$ For example if the committee contains 10 members and the first awaken member is the third, EPOCH MAN is the third member of this comitte\&. An awaken member is a committee member who broadcast a block to the network or a committee member that send a verdict on a broadcasted block\&.
+.SS "COMITAL"
+If the committee contains $n$ members and the selected EPOCH MAN is the validator with the ID $m$, the comital members ID are from $0$ to $m$ (excluded) and from $m+1$ to $n$ (excluded)\&.
+.SS "VOTE"
+A vote is a validator judgment about a the validity of a certain block\&. If a validator think that a block is valid, he will send a \fBpostive\fP vote, otherwise, he will send a \fBnegative\fP one\&. Note that the block at height $0$ (genesis block) is considered as valid by default\&.
+.SS "PLÈBE"
+All non-validators members\&. Each of there \fBSTAKE\fP are under $50$ PEPITAS\&.
+.SS "MEMPOOL"
+A directory where all pending transactions (transactions that are not in a block) are stocked\&.
+.SH "How EPOCH MAN creates a block"
+.PP
+Lets admit that the current validated block is at height $n$\&.
+.PP
+To create a block, EPOCH MAN do several things : 
+.SS "Last block validity checking"
+.IP "\(bu" 2
+First, he creates a new empty block (at height $n+1$)\&.
+.IP "\(bu" 2
+Then, he check if the validators votes ratio of the block at height $n$\&.
+.IP "  \(bu" 4
+If the block at height $n$ has more positive than negative votes\&.
+.IP "    \(bu" 6
+Writes on the block at height $n+1$ that the block at height $n$ is valid\&.
+.IP "    \(bu" 6
+Flushes the transactions in the block at height $n$ from the mempool\&.
+.PP
+
+.IP "  \(bu" 4
+Else
+.IP "    \(bu" 6
+Writes on the block at height $n+1$ that the block at height $n$ is not valid\&.
+.PP
+
+.PP
+
+.PP
+.SS "Rewards and punishments attribution"
+To motivate the network to do the job correctly (without corruption), EPOCH MAN will create new special transactions called \fIrewards\fP and \fIpunishments\fP\&. Rewards are transactions that '*send*' money to a validator (actually this transaction creates money) and punishments that \fItake of\fP money from a validator (this transaction delete money from an account)\&. Before this step, EPOCH MAN checked the validators votes ratio of the block at height $n$, then, he will create rewards transactions for the majority and punishments for the others\&. If there is equality on votes, the block is considered as non-valid and the same rule is applied\&.
+.SS "Broadcast"
+After all these steps, EPOCH MAN broadcasts his new block\&.
+.SH "How COMITAL send their verdicts"
+.PP
+.IP "1." 4
+A validator waits for a block from a validator that has a lower ID than him in the next committee\&. If it receive one, he will start computing it\&.
+.IP "2." 4
+Verify the validity of the received block\&.
+.IP "3." 4
+Send a verdict\&.
+.IP "4." 4
+Reiterate if the validator receive a block from another EPOCH MAN with an ID lower than the previous EPOCH MAN, for a certain amount of time\&.
+.PP
+.PP
+Note that if a member of the COMITAL doesn't send any verdict, he will be punished by the next EPOCH MAN\&.
+.SH "How PLÈBE adhere blocks"
+.PP
+.IP "1." 4
+A node waits for a block from a validator
+.IP "2." 4
+Adhere all verdicts from the next committee
+.IP "3." 4
+Reiterate for a certain amount of time, using the same rule as the COMITAL\&.
+.IP "4." 4
+Keep the received block
+.IP "5." 4
+If the previous block is valid (info stored in the received block), then flushes the transactions in the previous block from the mempool\&. 
+.PP
+

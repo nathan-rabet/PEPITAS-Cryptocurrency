@@ -91,7 +91,6 @@ $(document).ready(function(){initNavTree('validators_8c.html',''); initResizable
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="validators_8h_source.html">validation/validators.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="math_8h_source.html">misc/math.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for validators.c:</div>
 <div class="dyncontent">
@@ -103,21 +102,26 @@ Include dependency graph for validators.c:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:a63ae7a32d04d17e1ac38f0d19197e109"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="validators_8c.html#a63ae7a32d04d17e1ac38f0d19197e109">NB_RSA_CHUNK</a>&#160;&#160;&#160;2048/64</td></tr>
+<tr class="memitem:a63ae7a32d04d17e1ac38f0d19197e109"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="validators_8c.html#a63ae7a32d04d17e1ac38f0d19197e109">NB_RSA_CHUNK</a>&#160;&#160;&#160;2048 / 64</td></tr>
 <tr class="separator:a63ae7a32d04d17e1ac38f0d19197e109"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a05aa8039c995a645fa816cdb194d41b0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="validators_8c.html#a05aa8039c995a645fa816cdb194d41b0">HEADER_VALIDATORS_STATE_SIZE</a>&#160;&#160;&#160;3 * sizeof(size_t) + sizeof(char) + (<a class="el" href="rsa_8h.html#abff8d9514a23647de99e49913084f135">RSA_KEY_SIZE</a> + 2 * sizeof(size_t) + sizeof(char)) * validator_id</td></tr>
+<tr class="separator:a05aa8039c995a645fa816cdb194d41b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a7e3a2411fd0fab14465d33a5c0964aa6"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="validators_8c.html#a7e3a2411fd0fab14465d33a5c0964aa6">define_nb_validators</a> (size_t n)</td></tr>
-<tr class="separator:a7e3a2411fd0fab14465d33a5c0964aa6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a47f27f9d65e1a683a3eb7da762d267b2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="validators_8c.html#a47f27f9d65e1a683a3eb7da762d267b2">define_nb_validators</a> (size_t n)</td></tr>
+<tr class="separator:a47f27f9d65e1a683a3eb7da762d267b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6e675a99d3f446b36542c2a9facb2a35"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="validators_8c.html#a6e675a99d3f446b36542c2a9facb2a35">hash_block_transactions_epoch</a> (<a class="el" href="struct_block.html">Block</a> *block)</td></tr>
 <tr class="separator:a6e675a99d3f446b36542c2a9facb2a35"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1a1ab9ec31465da0d83b1d24a12d54bd"><td class="memItemLeft" align="right" valign="top">RSA **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="validators_8c.html#a1a1ab9ec31465da0d83b1d24a12d54bd">get_comittee</a> (size_t block_height, size_t *nb_validators)</td></tr>
-<tr class="memdesc:a1a1ab9ec31465da0d83b1d24a12d54bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the a comittee RSA public keys on a specific epoch.  <a href="validators_8c.html#a1a1ab9ec31465da0d83b1d24a12d54bd">More...</a><br /></td></tr>
-<tr class="separator:a1a1ab9ec31465da0d83b1d24a12d54bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a46a683358e281bebc6b77b1084b05bbb"><td class="memItemLeft" align="right" valign="top">RSA **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="validators_8c.html#a46a683358e281bebc6b77b1084b05bbb">get_next_comittee</a> (size_t *nb_validators)</td></tr>
-<tr class="memdesc:a46a683358e281bebc6b77b1084b05bbb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the a comittee RSA public keys on a specific epoch.  <a href="validators_8c.html#a46a683358e281bebc6b77b1084b05bbb">More...</a><br /></td></tr>
-<tr class="separator:a46a683358e281bebc6b77b1084b05bbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10b429b2db8983a1dff8503ada48d785"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="validators_8c.html#a10b429b2db8983a1dff8503ada48d785">init_validators_state</a> ()</td></tr>
+<tr class="memdesc:a10b429b2db8983a1dff8503ada48d785"><td class="mdescLeft">&#160;</td><td class="mdescRight">Init the <code>validators.state</code> file if it doesn't exists.  <a href="validators_8c.html#a10b429b2db8983a1dff8503ada48d785">More...</a><br /></td></tr>
+<tr class="separator:a10b429b2db8983a1dff8503ada48d785"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5cd8d6e86ed65da951a06ef195864eff"><td class="memItemLeft" align="right" valign="top">RSA **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="validators_8c.html#a5cd8d6e86ed65da951a06ef195864eff">get_comittee</a> (size_t <a class="el" href="ui_8c.html#ac58136f7a44535d618d5cc333265f7c5">block_height</a>, int *nb_validators)</td></tr>
+<tr class="memdesc:a5cd8d6e86ed65da951a06ef195864eff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the a comittee RSA public keys on a specific epoch.  <a href="validators_8c.html#a5cd8d6e86ed65da951a06ef195864eff">More...</a><br /></td></tr>
+<tr class="separator:a5cd8d6e86ed65da951a06ef195864eff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f0e12279812a9f0842827e00fb8d668"><td class="memItemLeft" align="right" valign="top">RSA **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="validators_8c.html#a2f0e12279812a9f0842827e00fb8d668">get_next_comittee</a> (int *nb_validators)</td></tr>
+<tr class="memdesc:a2f0e12279812a9f0842827e00fb8d668"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the a comittee RSA public keys on a specific epoch.  <a href="validators_8c.html#a2f0e12279812a9f0842827e00fb8d668">More...</a><br /></td></tr>
+<tr class="separator:a2f0e12279812a9f0842827e00fb8d668"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8f6120654a072409eadb156682a6c3af"><td class="memItemLeft" align="right" valign="top">ssize_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="validators_8c.html#a8f6120654a072409eadb156682a6c3af">get_validators_states_total_stake</a> ()</td></tr>
 <tr class="memdesc:a8f6120654a072409eadb156682a6c3af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the total stake of the network (parse 'validators.state')  <a href="validators_8c.html#a8f6120654a072409eadb156682a6c3af">More...</a><br /></td></tr>
 <tr class="separator:a8f6120654a072409eadb156682a6c3af"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -136,19 +140,27 @@ Functions</h2></td></tr>
 <tr class="memitem:ab2ce7e402e4a49a35d279a6056af3b37"><td class="memItemLeft" align="right" valign="top">RSA *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="validators_8c.html#ab2ce7e402e4a49a35d279a6056af3b37">get_validator_pkey</a> (size_t validator_id)</td></tr>
 <tr class="memdesc:ab2ce7e402e4a49a35d279a6056af3b37"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the validator pkey as RSA* (parse 'validators.state')  <a href="validators_8c.html#ab2ce7e402e4a49a35d279a6056af3b37">More...</a><br /></td></tr>
 <tr class="separator:ab2ce7e402e4a49a35d279a6056af3b37"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1f4c5cfc38471a14cbc6e5bd964ecdc4"><td class="memItemLeft" align="right" valign="top">ssize_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="validators_8c.html#a1f4c5cfc38471a14cbc6e5bd964ecdc4">get_validator_id</a> (char pkey[])</td></tr>
-<tr class="memdesc:a1f4c5cfc38471a14cbc6e5bd964ecdc4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the validator id in 'validators.state'.  <a href="validators_8c.html#a1f4c5cfc38471a14cbc6e5bd964ecdc4">More...</a><br /></td></tr>
-<tr class="separator:a1f4c5cfc38471a14cbc6e5bd964ecdc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9750bcfcbe82832c9603ec21ad61371"><td class="memItemLeft" align="right" valign="top">ssize_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="validators_8c.html#ad9750bcfcbe82832c9603ec21ad61371">get_validator_id</a> (RSA *pkey)</td></tr>
+<tr class="memdesc:ad9750bcfcbe82832c9603ec21ad61371"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the validator id in 'validators.state'.  <a href="validators_8c.html#ad9750bcfcbe82832c9603ec21ad61371">More...</a><br /></td></tr>
+<tr class="separator:ad9750bcfcbe82832c9603ec21ad61371"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45a8d2bd3e658918109e66d96c9055c4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="validators_8c.html#a45a8d2bd3e658918109e66d96c9055c4">i_am_commitee_member</a> ()</td></tr>
+<tr class="memdesc:a45a8d2bd3e658918109e66d96c9055c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the current user is a member of the next comitee.  <a href="validators_8c.html#a45a8d2bd3e658918109e66d96c9055c4">More...</a><br /></td></tr>
+<tr class="separator:a45a8d2bd3e658918109e66d96c9055c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30aeb0df2820fa2744f3c534faaa4173"><td class="memItemLeft" align="right" valign="top">ssize_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="validators_8c.html#a30aeb0df2820fa2744f3c534faaa4173">_create_validator_item</a> (FILE *validators_states, struct <a class="el" href="structvalidators__state__header.html">validators_state_header</a> *updated_validators_state_header, <a class="el" href="struct_transaction.html">Transaction</a> *transaction, bool is_key_on_sender)</td></tr>
+<tr class="separator:a30aeb0df2820fa2744f3c534faaa4173"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb995f2242245cf16710ddba0a0724bb"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="validators_8c.html#acb995f2242245cf16710ddba0a0724bb">update_validators_state</a> (<a class="el" href="struct_block.html">Block</a> *block)</td></tr>
+<tr class="memdesc:acb995f2242245cf16710ddba0a0724bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Given a block, update the 'validators.state' with the transactions.  <a href="validators_8c.html#acb995f2242245cf16710ddba0a0724bb">More...</a><br /></td></tr>
+<tr class="separator:acb995f2242245cf16710ddba0a0724bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="a63ae7a32d04d17e1ac38f0d19197e109"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a63ae7a32d04d17e1ac38f0d19197e109">&#9670;&nbsp;</a></span>NB_RSA_CHUNK</h2>
+<a id="a05aa8039c995a645fa816cdb194d41b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a05aa8039c995a645fa816cdb194d41b0">&#9670;&nbsp;</a></span>HEADER_VALIDATORS_STATE_SIZE</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define NB_RSA_CHUNK&#160;&#160;&#160;2048/64</td>
+          <td class="memname">#define HEADER_VALIDATORS_STATE_SIZE&#160;&#160;&#160;3 * sizeof(size_t) + sizeof(char) + (<a class="el" href="rsa_8h.html#abff8d9514a23647de99e49913084f135">RSA_KEY_SIZE</a> + 2 * sizeof(size_t) + sizeof(char)) * validator_id</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -157,15 +169,85 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<h2 class="groupheader">Function Documentation</h2>
-<a id="a7e3a2411fd0fab14465d33a5c0964aa6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7e3a2411fd0fab14465d33a5c0964aa6">&#9670;&nbsp;</a></span>define_nb_validators()</h2>
+<a id="a63ae7a32d04d17e1ac38f0d19197e109"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63ae7a32d04d17e1ac38f0d19197e109">&#9670;&nbsp;</a></span>NB_RSA_CHUNK</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint16_t define_nb_validators </td>
+          <td class="memname">#define NB_RSA_CHUNK&#160;&#160;&#160;2048 / 64</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="validators_8c_source.html#l00003">3</a> of file <a class="el" href="validators_8c_source.html">validators.c</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a30aeb0df2820fa2744f3c534faaa4173"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a30aeb0df2820fa2744f3c534faaa4173">&#9670;&nbsp;</a></span>_create_validator_item()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ssize_t _create_validator_item </td>
+          <td>(</td>
+          <td class="paramtype">FILE *&#160;</td>
+          <td class="paramname"><em>validators_states</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct <a class="el" href="structvalidators__state__header.html">validators_state_header</a> *&#160;</td>
+          <td class="paramname"><em>updated_validators_state_header</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_transaction.html">Transaction</a> *&#160;</td>
+          <td class="paramname"><em>transaction</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>is_key_on_sender</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="validators_8c_source.html#l00296">296</a> of file <a class="el" href="validators_8c_source.html">validators.c</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="validators_8c_a30aeb0df2820fa2744f3c534faaa4173_cgraph.png" border="0" usemap="#validators_8c_a30aeb0df2820fa2744f3c534faaa4173_cgraph" alt=""/></div>
+<!-- MAP 1 -->
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="validators_8c_a30aeb0df2820fa2744f3c534faaa4173_icgraph.png" border="0" usemap="#validators_8c_a30aeb0df2820fa2744f3c534faaa4173_icgraph" alt=""/></div>
+<!-- MAP 2 -->
+</div>
+
+</div>
+</div>
+<a id="a47f27f9d65e1a683a3eb7da762d267b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a47f27f9d65e1a683a3eb7da762d267b2">&#9670;&nbsp;</a></span>define_nb_validators()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int define_nb_validators </td>
           <td>(</td>
           <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>n</em></td><td>)</td>
@@ -175,17 +257,11 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="validators_8c_source.html#l00006">6</a> of file <a class="el" href="validators_8c_source.html">validators.c</a>.</p>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="validators_8c_a7e3a2411fd0fab14465d33a5c0964aa6_icgraph.png" border="0" usemap="#validators_8c_a7e3a2411fd0fab14465d33a5c0964aa6_icgraph" alt=""/></div>
-<!-- MAP 1 -->
-</div>
 
 </div>
 </div>
-<a id="a1a1ab9ec31465da0d83b1d24a12d54bd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1a1ab9ec31465da0d83b1d24a12d54bd">&#9670;&nbsp;</a></span>get_comittee()</h2>
+<a id="a5cd8d6e86ed65da951a06ef195864eff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5cd8d6e86ed65da951a06ef195864eff">&#9670;&nbsp;</a></span>get_comittee()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -199,7 +275,7 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t *&#160;</td>
+          <td class="paramtype">int *&#160;</td>
           <td class="paramname"><em>nb_validators</em>&#160;</td>
         </tr>
         <tr>
@@ -221,24 +297,12 @@ Here is the caller graph for this function:</div>
 <dl class="section see"><dt>See also</dt><dd>The 'next block' is referring to block after the last block available OFFLINE </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>[*RSA] </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="validators_8c_source.html#l00032">32</a> of file <a class="el" href="validators_8c_source.html">validators.c</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="validators_8c_a1a1ab9ec31465da0d83b1d24a12d54bd_cgraph.png" border="0" usemap="#validators_8c_a1a1ab9ec31465da0d83b1d24a12d54bd_cgraph" alt=""/></div>
-<!-- MAP 2 -->
-</div>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="validators_8c_a1a1ab9ec31465da0d83b1d24a12d54bd_icgraph.png" border="0" usemap="#validators_8c_a1a1ab9ec31465da0d83b1d24a12d54bd_icgraph" alt=""/></div>
-<!-- MAP 3 -->
-</div>
+<p class="definition">Definition at line <a class="el" href="validators_8c_source.html#l00046">46</a> of file <a class="el" href="validators_8c_source.html">validators.c</a>.</p>
 
 </div>
 </div>
-<a id="a46a683358e281bebc6b77b1084b05bbb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a46a683358e281bebc6b77b1084b05bbb">&#9670;&nbsp;</a></span>get_next_comittee()</h2>
+<a id="a2f0e12279812a9f0842827e00fb8d668"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f0e12279812a9f0842827e00fb8d668">&#9670;&nbsp;</a></span>get_next_comittee()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -246,7 +310,7 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="memname">RSA** get_next_comittee </td>
           <td>(</td>
-          <td class="paramtype">size_t *&#160;</td>
+          <td class="paramtype">int *&#160;</td>
           <td class="paramname"><em>nb_validators</em></td><td>)</td>
           <td></td>
         </tr>
@@ -256,7 +320,6 @@ Here is the caller graph for this function:</div>
 <p>Get the a comittee RSA public keys on a specific epoch. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">block_height</td><td>The height of the block you want a comitte from </td></tr>
     <tr><td class="paramname">nb_validators</td><td>return value, the number of selected validators </td></tr>
   </table>
   </dd>
@@ -264,24 +327,18 @@ Here is the caller graph for this function:</div>
 <dl class="section see"><dt>See also</dt><dd>The 'next block' is referring to block after the last block available OFFLINE </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>[*RSA] </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="validators_8c_source.html#l00124">124</a> of file <a class="el" href="validators_8c_source.html">validators.c</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="validators_8c_a46a683358e281bebc6b77b1084b05bbb_cgraph.png" border="0" usemap="#validators_8c_a46a683358e281bebc6b77b1084b05bbb_cgraph" alt=""/></div>
-<!-- MAP 4 -->
-</div>
+<p class="definition">Definition at line <a class="el" href="validators_8c_source.html#l00135">135</a> of file <a class="el" href="validators_8c_source.html">validators.c</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="validators_8c_a46a683358e281bebc6b77b1084b05bbb_icgraph.png" border="0" usemap="#validators_8c_a46a683358e281bebc6b77b1084b05bbb_icgraph" alt=""/></div>
-<!-- MAP 5 -->
+<div class="center"><img src="validators_8c_a2f0e12279812a9f0842827e00fb8d668_icgraph.png" border="0" usemap="#validators_8c_a2f0e12279812a9f0842827e00fb8d668_icgraph" alt=""/></div>
+<!-- MAP 3 -->
 </div>
 
 </div>
 </div>
-<a id="a1f4c5cfc38471a14cbc6e5bd964ecdc4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1f4c5cfc38471a14cbc6e5bd964ecdc4">&#9670;&nbsp;</a></span>get_validator_id()</h2>
+<a id="ad9750bcfcbe82832c9603ec21ad61371"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9750bcfcbe82832c9603ec21ad61371">&#9670;&nbsp;</a></span>get_validator_id()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -289,8 +346,8 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="memname">ssize_t get_validator_id </td>
           <td>(</td>
-          <td class="paramtype">char&#160;</td>
-          <td class="paramname"><em>pkey</em>[]</td><td>)</td>
+          <td class="paramtype">RSA *&#160;</td>
+          <td class="paramname"><em>pkey</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -299,18 +356,24 @@ Here is the caller graph for this function:</div>
 <p>Get the validator id in 'validators.state'. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">pkey</td><td>The string public key (without --&mdash;BEGIN RSA KEY--&mdash; &amp; --&mdash;END RSA KEY--&mdash;) </td></tr>
+    <tr><td class="paramname">pkey</td><td>The RSA public key </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>ssize_t, the validator index </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="validators_8c_source.html#l00209">209</a> of file <a class="el" href="validators_8c_source.html">validators.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="validators_8c_source.html#l00247">247</a> of file <a class="el" href="validators_8c_source.html">validators.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="validators_8c_a1f4c5cfc38471a14cbc6e5bd964ecdc4_cgraph.png" border="0" usemap="#validators_8c_a1f4c5cfc38471a14cbc6e5bd964ecdc4_cgraph" alt=""/></div>
-<!-- MAP 6 -->
+<div class="center"><img src="validators_8c_ad9750bcfcbe82832c9603ec21ad61371_cgraph.png" border="0" usemap="#validators_8c_ad9750bcfcbe82832c9603ec21ad61371_cgraph" alt=""/></div>
+<!-- MAP 4 -->
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="validators_8c_ad9750bcfcbe82832c9603ec21ad61371_icgraph.png" border="0" usemap="#validators_8c_ad9750bcfcbe82832c9603ec21ad61371_icgraph" alt=""/></div>
+<!-- MAP 5 -->
 </div>
 
 </div>
@@ -340,12 +403,12 @@ Here is the call graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>RSA* </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="validators_8c_source.html#l00188">188</a> of file <a class="el" href="validators_8c_source.html">validators.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="validators_8c_source.html#l00216">216</a> of file <a class="el" href="validators_8c_source.html">validators.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="validators_8c_ab2ce7e402e4a49a35d279a6056af3b37_cgraph.png" border="0" usemap="#validators_8c_ab2ce7e402e4a49a35d279a6056af3b37_cgraph" alt=""/></div>
-<!-- MAP 7 -->
+<!-- MAP 6 -->
 </div>
 
 </div>
@@ -375,12 +438,12 @@ Here is the call graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>ssize_t </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="validators_8c_source.html#l00176">176</a> of file <a class="el" href="validators_8c_source.html">validators.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="validators_8c_source.html#l00199">199</a> of file <a class="el" href="validators_8c_source.html">validators.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="validators_8c_ac107ed39faf1ba48ff297d5728fdd634_cgraph.png" border="0" usemap="#validators_8c_ac107ed39faf1ba48ff297d5728fdd634_cgraph" alt=""/></div>
-<!-- MAP 8 -->
+<!-- MAP 7 -->
 </div>
 
 </div>
@@ -410,12 +473,12 @@ Here is the call graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>ssize_t </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="validators_8c_source.html#l00164">164</a> of file <a class="el" href="validators_8c_source.html">validators.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="validators_8c_source.html#l00182">182</a> of file <a class="el" href="validators_8c_source.html">validators.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="validators_8c_ae3fb25bafbbe141b3e04c5a85c6f26c1_cgraph.png" border="0" usemap="#validators_8c_ae3fb25bafbbe141b3e04c5a85c6f26c1_cgraph" alt=""/></div>
-<!-- MAP 9 -->
+<!-- MAP 8 -->
 </div>
 
 </div>
@@ -438,11 +501,17 @@ Here is the call graph for this function:</div>
 <p>Get the validators states block height validity (parse 'validators.state') </p>
 <dl class="section return"><dt>Returns</dt><dd>ssize_t </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="validators_8c_source.html#l00152">152</a> of file <a class="el" href="validators_8c_source.html">validators.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="validators_8c_source.html#l00168">168</a> of file <a class="el" href="validators_8c_source.html">validators.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="validators_8c_add21456c69726d58c43b35b7a2756dc8_cgraph.png" border="0" usemap="#validators_8c_add21456c69726d58c43b35b7a2756dc8_cgraph" alt=""/></div>
+<!-- MAP 9 -->
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="validators_8c_add21456c69726d58c43b35b7a2756dc8_icgraph.png" border="0" usemap="#validators_8c_add21456c69726d58c43b35b7a2756dc8_icgraph" alt=""/></div>
 <!-- MAP 10 -->
 </div>
 
@@ -466,7 +535,7 @@ Here is the call graph for this function:</div>
 <p>Get the number of validators of the network (parse 'validators.state') </p>
 <dl class="section return"><dt>Returns</dt><dd>ssize_t </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="validators_8c_source.html#l00141">141</a> of file <a class="el" href="validators_8c_source.html">validators.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="validators_8c_source.html#l00154">154</a> of file <a class="el" href="validators_8c_source.html">validators.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -494,7 +563,7 @@ Here is the call graph for this function:</div>
 <p>Get the total stake of the network (parse 'validators.state') </p>
 <dl class="section return"><dt>Returns</dt><dd>ssize_t </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="validators_8c_source.html#l00129">129</a> of file <a class="el" href="validators_8c_source.html">validators.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="validators_8c_source.html#l00140">140</a> of file <a class="el" href="validators_8c_source.html">validators.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -520,12 +589,108 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="validators_8c_source.html#l00020">20</a> of file <a class="el" href="validators_8c_source.html">validators.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="validators_8c_source.html#l00021">21</a> of file <a class="el" href="validators_8c_source.html">validators.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="validators_8c_a6e675a99d3f446b36542c2a9facb2a35_cgraph.png" border="0" usemap="#validators_8c_a6e675a99d3f446b36542c2a9facb2a35_cgraph" alt=""/></div>
 <!-- MAP 13 -->
+</div>
+
+</div>
+</div>
+<a id="a45a8d2bd3e658918109e66d96c9055c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45a8d2bd3e658918109e66d96c9055c4">&#9670;&nbsp;</a></span>i_am_commitee_member()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int i_am_commitee_member </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Check if the current user is a member of the next comitee. </p>
+<dl class="section return"><dt>Returns</dt><dd>The id in the comittee, -1 if you are not member of the comittee </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="validators_8c_source.html#l00281">281</a> of file <a class="el" href="validators_8c_source.html">validators.c</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="validators_8c_a45a8d2bd3e658918109e66d96c9055c4_icgraph.png" border="0" usemap="#validators_8c_a45a8d2bd3e658918109e66d96c9055c4_icgraph" alt=""/></div>
+<!-- MAP 14 -->
+</div>
+
+</div>
+</div>
+<a id="a10b429b2db8983a1dff8503ada48d785"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a10b429b2db8983a1dff8503ada48d785">&#9670;&nbsp;</a></span>init_validators_state()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void init_validators_state </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Init the <code>validators.state</code> file if it doesn't exists. </p>
+
+<p class="definition">Definition at line <a class="el" href="validators_8c_source.html#l00033">33</a> of file <a class="el" href="validators_8c_source.html">validators.c</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="validators_8c_a10b429b2db8983a1dff8503ada48d785_icgraph.png" border="0" usemap="#validators_8c_a10b429b2db8983a1dff8503ada48d785_icgraph" alt=""/></div>
+<!-- MAP 15 -->
+</div>
+
+</div>
+</div>
+<a id="acb995f2242245cf16710ddba0a0724bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acb995f2242245cf16710ddba0a0724bb">&#9670;&nbsp;</a></span>update_validators_state()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char update_validators_state </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_block.html">Block</a> *&#160;</td>
+          <td class="paramname"><em>block</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Given a block, update the 'validators.state' with the transactions. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">block</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>0, -1 if the given block height is not 'validators.state' height + 1 </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="validators_8c_source.html#l00333">333</a> of file <a class="el" href="validators_8c_source.html">validators.c</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="validators_8c_acb995f2242245cf16710ddba0a0724bb_cgraph.png" border="0" usemap="#validators_8c_acb995f2242245cf16710ddba0a0724bb_cgraph" alt=""/></div>
+<!-- MAP 16 -->
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="validators_8c_acb995f2242245cf16710ddba0a0724bb_icgraph.png" border="0" usemap="#validators_8c_acb995f2242245cf16710ddba0a0724bb_icgraph" alt=""/></div>
+<!-- MAP 17 -->
 </div>
 
 </div>

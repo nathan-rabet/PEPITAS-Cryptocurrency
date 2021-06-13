@@ -14,15 +14,27 @@
 .br
 \fC#include <openssl/pem\&.h>\fP
 .br
-\fC#include 'cryptosystem/rsa\&.h'\fP
-.br
 \fC#include 'cryptosystem/hash\&.h'\fP
+.br
+\fC#include 'cryptosystem/rsa\&.h'\fP
 .br
 \fC#include 'misc/files\&.h'\fP
 .br
 \fC#include 'misc/safe\&.h'\fP
 .br
+\fC#include 'misc/math\&.h'\fP
+.br
 
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fBvalidators_state_header\fP"
+.br
+.ti -1c
+.RI "struct \fBvalidators_state_item\fP"
+.br
+.in -1c
 .SS "Macros"
 
 .in +1c
@@ -34,11 +46,15 @@
 
 .in +1c
 .ti -1c
-.RI "RSA ** \fBget_comittee\fP (size_t block_height, size_t *nb_validators)"
+.RI "void \fBinit_validators_state\fP ()"
+.br
+.RI "Init the \fCvalidators\&.state\fP file if it doesn't exists\&. "
+.ti -1c
+.RI "RSA ** \fBget_comittee\fP (size_t \fBblock_height\fP, int *nb_validators)"
 .br
 .RI "Get the a comittee RSA public keys on a specific epoch\&. "
 .ti -1c
-.RI "RSA ** \fBget_next_comittee\fP (size_t *nb_validators)"
+.RI "RSA ** \fBget_next_comittee\fP (int *nb_validators)"
 .br
 .RI "Get the a comittee RSA public keys on a specific epoch\&. "
 .ti -1c
@@ -66,27 +82,27 @@
 .br
 .RI "Get the validator pkey as RSA* (parse 'validators\&.state') "
 .ti -1c
-.RI "ssize_t \fBget_validator_id\fP (char pkey[])"
+.RI "ssize_t \fBget_validator_id\fP (RSA *pkey)"
 .br
 .RI "Get the validator id in 'validators\&.state'\&. "
 .ti -1c
-.RI "int \fBpush_stake\fP (size_t amount)"
+.RI "int \fBi_am_commitee_member\fP ()"
 .br
-.RI "Push an amount on the stake\&. "
+.RI "Check if the current user is a member of the next comitee\&. "
 .ti -1c
-.RI "int \fBpop_stake\fP (size_t amount)"
+.RI "char \fBupdate_validators_state\fP (\fBBlock\fP *block)"
 .br
-.RI "Pops an amount on the stake\&. "
+.RI "Given a block, update the 'validators\&.state' with the transactions\&. "
 .in -1c
 .SH "Macro Definition Documentation"
 .PP 
 .SS "#define MAX_VALIDATORS_PER_BLOCK   512"
 
 .PP
-Definition at line 13 of file validators\&.h\&.
+Definition at line 28 of file validators\&.h\&.
 .SH "Function Documentation"
 .PP 
-.SS "RSA** get_comittee (size_t block_height, size_t * nb_validators)"
+.SS "RSA** get_comittee (size_t block_height, int * nb_validators)"
 
 .PP
 Get the a comittee RSA public keys on a specific epoch\&. 
@@ -110,16 +126,14 @@ The 'next block' is referring to block after the last block available OFFLINE
 .PP
 
 .PP
-Definition at line 32 of file validators\&.c\&.
-.SS "RSA** get_next_comittee (size_t * nb_validators)"
+Definition at line 46 of file validators\&.c\&.
+.SS "RSA** get_next_comittee (int * nb_validators)"
 
 .PP
 Get the a comittee RSA public keys on a specific epoch\&. 
 .PP
 \fBParameters\fP
 .RS 4
-\fIblock_height\fP The height of the block you want a comitte from 
-.br
 \fInb_validators\fP return value, the number of selected validators 
 .RE
 .PP
@@ -135,15 +149,15 @@ The 'next block' is referring to block after the last block available OFFLINE
 .PP
 
 .PP
-Definition at line 124 of file validators\&.c\&.
-.SS "ssize_t get_validator_id (char pkey[])"
+Definition at line 135 of file validators\&.c\&.
+.SS "ssize_t get_validator_id (RSA * pkey)"
 
 .PP
 Get the validator id in 'validators\&.state'\&. 
 .PP
 \fBParameters\fP
 .RS 4
-\fIpkey\fP The string public key (without -----BEGIN RSA KEY----- & -----END RSA KEY-----) 
+\fIpkey\fP The RSA public key 
 .RE
 .PP
 \fBReturns\fP
@@ -153,7 +167,7 @@ ssize_t, the validator index
 .PP
 
 .PP
-Definition at line 209 of file validators\&.c\&.
+Definition at line 247 of file validators\&.c\&.
 .SS "RSA* get_validator_pkey (size_t validator_id)"
 
 .PP
@@ -171,7 +185,7 @@ RSA*
 .PP
 
 .PP
-Definition at line 188 of file validators\&.c\&.
+Definition at line 216 of file validators\&.c\&.
 .SS "ssize_t get_validator_power (size_t validator_id)"
 
 .PP
@@ -189,7 +203,7 @@ ssize_t
 .PP
 
 .PP
-Definition at line 176 of file validators\&.c\&.
+Definition at line 199 of file validators\&.c\&.
 .SS "ssize_t get_validator_stake (size_t validator_id)"
 
 .PP
@@ -207,7 +221,7 @@ ssize_t
 .PP
 
 .PP
-Definition at line 164 of file validators\&.c\&.
+Definition at line 182 of file validators\&.c\&.
 .SS "ssize_t get_validators_states_block_height_validity ()"
 
 .PP
@@ -220,7 +234,7 @@ ssize_t
 .PP
 
 .PP
-Definition at line 152 of file validators\&.c\&.
+Definition at line 168 of file validators\&.c\&.
 .SS "ssize_t get_validators_states_nb_validators ()"
 
 .PP
@@ -233,7 +247,7 @@ ssize_t
 .PP
 
 .PP
-Definition at line 141 of file validators\&.c\&.
+Definition at line 154 of file validators\&.c\&.
 .SS "ssize_t get_validators_states_total_stake ()"
 
 .PP
@@ -246,49 +260,44 @@ ssize_t
 .PP
 
 .PP
-Definition at line 129 of file validators\&.c\&.
-.SS "int pop_stake (size_t amount)"
+Definition at line 140 of file validators\&.c\&.
+.SS "int i_am_commitee_member ()"
 
 .PP
-Pops an amount on the stake\&. This will broadcast a stake pop on the network\&.
+Check if the current user is a member of the next comitee\&. 
 .PP
-\fBSee also\fP
+\fBReturns\fP
 .RS 4
-The stake account public key is '1'
+The id in the comittee, -1 if you are not member of the comittee 
 .RE
+.PP
+
+.PP
+Definition at line 281 of file validators\&.c\&.
+.SS "void init_validators_state ()"
+
+.PP
+Init the \fCvalidators\&.state\fP file if it doesn't exists\&. 
+.PP
+Definition at line 33 of file validators\&.c\&.
+.SS "char update_validators_state (\fBBlock\fP * block)"
+
+.PP
+Given a block, update the 'validators\&.state' with the transactions\&. 
 .PP
 \fBParameters\fP
 .RS 4
-\fIamount\fP The amount to pop 
+\fIblock\fP 
 .RE
 .PP
 \fBReturns\fP
 .RS 4
-0 if the broadcast succeeds, else returns -1 
+0, -1 if the given block height is not 'validators\&.state' height + 1 
 .RE
 .PP
 
-.SS "int push_stake (size_t amount)"
-
 .PP
-Push an amount on the stake\&. This will broadcast a stake push on the network\&.
-.PP
-\fBSee also\fP
-.RS 4
-The stake account public key is '1'
-.RE
-.PP
-\fBParameters\fP
-.RS 4
-\fIamount\fP The amount to push 
-.RE
-.PP
-\fBReturns\fP
-.RS 4
-0 if the broadcast succeeds, else returns -1 
-.RE
-.PP
-
+Definition at line 333 of file validators\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for PEPITAS CRYPTOCURRENCY from the source code\&.

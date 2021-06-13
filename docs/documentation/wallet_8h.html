@@ -95,6 +95,7 @@ $(document).ready(function(){initNavTree('wallet_8h.html',''); initResizable(); 
 <code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;stdbool.h&gt;</code><br />
 <code>#include &lt;time.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="labels_8h_source.html">ui/labels.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for wallet.h:</div>
 <div class="dyncontent">
@@ -128,6 +129,14 @@ Functions</h2></td></tr>
 <tr class="memitem:a26c6f56037df4dbfb58855db1633a7df"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="wallet_8h.html#a26c6f56037df4dbfb58855db1633a7df">create_account</a> ()</td></tr>
 <tr class="memdesc:a26c6f56037df4dbfb58855db1633a7df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an account in local and broadcasts the creation to the network.  <a href="wallet_8h.html#a26c6f56037df4dbfb58855db1633a7df">More...</a><br /></td></tr>
 <tr class="separator:a26c6f56037df4dbfb58855db1633a7df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01cbce1c25723e73973e95339cf5da3b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="wallet_8h.html#a01cbce1c25723e73973e95339cf5da3b">add_money_to_wallet</a> (size_t money)</td></tr>
+<tr class="separator:a01cbce1c25723e73973e95339cf5da3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aedf9e7d88d87a507292e787a5c2721a5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="wallet_8h.html#aedf9e7d88d87a507292e787a5c2721a5">remove_money_from_wallet</a> (size_t money)</td></tr>
+<tr class="separator:aedf9e7d88d87a507292e787a5c2721a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3f2ce7f643200ea2cf509691237f60a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="wallet_8h.html#ac3f2ce7f643200ea2cf509691237f60a">add_money_to_stake</a> (size_t money)</td></tr>
+<tr class="separator:ac3f2ce7f643200ea2cf509691237f60a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c1a2494ee88851fac4a7df37278f5de"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="wallet_8h.html#a6c1a2494ee88851fac4a7df37278f5de">remove_money_from_stake</a> (size_t money)</td></tr>
+<tr class="separator:a6c1a2494ee88851fac4a7df37278f5de"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Typedef Documentation</h2>
 <a id="aa5498241ce069f8b7c1ab023f5b5aaa7"></a>
@@ -145,6 +154,58 @@ Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="ac3f2ce7f643200ea2cf509691237f60a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac3f2ce7f643200ea2cf509691237f60a">&#9670;&nbsp;</a></span>add_money_to_stake()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void add_money_to_stake </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>money</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="wallet_8c_source.html#l00045">45</a> of file <a class="el" href="wallet_8c_source.html">wallet.c</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="wallet_8h_ac3f2ce7f643200ea2cf509691237f60a_cgraph.png" border="0" usemap="#wallet_8h_ac3f2ce7f643200ea2cf509691237f60a_cgraph" alt=""/></div>
+<!-- MAP 2 -->
+</div>
+
+</div>
+</div>
+<a id="a01cbce1c25723e73973e95339cf5da3b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a01cbce1c25723e73973e95339cf5da3b">&#9670;&nbsp;</a></span>add_money_to_wallet()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void add_money_to_wallet </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>money</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="wallet_8c_source.html#l00026">26</a> of file <a class="el" href="wallet_8c_source.html">wallet.c</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="wallet_8h_a01cbce1c25723e73973e95339cf5da3b_cgraph.png" border="0" usemap="#wallet_8h_a01cbce1c25723e73973e95339cf5da3b_cgraph" alt=""/></div>
+<!-- MAP 3 -->
+</div>
+
+</div>
+</div>
 <a id="a26c6f56037df4dbfb58855db1633a7df"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a26c6f56037df4dbfb58855db1633a7df">&#9670;&nbsp;</a></span>create_account()</h2>
 
@@ -163,12 +224,18 @@ Functions</h2></td></tr>
 <p>Creates an account in local and broadcasts the creation to the network. </p>
 <dl class="section return"><dt>Returns</dt><dd>0 if the broadcast succeeds, otherwise 1 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="wallet_8c_source.html#l00019">19</a> of file <a class="el" href="wallet_8c_source.html">wallet.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="wallet_8c_source.html#l00018">18</a> of file <a class="el" href="wallet_8c_source.html">wallet.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="wallet_8h_a26c6f56037df4dbfb58855db1633a7df_cgraph.png" border="0" usemap="#wallet_8h_a26c6f56037df4dbfb58855db1633a7df_cgraph" alt=""/></div>
-<!-- MAP 2 -->
+<!-- MAP 4 -->
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="wallet_8h_a26c6f56037df4dbfb58855db1633a7df_icgraph.png" border="0" usemap="#wallet_8h_a26c6f56037df4dbfb58855db1633a7df_icgraph" alt=""/></div>
+<!-- MAP 5 -->
 </div>
 
 </div>
@@ -191,12 +258,64 @@ Here is the call graph for this function:</div>
 <p>Get my wallet object. </p>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="struct_wallet.html">Wallet</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="wallet_8c_source.html#l00007">7</a> of file <a class="el" href="wallet_8c_source.html">wallet.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="wallet_8c_source.html#l00006">6</a> of file <a class="el" href="wallet_8c_source.html">wallet.c</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="wallet_8h_a993fb7ec0c86c7a2d8ff68363e9f5304_icgraph.png" border="0" usemap="#wallet_8h_a993fb7ec0c86c7a2d8ff68363e9f5304_icgraph" alt=""/></div>
-<!-- MAP 3 -->
+<!-- MAP 6 -->
+</div>
+
+</div>
+</div>
+<a id="a6c1a2494ee88851fac4a7df37278f5de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c1a2494ee88851fac4a7df37278f5de">&#9670;&nbsp;</a></span>remove_money_from_stake()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void remove_money_from_stake </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>money</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="wallet_8c_source.html#l00054">54</a> of file <a class="el" href="wallet_8c_source.html">wallet.c</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="wallet_8h_a6c1a2494ee88851fac4a7df37278f5de_cgraph.png" border="0" usemap="#wallet_8h_a6c1a2494ee88851fac4a7df37278f5de_cgraph" alt=""/></div>
+<!-- MAP 7 -->
+</div>
+
+</div>
+</div>
+<a id="aedf9e7d88d87a507292e787a5c2721a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aedf9e7d88d87a507292e787a5c2721a5">&#9670;&nbsp;</a></span>remove_money_from_wallet()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void remove_money_from_wallet </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>money</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="wallet_8c_source.html#l00034">34</a> of file <a class="el" href="wallet_8c_source.html">wallet.c</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="wallet_8h_aedf9e7d88d87a507292e787a5c2721a5_cgraph.png" border="0" usemap="#wallet_8h_aedf9e7d88d87a507292e787a5c2721a5_cgraph" alt=""/></div>
+<!-- MAP 8 -->
 </div>
 
 </div>

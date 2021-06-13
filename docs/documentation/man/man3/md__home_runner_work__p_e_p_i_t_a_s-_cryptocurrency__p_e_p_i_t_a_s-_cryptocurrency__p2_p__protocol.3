@@ -33,42 +33,131 @@ SEND BLOCK EPOCHMAN
 SEND VOTE
 .PP
 .SS "CONNECTION TO NETWORK"
-\fBMessage:\fP char * : 'CONNECTION TO NETWORK\\r\\n\\r\\n'
+\fBMessage:\fP
+.IP "\(bu" 2
+char * : 'CONNECTION TO NETWORK\\r\\n\\r\\n'
+.PP
 .PP
 \fBDescription\fP Send a request to be accepted by a network door\&.
 .SS "CONNECTION TO NODE"
-\fBMessage:\fP char * : 'CONNECTION TO NODE\\r\\n\\r\\n'
+\fBMessage:\fP
+.IP "\(bu" 2
+char * : 'CONNECTION TO NODE\\r\\n\\r\\n'
+.PP
 .PP
 \fBDescription\fP Send a request to be accepted by a network node\&. 
 .SS "GET BLOCKS"
-\fBMessage:\fP char * : 'GET BLOCKS\\r\\n\\r\\n' uint32_t : P_VERSION char : Number of demand (max 50) size_t * : \fBBlock\fP height
+\fBMessage:\fP
+.IP "\(bu" 2
+char * : 'GET BLOCKS\\r\\n\\r\\n'
+.IP "\(bu" 2
+uint32_t : P_VERSION
+.IP "\(bu" 2
+char : Number of demand (max 50)
+.IP "\(bu" 2
+size_t * : \fBBlock\fP height
+.PP
 .PP
 \fBDescription\fP Send a request to a server for getting blocks\&. If the genesis block (height 0) is demand then the number of the actual blockchain height is return with 'ACTUAL HEIGHT' header\&. If not, SEND BLOCK or REJECT DEMAND messages are returned\&. 
 .SS "ACTUAL HEIGHT"
-\fBMessage:\fP char * : 'ACTUAL HEIGHT\\r\\n\\r\\n' size_t : \fBBlock\fP height
+\fBMessage:\fP
+.IP "\(bu" 2
+char * : 'ACTUAL HEIGHT\\r\\n\\r\\n'
+.IP "\(bu" 2
+size_t : \fBBlock\fP height
+.PP
 .PP
 \fBDescription\fP Send my actual blockchain height\&. 
 .SS "SEND BLOCK"
-\fBMessage:\fP char * : 'SEND BLOCK\\r\\n\\r\\n' size_t : \fBBlock\fP height size_t : \fBBlock\fP size char * : \fBBlock\fP struct
+\fBMessage:\fP
+.IP "\(bu" 2
+char * : 'SEND BLOCK\\r\\n\\r\\n'
+.IP "\(bu" 2
+size_t : \fBBlock\fP height
+.IP "\(bu" 2
+size_t : \fBBlock\fP size
+.IP "\(bu" 2
+char * : \fBBlock\fP struct
+.PP
 .PP
 \fBDescription\fP The block of height demand by 'GET BLOCKS'\&. 
 .SS "GET PENDING TRANSACTION LIST"
-\fBMessage\fP char * : 'GET PENDING TRANSACTION LIST\\r\\n\\r\\n'
+\fBMessage\fP
+.IP "\(bu" 2
+char * : 'GET PENDING TRANSACTION LIST\\r\\n\\r\\n'
 .PP
-\fBDescription\fP Call 'SEND PENDING TRANSACTION'\&. 
+.PP
+\fBDescription\fP Call 'SEND PENDING TRANSACTION LIST'\&. 
+.SS "SEND PENDING TRANSACTION LIST"
+\fBMessage\fP
+.IP "\(bu" 2
+char * : 'GET PENDING TRANSACTION LIST\\r\\n\\r\\n'
+.IP "\(bu" 2
+size_t : Number of \fBTransaction\fP id
+.IP "\(bu" 2
+time_t * : \fBTransaction\fP id
+.PP
+.PP
+\fBDescription\fP Send PDT list\&. 
 .SS "REJECT DEMAND"
-\fBMessage:\fP char * : 'REJECT DEMAND\\r\\n\\r\\n'
+\fBMessage:\fP
+.IP "\(bu" 2
+char * : 'REJECT DEMAND\\r\\n\\r\\n'
 .PP
-\fBDescription\fP Reject a demand if can't reply\&. For example a 'GET BLOCKS' of a not existing block\&. 
+.PP
+\fBDescription\fP Reject a demand if can't reply\&. For example a 'GET BLOCKS' of a not existing block\&.
+.SS "GET PENDING TRANSACTION"
+\fBMessage:\fP
+.IP "\(bu" 2
+char * : 'GET PENDING TRANSACTION\\r\\n\\r\\n'
+.IP "\(bu" 2
+time_t : \fBTransaction\fP id
+.PP
+.PP
+\fBDescription\fP Demand a PENDING TRANSACTION\&. 
 .SS "SEND PENDING TRANSACTION"
-\fBMessage:\fP char * : 'SEND PENDING TRANSACTION\\r\\n\\r\\n'
+\fBMessage:\fP
+.IP "\(bu" 2
+char * : 'SEND PENDING TRANSACTION\\r\\n\\r\\n'
+.IP "\(bu" 2
+size_t : \fBTransaction\fP id
+.IP "\(bu" 2
+size_t : \fBTransaction\fP struct size octet
+.IP "\(bu" 2
+char * : \fBTransaction\fP struct
 .PP
-\fBDescription\fP Send the epoch block of a committee member\&. 
+.PP
+\fBDescription\fP Send the PENDING TRANSACTION demand by SEND PENDING TRANSACTION\&. 
 .SS "SEND EPOCH BLOCK"
-\fBMessage:\fP char * : 'SEND EPOCH BLOCK\\r\\n\\r\\n' char * : \fBBlock\fP struct
+\fBMessage:\fP
+.IP "\(bu" 2
+char * : 'SEND EPOCH BLOCK\\r\\n\\r\\n'
+.IP "\(bu" 2
+int : Epoch id
+.IP "\(bu" 2
+size_t : \fBBlock\fP height
+.IP "\(bu" 2
+char * : \fBBlock\fP struct
+.PP
 .PP
 \fBDescription\fP Send the epoch block of a committee member\&.
 .SS "SEND VOTE"
-\fBMessage:\fP char * : 'SEND VOTE\\r\\n\\r\\n' char *: Epoch creator pk size_t : block height int epoch_id: creator char : 0 = False 1 = True char * : signature of vote precedent vars
+\fBMessage:\fP
+.PP
+.IP "\(bu" 2
+char * : 'SEND VOTE\\r\\n\\r\\n'
+.IP "\(bu" 2
+size_t : size epoch creator pk
+.IP "\(bu" 2
+char * : Epoch creator pk
+.IP "\(bu" 2
+size_t : block height
+.IP "\(bu" 2
+int : epoch_id
+.IP "\(bu" 2
+char : 0 = False 1 = True
+.IP "\(bu" 2
+char * : signature of vote precedent vars but not 'SEND VOTE\\r\\n\\r\\n'
+.PP
 .PP
 \fBDescription\fP Send the vote of a committee member\&. 

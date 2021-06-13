@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>PEPITAS CRYPTOCURRENCY: /home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/headers/network/client.h File Reference</title>
+<title>PEPITAS CRYPTOCURRENCY: /home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/headers/client.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -89,163 +89,284 @@ $(document).ready(function(){initNavTree('client_8h.html',''); initResizable(); 
 <div class="title">client.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="network_8h_source.html">network/network.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="server_8h_source.html">network/server.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="get__data_8h_source.html">network/get_data.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="send__data_8h_source.html">network/send_data.h</a>&quot;</code><br />
-<code>#include &lt;stdio.h&gt;</code><br />
+<div class="textblock"><code>#include &lt;signal.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
-<code>#include &lt;sys/types.h&gt;</code><br />
-<code>#include &lt;sys/socket.h&gt;</code><br />
-<code>#include &lt;netdb.h&gt;</code><br />
-<code>#include &lt;sys/stat.h&gt;</code><br />
-<code>#include &lt;unistd.h&gt;</code><br />
-<code>#include &lt;err.h&gt;</code><br />
-<code>#include &lt;errno.h&gt;</code><br />
-<code>#include &lt;semaphore.h&gt;</code><br />
-<code>#include &lt;stddef.h&gt;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="network_8h_source.html">network/network.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for client.h:</div>
 <div class="dyncontent">
-<div class="center"><img src="client_8h__incl.png" border="0" usemap="#_2home_2runner_2work_2_p_e_p_i_t_a_s-_cryptocurrency_2_p_e_p_i_t_a_s-_cryptocurrency_2headers_2network_2client_8h" alt=""/></div>
+<div class="center"><img src="client_8h__incl.png" border="0" usemap="#_2home_2runner_2work_2_p_e_p_i_t_a_s-_cryptocurrency_2_p_e_p_i_t_a_s-_cryptocurrency_2headers_2client_8h" alt=""/></div>
 <!-- MAP 0 -->
-</div>
-</div><div class="textblock"><div class="dynheader">
-This graph shows which files directly or indirectly include this file:</div>
-<div class="dyncontent">
-<div class="center"><img src="client_8h__dep__incl.png" border="0" usemap="#_2home_2runner_2work_2_p_e_p_i_t_a_s-_cryptocurrency_2_p_e_p_i_t_a_s-_cryptocurrency_2headers_2network_2client_8hdep" alt=""/></div>
-<!-- MAP 1 -->
 </div>
 </div>
 <p><a href="client_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a745cc052bf8990bd3189b857a1d29f40"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_node.html">Node</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8h.html#a745cc052bf8990bd3189b857a1d29f40">get_my_node</a> (char who)</td></tr>
-<tr class="memdesc:a745cc052bf8990bd3189b857a1d29f40"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the my node object.  <a href="client_8h.html#a745cc052bf8990bd3189b857a1d29f40">More...</a><br /></td></tr>
-<tr class="separator:a745cc052bf8990bd3189b857a1d29f40"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a65f3df28a906d619b5f408a26aec7649"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8h.html#a65f3df28a906d619b5f408a26aec7649">set_neighbour</a> (char who, char *hostname, int family)</td></tr>
-<tr class="memdesc:a65f3df28a906d619b5f408a26aec7649"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets a neighbour in the client.neightbours section.  <a href="client_8h.html#a65f3df28a906d619b5f408a26aec7649">More...</a><br /></td></tr>
-<tr class="separator:a65f3df28a906d619b5f408a26aec7649"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac8ccea3b50ff7a7e599cfa8fa774af8e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8h.html#ac8ccea3b50ff7a7e599cfa8fa774af8e">remove_neighbour</a> (char who, int index)</td></tr>
-<tr class="memdesc:ac8ccea3b50ff7a7e599cfa8fa774af8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove a neighbour in the client.neightbours section.  <a href="client_8h.html#ac8ccea3b50ff7a7e599cfa8fa774af8e">More...</a><br /></td></tr>
-<tr class="separator:ac8ccea3b50ff7a7e599cfa8fa774af8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acec8d99c29599378ad06a91d4911587f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8h.html#acec8d99c29599378ad06a91d4911587f">number_neighbours</a> (char who)</td></tr>
-<tr class="memdesc:acec8d99c29599378ad06a91d4911587f"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the nb of neighbour in the client.neightbours section  <a href="client_8h.html#acec8d99c29599378ad06a91d4911587f">More...</a><br /></td></tr>
-<tr class="separator:acec8d99c29599378ad06a91d4911587f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae814feddaa9902371625b42131b1a7f4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8h.html#ae814feddaa9902371625b42131b1a7f4">print_neighbours</a> (char who, char mask)</td></tr>
-<tr class="memdesc:ae814feddaa9902371625b42131b1a7f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print neighbours list.  <a href="client_8h.html#ae814feddaa9902371625b42131b1a7f4">More...</a><br /></td></tr>
-<tr class="separator:ae814feddaa9902371625b42131b1a7f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aab146f25715d4241dd2cfc64750cdd0d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8h.html#aab146f25715d4241dd2cfc64750cdd0d">save_neighbours</a> (char who)</td></tr>
-<tr class="memdesc:aab146f25715d4241dd2cfc64750cdd0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Save neighbours list in .neighbours/neighbours.  <a href="client_8h.html#aab146f25715d4241dd2cfc64750cdd0d">More...</a><br /></td></tr>
-<tr class="separator:aab146f25715d4241dd2cfc64750cdd0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a641a9d3cb0669b127493779eefc8b56c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8h.html#a641a9d3cb0669b127493779eefc8b56c">load_neighbours</a> (char who)</td></tr>
-<tr class="memdesc:a641a9d3cb0669b127493779eefc8b56c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load neighbours list from .neighbours/neighbours.  <a href="client_8h.html#a641a9d3cb0669b127493779eefc8b56c">More...</a><br /></td></tr>
-<tr class="separator:a641a9d3cb0669b127493779eefc8b56c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3d1ce0194b7697343dc0e04866ac4935"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structclient__connection.html">client_connection</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8h.html#a3d1ce0194b7697343dc0e04866ac4935">listen_to</a> (<a class="el" href="structinfos__st.html">infos_st</a> *infos, <a class="el" href="struct_neighbour.html">Neighbour</a> neighbour, char *connection_type)</td></tr>
-<tr class="memdesc:a3d1ce0194b7697343dc0e04866ac4935"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tries to connect to the peer-to-peer network via a node in the <a class="el" href="struct_node.html">Node</a> structure.  <a href="client_8h.html#a3d1ce0194b7697343dc0e04866ac4935">More...</a><br /></td></tr>
-<tr class="separator:a3d1ce0194b7697343dc0e04866ac4935"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7c18dc2a701e4f81d1c1f074bca42e6e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8h.html#a7c18dc2a701e4f81d1c1f074bca42e6e">find_empty_connection</a> (int max)</td></tr>
-<tr class="separator:a7c18dc2a701e4f81d1c1f074bca42e6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a351b786eb662460f254da2ff204fcfcc"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8h.html#a351b786eb662460f254da2ff204fcfcc">client_thread</a> (void *args)</td></tr>
-<tr class="separator:a351b786eb662460f254da2ff204fcfcc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a597346567fc95cf305a94063df3e86c3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8h.html#a597346567fc95cf305a94063df3e86c3">new_transaction</a> (char type, char *rc_pk, size_t amount, char cause[512], char asset[512])</td></tr>
+<tr class="separator:a597346567fc95cf305a94063df3e86c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a480459f3451fa57a66df548ca0b408e3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structinfos__st.html">infos_st</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8h.html#a480459f3451fa57a66df548ca0b408e3">get_infos</a> ()</td></tr>
+<tr class="separator:a480459f3451fa57a66df548ca0b408e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35c808540bae041c9d4f83012c639426"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8h.html#a35c808540bae041c9d4f83012c639426">update_pdt</a> (int number)</td></tr>
+<tr class="separator:a35c808540bae041c9d4f83012c639426"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48484e0947e98ccf25a3eeddb669a9ca"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8h.html#a48484e0947e98ccf25a3eeddb669a9ca">move_file</a> (char *src, char *dest)</td></tr>
+<tr class="separator:a48484e0947e98ccf25a3eeddb669a9ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a17e4539f5b0c67dbd36bae0c2c0c8a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8h.html#a6a17e4539f5b0c67dbd36bae0c2c0c8a">Validate</a> ()</td></tr>
+<tr class="separator:a6a17e4539f5b0c67dbd36bae0c2c0c8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4bc5d82e85996fecc53fe3e97c2a7b98"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8h.html#a4bc5d82e85996fecc53fe3e97c2a7b98">join_network_door</a> (<a class="el" href="structinfos__st.html">infos_st</a> *infos)</td></tr>
+<tr class="separator:a4bc5d82e85996fecc53fe3e97c2a7b98"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7126685bb9b5dc07de54dbb8a8ba89d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8h.html#ab7126685bb9b5dc07de54dbb8a8ba89d">connection_to_others</a> (<a class="el" href="structinfos__st.html">infos_st</a> *infos)</td></tr>
+<tr class="separator:ab7126685bb9b5dc07de54dbb8a8ba89d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a6632fc31369b450613587243a58807"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8h.html#a6a6632fc31369b450613587243a58807">update_blockchain_height</a> (<a class="el" href="structinfos__st.html">infos_st</a> *infos)</td></tr>
+<tr class="separator:a6a6632fc31369b450613587243a58807"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2aa6779c93462c07f8a674546b72bd8b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8h.html#a2aa6779c93462c07f8a674546b72bd8b">update_blockchain</a> (<a class="el" href="structinfos__st.html">infos_st</a> *infos, size_t index_client)</td></tr>
+<tr class="separator:a2aa6779c93462c07f8a674546b72bd8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adcc4f847feef7ccada40e231100765f2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8h.html#adcc4f847feef7ccada40e231100765f2">clear_transactions</a> ()</td></tr>
+<tr class="separator:adcc4f847feef7ccada40e231100765f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a615d428cc2349cb563e4fa3d9212429a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8h.html#a615d428cc2349cb563e4fa3d9212429a">clear_epochs</a> ()</td></tr>
+<tr class="separator:a615d428cc2349cb563e4fa3d9212429a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22202ffd77ff472dddbec2ac501025f4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8h.html#a22202ffd77ff472dddbec2ac501025f4">update_pending_transactions_list</a> ()</td></tr>
+<tr class="separator:a22202ffd77ff472dddbec2ac501025f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a351b786eb662460f254da2ff204fcfcc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a351b786eb662460f254da2ff204fcfcc">&#9670;&nbsp;</a></span>client_thread()</h2>
+<a id="a615d428cc2349cb563e4fa3d9212429a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a615d428cc2349cb563e4fa3d9212429a">&#9670;&nbsp;</a></span>clear_epochs()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void* client_thread </td>
+          <td class="memname">void clear_epochs </td>
           <td>(</td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>args</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="core_2network_2client_8c_source.html#l00247">247</a> of file <a class="el" href="core_2network_2client_8c_source.html">client.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="atrier_8c_source.html#l00329">329</a> of file <a class="el" href="atrier_8c_source.html">atrier.c</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="client_8h_a615d428cc2349cb563e4fa3d9212429a_icgraph.png" border="0" usemap="#client_8h_a615d428cc2349cb563e4fa3d9212429a_icgraph" alt=""/></div>
+<!-- MAP 1 -->
+</div>
+
+</div>
+</div>
+<a id="adcc4f847feef7ccada40e231100765f2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adcc4f847feef7ccada40e231100765f2">&#9670;&nbsp;</a></span>clear_transactions()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void clear_transactions </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="atrier_8c_source.html#l00306">306</a> of file <a class="el" href="atrier_8c_source.html">atrier.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="client_8h_a351b786eb662460f254da2ff204fcfcc_cgraph.png" border="0" usemap="#client_8h_a351b786eb662460f254da2ff204fcfcc_cgraph" alt=""/></div>
+<div class="center"><img src="client_8h_adcc4f847feef7ccada40e231100765f2_cgraph.png" border="0" usemap="#client_8h_adcc4f847feef7ccada40e231100765f2_cgraph" alt=""/></div>
 <!-- MAP 2 -->
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="client_8h_a351b786eb662460f254da2ff204fcfcc_icgraph.png" border="0" usemap="#client_8h_a351b786eb662460f254da2ff204fcfcc_icgraph" alt=""/></div>
+<div class="center"><img src="client_8h_adcc4f847feef7ccada40e231100765f2_icgraph.png" border="0" usemap="#client_8h_adcc4f847feef7ccada40e231100765f2_icgraph" alt=""/></div>
 <!-- MAP 3 -->
 </div>
 
 </div>
 </div>
-<a id="a7c18dc2a701e4f81d1c1f074bca42e6e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7c18dc2a701e4f81d1c1f074bca42e6e">&#9670;&nbsp;</a></span>find_empty_connection()</h2>
+<a id="ab7126685bb9b5dc07de54dbb8a8ba89d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7126685bb9b5dc07de54dbb8a8ba89d">&#9670;&nbsp;</a></span>connection_to_others()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int find_empty_connection </td>
+          <td class="memname">void connection_to_others </td>
           <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>max</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="structinfos__st.html">infos_st</a> *&#160;</td>
+          <td class="paramname"><em>infos</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="core_2network_2client_8c_source.html#l00237">237</a> of file <a class="el" href="core_2network_2client_8c_source.html">client.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="atrier_8c_source.html#l00222">222</a> of file <a class="el" href="atrier_8c_source.html">atrier.c</a>.</p>
 <div class="dynheader">
-Here is the caller graph for this function:</div>
+Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="client_8h_a7c18dc2a701e4f81d1c1f074bca42e6e_icgraph.png" border="0" usemap="#client_8h_a7c18dc2a701e4f81d1c1f074bca42e6e_icgraph" alt=""/></div>
+<div class="center"><img src="client_8h_ab7126685bb9b5dc07de54dbb8a8ba89d_cgraph.png" border="0" usemap="#client_8h_ab7126685bb9b5dc07de54dbb8a8ba89d_cgraph" alt=""/></div>
 <!-- MAP 4 -->
 </div>
 
 </div>
 </div>
-<a id="a745cc052bf8990bd3189b857a1d29f40"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a745cc052bf8990bd3189b857a1d29f40">&#9670;&nbsp;</a></span>get_my_node()</h2>
+<a id="a480459f3451fa57a66df548ca0b408e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a480459f3451fa57a66df548ca0b408e3">&#9670;&nbsp;</a></span>get_infos()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_node.html">Node</a>* get_my_node </td>
+          <td class="memname"><a class="el" href="structinfos__st.html">infos_st</a>* get_infos </td>
           <td>(</td>
-          <td class="paramtype">char&#160;</td>
-          <td class="paramname"><em>who</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Get the my node object. </p>
-<dl class="section return"><dt>Returns</dt><dd>Node* </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="core_2network_2client_8c_source.html#l00006">6</a> of file <a class="el" href="core_2network_2client_8c_source.html">client.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="atrier_8c_source.html#l00016">16</a> of file <a class="el" href="atrier_8c_source.html">atrier.c</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="client_8h_a745cc052bf8990bd3189b857a1d29f40_icgraph.png" border="0" usemap="#client_8h_a745cc052bf8990bd3189b857a1d29f40_icgraph" alt=""/></div>
+<div class="center"><img src="client_8h_a480459f3451fa57a66df548ca0b408e3_icgraph.png" border="0" usemap="#client_8h_a480459f3451fa57a66df548ca0b408e3_icgraph" alt=""/></div>
 <!-- MAP 5 -->
 </div>
 
 </div>
 </div>
-<a id="a3d1ce0194b7697343dc0e04866ac4935"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3d1ce0194b7697343dc0e04866ac4935">&#9670;&nbsp;</a></span>listen_to()</h2>
+<a id="a4bc5d82e85996fecc53fe3e97c2a7b98"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4bc5d82e85996fecc53fe3e97c2a7b98">&#9670;&nbsp;</a></span>join_network_door()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structclient__connection.html">client_connection</a>* listen_to </td>
+          <td class="memname">void join_network_door </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structinfos__st.html">infos_st</a> *&#160;</td>
+          <td class="paramname"><em>infos</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="atrier_8c_source.html#l00204">204</a> of file <a class="el" href="atrier_8c_source.html">atrier.c</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="client_8h_a4bc5d82e85996fecc53fe3e97c2a7b98_cgraph.png" border="0" usemap="#client_8h_a4bc5d82e85996fecc53fe3e97c2a7b98_cgraph" alt=""/></div>
+<!-- MAP 6 -->
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="client_8h_a4bc5d82e85996fecc53fe3e97c2a7b98_icgraph.png" border="0" usemap="#client_8h_a4bc5d82e85996fecc53fe3e97c2a7b98_icgraph" alt=""/></div>
+<!-- MAP 7 -->
+</div>
+
+</div>
+</div>
+<a id="a48484e0947e98ccf25a3eeddb669a9ca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48484e0947e98ccf25a3eeddb669a9ca">&#9670;&nbsp;</a></span>move_file()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void move_file </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>src</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>dest</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="atrier_8c_source.html#l00027">27</a> of file <a class="el" href="atrier_8c_source.html">atrier.c</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="client_8h_a48484e0947e98ccf25a3eeddb669a9ca_cgraph.png" border="0" usemap="#client_8h_a48484e0947e98ccf25a3eeddb669a9ca_cgraph" alt=""/></div>
+<!-- MAP 8 -->
+</div>
+
+</div>
+</div>
+<a id="a597346567fc95cf305a94063df3e86c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a597346567fc95cf305a94063df3e86c3">&#9670;&nbsp;</a></span>new_transaction()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void new_transaction </td>
+          <td>(</td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>rc_pk</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>amount</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>cause</em>[512], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>asset</em>[512]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="atrier_8c_source.html#l00148">148</a> of file <a class="el" href="atrier_8c_source.html">atrier.c</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="client_8h_a597346567fc95cf305a94063df3e86c3_icgraph.png" border="0" usemap="#client_8h_a597346567fc95cf305a94063df3e86c3_icgraph" alt=""/></div>
+<!-- MAP 9 -->
+</div>
+
+</div>
+</div>
+<a id="a2aa6779c93462c07f8a674546b72bd8b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2aa6779c93462c07f8a674546b72bd8b">&#9670;&nbsp;</a></span>update_blockchain()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void update_blockchain </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structinfos__st.html">infos_st</a> *&#160;</td>
           <td class="paramname"><em>infos</em>, </td>
@@ -253,14 +374,8 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="struct_neighbour.html">Neighbour</a>&#160;</td>
-          <td class="paramname"><em>neighbour</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>connection_type</em>&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>index_client</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -270,262 +385,120 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Tries to connect to the peer-to-peer network via a node in the <a class="el" href="struct_node.html">Node</a> structure. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">neighbour</td><td>The neighbour to connect with </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>socket FD or -1 if an error occurs </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="core_2network_2client_8c_source.html#l00161">161</a> of file <a class="el" href="core_2network_2client_8c_source.html">client.c</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="client_8h_a3d1ce0194b7697343dc0e04866ac4935_cgraph.png" border="0" usemap="#client_8h_a3d1ce0194b7697343dc0e04866ac4935_cgraph" alt=""/></div>
-<!-- MAP 6 -->
-</div>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="client_8h_a3d1ce0194b7697343dc0e04866ac4935_icgraph.png" border="0" usemap="#client_8h_a3d1ce0194b7697343dc0e04866ac4935_icgraph" alt=""/></div>
-<!-- MAP 7 -->
-</div>
+<p class="definition">Definition at line <a class="el" href="atrier_8c_source.html#l00279">279</a> of file <a class="el" href="atrier_8c_source.html">atrier.c</a>.</p>
 
 </div>
 </div>
-<a id="a641a9d3cb0669b127493779eefc8b56c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a641a9d3cb0669b127493779eefc8b56c">&#9670;&nbsp;</a></span>load_neighbours()</h2>
+<a id="a6a6632fc31369b450613587243a58807"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a6632fc31369b450613587243a58807">&#9670;&nbsp;</a></span>update_blockchain_height()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void load_neighbours </td>
+          <td class="memname">size_t update_blockchain_height </td>
           <td>(</td>
-          <td class="paramtype">char&#160;</td>
-          <td class="paramname"><em>who</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="structinfos__st.html">infos_st</a> *&#160;</td>
+          <td class="paramname"><em>infos</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Load neighbours list from .neighbours/neighbours. </p>
-
-<p class="definition">Definition at line <a class="el" href="core_2network_2client_8c_source.html#l00113">113</a> of file <a class="el" href="core_2network_2client_8c_source.html">client.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="atrier_8c_source.html#l00243">243</a> of file <a class="el" href="atrier_8c_source.html">atrier.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="client_8h_a641a9d3cb0669b127493779eefc8b56c_cgraph.png" border="0" usemap="#client_8h_a641a9d3cb0669b127493779eefc8b56c_cgraph" alt=""/></div>
-<!-- MAP 8 -->
-</div>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="client_8h_a641a9d3cb0669b127493779eefc8b56c_icgraph.png" border="0" usemap="#client_8h_a641a9d3cb0669b127493779eefc8b56c_icgraph" alt=""/></div>
-<!-- MAP 9 -->
-</div>
-
-</div>
-</div>
-<a id="acec8d99c29599378ad06a91d4911587f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acec8d99c29599378ad06a91d4911587f">&#9670;&nbsp;</a></span>number_neighbours()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int number_neighbours </td>
-          <td>(</td>
-          <td class="paramtype">char&#160;</td>
-          <td class="paramname"><em>who</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>return the nb of neighbour in the client.neightbours section </p>
-
-<p class="definition">Definition at line <a class="el" href="core_2network_2client_8c_source.html#l00149">149</a> of file <a class="el" href="core_2network_2client_8c_source.html">client.c</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="client_8h_acec8d99c29599378ad06a91d4911587f_cgraph.png" border="0" usemap="#client_8h_acec8d99c29599378ad06a91d4911587f_cgraph" alt=""/></div>
+<div class="center"><img src="client_8h_a6a6632fc31369b450613587243a58807_cgraph.png" border="0" usemap="#client_8h_a6a6632fc31369b450613587243a58807_cgraph" alt=""/></div>
 <!-- MAP 10 -->
 </div>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="client_8h_acec8d99c29599378ad06a91d4911587f_icgraph.png" border="0" usemap="#client_8h_acec8d99c29599378ad06a91d4911587f_icgraph" alt=""/></div>
-<!-- MAP 11 -->
-</div>
 
 </div>
 </div>
-<a id="ae814feddaa9902371625b42131b1a7f4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae814feddaa9902371625b42131b1a7f4">&#9670;&nbsp;</a></span>print_neighbours()</h2>
+<a id="a35c808540bae041c9d4f83012c639426"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35c808540bae041c9d4f83012c639426">&#9670;&nbsp;</a></span>update_pdt()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void print_neighbours </td>
+          <td class="memname">void update_pdt </td>
           <td>(</td>
-          <td class="paramtype">char&#160;</td>
-          <td class="paramname"><em>who</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>number</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">char&#160;</td>
-          <td class="paramname"><em>mask</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Print neighbours list. </p>
-
-<p class="definition">Definition at line <a class="el" href="core_2network_2client_8c_source.html#l00058">58</a> of file <a class="el" href="core_2network_2client_8c_source.html">client.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="atrier_8c_source.html#l00020">20</a> of file <a class="el" href="atrier_8c_source.html">atrier.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="client_8h_ae814feddaa9902371625b42131b1a7f4_cgraph.png" border="0" usemap="#client_8h_ae814feddaa9902371625b42131b1a7f4_cgraph" alt=""/></div>
-<!-- MAP 12 -->
+<div class="center"><img src="client_8h_a35c808540bae041c9d4f83012c639426_cgraph.png" border="0" usemap="#client_8h_a35c808540bae041c9d4f83012c639426_cgraph" alt=""/></div>
+<!-- MAP 11 -->
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="client_8h_ae814feddaa9902371625b42131b1a7f4_icgraph.png" border="0" usemap="#client_8h_ae814feddaa9902371625b42131b1a7f4_icgraph" alt=""/></div>
+<div class="center"><img src="client_8h_a35c808540bae041c9d4f83012c639426_icgraph.png" border="0" usemap="#client_8h_a35c808540bae041c9d4f83012c639426_icgraph" alt=""/></div>
+<!-- MAP 12 -->
+</div>
+
+</div>
+</div>
+<a id="a22202ffd77ff472dddbec2ac501025f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22202ffd77ff472dddbec2ac501025f4">&#9670;&nbsp;</a></span>update_pending_transactions_list()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void update_pending_transactions_list </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="atrier_8c_source.html#l00348">348</a> of file <a class="el" href="atrier_8c_source.html">atrier.c</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="client_8h_a22202ffd77ff472dddbec2ac501025f4_cgraph.png" border="0" usemap="#client_8h_a22202ffd77ff472dddbec2ac501025f4_cgraph" alt=""/></div>
 <!-- MAP 13 -->
 </div>
 
 </div>
 </div>
-<a id="ac8ccea3b50ff7a7e599cfa8fa774af8e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac8ccea3b50ff7a7e599cfa8fa774af8e">&#9670;&nbsp;</a></span>remove_neighbour()</h2>
+<a id="a6a17e4539f5b0c67dbd36bae0c2c0c8a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a17e4539f5b0c67dbd36bae0c2c0c8a">&#9670;&nbsp;</a></span>Validate()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void remove_neighbour </td>
+          <td class="memname">void Validate </td>
           <td>(</td>
-          <td class="paramtype">char&#160;</td>
-          <td class="paramname"><em>who</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>index</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Remove a neighbour in the client.neightbours section. </p>
-
-<p class="definition">Definition at line <a class="el" href="core_2network_2client_8c_source.html#l00047">47</a> of file <a class="el" href="core_2network_2client_8c_source.html">client.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="atrier_8c_source.html#l00062">62</a> of file <a class="el" href="atrier_8c_source.html">atrier.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="client_8h_ac8ccea3b50ff7a7e599cfa8fa774af8e_cgraph.png" border="0" usemap="#client_8h_ac8ccea3b50ff7a7e599cfa8fa774af8e_cgraph" alt=""/></div>
+<div class="center"><img src="client_8h_a6a17e4539f5b0c67dbd36bae0c2c0c8a_cgraph.png" border="0" usemap="#client_8h_a6a17e4539f5b0c67dbd36bae0c2c0c8a_cgraph" alt=""/></div>
 <!-- MAP 14 -->
 </div>
-
-</div>
-</div>
-<a id="aab146f25715d4241dd2cfc64750cdd0d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aab146f25715d4241dd2cfc64750cdd0d">&#9670;&nbsp;</a></span>save_neighbours()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void save_neighbours </td>
-          <td>(</td>
-          <td class="paramtype">char&#160;</td>
-          <td class="paramname"><em>who</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Save neighbours list in .neighbours/neighbours. </p>
-
-<p class="definition">Definition at line <a class="el" href="core_2network_2client_8c_source.html#l00074">74</a> of file <a class="el" href="core_2network_2client_8c_source.html">client.c</a>.</p>
 <div class="dynheader">
-Here is the call graph for this function:</div>
+Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="client_8h_aab146f25715d4241dd2cfc64750cdd0d_cgraph.png" border="0" usemap="#client_8h_aab146f25715d4241dd2cfc64750cdd0d_cgraph" alt=""/></div>
+<div class="center"><img src="client_8h_a6a17e4539f5b0c67dbd36bae0c2c0c8a_icgraph.png" border="0" usemap="#client_8h_a6a17e4539f5b0c67dbd36bae0c2c0c8a_icgraph" alt=""/></div>
 <!-- MAP 15 -->
-</div>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="client_8h_aab146f25715d4241dd2cfc64750cdd0d_icgraph.png" border="0" usemap="#client_8h_aab146f25715d4241dd2cfc64750cdd0d_icgraph" alt=""/></div>
-<!-- MAP 16 -->
-</div>
-
-</div>
-</div>
-<a id="a65f3df28a906d619b5f408a26aec7649"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a65f3df28a906d619b5f408a26aec7649">&#9670;&nbsp;</a></span>set_neighbour()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int set_neighbour </td>
-          <td>(</td>
-          <td class="paramtype">char&#160;</td>
-          <td class="paramname"><em>who</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>hostname</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>family</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Sets a neighbour in the client.neightbours section. </p>
-<dl class="section return"><dt>Returns</dt><dd>0 if sucess, -1 otherwise if full </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="core_2network_2client_8c_source.html#l00019">19</a> of file <a class="el" href="core_2network_2client_8c_source.html">client.c</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="client_8h_a65f3df28a906d619b5f408a26aec7649_cgraph.png" border="0" usemap="#client_8h_a65f3df28a906d619b5f408a26aec7649_cgraph" alt=""/></div>
-<!-- MAP 17 -->
-</div>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="client_8h_a65f3df28a906d619b5f408a26aec7649_icgraph.png" border="0" usemap="#client_8h_a65f3df28a906d619b5f408a26aec7649_icgraph" alt=""/></div>
-<!-- MAP 18 -->
 </div>
 
 </div>
@@ -535,7 +508,7 @@ Here is the caller graph for this function:</div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_7f57b1e41c5acd0e859ae5f3a2b075a9.html">headers</a></li><li class="navelem"><a class="el" href="dir_83fbd955906e9032510966d415c56495.html">network</a></li><li class="navelem"><a class="el" href="client_8h.html">client.h</a></li>
+    <li class="navelem"><a class="el" href="dir_7f57b1e41c5acd0e859ae5f3a2b075a9.html">headers</a></li><li class="navelem"><a class="el" href="client_8h.html">client.h</a></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>

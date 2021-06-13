@@ -94,32 +94,48 @@ $(document).ready(function(){initNavTree('validation__engine_8h_source.html','')
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="signature_8h.html">cryptosystem/signature.h</a>&quot;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="rsa_8h.html">cryptosystem/rsa.h</a>&quot;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="hash_8h.html">cryptosystem/hash.h</a>&quot;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="math_8h.html">misc/math.h</a>&quot;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="files_8h.html">misc/files.h</a>&quot;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="safe_8h.html">misc/safe.h</a>&quot;</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;string.h&gt;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="math_8h.html">math.h</a>&gt;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;openssl/bio.h&gt;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;stdbool.h&gt;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keywordtype">int</span> <a class="code" href="validation__engine_8h.html#a93a0b87cba2b7b614c178e5d9519c6ae">send_verdict</a>(<a class="code" href="struct_block.html">Block</a> *block, <span class="keywordtype">char</span> verdict);</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<a class="code" href="struct_transaction.html">Transaction</a> ** <a class="code" href="validation__engine_8h.html#ade3e807a9bf1d4bb1e11bc8cf931af6c">validate_transactions</a>(<a class="code" href="struct_transaction.html">Transaction</a>* transaction_to_validate,<span class="keywordtype">size_t</span> nb_transactions,<span class="keywordtype">size_t</span> * nb_returned_transactions);</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="get__data_8h.html">network/get_data.h</a>&quot;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="math_8h.html">misc/math.h</a>&quot;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="files_8h.html">misc/files.h</a>&quot;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="bits_8h.html">misc/bits.h</a>&quot;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="safe_8h.html">misc/safe.h</a>&quot;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;string.h&gt;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="math_8h.html">math.h</a>&gt;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;openssl/bio.h&gt;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;stdbool.h&gt;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;openssl/evp.h&gt;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="validation__engine_8h.html#a9abe81e7578fcc2e894db69b249f4e93">   19</a></span>&#160;<span class="preprocessor">#define VERIDCT_NO 0</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="validation__engine_8h.html#a20c0cc377715ba73637ef8a364b9fcd0">   20</a></span>&#160;<span class="preprocessor">#define VERIDCT_YES 1</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">extern</span> <a class="code" href="structconnection.html">connection</a> *<a class="code" href="validation__engine_8h.html#a0ba5d3a056115234ab9ed718797c2953">client_connections</a>;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keywordtype">int</span> <a class="code" href="validation__engine_8h.html#a93a0b87cba2b7b614c178e5d9519c6ae">send_verdict</a>(<a class="code" href="struct_block.html">Block</a> *block, <span class="keywordtype">char</span> verdict);</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<a class="code" href="struct_transaction.html">Transaction</a> ** <a class="code" href="validation__engine_8h.html#a9134934f42952ee3fd7a73aea892858c">validate_transactions</a>(<a class="code" href="struct_transaction.html">Transaction</a>** transaction_to_validate,<span class="keywordtype">size_t</span> nb_transactions,<span class="keywordtype">size_t</span> * nb_returned_transactions);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="keywordtype">int</span> <a class="code" href="validation__engine_8h.html#a8a7c063b5d2f1c5e3e0527a5b133e6a2">comital_validate_block</a>(<a class="code" href="struct_block.html">Block</a> *block);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keywordtype">char</span> <a class="code" href="validation__engine_8h.html#aa566a0b7eb319d2489b8ac68c6e76824">plebe_verify_block</a>(<a class="code" href="struct_block.html">Block</a> *block);</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="ablock_8h_html"><div class="ttname"><a href="block_8h.html">block.h</a></div></div>
-<div class="ttc" id="avalidation__engine_8h_html_a93a0b87cba2b7b614c178e5d9519c6ae"><div class="ttname"><a href="validation__engine_8h.html#a93a0b87cba2b7b614c178e5d9519c6ae">send_verdict</a></div><div class="ttdeci">int send_verdict(Block *block, char verdict)</div><div class="ttdoc">Broadcast a verdict about a block validity to the network.</div></div>
+<div class="ttc" id="avalidation__engine_8h_html_a93a0b87cba2b7b614c178e5d9519c6ae"><div class="ttname"><a href="validation__engine_8h.html#a93a0b87cba2b7b614c178e5d9519c6ae">send_verdict</a></div><div class="ttdeci">int send_verdict(Block *block, char verdict)</div><div class="ttdoc">Broadcast a verdict about a block validity to the network.</div><div class="ttdef"><b>Definition:</b> <a href="validation__engine_8c_source.html#l00305">validation_engine.c:305</a></div></div>
+<div class="ttc" id="avalidation__engine_8h_html_a9134934f42952ee3fd7a73aea892858c"><div class="ttname"><a href="validation__engine_8h.html#a9134934f42952ee3fd7a73aea892858c">validate_transactions</a></div><div class="ttdeci">Transaction ** validate_transactions(Transaction **transaction_to_validate, size_t nb_transactions, size_t *nb_returned_transactions)</div><div class="ttdoc">Validate some transactions.</div><div class="ttdef"><b>Definition:</b> <a href="validation__engine_8c_source.html#l00003">validation_engine.c:3</a></div></div>
+<div class="ttc" id="abits_8h_html"><div class="ttname"><a href="bits_8h.html">bits.h</a></div></div>
 <div class="ttc" id="amath_8h_html"><div class="ttname"><a href="math_8h.html">math.h</a></div></div>
+<div class="ttc" id="avalidation__engine_8h_html_aa566a0b7eb319d2489b8ac68c6e76824"><div class="ttname"><a href="validation__engine_8h.html#aa566a0b7eb319d2489b8ac68c6e76824">plebe_verify_block</a></div><div class="ttdeci">char plebe_verify_block(Block *block)</div><div class="ttdef"><b>Definition:</b> <a href="validation__engine_8c_source.html#l00199">validation_engine.c:199</a></div></div>
 <div class="ttc" id="asignature_8h_html"><div class="ttname"><a href="signature_8h.html">signature.h</a></div></div>
 <div class="ttc" id="arsa_8h_html"><div class="ttname"><a href="rsa_8h.html">rsa.h</a></div></div>
 <div class="ttc" id="asafe_8h_html"><div class="ttname"><a href="safe_8h.html">safe.h</a></div></div>
+<div class="ttc" id="avalidation__engine_8h_html_a0ba5d3a056115234ab9ed718797c2953"><div class="ttname"><a href="validation__engine_8h.html#a0ba5d3a056115234ab9ed718797c2953">client_connections</a></div><div class="ttdeci">connection * client_connections</div><div class="ttdef"><b>Definition:</b> <a href="core_2network_2client_8c_source.html#l00004">client.c:4</a></div></div>
 <div class="ttc" id="ahash_8h_html"><div class="ttname"><a href="hash_8h.html">hash.h</a></div></div>
-<div class="ttc" id="astruct_block_html"><div class="ttname"><a href="struct_block.html">Block</a></div><div class="ttdef"><b>Definition:</b> <a href="block_8h_source.html#l00051">block.h:51</a></div></div>
+<div class="ttc" id="aget__data_8h_html"><div class="ttname"><a href="get__data_8h.html">get_data.h</a></div></div>
+<div class="ttc" id="astruct_block_html"><div class="ttname"><a href="struct_block.html">Block</a></div><div class="ttdef"><b>Definition:</b> <a href="block_8h_source.html#l00084">block.h:84</a></div></div>
 <div class="ttc" id="afiles_8h_html"><div class="ttname"><a href="files_8h.html">files.h</a></div></div>
-<div class="ttc" id="avalidation__engine_8h_html_ade3e807a9bf1d4bb1e11bc8cf931af6c"><div class="ttname"><a href="validation__engine_8h.html#ade3e807a9bf1d4bb1e11bc8cf931af6c">validate_transactions</a></div><div class="ttdeci">Transaction ** validate_transactions(Transaction *transaction_to_validate, size_t nb_transactions, size_t *nb_returned_transactions)</div><div class="ttdoc">Validate some transactions.</div></div>
-<div class="ttc" id="astruct_transaction_html"><div class="ttname"><a href="struct_transaction.html">Transaction</a></div><div class="ttdef"><b>Definition:</b> <a href="transaction_8h_source.html#l00043">transaction.h:43</a></div></div>
+<div class="ttc" id="astructconnection_html"><div class="ttname"><a href="structconnection.html">connection</a></div><div class="ttdef"><b>Definition:</b> <a href="network_8h_source.html#l00044">network.h:44</a></div></div>
+<div class="ttc" id="avalidation__engine_8h_html_a8a7c063b5d2f1c5e3e0527a5b133e6a2"><div class="ttname"><a href="validation__engine_8h.html#a8a7c063b5d2f1c5e3e0527a5b133e6a2">comital_validate_block</a></div><div class="ttdeci">int comital_validate_block(Block *block)</div><div class="ttdef"><b>Definition:</b> <a href="validation__engine_8c_source.html#l00242">validation_engine.c:242</a></div></div>
+<div class="ttc" id="astruct_transaction_html"><div class="ttname"><a href="struct_transaction.html">Transaction</a></div><div class="ttdef"><b>Definition:</b> <a href="block_8h_source.html#l00051">block.h:51</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

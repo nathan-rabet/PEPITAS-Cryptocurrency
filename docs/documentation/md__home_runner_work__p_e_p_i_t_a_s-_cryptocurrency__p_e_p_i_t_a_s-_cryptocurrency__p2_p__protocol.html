@@ -113,43 +113,98 @@ Validating Headers</h2>
 </ol>
 <h2><a class="anchor" id="autotoc_md5"></a>
 CONNECTION TO NETWORK</h2>
-<p><b>Message:</b> char * : "CONNECTION TO NETWORK\r\n\r\n"</p>
+<p><b>Message:</b></p><ul>
+<li>char * : "CONNECTION TO NETWORK\r\n\r\n"</li>
+</ul>
 <p><b>Description</b> Send a request to be accepted by a network door.</p>
 <h2><a class="anchor" id="autotoc_md6"></a>
 CONNECTION TO NODE</h2>
-<p><b>Message:</b> char * : "CONNECTION TO NODE\r\n\r\n"</p>
+<p><b>Message:</b></p><ul>
+<li>char * : "CONNECTION TO NODE\r\n\r\n"</li>
+</ul>
 <p><b>Description</b> Send a request to be accepted by a network node. </p>
 <h2><a class="anchor" id="autotoc_md7"></a>
 GET BLOCKS</h2>
-<p><b>Message:</b> char * : "GET BLOCKS\r\n\r\n" uint32_t : P_VERSION char : Number of demand (max 50) size_t * : <a class="el" href="struct_block.html">Block</a> height</p>
+<p><b>Message:</b></p><ul>
+<li>char * : "GET BLOCKS\r\n\r\n"</li>
+<li>uint32_t : P_VERSION</li>
+<li>char : Number of demand (max 50)</li>
+<li>size_t * : <a class="el" href="struct_block.html">Block</a> height</li>
+</ul>
 <p><b>Description</b> Send a request to a server for getting blocks. If the genesis block (height 0) is demand then the number of the actual blockchain height is return with "ACTUAL HEIGHT" header. If not, SEND BLOCK or REJECT DEMAND messages are returned. </p>
 <h2><a class="anchor" id="autotoc_md8"></a>
 ACTUAL HEIGHT</h2>
-<p><b>Message:</b> char * : "ACTUAL HEIGHT\r\n\r\n" size_t : <a class="el" href="struct_block.html">Block</a> height</p>
+<p><b>Message:</b></p><ul>
+<li>char * : "ACTUAL HEIGHT\r\n\r\n"</li>
+<li>size_t : <a class="el" href="struct_block.html">Block</a> height</li>
+</ul>
 <p><b>Description</b> Send my actual blockchain height. </p>
 <h2><a class="anchor" id="autotoc_md9"></a>
 SEND BLOCK</h2>
-<p><b>Message:</b> char * : "SEND BLOCK\r\n\r\n" size_t : <a class="el" href="struct_block.html">Block</a> height size_t : <a class="el" href="struct_block.html">Block</a> size char * : <a class="el" href="struct_block.html">Block</a> struct</p>
+<p><b>Message:</b></p><ul>
+<li>char * : "SEND BLOCK\r\n\r\n"</li>
+<li>size_t : <a class="el" href="struct_block.html">Block</a> height</li>
+<li>size_t : <a class="el" href="struct_block.html">Block</a> size</li>
+<li>char * : <a class="el" href="struct_block.html">Block</a> struct</li>
+</ul>
 <p><b>Description</b> The block of height demand by "GET BLOCKS". </p>
 <h2><a class="anchor" id="autotoc_md10"></a>
 GET PENDING TRANSACTION LIST</h2>
-<p><b>Message</b> char * : "GET PENDING TRANSACTION LIST\r\n\r\n"</p>
-<p><b>Description</b> Call "SEND PENDING TRANSACTION". </p>
+<p><b>Message</b></p><ul>
+<li>char * : "GET PENDING TRANSACTION LIST\r\n\r\n"</li>
+</ul>
+<p><b>Description</b> Call "SEND PENDING TRANSACTION LIST". </p>
 <h2><a class="anchor" id="autotoc_md11"></a>
-REJECT DEMAND</h2>
-<p><b>Message:</b> char * : "REJECT DEMAND\r\n\r\n"</p>
-<p><b>Description</b> Reject a demand if can't reply. For example a "GET BLOCKS" of a not existing block. </p>
+SEND PENDING TRANSACTION LIST</h2>
+<p><b>Message</b></p><ul>
+<li>char * : "GET PENDING TRANSACTION LIST\r\n\r\n"</li>
+<li>size_t : Number of <a class="el" href="struct_transaction.html">Transaction</a> id</li>
+<li>time_t * : <a class="el" href="struct_transaction.html">Transaction</a> id</li>
+</ul>
+<p><b>Description</b> Send PDT list. </p>
 <h2><a class="anchor" id="autotoc_md12"></a>
-SEND PENDING TRANSACTION</h2>
-<p><b>Message:</b> char * : "SEND PENDING TRANSACTION\r\n\r\n"</p>
-<p><b>Description</b> Send the epoch block of a committee member. </p>
+REJECT DEMAND</h2>
+<p><b>Message:</b></p><ul>
+<li>char * : "REJECT DEMAND\r\n\r\n"</li>
+</ul>
+<p><b>Description</b> Reject a demand if can't reply. For example a "GET BLOCKS" of a not existing block.</p>
 <h2><a class="anchor" id="autotoc_md13"></a>
-SEND EPOCH BLOCK</h2>
-<p><b>Message:</b> char * : "SEND EPOCH BLOCK\r\n\r\n" char * : <a class="el" href="struct_block.html">Block</a> struct</p>
-<p><b>Description</b> Send the epoch block of a committee member.</p>
+GET PENDING TRANSACTION</h2>
+<p><b>Message:</b></p><ul>
+<li>char * : "GET PENDING TRANSACTION\r\n\r\n"</li>
+<li>time_t : <a class="el" href="struct_transaction.html">Transaction</a> id</li>
+</ul>
+<p><b>Description</b> Demand a PENDING TRANSACTION. </p>
 <h2><a class="anchor" id="autotoc_md14"></a>
+SEND PENDING TRANSACTION</h2>
+<p><b>Message:</b></p><ul>
+<li>char * : "SEND PENDING TRANSACTION\r\n\r\n"</li>
+<li>size_t : <a class="el" href="struct_transaction.html">Transaction</a> id</li>
+<li>size_t : <a class="el" href="struct_transaction.html">Transaction</a> struct size octet</li>
+<li>char * : <a class="el" href="struct_transaction.html">Transaction</a> struct</li>
+</ul>
+<p><b>Description</b> Send the PENDING TRANSACTION demand by SEND PENDING TRANSACTION. </p>
+<h2><a class="anchor" id="autotoc_md15"></a>
+SEND EPOCH BLOCK</h2>
+<p><b>Message:</b></p><ul>
+<li>char * : "SEND EPOCH BLOCK\r\n\r\n"</li>
+<li>int : Epoch id</li>
+<li>size_t : <a class="el" href="struct_block.html">Block</a> height</li>
+<li>char * : <a class="el" href="struct_block.html">Block</a> struct</li>
+</ul>
+<p><b>Description</b> Send the epoch block of a committee member.</p>
+<h2><a class="anchor" id="autotoc_md16"></a>
 SEND VOTE</h2>
-<p><b>Message:</b> char * : "SEND VOTE\r\n\r\n" char *: Epoch creator pk size_t : block height int epoch_id: creator char : 0 = False 1 = True char * : signature of vote precedent vars</p>
+<p><b>Message:</b></p>
+<ul>
+<li>char * : "SEND VOTE\r\n\r\n"</li>
+<li>size_t : size epoch creator pk</li>
+<li>char * : Epoch creator pk</li>
+<li>size_t : block height</li>
+<li>int : epoch_id</li>
+<li>char : 0 = False 1 = True</li>
+<li>char * : signature of vote precedent vars but not "SEND VOTE\r\n\r\n"</li>
+</ul>
 <p><b>Description</b> Send the vote of a committee member. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->

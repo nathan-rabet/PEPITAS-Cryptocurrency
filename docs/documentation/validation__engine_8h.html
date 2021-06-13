@@ -84,7 +84,9 @@ $(document).ready(function(){initNavTree('validation__engine_8h.html',''); initR
 
 <div class="header">
   <div class="summary">
-<a href="#func-members">Functions</a>  </div>
+<a href="#define-members">Macros</a> &#124;
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">validation_engine.h File Reference</div>  </div>
 </div><!--header-->
@@ -93,31 +95,147 @@ $(document).ready(function(){initNavTree('validation__engine_8h.html',''); initR
 <code>#include &quot;<a class="el" href="signature_8h_source.html">cryptosystem/signature.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="rsa_8h_source.html">cryptosystem/rsa.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="hash_8h_source.html">cryptosystem/hash.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="get__data_8h_source.html">network/get_data.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="math_8h_source.html">misc/math.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="files_8h_source.html">misc/files.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="bits_8h_source.html">misc/bits.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="safe_8h_source.html">misc/safe.h</a>&quot;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
 <code>#include &lt;openssl/bio.h&gt;</code><br />
 <code>#include &lt;stdbool.h&gt;</code><br />
+<code>#include &lt;openssl/evp.h&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for validation_engine.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="validation__engine_8h__incl.png" border="0" usemap="#_2home_2runner_2work_2_p_e_p_i_t_a_s-_cryptocurrency_2_p_e_p_i_t_a_s-_cryptocurrency_2headers_2validation_2validation__engine_8h" alt=""/></div>
 <!-- MAP 0 -->
 </div>
+</div><div class="textblock"><div class="dynheader">
+This graph shows which files directly or indirectly include this file:</div>
+<div class="dyncontent">
+<div class="center"><img src="validation__engine_8h__dep__incl.png" border="0" usemap="#_2home_2runner_2work_2_p_e_p_i_t_a_s-_cryptocurrency_2_p_e_p_i_t_a_s-_cryptocurrency_2headers_2validation_2validation__engine_8hdep" alt=""/></div>
+<!-- MAP 1 -->
+</div>
 </div>
 <p><a href="validation__engine_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a9abe81e7578fcc2e894db69b249f4e93"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="validation__engine_8h.html#a9abe81e7578fcc2e894db69b249f4e93">VERIDCT_NO</a>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:a9abe81e7578fcc2e894db69b249f4e93"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20c0cc377715ba73637ef8a364b9fcd0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="validation__engine_8h.html#a20c0cc377715ba73637ef8a364b9fcd0">VERIDCT_YES</a>&#160;&#160;&#160;1</td></tr>
+<tr class="separator:a20c0cc377715ba73637ef8a364b9fcd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a93a0b87cba2b7b614c178e5d9519c6ae"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="validation__engine_8h.html#a93a0b87cba2b7b614c178e5d9519c6ae">send_verdict</a> (<a class="el" href="struct_block.html">Block</a> *block, char verdict)</td></tr>
 <tr class="memdesc:a93a0b87cba2b7b614c178e5d9519c6ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broadcast a verdict about a block validity to the network.  <a href="validation__engine_8h.html#a93a0b87cba2b7b614c178e5d9519c6ae">More...</a><br /></td></tr>
 <tr class="separator:a93a0b87cba2b7b614c178e5d9519c6ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ade3e807a9bf1d4bb1e11bc8cf931af6c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_transaction.html">Transaction</a> **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="validation__engine_8h.html#ade3e807a9bf1d4bb1e11bc8cf931af6c">validate_transactions</a> (<a class="el" href="struct_transaction.html">Transaction</a> *transaction_to_validate, size_t nb_transactions, size_t *nb_returned_transactions)</td></tr>
-<tr class="memdesc:ade3e807a9bf1d4bb1e11bc8cf931af6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Validate some transactions.  <a href="validation__engine_8h.html#ade3e807a9bf1d4bb1e11bc8cf931af6c">More...</a><br /></td></tr>
-<tr class="separator:ade3e807a9bf1d4bb1e11bc8cf931af6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9134934f42952ee3fd7a73aea892858c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_transaction.html">Transaction</a> **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="validation__engine_8h.html#a9134934f42952ee3fd7a73aea892858c">validate_transactions</a> (<a class="el" href="struct_transaction.html">Transaction</a> **transaction_to_validate, size_t nb_transactions, size_t *nb_returned_transactions)</td></tr>
+<tr class="memdesc:a9134934f42952ee3fd7a73aea892858c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Validate some transactions.  <a href="validation__engine_8h.html#a9134934f42952ee3fd7a73aea892858c">More...</a><br /></td></tr>
+<tr class="separator:a9134934f42952ee3fd7a73aea892858c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a7c063b5d2f1c5e3e0527a5b133e6a2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="validation__engine_8h.html#a8a7c063b5d2f1c5e3e0527a5b133e6a2">comital_validate_block</a> (<a class="el" href="struct_block.html">Block</a> *block)</td></tr>
+<tr class="separator:a8a7c063b5d2f1c5e3e0527a5b133e6a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa566a0b7eb319d2489b8ac68c6e76824"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="validation__engine_8h.html#aa566a0b7eb319d2489b8ac68c6e76824">plebe_verify_block</a> (<a class="el" href="struct_block.html">Block</a> *block)</td></tr>
+<tr class="separator:aa566a0b7eb319d2489b8ac68c6e76824"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a0ba5d3a056115234ab9ed718797c2953"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structconnection.html">connection</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="validation__engine_8h.html#a0ba5d3a056115234ab9ed718797c2953">client_connections</a></td></tr>
+<tr class="separator:a0ba5d3a056115234ab9ed718797c2953"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="a9abe81e7578fcc2e894db69b249f4e93"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9abe81e7578fcc2e894db69b249f4e93">&#9670;&nbsp;</a></span>VERIDCT_NO</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define VERIDCT_NO&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="validation__engine_8h_source.html#l00019">19</a> of file <a class="el" href="validation__engine_8h_source.html">validation_engine.h</a>.</p>
+
+</div>
+</div>
+<a id="a20c0cc377715ba73637ef8a364b9fcd0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20c0cc377715ba73637ef8a364b9fcd0">&#9670;&nbsp;</a></span>VERIDCT_YES</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define VERIDCT_YES&#160;&#160;&#160;1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="validation__engine_8h_source.html#l00020">20</a> of file <a class="el" href="validation__engine_8h_source.html">validation_engine.h</a>.</p>
+
+</div>
+</div>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="a8a7c063b5d2f1c5e3e0527a5b133e6a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a7c063b5d2f1c5e3e0527a5b133e6a2">&#9670;&nbsp;</a></span>comital_validate_block()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int comital_validate_block </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_block.html">Block</a> *&#160;</td>
+          <td class="paramname"><em>block</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="validation__engine_8c_source.html#l00242">242</a> of file <a class="el" href="validation__engine_8c_source.html">validation_engine.c</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="validation__engine_8h_a8a7c063b5d2f1c5e3e0527a5b133e6a2_cgraph.png" border="0" usemap="#validation__engine_8h_a8a7c063b5d2f1c5e3e0527a5b133e6a2_cgraph" alt=""/></div>
+<!-- MAP 2 -->
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="validation__engine_8h_a8a7c063b5d2f1c5e3e0527a5b133e6a2_icgraph.png" border="0" usemap="#validation__engine_8h_a8a7c063b5d2f1c5e3e0527a5b133e6a2_icgraph" alt=""/></div>
+<!-- MAP 3 -->
+</div>
+
+</div>
+</div>
+<a id="aa566a0b7eb319d2489b8ac68c6e76824"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa566a0b7eb319d2489b8ac68c6e76824">&#9670;&nbsp;</a></span>plebe_verify_block()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char plebe_verify_block </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_block.html">Block</a> *&#160;</td>
+          <td class="paramname"><em>block</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="validation__engine_8c_source.html#l00199">199</a> of file <a class="el" href="validation__engine_8c_source.html">validation_engine.c</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="validation__engine_8h_aa566a0b7eb319d2489b8ac68c6e76824_icgraph.png" border="0" usemap="#validation__engine_8h_aa566a0b7eb319d2489b8ac68c6e76824_icgraph" alt=""/></div>
+<!-- MAP 4 -->
+</div>
+
+</div>
+</div>
 <a id="a93a0b87cba2b7b614c178e5d9519c6ae"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a93a0b87cba2b7b614c178e5d9519c6ae">&#9670;&nbsp;</a></span>send_verdict()</h2>
 
@@ -154,10 +272,24 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>0 if the broadcast suceed, -1 if not </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="validation__engine_8c_source.html#l00305">305</a> of file <a class="el" href="validation__engine_8c_source.html">validation_engine.c</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="validation__engine_8h_a93a0b87cba2b7b614c178e5d9519c6ae_cgraph.png" border="0" usemap="#validation__engine_8h_a93a0b87cba2b7b614c178e5d9519c6ae_cgraph" alt=""/></div>
+<!-- MAP 5 -->
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="validation__engine_8h_a93a0b87cba2b7b614c178e5d9519c6ae_icgraph.png" border="0" usemap="#validation__engine_8h_a93a0b87cba2b7b614c178e5d9519c6ae_icgraph" alt=""/></div>
+<!-- MAP 6 -->
+</div>
+
 </div>
 </div>
-<a id="ade3e807a9bf1d4bb1e11bc8cf931af6c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ade3e807a9bf1d4bb1e11bc8cf931af6c">&#9670;&nbsp;</a></span>validate_transactions()</h2>
+<a id="a9134934f42952ee3fd7a73aea892858c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9134934f42952ee3fd7a73aea892858c">&#9670;&nbsp;</a></span>validate_transactions()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -165,7 +297,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="struct_transaction.html">Transaction</a>** validate_transactions </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_transaction.html">Transaction</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_transaction.html">Transaction</a> **&#160;</td>
           <td class="paramname"><em>transaction_to_validate</em>, </td>
         </tr>
         <tr>
@@ -206,6 +338,37 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Transaction**, the valid transactions </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="validation__engine_8c_source.html#l00003">3</a> of file <a class="el" href="validation__engine_8c_source.html">validation_engine.c</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="validation__engine_8h_a9134934f42952ee3fd7a73aea892858c_cgraph.png" border="0" usemap="#validation__engine_8h_a9134934f42952ee3fd7a73aea892858c_cgraph" alt=""/></div>
+<!-- MAP 7 -->
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="validation__engine_8h_a9134934f42952ee3fd7a73aea892858c_icgraph.png" border="0" usemap="#validation__engine_8h_a9134934f42952ee3fd7a73aea892858c_icgraph" alt=""/></div>
+<!-- MAP 8 -->
+</div>
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="a0ba5d3a056115234ab9ed718797c2953"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ba5d3a056115234ab9ed718797c2953">&#9670;&nbsp;</a></span>client_connections</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structconnection.html">connection</a>* client_connections</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="core_2network_2client_8c_source.html#l00004">4</a> of file <a class="el" href="core_2network_2client_8c_source.html">client.c</a>.</p>
 
 </div>
 </div>

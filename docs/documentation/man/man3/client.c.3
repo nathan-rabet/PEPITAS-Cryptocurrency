@@ -39,15 +39,18 @@
 .br
 .RI "Load neighbours list from \&.neighbours/neighbours\&. "
 .ti -1c
+.RI "int \fBis_in_neighbours\fP (char who, char *hostname)"
+.br
+.ti -1c
 .RI "int \fBnumber_neighbours\fP (char who)"
 .br
 .RI "return the nb of neighbour in the client\&.neightbours section "
 .ti -1c
-.RI "\fBclient_connection\fP * \fBlisten_to\fP (\fBinfos_st\fP *infos, \fBNeighbour\fP neighbour, char *connection_type)"
+.RI "\fBconnection\fP * \fBlisten_to\fP (\fBinfos_st\fP *infos, \fBNeighbour\fP neighbour, char *connection_type, \fBconnection\fP *\fBconnection\fP)"
 .br
 .RI "Tries to connect to the peer-to-peer network via a node in the \fBNode\fP structure\&. "
 .ti -1c
-.RI "int \fBfind_empty_connection\fP (int max)"
+.RI "int \fBfind_empty_connection\fP (int max, \fBconnection\fP *connections)"
 .br
 .ti -1c
 .RI "void * \fBclient_thread\fP (void *args)"
@@ -57,7 +60,7 @@
 
 .in +1c
 .ti -1c
-.RI "\fBclient_connection\fP * \fBclient_connections\fP = NULL"
+.RI "\fBconnection\fP * \fBclient_connections\fP = NULL"
 .br
 .in -1c
 .SH "Function Documentation"
@@ -65,11 +68,11 @@
 .SS "void* client_thread (void * args)"
 
 .PP
-Definition at line 247 of file client\&.c\&.
-.SS "int find_empty_connection (int max)"
+Definition at line 268 of file client\&.c\&.
+.SS "int find_empty_connection (int max, \fBconnection\fP * connections)"
 
 .PP
-Definition at line 237 of file client\&.c\&.
+Definition at line 258 of file client\&.c\&.
 .SS "\fBNode\fP* get_my_node (char who)"
 
 .PP
@@ -83,7 +86,11 @@ Node*
 
 .PP
 Definition at line 6 of file client\&.c\&.
-.SS "\fBclient_connection\fP* listen_to (\fBinfos_st\fP * infos, \fBNeighbour\fP neighbour, char * connection_type)"
+.SS "int is_in_neighbours (char who, char * hostname)"
+
+.PP
+Definition at line 149 of file client\&.c\&.
+.SS "\fBconnection\fP* listen_to (\fBinfos_st\fP * infos, \fBNeighbour\fP neighbour, char * connection_type, \fBconnection\fP * connection)"
 
 .PP
 Tries to connect to the peer-to-peer network via a node in the \fBNode\fP structure\&. 
@@ -100,7 +107,7 @@ socket FD or -1 if an error occurs
 .PP
 
 .PP
-Definition at line 161 of file client\&.c\&.
+Definition at line 172 of file client\&.c\&.
 .SS "void load_neighbours (char who)"
 
 .PP
@@ -112,7 +119,7 @@ Definition at line 113 of file client\&.c\&.
 .PP
 return the nb of neighbour in the client\&.neightbours section 
 .PP
-Definition at line 149 of file client\&.c\&.
+Definition at line 160 of file client\&.c\&.
 .SS "void print_neighbours (char who, char mask)"
 
 .PP
@@ -146,7 +153,7 @@ Sets a neighbour in the client\&.neightbours section\&.
 Definition at line 19 of file client\&.c\&.
 .SH "Variable Documentation"
 .PP 
-.SS "\fBclient_connection\fP* client_connections = NULL"
+.SS "\fBconnection\fP* client_connections = NULL"
 
 .PP
 Definition at line 4 of file client\&.c\&.

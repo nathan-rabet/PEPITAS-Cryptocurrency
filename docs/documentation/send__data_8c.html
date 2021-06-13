@@ -104,17 +104,25 @@ Functions</h2></td></tr>
 <tr class="memitem:ad9194d475483d8bcc59cc5e1de6fbc0a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="send__data_8c.html#ad9194d475483d8bcc59cc5e1de6fbc0a">send_client_list</a> (char who, int sockfd, char *sockip)</td></tr>
 <tr class="memdesc:ad9194d475483d8bcc59cc5e1de6fbc0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends my client list to a node via 'sockfd'.  <a href="send__data_8c.html#ad9194d475483d8bcc59cc5e1de6fbc0a">More...</a><br /></td></tr>
 <tr class="separator:ad9194d475483d8bcc59cc5e1de6fbc0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acd3f44461fccb7cce14713691881d68d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="send__data_8c.html#acd3f44461fccb7cce14713691881d68d">send_get_blocks</a> (<a class="el" href="structclient__connection.html">client_connection</a> *cc)</td></tr>
-<tr class="memdesc:acd3f44461fccb7cce14713691881d68d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends get blocks.  <a href="send__data_8c.html#acd3f44461fccb7cce14713691881d68d">More...</a><br /></td></tr>
-<tr class="separator:acd3f44461fccb7cce14713691881d68d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51882be5abfcbec43cd4172fecc4ccce"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="send__data_8c.html#a51882be5abfcbec43cd4172fecc4ccce">send_get_blocks</a> (<a class="el" href="structconnection.html">connection</a> *cc)</td></tr>
+<tr class="memdesc:a51882be5abfcbec43cd4172fecc4ccce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends get blocks.  <a href="send__data_8c.html#a51882be5abfcbec43cd4172fecc4ccce">More...</a><br /></td></tr>
+<tr class="separator:a51882be5abfcbec43cd4172fecc4ccce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adb40f883657d52ed3ba313b116cab145"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="send__data_8c.html#adb40f883657d52ed3ba313b116cab145">send_actual_height</a> (int fd, <a class="el" href="structinfos__st.html">infos_st</a> *infos)</td></tr>
 <tr class="separator:adb40f883657d52ed3ba313b116cab145"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa8859ad379bea05c4aa49401434f643b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="send__data_8c.html#aa8859ad379bea05c4aa49401434f643b">send_reject_demand</a> (int fd)</td></tr>
 <tr class="separator:aa8859ad379bea05c4aa49401434f643b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a531773aa2b9ab63b3bec76fd51600ae8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="send__data_8c.html#a531773aa2b9ab63b3bec76fd51600ae8">send_send_block</a> (int fd, size_t height)</td></tr>
 <tr class="separator:a531773aa2b9ab63b3bec76fd51600ae8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac9f8961ac34d8b4b6d5e023fa1953dc7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="send__data_8c.html#ac9f8961ac34d8b4b6d5e023fa1953dc7">send_pending_transaction_list</a> (<a class="el" href="network_8h.html#a3d8810ff759f090d31d612cc51cf9158">__attribute__</a>((unused)) int fd)</td></tr>
-<tr class="separator:ac9f8961ac34d8b4b6d5e023fa1953dc7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a456da43b803dd9e6d7dc17b8b3881c1a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="send__data_8c.html#a456da43b803dd9e6d7dc17b8b3881c1a">send_pending_transaction_list</a> (int fd)</td></tr>
+<tr class="separator:a456da43b803dd9e6d7dc17b8b3881c1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44568bf063db6d1080211c0b9600f96f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="send__data_8c.html#a44568bf063db6d1080211c0b9600f96f">send_send_pending_transaction</a> (int fd, time_t txid)</td></tr>
+<tr class="separator:a44568bf063db6d1080211c0b9600f96f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a98ff5bedd4800a58f44fd6fa16ebd1a5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="send__data_8c.html#a98ff5bedd4800a58f44fd6fa16ebd1a5">send_get_pending_transaction</a> (int fd, time_t txid)</td></tr>
+<tr class="separator:a98ff5bedd4800a58f44fd6fa16ebd1a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa071fb878bcd5651f272fb06d5e30703"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="send__data_8c.html#aa071fb878bcd5651f272fb06d5e30703">send_epoch_block</a> (<a class="el" href="structconnection.html">connection</a> *cc)</td></tr>
+<tr class="separator:aa071fb878bcd5651f272fb06d5e30703"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39e8a998b5ca364579e286a92daa92c0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="send__data_8c.html#a39e8a998b5ca364579e286a92daa92c0">send_vote_fd</a> (<a class="el" href="structconnection.html">connection</a> *cc)</td></tr>
+<tr class="separator:a39e8a998b5ca364579e286a92daa92c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="adb40f883657d52ed3ba313b116cab145"></a>
@@ -216,8 +224,40 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="acd3f44461fccb7cce14713691881d68d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acd3f44461fccb7cce14713691881d68d">&#9670;&nbsp;</a></span>send_get_blocks()</h2>
+<a id="aa071fb878bcd5651f272fb06d5e30703"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa071fb878bcd5651f272fb06d5e30703">&#9670;&nbsp;</a></span>send_epoch_block()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void send_epoch_block </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structconnection.html">connection</a> *&#160;</td>
+          <td class="paramname"><em>cc</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="send__data_8c_source.html#l00173">173</a> of file <a class="el" href="send__data_8c_source.html">send_data.c</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="send__data_8c_aa071fb878bcd5651f272fb06d5e30703_cgraph.png" border="0" usemap="#send__data_8c_aa071fb878bcd5651f272fb06d5e30703_cgraph" alt=""/></div>
+<!-- MAP 5 -->
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="send__data_8c_aa071fb878bcd5651f272fb06d5e30703_icgraph.png" border="0" usemap="#send__data_8c_aa071fb878bcd5651f272fb06d5e30703_icgraph" alt=""/></div>
+<!-- MAP 6 -->
+</div>
+
+</div>
+</div>
+<a id="a51882be5abfcbec43cd4172fecc4ccce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51882be5abfcbec43cd4172fecc4ccce">&#9670;&nbsp;</a></span>send_get_blocks()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -225,7 +265,7 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="memname">void send_get_blocks </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structclient__connection.html">client_connection</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structconnection.html">connection</a> *&#160;</td>
           <td class="paramname"><em>cc</em></td><td>)</td>
           <td></td>
         </tr>
@@ -238,20 +278,62 @@ Here is the caller graph for this function:</div>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="send__data_8c_acd3f44461fccb7cce14713691881d68d_cgraph.png" border="0" usemap="#send__data_8c_acd3f44461fccb7cce14713691881d68d_cgraph" alt=""/></div>
-<!-- MAP 5 -->
+<div class="center"><img src="send__data_8c_a51882be5abfcbec43cd4172fecc4ccce_cgraph.png" border="0" usemap="#send__data_8c_a51882be5abfcbec43cd4172fecc4ccce_cgraph" alt=""/></div>
+<!-- MAP 7 -->
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="send__data_8c_acd3f44461fccb7cce14713691881d68d_icgraph.png" border="0" usemap="#send__data_8c_acd3f44461fccb7cce14713691881d68d_icgraph" alt=""/></div>
-<!-- MAP 6 -->
+<div class="center"><img src="send__data_8c_a51882be5abfcbec43cd4172fecc4ccce_icgraph.png" border="0" usemap="#send__data_8c_a51882be5abfcbec43cd4172fecc4ccce_icgraph" alt=""/></div>
+<!-- MAP 8 -->
 </div>
 
 </div>
 </div>
-<a id="ac9f8961ac34d8b4b6d5e023fa1953dc7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac9f8961ac34d8b4b6d5e023fa1953dc7">&#9670;&nbsp;</a></span>send_pending_transaction_list()</h2>
+<a id="a98ff5bedd4800a58f44fd6fa16ebd1a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a98ff5bedd4800a58f44fd6fa16ebd1a5">&#9670;&nbsp;</a></span>send_get_pending_transaction()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void send_get_pending_transaction </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>fd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">time_t&#160;</td>
+          <td class="paramname"><em>txid</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="send__data_8c_source.html#l00165">165</a> of file <a class="el" href="send__data_8c_source.html">send_data.c</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="send__data_8c_a98ff5bedd4800a58f44fd6fa16ebd1a5_cgraph.png" border="0" usemap="#send__data_8c_a98ff5bedd4800a58f44fd6fa16ebd1a5_cgraph" alt=""/></div>
+<!-- MAP 9 -->
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="send__data_8c_a98ff5bedd4800a58f44fd6fa16ebd1a5_icgraph.png" border="0" usemap="#send__data_8c_a98ff5bedd4800a58f44fd6fa16ebd1a5_icgraph" alt=""/></div>
+<!-- MAP 10 -->
+</div>
+
+</div>
+</div>
+<a id="a456da43b803dd9e6d7dc17b8b3881c1a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a456da43b803dd9e6d7dc17b8b3881c1a">&#9670;&nbsp;</a></span>send_pending_transaction_list()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -259,7 +341,7 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="memname">void send_pending_transaction_list </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="network_8h.html#a3d8810ff759f090d31d612cc51cf9158">__attribute__</a>((unused)) int&#160;</td>
+          <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>fd</em></td><td>)</td>
           <td></td>
         </tr>
@@ -267,6 +349,18 @@ Here is the caller graph for this function:</div>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="send__data_8c_source.html#l00104">104</a> of file <a class="el" href="send__data_8c_source.html">send_data.c</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="send__data_8c_a456da43b803dd9e6d7dc17b8b3881c1a_cgraph.png" border="0" usemap="#send__data_8c_a456da43b803dd9e6d7dc17b8b3881c1a_cgraph" alt=""/></div>
+<!-- MAP 11 -->
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="send__data_8c_a456da43b803dd9e6d7dc17b8b3881c1a_icgraph.png" border="0" usemap="#send__data_8c_a456da43b803dd9e6d7dc17b8b3881c1a_icgraph" alt=""/></div>
+<!-- MAP 12 -->
+</div>
 
 </div>
 </div>
@@ -291,13 +385,13 @@ Here is the caller graph for this function:</div>
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="send__data_8c_aa8859ad379bea05c4aa49401434f643b_cgraph.png" border="0" usemap="#send__data_8c_aa8859ad379bea05c4aa49401434f643b_cgraph" alt=""/></div>
-<!-- MAP 7 -->
+<!-- MAP 13 -->
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="send__data_8c_aa8859ad379bea05c4aa49401434f643b_icgraph.png" border="0" usemap="#send__data_8c_aa8859ad379bea05c4aa49401434f643b_icgraph" alt=""/></div>
-<!-- MAP 8 -->
+<!-- MAP 14 -->
 </div>
 
 </div>
@@ -333,13 +427,87 @@ Here is the caller graph for this function:</div>
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="send__data_8c_a531773aa2b9ab63b3bec76fd51600ae8_cgraph.png" border="0" usemap="#send__data_8c_a531773aa2b9ab63b3bec76fd51600ae8_cgraph" alt=""/></div>
-<!-- MAP 9 -->
+<!-- MAP 15 -->
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="send__data_8c_a531773aa2b9ab63b3bec76fd51600ae8_icgraph.png" border="0" usemap="#send__data_8c_a531773aa2b9ab63b3bec76fd51600ae8_icgraph" alt=""/></div>
-<!-- MAP 10 -->
+<!-- MAP 16 -->
+</div>
+
+</div>
+</div>
+<a id="a44568bf063db6d1080211c0b9600f96f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a44568bf063db6d1080211c0b9600f96f">&#9670;&nbsp;</a></span>send_send_pending_transaction()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void send_send_pending_transaction </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>fd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">time_t&#160;</td>
+          <td class="paramname"><em>txid</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="send__data_8c_source.html#l00127">127</a> of file <a class="el" href="send__data_8c_source.html">send_data.c</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="send__data_8c_a44568bf063db6d1080211c0b9600f96f_cgraph.png" border="0" usemap="#send__data_8c_a44568bf063db6d1080211c0b9600f96f_cgraph" alt=""/></div>
+<!-- MAP 17 -->
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="send__data_8c_a44568bf063db6d1080211c0b9600f96f_icgraph.png" border="0" usemap="#send__data_8c_a44568bf063db6d1080211c0b9600f96f_icgraph" alt=""/></div>
+<!-- MAP 18 -->
+</div>
+
+</div>
+</div>
+<a id="a39e8a998b5ca364579e286a92daa92c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39e8a998b5ca364579e286a92daa92c0">&#9670;&nbsp;</a></span>send_vote_fd()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void send_vote_fd </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structconnection.html">connection</a> *&#160;</td>
+          <td class="paramname"><em>cc</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="send__data_8c_source.html#l00209">209</a> of file <a class="el" href="send__data_8c_source.html">send_data.c</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="send__data_8c_a39e8a998b5ca364579e286a92daa92c0_cgraph.png" border="0" usemap="#send__data_8c_a39e8a998b5ca364579e286a92daa92c0_cgraph" alt=""/></div>
+<!-- MAP 19 -->
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="send__data_8c_a39e8a998b5ca364579e286a92daa92c0_icgraph.png" border="0" usemap="#send__data_8c_a39e8a998b5ca364579e286a92daa92c0_icgraph" alt=""/></div>
+<!-- MAP 20 -->
 </div>
 
 </div>

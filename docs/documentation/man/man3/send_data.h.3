@@ -8,6 +8,10 @@
 .PP
 \fC#include 'network/server\&.h'\fP
 .br
+\fC#include <dirent\&.h>\fP
+.br
+\fC#include <stdio\&.h>\fP
+.br
 
 .SS "Functions"
 
@@ -17,7 +21,7 @@
 .br
 .RI "Sends my client list to a node via 'sockfd'\&. "
 .ti -1c
-.RI "void \fBsend_get_blocks\fP (\fBclient_connection\fP *cc)"
+.RI "void \fBsend_get_blocks\fP (\fBconnection\fP *cc)"
 .br
 .RI "Sends get blocks\&. "
 .ti -1c
@@ -30,7 +34,19 @@
 .RI "void \fBsend_send_block\fP (int fd, size_t height)"
 .br
 .ti -1c
-.RI "void \fBsend_pending_transaction_list\fP (int sockfd)"
+.RI "void \fBsend_pending_transaction_list\fP (int fd)"
+.br
+.ti -1c
+.RI "void \fBsend_send_pending_transaction\fP (int fd, time_t txid)"
+.br
+.ti -1c
+.RI "void \fBsend_get_pending_transaction\fP (int fd, time_t txid)"
+.br
+.ti -1c
+.RI "void \fBsend_epoch_block\fP (\fBconnection\fP *cc)"
+.br
+.ti -1c
+.RI "void \fBsend_vote_fd\fP (\fBconnection\fP *cc)"
 .br
 .in -1c
 .SH "Function Documentation"
@@ -57,14 +73,24 @@ Sends my client list to a node via 'sockfd'\&.
 
 .PP
 Definition at line 3 of file send_data\&.c\&.
-.SS "void send_get_blocks (\fBclient_connection\fP * cc)"
+.SS "void send_epoch_block (\fBconnection\fP * cc)"
+
+.PP
+Definition at line 173 of file send_data\&.c\&.
+.SS "void send_get_blocks (\fBconnection\fP * cc)"
 
 .PP
 Sends get blocks\&. 
 .PP
 Definition at line 52 of file send_data\&.c\&.
-.SS "void send_pending_transaction_list (int sockfd)"
+.SS "void send_get_pending_transaction (int fd, time_t txid)"
 
+.PP
+Definition at line 165 of file send_data\&.c\&.
+.SS "void send_pending_transaction_list (int fd)"
+
+.PP
+Definition at line 104 of file send_data\&.c\&.
 .SS "void send_reject_demand (int fd)"
 
 .PP
@@ -73,6 +99,14 @@ Definition at line 65 of file send_data\&.c\&.
 
 .PP
 Definition at line 71 of file send_data\&.c\&.
+.SS "void send_send_pending_transaction (int fd, time_t txid)"
+
+.PP
+Definition at line 127 of file send_data\&.c\&.
+.SS "void send_vote_fd (\fBconnection\fP * cc)"
+
+.PP
+Definition at line 209 of file send_data\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for PEPITAS CRYPTOCURRENCY from the source code\&.

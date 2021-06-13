@@ -1,13 +1,15 @@
 var client_8h =
 [
-    [ "client_thread", "client_8h.html#a351b786eb662460f254da2ff204fcfcc", null ],
-    [ "find_empty_connection", "client_8h.html#a7c18dc2a701e4f81d1c1f074bca42e6e", null ],
-    [ "get_my_node", "client_8h.html#a745cc052bf8990bd3189b857a1d29f40", null ],
-    [ "listen_to", "client_8h.html#a3d1ce0194b7697343dc0e04866ac4935", null ],
-    [ "load_neighbours", "client_8h.html#a641a9d3cb0669b127493779eefc8b56c", null ],
-    [ "number_neighbours", "client_8h.html#acec8d99c29599378ad06a91d4911587f", null ],
-    [ "print_neighbours", "client_8h.html#ae814feddaa9902371625b42131b1a7f4", null ],
-    [ "remove_neighbour", "client_8h.html#ac8ccea3b50ff7a7e599cfa8fa774af8e", null ],
-    [ "save_neighbours", "client_8h.html#aab146f25715d4241dd2cfc64750cdd0d", null ],
-    [ "set_neighbour", "client_8h.html#a65f3df28a906d619b5f408a26aec7649", null ]
+    [ "clear_epochs", "client_8h.html#a615d428cc2349cb563e4fa3d9212429a", null ],
+    [ "clear_transactions", "client_8h.html#adcc4f847feef7ccada40e231100765f2", null ],
+    [ "connection_to_others", "client_8h.html#ab7126685bb9b5dc07de54dbb8a8ba89d", null ],
+    [ "get_infos", "client_8h.html#a480459f3451fa57a66df548ca0b408e3", null ],
+    [ "join_network_door", "client_8h.html#a4bc5d82e85996fecc53fe3e97c2a7b98", null ],
+    [ "move_file", "client_8h.html#a48484e0947e98ccf25a3eeddb669a9ca", null ],
+    [ "new_transaction", "client_8h.html#a597346567fc95cf305a94063df3e86c3", null ],
+    [ "update_blockchain", "client_8h.html#a2aa6779c93462c07f8a674546b72bd8b", null ],
+    [ "update_blockchain_height", "client_8h.html#a6a6632fc31369b450613587243a58807", null ],
+    [ "update_pdt", "client_8h.html#a35c808540bae041c9d4f83012c639426", null ],
+    [ "update_pending_transactions_list", "client_8h.html#a22202ffd77ff472dddbec2ac501025f4", null ],
+    [ "Validate", "client_8h.html#a6a17e4539f5b0c67dbd36bae0c2c0c8a", null ]
 ];

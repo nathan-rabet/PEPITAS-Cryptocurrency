@@ -1,0 +1,144 @@
+.TH "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/src/core/atrier.c" 3 "Sun Jun 13 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/src/core/atrier.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'blockchain/block\&.h'\fP
+.br
+\fC#include 'client\&.h'\fP
+.br
+\fC#include 'network/client\&.h'\fP
+.br
+\fC#include 'network/server\&.h'\fP
+.br
+\fC#include 'network/send_data\&.h'\fP
+.br
+\fC#include 'network/get_data\&.h'\fP
+.br
+\fC#include 'misc/safe\&.h'\fP
+.br
+\fC#include 'blockchain/transaction\&.h'\fP
+.br
+\fC#include <openssl/rsa\&.h>\fP
+.br
+\fC#include 'ui/ui\&.h'\fP
+.br
+\fC#include 'blockchain/blockchain_header\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBinfos_st\fP * \fBget_infos\fP ()"
+.br
+.ti -1c
+.RI "void \fBupdate_pdt\fP (int number)"
+.br
+.ti -1c
+.RI "void \fBmove_file\fP (char *src, char *dest)"
+.br
+.ti -1c
+.RI "void \fBValidate\fP ()"
+.br
+.ti -1c
+.RI "void \fBnew_transaction\fP (char type, char *rc_pk, size_t amount, char cause[512], char asset[512])"
+.br
+.ti -1c
+.RI "void \fBjoin_network_door\fP (\fBinfos_st\fP *infos)"
+.br
+.ti -1c
+.RI "void \fBconnection_to_others\fP (\fBinfos_st\fP *infos)"
+.br
+.ti -1c
+.RI "size_t \fBupdate_blockchain_height\fP (\fBinfos_st\fP *infos)"
+.br
+.ti -1c
+.RI "void \fBupdate_blockchain\fP (\fBinfos_st\fP *infos, size_t index_client)"
+.br
+.ti -1c
+.RI "void \fBclear_transactions\fP ()"
+.br
+.ti -1c
+.RI "void \fBclear_epochs\fP ()"
+.br
+.ti -1c
+.RI "void \fBupdate_pending_transactions_list\fP ()"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "\fBconnection\fP * \fBclient_connections\fP"
+.br
+.ti -1c
+.RI "\fBinfos_st\fP * \fBac_infos\fP"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "void clear_epochs ()"
+
+.PP
+Definition at line 329 of file atrier\&.c\&.
+.SS "void clear_transactions ()"
+
+.PP
+Definition at line 306 of file atrier\&.c\&.
+.SS "void connection_to_others (\fBinfos_st\fP * infos)"
+
+.PP
+Definition at line 222 of file atrier\&.c\&.
+.SS "\fBinfos_st\fP* get_infos ()"
+
+.PP
+Definition at line 16 of file atrier\&.c\&.
+.SS "void join_network_door (\fBinfos_st\fP * infos)"
+
+.PP
+Definition at line 204 of file atrier\&.c\&.
+.SS "void move_file (char * src, char * dest)"
+
+.PP
+Definition at line 27 of file atrier\&.c\&.
+.SS "void new_transaction (char type, char * rc_pk, size_t amount, char cause[512], char asset[512])"
+
+.PP
+Definition at line 148 of file atrier\&.c\&.
+.SS "void update_blockchain (\fBinfos_st\fP * infos, size_t index_client)"
+
+.PP
+Definition at line 279 of file atrier\&.c\&.
+.SS "size_t update_blockchain_height (\fBinfos_st\fP * infos)"
+
+.PP
+Definition at line 243 of file atrier\&.c\&.
+.SS "void update_pdt (int number)"
+
+.PP
+Definition at line 20 of file atrier\&.c\&.
+.SS "void update_pending_transactions_list ()"
+
+.PP
+Definition at line 348 of file atrier\&.c\&.
+.SS "void Validate ()"
+
+.PP
+Definition at line 62 of file atrier\&.c\&.
+.SH "Variable Documentation"
+.PP 
+.SS "\fBinfos_st\fP* ac_infos"
+
+.PP
+Definition at line 14 of file atrier\&.c\&.
+.SS "\fBconnection\fP* client_connections"
+
+.PP
+Definition at line 4 of file client\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for PEPITAS CRYPTOCURRENCY from the source code\&.

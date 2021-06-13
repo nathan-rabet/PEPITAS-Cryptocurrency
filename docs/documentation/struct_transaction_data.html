@@ -90,7 +90,7 @@ $(document).ready(function(){initNavTree('struct_transaction_data.html',''); ini
 </div><!--header-->
 <div class="contents">
 
-<p><code>#include &lt;<a class="el" href="transaction_8h_source.html">transaction.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="block_8h_source.html">block.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
@@ -98,12 +98,10 @@ Data Fields</h2></td></tr>
 <tr class="separator:a3f86b2fdc165f662a1d3a69ab9cb5fe2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aff17911edc8208aa8ddb1c7c52c78389"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_transaction_data.html#aff17911edc8208aa8ddb1c7c52c78389">type</a></td></tr>
 <tr class="separator:aff17911edc8208aa8ddb1c7c52c78389"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adab773a393f892dc7c1e31ff1ce733f8"><td class="memItemLeft" align="right" valign="top">RSA *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_transaction_data.html#adab773a393f892dc7c1e31ff1ce733f8">sender_public_key</a></td></tr>
-<tr class="separator:adab773a393f892dc7c1e31ff1ce733f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af9a5ebb2d24125d125f035e74830121e"><td class="memItemLeft" align="right" valign="top">RSA *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_transaction_data.html#af9a5ebb2d24125d125f035e74830121e">receiver_public_key</a></td></tr>
-<tr class="separator:af9a5ebb2d24125d125f035e74830121e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a67d7c4e95988d712faf91b928f317fd9"><td class="memItemLeft" align="right" valign="top">RSA *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_transaction_data.html#a67d7c4e95988d712faf91b928f317fd9">organisation_public_key</a></td></tr>
-<tr class="separator:a67d7c4e95988d712faf91b928f317fd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a384ee248985e672c52946db057d05928"><td class="memItemLeft" align="right" valign="top">RSA *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_transaction_data.html#a384ee248985e672c52946db057d05928">sender_public_key</a></td></tr>
+<tr class="separator:a384ee248985e672c52946db057d05928"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25c2facc5ebc1897df78cf7dc070b007"><td class="memItemLeft" align="right" valign="top">RSA *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_transaction_data.html#a25c2facc5ebc1897df78cf7dc070b007">receiver_public_key</a></td></tr>
+<tr class="separator:a25c2facc5ebc1897df78cf7dc070b007"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a09041dfaf996bee7cc220f076325f2ec"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_transaction_data.html#a09041dfaf996bee7cc220f076325f2ec">amount</a></td></tr>
 <tr class="separator:a09041dfaf996bee7cc220f076325f2ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1b1eb3251076e2d5f443c12a1a21757c"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_transaction_data.html#a1b1eb3251076e2d5f443c12a1a21757c">sender_remaining_money</a></td></tr>
@@ -112,14 +110,14 @@ Data Fields</h2></td></tr>
 <tr class="separator:a510c12c3daa195d76aa4c2ac73b8b11f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a08f7318370233b1a2f1b7d6b5737abf6"><td class="memItemLeft" align="right" valign="top">time_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_transaction_data.html#a08f7318370233b1a2f1b7d6b5737abf6">transaction_timestamp</a></td></tr>
 <tr class="separator:a08f7318370233b1a2f1b7d6b5737abf6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae902306646dc85979fe69ee6c2640bf6"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_transaction_data.html#ae902306646dc85979fe69ee6c2640bf6">cause</a> [512]</td></tr>
-<tr class="separator:ae902306646dc85979fe69ee6c2640bf6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1087ebb00091edb5a354038a6256b585"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_transaction_data.html#a1087ebb00091edb5a354038a6256b585">asset</a> [512]</td></tr>
-<tr class="separator:a1087ebb00091edb5a354038a6256b585"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3cd0c9c6141c243b3e1a3259fd4307c0"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_transaction_data.html#a3cd0c9c6141c243b3e1a3259fd4307c0">cause</a> [512]</td></tr>
+<tr class="separator:a3cd0c9c6141c243b3e1a3259fd4307c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a389eb9159e102222cddc03b515bfc23e"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_transaction_data.html#a389eb9159e102222cddc03b515bfc23e">asset</a> [512]</td></tr>
+<tr class="separator:a389eb9159e102222cddc03b515bfc23e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="transaction_8h_source.html#l00024">24</a> of file <a class="el" href="transaction_8h_source.html">transaction.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="block_8h_source.html#l00033">33</a> of file <a class="el" href="block_8h_source.html">block.h</a>.</p>
 </div><h2 class="groupheader">Field Documentation</h2>
 <a id="a09041dfaf996bee7cc220f076325f2ec"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a09041dfaf996bee7cc220f076325f2ec">&#9670;&nbsp;</a></span>amount</h2>
@@ -133,39 +131,39 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="transaction_8h_source.html#l00032">32</a> of file <a class="el" href="transaction_8h_source.html">transaction.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="block_8h_source.html#l00040">40</a> of file <a class="el" href="block_8h_source.html">block.h</a>.</p>
 
 </div>
 </div>
-<a id="a1087ebb00091edb5a354038a6256b585"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1087ebb00091edb5a354038a6256b585">&#9670;&nbsp;</a></span>asset</h2>
+<a id="a389eb9159e102222cddc03b515bfc23e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a389eb9159e102222cddc03b515bfc23e">&#9670;&nbsp;</a></span>asset</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">char asset[512]</td>
+          <td class="memname">char asset</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="transaction_8h_source.html#l00040">40</a> of file <a class="el" href="transaction_8h_source.html">transaction.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="block_8h_source.html#l00048">48</a> of file <a class="el" href="block_8h_source.html">block.h</a>.</p>
 
 </div>
 </div>
-<a id="ae902306646dc85979fe69ee6c2640bf6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae902306646dc85979fe69ee6c2640bf6">&#9670;&nbsp;</a></span>cause</h2>
+<a id="a3cd0c9c6141c243b3e1a3259fd4307c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3cd0c9c6141c243b3e1a3259fd4307c0">&#9670;&nbsp;</a></span>cause</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">char cause[512]</td>
+          <td class="memname">char cause</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="transaction_8h_source.html#l00039">39</a> of file <a class="el" href="transaction_8h_source.html">transaction.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="block_8h_source.html#l00047">47</a> of file <a class="el" href="block_8h_source.html">block.h</a>.</p>
 
 </div>
 </div>
@@ -181,39 +179,23 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="transaction_8h_source.html#l00026">26</a> of file <a class="el" href="transaction_8h_source.html">transaction.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="block_8h_source.html#l00035">35</a> of file <a class="el" href="block_8h_source.html">block.h</a>.</p>
 
 </div>
 </div>
-<a id="a67d7c4e95988d712faf91b928f317fd9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a67d7c4e95988d712faf91b928f317fd9">&#9670;&nbsp;</a></span>organisation_public_key</h2>
+<a id="a25c2facc5ebc1897df78cf7dc070b007"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a25c2facc5ebc1897df78cf7dc070b007">&#9670;&nbsp;</a></span>receiver_public_key</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">RSA* organisation_public_key</td>
+          <td class="memname">RSA * receiver_public_key</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="transaction_8h_source.html#l00031">31</a> of file <a class="el" href="transaction_8h_source.html">transaction.h</a>.</p>
-
-</div>
-</div>
-<a id="af9a5ebb2d24125d125f035e74830121e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af9a5ebb2d24125d125f035e74830121e">&#9670;&nbsp;</a></span>receiver_public_key</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">RSA* receiver_public_key</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="transaction_8h_source.html#l00030">30</a> of file <a class="el" href="transaction_8h_source.html">transaction.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="block_8h_source.html#l00039">39</a> of file <a class="el" href="block_8h_source.html">block.h</a>.</p>
 
 </div>
 </div>
@@ -229,23 +211,23 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="transaction_8h_source.html#l00034">34</a> of file <a class="el" href="transaction_8h_source.html">transaction.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="block_8h_source.html#l00042">42</a> of file <a class="el" href="block_8h_source.html">block.h</a>.</p>
 
 </div>
 </div>
-<a id="adab773a393f892dc7c1e31ff1ce733f8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adab773a393f892dc7c1e31ff1ce733f8">&#9670;&nbsp;</a></span>sender_public_key</h2>
+<a id="a384ee248985e672c52946db057d05928"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a384ee248985e672c52946db057d05928">&#9670;&nbsp;</a></span>sender_public_key</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">RSA* sender_public_key</td>
+          <td class="memname">RSA * sender_public_key</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="transaction_8h_source.html#l00029">29</a> of file <a class="el" href="transaction_8h_source.html">transaction.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="block_8h_source.html#l00038">38</a> of file <a class="el" href="block_8h_source.html">block.h</a>.</p>
 
 </div>
 </div>
@@ -261,7 +243,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="transaction_8h_source.html#l00033">33</a> of file <a class="el" href="transaction_8h_source.html">transaction.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="block_8h_source.html#l00041">41</a> of file <a class="el" href="block_8h_source.html">block.h</a>.</p>
 
 </div>
 </div>
@@ -277,7 +259,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="transaction_8h_source.html#l00035">35</a> of file <a class="el" href="transaction_8h_source.html">transaction.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="block_8h_source.html#l00043">43</a> of file <a class="el" href="block_8h_source.html">block.h</a>.</p>
 
 </div>
 </div>
@@ -293,11 +275,12 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="transaction_8h_source.html#l00027">27</a> of file <a class="el" href="transaction_8h_source.html">transaction.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="block_8h_source.html#l00036">36</a> of file <a class="el" href="block_8h_source.html">block.h</a>.</p>
 
 </div>
 </div>
-<hr/>The documentation for this struct was generated from the following file:<ul>
+<hr/>The documentation for this struct was generated from the following files:<ul>
+<li>/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/headers/blockchain/<a class="el" href="block_8h_source.html">block.h</a></li>
 <li>/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/headers/blockchain/<a class="el" href="transaction_8h_source.html">transaction.h</a></li>
 </ul>
 </div><!-- contents -->

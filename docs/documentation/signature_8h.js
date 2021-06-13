@@ -10,7 +10,7 @@ var signature_8h =
     [ "sign_transaction_with_key", "signature_8h.html#ad7757263f776dc00aaaae307629b53d9", null ],
     [ "verify_block_signature", "signature_8h.html#a197fbff013d305c63a9699922eb438f6", null ],
     [ "verify_signature", "signature_8h.html#abb24ef32c40711494e34d7639e64f8a3", null ],
-    [ "verify_transaction_signature", "signature_8h.html#ae45689cf209de84d0132284229d32824", null ],
+    [ "verify_transaction_signature", "signature_8h.html#a1f30e39552bd587069303929aecbb155", null ],
     [ "write_block", "signature_8h.html#a58b3466ce733938859f0651b2a756e95", null ],
     [ "write_blockdata", "signature_8h.html#a0e5ff1f119568fb8566981cf7da11d7f", null ]
 ];

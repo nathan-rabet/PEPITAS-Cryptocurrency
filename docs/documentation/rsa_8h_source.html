@@ -90,16 +90,54 @@ $(document).ready(function(){initNavTree('rsa_8h_source.html',''); initResizable
 <a href="rsa_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef RSA_H</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define RSA_H</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno"><a class="line" href="rsa_8h.html#abff8d9514a23647de99e49913084f135">    4</a></span>&#160;<span class="preprocessor">#define RSA_KEY_SIZE 366</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno"><a class="line" href="rsa_8h.html#a150e403695b4741246d3008143bc009a">    5</a></span>&#160;<span class="preprocessor">#define RSA_FILE_TOTAL_SIZE 426</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno"><a class="line" href="rsa_8h.html#adbc0e5075c30d3bb2c3bfca959cc9fdf">    6</a></span>&#160;<span class="preprocessor">#define RSA_BEGIN_SIZE 31</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno"><a class="line" href="rsa_8h.html#a0125ff1fd034dae1c06832611ebf4bfc">    7</a></span>&#160;<span class="preprocessor">#define RSA_END_SIZE 29</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keywordtype">void</span> <a class="code" href="rsa_8h.html#a43ef74c79e95360f43f9f9bd32b33b1d">get_keys</a>(<span class="keywordtype">char</span> *password);</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="wallet_8h.html">blockchain/wallet.h</a>&quot;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;stdlib.h&gt;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;openssl/rsa.h&gt;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;openssl/pem.h&gt;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;time.h&gt;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;sys/types.h&gt;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;sys/stat.h&gt;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;unistd.h&gt;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;err.h&gt;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;errno.h&gt;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;openssl/bn.h&gt;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;openssl/crypto.h&gt;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;string.h&gt;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="rsa_8h.html#abff8d9514a23647de99e49913084f135">   19</a></span>&#160;<span class="preprocessor">#define RSA_KEY_SIZE 366</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="rsa_8h.html#a150e403695b4741246d3008143bc009a">   20</a></span>&#160;<span class="preprocessor">#define RSA_FILE_TOTAL_SIZE 426</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="rsa_8h.html#adbc0e5075c30d3bb2c3bfca959cc9fdf">   21</a></span>&#160;<span class="preprocessor">#define RSA_BEGIN_SIZE 31</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="rsa_8h.html#a0125ff1fd034dae1c06832611ebf4bfc">   22</a></span>&#160;<span class="preprocessor">#define RSA_END_SIZE 29</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keywordtype">void</span> <a class="code" href="rsa_8h.html#a43ef74c79e95360f43f9f9bd32b33b1d">get_keys</a>(<span class="keywordtype">char</span> *password);</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">int</span> cmp_public_keys(RSA *key1, RSA *key2){</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keywordflow">if</span> (key1 &amp;&amp; key2)</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    {</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="keywordtype">char</span> my_pkey_string1[<a class="code" href="rsa_8h.html#a150e403695b4741246d3008143bc009a">RSA_FILE_TOTAL_SIZE</a>];</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <span class="keywordtype">char</span> my_pkey_string2[<a class="code" href="rsa_8h.html#a150e403695b4741246d3008143bc009a">RSA_FILE_TOTAL_SIZE</a>];</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        BIO *my_pub1 = BIO_new(BIO_s_mem());</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        BIO *my_pub2 = BIO_new(BIO_s_mem());</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        PEM_write_bio_RSAPublicKey(my_pub1, key1);</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        PEM_write_bio_RSAPublicKey(my_pub2, key2);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        BIO_read(my_pub1, my_pkey_string1, <a class="code" href="rsa_8h.html#a150e403695b4741246d3008143bc009a">RSA_FILE_TOTAL_SIZE</a>);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        BIO_read(my_pub2, my_pkey_string2, <a class="code" href="rsa_8h.html#a150e403695b4741246d3008143bc009a">RSA_FILE_TOTAL_SIZE</a>);</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        BIO_free(my_pub1);</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        BIO_free(my_pub2);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <span class="keywordflow">return</span> strncmp(my_pkey_string1, my_pkey_string2, <a class="code" href="rsa_8h.html#a150e403695b4741246d3008143bc009a">RSA_FILE_TOTAL_SIZE</a>) == 0;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    }</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="comment">// return key1 &amp;&amp; key2 &amp;&amp; </span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="comment">// !BN_cmp(RSA_get0_n(key1),RSA_get0_n(key2)) &amp;&amp;</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="comment">// !BN_cmp(RSA_get0_e(key1),RSA_get0_e(key2));</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;}</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
+<div class="ttc" id="arsa_8h_html_a150e403695b4741246d3008143bc009a"><div class="ttname"><a href="rsa_8h.html#a150e403695b4741246d3008143bc009a">RSA_FILE_TOTAL_SIZE</a></div><div class="ttdeci">#define RSA_FILE_TOTAL_SIZE</div><div class="ttdef"><b>Definition:</b> <a href="rsa_8h_source.html#l00020">rsa.h:20</a></div></div>
+<div class="ttc" id="awallet_8h_html"><div class="ttname"><a href="wallet_8h.html">wallet.h</a></div></div>
 <div class="ttc" id="arsa_8h_html_a43ef74c79e95360f43f9f9bd32b33b1d"><div class="ttname"><a href="rsa_8h.html#a43ef74c79e95360f43f9f9bd32b33b1d">get_keys</a></div><div class="ttdeci">void get_keys(char *password)</div><div class="ttdoc">Get the keys object.</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

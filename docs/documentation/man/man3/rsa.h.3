@@ -6,6 +6,35 @@
 .SH SYNOPSIS
 .br
 .PP
+\fC#include 'blockchain/wallet\&.h'\fP
+.br
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <openssl/rsa\&.h>\fP
+.br
+\fC#include <openssl/pem\&.h>\fP
+.br
+\fC#include <time\&.h>\fP
+.br
+\fC#include <sys/types\&.h>\fP
+.br
+\fC#include <sys/stat\&.h>\fP
+.br
+\fC#include <unistd\&.h>\fP
+.br
+\fC#include <err\&.h>\fP
+.br
+\fC#include <errno\&.h>\fP
+.br
+\fC#include <openssl/bn\&.h>\fP
+.br
+\fC#include <openssl/crypto\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+
 .SS "Macros"
 
 .in +1c
@@ -35,19 +64,19 @@
 .SS "#define RSA_BEGIN_SIZE   31"
 
 .PP
-Definition at line 6 of file rsa\&.h\&.
+Definition at line 21 of file rsa\&.h\&.
 .SS "#define RSA_END_SIZE   29"
 
 .PP
-Definition at line 7 of file rsa\&.h\&.
+Definition at line 22 of file rsa\&.h\&.
 .SS "#define RSA_FILE_TOTAL_SIZE   426"
 
 .PP
-Definition at line 5 of file rsa\&.h\&.
+Definition at line 20 of file rsa\&.h\&.
 .SS "#define RSA_KEY_SIZE   366"
 
 .PP
-Definition at line 4 of file rsa\&.h\&.
+Definition at line 19 of file rsa\&.h\&.
 .SH "Function Documentation"
 .PP 
 .SS "void get_keys (char * password)"

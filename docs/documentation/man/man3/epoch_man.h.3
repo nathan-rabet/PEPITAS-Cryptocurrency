@@ -6,14 +6,29 @@
 .SH SYNOPSIS
 .br
 .PP
+\fC#include 'blockchain/transaction\&.h'\fP
+.br
 \fC#include 'blockchain/block\&.h'\fP
 .br
-\fC#include 'blockchain/transaction\&.h'\fP
+\fC#include 'cryptosystem/signature\&.h'\fP
+.br
+\fC#include 'validation_engine\&.h'\fP
+.br
+\fC#include 'misc/bits\&.h'\fP
+.br
+\fC#include 'validators\&.h'\fP
+.br
+\fC#include <openssl/rsa\&.h>\fP
+.br
+\fC#include <dirent\&.h>\fP
 .br
 
 .SS "Functions"
 
 .in +1c
+.ti -1c
+.RI "char * \fBcreate_vote_data\fP (\fBBlock\fP *block, char vote, int validator_index, size_t *data_length)"
+.br
 .ti -1c
 .RI "\fBBlock\fP * \fBcreate_epoch_block\fP ()"
 .br
@@ -26,10 +41,6 @@
 .RI "void \fBgive_punishments_and_rewards\fP (\fBBlock\fP *prev_block, \fBBlock\fP *current_block)"
 .br
 .RI "Add punishmnent and reward transactions to validators of the 'prev_block' into 'current_block'\&. "
-.ti -1c
-.RI "int \fBflush_pending_transactions\fP (\fBBlock\fP *block)"
-.br
-.RI "Delete block transactions in pdt if the block is valid\&. "
 .in -1c
 .SH "Function Documentation"
 .PP 
@@ -49,22 +60,12 @@ Block*
 .RE
 .PP
 
-.SS "int flush_pending_transactions (\fBBlock\fP * block)"
+.PP
+Definition at line 141 of file epoch_man\&.c\&.
+.SS "char* create_vote_data (\fBBlock\fP * block, char vote, int validator_index, size_t * data_length)"
 
 .PP
-Delete block transactions in pdt if the block is valid\&. 
-.PP
-\fBParameters\fP
-.RS 4
-\fIblock\fP 
-.RE
-.PP
-\fBReturns\fP
-.RS 4
-1 if the flush proceed, 0 if not 
-.RE
-.PP
-
+Definition at line 10 of file epoch_man\&.c\&.
 .SS "RSA* get_epoch_man_pkey (\fBBlockData\fP * block_data)"
 
 .PP
@@ -77,7 +78,7 @@ Give the pkey of the creator of a block\&.
 .PP
 \fBReturns\fP
 .RS 4
-RSA* 
+RSA*, NULL if the data is corrupted 
 .RE
 .PP
 
@@ -101,6 +102,8 @@ Number of added transactions = number of validators in 'prev_block'
 .RE
 .PP
 
+.PP
+Definition at line 31 of file epoch_man\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for PEPITAS CRYPTOCURRENCY from the source code\&.

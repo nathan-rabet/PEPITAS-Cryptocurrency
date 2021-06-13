@@ -33,17 +33,30 @@
 .RI "int \fBread_send_block\fP (int fd)"
 .br
 .ti -1c
-.RI "int \fBread_vote\fP (\fB__attribute__\fP((unused)) int fd)"
+.RI "int \fBread_vote\fP (int fd, \fBinfos_st\fP *infos)"
 .br
 .ti -1c
 .RI "int \fBread_epoch_block\fP (int fd)"
 .br
 .ti -1c
-.RI "int \fBread_pending_transaction_list\fP (\fB__attribute__\fP((unused)) int fd)"
+.RI "int \fBepoch_validation_process\fP (int blockfile, size_t height, int id)"
+.br
+.ti -1c
+.RI "int \fBread_send_pending_transaction_list\fP (int fd, \fBinfos_st\fP *infos)"
+.br
+.ti -1c
+.RI "int \fBread_send_pending_transaction\fP (int fd, \fBinfos_st\fP *infos)"
+.br
+.ti -1c
+.RI "int \fBread_get_pending_transaction\fP (int fd)"
 .br
 .in -1c
 .SH "Function Documentation"
 .PP 
+.SS "int epoch_validation_process (int blockfile, size_t height, int id)"
+
+.PP
+Definition at line 482 of file get_data\&.c\&.
 .SS "int fetch_client_list (char who, int fd)"
 
 .PP
@@ -61,7 +74,7 @@ Merges my neighbours list with the one sent by 'neighbour_id'\&.
 .PP
 
 .PP
-Definition at line 95 of file get_data\&.c\&.
+Definition at line 107 of file get_data\&.c\&.
 .SS "size_t process_header (char * header, int sockfd, \fBinfos_st\fP * infos)"
 
 .PP
@@ -69,15 +82,19 @@ Definition at line 3 of file get_data\&.c\&.
 .SS "size_t read_actual_height (int fd)"
 
 .PP
-Definition at line 172 of file get_data\&.c\&.
+Definition at line 186 of file get_data\&.c\&.
 .SS "int read_epoch_block (int fd)"
 
 .PP
-Definition at line 222 of file get_data\&.c\&.
+Definition at line 420 of file get_data\&.c\&.
 .SS "int read_get_blocks (int fd, \fBinfos_st\fP * infos)"
 
 .PP
-Definition at line 144 of file get_data\&.c\&.
+Definition at line 155 of file get_data\&.c\&.
+.SS "int read_get_pending_transaction (int fd)"
+
+.PP
+Definition at line 629 of file get_data\&.c\&.
 .SS "size_t read_header (int sockfd, \fBinfos_st\fP * infos)"
 
 .PP
@@ -95,19 +112,23 @@ Waits a header in 'sockfd', reads it and processes it\&.
 .PP
 
 .PP
-Definition at line 125 of file get_data\&.c\&.
-.SS "int read_pending_transaction_list (\fB__attribute__\fP((unused)) int fd)"
-
-.PP
-Definition at line 229 of file get_data\&.c\&.
+Definition at line 136 of file get_data\&.c\&.
 .SS "int read_send_block (int fd)"
 
 .PP
-Definition at line 178 of file get_data\&.c\&.
-.SS "int read_vote (\fB__attribute__\fP((unused)) int fd)"
+Definition at line 193 of file get_data\&.c\&.
+.SS "int read_send_pending_transaction (int fd, \fBinfos_st\fP * infos)"
 
 .PP
-Definition at line 217 of file get_data\&.c\&.
+Definition at line 571 of file get_data\&.c\&.
+.SS "int read_send_pending_transaction_list (int fd, \fBinfos_st\fP * infos)"
+
+.PP
+Definition at line 549 of file get_data\&.c\&.
+.SS "int read_vote (int fd, \fBinfos_st\fP * infos)"
+
+.PP
+Definition at line 279 of file get_data\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for PEPITAS CRYPTOCURRENCY from the source code\&.

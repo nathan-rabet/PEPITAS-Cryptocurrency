@@ -8,8 +8,10 @@ digraph "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/headers
   }
   dir_1abae5ba6b7c6bf935bd52333e3d90cb [shape=box label="validation" URL="dir_1abae5ba6b7c6bf935bd52333e3d90cb.html"];
   dir_970168e4fc598f7815ebfaae486ffad9 [shape=box label="blockchain" URL="dir_970168e4fc598f7815ebfaae486ffad9.html"];
-  dir_1abae5ba6b7c6bf935bd52333e3d90cb->dir_970168e4fc598f7815ebfaae486ffad9 [headlabel="3", labeldistance=1.5 headhref="dir_000006_000001.html"];
-  dir_1abae5ba6b7c6bf935bd52333e3d90cb->dir_f4c924d95c8a1002b14665e0a9da530d [headlabel="5", labeldistance=1.5 headhref="dir_000006_000002.html"];
-  dir_f4c924d95c8a1002b14665e0a9da530d->dir_1abae5ba6b7c6bf935bd52333e3d90cb [headlabel="1", labeldistance=1.5 headhref="dir_000002_000006.html"];
-  dir_f4c924d95c8a1002b14665e0a9da530d->dir_970168e4fc598f7815ebfaae486ffad9 [headlabel="3", labeldistance=1.5 headhref="dir_000002_000001.html"];
+  dir_1abae5ba6b7c6bf935bd52333e3d90cb->dir_970168e4fc598f7815ebfaae486ffad9 [headlabel="4", labeldistance=1.5 headhref="dir_000006_000001.html"];
+  dir_1abae5ba6b7c6bf935bd52333e3d90cb->dir_f4c924d95c8a1002b14665e0a9da530d [headlabel="6", labeldistance=1.5 headhref="dir_000006_000003.html"];
+  dir_970168e4fc598f7815ebfaae486ffad9->dir_1abae5ba6b7c6bf935bd52333e3d90cb [headlabel="1", labeldistance=1.5 headhref="dir_000001_000006.html"];
+  dir_970168e4fc598f7815ebfaae486ffad9->dir_f4c924d95c8a1002b14665e0a9da530d [headlabel="2", labeldistance=1.5 headhref="dir_000001_000003.html"];
+  dir_f4c924d95c8a1002b14665e0a9da530d->dir_1abae5ba6b7c6bf935bd52333e3d90cb [headlabel="1", labeldistance=1.5 headhref="dir_000003_000006.html"];
+  dir_f4c924d95c8a1002b14665e0a9da530d->dir_970168e4fc598f7815ebfaae486ffad9 [headlabel="4", labeldistance=1.5 headhref="dir_000003_000001.html"];
 }

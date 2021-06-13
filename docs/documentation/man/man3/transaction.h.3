@@ -28,6 +28,10 @@
 .br
 \fC#include <err\&.h>\fP
 .br
+\fC#include 'blockchain/wallet\&.h'\fP
+.br
+\fC#include 'blockchain/blockchain_header\&.h'\fP
+.br
 
 .SS "Data Structures"
 
@@ -58,7 +62,13 @@
 .RI "#define \fBT_TYPE_WITHDRAW_STAKE\fP   2"
 .br
 .ti -1c
-.RI "#define \fBT_TYPE_STAKE_TO_STAKE\fP   3"
+.RI "#define \fBT_TYPE_REWARD_STAKE\fP   3"
+.br
+.ti -1c
+.RI "#define \fBT_TYPE_PUNISH_STAKE\fP   4"
+.br
+.ti -1c
+.RI "#define \fBTRANS_T\fP"
 .br
 .in -1c
 .SS "Typedefs"
@@ -99,33 +109,48 @@
 .ti -1c
 .RI "void \fBadd_pending_transaction\fP (\fBTransaction\fP *transaction)"
 .br
+.ti -1c
+.RI "\fBTransaction\fP \fBcreate_new_transaction\fP (\fBinfos_st\fP *infos, char type, RSA *receiver_public_key, size_t amount, char cause[512], char asset[512])"
+.br
+.ti -1c
+.RI "void \fBflush_pending_transactions\fP (\fBTransaction\fP **transactions, size_t nb_transactions)"
+.br
+.RI "Delete block transactions in pdt if the block is valid\&. "
 .in -1c
 .SH "Macro Definition Documentation"
 .PP 
 .SS "#define T_TYPE_ADD_STAKE   1"
 
 .PP
-Definition at line 20 of file transaction\&.h\&.
+Definition at line 22 of file transaction\&.h\&.
 .SS "#define T_TYPE_DEFAULT   0"
 
 .PP
-Definition at line 19 of file transaction\&.h\&.
-.SS "#define T_TYPE_STAKE_TO_STAKE   3"
+Definition at line 21 of file transaction\&.h\&.
+.SS "#define T_TYPE_PUNISH_STAKE   4"
 
 .PP
-Definition at line 22 of file transaction\&.h\&.
+Definition at line 25 of file transaction\&.h\&.
+.SS "#define T_TYPE_REWARD_STAKE   3"
+
+.PP
+Definition at line 24 of file transaction\&.h\&.
 .SS "#define T_TYPE_WITHDRAW_STAKE   2"
 
 .PP
-Definition at line 21 of file transaction\&.h\&.
+Definition at line 23 of file transaction\&.h\&.
+.SS "#define TRANS_T"
+
+.PP
+Definition at line 28 of file transaction\&.h\&.
 .SS "#define TRANSACTION_DATA_SIZE   sizeof(size_t) * 3 + sizeof(time_t) + (512 * 2)"
 
 .PP
-Definition at line 16 of file transaction\&.h\&.
+Definition at line 18 of file transaction\&.h\&.
 .SS "#define TRANSACTION_SIZE   sizeof(size_t) + 2048 + \fBTRANSACTION_DATA_SIZE\fP"
 
 .PP
-Definition at line 17 of file transaction\&.h\&.
+Definition at line 19 of file transaction\&.h\&.
 .SH "Typedef Documentation"
 .PP 
 .SS "typedef struct \fBTransaction\fP \fBTransaction\fP"
@@ -137,23 +162,42 @@ Definition at line 17 of file transaction\&.h\&.
 .SS "void add_pending_transaction (\fBTransaction\fP * transaction)"
 
 .PP
-Definition at line 158 of file transaction\&.c\&.
+Definition at line 140 of file transaction\&.c\&.
 .SS "void convert_data_to_transactiondata (\fBTransactionData\fP * transactiondata, int fd)"
 
 .PP
-Definition at line 99 of file transaction\&.c\&.
+Definition at line 88 of file transaction\&.c\&.
+.SS "\fBTransaction\fP create_new_transaction (\fBinfos_st\fP * infos, char type, RSA * receiver_public_key, size_t amount, char cause[512], char asset[512])"
+
+.PP
+Definition at line 157 of file transaction\&.c\&.
+.SS "void flush_pending_transactions (\fBTransaction\fP ** transactions, size_t nb_transactions)"
+
+.PP
+Delete block transactions in pdt if the block is valid\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fItransactions\fP block\&.blockdata\&.transactions 
+.br
+\fInb_transactions\fP number of transactions 
+.RE
+.PP
+
+.PP
+Definition at line 204 of file transaction\&.c\&.
 .SS "void get_transaction_data (\fBTransaction\fP * trans, char ** buff, size_t * index)"
 
 .PP
-Definition at line 48 of file transaction\&.c\&.
+Definition at line 40 of file transaction\&.c\&.
 .SS "\fBTransaction\fP* load_pending_transaction (time_t timestamp)"
 
 .PP
-Definition at line 145 of file transaction\&.c\&.
+Definition at line 127 of file transaction\&.c\&.
 .SS "void load_transaction (\fBTransaction\fP * transaction, int fd)"
 
 .PP
-Definition at line 135 of file transaction\&.c\&.
+Definition at line 117 of file transaction\&.c\&.
 .SS "int send_money (size_t amount, u_int64_t receiver_public_key)"
 
 .PP
@@ -175,7 +219,7 @@ returns 0 if the broadcast succeeds, -1 otherwise
 .SS "void write_transaction (\fBTransaction\fP * transaction, int fd)"
 
 .PP
-Definition at line 42 of file transaction\&.c\&.
+Definition at line 34 of file transaction\&.c\&.
 .SS "void write_transactiondata (\fBTransactionData\fP * transaction, int fd)"
 
 .PP

@@ -117,7 +117,7 @@ Data Structures</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_node.html">Node</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structclient__connection.html">client_connection</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structconnection.html">connection</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structinfos__st.html">infos_st</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -170,8 +170,12 @@ Macros</h2></td></tr>
 <tr class="separator:ad60e0f0165a8577e585174654046dc82"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa7e5cc589fcdba683b2bcfa323cade3a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#aa7e5cc589fcdba683b2bcfa323cade3a">HD_GET_PENDING_TRANSACTION_LIST</a>&#160;&#160;&#160;&quot;GET PENDING TRANSACTION LIST\r\n\r\n&quot;</td></tr>
 <tr class="separator:aa7e5cc589fcdba683b2bcfa323cade3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0127f8ea1c6510aea2fab39c5f87c59a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#a0127f8ea1c6510aea2fab39c5f87c59a">HD_SEND_PENDING_TRANSACTION_LIST</a>&#160;&#160;&#160;&quot;SEND PENDING TRANSACTION LIST\r\n\r\n&quot;</td></tr>
+<tr class="separator:a0127f8ea1c6510aea2fab39c5f87c59a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a67f2bd309afb2d5698e64946c46a0a01"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#a67f2bd309afb2d5698e64946c46a0a01">HD_REJECT_DEMAND</a>&#160;&#160;&#160;&quot;REJECT DEMAND\r\n\r\n&quot;</td></tr>
 <tr class="separator:a67f2bd309afb2d5698e64946c46a0a01"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d1b2920a9fa5875eda148f8f9e5416d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#a3d1b2920a9fa5875eda148f8f9e5416d">HD_GET_PENDING_TRANSACTION</a>&#160;&#160;&#160;&quot;GET PENDING TRANSACTION\r\n\r\n&quot;</td></tr>
+<tr class="separator:a3d1b2920a9fa5875eda148f8f9e5416d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4b8e9cdc2c79ab33d5e0eb438641b1e1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#a4b8e9cdc2c79ab33d5e0eb438641b1e1">HD_SEND_PENDING_TRANSACTION</a>&#160;&#160;&#160;&quot;SEND PENDING TRANSACTION\r\n\r\n&quot;</td></tr>
 <tr class="separator:a4b8e9cdc2c79ab33d5e0eb438641b1e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2e07c948440061bca7f76c8c2ef5444d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#a2e07c948440061bca7f76c8c2ef5444d">HD_SEND_EPOCH_BLOCK</a>&#160;&#160;&#160;&quot;SEND EPOCH BLOCK\r\n\r\n&quot;</td></tr>
@@ -182,6 +186,14 @@ Macros</h2></td></tr>
 <tr class="separator:aa5c73a7e9a255e35bd6ecbf6709b57de"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aabca23b9d8641dae222da4b3b6a374ca"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#aabca23b9d8641dae222da4b3b6a374ca">DD_GET_BLOCKS</a>&#160;&#160;&#160;2</td></tr>
 <tr class="separator:aabca23b9d8641dae222da4b3b6a374ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a202f3e1d6a61c1ae715d2a1e395f24f3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#a202f3e1d6a61c1ae715d2a1e395f24f3">DD_SEND_TRANSACTION</a>&#160;&#160;&#160;3</td></tr>
+<tr class="separator:a202f3e1d6a61c1ae715d2a1e395f24f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d9662370d4079b1121f040c9aa1e123"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#a3d9662370d4079b1121f040c9aa1e123">DD_GET_TRANSACTION_LIST</a>&#160;&#160;&#160;4</td></tr>
+<tr class="separator:a3d9662370d4079b1121f040c9aa1e123"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af42a615308a6703026b14993cfd81b5b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#af42a615308a6703026b14993cfd81b5b">DD_SEND_VOTE</a>&#160;&#160;&#160;5</td></tr>
+<tr class="separator:af42a615308a6703026b14993cfd81b5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7fecdbf20f13e721f900d73d453b1104"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#a7fecdbf20f13e721f900d73d453b1104">DD_SEND_EPOCH</a>&#160;&#160;&#160;6</td></tr>
+<tr class="separator:a7fecdbf20f13e721f900d73d453b1104"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a70dfa79077dc00c8de6083ff105c831b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#a70dfa79077dc00c8de6083ff105c831b">SERVERMSG</a>&#160;&#160;&#160;printf(&quot;\033[0;31m[S]:\033[0m &quot;);</td></tr>
 <tr class="separator:a70dfa79077dc00c8de6083ff105c831b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abec1d424ba3321c9dea7c0e38a1775ae"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#abec1d424ba3321c9dea7c0e38a1775ae">CLIENTMSG</a>&#160;&#160;&#160;printf(&quot;\033[0;34m[C]:\033[0m &quot;);</td></tr>
@@ -197,8 +209,8 @@ Typedefs</h2></td></tr>
 <tr class="separator:af516980a1d1fa7f6e92cafb59e634556"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3b09f37e675bcd48a01bf22155996872"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="struct_node.html">Node</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#a3b09f37e675bcd48a01bf22155996872">Node</a></td></tr>
 <tr class="separator:a3b09f37e675bcd48a01bf22155996872"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6994b8a72828be0e03c1d864113f7da1"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structclient__connection.html">client_connection</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#a6994b8a72828be0e03c1d864113f7da1">client_connection</a></td></tr>
-<tr class="separator:a6994b8a72828be0e03c1d864113f7da1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac7f8b0eeccabb2faa882fea55a07403"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structconnection.html">connection</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#aac7f8b0eeccabb2faa882fea55a07403">connection</a></td></tr>
+<tr class="separator:aac7f8b0eeccabb2faa882fea55a07403"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8f0eaaa3b951f1f65c49c80d575c9e16"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structinfos__st.html">infos_st</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#a8f0eaaa3b951f1f65c49c80d575c9e16">infos_st</a></td></tr>
 <tr class="separator:a8f0eaaa3b951f1f65c49c80d575c9e16"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a394d55fafa84f9a883a7c118de733f8b"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structth__arg.html">th_arg</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#a394d55fafa84f9a883a7c118de733f8b">th_arg</a></td></tr>
@@ -229,7 +241,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00090">90</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00099">99</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
 
 </div>
 </div>
@@ -245,7 +257,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00085">85</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00090">90</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
 
 </div>
 </div>
@@ -261,7 +273,71 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00084">84</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00089">89</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+
+</div>
+</div>
+<a id="a3d9662370d4079b1121f040c9aa1e123"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d9662370d4079b1121f040c9aa1e123">&#9670;&nbsp;</a></span>DD_GET_TRANSACTION_LIST</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define DD_GET_TRANSACTION_LIST&#160;&#160;&#160;4</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00092">92</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+
+</div>
+</div>
+<a id="a7fecdbf20f13e721f900d73d453b1104"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7fecdbf20f13e721f900d73d453b1104">&#9670;&nbsp;</a></span>DD_SEND_EPOCH</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define DD_SEND_EPOCH&#160;&#160;&#160;6</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00094">94</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+
+</div>
+</div>
+<a id="a202f3e1d6a61c1ae715d2a1e395f24f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a202f3e1d6a61c1ae715d2a1e395f24f3">&#9670;&nbsp;</a></span>DD_SEND_TRANSACTION</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define DD_SEND_TRANSACTION&#160;&#160;&#160;3</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00091">91</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+
+</div>
+</div>
+<a id="af42a615308a6703026b14993cfd81b5b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af42a615308a6703026b14993cfd81b5b">&#9670;&nbsp;</a></span>DD_SEND_VOTE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define DD_SEND_VOTE&#160;&#160;&#160;5</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00093">93</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
 
 </div>
 </div>
@@ -293,7 +369,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00075">75</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00078">78</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
 
 </div>
 </div>
@@ -309,7 +385,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00072">72</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00075">75</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
 
 </div>
 </div>
@@ -325,7 +401,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00073">73</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00076">76</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
 
 </div>
 </div>
@@ -341,7 +417,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00074">74</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00077">77</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
 
 </div>
 </div>
@@ -357,7 +433,23 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00070">70</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00073">73</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+
+</div>
+</div>
+<a id="a3d1b2920a9fa5875eda148f8f9e5416d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d1b2920a9fa5875eda148f8f9e5416d">&#9670;&nbsp;</a></span>HD_GET_PENDING_TRANSACTION</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HD_GET_PENDING_TRANSACTION&#160;&#160;&#160;&quot;GET PENDING TRANSACTION\r\n\r\n&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00083">83</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
 
 </div>
 </div>
@@ -373,7 +465,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00077">77</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00080">80</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
 
 </div>
 </div>
@@ -389,7 +481,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00078">78</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00082">82</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
 
 </div>
 </div>
@@ -405,7 +497,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00076">76</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00079">79</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
 
 </div>
 </div>
@@ -421,7 +513,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00071">71</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00074">74</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
 
 </div>
 </div>
@@ -437,7 +529,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00080">80</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00085">85</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
 
 </div>
 </div>
@@ -453,7 +545,23 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00079">79</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00084">84</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+
+</div>
+</div>
+<a id="a0127f8ea1c6510aea2fab39c5f87c59a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0127f8ea1c6510aea2fab39c5f87c59a">&#9670;&nbsp;</a></span>HD_SEND_PENDING_TRANSACTION_LIST</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HD_SEND_PENDING_TRANSACTION_LIST&#160;&#160;&#160;&quot;SEND PENDING TRANSACTION LIST\r\n\r\n&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00081">81</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
 
 </div>
 </div>
@@ -469,7 +577,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00081">81</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00086">86</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
 
 </div>
 </div>
@@ -517,7 +625,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00091">91</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00100">100</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
 
 </div>
 </div>
@@ -645,7 +753,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00089">89</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00098">98</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
 
 </div>
 </div>
@@ -729,19 +837,19 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00092">92</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00101">101</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Typedef Documentation</h2>
-<a id="a6994b8a72828be0e03c1d864113f7da1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6994b8a72828be0e03c1d864113f7da1">&#9670;&nbsp;</a></span>client_connection</h2>
+<a id="aac7f8b0eeccabb2faa882fea55a07403"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac7f8b0eeccabb2faa882fea55a07403">&#9670;&nbsp;</a></span>connection</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef struct <a class="el" href="structclient__connection.html">client_connection</a> <a class="el" href="structclient__connection.html">client_connection</a></td>
+          <td class="memname">typedef struct <a class="el" href="structconnection.html">connection</a> <a class="el" href="structconnection.html">connection</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -821,13 +929,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00094">94</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="network_8h_a3d8810ff759f090d31d612cc51cf9158_icgraph.png" border="0" usemap="#network_8h_a3d8810ff759f090d31d612cc51cf9158_icgraph" alt=""/></div>
-<!-- MAP 2 -->
-</div>
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00103">103</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
 
 </div>
 </div>
@@ -844,7 +946,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00099">99</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00108">108</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
 
 </div>
 </div>

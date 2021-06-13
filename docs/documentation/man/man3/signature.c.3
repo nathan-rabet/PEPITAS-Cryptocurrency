@@ -43,7 +43,7 @@
 .br
 .RI "Verifies if a block signature is valid\&. "
 .ti -1c
-.RI "int \fBverify_transaction_signature\fP (\fBTransaction\fP transaction)"
+.RI "int \fBverify_transaction_signature\fP (\fBTransaction\fP *transaction)"
 .br
 .RI "Verifies if a transaction signature is valid\&. "
 .ti -1c
@@ -79,7 +79,7 @@ Signs a block\&.
 .PP
 
 .PP
-Definition at line 102 of file signature\&.c\&.
+Definition at line 108 of file signature\&.c\&.
 .SS "void sign_block_transactions (\fBBlock\fP * block)"
 
 .PP
@@ -92,11 +92,11 @@ Signs transactions of a block\&.
 .PP
 
 .PP
-Definition at line 132 of file signature\&.c\&.
+Definition at line 138 of file signature\&.c\&.
 .SS "void sign_block_with_key (\fBBlock\fP * block, RSA * key)"
 
 .PP
-Definition at line 109 of file signature\&.c\&.
+Definition at line 115 of file signature\&.c\&.
 .SS "char* sign_message (char * data, size_t len_data, void * buffer)"
 
 .PP
@@ -146,7 +146,7 @@ Definition at line 34 of file signature\&.c\&.
 .SS "void sign_transaction (\fBTransaction\fP * transaction)"
 
 .PP
-Definition at line 116 of file signature\&.c\&.
+Definition at line 122 of file signature\&.c\&.
 .SS "void sign_transaction_with_key (\fBTransaction\fP * transaction, RSA * key)"
 
 .PP
@@ -159,7 +159,7 @@ Sign a transaction\&.
 .PP
 
 .PP
-Definition at line 124 of file signature\&.c\&.
+Definition at line 130 of file signature\&.c\&.
 .SS "int verify_block_signature (\fBBlock\fP block)"
 
 .PP
@@ -179,7 +179,7 @@ Verifies if a block signature is valid\&.
 .PP
 
 .PP
-Definition at line 77 of file signature\&.c\&.
+Definition at line 83 of file signature\&.c\&.
 .SS "int verify_signature (void * data, size_t data_len, char * signature, RSA * pub_key)"
 
 .PP
@@ -204,7 +204,7 @@ int
 
 .PP
 Definition at line 57 of file signature\&.c\&.
-.SS "int verify_transaction_signature (\fBTransaction\fP transaction)"
+.SS "int verify_transaction_signature (\fBTransaction\fP * transaction)"
 
 .PP
 Verifies if a transaction signature is valid\&. 
@@ -223,7 +223,7 @@ Verifies if a transaction signature is valid\&.
 .PP
 
 .PP
-Definition at line 89 of file signature\&.c\&.
+Definition at line 95 of file signature\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for PEPITAS CRYPTOCURRENCY from the source code\&.

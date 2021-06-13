@@ -6,5 +6,25 @@ digraph "read_send_block"
   rankdir="LR";
   Node1 [label="read_send_block",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
   Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node2 [label="safe_write",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$safe_8h.html#a405edff38f586c79822927a3b981e504",tooltip="Writes safely to a file descriptor."];
+  Node2 [label="convert_data_to_block",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$block_8h.html#ada1355f8610cc450d7c8f662dc6a7aef",tooltip=" "];
+  Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="convert_data_to_blockdata",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$block_8c.html#afcda50ce8deb3b381aeb5b88689f919f",tooltip=" "];
+  Node3 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="load_transaction",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$transaction_8h.html#a4f4e33641ff7466e848182ce420827b6",tooltip=" "];
+  Node4 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="convert_data_to_transactiondata",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$transaction_8c.html#a8649ee7d98b5b34c64efa31e274f2534",tooltip=" "];
+  Node1 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="free_block",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$block_8h.html#a3eb417f7cce88e8ec69d6974cd25e49f",tooltip="Free a block struct."];
+  Node6 -> Node7 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="clear_block",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$block_8c.html#a3beaf10afd57aec50225774ba2a21680",tooltip=" "];
+  Node1 -> Node8 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="get_infos",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$client_8h.html#a480459f3451fa57a66df548ca0b408e3",tooltip=" "];
+  Node1 -> Node9 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 [label="plebe_verify_block",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$validation__engine_8h.html#aa566a0b7eb319d2489b8ac68c6e76824",tooltip=" "];
+  Node1 -> Node10 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node10 [label="safe_write",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$safe_8h.html#a405edff38f586c79822927a3b981e504",tooltip="Writes safely to a file descriptor."];
+  Node1 -> Node11 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node11 [label="update_wallet_with\l_block",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$block_8h.html#aa460be06109601a5626d1acb251e1602",tooltip=" "];
+  Node11 -> Node12 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node12 [label="get_my_wallet",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$wallet_8h.html#a993fb7ec0c86c7a2d8ff68363e9f5304",tooltip="Get my wallet object."];
 }

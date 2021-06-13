@@ -7,7 +7,7 @@ TransactionData
 .br
 .PP
 .PP
-\fC#include <transaction\&.h>\fP
+\fC#include <block\&.h>\fP
 .SS "Data Fields"
 
 .in +1c
@@ -22,9 +22,6 @@ TransactionData
 .br
 .ti -1c
 .RI "RSA * \fBreceiver_public_key\fP"
-.br
-.ti -1c
-.RI "RSA * \fBorganisation_public_key\fP"
 .br
 .ti -1c
 .RI "size_t \fBamount\fP"
@@ -47,53 +44,49 @@ TransactionData
 .in -1c
 .SH "Detailed Description"
 .PP 
-Definition at line 24 of file transaction\&.h\&.
+Definition at line 33 of file block\&.h\&.
 .SH "Field Documentation"
 .PP 
 .SS "size_t amount"
 
 .PP
-Definition at line 32 of file transaction\&.h\&.
-.SS "char asset[512]"
+Definition at line 40 of file block\&.h\&.
+.SS "char asset"
 
 .PP
-Definition at line 40 of file transaction\&.h\&.
-.SS "char cause[512]"
+Definition at line 48 of file block\&.h\&.
+.SS "char cause"
 
 .PP
-Definition at line 39 of file transaction\&.h\&.
+Definition at line 47 of file block\&.h\&.
 .SS "char magic"
 
 .PP
-Definition at line 26 of file transaction\&.h\&.
-.SS "RSA* organisation_public_key"
+Definition at line 35 of file block\&.h\&.
+.SS "RSA * receiver_public_key"
 
 .PP
-Definition at line 31 of file transaction\&.h\&.
-.SS "RSA* receiver_public_key"
-
-.PP
-Definition at line 30 of file transaction\&.h\&.
+Definition at line 39 of file block\&.h\&.
 .SS "size_t receiver_remaining_money"
 
 .PP
-Definition at line 34 of file transaction\&.h\&.
-.SS "RSA* sender_public_key"
+Definition at line 42 of file block\&.h\&.
+.SS "RSA * sender_public_key"
 
 .PP
-Definition at line 29 of file transaction\&.h\&.
+Definition at line 38 of file block\&.h\&.
 .SS "size_t sender_remaining_money"
 
 .PP
-Definition at line 33 of file transaction\&.h\&.
+Definition at line 41 of file block\&.h\&.
 .SS "time_t transaction_timestamp"
 
 .PP
-Definition at line 35 of file transaction\&.h\&.
+Definition at line 43 of file block\&.h\&.
 .SS "char type"
 
 .PP
-Definition at line 27 of file transaction\&.h\&.
+Definition at line 36 of file block\&.h\&.
 
 .SH "Author"
 .PP 

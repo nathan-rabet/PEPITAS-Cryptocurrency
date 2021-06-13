@@ -16,9 +16,49 @@
 .RI "RSA * \fBget_epoch_man_pkey\fP (\fBBlockData\fP *block_data)"
 .br
 .RI "Give the pkey of the creator of a block\&. "
+.ti -1c
+.RI "char * \fBcreate_vote_data\fP (\fBBlock\fP *block, char vote, int validator_index, size_t *data_length)"
+.br
+.ti -1c
+.RI "void \fBgive_punishments_and_rewards\fP (\fBBlock\fP *last_block, \fBBlock\fP *current_block)"
+.br
+.RI "Add punishmnent and reward transactions to validators of the 'prev_block' into 'current_block'\&. "
+.ti -1c
+.RI "void \fBadd_pdt_to_block\fP (\fBBlock\fP *block)"
+.br
+.ti -1c
+.RI "\fBBlock\fP * \fBcreate_epoch_block\fP ()"
+.br
+.RI "Create a block object with the previous block hash & votes\&. "
 .in -1c
 .SH "Function Documentation"
 .PP 
+.SS "void add_pdt_to_block (\fBBlock\fP * block)"
+
+.PP
+Definition at line 94 of file epoch_man\&.c\&.
+.SS "\fBBlock\fP* create_epoch_block ()"
+
+.PP
+Create a block object with the previous block hash & votes\&. 
+.PP
+\fBSee also\fP
+.RS 4
+The function create a block based on the local last block
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Block* 
+.RE
+.PP
+
+.PP
+Definition at line 141 of file epoch_man\&.c\&.
+.SS "char* create_vote_data (\fBBlock\fP * block, char vote, int validator_index, size_t * data_length)"
+
+.PP
+Definition at line 10 of file epoch_man\&.c\&.
 .SS "RSA* get_epoch_man_pkey (\fBBlockData\fP * block_data)"
 
 .PP
@@ -31,12 +71,32 @@ Give the pkey of the creator of a block\&.
 .PP
 \fBReturns\fP
 .RS 4
-RSA* 
+RSA*, NULL if the data is corrupted 
 .RE
 .PP
 
 .PP
 Definition at line 3 of file epoch_man\&.c\&.
+.SS "void give_punishments_and_rewards (\fBBlock\fP * prev_block, \fBBlock\fP * current_block)"
+
+.PP
+Add punishmnent and reward transactions to validators of the 'prev_block' into 'current_block'\&. 
+.PP
+\fBSee also\fP
+.RS 4
+Number of added transactions = number of validators in 'prev_block'
+.RE
+.PP
+\fBParameters\fP
+.RS 4
+\fIprev_block\fP 
+.br
+\fIcurrent_block\fP 
+.RE
+.PP
+
+.PP
+Definition at line 31 of file epoch_man\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for PEPITAS CRYPTOCURRENCY from the source code\&.

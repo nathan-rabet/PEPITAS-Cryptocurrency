@@ -30,14 +30,26 @@
 .br
 \fC#include <sys/types\&.h>\fP
 .br
+\fC#include 'client\&.h'\fP
+.br
 \fC#include 'transaction\&.h'\fP
 .br
 \fC#include 'misc/files\&.h'\fP
+.br
+\fC#include 'blockchain/wallet\&.h'\fP
+.br
+\fC#include 'cryptosystem/rsa\&.h'\fP
 .br
 
 .SS "Data Structures"
 
 .in +1c
+.ti -1c
+.RI "struct \fBTransactionData\fP"
+.br
+.ti -1c
+.RI "struct \fBTransaction\fP"
+.br
 .ti -1c
 .RI "struct \fBBlockData\fP"
 .br
@@ -72,10 +84,22 @@
 .ti -1c
 .RI "#define \fBNB_BLOCK_PER_CHUNK\fP   10000"
 .br
+.ti -1c
+.RI "#define \fBNB_VOTES_BITMAP\fP   \fBMAX_VALIDATORS_PER_BLOCK\fP / 8"
+.br
+.ti -1c
+.RI "#define \fBTRANS_T\fP"
+.br
 .in -1c
 .SS "Typedefs"
 
 .in +1c
+.ti -1c
+.RI "typedef struct \fBTransactionData\fP \fBTransactionData\fP"
+.br
+.ti -1c
+.RI "typedef struct \fBTransaction\fP \fBTransaction\fP"
+.br
 .ti -1c
 .RI "typedef struct \fBBlockData\fP \fBBlockData\fP"
 .br
@@ -90,9 +114,6 @@
 
 .in +1c
 .ti -1c
-.RI "\fBBlock\fP * \fBget_genesis_block\fP ()"
-.br
-.ti -1c
 .RI "\fBChunkBlockchain\fP * \fBload_blockchain\fP (size_t nb_chunk)"
 .br
 .RI "Loads a blockchain object with a padding of 'nb_chunk'\&. "
@@ -101,15 +122,11 @@
 .br
 .RI "Load the last local blockchain chunk\&. "
 .ti -1c
-.RI "size_t \fBget_last_block_height\fP ()"
-.br
-.RI "Get the last block height\&. "
-.ti -1c
 .RI "void \fBwrite_block_file\fP (\fBBlock\fP block)"
 .br
 .RI "Writes a block struct in a file\&. "
 .ti -1c
-.RI "\fBBlock\fP * \fBget_block\fP (size_t block_height)"
+.RI "\fBBlock\fP * \fBget_block\fP (size_t \fBblock_height\fP)"
 .br
 .RI "Get a block object\&. "
 .ti -1c
@@ -139,37 +156,57 @@
 .ti -1c
 .RI "void \fBconvert_data_to_block\fP (\fBBlock\fP *block, int fd)"
 .br
+.ti -1c
+.RI "void \fBupdate_wallet_with_block\fP (\fBBlock\fP block)"
+.br
+.ti -1c
+.RI "void \fBdelete_epochs\fP (size_t height)"
+.br
+.ti -1c
+.RI "\fBBlock\fP * \fBget_epoch\fP (int id, size_t height)"
+.br
+.ti -1c
+.RI "void \fBclear_block\fP (\fBBlock\fP *block)"
+.br
 .in -1c
 .SH "Macro Definition Documentation"
 .PP 
 .SS "#define BLOCK_DATA_SIZE   (SHA384_DIGEST_LENGTH * 2 + 1) + sizeof(size_t) + sizeof(uint16_t) + sizeof(time_t) + sizeof(int)"
 
 .PP
-Definition at line 26 of file block\&.h\&.
+Definition at line 24 of file block\&.h\&.
 .SS "#define BLOCK_SIZE   2048 + sizeof(size_t) + \fBBLOCK_DATA_SIZE\fP + SHA384_DIGEST_LENGTH * 2 + 1"
 
 .PP
-Definition at line 27 of file block\&.h\&.
+Definition at line 25 of file block\&.h\&.
 .SS "#define CURRENT_CHUNK   0"
 
 .PP
-Definition at line 24 of file block\&.h\&.
+Definition at line 22 of file block\&.h\&.
 .SS "#define MAX_TRANSACTIONS_PER_BLOCK   16384"
 
 .PP
-Definition at line 29 of file block\&.h\&.
+Definition at line 27 of file block\&.h\&.
 .SS "#define MAX_VALIDATORS_PER_BLOCK   512"
 
 .PP
-Definition at line 20 of file block\&.h\&.
+Definition at line 18 of file block\&.h\&.
 .SS "#define NB_BLOCK_PER_CHUNK   10000"
 
 .PP
-Definition at line 30 of file block\&.h\&.
+Definition at line 28 of file block\&.h\&.
+.SS "#define NB_VOTES_BITMAP   \fBMAX_VALIDATORS_PER_BLOCK\fP / 8"
+
+.PP
+Definition at line 29 of file block\&.h\&.
 .SS "#define SIGNATURE_LEN   256"
 
 .PP
-Definition at line 22 of file block\&.h\&.
+Definition at line 20 of file block\&.h\&.
+.SS "#define TRANS_T"
+
+.PP
+Definition at line 32 of file block\&.h\&.
 .SH "Typedef Documentation"
 .PP 
 .SS "typedef struct \fBBlock\fP \fBBlock\fP"
@@ -178,12 +215,24 @@ Definition at line 22 of file block\&.h\&.
 
 .SS "typedef struct \fBChunkBlockchain\fP \fBChunkBlockchain\fP"
 
+.SS "typedef struct \fBTransaction\fP \fBTransaction\fP"
+
+.SS "typedef struct \fBTransactionData\fP \fBTransactionData\fP"
+
 .SH "Function Documentation"
 .PP 
+.SS "void clear_block (\fBBlock\fP * block)"
+
+.PP
+Definition at line 337 of file block\&.c\&.
 .SS "void convert_data_to_block (\fBBlock\fP * block, int fd)"
 
 .PP
-Definition at line 172 of file block\&.c\&.
+Definition at line 103 of file block\&.c\&.
+.SS "void delete_epochs (size_t height)"
+
+.PP
+Definition at line 301 of file block\&.c\&.
 .SS "void free_block (\fBBlock\fP * block)"
 
 .PP
@@ -196,7 +245,7 @@ Free a block struct\&.
 .PP
 
 .PP
-Definition at line 202 of file block\&.c\&.
+Definition at line 133 of file block\&.c\&.
 .SS "\fBBlock\fP* get_block (size_t block_height)"
 
 .PP
@@ -214,7 +263,7 @@ Block*
 .PP
 
 .PP
-Definition at line 180 of file block\&.c\&.
+Definition at line 111 of file block\&.c\&.
 .SS "char* get_blockdata_data (\fBBlock\fP * block, size_t * size)"
 
 .PP
@@ -234,24 +283,11 @@ char*
 .PP
 
 .PP
-Definition at line 241 of file block\&.c\&.
-.SS "\fBBlock\fP* get_genesis_block ()"
+Definition at line 159 of file block\&.c\&.
+.SS "\fBBlock\fP* get_epoch (int id, size_t height)"
 
 .PP
-Definition at line 35 of file block\&.c\&.
-.SS "size_t get_last_block_height ()"
-
-.PP
-Get the last block height\&. 
-.PP
-\fBReturns\fP
-.RS 4
-size_t 
-.RE
-.PP
-
-.PP
-Definition at line 115 of file block\&.c\&.
+Definition at line 316 of file block\&.c\&.
 .SS "\fBBlock\fP* get_next_block (\fBBlock\fP * block)"
 
 .PP
@@ -269,7 +305,7 @@ The next Block*
 .PP
 
 .PP
-Definition at line 221 of file block\&.c\&.
+Definition at line 139 of file block\&.c\&.
 .SS "\fBBlock\fP* get_prev_block (\fBBlock\fP * block)"
 
 .PP
@@ -282,12 +318,12 @@ For a block of height \fCh\fP, return the block of height \fCh-1\fP
 .PP
 \fBReturns\fP
 .RS 4
-The next Block* 
+The previous Block* 
 .RE
 .PP
 
 .PP
-Definition at line 231 of file block\&.c\&.
+Definition at line 149 of file block\&.c\&.
 .SS "\fBChunkBlockchain\fP* load_blockchain (size_t nb_chunk)"
 
 .PP
@@ -305,7 +341,7 @@ ChunkBlockchain*, NULL if the \fBChunkBlockchain\fP is empty after switching
 .PP
 
 .PP
-Definition at line 69 of file block\&.c\&.
+Definition at line 3 of file block\&.c\&.
 .SS "\fBChunkBlockchain\fP* load_last_blockchain ()"
 
 .PP
@@ -323,7 +359,11 @@ ChunkBlockchain*
 .PP
 
 .PP
-Definition at line 110 of file block\&.c\&.
+Definition at line 47 of file block\&.c\&.
+.SS "void update_wallet_with_block (\fBBlock\fP block)"
+
+.PP
+Definition at line 236 of file block\&.c\&.
 .SS "void write_block (\fBBlock\fP block, int fd)"
 
 .PP
@@ -338,7 +378,7 @@ Writes a block in a file\&.
 .PP
 
 .PP
-Definition at line 309 of file block\&.c\&.
+Definition at line 228 of file block\&.c\&.
 .SS "void write_block_file (\fBBlock\fP block)"
 
 .PP
@@ -351,7 +391,7 @@ Writes a block struct in a file\&.
 .PP
 
 .PP
-Definition at line 121 of file block\&.c\&.
+Definition at line 52 of file block\&.c\&.
 .SS "void write_blockdata (\fBBlockData\fP blockdata, int fd)"
 
 .PP
@@ -366,7 +406,7 @@ Writes blockdata in a file\&.
 .PP
 
 .PP
-Definition at line 277 of file block\&.c\&.
+Definition at line 196 of file block\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for PEPITAS CRYPTOCURRENCY from the source code\&.

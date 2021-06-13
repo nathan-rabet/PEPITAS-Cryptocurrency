@@ -34,17 +34,43 @@
 .ti -1c
 .RI "void \fBadd_pending_transaction\fP (\fBTransaction\fP *transaction)"
 .br
+.ti -1c
+.RI "\fBTransaction\fP \fBcreate_new_transaction\fP (\fBinfos_st\fP *infos, char type, RSA *receiver_public_key, size_t amount, char cause[512], char asset[512])"
+.br
+.ti -1c
+.RI "void \fBflush_pending_transactions\fP (\fBTransaction\fP **transactions, size_t nb_transactions)"
+.br
+.RI "Delete block transactions in pdt if the block is valid\&. "
 .in -1c
 .SH "Function Documentation"
 .PP 
 .SS "void add_pending_transaction (\fBTransaction\fP * transaction)"
 
 .PP
-Definition at line 158 of file transaction\&.c\&.
+Definition at line 140 of file transaction\&.c\&.
 .SS "void convert_data_to_transactiondata (\fBTransactionData\fP * transactiondata, int fd)"
 
 .PP
-Definition at line 99 of file transaction\&.c\&.
+Definition at line 88 of file transaction\&.c\&.
+.SS "\fBTransaction\fP create_new_transaction (\fBinfos_st\fP * infos, char type, RSA * receiver_public_key, size_t amount, char cause[512], char asset[512])"
+
+.PP
+Definition at line 157 of file transaction\&.c\&.
+.SS "void flush_pending_transactions (\fBTransaction\fP ** transactions, size_t nb_transactions)"
+
+.PP
+Delete block transactions in pdt if the block is valid\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fItransactions\fP block\&.blockdata\&.transactions 
+.br
+\fInb_transactions\fP number of transactions 
+.RE
+.PP
+
+.PP
+Definition at line 204 of file transaction\&.c\&.
 .SS "void get_transaction_data (\fBTransaction\fP * trans, char ** buff, size_t * size)"
 
 .PP
@@ -66,19 +92,19 @@ The buffer allocated (Must be freed)
 .PP
 
 .PP
-Definition at line 48 of file transaction\&.c\&.
+Definition at line 40 of file transaction\&.c\&.
 .SS "\fBTransaction\fP* load_pending_transaction (time_t timestamp)"
 
 .PP
-Definition at line 145 of file transaction\&.c\&.
+Definition at line 127 of file transaction\&.c\&.
 .SS "void load_transaction (\fBTransaction\fP * transaction, int fd)"
 
 .PP
-Definition at line 135 of file transaction\&.c\&.
+Definition at line 117 of file transaction\&.c\&.
 .SS "void write_transaction (\fBTransaction\fP * transaction, int fd)"
 
 .PP
-Definition at line 42 of file transaction\&.c\&.
+Definition at line 34 of file transaction\&.c\&.
 .SS "void write_transactiondata (\fBTransactionData\fP * transaction, int fd)"
 
 .PP

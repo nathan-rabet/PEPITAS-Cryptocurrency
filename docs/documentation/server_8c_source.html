@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>PEPITAS CRYPTOCURRENCY: /home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/src/server.c Source File</title>
+<title>PEPITAS CRYPTOCURRENCY: /home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/src/core/network/server.c Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -88,40 +88,244 @@ $(document).ready(function(){initNavTree('server_8c_source.html',''); initResiza
 </div><!--header-->
 <div class="contents">
 <a href="server_8c.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="server_8h.html">network/server.h</a>&quot;</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="client_8h.html">network/client.h</a>&quot;</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="signature_8h.html">cryptosystem/signature.h</a>&quot;</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="block_8h.html">blockchain/block.h</a>&quot;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;time.h&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno"><a class="line" href="server_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4">    7</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="server_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>()</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;{</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    <a class="code" href="structinfos__st.html">infos_st</a> *infos = malloc(<span class="keyword">sizeof</span>(<a class="code" href="structinfos__st.html">infos_st</a>));</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    infos-&gt;<a class="code" href="structinfos__st.html#abecc2f44ff318c3b1e4fa2c7f3d5cbd8">actual_height</a> = 0;</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    infos-&gt;<a class="code" href="structinfos__st.html#a3587e8ced0bb7858e27b8c7b9c5863b4">is_sychronize</a> = 0;</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    infos-&gt;<a class="code" href="structinfos__st.html#a09e60e6614ae4cb4eb36529d7133bbd3">serv_type</a> = <a class="code" href="network_8h.html#a990e4ab4f7babf69de0109080b0f7c72">NODESERVER</a>;</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <a class="code" href="client_8h.html#ae814feddaa9902371625b42131b1a7f4">print_neighbours</a>(<a class="code" href="network_8h.html#a44b6e2d68c7a890d60b6017e83bce337">IM_SERVER</a>, 1);</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <a class="code" href="core_2network_2server_8c.html#a10fb306879537348fffef6ae68f70640">init_server</a>(infos);</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;}</div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
+<div class="line"><a name="l00003"></a><span class="lineno"><a class="line" href="server_8c.html#a51b8c8c4c2582cc90f8155bd9eaab4c0">    3</a></span>&#160;<span class="keywordtype">void</span> *<a class="code" href="server_8c.html#a51b8c8c4c2582cc90f8155bd9eaab4c0">accept_connection</a>(<span class="keywordtype">void</span> *args)</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;{</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;    <a class="code" href="structth__arg.html">th_arg</a> *a = (<a class="code" href="structth__arg.html">th_arg</a> *)args;</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;    <a class="code" href="structconnection.html">connection</a> *server_connection = a-&gt;<a class="code" href="structth__arg.html#aeb3048bca09fc7c1174ca74d0e86100b">client_con</a>;</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;    <a class="code" href="structinfos__st.html">infos_st</a> *infos = a-&gt;<a class="code" href="structth__arg.html#a4ffe492fe883ff7cc8882a7cc5406ac7">infos</a>;</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    free(args);</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    <span class="keyword">struct </span>sockaddr_in client_addr;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    socklen_t client_addr_len = <span class="keyword">sizeof</span>(client_addr);</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <span class="keywordflow">if</span> (getpeername(server_connection-&gt;<a class="code" href="structconnection.html#acb1595ad65fb34f372e0f81f058c7405">clientfd</a>, (<span class="keyword">struct</span> sockaddr * restrict) &amp; client_addr, &amp;client_addr_len) == -1)</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;        err(EXIT_FAILURE, <span class="stringliteral">&quot;Failed to recover client IP address\n&quot;</span>);</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keywordtype">char</span> ip_str[INET_ADDRSTRLEN];</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keywordflow">if</span> (inet_ntop(AF_INET, &amp;(client_addr.sin_addr), ip_str, INET_ADDRSTRLEN) == NULL)</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        err(EXIT_FAILURE, <span class="stringliteral">&quot;Failed to convert client IP address to string\n&quot;</span>);</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <a class="code" href="network_8h.html#a70dfa79077dc00c8de6083ff105c831b">SERVERMSG</a></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    printf(<span class="stringliteral">&quot;New connection: &#39;%s&#39;\n&quot;</span>, ip_str);</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="comment">// VERIFY</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="get__data_8h.html#a1f63104d8a019196f59d848bacafcaf0">read_header</a>(server_connection-&gt;<a class="code" href="structconnection.html#acb1595ad65fb34f372e0f81f058c7405">clientfd</a>, infos) == 1)</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    {</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <a class="code" href="network_8h.html#a70dfa79077dc00c8de6083ff105c831b">SERVERMSG</a></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        printf(<span class="stringliteral">&quot;Accept connection: &#39;%s&#39;\n&quot;</span>, ip_str);</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    }</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    {</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        close(server_connection-&gt;<a class="code" href="structconnection.html#acb1595ad65fb34f372e0f81f058c7405">clientfd</a>);</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        server_connection-&gt;<a class="code" href="structconnection.html#acb1595ad65fb34f372e0f81f058c7405">clientfd</a> = 0;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        pthread_exit(NULL);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    }</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="comment">// CONNECTION BACK</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <a class="code" href="struct_node.html">Node</a> *node = <a class="code" href="network_2client_8h.html#a745cc052bf8990bd3189b857a1d29f40">get_my_node</a>(<a class="code" href="network_8h.html#a44b6e2d68c7a890d60b6017e83bce337">IM_SERVER</a>);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="network_2client_8h.html#a0dc5c7ebcc87bb9c0fc1b2dcb69596c7">is_in_neighbours</a>(<a class="code" href="network_8h.html#a4a4ea366b744078b50a96a3899aab46c">IM_CLIENT</a>, ip_str) == -1) {</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="keywordtype">int</span> nb_connection_success = <a class="code" href="network_2client_8h.html#acec8d99c29599378ad06a91d4911587f">number_neighbours</a>(<a class="code" href="network_8h.html#a4a4ea366b744078b50a96a3899aab46c">IM_CLIENT</a>);</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <span class="keywordtype">int</span> index = <a class="code" href="network_2client_8h.html#a65f3df28a906d619b5f408a26aec7649">set_neighbour</a>(<a class="code" href="network_8h.html#a44b6e2d68c7a890d60b6017e83bce337">IM_SERVER</a>, ip_str, AF_INET);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <a class="code" href="network_8h.html#a70dfa79077dc00c8de6083ff105c831b">SERVERMSG</a></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        printf(<span class="stringliteral">&quot;Connection back\n&quot;</span>);</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="keywordflow">if</span> (node-&gt;<a class="code" href="struct_node.html#a64982c1c406035f198bfe705faf683b2">neighbours</a>[index].<a class="code" href="struct_neighbour.html#af203df082d5c6dcaa0c88b07cf86466d">hostname</a> != NULL)</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        {</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            <span class="keywordflow">if</span> (<a class="code" href="network_2client_8h.html#a7be5d0a5ee88cfd1a654fc4813273708">listen_to</a>(infos, node-&gt;<a class="code" href="struct_node.html#a64982c1c406035f198bfe705faf683b2">neighbours</a>[index], <a class="code" href="network_8h.html#ada905430ccf37ff55d9bf790d51e799c">HD_CONNECTION_TO_NODE</a>, <a class="code" href="validation__engine_8h.html#a0ba5d3a056115234ab9ed718797c2953">client_connections</a>) == NULL)</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                printf(<span class="stringliteral">&quot;Fail de connection to neighbour\n&quot;</span>);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                nb_connection_success++;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        }</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keywordtype">char</span> tmp[5];</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        snprintf(tmp, 5, <span class="stringliteral">&quot;%i&quot;</span>, nb_connection_success);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <a class="code" href="labels_8h.html#ae4c608b5626430bac55322e32309bf8f">change_label_text</a>(<a class="code" href="labels_8h.html#ae197a17a69bd4320a69c3945369d802e">connections_label</a>, tmp);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    }</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="comment">// SERVER ROUTINE</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordflow">while</span> (1)</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    {</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        <a class="code" href="get__data_8h.html#a1f63104d8a019196f59d848bacafcaf0">read_header</a>(server_connection-&gt;<a class="code" href="structconnection.html#acb1595ad65fb34f372e0f81f058c7405">clientfd</a>, infos);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    }</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    close(server_connection-&gt;<a class="code" href="structconnection.html#acb1595ad65fb34f372e0f81f058c7405">clientfd</a>);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    server_connection-&gt;<a class="code" href="structconnection.html#acb1595ad65fb34f372e0f81f058c7405">clientfd</a> = 0;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    pthread_exit(NULL);</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;}</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
+<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="server_8c.html#a84cf9ceb7f864ec15c6a0a51fec348ed">   72</a></span>&#160;<span class="keywordtype">void</span> *<a class="code" href="server_8c.html#a84cf9ceb7f864ec15c6a0a51fec348ed">redirect_connection</a>(<span class="keywordtype">void</span> *arg)</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;{</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordtype">int</span> clientfd = *((<span class="keywordtype">int</span> *)arg);</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keyword">struct </span>sockaddr_in client_addr;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    socklen_t client_addr_len = <span class="keyword">sizeof</span>(client_addr);</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordflow">if</span> (getpeername(clientfd, (<span class="keyword">struct</span> sockaddr * restrict) &amp; client_addr, &amp;client_addr_len) == -1)</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        err(EXIT_FAILURE, <span class="stringliteral">&quot;Failed to recover client IP address\n&quot;</span>);</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordtype">char</span> ip_str[39];</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keywordflow">if</span> (inet_ntop(AF_INET, &amp;(client_addr.sin_addr), ip_str, INET_ADDRSTRLEN) == NULL)</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        err(EXIT_FAILURE, <span class="stringliteral">&quot;Failed to convert client IP address to string\n&quot;</span>);</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    printf(<span class="stringliteral">&quot;New connection: &#39;%s&#39;\n&quot;</span>, ip_str);</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="get__data_8h.html#a1f63104d8a019196f59d848bacafcaf0">read_header</a>(clientfd, NULL) == 1)</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    {</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        printf(<span class="stringliteral">&quot;Accept connection: &#39;%s&#39;\n&quot;</span>, ip_str);</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        <a class="code" href="network_2client_8h.html#a65f3df28a906d619b5f408a26aec7649">set_neighbour</a>(<a class="code" href="network_8h.html#a44b6e2d68c7a890d60b6017e83bce337">IM_SERVER</a>, ip_str, AF_INET);</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        <a class="code" href="network_2client_8h.html#aab146f25715d4241dd2cfc64750cdd0d">save_neighbours</a>(<a class="code" href="network_8h.html#a44b6e2d68c7a890d60b6017e83bce337">IM_SERVER</a>);</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        <a class="code" href="network_2client_8h.html#ae814feddaa9902371625b42131b1a7f4">print_neighbours</a>(<a class="code" href="network_8h.html#a44b6e2d68c7a890d60b6017e83bce337">IM_SERVER</a>, 0);</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        <span class="comment">//send client list</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        <a class="code" href="send__data_8h.html#ad9194d475483d8bcc59cc5e1de6fbc0a">send_client_list</a>(<a class="code" href="network_8h.html#a44b6e2d68c7a890d60b6017e83bce337">IM_SERVER</a>, clientfd, ip_str);</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    }</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    close(clientfd);</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    free(arg);</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    pthread_exit(NULL);</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;}</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
+<div class="line"><a name="l00106"></a><span class="lineno"><a class="line" href="server_8c.html#a10fb306879537348fffef6ae68f70640">  106</a></span>&#160;<span class="keywordtype">void</span> *<a class="code" href="server_8c.html#a10fb306879537348fffef6ae68f70640">init_server</a>(<span class="keywordtype">void</span> *args)</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;{</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <a class="code" href="structinfos__st.html">infos_st</a> *infos = (<a class="code" href="structinfos__st.html">infos_st</a> *)args;</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <a class="code" href="structconnection.html">connection</a> *server_connections = calloc(<a class="code" href="network_8h.html#ad546ea25dc7aa34a81dcf5aff48a31ca">MAX_SERVER</a>, <span class="keyword">sizeof</span>(<a class="code" href="structconnection.html">connection</a>));</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; <a class="code" href="network_8h.html#a1ad0110a77b8abbc3c30f7ec903dab1b">MAX_CONNECTION</a>; i++)</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    {</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        sem_init(&amp;server_connections[i].lock, 0, 0);</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    }</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <a class="code" href="network_8h.html#a70dfa79077dc00c8de6083ff105c831b">SERVERMSG</a></div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    printf(<span class="stringliteral">&quot;Opening client server...\n&quot;</span>);</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160; </div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    <span class="keyword">struct </span>addrinfo hints = {0}; <span class="comment">//</span></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    <span class="keyword">struct </span>addrinfo *result;     <span class="comment">//</span></div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    <span class="keyword">struct </span>addrinfo *rp;         <span class="comment">//</span></div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    <span class="keywordtype">int</span> addrinfo_error;</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    <span class="keywordtype">int</span> sockfd; <span class="comment">//File Descriptor of the socket</span></div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    hints.ai_family = AF_UNSPEC;     <span class="comment">//IPV6 IPV4</span></div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    hints.ai_socktype = SOCK_STREAM; <span class="comment">//TCP</span></div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    hints.ai_flags = AI_PASSIVE;     <span class="comment">//Server</span></div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160; </div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    <span class="comment">// Get info</span></div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    addrinfo_error = getaddrinfo(NULL, <a class="code" href="network_8h.html#a449aa0421d712bd4d969618f13101db8">STATIC_PORT</a>, &amp;hints, &amp;result);</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160; </div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    <span class="comment">// Error management</span></div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    <span class="keywordflow">if</span> (addrinfo_error)</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    {</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;        </div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;        <a class="code" href="network_8h.html#a70dfa79077dc00c8de6083ff105c831b">SERVERMSG</a></div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;        printf(<span class="stringliteral">&quot;Fail getting address on port %s: %s\n&quot;</span>,</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;             <a class="code" href="network_8h.html#a449aa0421d712bd4d969618f13101db8">STATIC_PORT</a>, gai_strerror(addrinfo_error));</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;        errx(EXIT_FAILURE, <span class="stringliteral">&quot;Fail getting address on port %s: %s&quot;</span>,</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;             <a class="code" href="network_8h.html#a449aa0421d712bd4d969618f13101db8">STATIC_PORT</a>, gai_strerror(addrinfo_error));</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;    }</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160; </div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;    <span class="comment">// result points to a linked list</span></div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;    <span class="comment">// try yo connect for each result</span></div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;    <span class="keywordflow">for</span> (rp = result; rp != NULL; rp = rp-&gt;ai_next)</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;    {</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;        sockfd = socket(rp-&gt;ai_family, rp-&gt;ai_socktype, 0);</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;        <span class="keywordflow">if</span> (sockfd == -1)</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;            <span class="keywordflow">continue</span>; <span class="comment">// The socket is not created</span></div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160; </div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;        <span class="keywordtype">int</span> chezpas = 1;</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;        setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &amp;chezpas, <span class="keyword">sizeof</span>(<span class="keywordtype">int</span>));</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160; </div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;        <span class="comment">// Try to connect</span></div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;        <span class="keywordflow">if</span> (bind(sockfd, rp-&gt;ai_addr, rp-&gt;ai_addrlen) == -1)</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;        {</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;            close(sockfd);</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;            <span class="keywordflow">continue</span>;</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;        }</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    }</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160; </div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160; </div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    <span class="keywordflow">if</span> (rp == NULL)</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    { <span class="comment">/* No address succeeded */</span></div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;        <a class="code" href="network_8h.html#a70dfa79077dc00c8de6083ff105c831b">SERVERMSG</a></div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;        printf(<span class="stringliteral">&quot;Could not bind\n&quot;</span>);</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;        <span class="comment">//exit(EXIT_FAILURE);</span></div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    }</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160; </div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    listen(sockfd, 5);</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160; </div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;    <span class="keywordflow">while</span> (1)</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    {</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;        <span class="keywordflow">if</span> (infos-&gt;<a class="code" href="structinfos__st.html#a09e60e6614ae4cb4eb36529d7133bbd3">serv_type</a> == <a class="code" href="network_8h.html#ad095a3848176dfa3cc06d477a0f83132">DOORSERVER</a>)</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;        {</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;            pthread_t thread;</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;            <span class="keywordtype">int</span> *clientfd = calloc(1, <span class="keyword">sizeof</span>(<span class="keywordtype">int</span>));</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;            *clientfd = accept(sockfd, rp-&gt;ai_addr, &amp;rp-&gt;ai_addrlen);</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;            pthread_create(&amp;thread, NULL, <a class="code" href="server_8c.html#a84cf9ceb7f864ec15c6a0a51fec348ed">redirect_connection</a>, clientfd);</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;        }</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;        </div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;        <span class="keywordflow">if</span> (infos-&gt;<a class="code" href="structinfos__st.html#a09e60e6614ae4cb4eb36529d7133bbd3">serv_type</a> == <a class="code" href="network_8h.html#a990e4ab4f7babf69de0109080b0f7c72">NODESERVER</a>)</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;        {</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;            <span class="keywordtype">int</span> index = <a class="code" href="network_2client_8h.html#a2ea79fcac5d457bfb388c14ed6ae7d41">find_empty_connection</a>(<a class="code" href="network_8h.html#ad546ea25dc7aa34a81dcf5aff48a31ca">MAX_SERVER</a>, server_connections);</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;            server_connections[index].<a class="code" href="structconnection.html#acb1595ad65fb34f372e0f81f058c7405">clientfd</a> = accept(sockfd, rp-&gt;ai_addr, &amp;rp-&gt;ai_addrlen);</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;            <span class="keywordflow">if</span> (server_connections[index].clientfd != -1)</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;            {</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;                <a class="code" href="structth__arg.html">th_arg</a> *args = malloc(<span class="keyword">sizeof</span>(<a class="code" href="structth__arg.html">th_arg</a>));</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;                args-&gt;<a class="code" href="structth__arg.html#a4ffe492fe883ff7cc8882a7cc5406ac7">infos</a> = infos;</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;                args-&gt;<a class="code" href="structth__arg.html#aeb3048bca09fc7c1174ca74d0e86100b">client_con</a> = &amp;server_connections[index];</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;                pthread_create(&amp;server_connections-&gt;<a class="code" href="structconnection.html#a01f75a9ad916f63a94e06a27635ba278">thread</a>, NULL, <a class="code" href="server_8c.html#a51b8c8c4c2582cc90f8155bd9eaab4c0">accept_connection</a>, args);</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;            }</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;            <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;                server_connections[index].<a class="code" href="structconnection.html#acb1595ad65fb34f372e0f81f058c7405">clientfd</a> = 0;</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;        }</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;    }</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="ablock_8h_html"><div class="ttname"><a href="block_8h.html">block.h</a></div></div>
-<div class="ttc" id="aserver_8c_html_ae66f6b31b5ad750f1fe042a706a4e3d4"><div class="ttname"><a href="server_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a></div><div class="ttdeci">int main()</div><div class="ttdef"><b>Definition:</b> <a href="server_8c_source.html#l00007">server.c:7</a></div></div>
+<div class="ttc" id="astructth__arg_html_aeb3048bca09fc7c1174ca74d0e86100b"><div class="ttname"><a href="structth__arg.html#aeb3048bca09fc7c1174ca74d0e86100b">th_arg::client_con</a></div><div class="ttdeci">connection * client_con</div><div class="ttdef"><b>Definition:</b> <a href="network_8h_source.html#l00067">network.h:67</a></div></div>
+<div class="ttc" id="anetwork_2client_8h_html_aab146f25715d4241dd2cfc64750cdd0d"><div class="ttname"><a href="network_2client_8h.html#aab146f25715d4241dd2cfc64750cdd0d">save_neighbours</a></div><div class="ttdeci">void save_neighbours(char who)</div><div class="ttdoc">Save neighbours list in .neighbours/neighbours.</div><div class="ttdef"><b>Definition:</b> <a href="core_2network_2client_8c_source.html#l00074">client.c:74</a></div></div>
 <div class="ttc" id="astructinfos__st_html"><div class="ttname"><a href="structinfos__st.html">infos_st</a></div><div class="ttdef"><b>Definition:</b> <a href="network_8h_source.html#l00055">network.h:55</a></div></div>
+<div class="ttc" id="anetwork_2client_8h_html_a745cc052bf8990bd3189b857a1d29f40"><div class="ttname"><a href="network_2client_8h.html#a745cc052bf8990bd3189b857a1d29f40">get_my_node</a></div><div class="ttdeci">Node * get_my_node(char who)</div><div class="ttdoc">Get the my node object.</div><div class="ttdef"><b>Definition:</b> <a href="core_2network_2client_8c_source.html#l00006">client.c:6</a></div></div>
+<div class="ttc" id="alabels_8h_html_ae4c608b5626430bac55322e32309bf8f"><div class="ttname"><a href="labels_8h.html#ae4c608b5626430bac55322e32309bf8f">change_label_text</a></div><div class="ttdeci">void change_label_text(GtkLabel *label, char *text)</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00233">ui.c:233</a></div></div>
+<div class="ttc" id="anetwork_8h_html_a1ad0110a77b8abbc3c30f7ec903dab1b"><div class="ttname"><a href="network_8h.html#a1ad0110a77b8abbc3c30f7ec903dab1b">MAX_CONNECTION</a></div><div class="ttdeci">#define MAX_CONNECTION</div><div class="ttdef"><b>Definition:</b> <a href="network_8h_source.html#l00011">network.h:11</a></div></div>
+<div class="ttc" id="anetwork_2client_8h_html_a0dc5c7ebcc87bb9c0fc1b2dcb69596c7"><div class="ttname"><a href="network_2client_8h.html#a0dc5c7ebcc87bb9c0fc1b2dcb69596c7">is_in_neighbours</a></div><div class="ttdeci">int is_in_neighbours(char who, char *hostname)</div><div class="ttdef"><b>Definition:</b> <a href="core_2network_2client_8c_source.html#l00149">client.c:149</a></div></div>
+<div class="ttc" id="aserver_8c_html_a10fb306879537348fffef6ae68f70640"><div class="ttname"><a href="server_8c.html#a10fb306879537348fffef6ae68f70640">init_server</a></div><div class="ttdeci">void * init_server(void *args)</div><div class="ttdoc">Launches a server instance, connected to the peer-to-peer network 'hostname'.</div><div class="ttdef"><b>Definition:</b> <a href="server_8c_source.html#l00106">server.c:106</a></div></div>
+<div class="ttc" id="astruct_node_html_a64982c1c406035f198bfe705faf683b2"><div class="ttname"><a href="struct_node.html#a64982c1c406035f198bfe705faf683b2">Node::neighbours</a></div><div class="ttdeci">Neighbour * neighbours</div><div class="ttdef"><b>Definition:</b> <a href="network_8h_source.html#l00041">network.h:41</a></div></div>
 <div class="ttc" id="anetwork_8h_html_a990e4ab4f7babf69de0109080b0f7c72"><div class="ttname"><a href="network_8h.html#a990e4ab4f7babf69de0109080b0f7c72">NODESERVER</a></div><div class="ttdeci">#define NODESERVER</div><div class="ttdef"><b>Definition:</b> <a href="network_8h_source.html#l00022">network.h:22</a></div></div>
-<div class="ttc" id="astructinfos__st_html_abecc2f44ff318c3b1e4fa2c7f3d5cbd8"><div class="ttname"><a href="structinfos__st.html#abecc2f44ff318c3b1e4fa2c7f3d5cbd8">infos_st::actual_height</a></div><div class="ttdeci">size_t actual_height</div><div class="ttdef"><b>Definition:</b> <a href="network_8h_source.html#l00058">network.h:58</a></div></div>
-<div class="ttc" id="asignature_8h_html"><div class="ttname"><a href="signature_8h.html">signature.h</a></div></div>
-<div class="ttc" id="astructinfos__st_html_a09e60e6614ae4cb4eb36529d7133bbd3"><div class="ttname"><a href="structinfos__st.html#a09e60e6614ae4cb4eb36529d7133bbd3">infos_st::serv_type</a></div><div class="ttdeci">char serv_type</div><div class="ttdef"><b>Definition:</b> <a href="network_8h_source.html#l00059">network.h:59</a></div></div>
-<div class="ttc" id="astructinfos__st_html_a3587e8ced0bb7858e27b8c7b9c5863b4"><div class="ttname"><a href="structinfos__st.html#a3587e8ced0bb7858e27b8c7b9c5863b4">infos_st::is_sychronize</a></div><div class="ttdeci">char is_sychronize</div><div class="ttdef"><b>Definition:</b> <a href="network_8h_source.html#l00057">network.h:57</a></div></div>
-<div class="ttc" id="acore_2network_2server_8c_html_a10fb306879537348fffef6ae68f70640"><div class="ttname"><a href="core_2network_2server_8c.html#a10fb306879537348fffef6ae68f70640">init_server</a></div><div class="ttdeci">void * init_server(void *args)</div><div class="ttdoc">Launches a server instance, connected to the peer-to-peer network 'hostname'.</div><div class="ttdef"><b>Definition:</b> <a href="core_2network_2server_8c_source.html#l00077">server.c:77</a></div></div>
+<div class="ttc" id="astruct_node_html"><div class="ttname"><a href="struct_node.html">Node</a></div><div class="ttdef"><b>Definition:</b> <a href="network_8h_source.html#l00039">network.h:39</a></div></div>
+<div class="ttc" id="asend__data_8h_html_ad9194d475483d8bcc59cc5e1de6fbc0a"><div class="ttname"><a href="send__data_8h.html#ad9194d475483d8bcc59cc5e1de6fbc0a">send_client_list</a></div><div class="ttdeci">int send_client_list(char who, int sockfd, char *sockip)</div><div class="ttdoc">Sends my client list to a node via 'sockfd'.</div><div class="ttdef"><b>Definition:</b> <a href="send__data_8c_source.html#l00003">send_data.c:3</a></div></div>
+<div class="ttc" id="anetwork_2client_8h_html_acec8d99c29599378ad06a91d4911587f"><div class="ttname"><a href="network_2client_8h.html#acec8d99c29599378ad06a91d4911587f">number_neighbours</a></div><div class="ttdeci">int number_neighbours(char who)</div><div class="ttdoc">return the nb of neighbour in the client.neightbours section</div><div class="ttdef"><b>Definition:</b> <a href="core_2network_2client_8c_source.html#l00160">client.c:160</a></div></div>
+<div class="ttc" id="astructconnection_html_acb1595ad65fb34f372e0f81f058c7405"><div class="ttname"><a href="structconnection.html#acb1595ad65fb34f372e0f81f058c7405">connection::clientfd</a></div><div class="ttdeci">int clientfd</div><div class="ttdef"><b>Definition:</b> <a href="network_8h_source.html#l00049">network.h:49</a></div></div>
+<div class="ttc" id="anetwork_2client_8h_html_a65f3df28a906d619b5f408a26aec7649"><div class="ttname"><a href="network_2client_8h.html#a65f3df28a906d619b5f408a26aec7649">set_neighbour</a></div><div class="ttdeci">int set_neighbour(char who, char *hostname, int family)</div><div class="ttdoc">Sets a neighbour in the client.neightbours section.</div><div class="ttdef"><b>Definition:</b> <a href="core_2network_2client_8c_source.html#l00019">client.c:19</a></div></div>
+<div class="ttc" id="anetwork_2client_8h_html_a2ea79fcac5d457bfb388c14ed6ae7d41"><div class="ttname"><a href="network_2client_8h.html#a2ea79fcac5d457bfb388c14ed6ae7d41">find_empty_connection</a></div><div class="ttdeci">int find_empty_connection(int max, connection *connection)</div><div class="ttdef"><b>Definition:</b> <a href="core_2network_2client_8c_source.html#l00258">client.c:258</a></div></div>
+<div class="ttc" id="anetwork_8h_html_a449aa0421d712bd4d969618f13101db8"><div class="ttname"><a href="network_8h.html#a449aa0421d712bd4d969618f13101db8">STATIC_PORT</a></div><div class="ttdeci">#define STATIC_PORT</div><div class="ttdef"><b>Definition:</b> <a href="network_8h_source.html#l00013">network.h:13</a></div></div>
+<div class="ttc" id="alabels_8h_html_ae197a17a69bd4320a69c3945369d802e"><div class="ttname"><a href="labels_8h.html#ae197a17a69bd4320a69c3945369d802e">connections_label</a></div><div class="ttdeci">GtkLabel * connections_label</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00031">ui.c:31</a></div></div>
+<div class="ttc" id="astructinfos__st_html_a09e60e6614ae4cb4eb36529d7133bbd3"><div class="ttname"><a href="structinfos__st.html#a09e60e6614ae4cb4eb36529d7133bbd3">infos_st::serv_type</a></div><div class="ttdeci">char serv_type</div><div class="ttdef"><b>Definition:</b> <a href="network_8h_source.html#l00062">network.h:62</a></div></div>
+<div class="ttc" id="anetwork_8h_html_ada905430ccf37ff55d9bf790d51e799c"><div class="ttname"><a href="network_8h.html#ada905430ccf37ff55d9bf790d51e799c">HD_CONNECTION_TO_NODE</a></div><div class="ttdeci">#define HD_CONNECTION_TO_NODE</div><div class="ttdef"><b>Definition:</b> <a href="network_8h_source.html#l00076">network.h:76</a></div></div>
+<div class="ttc" id="aserver_8c_html_a84cf9ceb7f864ec15c6a0a51fec348ed"><div class="ttname"><a href="server_8c.html#a84cf9ceb7f864ec15c6a0a51fec348ed">redirect_connection</a></div><div class="ttdeci">void * redirect_connection(void *arg)</div><div class="ttdef"><b>Definition:</b> <a href="server_8c_source.html#l00072">server.c:72</a></div></div>
+<div class="ttc" id="anetwork_2client_8h_html_ae814feddaa9902371625b42131b1a7f4"><div class="ttname"><a href="network_2client_8h.html#ae814feddaa9902371625b42131b1a7f4">print_neighbours</a></div><div class="ttdeci">void print_neighbours(char who, char mask)</div><div class="ttdoc">Print neighbours list.</div><div class="ttdef"><b>Definition:</b> <a href="core_2network_2client_8c_source.html#l00058">client.c:58</a></div></div>
 <div class="ttc" id="anetwork_8h_html_a44b6e2d68c7a890d60b6017e83bce337"><div class="ttname"><a href="network_8h.html#a44b6e2d68c7a890d60b6017e83bce337">IM_SERVER</a></div><div class="ttdeci">#define IM_SERVER</div><div class="ttdef"><b>Definition:</b> <a href="network_8h_source.html#l00017">network.h:17</a></div></div>
-<div class="ttc" id="aclient_8h_html_ae814feddaa9902371625b42131b1a7f4"><div class="ttname"><a href="client_8h.html#ae814feddaa9902371625b42131b1a7f4">print_neighbours</a></div><div class="ttdeci">void print_neighbours(char who, char mask)</div><div class="ttdoc">Print neighbours list.</div><div class="ttdef"><b>Definition:</b> <a href="core_2network_2client_8c_source.html#l00058">client.c:58</a></div></div>
+<div class="ttc" id="astructconnection_html_a01f75a9ad916f63a94e06a27635ba278"><div class="ttname"><a href="structconnection.html#a01f75a9ad916f63a94e06a27635ba278">connection::thread</a></div><div class="ttdeci">pthread_t thread</div><div class="ttdef"><b>Definition:</b> <a href="network_8h_source.html#l00046">network.h:46</a></div></div>
+<div class="ttc" id="aserver_8c_html_a51b8c8c4c2582cc90f8155bd9eaab4c0"><div class="ttname"><a href="server_8c.html#a51b8c8c4c2582cc90f8155bd9eaab4c0">accept_connection</a></div><div class="ttdeci">void * accept_connection(void *args)</div><div class="ttdef"><b>Definition:</b> <a href="server_8c_source.html#l00003">server.c:3</a></div></div>
+<div class="ttc" id="anetwork_8h_html_a70dfa79077dc00c8de6083ff105c831b"><div class="ttname"><a href="network_8h.html#a70dfa79077dc00c8de6083ff105c831b">SERVERMSG</a></div><div class="ttdeci">#define SERVERMSG</div><div class="ttdef"><b>Definition:</b> <a href="network_8h_source.html#l00098">network.h:98</a></div></div>
+<div class="ttc" id="anetwork_8h_html_a4a4ea366b744078b50a96a3899aab46c"><div class="ttname"><a href="network_8h.html#a4a4ea366b744078b50a96a3899aab46c">IM_CLIENT</a></div><div class="ttdeci">#define IM_CLIENT</div><div class="ttdef"><b>Definition:</b> <a href="network_8h_source.html#l00018">network.h:18</a></div></div>
+<div class="ttc" id="avalidation__engine_8h_html_a0ba5d3a056115234ab9ed718797c2953"><div class="ttname"><a href="validation__engine_8h.html#a0ba5d3a056115234ab9ed718797c2953">client_connections</a></div><div class="ttdeci">connection * client_connections</div><div class="ttdef"><b>Definition:</b> <a href="core_2network_2client_8c_source.html#l00004">client.c:4</a></div></div>
+<div class="ttc" id="astruct_neighbour_html_af203df082d5c6dcaa0c88b07cf86466d"><div class="ttname"><a href="struct_neighbour.html#af203df082d5c6dcaa0c88b07cf86466d">Neighbour::hostname</a></div><div class="ttdeci">char * hostname</div><div class="ttdef"><b>Definition:</b> <a href="network_8h_source.html#l00036">network.h:36</a></div></div>
+<div class="ttc" id="anetwork_8h_html_ad546ea25dc7aa34a81dcf5aff48a31ca"><div class="ttname"><a href="network_8h.html#ad546ea25dc7aa34a81dcf5aff48a31ca">MAX_SERVER</a></div><div class="ttdeci">#define MAX_SERVER</div><div class="ttdef"><b>Definition:</b> <a href="network_8h_source.html#l00025">network.h:25</a></div></div>
+<div class="ttc" id="astructconnection_html"><div class="ttname"><a href="structconnection.html">connection</a></div><div class="ttdef"><b>Definition:</b> <a href="network_8h_source.html#l00044">network.h:44</a></div></div>
+<div class="ttc" id="astructth__arg_html"><div class="ttname"><a href="structth__arg.html">th_arg</a></div><div class="ttdef"><b>Definition:</b> <a href="network_8h_source.html#l00064">network.h:64</a></div></div>
+<div class="ttc" id="astructth__arg_html_a4ffe492fe883ff7cc8882a7cc5406ac7"><div class="ttname"><a href="structth__arg.html#a4ffe492fe883ff7cc8882a7cc5406ac7">th_arg::infos</a></div><div class="ttdeci">infos_st * infos</div><div class="ttdef"><b>Definition:</b> <a href="network_8h_source.html#l00066">network.h:66</a></div></div>
 <div class="ttc" id="aserver_8h_html"><div class="ttname"><a href="server_8h.html">server.h</a></div></div>
-<div class="ttc" id="aclient_8h_html"><div class="ttname"><a href="client_8h.html">client.h</a></div></div>
+<div class="ttc" id="anetwork_8h_html_ad095a3848176dfa3cc06d477a0f83132"><div class="ttname"><a href="network_8h.html#ad095a3848176dfa3cc06d477a0f83132">DOORSERVER</a></div><div class="ttdeci">#define DOORSERVER</div><div class="ttdef"><b>Definition:</b> <a href="network_8h_source.html#l00023">network.h:23</a></div></div>
+<div class="ttc" id="aget__data_8h_html_a1f63104d8a019196f59d848bacafcaf0"><div class="ttname"><a href="get__data_8h.html#a1f63104d8a019196f59d848bacafcaf0">read_header</a></div><div class="ttdeci">size_t read_header(int sockfd, infos_st *infos)</div><div class="ttdoc">Waits a header in 'sockfd', reads it and processes it.</div><div class="ttdef"><b>Definition:</b> <a href="get__data_8c_source.html#l00136">get_data.c:136</a></div></div>
+<div class="ttc" id="anetwork_2client_8h_html_a7be5d0a5ee88cfd1a654fc4813273708"><div class="ttname"><a href="network_2client_8h.html#a7be5d0a5ee88cfd1a654fc4813273708">listen_to</a></div><div class="ttdeci">connection * listen_to(infos_st *infos, Neighbour neighbour, char *connection_type, connection *connection)</div><div class="ttdoc">Tries to connect to the peer-to-peer network via a node in the Node structure.</div><div class="ttdef"><b>Definition:</b> <a href="core_2network_2client_8c_source.html#l00172">client.c:172</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="server_8c.html">server.c</a></li>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_aebb8dcc11953d78e620bbef0b9e2183.html">core</a></li><li class="navelem"><a class="el" href="dir_b95722cc01ebae1793c459b9310e3c67.html">network</a></li><li class="navelem"><a class="el" href="server_8c.html">server.c</a></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>

@@ -14,6 +14,8 @@
 .br
 \fC#include <time\&.h>\fP
 .br
+\fC#include 'ui/labels\&.h'\fP
+.br
 
 .SS "Data Structures"
 
@@ -40,6 +42,18 @@
 .RI "int \fBcreate_account\fP ()"
 .br
 .RI "Creates an account in local and broadcasts the creation to the network\&. "
+.ti -1c
+.RI "void \fBadd_money_to_wallet\fP (size_t money)"
+.br
+.ti -1c
+.RI "void \fBremove_money_from_wallet\fP (size_t money)"
+.br
+.ti -1c
+.RI "void \fBadd_money_to_stake\fP (size_t money)"
+.br
+.ti -1c
+.RI "void \fBremove_money_from_stake\fP (size_t money)"
+.br
 .in -1c
 .SH "Typedef Documentation"
 .PP 
@@ -47,6 +61,14 @@
 
 .SH "Function Documentation"
 .PP 
+.SS "void add_money_to_stake (size_t money)"
+
+.PP
+Definition at line 45 of file wallet\&.c\&.
+.SS "void add_money_to_wallet (size_t money)"
+
+.PP
+Definition at line 26 of file wallet\&.c\&.
 .SS "int create_account ()"
 
 .PP
@@ -59,7 +81,7 @@ Creates an account in local and broadcasts the creation to the network\&.
 .PP
 
 .PP
-Definition at line 19 of file wallet\&.c\&.
+Definition at line 18 of file wallet\&.c\&.
 .SS "\fBWallet\fP* get_my_wallet ()"
 
 .PP
@@ -72,7 +94,15 @@ Get my wallet object\&.
 .PP
 
 .PP
-Definition at line 7 of file wallet\&.c\&.
+Definition at line 6 of file wallet\&.c\&.
+.SS "void remove_money_from_stake (size_t money)"
+
+.PP
+Definition at line 54 of file wallet\&.c\&.
+.SS "void remove_money_from_wallet (size_t money)"
+
+.PP
+Definition at line 34 of file wallet\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for PEPITAS CRYPTOCURRENCY from the source code\&.
