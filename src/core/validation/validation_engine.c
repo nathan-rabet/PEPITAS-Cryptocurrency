@@ -324,8 +324,29 @@ int send_verdict(Block *block, char verdict)
 
     size_t datalen;
     char *payload = create_vote_data(block, verdict, validator_index, &datalen);
-    sign_message_with_key(payload, datalen, wallet->priv_key, payload + datalen);
-    datalen += RSA_size(block->block_data.validators_public_keys[validator_index]) * 2;
+    char *signature = sign_message_with_key(payload, datalen, wallet->priv_key, payload + datalen);
+    datalen += SIGNATURE_LEN;
+
+    if (!verify_signature(payload, datalen - SIGNATURE_LEN, signature, block->block_data.validators_public_keys[validator_index]))
+    {
+        SERVERMSG
+        printf("Vote is not valid.\n");
+        return -1;
+    }
+
+    // SEND VOTE TO ME
+    char dir[256];
+    snprintf(dir, 256, "data/epoch/vote%luid%d", block->block_data.height, validator_index);
+    int vote_fd = open(dir, O_RDWR | O_CREAT | O_TRUNC, 0644);
+    if (vote_fd == -1)
+        err(errno, "Impossible to write vote_fd");
+    safe_write(vote_fd, payload, datalen);
+    lseek(vote_fd, 0L, SEEK_SET);
+    read_vote(vote_fd, get_infos());
+    close(vote_fd);
+    remove(dir);
+
+    // SEND VOTE TO NEIGHBOUR
     for (size_t i = 0; i < MAX_CONNECTION; i++)
     {
         if (client_connections[i].clientfd)
@@ -338,5 +359,5 @@ int send_verdict(Block *block, char verdict)
         }
     }
     free(payload);
-    return 0;
+    return verdict;
 }

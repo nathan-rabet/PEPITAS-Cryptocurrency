@@ -17,8 +17,43 @@ infos_st* get_infos(){
     return ac_infos;
 }
 
+void move_file(char *src, char* dest) {
+    if (access(src, F_OK)) {
+
+        CLIENTMSG
+        printf("The file %s does not exist.\n", src);
+        return;
+    }
+    int src_fd = open(src, O_RDONLY, 0644);
+    if (src_fd == -1) {
+        CLIENTMSG
+        printf("Impossible to open %s\n", src);
+        return;
+    }
+    int dest_fd = open(dest, O_RDWR | O_CREAT | O_TRUNC, 0644);
+    if (src_fd == -1) {
+        CLIENTMSG
+        printf("Impossible to create %s\n", dest);
+        return;
+    }
+    ssize_t r = 0;
+    char buff[2000];
+    while ((r = read(src_fd, buff, 2000)))
+    {
+        if (r == -1)
+        {
+            CLIENTMSG
+            printf("Uneable to read %s\n", dest);
+            return;
+        }
+        safe_write(dest_fd, buff, r);
+    }
+    close(src_fd);
+    close(dest_fd);
+}
+
 void Validate(){
-    if (ac_infos->is_validator == 0)
+    if (ac_infos->is_validator == 0 || ac_infos->as_epoch == 1)
         return;
     Block *epoch = create_epoch_block();
     if (plebe_verify_block(epoch)) {
@@ -49,6 +84,8 @@ void Validate(){
     if (fd == -1)
         err(errno, "Impossible to write epoch");
     write_block(*epoch, fd);
+    
+    ac_infos->as_epoch = 1;
 
     // SEND REQUEST DD_SEND_EPOCH
     for (size_t i = 0; i < MAX_CONNECTION; i++)
@@ -92,7 +129,6 @@ void Validate(){
     //     // MANAGERMSG
     //     // printf("Block %lu is added in the blockchain!\n", epoch->block_data.height);
     // }
-    ac_infos->pdt -= epoch->block_data.nb_transactions;
     epoch_validation_process(fd, epoch->block_data.height, epoch->block_data.epoch_id);
     free_block(epoch);
 }

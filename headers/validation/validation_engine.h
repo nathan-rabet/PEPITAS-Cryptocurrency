@@ -5,6 +5,7 @@
 #include "cryptosystem/signature.h"
 #include "cryptosystem/rsa.h"
 #include "cryptosystem/hash.h"
+#include "network/get_data.h"
 #include "misc/math.h"
 #include "misc/files.h"
 #include "misc/bits.h"
