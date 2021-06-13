@@ -38,6 +38,7 @@ void *accept_connection(void *args)
     // CONNECTION BACK
     Node *node = get_my_node(IM_SERVER);
     if (is_in_neighbours(IM_CLIENT, ip_str) == -1) {
+        int nb_connection_success = number_neighbours(IM_CLIENT);
         int index = set_neighbour(IM_SERVER, ip_str, AF_INET);
         SERVERMSG
         printf("Connection back\n");
@@ -45,7 +46,13 @@ void *accept_connection(void *args)
         {
             if (listen_to(infos, node->neighbours[index], HD_CONNECTION_TO_NODE, client_connections) == NULL)
                 printf("Fail de connection to neighbour\n");
+            else
+                nb_connection_success++;
+            
         }
+        char tmp[5];
+        snprintf(tmp, 5, "%i", nb_connection_success);
+        change_label_text(connections_label, tmp);
         
     }
 
