@@ -123,7 +123,7 @@ int main(int argc, char **argv)
         printf("Update pending transactions list...\n");
         update_pending_transactions_list();
         MANAGERMSG
-        printf("Pending transactions list syncronized!\n");
+        printf("Pending transactions list synchronized!\n");
 
     }
     infos->validator_id = i_am_commitee_member();
