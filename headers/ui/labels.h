@@ -18,5 +18,6 @@ extern GtkLabel *connections_label;
 extern GtkLabel *mempool_label;
 
 void change_label_text(GtkLabel *label, char* text);
+void add_new_blockinfo(size_t height, size_t transaction);
 
 #endif

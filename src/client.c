@@ -115,14 +115,13 @@ int main(int argc, char **argv)
         printf("Update blockchain...\n");
         update_blockchain(infos, index_client);
         MANAGERMSG
-        printf("Blockchain syncronized!\n New height: %lu\n", infos->actual_height+1);
-        change_label_text(synchro_label, "Syncronized");
-        change_label_text(block_amount_label, "");
+        printf("Blockchain Synchronized!\n New height: %lu\n", infos->actual_height+1);
+        update_sync(infos->actual_height+1, infos->actual_height+1);
 
         // SYNC PDT
         MANAGERMSG
         printf("Update pending transactions list...\n");
-        update_pending_transactions_list(infos);
+        update_pending_transactions_list();
         MANAGERMSG
         printf("Pending transactions list syncronized!\n");
 

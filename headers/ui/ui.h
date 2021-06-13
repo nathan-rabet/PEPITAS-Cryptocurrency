@@ -29,7 +29,7 @@ struct blockinfo
     size_t transactions;
 };
 
-struct blockinfo blocksinfo[3];
+static struct blockinfo blocksinfo[3];
 
 
 /**

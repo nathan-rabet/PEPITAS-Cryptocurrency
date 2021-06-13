@@ -279,7 +279,7 @@ void update_wallet_with_block(Block block) {
         snprintf(dir, 300, "data/pdt/%ld", trans->transaction_data.transaction_timestamp);
         if (!access(dir, F_OK))
         {
-            get_infos()->pdt--;
+            update_pdt(-1);
             remove(dir);
         }
         
@@ -295,6 +295,7 @@ void update_wallet_with_block(Block block) {
         infos->is_validator = 0;
         infos->as_epoch = 0;
     }
+    add_new_blockinfo(block.block_data.height, block.block_data.nb_transactions);
 }
 
 void delete_epochs(size_t height){

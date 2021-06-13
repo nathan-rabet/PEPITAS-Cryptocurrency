@@ -17,6 +17,13 @@ infos_st* get_infos(){
     return ac_infos;
 }
 
+void update_pdt(int number){
+    ac_infos += number;
+    char tmp[10];
+    snprintf(tmp, 10, "%li", ac_infos->pdt);
+    change_label_text(mempool_label, tmp);
+}
+
 void move_file(char *src, char* dest) {
     if (access(src, F_OK)) {
 
@@ -166,7 +173,7 @@ void new_transaction(char type, char *rc_pk, size_t amount, char cause[512], cha
     Transaction trans = create_new_transaction(ac_infos, type, key, amount, cause, asset);
     sign_transaction(&trans);
     add_pending_transaction(&trans);
-    get_infos()->pdt++;
+    update_pdt(1);
 
     // SEND PENDING TRANSACTION
     for (size_t i = 0; i < MAX_CONNECTION; i++)
@@ -313,6 +320,7 @@ void clear_transactions()
     }
 
     ac_infos->pdt = 0;
+    update_pdt(0);
 }
 
 void clear_epochs()
@@ -334,7 +342,7 @@ void clear_epochs()
     }
 }
 
-void update_pending_transactions_list(infos_st *infos){
+void update_pending_transactions_list(){
     
     clear_transactions();
     // SYNC
@@ -353,7 +361,5 @@ void update_pending_transactions_list(infos_st *infos){
             while (client_connections[i].demand);
         }
     }
-    char tmp[10];
-    snprintf(tmp, 10, "%li", infos->pdt);
-    change_label_text(mempool_label, tmp);
+    update_pdt(0);
 }

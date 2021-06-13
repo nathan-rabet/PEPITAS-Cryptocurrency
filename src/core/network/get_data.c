@@ -613,7 +613,7 @@ int read_send_pending_transaction(int fd, infos_st* infos)
     printf("Recived read_pending_transaction %lu \
     transaction in connection fd: %i\n",
            txid, fd);
-    infos->pdt++;
+    update_pdt(1);
 
         // CREATE NEW EPOCH
     if (infos->is_validator == 1 && infos->pdt > 0)
