@@ -15,8 +15,9 @@ static pthread_t server_t;
 infos_st *ac_infos;
 
 
-int main()
+int main(int argc, char **argv)
 {
+    
     struct stat st = {0};
 
     if (stat("data", &st) == -1)
@@ -66,13 +67,17 @@ int main()
     printf("Try to load last client list\n");
     load_neighbours(IM_CLIENT);
 
-    if (number_neighbours(IM_CLIENT) == 0)
+    if (argc == 1 && number_neighbours(IM_CLIENT) == 0)
     {
         MANAGERMSG
         printf("No last node for the network :(\n");
         MANAGERMSG
         printf("Search on doors...\n");
         join_network_door(infos);
+    }
+    if (argc == 2 && number_neighbours(IM_CLIENT) == 0)
+    {
+        set_neighbour(IM_CLIENT, argv[1], AF_INET);
     }
 
     clear_transactions();
@@ -133,6 +138,6 @@ int main()
         MANAGERMSG
         printf("You are in the next comitte.\n");
     }
-    
+
     pthread_exit(NULL);
 }
