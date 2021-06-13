@@ -23,7 +23,7 @@ char *create_vote_data(Block *block, char vote, int validator_index, size_t *dat
     memcpy(data + index, &vote, sizeof(char));
     index += sizeof(char);
     *data_length = index;
-    char *real_data = malloc(index + (RSA_size(block->block_data.validators_public_keys[validator_index]) * 2));
+    char *real_data = malloc(index + (RSA_size(block->block_data.validators_public_keys[validator_index]) * 2) + 3);
     memcpy(real_data, data, index);
     return real_data;
 }
