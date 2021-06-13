@@ -284,7 +284,7 @@ int comital_validate_block(Block *block)
         return send_verdict(block, VERIDCT_NO);
 
     // ? block.block_data.epoch_id and other stuff
-    if (verify_block_signature(*block))
+    if (!verify_block_signature(*block))
         return send_verdict(block, VERIDCT_NO);
 
     // ? block->block_data.transactions
@@ -324,7 +324,7 @@ int send_verdict(Block *block, char verdict)
 
     size_t datalen;
     char *payload = create_vote_data(block, verdict, validator_index, &datalen);
-    sign_message_with_key(payload, datalen, block->block_data.validators_public_keys[validator_index], payload + datalen);
+    sign_message_with_key(payload, datalen, wallet->priv_key, payload + datalen);
     datalen += RSA_size(block->block_data.validators_public_keys[validator_index]) * 2;
     for (size_t i = 0; i < MAX_CONNECTION; i++)
     {

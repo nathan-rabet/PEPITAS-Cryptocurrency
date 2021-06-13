@@ -25,6 +25,7 @@ void Validate(){
 
         CLIENTMSG
         printf("The block %lu is not valid.\n", epoch->block_data.height);
+        return;
     }
 
     struct stat st = {0};
@@ -36,7 +37,15 @@ void Validate(){
     }
     snprintf(dir, 300, "data/epoch/epoch%luid%d", epoch->block_data.height, epoch->block_data.epoch_id);
 
-    int fd = open(dir, O_WRONLY | O_CREAT, 0644);
+    if (!access(dir, F_OK)) {
+
+        CLIENTMSG
+        printf("The epoch %lu id %d is already existing.\n", epoch->block_data.height, epoch->block_data.epoch_id);
+        return;
+
+    }
+
+    int fd = open(dir, O_RDWR | O_CREAT | O_TRUNC, 0644);
     if (fd == -1)
         err(errno, "Impossible to write epoch");
     write_block(*epoch, fd);
@@ -84,8 +93,8 @@ void Validate(){
     //     // printf("Block %lu is added in the blockchain!\n", epoch->block_data.height);
     // }
     ac_infos->pdt -= epoch->block_data.nb_transactions;
+    epoch_validation_process(fd, epoch->block_data.height, epoch->block_data.epoch_id);
     free_block(epoch);
-    close(fd);
 }
 
 void new_transaction(char type, char *rc_pk, size_t amount, char cause[512], char asset[512]){
@@ -116,6 +125,7 @@ void new_transaction(char type, char *rc_pk, size_t amount, char cause[512], cha
     Transaction trans = create_new_transaction(ac_infos, type, key, amount, cause, asset);
     sign_transaction(&trans);
     add_pending_transaction(&trans);
+    get_infos()->pdt++;
 
     // SEND PENDING TRANSACTION
     for (size_t i = 0; i < MAX_CONNECTION; i++)

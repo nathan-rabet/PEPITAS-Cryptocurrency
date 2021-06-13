@@ -493,6 +493,7 @@ int epoch_validation_process(int blockfile, size_t height, int id) {
         delete_epochs(infos->actual_height);
         if (infos->is_validator > 0)
         {
+            infos->as_epoch = 0;
             infos->validator_id = i_am_commitee_member();
         }
     }
