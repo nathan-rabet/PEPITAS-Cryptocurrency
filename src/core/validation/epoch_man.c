@@ -140,15 +140,7 @@ void add_pdt_to_block(Block *block){
 
 Block *create_epoch_block()
 {
-    Block *last_block;
-    if (get_infos()->is_validator == 1)
-    {
-        last_block = get_block(get_infos()->actual_height);
-    }
-    else
-    {
-        last_block = get_epoch(0, get_infos()->actual_height+1);
-    }
+    Block *last_block = get_block(get_infos()->actual_height);
     if (last_block == NULL)
     {
         return NULL;
