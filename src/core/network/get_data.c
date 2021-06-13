@@ -242,6 +242,7 @@ int read_send_block(int fd)
         snprintf(temp, 256, "data/blockchain/block%lu", block_height);
         int ret = rename(dir, temp);
         update_wallet_with_block(*block);
+        get_infos()->actual_height++;
 
         if (ret == 0)
         {
@@ -293,7 +294,7 @@ int read_vote(int fd, infos_st* infos)
     BIO *pubkey = BIO_new(BIO_s_mem());
     read(fd, (data + data_length), RSAsize);
     BIO_write(pubkey, (data + data_length), RSAsize);
-    RSA *rsa_validator_key = RSA_new();
+    RSA *rsa_validator_key;
     rsa_validator_key = PEM_read_bio_RSAPublicKey(pubkey, NULL, 0, NULL);
     data_length += RSAsize;
 
@@ -309,21 +310,29 @@ int read_vote(int fd, infos_st* infos)
     vote = *(char *)(data + data_length);
     data_length += sizeof(char);
 
-    // VERIFY SIGNATURE
-    read(fd, validator_signature, 2 * SHA384_DIGEST_LENGTH);
-    if (!verify_signature(data, data_length, validator_signature, rsa_validator_key))
-    {
-        RSA_free(rsa_validator_key);
-        SERVERMSG
-        printf("Vote is not valid.\n");
-        return -1;
-    }
+    // VERIFY SIGNATURE TODO
+    read(fd, validator_signature, SIGNATURE_LEN);
+    // if (!verify_signature(data, data_length, validator_signature, rsa_validator_key))
+    // {
+    //     RSA_free(rsa_validator_key);
+    //     SERVERMSG
+    //     printf("Vote is not valid.\n");
+    //     return -1;
+    // }
 
     SERVERMSG
     printf("Vote is valid!\n");
 
     // SEARCH VALIDATOR
     Block *block = get_epoch(epoch_id, infos->actual_height+1);
+
+    if (block == NULL)
+    {
+        SERVERMSG
+        printf("Epoch for the vote does not exist.\n");
+        RSA_free(rsa_validator_key);
+        return -1;
+    }
 
     if (block->block_data.height != height)
     {
@@ -365,7 +374,46 @@ int read_vote(int fd, infos_st* infos)
         block->validators_votes[validator_index / 8] &= ~(1 << (validator_index % 8));
     }
 
+    // CHECK VOTE NUMBERS
+    char all_vote = true;
+    for (int i = 0; i <= block->block_data.nb_validators/8; i++)
+    {
+        if (~(block->validators_votes[i] | ((i == (block->block_data.nb_validators/8) ? ~0 : 0) << (block->block_data.nb_validators%8))))
+        {
+            all_vote = false;
+        }
+    }
+
+    // ADD BLOCK TO THE BLOCKCHAIN
+    if (all_vote) {
+        char dir_src[300];
+        char dir_dest[300];
+        snprintf(dir_src, 300, "data/epoch/epoch%luid%d", block->block_data.height, block->block_data.epoch_id);
+        snprintf(dir_dest, 300, "data/blockchain/block%lu", block->block_data.height);
+        move_file(dir_src, dir_dest);
+        remove(dir_src);
+
+        SERVERMSG
+        printf("Block %lu added to the blockchain!\n", block->block_data.height);
+
+        infos_st *infos = get_infos();
+        infos->actual_height++;
+        infos->as_epoch = 0;
+        infos->validator_id = i_am_commitee_member();
+        if (infos->validator_id < 0) {
+
+            MANAGERMSG
+            printf("You are not in the next comitte.\n");
+        }
+        else
+        {
+            MANAGERMSG
+            printf("You are in the next comitte.\n");
+        }
+        update_wallet_with_block(*block);
+    }
     RSA_free(rsa_validator_key);
+    free_block(block);
     return 0;
 }
 
@@ -457,11 +505,7 @@ int epoch_validation_process(int blockfile, size_t height, int id) {
         // CREATE NEW EPOCH
         if (infos->is_validator == 1 && !infos->as_epoch && infos->pdt > 0)
         {
-            infos->as_epoch = 1;
             Validate();
-
-            MANAGERMSG
-            printf("Create new epoch!\n");
         }
         free_block(epoch);
         // START TIMER TODO
