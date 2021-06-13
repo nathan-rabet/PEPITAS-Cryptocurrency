@@ -321,24 +321,26 @@ void set_block_viewer(int height)
 
 void add_new_blockinfo(size_t height, size_t transaction)
 {
-    blocksinfo[2] = blocksinfo[1];
-    blocksinfo[1] = blocksinfo[0];
-    blocksinfo[0].height = height;
-    blocksinfo[0].transactions = transaction;
-    char tmp[100];
-    sprintf(tmp, "Block %lu\n%lu transaction", blocksinfo[0].height, blocksinfo[0].transactions);
-    gtk_label_set_text(latest_block_name1, tmp);
-    sprintf(tmp, "Block %lu\n%lu transaction", blocksinfo[1].height, blocksinfo[1].transactions);
-    gtk_label_set_text(latest_block_name2, tmp);
-    sprintf(tmp, "Block %lu\n%lu transaction", blocksinfo[2].height, blocksinfo[2].transactions);
-    gtk_label_set_text(latest_block_name3, tmp);
+    if (blocksinfo[0].height < height) {
+        blocksinfo[2] = blocksinfo[1];
+        blocksinfo[1] = blocksinfo[0];
+        blocksinfo[0].height = height;
+        blocksinfo[0].transactions = transaction;
+        char tmp[100];
+        sprintf(tmp, "Block n°%lu\n%lu transactions", blocksinfo[0].height, blocksinfo[0].transactions);
+        gtk_label_set_text(latest_block_name1, tmp);
+        sprintf(tmp, "Block n°%lu\n%lu transactions", blocksinfo[1].height, blocksinfo[1].transactions);
+        gtk_label_set_text(latest_block_name2, tmp);
+        sprintf(tmp, "Block n°%lu\n%lu transactions", blocksinfo[2].height, blocksinfo[2].transactions);
+        gtk_label_set_text(latest_block_name3, tmp);
+    }
 }
 
 void update_sync(size_t actual, size_t final){
     if (actual >= final)
     {
         gtk_progress_bar_set_fraction(progress_bar_blockchain, (gdouble)1);
-        change_label_text(synchro_label, "Syncronized");
+        change_label_text(synchro_label, "Synchronized");
         char tmp[100];
         sprintf(tmp, "%lu blocks", final);
         change_label_text(block_amount_label, tmp);
@@ -346,7 +348,7 @@ void update_sync(size_t actual, size_t final){
     }
     gdouble percent = (double)actual/(double)final;
     gtk_progress_bar_set_fraction(progress_bar_blockchain, percent);
-    change_label_text(synchro_label, "Syncronisation");
+    change_label_text(synchro_label, "Synchronization");
     char tmp[100];
     sprintf(tmp, "%lu out of %lu blocks", actual, final);
     change_label_text(block_amount_label, "");
