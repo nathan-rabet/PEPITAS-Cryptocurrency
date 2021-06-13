@@ -18,7 +18,7 @@ infos_st* get_infos(){
 }
 
 void update_pdt(int number){
-    ac_infos += number;
+    ac_infos->pdt += number;
     char tmp[10];
     snprintf(tmp, 10, "%li", ac_infos->pdt);
     change_label_text(mempool_label, tmp);
