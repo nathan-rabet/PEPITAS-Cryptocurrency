@@ -99,16 +99,16 @@ PEPITAS, a C cryptocurrency</h1>
 <li>Earn transactions fees</li>
 </ul>
 <p>All of these features are obviously secured by a 2048-bits RSA based protocol.</p>
-<h1><a class="anchor" id="autotoc_md19"></a>
-Requirements</h1>
+<h2><a class="anchor" id="autotoc_md19"></a>
+Requirements</h2>
 <ul>
 <li>A Linux system (Ubuntu, Arch,...)</li>
 <li>GNU Make</li>
 <li>OpenSSL</li>
 <li>GTK</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md20"></a>
-Installation</h1>
+<h2><a class="anchor" id="autotoc_md20"></a>
+Installation</h2>
 <ol type="1">
 <li>Download the last version of the project : <a href="https://github.com/nathan-rabet/PEPITAS-Cryptocurrency/archive/refs/heads/master.zip">PEPITAS-Cryptocurrency</a>.</li>
 <li>Exctract the archive and go to the exctracted directory</li>
@@ -116,8 +116,8 @@ Installation</h1>
 <li>Go to the <code>build</code> directory</li>
 <li>Execute <code>client.elf</code>, with an argument : the IP address of an existing client, or without argument if you are the first node of the network</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md21"></a>
-Some explainations about how the program works</h1>
+<h2><a class="anchor" id="autotoc_md21"></a>
+Some explainations about how the program works</h2>
 <p>When launched, the client will try to connect to the host you provided as an argument (if provided). In the case where no argument are given to the ELF program, the client will try to etablish a connect to a <em>serverdoor</em> (a node which have executed the program <code>serverdoor.elf</code>). A serverdoor is a program that provides IP adresses to a node in order to let him have a connection with the corresponding hosts.</p>
 <p><em>NB : serverdoors IP adresses are stored in the <code>HARD_CODED_ADDR</code> macro in <code><a class="el" href="network_8c.html">src/core/network/network.c</a></code> and may not work if Maxence and/or Nathan decide to close the non-localhost serverdoor (currently hosted in a Google Cloud instance). If you really want to use a serverdoor, you also can refactor the <code>HARD_CODED_ADDR</code> macro and then run the program <code>serverdoor.elf</code></em></p>
 <p>If you want more information about the peer-to-peer or the validation protocol, you also can read the <a class="el" href="_p2_p___p_r_o_t_o_c_o_l_8md.html">P2P_PROTOCOL.md</a>) or the <a class="el" href="_p2_p___p_r_o_t_o_c_o_l_8md.html">VALIDATION_PROTOCOL.md</a> documentation.</p>
@@ -125,10 +125,10 @@ Some explainations about how the program works</h1>
 <h2><a class="anchor" id="autotoc_md22"></a>
 Contributors</h2>
 <ul>
-<li>Nathan RABET, project leader, in charge of the blockchain and the validation protocol.</li>
-<li>Maxence ODEN, in charge of the networking and cryptographic part of this project.</li>
-<li>Souleymane SENTICI, responsible for the user interface.</li>
-<li>Luca SAINGIER, responsible for the web implementation. </li>
+<li><b>Nathan RABET</b>, project leader, in charge of the blockchain and the validation protocol.</li>
+<li><b>Maxence ODEN</b>, in charge of the networking and cryptographic part of this project.</li>
+<li><b>Souleymane SENTICI</b>, responsible for the user interface.</li>
+<li><b>Luca SAINGIER</b>, responsible for the web implementation. </li>
 </ul>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->

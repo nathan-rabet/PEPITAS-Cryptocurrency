@@ -22,8 +22,7 @@ Earn transactions fees
 .PP
 .PP
 All of these features are obviously secured by a 2048-bits RSA based protocol\&.
-.SH "Requirements"
-.PP
+.SS "Requirements"
 .IP "\(bu" 2
 A Linux system (Ubuntu, Arch,\&.\&.\&.)
 .IP "\(bu" 2
@@ -33,8 +32,7 @@ OpenSSL
 .IP "\(bu" 2
 GTK
 .PP
-.SH "Installation"
-.PP
+.SS "Installation"
 .IP "1." 4
 Download the last version of the project : \fCPEPITAS-Cryptocurrency\fP\&.
 .IP "2." 4
@@ -46,8 +44,7 @@ Go to the \fCbuild\fP directory
 .IP "5." 4
 Execute \fCclient\&.elf\fP, with an argument : the IP address of an existing client, or without argument if you are the first node of the network
 .PP
-.SH "Some explainations about how the program works"
-.PP
+.SS "Some explainations about how the program works"
 When launched, the client will try to connect to the host you provided as an argument (if provided)\&. In the case where no argument are given to the ELF program, the client will try to etablish a connect to a \fIserverdoor\fP (a node which have executed the program \fCserverdoor\&.elf\fP)\&. A serverdoor is a program that provides IP adresses to a node in order to let him have a connection with the corresponding hosts\&.
 .PP
 \fINB : serverdoors IP adresses are stored in the \fCHARD_CODED_ADDR\fP macro in \fC\fBsrc/core/network/network\&.c\fP\fP and may not work if Maxence and/or Nathan decide to close the non-localhost serverdoor (currently hosted in a Google Cloud instance)\&. If you really want to use a serverdoor, you also can refactor the \fCHARD_CODED_ADDR\fP macro and then run the program \fCserverdoor\&.elf\fP\fP
@@ -57,12 +54,12 @@ If you want more information about the peer-to-peer or the validation protocol, 
 Also, don't hesitate to check our Doxygen \fCcode documentation\fP!
 .SS "Contributors"
 .IP "\(bu" 2
-Nathan RABET, project leader, in charge of the blockchain and the validation protocol\&.
+\fBNathan RABET\fP, project leader, in charge of the blockchain and the validation protocol\&.
 .IP "\(bu" 2
-Maxence ODEN, in charge of the networking and cryptographic part of this project\&.
+\fBMaxence ODEN\fP, in charge of the networking and cryptographic part of this project\&.
 .IP "\(bu" 2
-Souleymane SENTICI, responsible for the user interface\&.
+\fBSouleymane SENTICI\fP, responsible for the user interface\&.
 .IP "\(bu" 2
-Luca SAINGIER, responsible for the web implementation\&. 
+\fBLuca SAINGIER\fP, responsible for the web implementation\&. 
 .PP
 
