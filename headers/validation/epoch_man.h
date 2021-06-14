@@ -37,8 +37,8 @@ RSA* get_epoch_man_pkey(BlockData *block_data);
  * 
  * @see Number of added transactions = number of validators in 'prev_block'
  * 
- * @param prev_block 
- * @param current_block 
+ * @param prev_block The last validated block
+ * @param current_block The current block (in creation)
  */
 void give_punishments_and_rewards(Block *prev_block, Block *current_block);
 #endif

@@ -28,7 +28,7 @@
 void get_keys(char *password);
 
 /**
- * @brief Cmp the public keys object
+ * @brief Compare two RSA*
  * 
  */
 static inline int cmp_public_keys(RSA *key1, RSA *key2){

@@ -46,7 +46,21 @@ int send_verdict(Block *block, char verdict);
  * @return Transaction**, the valid transactions 
  */
 Transaction ** validate_transactions(Transaction** transaction_to_validate,size_t nb_transactions,size_t * nb_returned_transactions);
+
+/**
+ * @brief For the comital, check block validity
+ * 
+ * @param block The block to check
+ * @return int 
+ */
 int comital_validate_block(Block *block);
+
+/**
+ * @brief For the plèbe, check block validity
+ * 
+ * @param block The block to check
+ * @return int 
+ */
 char plebe_verify_block(Block *block);
 
 #endif

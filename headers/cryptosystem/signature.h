@@ -64,7 +64,7 @@ int verify_block_signature(Block block);
 int verify_transaction_signature(Transaction *transaction);
 
 /**
- * @brief Convert transactions to char * buffer
+ * @brief Converts transactions to char * buffer
  * 
  * @param transactions The transaction array
  * @param buff The buffer that receives the transactions
@@ -91,25 +91,37 @@ void write_blockdata(BlockData blockdata, int fd);
 void write_block(Block block, int fd);
 
 /**
- * @brief Signs a block
+ * @brief Signs a block with my private key
  * 
  * @param block The block to sign
  */
 void sign_block(Block *block);
 
+/**
+ * @brief Signs a block
+ * 
+ * @param block The block to sign
+ * @param key The key to use for the signature
+ */
 void sign_block_with_key(Block *block, RSA *key);
 
+/**
+ * @brief Signs a transaction with my private key
+ * 
+ * @param transaction The transaction to sign
+ */
 void sign_transaction(Transaction *transaction);
 
 /**
- * @brief Sign a transaction
+ * @brief Signs a transaction
  * 
  * @param transaction The transaction to sign
+ * @param key The key to use for the signature
  */
 void sign_transaction_with_key(Transaction *transaction, RSA *key);
 
 /**
- * @brief Signs transactions of a block
+ * @brief Signs all transactions of a block with my private key
  * 
  * @param block The block to sign
  */

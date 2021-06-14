@@ -28,8 +28,8 @@
 #define TRANS_T
 typedef struct TransactionData
 {
-    char magic;
-    char type;
+    char magic; // A magic number, never used, but could be :)
+    char type;  // The type of transaction (to user, to stake, from stake, ...)
     // All users area
     RSA *sender_public_key;          // The public key of the sender
     RSA *receiver_public_key;        // The public key of the receiver
@@ -40,13 +40,13 @@ typedef struct TransactionData
 
     // Organisations: must indicates what you bought
     // Normal node: free 1024 bytes data
-    char cause[512];
-    char asset[512];
+    char cause[512]; // Never used
+    char asset[512]; // Never used
 } TransactionData;
 
 typedef struct Transaction
 {
-    TransactionData transaction_data; // Exclude the signature
+    TransactionData transaction_data; // Transaction data, excluding the signature
 
     char transaction_signature[256]; // SHA384 signature
 } Transaction;
@@ -63,19 +63,77 @@ typedef struct Transaction
  */
 int send_money(size_t amount, u_int64_t receiver_public_key);
 
+/**
+ * @brief Serialize a TransactionData* structure
+ * 
+ * @param transaction The TransactionData* structure to serialize
+ * @param fd The output file FD
+ */
 void write_transactiondata(TransactionData *transaction, int fd);
-void write_transaction(Transaction *transaction, int fd);
-void get_transaction_data(Transaction *trans, char **buff, size_t *index);
-void convert_data_to_transactiondata(TransactionData *transactiondata, int fd);
-void load_transaction(Transaction *transaction, int fd);
-Transaction* load_pending_transaction(time_t timestamp);
-void add_pending_transaction(Transaction *transaction);
-// NEED TO SIGN
-Transaction create_new_transaction(infos_st *infos, char type, RSA* receiver_public_key, size_t amount, char cause[512], char asset[512]);
-
 
 /**
- * @brief Delete block transactions in pdt if the block is valid
+ * @brief Serialize a Transaction* structure
+ * 
+ * @param transaction The Transaction* structure to serialize
+ * @param fd The output file FD
+ */
+void write_transaction(Transaction *transaction, int fd);
+
+/**
+ * @brief Get the transaction data object
+ * 
+ * @param trans The returned transaction
+ * @param buff The buffer with the serialized data
+ * @param index The buffer starting offset
+ */
+void get_transaction_data(Transaction *trans, char **buff, size_t *index);
+
+/**
+ * @brief Convert serialized TransactionData* to TransactionData*
+ * 
+ * @param transactiondata The returned TransactionData*
+ * @param fd The serialized TransactionData FD
+ */
+void convert_data_to_transactiondata(TransactionData *transactiondata, int fd);
+
+/**
+ * @brief Load a serialized Transaction* structure
+ * 
+ * @param transaction The returned Transaction*
+ * @param fd The serialized Transaction FD
+ */
+void load_transaction(Transaction *transaction, int fd);
+
+/**
+ * @brief Load a transaction in the pending transaction (pdt) directory
+ * 
+ * @param timestamp The timestamp of the transaction
+ * @return Transaction* 
+ */
+Transaction *load_pending_transaction(time_t timestamp);
+
+/**
+ * @brief Add a transaction to the pending transaction (pdt) directory
+ * 
+ * @param transaction The transaction to add
+ */
+void add_pending_transaction(Transaction *transaction);
+
+/**
+ * @brief Create a new transaction
+ * 
+ * @param infos Shared information object
+ * @param type The type of transaction
+ * @param receiver_public_key The receiver pkey
+ * @param amount The amount of PEPITAS
+ * @param cause The cause (deprecated)
+ * @param asset The asset (deprecated)
+ * @return Transaction 
+ */
+Transaction create_new_transaction(infos_st *infos, char type, RSA *receiver_public_key, size_t amount, char cause[512], char asset[512]);
+
+/**
+ * @brief Delete block transactions in the pending transaction (pdt) directory if the block is valid
  * 
  * @param transactions block.blockdata.transactions
  * @param nb_transactions number of transactions

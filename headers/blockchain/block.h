@@ -14,7 +14,6 @@
 #include <fcntl.h>
 #include <sys/types.h>
 
-
 #define MAX_VALIDATORS_PER_BLOCK 512
 
 #define SIGNATURE_LEN 256
@@ -32,8 +31,9 @@
 #define TRANS_T
 typedef struct TransactionData
 {
-    char magic;
-    char type;
+    char magic; // A magic number, never used, but could be :)
+    char type;  // The type of transaction (to user, to stake, from stake, ...)
+
     // All users area
     RSA *sender_public_key;          // The public key of the sender
     RSA *receiver_public_key;        // The public key of the receiver
@@ -44,13 +44,13 @@ typedef struct TransactionData
 
     // Organisations: must indicates what you bought
     // Normal node: free 1024 bytes data
-    char cause[512];
-    char asset[512];
+    char cause[512]; // Never implemented
+    char asset[512]; // Never implemented
 } TransactionData;
 
 typedef struct Transaction
 {
-    TransactionData transaction_data; // Exclude the signature
+    TransactionData transaction_data; // Transaction information, excluding the signature
 
     char transaction_signature[256]; // SHA384 signature
 } Transaction;
@@ -60,9 +60,9 @@ typedef struct Transaction
 // Standard implementation
 typedef struct BlockData
 {
-    char magic;                                             // Describe the block type
-    int epoch_id;                                           // EPOCH MAN
-    char is_prev_block_valid;                               // EPOCH MAN VOTE ON LAST BLOCK
+    char magic;                                             // A magic number, never used, but could be :)
+    int epoch_id;                                           // The ID of the block creator (EPOCH MAN) in the corresponding committee
+    char is_prev_block_valid;                               // EPOCH MAN verdict about the last block
     char previous_block_hash[SHA384_DIGEST_LENGTH * 2 + 1]; // Previous block SHA384 hash
     size_t height;                                          // The height of the block inside the blockchain
 
@@ -70,21 +70,17 @@ typedef struct BlockData
     Transaction **transactions; // Transactions vector
 
     //* Validator area
-    int nb_validators;
-    RSA *validators_public_keys[MAX_VALIDATORS_PER_BLOCK];            // The public key of the validators
-    time_t block_timestamp;                                         // The block creation timestamp
-    
-    
-    
-    
-    
+    int nb_validators;                                     // Number of validator who sent a verdict
+    RSA *validators_public_keys[MAX_VALIDATORS_PER_BLOCK]; // The public key of the validators
+    time_t block_timestamp;                                // The block creation timestamp
+
     char prev_validators_votes[NB_VOTES_BITMAP]; // INUTILE
 } BlockData;
 
 typedef struct Block
 {
-    uint16_t chunk_id;  // Don't show
-    BlockData block_data; // The block distributed data, excluding the block signature
+    uint16_t chunk_id;    // Only used by Nathan :(
+    BlockData block_data; // The block data, excluding the block signature & the validators votes
 
     char block_signature[256]; // SHA384 signature EPOCHMAN
 
@@ -95,9 +91,9 @@ typedef struct Block
 
 typedef struct ChunkBlockchain
 {
-    size_t chunk_nb; // The split offset
-    Block **chunk;   // The splited blocks
-    int16_t nb_blocks;        // The number of blocks loaded in the chunk
+    size_t chunk_nb;   // The split offset
+    Block **chunk;     // The splited blocks
+    int16_t nb_blocks; // The number of blocks loaded in the chunk
 } ChunkBlockchain;
 
 #include "client.h"
@@ -109,7 +105,7 @@ typedef struct ChunkBlockchain
 /**
  * @brief Loads a blockchain object with a padding of 'nb_chunk'
  * 
- * @param nb_chunk The chunk nb, 
+ * @param nb_chunk The chunk nb,
  * if 0 : return the current blockchain object without modification
  * @return ChunkBlockchain*, NULL if the ChunkBlockchain is empty after switching
  */
@@ -119,7 +115,7 @@ ChunkBlockchain *load_blockchain(size_t nb_chunk);
  * @brief Load the last local blockchain chunk
  * 
  * @param nb_chunk 
- * @return ChunkBlockchain* 
+ * @return ChunkBlockchain*, NULL if the ChunkBlockchain is empty after switching
  */
 ChunkBlockchain *load_last_blockchain();
 
@@ -139,7 +135,7 @@ void write_block_file(Block block);
 Block *get_block(size_t block_height);
 
 /**
- * @brief Free a block struct
+ * @brief Free a block structure
  * 
  * @param block The block to free
  */
@@ -186,14 +182,42 @@ void write_blockdata(BlockData blockdata, int fd);
  */
 void write_block(Block block, int fd);
 
+/**
+ * @brief Convert serialized data to Block*
+ * 
+ * @param block The return Block*
+ * @param fd The file descriptor where data are serialized
+ */
 void convert_data_to_block(Block *block, int fd);
 
+/**
+ * @brief Update the Wallet* structure with the transactions in a block
+ * 
+ * @param block The block to fetch update from
+ */
 void update_wallet_with_block(Block block);
 
+/**
+ * @brief Delete specific epoches (draft blocks)
+ * @deprecated
+ * @param height The height of the epochs
+ */
 void delete_epochs(size_t height);
 
-Block* get_epoch(int id, size_t height);
+/**
+ * @brief Get the epoch object
+ * 
+ * @param id The ID of the epoch
+ * @param height The height of the epoch
+ * @return Block* 
+ */
+Block *get_epoch(int id, size_t height);
 
-void clear_block(Block* block);
+/**
+ * @brief Free block data, without deleting it structure
+ * 
+ * @param block The block to free
+ */
+void clear_block(Block *block);
 
 #endif
