@@ -1,0 +1,12 @@
+digraph "on_recover_button2_press"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="on_recover_button2\l_press",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="add_transaction_with_pkey",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$ui_8c.html#adf3736e772d266218ca1c9c0e4b38ac3",tooltip=" "];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="new_transaction",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$client_8h.html#a597346567fc95cf305a94063df3e86c3",tooltip=" "];
+}

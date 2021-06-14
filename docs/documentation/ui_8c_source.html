@@ -625,271 +625,293 @@ $(document).ready(function(){initNavTree('ui_8c_source.html',''); initResizable(
 <div class="line"><a name="l00536"></a><span class="lineno">  536</span>&#160;                    <a class="code" href="network_8h.html#a3d8810ff759f090d31d612cc51cf9158">__attribute__</a> ((unused)) gpointer user_data)</div>
 <div class="line"><a name="l00537"></a><span class="lineno">  537</span>&#160;{</div>
 <div class="line"><a name="l00538"></a><span class="lineno">  538</span>&#160;    <span class="comment">//Call to the invest function</span></div>
-<div class="line"><a name="l00539"></a><span class="lineno">  539</span>&#160;    gtk_widget_hide(invest_window);</div>
-<div class="line"><a name="l00540"></a><span class="lineno">  540</span>&#160;    gtk_entry_set_text(<a class="code" href="ui_8c.html#a1cd59d712f0351edfa00b753656b486a">invest_entry</a>, <span class="stringliteral">&quot;&quot;</span>);</div>
-<div class="line"><a name="l00541"></a><span class="lineno">  541</span>&#160; </div>
-<div class="line"><a name="l00542"></a><span class="lineno">  542</span>&#160;    <span class="keywordflow">return</span> TRUE;</div>
-<div class="line"><a name="l00543"></a><span class="lineno">  543</span>&#160;}</div>
-<div class="line"><a name="l00544"></a><span class="lineno"><a class="line" href="ui_8c.html#a1513831bd850ea1b552ef70538afb16d">  544</a></span>&#160;gboolean <a class="code" href="ui_8c.html#a1513831bd850ea1b552ef70538afb16d">on_recover_button1_press</a>(<a class="code" href="network_8h.html#a3d8810ff759f090d31d612cc51cf9158">__attribute__</a> ((unused)) GtkWidget *widget,</div>
-<div class="line"><a name="l00545"></a><span class="lineno">  545</span>&#160;                    <a class="code" href="network_8h.html#a3d8810ff759f090d31d612cc51cf9158">__attribute__</a> ((unused)) GdkEventKey *event,</div>
-<div class="line"><a name="l00546"></a><span class="lineno">  546</span>&#160;                    <a class="code" href="network_8h.html#a3d8810ff759f090d31d612cc51cf9158">__attribute__</a> ((unused)) gpointer user_data)</div>
-<div class="line"><a name="l00547"></a><span class="lineno">  547</span>&#160;{</div>
-<div class="line"><a name="l00548"></a><span class="lineno">  548</span>&#160;    gtk_widget_show(recover_window);</div>
-<div class="line"><a name="l00549"></a><span class="lineno">  549</span>&#160; </div>
-<div class="line"><a name="l00550"></a><span class="lineno">  550</span>&#160;    <span class="keywordflow">return</span> TRUE;</div>
-<div class="line"><a name="l00551"></a><span class="lineno">  551</span>&#160;}</div>
-<div class="line"><a name="l00552"></a><span class="lineno">  552</span>&#160; </div>
-<div class="line"><a name="l00553"></a><span class="lineno"><a class="line" href="ui_8c.html#ad8f99ac51861be5da7d885cdd2e26ea0">  553</a></span>&#160;gboolean <a class="code" href="ui_8c.html#ad8f99ac51861be5da7d885cdd2e26ea0">on_recover_button2_press</a>(<a class="code" href="network_8h.html#a3d8810ff759f090d31d612cc51cf9158">__attribute__</a> ((unused)) GtkWidget *widget,</div>
-<div class="line"><a name="l00554"></a><span class="lineno">  554</span>&#160;                    <a class="code" href="network_8h.html#a3d8810ff759f090d31d612cc51cf9158">__attribute__</a> ((unused)) GdkEventKey *event,</div>
-<div class="line"><a name="l00555"></a><span class="lineno">  555</span>&#160;                    <a class="code" href="network_8h.html#a3d8810ff759f090d31d612cc51cf9158">__attribute__</a> ((unused)) gpointer user_data)</div>
-<div class="line"><a name="l00556"></a><span class="lineno">  556</span>&#160;{</div>
-<div class="line"><a name="l00557"></a><span class="lineno">  557</span>&#160;    <span class="comment">//Call to the recover function</span></div>
-<div class="line"><a name="l00558"></a><span class="lineno">  558</span>&#160;    gtk_widget_hide(recover_window);</div>
-<div class="line"><a name="l00559"></a><span class="lineno">  559</span>&#160;    gtk_entry_set_text(<a class="code" href="ui_8c.html#a30b512f884b7c54ff9bfe3f8b42a665f">recover_entry</a>, <span class="stringliteral">&quot;&quot;</span>);</div>
+<div class="line"><a name="l00539"></a><span class="lineno">  539</span>&#160;    <span class="keyword">const</span> time_t date = time(NULL);</div>
+<div class="line"><a name="l00540"></a><span class="lineno">  540</span>&#160;    <span class="keywordtype">char</span> *time_str = ctime(&amp;date);</div>
+<div class="line"><a name="l00541"></a><span class="lineno">  541</span>&#160;    <span class="keywordtype">double</span> amount = strtod(gtk_entry_get_text(<a class="code" href="ui_8c.html#a1cd59d712f0351edfa00b753656b486a">invest_entry</a>), NULL);</div>
+<div class="line"><a name="l00542"></a><span class="lineno">  542</span>&#160;    <a class="code" href="ui_8c.html#adf3736e772d266218ca1c9c0e4b38ac3">add_transaction_with_pkey</a>(amount, <span class="stringliteral">&quot;Add Stake&quot;</span>, time_str);</div>
+<div class="line"><a name="l00543"></a><span class="lineno">  543</span>&#160;<span class="preprocessor">#ifndef TEST</span></div>
+<div class="line"><a name="l00544"></a><span class="lineno">  544</span>&#160;    <span class="keywordtype">char</span> *asset = calloc(1, 512);</div>
+<div class="line"><a name="l00545"></a><span class="lineno">  545</span>&#160;    <span class="keywordtype">char</span> *cause = calloc(1, 512);</div>
+<div class="line"><a name="l00546"></a><span class="lineno">  546</span>&#160;    <a class="code" href="client_8h.html#a597346567fc95cf305a94063df3e86c3">new_transaction</a>(<a class="code" href="transaction_8h.html#ab89b46767fb01957106298a1e1b71cc4">T_TYPE_ADD_STAKE</a>, NULL, (<span class="keywordtype">size_t</span>)(amount * 10e5), asset, cause);</div>
+<div class="line"><a name="l00547"></a><span class="lineno">  547</span>&#160;    free(asset);</div>
+<div class="line"><a name="l00548"></a><span class="lineno">  548</span>&#160;    free(cause);</div>
+<div class="line"><a name="l00549"></a><span class="lineno">  549</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00550"></a><span class="lineno">  550</span>&#160; </div>
+<div class="line"><a name="l00551"></a><span class="lineno">  551</span>&#160;    gtk_widget_hide(invest_window);</div>
+<div class="line"><a name="l00552"></a><span class="lineno">  552</span>&#160;    gtk_entry_set_text(<a class="code" href="ui_8c.html#a1cd59d712f0351edfa00b753656b486a">invest_entry</a>, <span class="stringliteral">&quot;&quot;</span>);</div>
+<div class="line"><a name="l00553"></a><span class="lineno">  553</span>&#160;    <span class="keywordflow">return</span> TRUE;</div>
+<div class="line"><a name="l00554"></a><span class="lineno">  554</span>&#160;}</div>
+<div class="line"><a name="l00555"></a><span class="lineno"><a class="line" href="ui_8c.html#a1513831bd850ea1b552ef70538afb16d">  555</a></span>&#160;gboolean <a class="code" href="ui_8c.html#a1513831bd850ea1b552ef70538afb16d">on_recover_button1_press</a>(<a class="code" href="network_8h.html#a3d8810ff759f090d31d612cc51cf9158">__attribute__</a> ((unused)) GtkWidget *widget,</div>
+<div class="line"><a name="l00556"></a><span class="lineno">  556</span>&#160;                    <a class="code" href="network_8h.html#a3d8810ff759f090d31d612cc51cf9158">__attribute__</a> ((unused)) GdkEventKey *event,</div>
+<div class="line"><a name="l00557"></a><span class="lineno">  557</span>&#160;                    <a class="code" href="network_8h.html#a3d8810ff759f090d31d612cc51cf9158">__attribute__</a> ((unused)) gpointer user_data)</div>
+<div class="line"><a name="l00558"></a><span class="lineno">  558</span>&#160;{</div>
+<div class="line"><a name="l00559"></a><span class="lineno">  559</span>&#160;    gtk_widget_show(recover_window);</div>
 <div class="line"><a name="l00560"></a><span class="lineno">  560</span>&#160; </div>
 <div class="line"><a name="l00561"></a><span class="lineno">  561</span>&#160;    <span class="keywordflow">return</span> TRUE;</div>
 <div class="line"><a name="l00562"></a><span class="lineno">  562</span>&#160;}</div>
 <div class="line"><a name="l00563"></a><span class="lineno">  563</span>&#160; </div>
-<div class="line"><a name="l00564"></a><span class="lineno"><a class="line" href="ui_8c.html#a399dcb9da92a8915352bb0f96df00bc9">  564</a></span>&#160;gboolean <a class="code" href="ui_8c.html#a399dcb9da92a8915352bb0f96df00bc9">on_add_contact_button1_press</a>(<a class="code" href="network_8h.html#a3d8810ff759f090d31d612cc51cf9158">__attribute__</a> ((unused)) GtkWidget *widget,</div>
+<div class="line"><a name="l00564"></a><span class="lineno"><a class="line" href="ui_8c.html#ad8f99ac51861be5da7d885cdd2e26ea0">  564</a></span>&#160;gboolean <a class="code" href="ui_8c.html#ad8f99ac51861be5da7d885cdd2e26ea0">on_recover_button2_press</a>(<a class="code" href="network_8h.html#a3d8810ff759f090d31d612cc51cf9158">__attribute__</a> ((unused)) GtkWidget *widget,</div>
 <div class="line"><a name="l00565"></a><span class="lineno">  565</span>&#160;                    <a class="code" href="network_8h.html#a3d8810ff759f090d31d612cc51cf9158">__attribute__</a> ((unused)) GdkEventKey *event,</div>
 <div class="line"><a name="l00566"></a><span class="lineno">  566</span>&#160;                    <a class="code" href="network_8h.html#a3d8810ff759f090d31d612cc51cf9158">__attribute__</a> ((unused)) gpointer user_data)</div>
 <div class="line"><a name="l00567"></a><span class="lineno">  567</span>&#160;{</div>
-<div class="line"><a name="l00568"></a><span class="lineno">  568</span>&#160;    gtk_widget_show(add_contact_window);</div>
-<div class="line"><a name="l00569"></a><span class="lineno">  569</span>&#160;    <span class="keywordflow">return</span> TRUE;</div>
-<div class="line"><a name="l00570"></a><span class="lineno">  570</span>&#160;}</div>
-<div class="line"><a name="l00571"></a><span class="lineno">  571</span>&#160; </div>
-<div class="line"><a name="l00572"></a><span class="lineno">  572</span>&#160; </div>
-<div class="line"><a name="l00573"></a><span class="lineno"><a class="line" href="ui_8c.html#ad00b3507b4bb09e32b88b8c4e015c7bf">  573</a></span>&#160;gboolean <a class="code" href="ui_8c.html#ad00b3507b4bb09e32b88b8c4e015c7bf">add_contact</a>(<a class="code" href="network_8h.html#a3d8810ff759f090d31d612cc51cf9158">__attribute__</a> ((unused)) GtkWidget *widget,</div>
-<div class="line"><a name="l00574"></a><span class="lineno">  574</span>&#160;                    <a class="code" href="network_8h.html#a3d8810ff759f090d31d612cc51cf9158">__attribute__</a> ((unused)) GdkEventKey *event,</div>
-<div class="line"><a name="l00575"></a><span class="lineno">  575</span>&#160;                    <a class="code" href="network_8h.html#a3d8810ff759f090d31d612cc51cf9158">__attribute__</a> ((unused)) gpointer user_data)</div>
-<div class="line"><a name="l00576"></a><span class="lineno">  576</span>&#160;{</div>
-<div class="line"><a name="l00577"></a><span class="lineno">  577</span>&#160;    <span class="keywordtype">char</span> *name = (<span class="keywordtype">char</span> *) gtk_entry_get_text(<a class="code" href="ui_8c.html#af7c418915599a0feee638b616aca25ec">name_entry_con</a>);</div>
-<div class="line"><a name="l00578"></a><span class="lineno">  578</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span> *public_key = gtk_entry_get_text(<a class="code" href="ui_8c.html#a1232a61f99830b200a87137da4ad0232">public_key_entry_con</a>);</div>
-<div class="line"><a name="l00579"></a><span class="lineno">  579</span>&#160;    <span class="keywordflow">if</span>(strcmp(name, <span class="stringliteral">&quot;&quot;</span>) &amp;&amp; strcmp(public_key ,<span class="stringliteral">&quot;&quot;</span>))</div>
-<div class="line"><a name="l00580"></a><span class="lineno">  580</span>&#160;    {</div>
-<div class="line"><a name="l00581"></a><span class="lineno">  581</span>&#160;        <span class="keywordtype">char</span> file[300] = <span class="stringliteral">&quot;data/contact/&quot;</span>;</div>
-<div class="line"><a name="l00582"></a><span class="lineno">  582</span>&#160;        strcpy(file + strlen(file), name);</div>
-<div class="line"><a name="l00583"></a><span class="lineno">  583</span>&#160;        FILE *contacts_f = fopen(file, <span class="stringliteral">&quot;w&quot;</span>);</div>
-<div class="line"><a name="l00584"></a><span class="lineno">  584</span>&#160;        <span class="keywordflow">if</span>(contacts_f == NULL)</div>
-<div class="line"><a name="l00585"></a><span class="lineno">  585</span>&#160;            err(-1, <span class="stringliteral">&quot;Couldn&#39;t open contacts file&quot;</span>);</div>
-<div class="line"><a name="l00586"></a><span class="lineno">  586</span>&#160; </div>
-<div class="line"><a name="l00587"></a><span class="lineno">  587</span>&#160;        fprintf(contacts_f, <span class="stringliteral">&quot;%s&quot;</span>, public_key);</div>
-<div class="line"><a name="l00588"></a><span class="lineno">  588</span>&#160; </div>
-<div class="line"><a name="l00589"></a><span class="lineno">  589</span>&#160;        fclose(contacts_f);</div>
-<div class="line"><a name="l00590"></a><span class="lineno">  590</span>&#160; </div>
-<div class="line"><a name="l00591"></a><span class="lineno">  591</span>&#160;        gtk_tree_store_clear(<a class="code" href="ui_8c.html#a3d023a78babb0df3470dc81314feadd5">ts_con</a>);</div>
-<div class="line"><a name="l00592"></a><span class="lineno">  592</span>&#160;        <a class="code" href="ui_8c.html#a73fe931a2fbeb2086428ad91c0cbc05e">load_contacts_from_file</a>();</div>
-<div class="line"><a name="l00593"></a><span class="lineno">  593</span>&#160;        gtk_entry_set_text(<a class="code" href="ui_8c.html#af7c418915599a0feee638b616aca25ec">name_entry_con</a>, <span class="stringliteral">&quot;&quot;</span>);</div>
-<div class="line"><a name="l00594"></a><span class="lineno">  594</span>&#160;        gtk_entry_set_text(<a class="code" href="ui_8c.html#a1232a61f99830b200a87137da4ad0232">public_key_entry_con</a>, <span class="stringliteral">&quot;&quot;</span>);</div>
-<div class="line"><a name="l00595"></a><span class="lineno">  595</span>&#160; </div>
-<div class="line"><a name="l00596"></a><span class="lineno">  596</span>&#160;    }</div>
-<div class="line"><a name="l00597"></a><span class="lineno">  597</span>&#160; </div>
-<div class="line"><a name="l00598"></a><span class="lineno">  598</span>&#160;    gtk_widget_hide(add_contact_window);</div>
-<div class="line"><a name="l00599"></a><span class="lineno">  599</span>&#160;    <span class="keywordflow">return</span> TRUE;</div>
-<div class="line"><a name="l00600"></a><span class="lineno">  600</span>&#160;}</div>
-<div class="line"><a name="l00601"></a><span class="lineno">  601</span>&#160; </div>
-<div class="line"><a name="l00602"></a><span class="lineno"><a class="line" href="ui_8c.html#acfeb1c1504a9c8dab16b48f4ee0a8324">  602</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="ui_8c.html#acfeb1c1504a9c8dab16b48f4ee0a8324">add_contact_to_combobox</a>(<span class="keywordtype">char</span> *name)</div>
-<div class="line"><a name="l00603"></a><span class="lineno">  603</span>&#160;{</div>
-<div class="line"><a name="l00604"></a><span class="lineno">  604</span>&#160;    GtkTreeIter iter;</div>
-<div class="line"><a name="l00605"></a><span class="lineno">  605</span>&#160; </div>
-<div class="line"><a name="l00606"></a><span class="lineno">  606</span>&#160;    gtk_list_store_append(<a class="code" href="ui_8c.html#a56f0bc64e6d4d817b9eab9ed1796f868">ls_combo</a>, &amp;iter);</div>
-<div class="line"><a name="l00607"></a><span class="lineno">  607</span>&#160;    gtk_list_store_set(<a class="code" href="ui_8c.html#a56f0bc64e6d4d817b9eab9ed1796f868">ls_combo</a>, &amp;iter, 0, name, -1);</div>
-<div class="line"><a name="l00608"></a><span class="lineno">  608</span>&#160;}</div>
-<div class="line"><a name="l00609"></a><span class="lineno">  609</span>&#160; </div>
-<div class="line"><a name="l00610"></a><span class="lineno"><a class="line" href="ui_8c.html#a3cce6cef71ccb6ae5dd4c9ca852eb31f">  610</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="ui_8c.html#a3cce6cef71ccb6ae5dd4c9ca852eb31f">add_contacts_from_file</a>(<span class="keywordtype">char</span> *name, <span class="keywordtype">char</span> *public_key)</div>
-<div class="line"><a name="l00611"></a><span class="lineno">  611</span>&#160;{</div>
-<div class="line"><a name="l00612"></a><span class="lineno">  612</span>&#160;    GtkTreeIter iter;</div>
-<div class="line"><a name="l00613"></a><span class="lineno">  613</span>&#160; </div>
-<div class="line"><a name="l00614"></a><span class="lineno">  614</span>&#160;    gtk_tree_store_append(<a class="code" href="ui_8c.html#a3d023a78babb0df3470dc81314feadd5">ts_con</a>, &amp;iter, NULL);</div>
-<div class="line"><a name="l00615"></a><span class="lineno">  615</span>&#160;    gtk_tree_store_set(<a class="code" href="ui_8c.html#a3d023a78babb0df3470dc81314feadd5">ts_con</a>, &amp;iter, 0, name, -1);</div>
-<div class="line"><a name="l00616"></a><span class="lineno">  616</span>&#160;    gtk_tree_store_set(<a class="code" href="ui_8c.html#a3d023a78babb0df3470dc81314feadd5">ts_con</a>, &amp;iter, 1, public_key, -1);</div>
-<div class="line"><a name="l00617"></a><span class="lineno">  617</span>&#160;}</div>
-<div class="line"><a name="l00618"></a><span class="lineno">  618</span>&#160; </div>
-<div class="line"><a name="l00619"></a><span class="lineno"><a class="line" href="ui_8c.html#a73fe931a2fbeb2086428ad91c0cbc05e">  619</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="ui_8c.html#a73fe931a2fbeb2086428ad91c0cbc05e">load_contacts_from_file</a>()</div>
-<div class="line"><a name="l00620"></a><span class="lineno">  620</span>&#160;{</div>
-<div class="line"><a name="l00621"></a><span class="lineno">  621</span>&#160;    <span class="keywordtype">char</span> buff[128];</div>
-<div class="line"><a name="l00622"></a><span class="lineno">  622</span>&#160;    DIR *d;</div>
-<div class="line"><a name="l00623"></a><span class="lineno">  623</span>&#160;    <span class="keyword">struct </span>dirent *dir;</div>
-<div class="line"><a name="l00624"></a><span class="lineno">  624</span>&#160;    d = opendir(<span class="stringliteral">&quot;data/contact/&quot;</span>);</div>
-<div class="line"><a name="l00625"></a><span class="lineno">  625</span>&#160;    <span class="keywordflow">if</span> (d) {</div>
-<div class="line"><a name="l00626"></a><span class="lineno">  626</span>&#160;        <span class="keywordflow">while</span> ((dir = readdir(d)) != NULL) {</div>
-<div class="line"><a name="l00627"></a><span class="lineno">  627</span>&#160;            <span class="keywordflow">if</span> (dir-&gt;d_type == DT_REG)</div>
-<div class="line"><a name="l00628"></a><span class="lineno">  628</span>&#160;            {</div>
-<div class="line"><a name="l00629"></a><span class="lineno">  629</span>&#160;                strcpy(buff, <span class="stringliteral">&quot;data/contact/&quot;</span>);</div>
-<div class="line"><a name="l00630"></a><span class="lineno">  630</span>&#160;                FILE *contacts_f = fopen(strcat(buff, dir-&gt;d_name), <span class="stringliteral">&quot;r&quot;</span>);</div>
-<div class="line"><a name="l00631"></a><span class="lineno">  631</span>&#160;                <span class="keywordflow">if</span>(contacts_f == NULL)</div>
-<div class="line"><a name="l00632"></a><span class="lineno">  632</span>&#160;                    err(-1, <span class="stringliteral">&quot;Couldn&#39;t open contacts file&quot;</span>);</div>
-<div class="line"><a name="l00633"></a><span class="lineno">  633</span>&#160;                <span class="keywordtype">char</span> *public_key = malloc(2000);</div>
-<div class="line"><a name="l00634"></a><span class="lineno">  634</span>&#160;                fread(public_key, 2000, 1, contacts_f);</div>
-<div class="line"><a name="l00635"></a><span class="lineno">  635</span>&#160;                <a class="code" href="ui_8c.html#a3cce6cef71ccb6ae5dd4c9ca852eb31f">add_contacts_from_file</a>(dir-&gt;d_name , public_key);</div>
-<div class="line"><a name="l00636"></a><span class="lineno">  636</span>&#160;                <a class="code" href="ui_8c.html#acfeb1c1504a9c8dab16b48f4ee0a8324">add_contact_to_combobox</a>(dir-&gt;d_name);</div>
-<div class="line"><a name="l00637"></a><span class="lineno">  637</span>&#160;                free(public_key);</div>
-<div class="line"><a name="l00638"></a><span class="lineno">  638</span>&#160;                fclose(contacts_f);</div>
-<div class="line"><a name="l00639"></a><span class="lineno">  639</span>&#160;            }</div>
-<div class="line"><a name="l00640"></a><span class="lineno">  640</span>&#160;        }</div>
-<div class="line"><a name="l00641"></a><span class="lineno">  641</span>&#160;        closedir(d);</div>
-<div class="line"><a name="l00642"></a><span class="lineno">  642</span>&#160;    }</div>
-<div class="line"><a name="l00643"></a><span class="lineno">  643</span>&#160;}</div>
-<div class="line"><a name="l00644"></a><span class="lineno">  644</span>&#160; </div>
-<div class="line"><a name="l00645"></a><span class="lineno"><a class="line" href="ui_8c.html#a0ff6af24bc9be5261b9ef9f6169c91da">  645</a></span>&#160;<span class="keywordtype">char</span> *<a class="code" href="ui_8c.html#a0ff6af24bc9be5261b9ef9f6169c91da">get_public_key_from_contacts</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *name)</div>
-<div class="line"><a name="l00646"></a><span class="lineno">  646</span>&#160;{</div>
-<div class="line"><a name="l00647"></a><span class="lineno">  647</span>&#160;    <span class="keywordtype">char</span> buff[300];</div>
-<div class="line"><a name="l00648"></a><span class="lineno">  648</span>&#160;    strcpy(buff, <span class="stringliteral">&quot;data/contact/&quot;</span>);</div>
-<div class="line"><a name="l00649"></a><span class="lineno">  649</span>&#160;    <span class="keywordtype">int</span> contacts_f = open(strcat(buff, name), O_RDONLY);</div>
-<div class="line"><a name="l00650"></a><span class="lineno">  650</span>&#160;    <span class="keywordflow">if</span>(contacts_f == 0)</div>
-<div class="line"><a name="l00651"></a><span class="lineno">  651</span>&#160;        <span class="keywordflow">return</span> NULL;</div>
-<div class="line"><a name="l00652"></a><span class="lineno">  652</span>&#160; </div>
-<div class="line"><a name="l00653"></a><span class="lineno">  653</span>&#160;    <span class="keywordtype">char</span> *public_key = malloc(2000);</div>
-<div class="line"><a name="l00654"></a><span class="lineno">  654</span>&#160;    <span class="keywordtype">size_t</span> r = read(contacts_f, public_key, 2000);</div>
-<div class="line"><a name="l00655"></a><span class="lineno">  655</span>&#160;    public_key[r+1] = <span class="charliteral">&#39;\0&#39;</span>;</div>
-<div class="line"><a name="l00656"></a><span class="lineno">  656</span>&#160;    </div>
-<div class="line"><a name="l00657"></a><span class="lineno">  657</span>&#160;    close(contacts_f);</div>
-<div class="line"><a name="l00658"></a><span class="lineno">  658</span>&#160;    <span class="keywordflow">return</span> public_key;</div>
-<div class="line"><a name="l00659"></a><span class="lineno">  659</span>&#160; </div>
-<div class="line"><a name="l00660"></a><span class="lineno">  660</span>&#160;}</div>
-<div class="line"><a name="l00661"></a><span class="lineno">  661</span>&#160; </div>
-<div class="line"><a name="l00662"></a><span class="lineno">  662</span>&#160; </div>
-<div class="line"><a name="l00663"></a><span class="lineno">  663</span>&#160; </div>
-<div class="line"><a name="l00664"></a><span class="lineno"><a class="line" href="ui_8c.html#ac37428318289fb0254b3cd9a9dec6b6e">  664</a></span>&#160;gboolean <a class="code" href="ui_8c.html#ac37428318289fb0254b3cd9a9dec6b6e">on_create_key_but1_press</a>(<a class="code" href="network_8h.html#a3d8810ff759f090d31d612cc51cf9158">__attribute__</a> ((unused)) GtkWidget *widget,</div>
-<div class="line"><a name="l00665"></a><span class="lineno">  665</span>&#160;                    <a class="code" href="network_8h.html#a3d8810ff759f090d31d612cc51cf9158">__attribute__</a> ((unused)) GdkEventKey *event,</div>
-<div class="line"><a name="l00666"></a><span class="lineno">  666</span>&#160;                    <a class="code" href="network_8h.html#a3d8810ff759f090d31d612cc51cf9158">__attribute__</a> ((unused)) gpointer user_data)</div>
-<div class="line"><a name="l00667"></a><span class="lineno">  667</span>&#160;{</div>
-<div class="line"><a name="l00668"></a><span class="lineno">  668</span>&#160;    <span class="keyword">struct </span>stat st = {0};</div>
-<div class="line"><a name="l00669"></a><span class="lineno">  669</span>&#160;    <span class="keywordflow">if</span> (stat(<span class="stringliteral">&quot;data/ui/.password&quot;</span>, &amp;st) == -1)</div>
-<div class="line"><a name="l00670"></a><span class="lineno">  670</span>&#160;    {</div>
-<div class="line"><a name="l00671"></a><span class="lineno">  671</span>&#160;        gtk_widget_show(create_key_window);</div>
-<div class="line"><a name="l00672"></a><span class="lineno">  672</span>&#160;        <span class="keywordflow">return</span> TRUE;</div>
-<div class="line"><a name="l00673"></a><span class="lineno">  673</span>&#160;    }</div>
-<div class="line"><a name="l00674"></a><span class="lineno">  674</span>&#160;    <a class="code" href="ui_8c.html#ae4c608b5626430bac55322e32309bf8f">change_label_text</a>(<a class="code" href="ui_8c.html#a8b12d0127ba1f869e04b7c403ea82ff2">password_error_label</a>, <span class="stringliteral">&quot;Account already exist&quot;</span>);</div>
-<div class="line"><a name="l00675"></a><span class="lineno">  675</span>&#160;    <span class="keywordflow">return</span> TRUE;</div>
-<div class="line"><a name="l00676"></a><span class="lineno">  676</span>&#160; </div>
-<div class="line"><a name="l00677"></a><span class="lineno">  677</span>&#160;}</div>
-<div class="line"><a name="l00678"></a><span class="lineno">  678</span>&#160; </div>
-<div class="line"><a name="l00679"></a><span class="lineno"><a class="line" href="ui_8c.html#ab865e6138c061d47b274af99c574af03">  679</a></span>&#160;gboolean <a class="code" href="ui_8c.html#ab865e6138c061d47b274af99c574af03">on_create_key_but2_press</a>(<a class="code" href="network_8h.html#a3d8810ff759f090d31d612cc51cf9158">__attribute__</a> ((unused)) GtkWidget *widget,</div>
-<div class="line"><a name="l00680"></a><span class="lineno">  680</span>&#160;                    <a class="code" href="network_8h.html#a3d8810ff759f090d31d612cc51cf9158">__attribute__</a> ((unused)) GdkEventKey *event,</div>
-<div class="line"><a name="l00681"></a><span class="lineno">  681</span>&#160;                    <a class="code" href="network_8h.html#a3d8810ff759f090d31d612cc51cf9158">__attribute__</a> ((unused)) gpointer user_data)</div>
-<div class="line"><a name="l00682"></a><span class="lineno">  682</span>&#160;{</div>
-<div class="line"><a name="l00683"></a><span class="lineno">  683</span>&#160;    <span class="keywordtype">size_t</span> bufflen = strlen(gtk_entry_get_text(<a class="code" href="ui_8c.html#aa345dbc39b26d7892d6b987c3b7dd280">password_entry2</a>));</div>
-<div class="line"><a name="l00684"></a><span class="lineno">  684</span>&#160;    <span class="keywordflow">if</span> (bufflen &lt; 5){</div>
-<div class="line"><a name="l00685"></a><span class="lineno">  685</span>&#160;        <a class="code" href="ui_8c.html#ae4c608b5626430bac55322e32309bf8f">change_label_text</a>(<a class="code" href="ui_8c.html#a8b12d0127ba1f869e04b7c403ea82ff2">password_error_label</a>, <span class="stringliteral">&quot;Invalid password\n(min 5 characters)&quot;</span>);</div>
-<div class="line"><a name="l00686"></a><span class="lineno">  686</span>&#160;        gtk_widget_hide(create_key_window);</div>
-<div class="line"><a name="l00687"></a><span class="lineno">  687</span>&#160;        <span class="keywordflow">return</span> TRUE;</div>
-<div class="line"><a name="l00688"></a><span class="lineno">  688</span>&#160;    }</div>
-<div class="line"><a name="l00689"></a><span class="lineno">  689</span>&#160;    <span class="keywordtype">char</span> *buff = malloc(<span class="keyword">sizeof</span>(<span class="keywordtype">char</span>) * bufflen);</div>
-<div class="line"><a name="l00690"></a><span class="lineno">  690</span>&#160;    memcpy(buff, gtk_entry_get_text(<a class="code" href="ui_8c.html#aa345dbc39b26d7892d6b987c3b7dd280">password_entry2</a>), bufflen);</div>
-<div class="line"><a name="l00691"></a><span class="lineno">  691</span>&#160;    <span class="keywordtype">size_t</span> keylen = strlen(gtk_entry_get_text(<a class="code" href="ui_8c.html#a612981b6f4708cbf727a214239dc1f21">key_entry</a>));</div>
-<div class="line"><a name="l00692"></a><span class="lineno">  692</span>&#160;    <span class="keywordflow">if</span> (keylen)</div>
-<div class="line"><a name="l00693"></a><span class="lineno">  693</span>&#160;    {</div>
-<div class="line"><a name="l00694"></a><span class="lineno">  694</span>&#160;        <span class="keywordtype">char</span> *buffkey = malloc(keylen);</div>
-<div class="line"><a name="l00695"></a><span class="lineno">  695</span>&#160;        memcpy(buff, gtk_entry_get_text(<a class="code" href="ui_8c.html#a612981b6f4708cbf727a214239dc1f21">key_entry</a>), keylen);</div>
-<div class="line"><a name="l00696"></a><span class="lineno">  696</span>&#160; </div>
-<div class="line"><a name="l00697"></a><span class="lineno">  697</span>&#160;        FILE* rsa_public_file = fopen(<span class="stringliteral">&quot;data/keys/rsa.pub&quot;</span>, <span class="stringliteral">&quot;wb&quot;</span>);</div>
-<div class="line"><a name="l00698"></a><span class="lineno">  698</span>&#160;        FILE* rsa_private_file = fopen(<span class="stringliteral">&quot;data/keys/rsa&quot;</span>, <span class="stringliteral">&quot;wb&quot;</span>);</div>
-<div class="line"><a name="l00699"></a><span class="lineno">  699</span>&#160; </div>
-<div class="line"><a name="l00700"></a><span class="lineno">  700</span>&#160;        <span class="keywordflow">if</span> (!rsa_private_file || !rsa_public_file)</div>
-<div class="line"><a name="l00701"></a><span class="lineno">  701</span>&#160;            err(errno, <span class="stringliteral">&quot;Impossible to write &#39;data/keys/rsa.pub&#39; and data/keys/rsa files&quot;</span>);</div>
-<div class="line"><a name="l00702"></a><span class="lineno">  702</span>&#160; </div>
-<div class="line"><a name="l00703"></a><span class="lineno">  703</span>&#160;        <span class="keywordflow">if</span> (fwrite(buffkey, keylen, 1, rsa_private_file) == 0)</div>
-<div class="line"><a name="l00704"></a><span class="lineno">  704</span>&#160;            err(errno, <span class="stringliteral">&quot;Impossible to write data in &#39;data/keys/rsa&#39;&quot;</span>);</div>
-<div class="line"><a name="l00705"></a><span class="lineno">  705</span>&#160;        fclose(rsa_private_file);</div>
-<div class="line"><a name="l00706"></a><span class="lineno">  706</span>&#160; </div>
-<div class="line"><a name="l00707"></a><span class="lineno">  707</span>&#160;        <span class="keywordflow">if</span> (fwrite(buffkey, keylen, 1, rsa_private_file) == 0)</div>
-<div class="line"><a name="l00708"></a><span class="lineno">  708</span>&#160;            err(errno, <span class="stringliteral">&quot;Impossible to write data in &#39;data/keys/rsa.pub&#39;&quot;</span>);</div>
-<div class="line"><a name="l00709"></a><span class="lineno">  709</span>&#160;        fclose(rsa_public_file);</div>
+<div class="line"><a name="l00568"></a><span class="lineno">  568</span>&#160;    <span class="comment">//Call to the recover function</span></div>
+<div class="line"><a name="l00569"></a><span class="lineno">  569</span>&#160;    <span class="keyword">const</span> time_t date = time(NULL);</div>
+<div class="line"><a name="l00570"></a><span class="lineno">  570</span>&#160;    <span class="keywordtype">char</span> *time_str = ctime(&amp;date);</div>
+<div class="line"><a name="l00571"></a><span class="lineno">  571</span>&#160;    <span class="keywordtype">double</span> amount = strtod(gtk_entry_get_text(<a class="code" href="ui_8c.html#a30b512f884b7c54ff9bfe3f8b42a665f">recover_entry</a>), NULL);</div>
+<div class="line"><a name="l00572"></a><span class="lineno">  572</span>&#160;    <a class="code" href="ui_8c.html#adf3736e772d266218ca1c9c0e4b38ac3">add_transaction_with_pkey</a>(amount, <span class="stringliteral">&quot;Withdrow Stake&quot;</span>, time_str);</div>
+<div class="line"><a name="l00573"></a><span class="lineno">  573</span>&#160;<span class="preprocessor">#ifndef TEST</span></div>
+<div class="line"><a name="l00574"></a><span class="lineno">  574</span>&#160;    <span class="keywordtype">char</span> *asset = calloc(1, 512);</div>
+<div class="line"><a name="l00575"></a><span class="lineno">  575</span>&#160;    <span class="keywordtype">char</span> *cause = calloc(1, 512);</div>
+<div class="line"><a name="l00576"></a><span class="lineno">  576</span>&#160;    <a class="code" href="client_8h.html#a597346567fc95cf305a94063df3e86c3">new_transaction</a>(<a class="code" href="transaction_8h.html#a96043a50e70275b11a4adb73a30e71ec">T_TYPE_WITHDRAW_STAKE</a>, NULL, (<span class="keywordtype">size_t</span>)(amount * 10e5), asset, cause);</div>
+<div class="line"><a name="l00577"></a><span class="lineno">  577</span>&#160;    free(asset);</div>
+<div class="line"><a name="l00578"></a><span class="lineno">  578</span>&#160;    free(cause);</div>
+<div class="line"><a name="l00579"></a><span class="lineno">  579</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00580"></a><span class="lineno">  580</span>&#160;    gtk_widget_hide(recover_window);</div>
+<div class="line"><a name="l00581"></a><span class="lineno">  581</span>&#160;    gtk_entry_set_text(<a class="code" href="ui_8c.html#a30b512f884b7c54ff9bfe3f8b42a665f">recover_entry</a>, <span class="stringliteral">&quot;&quot;</span>);</div>
+<div class="line"><a name="l00582"></a><span class="lineno">  582</span>&#160; </div>
+<div class="line"><a name="l00583"></a><span class="lineno">  583</span>&#160;    <span class="keywordflow">return</span> TRUE;</div>
+<div class="line"><a name="l00584"></a><span class="lineno">  584</span>&#160;}</div>
+<div class="line"><a name="l00585"></a><span class="lineno">  585</span>&#160; </div>
+<div class="line"><a name="l00586"></a><span class="lineno"><a class="line" href="ui_8c.html#a399dcb9da92a8915352bb0f96df00bc9">  586</a></span>&#160;gboolean <a class="code" href="ui_8c.html#a399dcb9da92a8915352bb0f96df00bc9">on_add_contact_button1_press</a>(<a class="code" href="network_8h.html#a3d8810ff759f090d31d612cc51cf9158">__attribute__</a> ((unused)) GtkWidget *widget,</div>
+<div class="line"><a name="l00587"></a><span class="lineno">  587</span>&#160;                    <a class="code" href="network_8h.html#a3d8810ff759f090d31d612cc51cf9158">__attribute__</a> ((unused)) GdkEventKey *event,</div>
+<div class="line"><a name="l00588"></a><span class="lineno">  588</span>&#160;                    <a class="code" href="network_8h.html#a3d8810ff759f090d31d612cc51cf9158">__attribute__</a> ((unused)) gpointer user_data)</div>
+<div class="line"><a name="l00589"></a><span class="lineno">  589</span>&#160;{</div>
+<div class="line"><a name="l00590"></a><span class="lineno">  590</span>&#160;    gtk_widget_show(add_contact_window);</div>
+<div class="line"><a name="l00591"></a><span class="lineno">  591</span>&#160;    <span class="keywordflow">return</span> TRUE;</div>
+<div class="line"><a name="l00592"></a><span class="lineno">  592</span>&#160;}</div>
+<div class="line"><a name="l00593"></a><span class="lineno">  593</span>&#160; </div>
+<div class="line"><a name="l00594"></a><span class="lineno">  594</span>&#160; </div>
+<div class="line"><a name="l00595"></a><span class="lineno"><a class="line" href="ui_8c.html#ad00b3507b4bb09e32b88b8c4e015c7bf">  595</a></span>&#160;gboolean <a class="code" href="ui_8c.html#ad00b3507b4bb09e32b88b8c4e015c7bf">add_contact</a>(<a class="code" href="network_8h.html#a3d8810ff759f090d31d612cc51cf9158">__attribute__</a> ((unused)) GtkWidget *widget,</div>
+<div class="line"><a name="l00596"></a><span class="lineno">  596</span>&#160;                    <a class="code" href="network_8h.html#a3d8810ff759f090d31d612cc51cf9158">__attribute__</a> ((unused)) GdkEventKey *event,</div>
+<div class="line"><a name="l00597"></a><span class="lineno">  597</span>&#160;                    <a class="code" href="network_8h.html#a3d8810ff759f090d31d612cc51cf9158">__attribute__</a> ((unused)) gpointer user_data)</div>
+<div class="line"><a name="l00598"></a><span class="lineno">  598</span>&#160;{</div>
+<div class="line"><a name="l00599"></a><span class="lineno">  599</span>&#160;    <span class="keywordtype">char</span> *name = (<span class="keywordtype">char</span> *) gtk_entry_get_text(<a class="code" href="ui_8c.html#af7c418915599a0feee638b616aca25ec">name_entry_con</a>);</div>
+<div class="line"><a name="l00600"></a><span class="lineno">  600</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span> *public_key = gtk_entry_get_text(<a class="code" href="ui_8c.html#a1232a61f99830b200a87137da4ad0232">public_key_entry_con</a>);</div>
+<div class="line"><a name="l00601"></a><span class="lineno">  601</span>&#160;    <span class="keywordflow">if</span>(strcmp(name, <span class="stringliteral">&quot;&quot;</span>) &amp;&amp; strcmp(public_key ,<span class="stringliteral">&quot;&quot;</span>))</div>
+<div class="line"><a name="l00602"></a><span class="lineno">  602</span>&#160;    {</div>
+<div class="line"><a name="l00603"></a><span class="lineno">  603</span>&#160;        <span class="keywordtype">char</span> file[300] = <span class="stringliteral">&quot;data/contact/&quot;</span>;</div>
+<div class="line"><a name="l00604"></a><span class="lineno">  604</span>&#160;        strcpy(file + strlen(file), name);</div>
+<div class="line"><a name="l00605"></a><span class="lineno">  605</span>&#160;        FILE *contacts_f = fopen(file, <span class="stringliteral">&quot;w&quot;</span>);</div>
+<div class="line"><a name="l00606"></a><span class="lineno">  606</span>&#160;        <span class="keywordflow">if</span>(contacts_f == NULL)</div>
+<div class="line"><a name="l00607"></a><span class="lineno">  607</span>&#160;            err(-1, <span class="stringliteral">&quot;Couldn&#39;t open contacts file&quot;</span>);</div>
+<div class="line"><a name="l00608"></a><span class="lineno">  608</span>&#160; </div>
+<div class="line"><a name="l00609"></a><span class="lineno">  609</span>&#160;        fprintf(contacts_f, <span class="stringliteral">&quot;%s&quot;</span>, public_key);</div>
+<div class="line"><a name="l00610"></a><span class="lineno">  610</span>&#160; </div>
+<div class="line"><a name="l00611"></a><span class="lineno">  611</span>&#160;        fclose(contacts_f);</div>
+<div class="line"><a name="l00612"></a><span class="lineno">  612</span>&#160; </div>
+<div class="line"><a name="l00613"></a><span class="lineno">  613</span>&#160;        gtk_tree_store_clear(<a class="code" href="ui_8c.html#a3d023a78babb0df3470dc81314feadd5">ts_con</a>);</div>
+<div class="line"><a name="l00614"></a><span class="lineno">  614</span>&#160;        <a class="code" href="ui_8c.html#a73fe931a2fbeb2086428ad91c0cbc05e">load_contacts_from_file</a>();</div>
+<div class="line"><a name="l00615"></a><span class="lineno">  615</span>&#160;        gtk_entry_set_text(<a class="code" href="ui_8c.html#af7c418915599a0feee638b616aca25ec">name_entry_con</a>, <span class="stringliteral">&quot;&quot;</span>);</div>
+<div class="line"><a name="l00616"></a><span class="lineno">  616</span>&#160;        gtk_entry_set_text(<a class="code" href="ui_8c.html#a1232a61f99830b200a87137da4ad0232">public_key_entry_con</a>, <span class="stringliteral">&quot;&quot;</span>);</div>
+<div class="line"><a name="l00617"></a><span class="lineno">  617</span>&#160; </div>
+<div class="line"><a name="l00618"></a><span class="lineno">  618</span>&#160;    }</div>
+<div class="line"><a name="l00619"></a><span class="lineno">  619</span>&#160; </div>
+<div class="line"><a name="l00620"></a><span class="lineno">  620</span>&#160;    gtk_widget_hide(add_contact_window);</div>
+<div class="line"><a name="l00621"></a><span class="lineno">  621</span>&#160;    <span class="keywordflow">return</span> TRUE;</div>
+<div class="line"><a name="l00622"></a><span class="lineno">  622</span>&#160;}</div>
+<div class="line"><a name="l00623"></a><span class="lineno">  623</span>&#160; </div>
+<div class="line"><a name="l00624"></a><span class="lineno"><a class="line" href="ui_8c.html#acfeb1c1504a9c8dab16b48f4ee0a8324">  624</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="ui_8c.html#acfeb1c1504a9c8dab16b48f4ee0a8324">add_contact_to_combobox</a>(<span class="keywordtype">char</span> *name)</div>
+<div class="line"><a name="l00625"></a><span class="lineno">  625</span>&#160;{</div>
+<div class="line"><a name="l00626"></a><span class="lineno">  626</span>&#160;    GtkTreeIter iter;</div>
+<div class="line"><a name="l00627"></a><span class="lineno">  627</span>&#160; </div>
+<div class="line"><a name="l00628"></a><span class="lineno">  628</span>&#160;    gtk_list_store_append(<a class="code" href="ui_8c.html#a56f0bc64e6d4d817b9eab9ed1796f868">ls_combo</a>, &amp;iter);</div>
+<div class="line"><a name="l00629"></a><span class="lineno">  629</span>&#160;    gtk_list_store_set(<a class="code" href="ui_8c.html#a56f0bc64e6d4d817b9eab9ed1796f868">ls_combo</a>, &amp;iter, 0, name, -1);</div>
+<div class="line"><a name="l00630"></a><span class="lineno">  630</span>&#160;}</div>
+<div class="line"><a name="l00631"></a><span class="lineno">  631</span>&#160; </div>
+<div class="line"><a name="l00632"></a><span class="lineno"><a class="line" href="ui_8c.html#a3cce6cef71ccb6ae5dd4c9ca852eb31f">  632</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="ui_8c.html#a3cce6cef71ccb6ae5dd4c9ca852eb31f">add_contacts_from_file</a>(<span class="keywordtype">char</span> *name, <span class="keywordtype">char</span> *public_key)</div>
+<div class="line"><a name="l00633"></a><span class="lineno">  633</span>&#160;{</div>
+<div class="line"><a name="l00634"></a><span class="lineno">  634</span>&#160;    GtkTreeIter iter;</div>
+<div class="line"><a name="l00635"></a><span class="lineno">  635</span>&#160; </div>
+<div class="line"><a name="l00636"></a><span class="lineno">  636</span>&#160;    gtk_tree_store_append(<a class="code" href="ui_8c.html#a3d023a78babb0df3470dc81314feadd5">ts_con</a>, &amp;iter, NULL);</div>
+<div class="line"><a name="l00637"></a><span class="lineno">  637</span>&#160;    gtk_tree_store_set(<a class="code" href="ui_8c.html#a3d023a78babb0df3470dc81314feadd5">ts_con</a>, &amp;iter, 0, name, -1);</div>
+<div class="line"><a name="l00638"></a><span class="lineno">  638</span>&#160;    gtk_tree_store_set(<a class="code" href="ui_8c.html#a3d023a78babb0df3470dc81314feadd5">ts_con</a>, &amp;iter, 1, public_key, -1);</div>
+<div class="line"><a name="l00639"></a><span class="lineno">  639</span>&#160;}</div>
+<div class="line"><a name="l00640"></a><span class="lineno">  640</span>&#160; </div>
+<div class="line"><a name="l00641"></a><span class="lineno"><a class="line" href="ui_8c.html#a73fe931a2fbeb2086428ad91c0cbc05e">  641</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="ui_8c.html#a73fe931a2fbeb2086428ad91c0cbc05e">load_contacts_from_file</a>()</div>
+<div class="line"><a name="l00642"></a><span class="lineno">  642</span>&#160;{</div>
+<div class="line"><a name="l00643"></a><span class="lineno">  643</span>&#160;    <span class="keywordtype">char</span> buff[128];</div>
+<div class="line"><a name="l00644"></a><span class="lineno">  644</span>&#160;    DIR *d;</div>
+<div class="line"><a name="l00645"></a><span class="lineno">  645</span>&#160;    <span class="keyword">struct </span>dirent *dir;</div>
+<div class="line"><a name="l00646"></a><span class="lineno">  646</span>&#160;    d = opendir(<span class="stringliteral">&quot;data/contact/&quot;</span>);</div>
+<div class="line"><a name="l00647"></a><span class="lineno">  647</span>&#160;    <span class="keywordflow">if</span> (d) {</div>
+<div class="line"><a name="l00648"></a><span class="lineno">  648</span>&#160;        <span class="keywordflow">while</span> ((dir = readdir(d)) != NULL) {</div>
+<div class="line"><a name="l00649"></a><span class="lineno">  649</span>&#160;            <span class="keywordflow">if</span> (dir-&gt;d_type == DT_REG)</div>
+<div class="line"><a name="l00650"></a><span class="lineno">  650</span>&#160;            {</div>
+<div class="line"><a name="l00651"></a><span class="lineno">  651</span>&#160;                strcpy(buff, <span class="stringliteral">&quot;data/contact/&quot;</span>);</div>
+<div class="line"><a name="l00652"></a><span class="lineno">  652</span>&#160;                FILE *contacts_f = fopen(strcat(buff, dir-&gt;d_name), <span class="stringliteral">&quot;r&quot;</span>);</div>
+<div class="line"><a name="l00653"></a><span class="lineno">  653</span>&#160;                <span class="keywordflow">if</span>(contacts_f == NULL)</div>
+<div class="line"><a name="l00654"></a><span class="lineno">  654</span>&#160;                    err(-1, <span class="stringliteral">&quot;Couldn&#39;t open contacts file&quot;</span>);</div>
+<div class="line"><a name="l00655"></a><span class="lineno">  655</span>&#160;                <span class="keywordtype">char</span> *public_key = malloc(2000);</div>
+<div class="line"><a name="l00656"></a><span class="lineno">  656</span>&#160;                fread(public_key, 2000, 1, contacts_f);</div>
+<div class="line"><a name="l00657"></a><span class="lineno">  657</span>&#160;                <a class="code" href="ui_8c.html#a3cce6cef71ccb6ae5dd4c9ca852eb31f">add_contacts_from_file</a>(dir-&gt;d_name , public_key);</div>
+<div class="line"><a name="l00658"></a><span class="lineno">  658</span>&#160;                <a class="code" href="ui_8c.html#acfeb1c1504a9c8dab16b48f4ee0a8324">add_contact_to_combobox</a>(dir-&gt;d_name);</div>
+<div class="line"><a name="l00659"></a><span class="lineno">  659</span>&#160;                free(public_key);</div>
+<div class="line"><a name="l00660"></a><span class="lineno">  660</span>&#160;                fclose(contacts_f);</div>
+<div class="line"><a name="l00661"></a><span class="lineno">  661</span>&#160;            }</div>
+<div class="line"><a name="l00662"></a><span class="lineno">  662</span>&#160;        }</div>
+<div class="line"><a name="l00663"></a><span class="lineno">  663</span>&#160;        closedir(d);</div>
+<div class="line"><a name="l00664"></a><span class="lineno">  664</span>&#160;    }</div>
+<div class="line"><a name="l00665"></a><span class="lineno">  665</span>&#160;}</div>
+<div class="line"><a name="l00666"></a><span class="lineno">  666</span>&#160; </div>
+<div class="line"><a name="l00667"></a><span class="lineno"><a class="line" href="ui_8c.html#a0ff6af24bc9be5261b9ef9f6169c91da">  667</a></span>&#160;<span class="keywordtype">char</span> *<a class="code" href="ui_8c.html#a0ff6af24bc9be5261b9ef9f6169c91da">get_public_key_from_contacts</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *name)</div>
+<div class="line"><a name="l00668"></a><span class="lineno">  668</span>&#160;{</div>
+<div class="line"><a name="l00669"></a><span class="lineno">  669</span>&#160;    <span class="keywordtype">char</span> buff[300];</div>
+<div class="line"><a name="l00670"></a><span class="lineno">  670</span>&#160;    strcpy(buff, <span class="stringliteral">&quot;data/contact/&quot;</span>);</div>
+<div class="line"><a name="l00671"></a><span class="lineno">  671</span>&#160;    <span class="keywordtype">int</span> contacts_f = open(strcat(buff, name), O_RDONLY);</div>
+<div class="line"><a name="l00672"></a><span class="lineno">  672</span>&#160;    <span class="keywordflow">if</span>(contacts_f == 0)</div>
+<div class="line"><a name="l00673"></a><span class="lineno">  673</span>&#160;        <span class="keywordflow">return</span> NULL;</div>
+<div class="line"><a name="l00674"></a><span class="lineno">  674</span>&#160; </div>
+<div class="line"><a name="l00675"></a><span class="lineno">  675</span>&#160;    <span class="keywordtype">char</span> *public_key = malloc(2000);</div>
+<div class="line"><a name="l00676"></a><span class="lineno">  676</span>&#160;    <span class="keywordtype">size_t</span> r = read(contacts_f, public_key, 2000);</div>
+<div class="line"><a name="l00677"></a><span class="lineno">  677</span>&#160;    public_key[r+1] = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><a name="l00678"></a><span class="lineno">  678</span>&#160;    </div>
+<div class="line"><a name="l00679"></a><span class="lineno">  679</span>&#160;    close(contacts_f);</div>
+<div class="line"><a name="l00680"></a><span class="lineno">  680</span>&#160;    <span class="keywordflow">return</span> public_key;</div>
+<div class="line"><a name="l00681"></a><span class="lineno">  681</span>&#160; </div>
+<div class="line"><a name="l00682"></a><span class="lineno">  682</span>&#160;}</div>
+<div class="line"><a name="l00683"></a><span class="lineno">  683</span>&#160; </div>
+<div class="line"><a name="l00684"></a><span class="lineno">  684</span>&#160; </div>
+<div class="line"><a name="l00685"></a><span class="lineno">  685</span>&#160; </div>
+<div class="line"><a name="l00686"></a><span class="lineno"><a class="line" href="ui_8c.html#ac37428318289fb0254b3cd9a9dec6b6e">  686</a></span>&#160;gboolean <a class="code" href="ui_8c.html#ac37428318289fb0254b3cd9a9dec6b6e">on_create_key_but1_press</a>(<a class="code" href="network_8h.html#a3d8810ff759f090d31d612cc51cf9158">__attribute__</a> ((unused)) GtkWidget *widget,</div>
+<div class="line"><a name="l00687"></a><span class="lineno">  687</span>&#160;                    <a class="code" href="network_8h.html#a3d8810ff759f090d31d612cc51cf9158">__attribute__</a> ((unused)) GdkEventKey *event,</div>
+<div class="line"><a name="l00688"></a><span class="lineno">  688</span>&#160;                    <a class="code" href="network_8h.html#a3d8810ff759f090d31d612cc51cf9158">__attribute__</a> ((unused)) gpointer user_data)</div>
+<div class="line"><a name="l00689"></a><span class="lineno">  689</span>&#160;{</div>
+<div class="line"><a name="l00690"></a><span class="lineno">  690</span>&#160;    <span class="keyword">struct </span>stat st = {0};</div>
+<div class="line"><a name="l00691"></a><span class="lineno">  691</span>&#160;    <span class="keywordflow">if</span> (stat(<span class="stringliteral">&quot;data/ui/.password&quot;</span>, &amp;st) == -1)</div>
+<div class="line"><a name="l00692"></a><span class="lineno">  692</span>&#160;    {</div>
+<div class="line"><a name="l00693"></a><span class="lineno">  693</span>&#160;        gtk_widget_show(create_key_window);</div>
+<div class="line"><a name="l00694"></a><span class="lineno">  694</span>&#160;        <span class="keywordflow">return</span> TRUE;</div>
+<div class="line"><a name="l00695"></a><span class="lineno">  695</span>&#160;    }</div>
+<div class="line"><a name="l00696"></a><span class="lineno">  696</span>&#160;    <a class="code" href="ui_8c.html#ae4c608b5626430bac55322e32309bf8f">change_label_text</a>(<a class="code" href="ui_8c.html#a8b12d0127ba1f869e04b7c403ea82ff2">password_error_label</a>, <span class="stringliteral">&quot;Account already exist&quot;</span>);</div>
+<div class="line"><a name="l00697"></a><span class="lineno">  697</span>&#160;    <span class="keywordflow">return</span> TRUE;</div>
+<div class="line"><a name="l00698"></a><span class="lineno">  698</span>&#160; </div>
+<div class="line"><a name="l00699"></a><span class="lineno">  699</span>&#160;}</div>
+<div class="line"><a name="l00700"></a><span class="lineno">  700</span>&#160; </div>
+<div class="line"><a name="l00701"></a><span class="lineno"><a class="line" href="ui_8c.html#ab865e6138c061d47b274af99c574af03">  701</a></span>&#160;gboolean <a class="code" href="ui_8c.html#ab865e6138c061d47b274af99c574af03">on_create_key_but2_press</a>(<a class="code" href="network_8h.html#a3d8810ff759f090d31d612cc51cf9158">__attribute__</a> ((unused)) GtkWidget *widget,</div>
+<div class="line"><a name="l00702"></a><span class="lineno">  702</span>&#160;                    <a class="code" href="network_8h.html#a3d8810ff759f090d31d612cc51cf9158">__attribute__</a> ((unused)) GdkEventKey *event,</div>
+<div class="line"><a name="l00703"></a><span class="lineno">  703</span>&#160;                    <a class="code" href="network_8h.html#a3d8810ff759f090d31d612cc51cf9158">__attribute__</a> ((unused)) gpointer user_data)</div>
+<div class="line"><a name="l00704"></a><span class="lineno">  704</span>&#160;{</div>
+<div class="line"><a name="l00705"></a><span class="lineno">  705</span>&#160;    <span class="keywordtype">size_t</span> bufflen = strlen(gtk_entry_get_text(<a class="code" href="ui_8c.html#aa345dbc39b26d7892d6b987c3b7dd280">password_entry2</a>));</div>
+<div class="line"><a name="l00706"></a><span class="lineno">  706</span>&#160;    <span class="keywordflow">if</span> (bufflen &lt; 5){</div>
+<div class="line"><a name="l00707"></a><span class="lineno">  707</span>&#160;        <a class="code" href="ui_8c.html#ae4c608b5626430bac55322e32309bf8f">change_label_text</a>(<a class="code" href="ui_8c.html#a8b12d0127ba1f869e04b7c403ea82ff2">password_error_label</a>, <span class="stringliteral">&quot;Invalid password\n(min 5 characters)&quot;</span>);</div>
+<div class="line"><a name="l00708"></a><span class="lineno">  708</span>&#160;        gtk_widget_hide(create_key_window);</div>
+<div class="line"><a name="l00709"></a><span class="lineno">  709</span>&#160;        <span class="keywordflow">return</span> TRUE;</div>
 <div class="line"><a name="l00710"></a><span class="lineno">  710</span>&#160;    }</div>
-<div class="line"><a name="l00711"></a><span class="lineno">  711</span>&#160;    <a class="code" href="rsa_8h.html#a43ef74c79e95360f43f9f9bd32b33b1d">get_keys</a>(buff);</div>
-<div class="line"><a name="l00712"></a><span class="lineno">  712</span>&#160;    <span class="keywordtype">char</span> *hashed = <a class="code" href="hash_8h.html#a67d06acefe39c395887f87d76bed5ba3">sha384_data</a>(buff, bufflen);</div>
-<div class="line"><a name="l00713"></a><span class="lineno">  713</span>&#160;    FILE *password_f = fopen(<span class="stringliteral">&quot;data/ui/.password&quot;</span>, <span class="stringliteral">&quot;wb&quot;</span>);</div>
-<div class="line"><a name="l00714"></a><span class="lineno">  714</span>&#160;    <span class="keywordflow">if</span>(password_f == NULL)</div>
-<div class="line"><a name="l00715"></a><span class="lineno">  715</span>&#160;        err(-1, <span class="stringliteral">&quot;Couldn&#39;t open password file&quot;</span>);</div>
-<div class="line"><a name="l00716"></a><span class="lineno">  716</span>&#160;    fwrite(hashed, 48, 1, password_f);</div>
-<div class="line"><a name="l00717"></a><span class="lineno">  717</span>&#160;    free(buff);</div>
-<div class="line"><a name="l00718"></a><span class="lineno">  718</span>&#160;    free(hashed);</div>
-<div class="line"><a name="l00719"></a><span class="lineno">  719</span>&#160;    fclose(password_f);</div>
-<div class="line"><a name="l00720"></a><span class="lineno">  720</span>&#160;    gtk_widget_hide(create_key_window);</div>
-<div class="line"><a name="l00721"></a><span class="lineno">  721</span>&#160;    <span class="keywordflow">return</span> TRUE;</div>
-<div class="line"><a name="l00722"></a><span class="lineno">  722</span>&#160;}</div>
-<div class="line"><a name="l00723"></a><span class="lineno">  723</span>&#160; </div>
-<div class="line"><a name="l00724"></a><span class="lineno"><a class="line" href="ui_8c.html#aa118feebec7cfa09ac8e958107872c47">  724</a></span>&#160;gboolean <a class="code" href="ui_8c.html#aa118feebec7cfa09ac8e958107872c47">on_connect_but_press</a>(<a class="code" href="network_8h.html#a3d8810ff759f090d31d612cc51cf9158">__attribute__</a> ((unused)) GtkWidget *widget,</div>
-<div class="line"><a name="l00725"></a><span class="lineno">  725</span>&#160;                    <a class="code" href="network_8h.html#a3d8810ff759f090d31d612cc51cf9158">__attribute__</a> ((unused)) GdkEventKey *event,</div>
-<div class="line"><a name="l00726"></a><span class="lineno">  726</span>&#160;                    <a class="code" href="network_8h.html#a3d8810ff759f090d31d612cc51cf9158">__attribute__</a> ((unused)) gpointer user_data)</div>
-<div class="line"><a name="l00727"></a><span class="lineno">  727</span>&#160;{</div>
-<div class="line"><a name="l00728"></a><span class="lineno">  728</span>&#160;    <span class="keyword">struct </span>stat st = {0};</div>
-<div class="line"><a name="l00729"></a><span class="lineno">  729</span>&#160;    <span class="keywordflow">if</span> (stat(<span class="stringliteral">&quot;data/ui/.password&quot;</span>, &amp;st) == -1)</div>
-<div class="line"><a name="l00730"></a><span class="lineno">  730</span>&#160;    {</div>
-<div class="line"><a name="l00731"></a><span class="lineno">  731</span>&#160;        <a class="code" href="ui_8c.html#ae4c608b5626430bac55322e32309bf8f">change_label_text</a>(<a class="code" href="ui_8c.html#a8b12d0127ba1f869e04b7c403ea82ff2">password_error_label</a>, <span class="stringliteral">&quot;No password, please create an account&quot;</span>);</div>
-<div class="line"><a name="l00732"></a><span class="lineno">  732</span>&#160;        <span class="keywordflow">return</span> TRUE;</div>
-<div class="line"><a name="l00733"></a><span class="lineno">  733</span>&#160;    }</div>
-<div class="line"><a name="l00734"></a><span class="lineno">  734</span>&#160;    FILE *password_f = fopen(<span class="stringliteral">&quot;data/ui/.password&quot;</span>, <span class="stringliteral">&quot;r&quot;</span>);</div>
-<div class="line"><a name="l00735"></a><span class="lineno">  735</span>&#160;    <span class="keywordflow">if</span>(password_f == NULL)</div>
-<div class="line"><a name="l00736"></a><span class="lineno">  736</span>&#160;        err(-1, <span class="stringliteral">&quot;Couldn&#39;t open password file&quot;</span>);</div>
-<div class="line"><a name="l00737"></a><span class="lineno">  737</span>&#160; </div>
-<div class="line"><a name="l00738"></a><span class="lineno">  738</span>&#160;    <span class="keywordtype">size_t</span> bufflen = strlen(gtk_entry_get_text(<a class="code" href="ui_8c.html#ad339cc79acfe1685a9cc695347628fed">password_entry1</a>));</div>
-<div class="line"><a name="l00739"></a><span class="lineno">  739</span>&#160;    <span class="keywordflow">if</span> (bufflen &lt; 5){</div>
-<div class="line"><a name="l00740"></a><span class="lineno">  740</span>&#160;        <a class="code" href="ui_8c.html#ae4c608b5626430bac55322e32309bf8f">change_label_text</a>(<a class="code" href="ui_8c.html#a8b12d0127ba1f869e04b7c403ea82ff2">password_error_label</a>, <span class="stringliteral">&quot;Invalid password\n(min 5 characters)&quot;</span>);</div>
-<div class="line"><a name="l00741"></a><span class="lineno">  741</span>&#160;        gtk_widget_hide(create_key_window);</div>
-<div class="line"><a name="l00742"></a><span class="lineno">  742</span>&#160;        <span class="keywordflow">return</span> TRUE;</div>
-<div class="line"><a name="l00743"></a><span class="lineno">  743</span>&#160;    }</div>
-<div class="line"><a name="l00744"></a><span class="lineno">  744</span>&#160; </div>
-<div class="line"><a name="l00745"></a><span class="lineno">  745</span>&#160;    <span class="keywordtype">char</span> *buff = malloc(<span class="keyword">sizeof</span>(<span class="keywordtype">char</span>) * bufflen);</div>
-<div class="line"><a name="l00746"></a><span class="lineno">  746</span>&#160;    memcpy(buff, gtk_entry_get_text(<a class="code" href="ui_8c.html#ad339cc79acfe1685a9cc695347628fed">password_entry1</a>), bufflen);</div>
-<div class="line"><a name="l00747"></a><span class="lineno">  747</span>&#160;    <span class="keywordtype">char</span> *hashed = <a class="code" href="hash_8h.html#a67d06acefe39c395887f87d76bed5ba3">sha384_data</a>(buff, bufflen);</div>
-<div class="line"><a name="l00748"></a><span class="lineno">  748</span>&#160;    <span class="keywordtype">char</span> *buff_hashed = malloc(48 * <span class="keyword">sizeof</span>(<span class="keywordtype">char</span>));</div>
-<div class="line"><a name="l00749"></a><span class="lineno">  749</span>&#160;    fread(buff_hashed, 1, 48, password_f);</div>
-<div class="line"><a name="l00750"></a><span class="lineno">  750</span>&#160;    <span class="keywordflow">if</span>(strncmp(buff_hashed, hashed, 48))</div>
-<div class="line"><a name="l00751"></a><span class="lineno">  751</span>&#160;    {</div>
-<div class="line"><a name="l00752"></a><span class="lineno">  752</span>&#160;        free(buff_hashed);</div>
-<div class="line"><a name="l00753"></a><span class="lineno">  753</span>&#160;        free(hashed);</div>
-<div class="line"><a name="l00754"></a><span class="lineno">  754</span>&#160;        free(buff);</div>
-<div class="line"><a name="l00755"></a><span class="lineno">  755</span>&#160;        fclose(password_f);</div>
-<div class="line"><a name="l00756"></a><span class="lineno">  756</span>&#160;        gtk_label_set_text(<a class="code" href="ui_8c.html#a8b12d0127ba1f869e04b7c403ea82ff2">password_error_label</a>, <span class="stringliteral">&quot;Wrong password&quot;</span>);</div>
-<div class="line"><a name="l00757"></a><span class="lineno">  757</span>&#160;    }</div>
-<div class="line"><a name="l00758"></a><span class="lineno">  758</span>&#160;    <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00759"></a><span class="lineno">  759</span>&#160;    {</div>
-<div class="line"><a name="l00760"></a><span class="lineno">  760</span>&#160;        <a class="code" href="rsa_8h.html#a43ef74c79e95360f43f9f9bd32b33b1d">get_keys</a>(buff);</div>
-<div class="line"><a name="l00761"></a><span class="lineno">  761</span>&#160;        free(buff_hashed);</div>
-<div class="line"><a name="l00762"></a><span class="lineno">  762</span>&#160;        free(hashed);</div>
-<div class="line"><a name="l00763"></a><span class="lineno">  763</span>&#160;        free(buff);</div>
-<div class="line"><a name="l00764"></a><span class="lineno">  764</span>&#160;        fclose(password_f);</div>
-<div class="line"><a name="l00765"></a><span class="lineno">  765</span>&#160;        <a class="code" href="ui_8c.html#af1854ec5ff4099ed69a1b51a3fd3b3df">update_labels</a>();</div>
-<div class="line"><a name="l00766"></a><span class="lineno">  766</span>&#160;        <a class="code" href="ui_8c.html#a73fe931a2fbeb2086428ad91c0cbc05e">load_contacts_from_file</a>();</div>
-<div class="line"><a name="l00767"></a><span class="lineno">  767</span>&#160;        <a class="code" href="ui_8c.html#a8909bf913522e177fc1629b07c32420c">load_transactions_from_file</a>();</div>
-<div class="line"><a name="l00768"></a><span class="lineno">  768</span>&#160;        gtk_widget_hide(connection_window);</div>
-<div class="line"><a name="l00769"></a><span class="lineno">  769</span>&#160;        gtk_widget_show(window);</div>
-<div class="line"><a name="l00770"></a><span class="lineno">  770</span>&#160;    }</div>
-<div class="line"><a name="l00771"></a><span class="lineno">  771</span>&#160;    <span class="keywordflow">return</span> TRUE;</div>
-<div class="line"><a name="l00772"></a><span class="lineno">  772</span>&#160;}</div>
-<div class="line"><a name="l00773"></a><span class="lineno">  773</span>&#160; </div>
-<div class="line"><a name="l00774"></a><span class="lineno"><a class="line" href="ui_8c.html#af1854ec5ff4099ed69a1b51a3fd3b3df">  774</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="ui_8c.html#af1854ec5ff4099ed69a1b51a3fd3b3df">update_labels</a>()</div>
-<div class="line"><a name="l00775"></a><span class="lineno">  775</span>&#160;{</div>
-<div class="line"><a name="l00776"></a><span class="lineno">  776</span>&#160; </div>
-<div class="line"><a name="l00777"></a><span class="lineno">  777</span>&#160;    <a class="code" href="struct_wallet.html">Wallet</a> *wallet = <a class="code" href="wallet_8h.html#a993fb7ec0c86c7a2d8ff68363e9f5304">get_my_wallet</a>();</div>
-<div class="line"><a name="l00778"></a><span class="lineno">  778</span>&#160;    <span class="keywordtype">double</span> money = wallet-&gt;<a class="code" href="struct_wallet.html#a09041dfaf996bee7cc220f076325f2ec">amount</a> / 100000000.0f;</div>
-<div class="line"><a name="l00779"></a><span class="lineno">  779</span>&#160;    <span class="keywordflow">if</span>(strtod(gtk_label_get_text(<a class="code" href="ui_8c.html#ab43804688ba42c6200ce731eb35c5dc8">balance_1</a>), NULL) != money)</div>
-<div class="line"><a name="l00780"></a><span class="lineno">  780</span>&#160;    {</div>
-<div class="line"><a name="l00781"></a><span class="lineno">  781</span>&#160;        <span class="keywordtype">char</span> buff1[30];</div>
-<div class="line"><a name="l00782"></a><span class="lineno">  782</span>&#160;        sprintf(buff1, <span class="stringliteral">&quot;%lf&quot;</span>, money);</div>
-<div class="line"><a name="l00783"></a><span class="lineno">  783</span>&#160;        gtk_label_set_text(<a class="code" href="ui_8c.html#ab43804688ba42c6200ce731eb35c5dc8">balance_1</a>, buff1);</div>
-<div class="line"><a name="l00784"></a><span class="lineno">  784</span>&#160;        gtk_label_set_text(<a class="code" href="ui_8c.html#a868e43b57c30e358fe58e0deb101f42a">balance_2</a>, buff1);</div>
-<div class="line"><a name="l00785"></a><span class="lineno">  785</span>&#160;    }</div>
-<div class="line"><a name="l00786"></a><span class="lineno">  786</span>&#160;    BIO *pubkey = BIO_new(BIO_s_mem());</div>
-<div class="line"><a name="l00787"></a><span class="lineno">  787</span>&#160;    PEM_write_bio_RSAPublicKey(pubkey, wallet-&gt;<a class="code" href="struct_wallet.html#a7c3fbe707cd5eabe1365d44b5d1cd16f">pub_key</a>);</div>
-<div class="line"><a name="l00788"></a><span class="lineno">  788</span>&#160;    <span class="keywordtype">char</span> temp[5000];</div>
-<div class="line"><a name="l00789"></a><span class="lineno">  789</span>&#160;    <span class="keywordtype">int</span> rsa_size = BIO_pending(pubkey);</div>
-<div class="line"><a name="l00790"></a><span class="lineno">  790</span>&#160;    BIO_read(pubkey, temp, rsa_size);</div>
-<div class="line"><a name="l00791"></a><span class="lineno">  791</span>&#160;    temp[rsa_size] = 0;</div>
-<div class="line"><a name="l00792"></a><span class="lineno">  792</span>&#160;    gtk_label_set_text(<a class="code" href="ui_8c.html#a8a74dabd2d33f171e4de9e1031b27ddf">public_key_label</a>, temp);</div>
-<div class="line"><a name="l00793"></a><span class="lineno">  793</span>&#160;    BIO_free_all(pubkey);</div>
-<div class="line"><a name="l00794"></a><span class="lineno">  794</span>&#160;    <span class="comment">/*if(atol(gtk_label_get_text(stake_label1)) != Get_Stake)</span></div>
-<div class="line"><a name="l00795"></a><span class="lineno">  795</span>&#160;<span class="comment">    {</span></div>
-<div class="line"><a name="l00796"></a><span class="lineno">  796</span>&#160;<span class="comment">        char buff2[30];</span></div>
-<div class="line"><a name="l00797"></a><span class="lineno">  797</span>&#160;<span class="comment">        sprintf(buff, &quot;%lu&quot;,Get_Stake);</span></div>
-<div class="line"><a name="l00798"></a><span class="lineno">  798</span>&#160;<span class="comment">        gtk_label_set_text(stake_label1, buff2);</span></div>
-<div class="line"><a name="l00799"></a><span class="lineno">  799</span>&#160;<span class="comment">        gtk_label_set_text(stake_label2, buff2);</span></div>
-<div class="line"><a name="l00800"></a><span class="lineno">  800</span>&#160;<span class="comment">        gtk_label_set_text(stake_label3, buff2);</span></div>
-<div class="line"><a name="l00801"></a><span class="lineno">  801</span>&#160;<span class="comment">    }</span></div>
-<div class="line"><a name="l00802"></a><span class="lineno">  802</span>&#160;<span class="comment">    */</span></div>
-<div class="line"><a name="l00803"></a><span class="lineno">  803</span>&#160;}</div>
+<div class="line"><a name="l00711"></a><span class="lineno">  711</span>&#160;    <span class="keywordtype">char</span> *buff = malloc(<span class="keyword">sizeof</span>(<span class="keywordtype">char</span>) * bufflen);</div>
+<div class="line"><a name="l00712"></a><span class="lineno">  712</span>&#160;    memcpy(buff, gtk_entry_get_text(<a class="code" href="ui_8c.html#aa345dbc39b26d7892d6b987c3b7dd280">password_entry2</a>), bufflen);</div>
+<div class="line"><a name="l00713"></a><span class="lineno">  713</span>&#160;    <span class="keywordtype">size_t</span> keylen = strlen(gtk_entry_get_text(<a class="code" href="ui_8c.html#a612981b6f4708cbf727a214239dc1f21">key_entry</a>));</div>
+<div class="line"><a name="l00714"></a><span class="lineno">  714</span>&#160;    <span class="keywordflow">if</span> (keylen)</div>
+<div class="line"><a name="l00715"></a><span class="lineno">  715</span>&#160;    {</div>
+<div class="line"><a name="l00716"></a><span class="lineno">  716</span>&#160;        <span class="keywordtype">char</span> *buffkey = malloc(keylen);</div>
+<div class="line"><a name="l00717"></a><span class="lineno">  717</span>&#160;        memcpy(buff, gtk_entry_get_text(<a class="code" href="ui_8c.html#a612981b6f4708cbf727a214239dc1f21">key_entry</a>), keylen);</div>
+<div class="line"><a name="l00718"></a><span class="lineno">  718</span>&#160; </div>
+<div class="line"><a name="l00719"></a><span class="lineno">  719</span>&#160;        FILE* rsa_public_file = fopen(<span class="stringliteral">&quot;data/keys/rsa.pub&quot;</span>, <span class="stringliteral">&quot;wb&quot;</span>);</div>
+<div class="line"><a name="l00720"></a><span class="lineno">  720</span>&#160;        FILE* rsa_private_file = fopen(<span class="stringliteral">&quot;data/keys/rsa&quot;</span>, <span class="stringliteral">&quot;wb&quot;</span>);</div>
+<div class="line"><a name="l00721"></a><span class="lineno">  721</span>&#160; </div>
+<div class="line"><a name="l00722"></a><span class="lineno">  722</span>&#160;        <span class="keywordflow">if</span> (!rsa_private_file || !rsa_public_file)</div>
+<div class="line"><a name="l00723"></a><span class="lineno">  723</span>&#160;            err(errno, <span class="stringliteral">&quot;Impossible to write &#39;data/keys/rsa.pub&#39; and data/keys/rsa files&quot;</span>);</div>
+<div class="line"><a name="l00724"></a><span class="lineno">  724</span>&#160; </div>
+<div class="line"><a name="l00725"></a><span class="lineno">  725</span>&#160;        <span class="keywordflow">if</span> (fwrite(buffkey, keylen, 1, rsa_private_file) == 0)</div>
+<div class="line"><a name="l00726"></a><span class="lineno">  726</span>&#160;            err(errno, <span class="stringliteral">&quot;Impossible to write data in &#39;data/keys/rsa&#39;&quot;</span>);</div>
+<div class="line"><a name="l00727"></a><span class="lineno">  727</span>&#160;        fclose(rsa_private_file);</div>
+<div class="line"><a name="l00728"></a><span class="lineno">  728</span>&#160; </div>
+<div class="line"><a name="l00729"></a><span class="lineno">  729</span>&#160;        <span class="keywordflow">if</span> (fwrite(buffkey, keylen, 1, rsa_private_file) == 0)</div>
+<div class="line"><a name="l00730"></a><span class="lineno">  730</span>&#160;            err(errno, <span class="stringliteral">&quot;Impossible to write data in &#39;data/keys/rsa.pub&#39;&quot;</span>);</div>
+<div class="line"><a name="l00731"></a><span class="lineno">  731</span>&#160;        fclose(rsa_public_file);</div>
+<div class="line"><a name="l00732"></a><span class="lineno">  732</span>&#160;    }</div>
+<div class="line"><a name="l00733"></a><span class="lineno">  733</span>&#160;    <a class="code" href="rsa_8h.html#a43ef74c79e95360f43f9f9bd32b33b1d">get_keys</a>(buff);</div>
+<div class="line"><a name="l00734"></a><span class="lineno">  734</span>&#160;    <span class="keywordtype">char</span> *hashed = <a class="code" href="hash_8h.html#a67d06acefe39c395887f87d76bed5ba3">sha384_data</a>(buff, bufflen);</div>
+<div class="line"><a name="l00735"></a><span class="lineno">  735</span>&#160;    FILE *password_f = fopen(<span class="stringliteral">&quot;data/ui/.password&quot;</span>, <span class="stringliteral">&quot;wb&quot;</span>);</div>
+<div class="line"><a name="l00736"></a><span class="lineno">  736</span>&#160;    <span class="keywordflow">if</span>(password_f == NULL)</div>
+<div class="line"><a name="l00737"></a><span class="lineno">  737</span>&#160;        err(-1, <span class="stringliteral">&quot;Couldn&#39;t open password file&quot;</span>);</div>
+<div class="line"><a name="l00738"></a><span class="lineno">  738</span>&#160;    fwrite(hashed, 48, 1, password_f);</div>
+<div class="line"><a name="l00739"></a><span class="lineno">  739</span>&#160;    free(buff);</div>
+<div class="line"><a name="l00740"></a><span class="lineno">  740</span>&#160;    free(hashed);</div>
+<div class="line"><a name="l00741"></a><span class="lineno">  741</span>&#160;    fclose(password_f);</div>
+<div class="line"><a name="l00742"></a><span class="lineno">  742</span>&#160;    gtk_widget_hide(create_key_window);</div>
+<div class="line"><a name="l00743"></a><span class="lineno">  743</span>&#160;    <span class="keywordflow">return</span> TRUE;</div>
+<div class="line"><a name="l00744"></a><span class="lineno">  744</span>&#160;}</div>
+<div class="line"><a name="l00745"></a><span class="lineno">  745</span>&#160; </div>
+<div class="line"><a name="l00746"></a><span class="lineno"><a class="line" href="ui_8c.html#aa118feebec7cfa09ac8e958107872c47">  746</a></span>&#160;gboolean <a class="code" href="ui_8c.html#aa118feebec7cfa09ac8e958107872c47">on_connect_but_press</a>(<a class="code" href="network_8h.html#a3d8810ff759f090d31d612cc51cf9158">__attribute__</a> ((unused)) GtkWidget *widget,</div>
+<div class="line"><a name="l00747"></a><span class="lineno">  747</span>&#160;                    <a class="code" href="network_8h.html#a3d8810ff759f090d31d612cc51cf9158">__attribute__</a> ((unused)) GdkEventKey *event,</div>
+<div class="line"><a name="l00748"></a><span class="lineno">  748</span>&#160;                    <a class="code" href="network_8h.html#a3d8810ff759f090d31d612cc51cf9158">__attribute__</a> ((unused)) gpointer user_data)</div>
+<div class="line"><a name="l00749"></a><span class="lineno">  749</span>&#160;{</div>
+<div class="line"><a name="l00750"></a><span class="lineno">  750</span>&#160;    <span class="keyword">struct </span>stat st = {0};</div>
+<div class="line"><a name="l00751"></a><span class="lineno">  751</span>&#160;    <span class="keywordflow">if</span> (stat(<span class="stringliteral">&quot;data/ui/.password&quot;</span>, &amp;st) == -1)</div>
+<div class="line"><a name="l00752"></a><span class="lineno">  752</span>&#160;    {</div>
+<div class="line"><a name="l00753"></a><span class="lineno">  753</span>&#160;        <a class="code" href="ui_8c.html#ae4c608b5626430bac55322e32309bf8f">change_label_text</a>(<a class="code" href="ui_8c.html#a8b12d0127ba1f869e04b7c403ea82ff2">password_error_label</a>, <span class="stringliteral">&quot;No password, please create an account&quot;</span>);</div>
+<div class="line"><a name="l00754"></a><span class="lineno">  754</span>&#160;        <span class="keywordflow">return</span> TRUE;</div>
+<div class="line"><a name="l00755"></a><span class="lineno">  755</span>&#160;    }</div>
+<div class="line"><a name="l00756"></a><span class="lineno">  756</span>&#160;    FILE *password_f = fopen(<span class="stringliteral">&quot;data/ui/.password&quot;</span>, <span class="stringliteral">&quot;r&quot;</span>);</div>
+<div class="line"><a name="l00757"></a><span class="lineno">  757</span>&#160;    <span class="keywordflow">if</span>(password_f == NULL)</div>
+<div class="line"><a name="l00758"></a><span class="lineno">  758</span>&#160;        err(-1, <span class="stringliteral">&quot;Couldn&#39;t open password file&quot;</span>);</div>
+<div class="line"><a name="l00759"></a><span class="lineno">  759</span>&#160; </div>
+<div class="line"><a name="l00760"></a><span class="lineno">  760</span>&#160;    <span class="keywordtype">size_t</span> bufflen = strlen(gtk_entry_get_text(<a class="code" href="ui_8c.html#ad339cc79acfe1685a9cc695347628fed">password_entry1</a>));</div>
+<div class="line"><a name="l00761"></a><span class="lineno">  761</span>&#160;    <span class="keywordflow">if</span> (bufflen &lt; 5){</div>
+<div class="line"><a name="l00762"></a><span class="lineno">  762</span>&#160;        <a class="code" href="ui_8c.html#ae4c608b5626430bac55322e32309bf8f">change_label_text</a>(<a class="code" href="ui_8c.html#a8b12d0127ba1f869e04b7c403ea82ff2">password_error_label</a>, <span class="stringliteral">&quot;Invalid password\n(min 5 characters)&quot;</span>);</div>
+<div class="line"><a name="l00763"></a><span class="lineno">  763</span>&#160;        gtk_widget_hide(create_key_window);</div>
+<div class="line"><a name="l00764"></a><span class="lineno">  764</span>&#160;        <span class="keywordflow">return</span> TRUE;</div>
+<div class="line"><a name="l00765"></a><span class="lineno">  765</span>&#160;    }</div>
+<div class="line"><a name="l00766"></a><span class="lineno">  766</span>&#160; </div>
+<div class="line"><a name="l00767"></a><span class="lineno">  767</span>&#160;    <span class="keywordtype">char</span> *buff = malloc(<span class="keyword">sizeof</span>(<span class="keywordtype">char</span>) * bufflen);</div>
+<div class="line"><a name="l00768"></a><span class="lineno">  768</span>&#160;    memcpy(buff, gtk_entry_get_text(<a class="code" href="ui_8c.html#ad339cc79acfe1685a9cc695347628fed">password_entry1</a>), bufflen);</div>
+<div class="line"><a name="l00769"></a><span class="lineno">  769</span>&#160;    <span class="keywordtype">char</span> *hashed = <a class="code" href="hash_8h.html#a67d06acefe39c395887f87d76bed5ba3">sha384_data</a>(buff, bufflen);</div>
+<div class="line"><a name="l00770"></a><span class="lineno">  770</span>&#160;    <span class="keywordtype">char</span> *buff_hashed = malloc(48 * <span class="keyword">sizeof</span>(<span class="keywordtype">char</span>));</div>
+<div class="line"><a name="l00771"></a><span class="lineno">  771</span>&#160;    fread(buff_hashed, 1, 48, password_f);</div>
+<div class="line"><a name="l00772"></a><span class="lineno">  772</span>&#160;    <span class="keywordflow">if</span>(strncmp(buff_hashed, hashed, 48))</div>
+<div class="line"><a name="l00773"></a><span class="lineno">  773</span>&#160;    {</div>
+<div class="line"><a name="l00774"></a><span class="lineno">  774</span>&#160;        free(buff_hashed);</div>
+<div class="line"><a name="l00775"></a><span class="lineno">  775</span>&#160;        free(hashed);</div>
+<div class="line"><a name="l00776"></a><span class="lineno">  776</span>&#160;        free(buff);</div>
+<div class="line"><a name="l00777"></a><span class="lineno">  777</span>&#160;        fclose(password_f);</div>
+<div class="line"><a name="l00778"></a><span class="lineno">  778</span>&#160;        gtk_label_set_text(<a class="code" href="ui_8c.html#a8b12d0127ba1f869e04b7c403ea82ff2">password_error_label</a>, <span class="stringliteral">&quot;Wrong password&quot;</span>);</div>
+<div class="line"><a name="l00779"></a><span class="lineno">  779</span>&#160;    }</div>
+<div class="line"><a name="l00780"></a><span class="lineno">  780</span>&#160;    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00781"></a><span class="lineno">  781</span>&#160;    {</div>
+<div class="line"><a name="l00782"></a><span class="lineno">  782</span>&#160;        <a class="code" href="rsa_8h.html#a43ef74c79e95360f43f9f9bd32b33b1d">get_keys</a>(buff);</div>
+<div class="line"><a name="l00783"></a><span class="lineno">  783</span>&#160;        free(buff_hashed);</div>
+<div class="line"><a name="l00784"></a><span class="lineno">  784</span>&#160;        free(hashed);</div>
+<div class="line"><a name="l00785"></a><span class="lineno">  785</span>&#160;        free(buff);</div>
+<div class="line"><a name="l00786"></a><span class="lineno">  786</span>&#160;        fclose(password_f);</div>
+<div class="line"><a name="l00787"></a><span class="lineno">  787</span>&#160;        <a class="code" href="ui_8c.html#af1854ec5ff4099ed69a1b51a3fd3b3df">update_labels</a>();</div>
+<div class="line"><a name="l00788"></a><span class="lineno">  788</span>&#160;        <a class="code" href="ui_8c.html#a73fe931a2fbeb2086428ad91c0cbc05e">load_contacts_from_file</a>();</div>
+<div class="line"><a name="l00789"></a><span class="lineno">  789</span>&#160;        <a class="code" href="ui_8c.html#a8909bf913522e177fc1629b07c32420c">load_transactions_from_file</a>();</div>
+<div class="line"><a name="l00790"></a><span class="lineno">  790</span>&#160;        gtk_widget_hide(connection_window);</div>
+<div class="line"><a name="l00791"></a><span class="lineno">  791</span>&#160;        gtk_widget_show(window);</div>
+<div class="line"><a name="l00792"></a><span class="lineno">  792</span>&#160;    }</div>
+<div class="line"><a name="l00793"></a><span class="lineno">  793</span>&#160;    <span class="keywordflow">return</span> TRUE;</div>
+<div class="line"><a name="l00794"></a><span class="lineno">  794</span>&#160;}</div>
+<div class="line"><a name="l00795"></a><span class="lineno">  795</span>&#160; </div>
+<div class="line"><a name="l00796"></a><span class="lineno"><a class="line" href="ui_8c.html#af1854ec5ff4099ed69a1b51a3fd3b3df">  796</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="ui_8c.html#af1854ec5ff4099ed69a1b51a3fd3b3df">update_labels</a>()</div>
+<div class="line"><a name="l00797"></a><span class="lineno">  797</span>&#160;{</div>
+<div class="line"><a name="l00798"></a><span class="lineno">  798</span>&#160; </div>
+<div class="line"><a name="l00799"></a><span class="lineno">  799</span>&#160;    <a class="code" href="struct_wallet.html">Wallet</a> *wallet = <a class="code" href="wallet_8h.html#a993fb7ec0c86c7a2d8ff68363e9f5304">get_my_wallet</a>();</div>
+<div class="line"><a name="l00800"></a><span class="lineno">  800</span>&#160;    <span class="keywordtype">double</span> money = wallet-&gt;<a class="code" href="struct_wallet.html#a09041dfaf996bee7cc220f076325f2ec">amount</a> / 100000000.0f;</div>
+<div class="line"><a name="l00801"></a><span class="lineno">  801</span>&#160;    <span class="keywordflow">if</span>(strtod(gtk_label_get_text(<a class="code" href="ui_8c.html#ab43804688ba42c6200ce731eb35c5dc8">balance_1</a>), NULL) != money)</div>
+<div class="line"><a name="l00802"></a><span class="lineno">  802</span>&#160;    {</div>
+<div class="line"><a name="l00803"></a><span class="lineno">  803</span>&#160;        <span class="keywordtype">char</span> buff1[30];</div>
+<div class="line"><a name="l00804"></a><span class="lineno">  804</span>&#160;        sprintf(buff1, <span class="stringliteral">&quot;%lf&quot;</span>, money);</div>
+<div class="line"><a name="l00805"></a><span class="lineno">  805</span>&#160;        gtk_label_set_text(<a class="code" href="ui_8c.html#ab43804688ba42c6200ce731eb35c5dc8">balance_1</a>, buff1);</div>
+<div class="line"><a name="l00806"></a><span class="lineno">  806</span>&#160;        gtk_label_set_text(<a class="code" href="ui_8c.html#a868e43b57c30e358fe58e0deb101f42a">balance_2</a>, buff1);</div>
+<div class="line"><a name="l00807"></a><span class="lineno">  807</span>&#160;    }</div>
+<div class="line"><a name="l00808"></a><span class="lineno">  808</span>&#160;    BIO *pubkey = BIO_new(BIO_s_mem());</div>
+<div class="line"><a name="l00809"></a><span class="lineno">  809</span>&#160;    PEM_write_bio_RSAPublicKey(pubkey, wallet-&gt;<a class="code" href="struct_wallet.html#a7c3fbe707cd5eabe1365d44b5d1cd16f">pub_key</a>);</div>
+<div class="line"><a name="l00810"></a><span class="lineno">  810</span>&#160;    <span class="keywordtype">char</span> temp[5000];</div>
+<div class="line"><a name="l00811"></a><span class="lineno">  811</span>&#160;    <span class="keywordtype">int</span> rsa_size = BIO_pending(pubkey);</div>
+<div class="line"><a name="l00812"></a><span class="lineno">  812</span>&#160;    BIO_read(pubkey, temp, rsa_size);</div>
+<div class="line"><a name="l00813"></a><span class="lineno">  813</span>&#160;    temp[rsa_size] = 0;</div>
+<div class="line"><a name="l00814"></a><span class="lineno">  814</span>&#160;    gtk_label_set_text(<a class="code" href="ui_8c.html#a8a74dabd2d33f171e4de9e1031b27ddf">public_key_label</a>, temp);</div>
+<div class="line"><a name="l00815"></a><span class="lineno">  815</span>&#160;    BIO_free_all(pubkey);</div>
+<div class="line"><a name="l00816"></a><span class="lineno">  816</span>&#160;    <span class="comment">/*if(atol(gtk_label_get_text(stake_label1)) != Get_Stake)</span></div>
+<div class="line"><a name="l00817"></a><span class="lineno">  817</span>&#160;<span class="comment">    {</span></div>
+<div class="line"><a name="l00818"></a><span class="lineno">  818</span>&#160;<span class="comment">        char buff2[30];</span></div>
+<div class="line"><a name="l00819"></a><span class="lineno">  819</span>&#160;<span class="comment">        sprintf(buff, &quot;%lu&quot;,Get_Stake);</span></div>
+<div class="line"><a name="l00820"></a><span class="lineno">  820</span>&#160;<span class="comment">        gtk_label_set_text(stake_label1, buff2);</span></div>
+<div class="line"><a name="l00821"></a><span class="lineno">  821</span>&#160;<span class="comment">        gtk_label_set_text(stake_label2, buff2);</span></div>
+<div class="line"><a name="l00822"></a><span class="lineno">  822</span>&#160;<span class="comment">        gtk_label_set_text(stake_label3, buff2);</span></div>
+<div class="line"><a name="l00823"></a><span class="lineno">  823</span>&#160;<span class="comment">    }</span></div>
+<div class="line"><a name="l00824"></a><span class="lineno">  824</span>&#160;<span class="comment">    */</span></div>
+<div class="line"><a name="l00825"></a><span class="lineno">  825</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="aui_8c_html_a1b51e8f243dd78092b7aff4604d453f8"><div class="ttname"><a href="ui_8c.html#a1b51e8f243dd78092b7aff4604d453f8">validators_votes_label</a></div><div class="ttdeci">GtkLabel * validators_votes_label</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00047">ui.c:47</a></div></div>
@@ -897,16 +919,16 @@ $(document).ready(function(){initNavTree('ui_8c_source.html',''); initResizable(
 <div class="ttc" id="aui_8c_html_a5a64b67ddec08a9b9d81b4facd94047a"><div class="ttname"><a href="ui_8c.html#a5a64b67ddec08a9b9d81b4facd94047a">transa_amount</a></div><div class="ttdeci">GtkEntry * transa_amount</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00048">ui.c:48</a></div></div>
 <div class="ttc" id="aui_8h_html"><div class="ttname"><a href="ui_8h.html">ui.h</a></div></div>
 <div class="ttc" id="aui_8c_html_a23771b2624008125017ad71bbec0924b"><div class="ttname"><a href="ui_8c.html#a23771b2624008125017ad71bbec0924b">block_error_label</a></div><div class="ttdeci">GtkLabel * block_error_label</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00045">ui.c:45</a></div></div>
-<div class="ttc" id="aui_8c_html_ac37428318289fb0254b3cd9a9dec6b6e"><div class="ttname"><a href="ui_8c.html#ac37428318289fb0254b3cd9a9dec6b6e">on_create_key_but1_press</a></div><div class="ttdeci">gboolean on_create_key_but1_press(__attribute__((unused)) GtkWidget *widget, __attribute__((unused)) GdkEventKey *event, __attribute__((unused)) gpointer user_data)</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00664">ui.c:664</a></div></div>
+<div class="ttc" id="aui_8c_html_ac37428318289fb0254b3cd9a9dec6b6e"><div class="ttname"><a href="ui_8c.html#ac37428318289fb0254b3cd9a9dec6b6e">on_create_key_but1_press</a></div><div class="ttdeci">gboolean on_create_key_but1_press(__attribute__((unused)) GtkWidget *widget, __attribute__((unused)) GdkEventKey *event, __attribute__((unused)) gpointer user_data)</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00686">ui.c:686</a></div></div>
 <div class="ttc" id="aui_8c_html_a64f8a04199f203429b42fe1d10d4ed6f"><div class="ttname"><a href="ui_8c.html#a64f8a04199f203429b42fe1d10d4ed6f">contacts_combo</a></div><div class="ttdeci">GtkComboBox * contacts_combo</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00073">ui.c:73</a></div></div>
 <div class="ttc" id="aui_8c_html_a476e49ba86b596073ff2711ff3c0273a"><div class="ttname"><a href="ui_8c.html#a476e49ba86b596073ff2711ff3c0273a">error_label</a></div><div class="ttdeci">GtkLabel * error_label</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00038">ui.c:38</a></div></div>
 <div class="ttc" id="aui_8c_html_a7d4f1acd200f42ce8a25b24bdcd11f6e"><div class="ttname"><a href="ui_8c.html#a7d4f1acd200f42ce8a25b24bdcd11f6e">tv_con</a></div><div class="ttdeci">GtkTreeView * tv_con</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00059">ui.c:59</a></div></div>
 <div class="ttc" id="aui_8c_html_ac58136f7a44535d618d5cc333265f7c5"><div class="ttname"><a href="ui_8c.html#ac58136f7a44535d618d5cc333265f7c5">block_height</a></div><div class="ttdeci">size_t block_height</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00078">ui.c:78</a></div></div>
-<div class="ttc" id="aui_8c_html_aa118feebec7cfa09ac8e958107872c47"><div class="ttname"><a href="ui_8c.html#aa118feebec7cfa09ac8e958107872c47">on_connect_but_press</a></div><div class="ttdeci">gboolean on_connect_but_press(__attribute__((unused)) GtkWidget *widget, __attribute__((unused)) GdkEventKey *event, __attribute__((unused)) gpointer user_data)</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00724">ui.c:724</a></div></div>
+<div class="ttc" id="aui_8c_html_aa118feebec7cfa09ac8e958107872c47"><div class="ttname"><a href="ui_8c.html#aa118feebec7cfa09ac8e958107872c47">on_connect_but_press</a></div><div class="ttdeci">gboolean on_connect_but_press(__attribute__((unused)) GtkWidget *widget, __attribute__((unused)) GdkEventKey *event, __attribute__((unused)) gpointer user_data)</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00746">ui.c:746</a></div></div>
 <div class="ttc" id="aui_8c_html_a3d023a78babb0df3470dc81314feadd5"><div class="ttname"><a href="ui_8c.html#a3d023a78babb0df3470dc81314feadd5">ts_con</a></div><div class="ttdeci">GtkTreeStore * ts_con</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00060">ui.c:60</a></div></div>
 <div class="ttc" id="aui_8c_html_acc866aa77170d1eaec44d9085748d6d5"><div class="ttname"><a href="ui_8c.html#acc866aa77170d1eaec44d9085748d6d5">total_transa_label</a></div><div class="ttdeci">GtkLabel * total_transa_label</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00041">ui.c:41</a></div></div>
 <div class="ttc" id="astruct_wallet_html"><div class="ttname"><a href="struct_wallet.html">Wallet</a></div><div class="ttdef"><b>Definition:</b> <a href="wallet_8h_source.html#l00010">wallet.h:10</a></div></div>
-<div class="ttc" id="aui_8c_html_af1854ec5ff4099ed69a1b51a3fd3b3df"><div class="ttname"><a href="ui_8c.html#af1854ec5ff4099ed69a1b51a3fd3b3df">update_labels</a></div><div class="ttdeci">void update_labels()</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00774">ui.c:774</a></div></div>
+<div class="ttc" id="aui_8c_html_af1854ec5ff4099ed69a1b51a3fd3b3df"><div class="ttname"><a href="ui_8c.html#af1854ec5ff4099ed69a1b51a3fd3b3df">update_labels</a></div><div class="ttdeci">void update_labels()</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00796">ui.c:796</a></div></div>
 <div class="ttc" id="aui_8c_html_a9856845eebffe4f02ca0b6c491816d1b"><div class="ttname"><a href="ui_8c.html#a9856845eebffe4f02ca0b6c491816d1b">recipient_key</a></div><div class="ttdeci">GtkEntry * recipient_key</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00049">ui.c:49</a></div></div>
 <div class="ttc" id="ahash_8h_html_a67d06acefe39c395887f87d76bed5ba3"><div class="ttname"><a href="hash_8h.html#a67d06acefe39c395887f87d76bed5ba3">sha384_data</a></div><div class="ttdeci">char * sha384_data(void *data, size_t len_data)</div><div class="ttdoc">Apply the SHA384 algorithm on a 'data' of size 'len_data'.</div><div class="ttdef"><b>Definition:</b> <a href="hash_8c_source.html#l00006">hash.c:6</a></div></div>
 <div class="ttc" id="aui_8c_html_a472629946cf5a35483eb1d4a4c79822f"><div class="ttname"><a href="ui_8c.html#a472629946cf5a35483eb1d4a4c79822f">cr2_th</a></div><div class="ttdeci">GtkCellRenderer * cr2_th</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00071">ui.c:71</a></div></div>
@@ -918,10 +940,11 @@ $(document).ready(function(){initNavTree('ui_8c_source.html',''); initResizable(
 <div class="ttc" id="aui_8c_html_af7c418915599a0feee638b616aca25ec"><div class="ttname"><a href="ui_8c.html#af7c418915599a0feee638b616aca25ec">name_entry_con</a></div><div class="ttdeci">GtkEntry * name_entry_con</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00054">ui.c:54</a></div></div>
 <div class="ttc" id="astructinfos__st_html"><div class="ttname"><a href="structinfos__st.html">infos_st</a></div><div class="ttdef"><b>Definition:</b> <a href="network_8h_source.html#l00055">network.h:55</a></div></div>
 <div class="ttc" id="aui_8c_html_aa345dbc39b26d7892d6b987c3b7dd280"><div class="ttname"><a href="ui_8c.html#aa345dbc39b26d7892d6b987c3b7dd280">password_entry2</a></div><div class="ttdeci">GtkEntry * password_entry2</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00057">ui.c:57</a></div></div>
+<div class="ttc" id="atransaction_8h_html_a96043a50e70275b11a4adb73a30e71ec"><div class="ttname"><a href="transaction_8h.html#a96043a50e70275b11a4adb73a30e71ec">T_TYPE_WITHDRAW_STAKE</a></div><div class="ttdeci">#define T_TYPE_WITHDRAW_STAKE</div><div class="ttdef"><b>Definition:</b> <a href="transaction_8h_source.html#l00023">transaction.h:23</a></div></div>
 <div class="ttc" id="astruct_block_data_html_a6a025b5ff7c48992e8d360c35f02b7e8"><div class="ttname"><a href="struct_block_data.html#a6a025b5ff7c48992e8d360c35f02b7e8">BlockData::nb_transactions</a></div><div class="ttdeci">uint16_t nb_transactions</div><div class="ttdef"><b>Definition:</b> <a href="block_8h_source.html#l00069">block.h:69</a></div></div>
 <div class="ttc" id="aui_8c_html_a9f9ada2bfa01c401df766ed824f0fdfd"><div class="ttname"><a href="ui_8c.html#a9f9ada2bfa01c401df766ed824f0fdfd">add_transaction_with_contact</a></div><div class="ttdeci">void add_transaction_with_contact(double amount, char *public_key, char *date)</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00460">ui.c:460</a></div></div>
 <div class="ttc" id="aui_8c_html_a92ee61739bde1f3a7d4eaf16edc12f92"><div class="ttname"><a href="ui_8c.html#a92ee61739bde1f3a7d4eaf16edc12f92">transa_number_label</a></div><div class="ttdeci">GtkLabel * transa_number_label</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00040">ui.c:40</a></div></div>
-<div class="ttc" id="aui_8c_html_ad00b3507b4bb09e32b88b8c4e015c7bf"><div class="ttname"><a href="ui_8c.html#ad00b3507b4bb09e32b88b8c4e015c7bf">add_contact</a></div><div class="ttdeci">gboolean add_contact(__attribute__((unused)) GtkWidget *widget, __attribute__((unused)) GdkEventKey *event, __attribute__((unused)) gpointer user_data)</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00573">ui.c:573</a></div></div>
+<div class="ttc" id="aui_8c_html_ad00b3507b4bb09e32b88b8c4e015c7bf"><div class="ttname"><a href="ui_8c.html#ad00b3507b4bb09e32b88b8c4e015c7bf">add_contact</a></div><div class="ttdeci">gboolean add_contact(__attribute__((unused)) GtkWidget *widget, __attribute__((unused)) GdkEventKey *event, __attribute__((unused)) gpointer user_data)</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00595">ui.c:595</a></div></div>
 <div class="ttc" id="aui_8c_html_af3076ab0ad7b6b46fc474c9cdf6356cc"><div class="ttname"><a href="ui_8c.html#af3076ab0ad7b6b46fc474c9cdf6356cc">latest_block_name3</a></div><div class="ttdeci">GtkLabel * latest_block_name3</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00037">ui.c:37</a></div></div>
 <div class="ttc" id="aui_8c_html_a59e5b21a4ef99d9045be23eb799cf84d"><div class="ttname"><a href="ui_8c.html#a59e5b21a4ef99d9045be23eb799cf84d">cx2_con</a></div><div class="ttdeci">GtkTreeViewColumn * cx2_con</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00062">ui.c:62</a></div></div>
 <div class="ttc" id="astruct_transaction_data_html_a09041dfaf996bee7cc220f076325f2ec"><div class="ttname"><a href="struct_transaction_data.html#a09041dfaf996bee7cc220f076325f2ec">TransactionData::amount</a></div><div class="ttdeci">size_t amount</div><div class="ttdef"><b>Definition:</b> <a href="block_8h_source.html#l00040">block.h:40</a></div></div>
@@ -947,7 +970,7 @@ $(document).ready(function(){initNavTree('ui_8c_source.html',''); initResizable(
 <div class="ttc" id="aui_8c_html_a8909bf913522e177fc1629b07c32420c"><div class="ttname"><a href="ui_8c.html#a8909bf913522e177fc1629b07c32420c">load_transactions_from_file</a></div><div class="ttdeci">void load_transactions_from_file()</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00490">ui.c:490</a></div></div>
 <div class="ttc" id="aui_8c_html_a61df27324bc5fa1509abd1ef234f0368"><div class="ttname"><a href="ui_8c.html#a61df27324bc5fa1509abd1ef234f0368">tv_th</a></div><div class="ttdeci">GtkTreeView * tv_th</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00065">ui.c:65</a></div></div>
 <div class="ttc" id="aui_8c_html_a2121cdc7aa51459e7c0b5e09364d58df"><div class="ttname"><a href="ui_8c.html#a2121cdc7aa51459e7c0b5e09364d58df">cx2_th</a></div><div class="ttdeci">GtkTreeViewColumn * cx2_th</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00068">ui.c:68</a></div></div>
-<div class="ttc" id="aui_8c_html_a3cce6cef71ccb6ae5dd4c9ca852eb31f"><div class="ttname"><a href="ui_8c.html#a3cce6cef71ccb6ae5dd4c9ca852eb31f">add_contacts_from_file</a></div><div class="ttdeci">void add_contacts_from_file(char *name, char *public_key)</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00610">ui.c:610</a></div></div>
+<div class="ttc" id="aui_8c_html_a3cce6cef71ccb6ae5dd4c9ca852eb31f"><div class="ttname"><a href="ui_8c.html#a3cce6cef71ccb6ae5dd4c9ca852eb31f">add_contacts_from_file</a></div><div class="ttdeci">void add_contacts_from_file(char *name, char *public_key)</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00632">ui.c:632</a></div></div>
 <div class="ttc" id="aui_8c_html_aefec39c0d533d739e5f677b624fd65d8"><div class="ttname"><a href="ui_8c.html#aefec39c0d533d739e5f677b624fd65d8">set_block_viewer_plus</a></div><div class="ttdeci">gboolean set_block_viewer_plus(__attribute__((unused)) GtkWidget *widget, __attribute__((unused)) GdkEventKey *event, __attribute__((unused)) gpointer user_data)</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00238">ui.c:238</a></div></div>
 <div class="ttc" id="aui_8c_html_ad47cb2d8d2bce6ac4707dbe417d210c4"><div class="ttname"><a href="ui_8c.html#ad47cb2d8d2bce6ac4707dbe417d210c4">prev_block_valid_label</a></div><div class="ttdeci">GtkLabel * prev_block_valid_label</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00043">ui.c:43</a></div></div>
 <div class="ttc" id="aui_8c_html_a96e0a79f6033861a062317356204bceb"><div class="ttname"><a href="ui_8c.html#a96e0a79f6033861a062317356204bceb">cr1_combo</a></div><div class="ttdeci">GtkCellRenderer * cr1_combo</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00075">ui.c:75</a></div></div>
@@ -955,6 +978,7 @@ $(document).ready(function(){initNavTree('ui_8c_source.html',''); initResizable(
 <div class="ttc" id="aui_8c_html_a7abe8e8c8f8674c6d9e0f4a9f33d2b3a"><div class="ttname"><a href="ui_8c.html#a7abe8e8c8f8674c6d9e0f4a9f33d2b3a">on_invest_button1_press</a></div><div class="ttdeci">gboolean on_invest_button1_press(__attribute__((unused)) GtkWidget *widget, __attribute__((unused)) GdkEventKey *event, __attribute__((unused)) gpointer user_data)</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00525">ui.c:525</a></div></div>
 <div class="ttc" id="astruct_block_data_html"><div class="ttname"><a href="struct_block_data.html">BlockData</a></div><div class="ttdef"><b>Definition:</b> <a href="block_8h_source.html#l00061">block.h:61</a></div></div>
 <div class="ttc" id="aui_8c_html_a30b512f884b7c54ff9bfe3f8b42a665f"><div class="ttname"><a href="ui_8c.html#a30b512f884b7c54ff9bfe3f8b42a665f">recover_entry</a></div><div class="ttdeci">GtkEntry * recover_entry</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00053">ui.c:53</a></div></div>
+<div class="ttc" id="atransaction_8h_html_ab89b46767fb01957106298a1e1b71cc4"><div class="ttname"><a href="transaction_8h.html#ab89b46767fb01957106298a1e1b71cc4">T_TYPE_ADD_STAKE</a></div><div class="ttdeci">#define T_TYPE_ADD_STAKE</div><div class="ttdef"><b>Definition:</b> <a href="transaction_8h_source.html#l00022">transaction.h:22</a></div></div>
 <div class="ttc" id="aui_8c_html_a5e22e78adc3ccb25f63ee84836cc83e4"><div class="ttname"><a href="ui_8c.html#a5e22e78adc3ccb25f63ee84836cc83e4">on_transaction_button_press</a></div><div class="ttdeci">gboolean on_transaction_button_press(__attribute__((unused)) GtkWidget *widget, __attribute__((unused)) GdkEventKey *event, __attribute__((unused)) gpointer user_data)</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00374">ui.c:374</a></div></div>
 <div class="ttc" id="aui_8c_html_a2bccfa5ba7901a302e24e5c4d6122b04"><div class="ttname"><a href="ui_8c.html#a2bccfa5ba7901a302e24e5c4d6122b04">cause_entry</a></div><div class="ttdeci">GtkEntry * cause_entry</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00051">ui.c:51</a></div></div>
 <div class="ttc" id="aui_8c_html_aeed0de8dfeacfee1c56cfbf156cd9b7b"><div class="ttname"><a href="ui_8c.html#aeed0de8dfeacfee1c56cfbf156cd9b7b">set_block_viewer</a></div><div class="ttdeci">void set_block_viewer(int height)</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00270">ui.c:270</a></div></div>
@@ -965,9 +989,9 @@ $(document).ready(function(){initNavTree('ui_8c_source.html',''); initResizable(
 <div class="ttc" id="aui_8c_html_a295a9203dbc00bdeefacfa4172450feb"><div class="ttname"><a href="ui_8c.html#a295a9203dbc00bdeefacfa4172450feb">cr1_th</a></div><div class="ttdeci">GtkCellRenderer * cr1_th</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00070">ui.c:70</a></div></div>
 <div class="ttc" id="astruct_transaction_html_a9146d56260acb20560c4f8d46c429e55"><div class="ttname"><a href="struct_transaction.html#a9146d56260acb20560c4f8d46c429e55">Transaction::transaction_data</a></div><div class="ttdeci">TransactionData transaction_data</div><div class="ttdef"><b>Definition:</b> <a href="block_8h_source.html#l00053">block.h:53</a></div></div>
 <div class="ttc" id="aui_8c_html_a868e43b57c30e358fe58e0deb101f42a"><div class="ttname"><a href="ui_8c.html#a868e43b57c30e358fe58e0deb101f42a">balance_2</a></div><div class="ttdeci">GtkLabel * balance_2</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00025">ui.c:25</a></div></div>
-<div class="ttc" id="aui_8c_html_a73fe931a2fbeb2086428ad91c0cbc05e"><div class="ttname"><a href="ui_8c.html#a73fe931a2fbeb2086428ad91c0cbc05e">load_contacts_from_file</a></div><div class="ttdeci">void load_contacts_from_file()</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00619">ui.c:619</a></div></div>
+<div class="ttc" id="aui_8c_html_a73fe931a2fbeb2086428ad91c0cbc05e"><div class="ttname"><a href="ui_8c.html#a73fe931a2fbeb2086428ad91c0cbc05e">load_contacts_from_file</a></div><div class="ttdeci">void load_contacts_from_file()</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00641">ui.c:641</a></div></div>
 <div class="ttc" id="astruct_block_html_a844db3988bb76609b2ca47e6c19c98eb"><div class="ttname"><a href="struct_block.html#a844db3988bb76609b2ca47e6c19c98eb">Block::validators_votes</a></div><div class="ttdeci">char validators_votes[NB_VOTES_BITMAP]</div><div class="ttdef"><b>Definition:</b> <a href="block_8h_source.html#l00092">block.h:92</a></div></div>
-<div class="ttc" id="aui_8c_html_a399dcb9da92a8915352bb0f96df00bc9"><div class="ttname"><a href="ui_8c.html#a399dcb9da92a8915352bb0f96df00bc9">on_add_contact_button1_press</a></div><div class="ttdeci">gboolean on_add_contact_button1_press(__attribute__((unused)) GtkWidget *widget, __attribute__((unused)) GdkEventKey *event, __attribute__((unused)) gpointer user_data)</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00564">ui.c:564</a></div></div>
+<div class="ttc" id="aui_8c_html_a399dcb9da92a8915352bb0f96df00bc9"><div class="ttname"><a href="ui_8c.html#a399dcb9da92a8915352bb0f96df00bc9">on_add_contact_button1_press</a></div><div class="ttdeci">gboolean on_add_contact_button1_press(__attribute__((unused)) GtkWidget *widget, __attribute__((unused)) GdkEventKey *event, __attribute__((unused)) gpointer user_data)</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00586">ui.c:586</a></div></div>
 <div class="ttc" id="astruct_block_data_html_acf585c1809511c4f5b5366bb2bc2e855"><div class="ttname"><a href="struct_block_data.html#acf585c1809511c4f5b5366bb2bc2e855">BlockData::transactions</a></div><div class="ttdeci">Transaction ** transactions</div><div class="ttdef"><b>Definition:</b> <a href="block_8h_source.html#l00070">block.h:70</a></div></div>
 <div class="ttc" id="aui_8c_html_aa390af6abf83347d6b141cee7b7dde29"><div class="ttname"><a href="ui_8c.html#aa390af6abf83347d6b141cee7b7dde29">update_sync</a></div><div class="ttdeci">void update_sync(size_t actual, size_t final)</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00339">ui.c:339</a></div></div>
 <div class="ttc" id="aui_8c_html_a48095bf105fef9a39a872144a56e23ab"><div class="ttname"><a href="ui_8c.html#a48095bf105fef9a39a872144a56e23ab">mempool_label</a></div><div class="ttdeci">GtkLabel * mempool_label</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00032">ui.c:32</a></div></div>
@@ -975,8 +999,8 @@ $(document).ready(function(){initNavTree('ui_8c_source.html',''); initResizable(
 <div class="ttc" id="aui_8c_html_a9a98b342050f650b678b3f482e70923d"><div class="ttname"><a href="ui_8c.html#a9a98b342050f650b678b3f482e70923d">block_height_label</a></div><div class="ttdeci">GtkLabel * block_height_label</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00039">ui.c:39</a></div></div>
 <div class="ttc" id="aui_8c_html_aef63568bf1128193551f9c914c544752"><div class="ttname"><a href="ui_8c.html#aef63568bf1128193551f9c914c544752">latest_block_name1</a></div><div class="ttdeci">GtkLabel * latest_block_name1</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00035">ui.c:35</a></div></div>
 <div class="ttc" id="aui_8c_html_af0fd9e6f06e2040c43a09ef58d1d3468"><div class="ttname"><a href="ui_8c.html#af0fd9e6f06e2040c43a09ef58d1d3468">setup</a></div><div class="ttdeci">void * setup(void *args)</div><div class="ttdoc">Setups the gtk widgets for the GUI.</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00080">ui.c:80</a></div></div>
-<div class="ttc" id="aui_8c_html_acfeb1c1504a9c8dab16b48f4ee0a8324"><div class="ttname"><a href="ui_8c.html#acfeb1c1504a9c8dab16b48f4ee0a8324">add_contact_to_combobox</a></div><div class="ttdeci">void add_contact_to_combobox(char *name)</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00602">ui.c:602</a></div></div>
-<div class="ttc" id="aui_8c_html_ab865e6138c061d47b274af99c574af03"><div class="ttname"><a href="ui_8c.html#ab865e6138c061d47b274af99c574af03">on_create_key_but2_press</a></div><div class="ttdeci">gboolean on_create_key_but2_press(__attribute__((unused)) GtkWidget *widget, __attribute__((unused)) GdkEventKey *event, __attribute__((unused)) gpointer user_data)</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00679">ui.c:679</a></div></div>
+<div class="ttc" id="aui_8c_html_acfeb1c1504a9c8dab16b48f4ee0a8324"><div class="ttname"><a href="ui_8c.html#acfeb1c1504a9c8dab16b48f4ee0a8324">add_contact_to_combobox</a></div><div class="ttdeci">void add_contact_to_combobox(char *name)</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00624">ui.c:624</a></div></div>
+<div class="ttc" id="aui_8c_html_ab865e6138c061d47b274af99c574af03"><div class="ttname"><a href="ui_8c.html#ab865e6138c061d47b274af99c574af03">on_create_key_but2_press</a></div><div class="ttdeci">gboolean on_create_key_but2_press(__attribute__((unused)) GtkWidget *widget, __attribute__((unused)) GdkEventKey *event, __attribute__((unused)) gpointer user_data)</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00701">ui.c:701</a></div></div>
 <div class="ttc" id="anetwork_8h_html_a3d8810ff759f090d31d612cc51cf9158"><div class="ttname"><a href="network_8h.html#a3d8810ff759f090d31d612cc51cf9158">__attribute__</a></div><div class="ttdeci">struct __attribute__((__packed__)) get_blocks_t</div><div class="ttdef"><b>Definition:</b> <a href="network_8h_source.html#l00103">network.h:103</a></div></div>
 <div class="ttc" id="aui_8c_html_a79eea76daf4b03659d5fbeec022d2185"><div class="ttname"><a href="ui_8c.html#a79eea76daf4b03659d5fbeec022d2185">nb_validators_label</a></div><div class="ttdeci">GtkLabel * nb_validators_label</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00044">ui.c:44</a></div></div>
 <div class="ttc" id="aui_8c_html_abc67495e5ecb1386fead3eec50be64eb"><div class="ttname"><a href="ui_8c.html#abc67495e5ecb1386fead3eec50be64eb">cx1_th</a></div><div class="ttdeci">GtkTreeViewColumn * cx1_th</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00067">ui.c:67</a></div></div>
@@ -984,15 +1008,15 @@ $(document).ready(function(){initNavTree('ui_8c_source.html',''); initResizable(
 <div class="ttc" id="aui_8c_html_a6f90e7dead0868fb0ea2deccc1868aba"><div class="ttname"><a href="ui_8c.html#a6f90e7dead0868fb0ea2deccc1868aba">on_main_window_delete</a></div><div class="ttdeci">gboolean on_main_window_delete(GtkWidget *widget, __attribute__((unused)) gpointer data)</div><div class="ttdoc">Destroys the window when it is closed.</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00358">ui.c:358</a></div></div>
 <div class="ttc" id="astruct_block_data_html_a7e3cf87673d9cf2f1b5341ad61427fea"><div class="ttname"><a href="struct_block_data.html#a7e3cf87673d9cf2f1b5341ad61427fea">BlockData::nb_validators</a></div><div class="ttdeci">int nb_validators</div><div class="ttdef"><b>Definition:</b> <a href="block_8h_source.html#l00073">block.h:73</a></div></div>
 <div class="ttc" id="aui_8h_html_a46ad7408bf2f0e142f3c124e26bd4b19"><div class="ttname"><a href="ui_8h.html#a46ad7408bf2f0e142f3c124e26bd4b19">blocksinfo</a></div><div class="ttdeci">struct blockinfo blocksinfo[3]</div><div class="ttdef"><b>Definition:</b> <a href="ui_8h_source.html#l00032">ui.h:32</a></div></div>
-<div class="ttc" id="aui_8c_html_a1513831bd850ea1b552ef70538afb16d"><div class="ttname"><a href="ui_8c.html#a1513831bd850ea1b552ef70538afb16d">on_recover_button1_press</a></div><div class="ttdeci">gboolean on_recover_button1_press(__attribute__((unused)) GtkWidget *widget, __attribute__((unused)) GdkEventKey *event, __attribute__((unused)) gpointer user_data)</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00544">ui.c:544</a></div></div>
+<div class="ttc" id="aui_8c_html_a1513831bd850ea1b552ef70538afb16d"><div class="ttname"><a href="ui_8c.html#a1513831bd850ea1b552ef70538afb16d">on_recover_button1_press</a></div><div class="ttdeci">gboolean on_recover_button1_press(__attribute__((unused)) GtkWidget *widget, __attribute__((unused)) GdkEventKey *event, __attribute__((unused)) gpointer user_data)</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00555">ui.c:555</a></div></div>
 <div class="ttc" id="aui_8c_html_a349d73cd99b37cff7f14d3269fae4057"><div class="ttname"><a href="ui_8c.html#a349d73cd99b37cff7f14d3269fae4057">on_main_window_destroy</a></div><div class="ttdeci">void on_main_window_destroy(__attribute__((unused)) GtkWidget *widget, __attribute__((unused)) gpointer data)</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00367">ui.c:367</a></div></div>
 <div class="ttc" id="astruct_block_data_html_a3f86b2fdc165f662a1d3a69ab9cb5fe2"><div class="ttname"><a href="struct_block_data.html#a3f86b2fdc165f662a1d3a69ab9cb5fe2">BlockData::magic</a></div><div class="ttdeci">char magic</div><div class="ttdef"><b>Definition:</b> <a href="block_8h_source.html#l00063">block.h:63</a></div></div>
 <div class="ttc" id="aui_8c_html_ae4c608b5626430bac55322e32309bf8f"><div class="ttname"><a href="ui_8c.html#ae4c608b5626430bac55322e32309bf8f">change_label_text</a></div><div class="ttdeci">void change_label_text(GtkLabel *label, char *text)</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00233">ui.c:233</a></div></div>
 <div class="ttc" id="astruct_block_html"><div class="ttname"><a href="struct_block.html">Block</a></div><div class="ttdef"><b>Definition:</b> <a href="block_8h_source.html#l00084">block.h:84</a></div></div>
-<div class="ttc" id="aui_8c_html_a0ff6af24bc9be5261b9ef9f6169c91da"><div class="ttname"><a href="ui_8c.html#a0ff6af24bc9be5261b9ef9f6169c91da">get_public_key_from_contacts</a></div><div class="ttdeci">char * get_public_key_from_contacts(const char *name)</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00645">ui.c:645</a></div></div>
+<div class="ttc" id="aui_8c_html_a0ff6af24bc9be5261b9ef9f6169c91da"><div class="ttname"><a href="ui_8c.html#a0ff6af24bc9be5261b9ef9f6169c91da">get_public_key_from_contacts</a></div><div class="ttdeci">char * get_public_key_from_contacts(const char *name)</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00667">ui.c:667</a></div></div>
 <div class="ttc" id="aui_8c_html_a62f3e2bbc9db01a78aa7bd51fa3baae9"><div class="ttname"><a href="ui_8c.html#a62f3e2bbc9db01a78aa7bd51fa3baae9">progress_bar_blockchain</a></div><div class="ttdeci">GtkProgressBar * progress_bar_blockchain</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00076">ui.c:76</a></div></div>
 <div class="ttc" id="aui_8c_html_a2abce63b237dd17f1a7994eef33c13f2"><div class="ttname"><a href="ui_8c.html#a2abce63b237dd17f1a7994eef33c13f2">add_new_blockinfo</a></div><div class="ttdeci">void add_new_blockinfo(size_t height, size_t transaction)</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00322">ui.c:322</a></div></div>
-<div class="ttc" id="aui_8c_html_ad8f99ac51861be5da7d885cdd2e26ea0"><div class="ttname"><a href="ui_8c.html#ad8f99ac51861be5da7d885cdd2e26ea0">on_recover_button2_press</a></div><div class="ttdeci">gboolean on_recover_button2_press(__attribute__((unused)) GtkWidget *widget, __attribute__((unused)) GdkEventKey *event, __attribute__((unused)) gpointer user_data)</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00553">ui.c:553</a></div></div>
+<div class="ttc" id="aui_8c_html_ad8f99ac51861be5da7d885cdd2e26ea0"><div class="ttname"><a href="ui_8c.html#ad8f99ac51861be5da7d885cdd2e26ea0">on_recover_button2_press</a></div><div class="ttdeci">gboolean on_recover_button2_press(__attribute__((unused)) GtkWidget *widget, __attribute__((unused)) GdkEventKey *event, __attribute__((unused)) gpointer user_data)</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00564">ui.c:564</a></div></div>
 <div class="ttc" id="astruct_block_html_aa4ad7aceb75575844e2db05c93709bba"><div class="ttname"><a href="struct_block.html#aa4ad7aceb75575844e2db05c93709bba">Block::block_data</a></div><div class="ttdeci">BlockData block_data</div><div class="ttdef"><b>Definition:</b> <a href="block_8h_source.html#l00087">block.h:87</a></div></div>
 <div class="ttc" id="astruct_wallet_html_a09041dfaf996bee7cc220f076325f2ec"><div class="ttname"><a href="struct_wallet.html#a09041dfaf996bee7cc220f076325f2ec">Wallet::amount</a></div><div class="ttdeci">size_t amount</div><div class="ttdef"><b>Definition:</b> <a href="wallet_8h_source.html#l00015">wallet.h:15</a></div></div>
 <div class="ttc" id="aui_8c_html_a02d08d31202ad6ef53ebda0f019fd823"><div class="ttname"><a href="ui_8c.html#a02d08d31202ad6ef53ebda0f019fd823">cx3_th</a></div><div class="ttdeci">GtkTreeViewColumn * cx3_th</div><div class="ttdef"><b>Definition:</b> <a href="ui_8c_source.html#l00069">ui.c:69</a></div></div>

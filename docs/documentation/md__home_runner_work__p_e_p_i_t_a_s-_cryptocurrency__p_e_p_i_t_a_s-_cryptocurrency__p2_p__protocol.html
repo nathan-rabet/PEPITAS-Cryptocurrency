@@ -87,9 +87,9 @@ $(document).ready(function(){initNavTree('md__home_runner_work__p_e_p_i_t_a_s-_c
 <div class="title">PEPITAS NETWORK PROTOCOL </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h1><a class="anchor" id="autotoc_md1"></a>
+<div class="textblock"><h1><a class="anchor" id="autotoc_md2"></a>
 HEADERS</h1>
-<h2><a class="anchor" id="autotoc_md2"></a>
+<h2><a class="anchor" id="autotoc_md3"></a>
 Sync Headers</h2>
 <ol type="1">
 <li>CONNECTION TO NETWORK</li>
@@ -100,30 +100,30 @@ Sync Headers</h2>
 <li>GET PENDING TRANSACTION LIST</li>
 <li>REJECT DEMAND </li>
 </ol>
-<h2><a class="anchor" id="autotoc_md3"></a>
+<h2><a class="anchor" id="autotoc_md4"></a>
 Running Headers</h2>
 <ol type="1">
 <li>SEND PENDING TRANSACTION </li>
 </ol>
-<h2><a class="anchor" id="autotoc_md4"></a>
+<h2><a class="anchor" id="autotoc_md5"></a>
 Validating Headers</h2>
 <ol type="1">
 <li>SEND BLOCK EPOCHMAN</li>
 <li>SEND VOTE</li>
 </ol>
-<h2><a class="anchor" id="autotoc_md5"></a>
+<h2><a class="anchor" id="autotoc_md6"></a>
 CONNECTION TO NETWORK</h2>
 <p><b>Message:</b></p><ul>
 <li>char * : "CONNECTION TO NETWORK\r\n\r\n"</li>
 </ul>
 <p><b>Description</b> Send a request to be accepted by a network door.</p>
-<h2><a class="anchor" id="autotoc_md6"></a>
+<h2><a class="anchor" id="autotoc_md7"></a>
 CONNECTION TO NODE</h2>
 <p><b>Message:</b></p><ul>
 <li>char * : "CONNECTION TO NODE\r\n\r\n"</li>
 </ul>
 <p><b>Description</b> Send a request to be accepted by a network node. </p>
-<h2><a class="anchor" id="autotoc_md7"></a>
+<h2><a class="anchor" id="autotoc_md8"></a>
 GET BLOCKS</h2>
 <p><b>Message:</b></p><ul>
 <li>char * : "GET BLOCKS\r\n\r\n"</li>
@@ -132,14 +132,14 @@ GET BLOCKS</h2>
 <li>size_t * : <a class="el" href="struct_block.html">Block</a> height</li>
 </ul>
 <p><b>Description</b> Send a request to a server for getting blocks. If the genesis block (height 0) is demand then the number of the actual blockchain height is return with "ACTUAL HEIGHT" header. If not, SEND BLOCK or REJECT DEMAND messages are returned. </p>
-<h2><a class="anchor" id="autotoc_md8"></a>
+<h2><a class="anchor" id="autotoc_md9"></a>
 ACTUAL HEIGHT</h2>
 <p><b>Message:</b></p><ul>
 <li>char * : "ACTUAL HEIGHT\r\n\r\n"</li>
 <li>size_t : <a class="el" href="struct_block.html">Block</a> height</li>
 </ul>
 <p><b>Description</b> Send my actual blockchain height. </p>
-<h2><a class="anchor" id="autotoc_md9"></a>
+<h2><a class="anchor" id="autotoc_md10"></a>
 SEND BLOCK</h2>
 <p><b>Message:</b></p><ul>
 <li>char * : "SEND BLOCK\r\n\r\n"</li>
@@ -148,13 +148,13 @@ SEND BLOCK</h2>
 <li>char * : <a class="el" href="struct_block.html">Block</a> struct</li>
 </ul>
 <p><b>Description</b> The block of height demand by "GET BLOCKS". </p>
-<h2><a class="anchor" id="autotoc_md10"></a>
+<h2><a class="anchor" id="autotoc_md11"></a>
 GET PENDING TRANSACTION LIST</h2>
 <p><b>Message</b></p><ul>
 <li>char * : "GET PENDING TRANSACTION LIST\r\n\r\n"</li>
 </ul>
 <p><b>Description</b> Call "SEND PENDING TRANSACTION LIST". </p>
-<h2><a class="anchor" id="autotoc_md11"></a>
+<h2><a class="anchor" id="autotoc_md12"></a>
 SEND PENDING TRANSACTION LIST</h2>
 <p><b>Message</b></p><ul>
 <li>char * : "GET PENDING TRANSACTION LIST\r\n\r\n"</li>
@@ -162,20 +162,20 @@ SEND PENDING TRANSACTION LIST</h2>
 <li>time_t * : <a class="el" href="struct_transaction.html">Transaction</a> id</li>
 </ul>
 <p><b>Description</b> Send PDT list. </p>
-<h2><a class="anchor" id="autotoc_md12"></a>
+<h2><a class="anchor" id="autotoc_md13"></a>
 REJECT DEMAND</h2>
 <p><b>Message:</b></p><ul>
 <li>char * : "REJECT DEMAND\r\n\r\n"</li>
 </ul>
 <p><b>Description</b> Reject a demand if can't reply. For example a "GET BLOCKS" of a not existing block.</p>
-<h2><a class="anchor" id="autotoc_md13"></a>
+<h2><a class="anchor" id="autotoc_md14"></a>
 GET PENDING TRANSACTION</h2>
 <p><b>Message:</b></p><ul>
 <li>char * : "GET PENDING TRANSACTION\r\n\r\n"</li>
 <li>time_t : <a class="el" href="struct_transaction.html">Transaction</a> id</li>
 </ul>
 <p><b>Description</b> Demand a PENDING TRANSACTION. </p>
-<h2><a class="anchor" id="autotoc_md14"></a>
+<h2><a class="anchor" id="autotoc_md15"></a>
 SEND PENDING TRANSACTION</h2>
 <p><b>Message:</b></p><ul>
 <li>char * : "SEND PENDING TRANSACTION\r\n\r\n"</li>
@@ -184,7 +184,7 @@ SEND PENDING TRANSACTION</h2>
 <li>char * : <a class="el" href="struct_transaction.html">Transaction</a> struct</li>
 </ul>
 <p><b>Description</b> Send the PENDING TRANSACTION demand by SEND PENDING TRANSACTION. </p>
-<h2><a class="anchor" id="autotoc_md15"></a>
+<h2><a class="anchor" id="autotoc_md16"></a>
 SEND EPOCH BLOCK</h2>
 <p><b>Message:</b></p><ul>
 <li>char * : "SEND EPOCH BLOCK\r\n\r\n"</li>
@@ -193,7 +193,7 @@ SEND EPOCH BLOCK</h2>
 <li>char * : <a class="el" href="struct_block.html">Block</a> struct</li>
 </ul>
 <p><b>Description</b> Send the epoch block of a committee member.</p>
-<h2><a class="anchor" id="autotoc_md16"></a>
+<h2><a class="anchor" id="autotoc_md17"></a>
 SEND VOTE</h2>
 <p><b>Message:</b></p>
 <ul>

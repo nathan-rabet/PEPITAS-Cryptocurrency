@@ -2,20 +2,28 @@
 .ad l
 .nh
 .SH NAME
-md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__r_e_a_d_m_e \- PEPITAS 
-C cryptocurrency\&.
+md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__r_e_a_d_m_e \- PEPITAS, a C cryptocurrency 
+PEPITAS is an EPITA project made for the last semester of the preparatory cycle\&. This cryptocurrency is based on the \fIproof of stake\fP, the new validation concensus (used in Etherum 2\&.0)
+.SH "How to use the project"
 .PP
-\fC\fP.SH "CODING STYLE"
+.SS "Installation"
+.IP "1." 4
+Download the last version of the project : \fCPEPITAS-Cryptocurrency\fP\&.
+.IP "2." 4
+In the terminal, type \fCmake\fP
+.IP "3." 4
+Change to the directory \fCbuild\fP
+.IP "4." 4
+Execute \fCclient\&.elf\fP
 .PP
-.SS "Coding case"
+.SS "Contributors"
 .IP "\(bu" 2
-\fIFunctions\fP, \fIvariables\fP and \fIfilenames\fP must be written in \fCsnake_case\fP\&.
+Nathan RABET, project leader, in charge of the blockchain and the validation protocol\&.
 .IP "\(bu" 2
-\fIStructures\fP must be written in \fCPascalCase\fP\&.
+Maxence ODEN, in charge of the networking and cryptographic part of the project\&.
 .IP "\(bu" 2
-\fIConstants\fP or \fIMACRO\fP must be written in \fCUPPER_SNAKE_CASE\fP\&.
+Souleymane SENTICI, in charge of the user interface\&.
+.IP "\(bu" 2
+Luca SAINGIER, in charge of the web implementation\&. 
 .PP
-.SS "Tests"
-Each function must be tested before \fBmarked as done\fP\&. To create a test function, you must write it in the \fCtest/\fP directory and call the file \fCfilename_test\&.c\fP and its functions \fCfunctionname_test\fP\&. Note that the test file must be at the same relative place than his real function
-.PP
-exemple : if you want to test \fC\fBinit_server()\fP\fP in the file \fC\fBnetwork/client\&.c\fP\fP, you must write the test in \fCtest/network/client_test\&.c\fP and call the test function \fCinit_server_test()\fP 
+
