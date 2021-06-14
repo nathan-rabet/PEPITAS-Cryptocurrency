@@ -1,37 +1,343 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="style.css" rel="stylesheet">
-    <link href="index.css" rel="stylesheet">
-    <title>PEPITAS</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>Pepitas-Home</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 </head>
-<div class=Background></div>
+<body>
+  <style>
+    body {
+      background-image: url('images/Background.png');
+    }
+    </style>
 
-<body class="container">
-    <a class="Fond"></a>
-    <header class= "main-header">
-        <a href="Connexion_EN.html" class="logo">
-            <img src="images/Logo.png">
-        </a>
-        <a href="index.html" class="Home">Home</a>
-        <a href="Presentation_EN.html" class="Presentation">Presentation</a>
-        <a href="Team_EN(1).html" class="Team">Team</a>
-        <a href="Report_EN.html" class="Report">Report</a>
-        <a href="Download_EN.html" class="Download">Download</a>
-        <a href="index_FR.html" class="FFlag">
-            <img src="images/FFlag.png">
-        </a>
-    </header>
+    
 
-    <div class="PEPITASLogo"></div>
+  <nav class="light-blue lighten-1 sticky" role="navigation">
+    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo"><img class="responsive-img" src="images/Pepita.png"></a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="#index-banner">Home</a></li>
+        <li><a href="#Presentation">Presentation</a></li>
+        <li><a href="#Team">Team</a></li>
+        <li><a href="#Report">Report</a></li>
+        <li><a href="#Download">Download</a></li>
+      </ul>
+  </nav>
 
-    <div>
-        <span class="subtitle">The New Face of Cryptocurrency</span>
+<!---Home--->
+  <div class="section no-pad-bot" id="index-banner">
+    <div class="container">
+      <br><br>
+      <div class="header center">
+        <img class="responsive-img" src="images/Pepitas image.png">
+      </div>
+      <div class="row center">
+        <h5 class="header col s12 light">The New Face of Cryptocurrency</h5>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="container">
+    <div class="section">
+
+      <div class="row">
+
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center light-blue-text"><i class="material-icons">description</i></h2>
+            <h5 class="center">Information</h5>
+
+            <p class="light">
+              Pepitas is a school project aiming to create a cryptocurrency, the Pepita. For more 
+              information on the project, you can explore the "Presentation" section. 
+            </p>
+
+          </div>
+        </div>
+
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center light-blue-text"><i class="material-icons">group</i></h2>
+            <h5 class="center">Team</h5>
+
+            <p class="light">
+              This project was carried out by four S4 students in class B2 of EPITA, School of Engineering and Computer Science. 
+              You can find their presentation from the Team tab.
+              </p>
+          </div>
+        </div>
+
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center light-blue-text"><i class="material-icons">file_download</i></h2>
+            <h5 class="center">The Project</h5>
+
+            <p class="light">
+              You can download the Project as well as the report of each one of its versions from the Download tab. If you want 
+              log into your account directly, you can use the button above.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <br><br>
+  </div>
+
+<!---Presentation--->
+  <div class="container" id="Presentation">
+    <div class="section">
+      <h4>The Project Pepitas</h4>
+      <p>
+        The primary goal of the Pepitas project was to discover the fundamental concepts of cryptocurrencies by recreating one in C language  
+        and developping all the tools and interfaces that are necessary for users to use it.
+      </p>
+      <p>
+        The initial idea was to develop a lighter version, similar to Peercoin, i.e. a proof-of-stake-based currency 
+        (PoS) rather than Proof of Work (PoW), which is the consensus used, in particular, by Bitcoin.
+      </p>
     </div>
 
-</body>
+    <div class="divider"></div>
+  
+    <div class="section">
+      <h4>How to Use</h4>
+      <div class="center">
+        <div class="header center">
+          <img class="responsive-img" src="images/connexion.png">
+        </div>
+      </div>
+      <p>
+        Once you've downloaded and started Pepitas, you'll have access to a Login window in the user's interface. If it's your first time
+        using it, you'll have to create an account (Be sure to remember your password, it must be at least 5 characters long). Then, or if 
+        you already have an account, you can login.
+      </p>
+      <div class="header center">
+        <img class="responsive-img" src="images/Presentation.png">
+      </div>
+      <p>
+        Now that you're logged in, you can see your wallet, it has a lot of important informations in it. First of all, your balance, aka the
+        number of pepitas you posses is showned at your right. Below, are displayed your public and private keys. For your own security, the
+        second one is covered up and revealed when the button is pressed, be careful when you need to see it.
+      </p>
+      <p>
+        Your wallet also shows the numbers of connections to the server and the mempool; the number of transactions pending. Finally,
+        the progress bar represents the purcentage of synchronisation with the blockchain.
+      </p>
+      <p>
+        The others windows, Transaction, Validator, Contacts and Transaction History respectifully allow you to: make a transaction a of
+        certain amount of Pepitas to a user given his key, invest (and recover your investissement) in Pepitas to increase your chances of becoming a validator (see Proof
+        of Stake in the Report), manage your contacts and see your pasts transactions.
+      </p>
 
+    </div>
+
+  
+    <div class="divider"></div>
+  
+    <div class="section">
+      <h5>Material Used</h5>
+      <table>
+        <thead>
+          <tr>
+              <th>Tool</th>
+              <th>Description</th>
+              <th>Link</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <tr>
+            <td><img class="responsive-img" src="images/Github.png"> Github</td>
+            <td>Hosting / Project Sharing </td>
+            <td><a href="https://github.com/">https://github.com/</a></td>
+          </tr>
+
+          <tr>
+            <td><img class="responsive-img" src="images/Glade.png"> Glade</td>
+            <td>Interface design</td>
+            <td><a href="http://glade.gnome.org/">http://glade.gnome.org/</a></td>
+          </tr>
+
+          <tr>
+            <td><img class="responsive-img" src="images/GTK.png"> GTK3</td>
+            <td>Software Libraries</td>
+            <td><a href="https://gtk.org/">https://gtk.org/</a></td>
+          </tr>
+
+          <tr>
+            <td><img class="responsive-img" src="images/OpenSSL.png"> OpenSSL</td>
+            <td>Encryption Tools</td>
+            <td><a href="https://www.openssl.org/">https://www.openssl.org/</a></td>
+          </tr>
+
+          <tr>
+            <td><img class="responsive-img" src="images/Materialize.png"> Materialize</td>
+            <td>Webpage Framework</td>
+            <td><a href="https://materializecss.com">https://materializecss.com</a></td>
+          </tr>
+          <tr>
+            <td><img class="responsive-img" src="images/firebase.png"> Firebase</td>
+            <td>Development Tool/Hosting</td>
+            <td><a href="https://firebase.google.com">https://firebase.google.com</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+
+
+</div>
+  <!---TEAM--->
+  <div class="container" id="Team">
+    <div class="divider"></div>
+    <h4>The Team</h4>
+
+  
+    <div class="section">
+      <h5 class="left-align"><img class="circle responsive-img" src="images/nathan.rabet.jpg"></h5>
+      <h5 class="left-align">Nathan Rabet</h5>
+      <p>
+        I’m a student in his second year of the preparatory cycle at EPITA, I’m also a voluntary fireman since two years. 
+        Passionate of cybersecurity and low-level coding languages, I’m now interessed in economy and in the functionning of 
+        cryptocurrencies.
+      </p>
+    </div>
+  
+    <div class="divider"></div>
+
+    <div class="section">
+      <h5 class="left-align"><img class="circle responsive-img" src="images/luca.saingier.jpg"></h5>
+      <h5 class="left-align">Luca Saingier</h5>
+      <p>
+        I’m Luca Saingier, a second year student preparing for Epita. I am big fan of competitive games and a die-hard cat lover, 
+        I have no special knowledge in cryptocurrencies but I can't wait to broaden my horizons and challenge myself with this project.
+      </p>
+    </div>
+  
+    <div class="divider"></div>
+
+    <div class="section">
+      <h5 class="left-align"><img class="circle responsive-img" src="images/souleymane.sentici.jpg"></h5>
+      <h5 class="left-align">Souleymane Sentici</h5>
+      <p>
+        My name is Souleymane Sentici. Impasionned by video games and Japanese pop culture, I would like to orient myself in the field of 
+        video games. I have a great interest in economics and am interested in cryptocurrencies.
+      </p>
+    </div>
+  
+    <div class="divider"></div>
+
+    <div class="section">
+      <h5 class="left-align"><img class="circle responsive-img" src="images/maxence.oden.jpg"></h5>
+      <h5 class="left-align">Maxence Oden</h5>
+      <p>
+        I'm a student at Epita and a big fan of space and space exploration. This projet is, for me, an opportunity to learn more
+        about cryptocurrencies and concepts as peer to peer networks and blockchains.
+      </p>
+    </div>
+  
+  
+
+  <!---Download--->
+  <div class="divider"></div>
+  <div class="section no-pad-bot" id="Report">
+    <h4>Download</h4>
+    <div class="col l3 s12">
+      <div class="container">
+        <br><br>
+          <div class="row center">
+            <h5 class="header col s12 light">Download the selected report.</h5>
+          </div>
+          <div class="row center">
+            <a href="images/RS1.pdf.zip" id="download-button" class="btn-large  red">Download 1st Report</a>
+          </div>
+          <div class="row center">
+            <a href="images/RS2.pdf.zip" id="download-button" class="btn-large  red">Download 2nd Report</a>
+          </div>
+          <div class="row center">
+            <a href="images/RS3.pdf.zip" id="download-button" class="btn-large  red">Download 3rd Report</a>
+          </div>
+          <br><br>
+          </div>
+    </div>
+    <div class="col l3 s12">
+      <div class="container" id="Download">
+        <br><br>
+        <div class="row center">
+          <h5 class="header col s12 light">Download the last version of the project.</h5>
+        </div>
+        <div class="row center">
+          <a href="https://github.com/nathan-rabet/PEPITAS-Cryptocurrency/archive/refs/heads/master.zip" id="download-button" class="btn-large red">Download</a>
+        </div>
+        <br><br>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+</div>
+<!---FOOTER--->
+  <footer class="page-footer light-blue">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h6 class="white-text">PEPITAS</h5>
+            <p class="light">
+              A Second Year of Preparatory Project at EPITA of Nathan Rabet, Luca Saingier, Souleymane Sentici and Maxence Oden.
+            </p>
+
+
+        </div>
+        <div class="col l3 s12">
+          <h6 class="white-text">Settings</h5>
+          <ul>
+            <li><a class="white-text" href="indexFR.html">Français</a></li>
+            <li><a class="white-text" href="index.html">English</a></li>
+          </ul>
+        </div>
+
+        <div class="col l3 s12">
+          <h6 class="white-text">Connection</h5>
+          <ul>
+            <li><a class="white-text" href="#">Your Account</a></li>
+            <li><a class="white-text" href="https://github.com/nathan-rabet/PEPITAS-Cryptocurrency">Github</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+      Made by <a class="grey-text text-lighten-3" href="https://github.com/nathan-rabet/PEPITAS-Cryptocurrency">PEPITAS-TEAM</a>
+      </div>
+    </div>
+  </footer>
+
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="js/materialize.js"></script>
+  <script src="js/init.js"></script>
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="/__/firebase/8.6.7/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+  <script src="/__/firebase/8.6.7/firebase-analytics.js"></script>
+
+<!-- Initialize Firebase -->
+  <script src="/__/firebase/init.js"></script>
+
+  </body>
 </html>

@@ -3,7 +3,6 @@ PEPITAS is an EPITA project made for the last semester of the preparatory cycle.
 This cryptocurrency is based on the *proof of stake*, the new validation concensus (used in Etherum 2.0)
 
 # How to use the project
-
 ## Installation
 1. Download the last version of the project : [PEPITAS-Cryptocurrency](https://github.com/nathan-rabet/PEPITAS-Cryptocurrency/archive/refs/heads/master.zip).
 2. In the terminal, type `make`
