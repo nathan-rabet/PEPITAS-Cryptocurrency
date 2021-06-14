@@ -46,32 +46,30 @@ var NAVTREE =
     [ "README", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__r_e_a_d_m_e.html", [
       [ "PEPITAS, a C cryptocurrency", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__r_e_a_d_m_e.html#autotoc_md18", null ],
       [ "Requirements", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__r_e_a_d_m_e.html#autotoc_md19", null ],
-      [ "How to use the project", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__r_e_a_d_m_e.html#autotoc_md20", [
-        [ "Installation", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__r_e_a_d_m_e.html#autotoc_md21", null ]
-      ] ],
-      [ "Some explainations about how the program works", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__r_e_a_d_m_e.html#autotoc_md22", [
-        [ "Contributors", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__r_e_a_d_m_e.html#autotoc_md23", null ]
+      [ "Installation", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__r_e_a_d_m_e.html#autotoc_md20", null ],
+      [ "Some explainations about how the program works", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__r_e_a_d_m_e.html#autotoc_md21", [
+        [ "Contributors", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__r_e_a_d_m_e.html#autotoc_md22", null ]
       ] ]
     ] ],
     [ "PEPITAS VALIDATION PROTOCOL", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__v_a_l_i_d_a_t_i_o_n__p_r_o_t_o_c_o_l.html", [
-      [ "Prerequisites", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__v_a_l_i_d_a_t_i_o_n__p_r_o_t_o_c_o_l.html#autotoc_md25", null ],
-      [ "Introduction", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__v_a_l_i_d_a_t_i_o_n__p_r_o_t_o_c_o_l.html#autotoc_md26", null ],
-      [ "Definitions", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__v_a_l_i_d_a_t_i_o_n__p_r_o_t_o_c_o_l.html#autotoc_md27", [
-        [ "VALIDATOR", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__v_a_l_i_d_a_t_i_o_n__p_r_o_t_o_c_o_l.html#autotoc_md28", null ],
-        [ "COMMITTEE", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__v_a_l_i_d_a_t_i_o_n__p_r_o_t_o_c_o_l.html#autotoc_md29", null ],
-        [ "EPOCH MAN", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__v_a_l_i_d_a_t_i_o_n__p_r_o_t_o_c_o_l.html#autotoc_md30", null ],
-        [ "COMITAL", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__v_a_l_i_d_a_t_i_o_n__p_r_o_t_o_c_o_l.html#autotoc_md31", null ],
-        [ "VOTE", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__v_a_l_i_d_a_t_i_o_n__p_r_o_t_o_c_o_l.html#autotoc_md32", null ],
-        [ "PLÈBE", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__v_a_l_i_d_a_t_i_o_n__p_r_o_t_o_c_o_l.html#autotoc_md33", null ],
-        [ "MEMPOOL", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__v_a_l_i_d_a_t_i_o_n__p_r_o_t_o_c_o_l.html#autotoc_md34", null ]
+      [ "Prerequisites", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__v_a_l_i_d_a_t_i_o_n__p_r_o_t_o_c_o_l.html#autotoc_md24", null ],
+      [ "Introduction", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__v_a_l_i_d_a_t_i_o_n__p_r_o_t_o_c_o_l.html#autotoc_md25", null ],
+      [ "Definitions", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__v_a_l_i_d_a_t_i_o_n__p_r_o_t_o_c_o_l.html#autotoc_md26", [
+        [ "VALIDATOR", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__v_a_l_i_d_a_t_i_o_n__p_r_o_t_o_c_o_l.html#autotoc_md27", null ],
+        [ "COMMITTEE", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__v_a_l_i_d_a_t_i_o_n__p_r_o_t_o_c_o_l.html#autotoc_md28", null ],
+        [ "EPOCH MAN", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__v_a_l_i_d_a_t_i_o_n__p_r_o_t_o_c_o_l.html#autotoc_md29", null ],
+        [ "COMITAL", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__v_a_l_i_d_a_t_i_o_n__p_r_o_t_o_c_o_l.html#autotoc_md30", null ],
+        [ "VOTE", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__v_a_l_i_d_a_t_i_o_n__p_r_o_t_o_c_o_l.html#autotoc_md31", null ],
+        [ "PLÈBE", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__v_a_l_i_d_a_t_i_o_n__p_r_o_t_o_c_o_l.html#autotoc_md32", null ],
+        [ "MEMPOOL", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__v_a_l_i_d_a_t_i_o_n__p_r_o_t_o_c_o_l.html#autotoc_md33", null ]
       ] ],
-      [ "How EPOCH MAN creates a block", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__v_a_l_i_d_a_t_i_o_n__p_r_o_t_o_c_o_l.html#autotoc_md35", [
-        [ "Last block validity checking", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__v_a_l_i_d_a_t_i_o_n__p_r_o_t_o_c_o_l.html#autotoc_md36", null ],
-        [ "Rewards and punishments attribution", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__v_a_l_i_d_a_t_i_o_n__p_r_o_t_o_c_o_l.html#autotoc_md37", null ],
-        [ "Broadcast", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__v_a_l_i_d_a_t_i_o_n__p_r_o_t_o_c_o_l.html#autotoc_md38", null ]
+      [ "How EPOCH MAN creates a block", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__v_a_l_i_d_a_t_i_o_n__p_r_o_t_o_c_o_l.html#autotoc_md34", [
+        [ "Last block validity checking", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__v_a_l_i_d_a_t_i_o_n__p_r_o_t_o_c_o_l.html#autotoc_md35", null ],
+        [ "Rewards and punishments attribution", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__v_a_l_i_d_a_t_i_o_n__p_r_o_t_o_c_o_l.html#autotoc_md36", null ],
+        [ "Broadcast", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__v_a_l_i_d_a_t_i_o_n__p_r_o_t_o_c_o_l.html#autotoc_md37", null ]
       ] ],
-      [ "How COMITAL send their verdicts", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__v_a_l_i_d_a_t_i_o_n__p_r_o_t_o_c_o_l.html#autotoc_md39", null ],
-      [ "How PLÈBE adhere blocks", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__v_a_l_i_d_a_t_i_o_n__p_r_o_t_o_c_o_l.html#autotoc_md40", null ]
+      [ "How COMITAL send their verdicts", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__v_a_l_i_d_a_t_i_o_n__p_r_o_t_o_c_o_l.html#autotoc_md38", null ],
+      [ "How PLÈBE adhere blocks", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__v_a_l_i_d_a_t_i_o_n__p_r_o_t_o_c_o_l.html#autotoc_md39", null ]
     ] ],
     [ "Deprecated List", "deprecated.html", null ],
     [ "Data Structures", "annotated.html", [
@@ -99,8 +97,8 @@ var NAVTREEINDEX =
 [
 "_g_e_n__blockchain__files_8c.html",
 "globals_func_r.html",
-"signature_8h.html#a39fc832fd334ecc83d42bdc39e262948",
-"ui_8h.html#aeed0de8dfeacfee1c56cfbf156cd9b7b"
+"signature_8h.html#a58b3466ce733938859f0651b2a756e95",
+"ui_8h.html#aef72f064f1fc788edba39ced4f4735d5"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
