@@ -31,49 +31,78 @@
 .ti -1c
 .RI "int \fBfetch_client_list\fP (char who, int fd)"
 .br
-.RI "Merges my neighbours list with the one sent by 'neighbour_id'\&. "
+.RI "Fetches the client list from a socket fd\&. "
 .ti -1c
 .RI "int \fBread_get_blocks\fP (int fd, \fBinfos_st\fP *infos)"
 .br
+.RI "Read blocks from a sock fd\&. "
 .ti -1c
 .RI "size_t \fBread_actual_height\fP (int fd)"
 .br
+.RI "Get the actual height of a node via its sock fd\&. "
 .ti -1c
 .RI "int \fBread_send_block\fP (int fd)"
 .br
+.RI "Read a socket sended block\&. "
 .ti -1c
 .RI "int \fBread_vote\fP (int fd, \fBinfos_st\fP *infos)"
 .br
+.RI "Read a socket sended vote\&. "
 .ti -1c
 .RI "int \fBread_epoch_block\fP (int fd)"
 .br
+.RI "Read a socket sended epoch block\&. "
 .ti -1c
 .RI "int \fBread_get_pending_transaction\fP (int fd)"
 .br
+.RI "Get a socket sended pending transaction\&. "
 .ti -1c
 .RI "int \fBread_send_pending_transaction\fP (int fd, \fBinfos_st\fP *infos)"
 .br
+.RI "Read a socket sended pending transaction\&. "
 .ti -1c
 .RI "int \fBread_send_pending_transaction_list\fP (int fd, \fBinfos_st\fP *infos)"
 .br
+.RI "Read a socket sended pending transaction list\&. "
 .ti -1c
 .RI "int \fBepoch_validation_process\fP (int blockfile, size_t height, int id)"
 .br
+.RI "Epoch validation protocol\&. "
 .in -1c
 .SH "Function Documentation"
 .PP 
 .SS "int epoch_validation_process (int blockfile, size_t height, int id)"
 
 .PP
+Epoch validation protocol\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIblockfile\fP The epoch FD 
+.br
+\fIheight\fP The epoch height 
+.br
+\fIid\fP The epoch ID 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+int 
+.RE
+.PP
+
+.PP
 Definition at line 482 of file get_data\&.c\&.
 .SS "int fetch_client_list (char who, int fd)"
 
 .PP
-Merges my neighbours list with the one sent by 'neighbour_id'\&. 
+Fetches the client list from a socket fd\&. 
 .PP
 \fBParameters\fP
 .RS 4
-\fIsockfd\fP The sockfd to read
+\fIwho\fP Tells if it is the server or the client side 
+.br
+\fIfd\fP The socket fd
 .RE
 .PP
 \fBReturns\fP
@@ -87,16 +116,74 @@ Definition at line 107 of file get_data\&.c\&.
 .SS "size_t read_actual_height (int fd)"
 
 .PP
+Get the actual height of a node via its sock fd\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIfd\fP The sock fd 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+size_t 
+.RE
+.PP
+
+.PP
 Definition at line 186 of file get_data\&.c\&.
 .SS "int read_epoch_block (int fd)"
+
+.PP
+Read a socket sended epoch block\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIfd\fP The socket fd 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+int 
+.RE
+.PP
 
 .PP
 Definition at line 420 of file get_data\&.c\&.
 .SS "int read_get_blocks (int fd, \fBinfos_st\fP * infos)"
 
 .PP
+Read blocks from a sock fd\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIfd\fP The sock fd 
+.br
+\fIinfos\fP Shared information 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+int 
+.RE
+.PP
+
+.PP
 Definition at line 155 of file get_data\&.c\&.
 .SS "int read_get_pending_transaction (int fd)"
+
+.PP
+Get a socket sended pending transaction\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIfd\fP The socket fd 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+int 
+.RE
+.PP
 
 .PP
 Definition at line 629 of file get_data\&.c\&.
@@ -108,6 +195,8 @@ Waits a header in 'sockfd', reads it and processes it\&.
 \fBParameters\fP
 .RS 4
 \fIsockfd\fP The sock FD 
+.br
+\fIinfos\fP Shared information 
 .RE
 .PP
 \fBReturns\fP
@@ -121,16 +210,78 @@ Definition at line 136 of file get_data\&.c\&.
 .SS "int read_send_block (int fd)"
 
 .PP
+Read a socket sended block\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIfd\fP The socket fd 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+int 
+.RE
+.PP
+
+.PP
 Definition at line 193 of file get_data\&.c\&.
 .SS "int read_send_pending_transaction (int fd, \fBinfos_st\fP * infos)"
+
+.PP
+Read a socket sended pending transaction\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIfd\fP The socket fd 
+.br
+\fIinfos\fP Shared information 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+int 
+.RE
+.PP
 
 .PP
 Definition at line 571 of file get_data\&.c\&.
 .SS "int read_send_pending_transaction_list (int fd, \fBinfos_st\fP * infos)"
 
 .PP
+Read a socket sended pending transaction list\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIfd\fP The socket fd 
+.br
+\fIinfos\fP Shared information 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+int 
+.RE
+.PP
+
+.PP
 Definition at line 549 of file get_data\&.c\&.
 .SS "int read_vote (int fd, \fBinfos_st\fP * infos)"
+
+.PP
+Read a socket sended vote\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIfd\fP The socket fd 
+.br
+\fIinfos\fP Shared information 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+int 
+.RE
+.PP
 
 .PP
 Definition at line 279 of file get_data\&.c\&.

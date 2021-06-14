@@ -64,7 +64,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__v_a_l_i_d_a_t_i_o_n__protocol.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__v_a_l_i_d_a_t_i_o_n__p_r_o_t_o_c_o_l.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -87,40 +87,40 @@ $(document).ready(function(){initNavTree('md__home_runner_work__p_e_p_i_t_a_s-_c
 <div class="title">PEPITAS VALIDATION PROTOCOL </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h1><a class="anchor" id="autotoc_md23"></a>
+<div class="textblock"><h1><a class="anchor" id="autotoc_md25"></a>
 Prerequisites</h1>
-<p>To understand this documentation, you need to have a good understanding of the blockchain data structure used in cryptocurrencies and the concept of the proof of stake. </p>
-<h1><a class="anchor" id="autotoc_md24"></a>
+<p>To understand this documentation, you need to have a good understanding of the blockchain data structure used in cryptocurrencies and the concept of the proof of stake.</p>
+<h1><a class="anchor" id="autotoc_md26"></a>
 Introduction</h1>
 <p>PEPITAS is a C written cryptocurrency. At the beginning of cryptocurrencies, the method (or concensus) used to guarantee the network security was the <em>proof of work</em>, users computers had to calculate some hashes to validate transactions (also called <em>mining</em>). These calculations ensure a good security,but are not eco-frendly (because of the huge amount of CPU's and GPU's in charge of calculating hashes). This issue enrolled a new concensus : the <em>proof of stake</em>. This type of validation protocol doesn't use calculations to prove a transaction validity, but the money users putted in a bank, named the <em>stake</em>. The more a user send money to the stake, the more he has a chance to be selected to create a new block, and by the time, to earn money as a reward. It is important to note that if the other users of the network detect that a validator validated fraudulent transactions, the corresponding validator will lose some part of his stake. This punishment ensure that all users have more interest to validate valid transactions instead of fraudulent ones.</p>
-<h1><a class="anchor" id="autotoc_md25"></a>
+<h1><a class="anchor" id="autotoc_md27"></a>
 Definitions</h1>
-<h2><a class="anchor" id="autotoc_md26"></a>
+<h2><a class="anchor" id="autotoc_md28"></a>
 VALIDATOR</h2>
 <p>Members of the network who can validate and create block. Each of there <b>STAKE</b> must contains at least $50$ PEPITAS. </p>
-<h2><a class="anchor" id="autotoc_md27"></a>
+<h2><a class="anchor" id="autotoc_md29"></a>
 COMMITTEE</h2>
 <p>A list containing public keys, correpsonding to some accounts on the network. Each account in this list is allowed to participate to the validation and the creation of a new block for the blockchain network. A committee is pseudo-randomly selected and is known by every node of the network. It changes every time a block is added to the blockchain. The more a user puts money in his stake, the more he has a chance to appear and have a low ID in a committee. </p>
-<h2><a class="anchor" id="autotoc_md28"></a>
+<h2><a class="anchor" id="autotoc_md30"></a>
 EPOCH MAN</h2>
 <p>The committee (list) ID of the block creator. The EPOCH MAN is selected by priority order in a committee with this rule : $min(awaken_validator_ID)$ For example if the committee contains 10 members and the first awaken member is the third, EPOCH MAN is the third member of this comitte. An awaken member is a committee member who broadcast a block to the network or a committee member that send a verdict on a broadcasted block.</p>
-<h2><a class="anchor" id="autotoc_md29"></a>
+<h2><a class="anchor" id="autotoc_md31"></a>
 COMITAL</h2>
 <p>If the committee contains $n$ members and the selected EPOCH MAN is the validator with the ID $m$, the comital members ID are from $0$ to $m$ (excluded) and from $m+1$ to $n$ (excluded).</p>
-<h2><a class="anchor" id="autotoc_md30"></a>
+<h2><a class="anchor" id="autotoc_md32"></a>
 VOTE</h2>
 <p>A vote is a validator judgment about a the validity of a certain block. If a validator think that a block is valid, he will send a <b>postive</b> vote, otherwise, he will send a <b>negative</b> one. Note that the block at height $0$ (genesis block) is considered as valid by default.</p>
-<h2><a class="anchor" id="autotoc_md31"></a>
+<h2><a class="anchor" id="autotoc_md33"></a>
 PLÈBE</h2>
 <p>All non-validators members. Each of there <b>STAKE</b> are under $50$ PEPITAS.</p>
-<h2><a class="anchor" id="autotoc_md32"></a>
+<h2><a class="anchor" id="autotoc_md34"></a>
 MEMPOOL</h2>
 <p>A directory where all pending transactions (transactions that are not in a block) are stocked.</p>
-<h1><a class="anchor" id="autotoc_md33"></a>
+<h1><a class="anchor" id="autotoc_md35"></a>
 How EPOCH MAN creates a block</h1>
 <p>Lets admit that the current validated block is at height $n$.</p>
 <p>To create a block, EPOCH MAN do several things : </p>
-<h2><a class="anchor" id="autotoc_md34"></a>
+<h2><a class="anchor" id="autotoc_md36"></a>
 Last block validity checking</h2>
 <ul>
 <li>First, he creates a new empty block (at height $n+1$).</li>
@@ -137,13 +137,13 @@ Last block validity checking</h2>
 </ul>
 </li>
 </ul>
-<h2><a class="anchor" id="autotoc_md35"></a>
+<h2><a class="anchor" id="autotoc_md37"></a>
 Rewards and punishments attribution</h2>
 <p>To motivate the network to do the job correctly (without corruption), EPOCH MAN will create new special transactions called <em>rewards</em> and <em>punishments</em>. Rewards are transactions that "*send*" money to a validator (actually this transaction creates money) and punishments that <em>take of</em> money from a validator (this transaction delete money from an account). Before this step, EPOCH MAN checked the validators votes ratio of the block at height $n$, then, he will create rewards transactions for the majority and punishments for the others. If there is equality on votes, the block is considered as non-valid and the same rule is applied.</p>
-<h2><a class="anchor" id="autotoc_md36"></a>
+<h2><a class="anchor" id="autotoc_md38"></a>
 Broadcast</h2>
 <p>After all these steps, EPOCH MAN broadcasts his new block.</p>
-<h1><a class="anchor" id="autotoc_md37"></a>
+<h1><a class="anchor" id="autotoc_md39"></a>
 How COMITAL send their verdicts</h1>
 <ol type="1">
 <li>A validator waits for a block from a validator that has a lower ID than him in the next committee. If it receive one, he will start computing it.</li>
@@ -152,7 +152,7 @@ How COMITAL send their verdicts</h1>
 <li>Reiterate if the validator receive a block from another EPOCH MAN with an ID lower than the previous EPOCH MAN, for a certain amount of time.</li>
 </ol>
 <p>Note that if a member of the COMITAL doesn't send any verdict, he will be punished by the next EPOCH MAN.</p>
-<h1><a class="anchor" id="autotoc_md38"></a>
+<h1><a class="anchor" id="autotoc_md40"></a>
 How PLÈBE adhere blocks</h1>
 <ol type="1">
 <li>A node waits for a block from a validator</li>

@@ -10,5 +10,6 @@ var searchData=
   ['define_5fnb_5fvalidators_102',['define_nb_validators',['../validators_8c.html#a47f27f9d65e1a683a3eb7da762d267b2',1,'validators.c']]],
   ['delete_5fepochs_103',['delete_epochs',['../block_8h.html#a26d68c21f6e7bedeb73586554f4a9526',1,'delete_epochs(size_t height):&#160;block.c'],['../block_8c.html#a26d68c21f6e7bedeb73586554f4a9526',1,'delete_epochs(size_t height):&#160;block.c']]],
   ['demand_104',['demand',['../structconnection.html#a03bbf16021794da27dc482d7eb9fc0d1',1,'connection']]],
-  ['doorserver_105',['DOORSERVER',['../network_8h.html#ad095a3848176dfa3cc06d477a0f83132',1,'network.h']]]
+  ['deprecated_20list_105',['Deprecated List',['../deprecated.html',1,'']]],
+  ['doorserver_106',['DOORSERVER',['../network_8h.html#ad095a3848176dfa3cc06d477a0f83132',1,'network.h']]]
 ];

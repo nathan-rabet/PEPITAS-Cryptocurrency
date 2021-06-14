@@ -132,7 +132,7 @@
 .ti -1c
 .RI "void \fBfree_block\fP (\fBBlock\fP *block)"
 .br
-.RI "Free a block struct\&. "
+.RI "Free a block structure\&. "
 .ti -1c
 .RI "\fBBlock\fP * \fBget_next_block\fP (\fBBlock\fP *block)"
 .br
@@ -156,57 +156,62 @@
 .ti -1c
 .RI "void \fBconvert_data_to_block\fP (\fBBlock\fP *block, int fd)"
 .br
+.RI "Convert serialized data to Block*\&. "
 .ti -1c
 .RI "void \fBupdate_wallet_with_block\fP (\fBBlock\fP block)"
 .br
+.RI "Update the Wallet* structure with the transactions in a block\&. "
 .ti -1c
 .RI "void \fBdelete_epochs\fP (size_t height)"
 .br
+.RI "Delete specific epoches (draft blocks) "
 .ti -1c
 .RI "\fBBlock\fP * \fBget_epoch\fP (int id, size_t height)"
 .br
+.RI "Get the epoch object\&. "
 .ti -1c
 .RI "void \fBclear_block\fP (\fBBlock\fP *block)"
 .br
+.RI "Free block data, without deleting it structure\&. "
 .in -1c
 .SH "Macro Definition Documentation"
 .PP 
 .SS "#define BLOCK_DATA_SIZE   (SHA384_DIGEST_LENGTH * 2 + 1) + sizeof(size_t) + sizeof(uint16_t) + sizeof(time_t) + sizeof(int)"
 
 .PP
-Definition at line 24 of file block\&.h\&.
+Definition at line 23 of file block\&.h\&.
 .SS "#define BLOCK_SIZE   2048 + sizeof(size_t) + \fBBLOCK_DATA_SIZE\fP + SHA384_DIGEST_LENGTH * 2 + 1"
 
 .PP
-Definition at line 25 of file block\&.h\&.
+Definition at line 24 of file block\&.h\&.
 .SS "#define CURRENT_CHUNK   0"
 
 .PP
-Definition at line 22 of file block\&.h\&.
+Definition at line 21 of file block\&.h\&.
 .SS "#define MAX_TRANSACTIONS_PER_BLOCK   16384"
 
 .PP
-Definition at line 27 of file block\&.h\&.
+Definition at line 26 of file block\&.h\&.
 .SS "#define MAX_VALIDATORS_PER_BLOCK   512"
 
 .PP
-Definition at line 18 of file block\&.h\&.
+Definition at line 17 of file block\&.h\&.
 .SS "#define NB_BLOCK_PER_CHUNK   10000"
 
 .PP
-Definition at line 28 of file block\&.h\&.
+Definition at line 27 of file block\&.h\&.
 .SS "#define NB_VOTES_BITMAP   \fBMAX_VALIDATORS_PER_BLOCK\fP / 8"
 
 .PP
-Definition at line 29 of file block\&.h\&.
+Definition at line 28 of file block\&.h\&.
 .SS "#define SIGNATURE_LEN   256"
 
 .PP
-Definition at line 20 of file block\&.h\&.
+Definition at line 19 of file block\&.h\&.
 .SS "#define TRANS_T"
 
 .PP
-Definition at line 32 of file block\&.h\&.
+Definition at line 31 of file block\&.h\&.
 .SH "Typedef Documentation"
 .PP 
 .SS "typedef struct \fBBlock\fP \fBBlock\fP"
@@ -224,19 +229,53 @@ Definition at line 32 of file block\&.h\&.
 .SS "void clear_block (\fBBlock\fP * block)"
 
 .PP
+Free block data, without deleting it structure\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIblock\fP The block to free 
+.RE
+.PP
+
+.PP
 Definition at line 337 of file block\&.c\&.
 .SS "void convert_data_to_block (\fBBlock\fP * block, int fd)"
+
+.PP
+Convert serialized data to Block*\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIblock\fP The return Block* 
+.br
+\fIfd\fP The file descriptor where data are serialized 
+.RE
+.PP
 
 .PP
 Definition at line 103 of file block\&.c\&.
 .SS "void delete_epochs (size_t height)"
 
 .PP
+Delete specific epoches (draft blocks) 
+.PP
+\fBDeprecated\fP
+.RS 4
+
+.RE
+.PP
+\fBParameters\fP
+.RS 4
+\fIheight\fP The height of the epochs 
+.RE
+.PP
+
+.PP
 Definition at line 301 of file block\&.c\&.
 .SS "void free_block (\fBBlock\fP * block)"
 
 .PP
-Free a block struct\&. 
+Free a block structure\&. 
 .PP
 \fBParameters\fP
 .RS 4
@@ -285,6 +324,22 @@ char*
 .PP
 Definition at line 159 of file block\&.c\&.
 .SS "\fBBlock\fP* get_epoch (int id, size_t height)"
+
+.PP
+Get the epoch object\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIid\fP The ID of the epoch 
+.br
+\fIheight\fP The height of the epoch 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Block* 
+.RE
+.PP
 
 .PP
 Definition at line 316 of file block\&.c\&.
@@ -354,13 +409,22 @@ Load the last local blockchain chunk\&.
 .PP
 \fBReturns\fP
 .RS 4
-ChunkBlockchain* 
+ChunkBlockchain*, NULL if the \fBChunkBlockchain\fP is empty after switching 
 .RE
 .PP
 
 .PP
 Definition at line 47 of file block\&.c\&.
 .SS "void update_wallet_with_block (\fBBlock\fP block)"
+
+.PP
+Update the Wallet* structure with the transactions in a block\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIblock\fP The block to fetch update from 
+.RE
+.PP
 
 .PP
 Definition at line 236 of file block\&.c\&.

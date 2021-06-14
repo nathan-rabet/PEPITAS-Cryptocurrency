@@ -8,7 +8,7 @@ digraph "verify_block_signature"
   Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node2 [label="get_blockdata_data",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$block_8h.html#af656af2c0f2bf2ea38d4fba26b50f5d6",tooltip="Get the blockdata data object."];
   Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node3 [label="get_transaction_data",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$transaction_8h.html#a16588449d977a2d5052be7b3639768a8",tooltip=" "];
+  Node3 [label="get_transaction_data",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$transaction_8h.html#a16588449d977a2d5052be7b3639768a8",tooltip="Get the transaction data object."];
   Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node4 [label="get_epoch_man_pkey",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$epoch__man_8h.html#a600e69b60a52aa9e5976546b39ff2fab",tooltip="Give the pkey of the creator of a block."];
   Node1 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];

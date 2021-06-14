@@ -102,24 +102,31 @@ Include dependency graph for transaction.c:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a0bd00440f3c97bf7dace6c4e26ea17be"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="transaction_8c.html#a0bd00440f3c97bf7dace6c4e26ea17be">write_transactiondata</a> (<a class="el" href="struct_transaction_data.html">TransactionData</a> *transaction, int fd)</td></tr>
+<tr class="memdesc:a0bd00440f3c97bf7dace6c4e26ea17be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Serialize a TransactionData* structure.  <a href="transaction_8c.html#a0bd00440f3c97bf7dace6c4e26ea17be">More...</a><br /></td></tr>
 <tr class="separator:a0bd00440f3c97bf7dace6c4e26ea17be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5bff0131aa50faf1cd0236e0b44169eb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="transaction_8c.html#a5bff0131aa50faf1cd0236e0b44169eb">write_transaction</a> (<a class="el" href="struct_transaction.html">Transaction</a> *transaction, int fd)</td></tr>
+<tr class="memdesc:a5bff0131aa50faf1cd0236e0b44169eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Serialize a Transaction* structure.  <a href="transaction_8c.html#a5bff0131aa50faf1cd0236e0b44169eb">More...</a><br /></td></tr>
 <tr class="separator:a5bff0131aa50faf1cd0236e0b44169eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a16588449d977a2d5052be7b3639768a8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="transaction_8c.html#a16588449d977a2d5052be7b3639768a8">get_transaction_data</a> (<a class="el" href="struct_transaction.html">Transaction</a> *trans, char **buff, size_t *index)</td></tr>
-<tr class="memdesc:a16588449d977a2d5052be7b3639768a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert transactions to char * buffer.  <a href="transaction_8c.html#a16588449d977a2d5052be7b3639768a8">More...</a><br /></td></tr>
+<tr class="memdesc:a16588449d977a2d5052be7b3639768a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the transaction data object.  <a href="transaction_8c.html#a16588449d977a2d5052be7b3639768a8">More...</a><br /></td></tr>
 <tr class="separator:a16588449d977a2d5052be7b3639768a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8649ee7d98b5b34c64efa31e274f2534"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="transaction_8c.html#a8649ee7d98b5b34c64efa31e274f2534">convert_data_to_transactiondata</a> (<a class="el" href="struct_transaction_data.html">TransactionData</a> *transactiondata, int fd)</td></tr>
+<tr class="memdesc:a8649ee7d98b5b34c64efa31e274f2534"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert serialized TransactionData* to TransactionData*.  <a href="transaction_8c.html#a8649ee7d98b5b34c64efa31e274f2534">More...</a><br /></td></tr>
 <tr class="separator:a8649ee7d98b5b34c64efa31e274f2534"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4f4e33641ff7466e848182ce420827b6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="transaction_8c.html#a4f4e33641ff7466e848182ce420827b6">load_transaction</a> (<a class="el" href="struct_transaction.html">Transaction</a> *transaction, int fd)</td></tr>
+<tr class="memdesc:a4f4e33641ff7466e848182ce420827b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load a serialized Transaction* structure.  <a href="transaction_8c.html#a4f4e33641ff7466e848182ce420827b6">More...</a><br /></td></tr>
 <tr class="separator:a4f4e33641ff7466e848182ce420827b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8b26b26139793db7c1860ff96091ca77"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_transaction.html">Transaction</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="transaction_8c.html#a8b26b26139793db7c1860ff96091ca77">load_pending_transaction</a> (time_t timestamp)</td></tr>
+<tr class="memdesc:a8b26b26139793db7c1860ff96091ca77"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load a transaction in the pending transaction (pdt) directory.  <a href="transaction_8c.html#a8b26b26139793db7c1860ff96091ca77">More...</a><br /></td></tr>
 <tr class="separator:a8b26b26139793db7c1860ff96091ca77"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acb63cde8baf977cfe0c39644f1e36010"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="transaction_8c.html#acb63cde8baf977cfe0c39644f1e36010">add_pending_transaction</a> (<a class="el" href="struct_transaction.html">Transaction</a> *transaction)</td></tr>
+<tr class="memdesc:acb63cde8baf977cfe0c39644f1e36010"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a transaction to the pending transaction (pdt) directory.  <a href="transaction_8c.html#acb63cde8baf977cfe0c39644f1e36010">More...</a><br /></td></tr>
 <tr class="separator:acb63cde8baf977cfe0c39644f1e36010"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af274d54bdf6f74206feb6c06c2fb6505"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_transaction.html">Transaction</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="transaction_8c.html#af274d54bdf6f74206feb6c06c2fb6505">create_new_transaction</a> (<a class="el" href="structinfos__st.html">infos_st</a> *infos, char type, RSA *receiver_public_key, size_t amount, char cause[512], char asset[512])</td></tr>
+<tr class="memdesc:af274d54bdf6f74206feb6c06c2fb6505"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new transaction.  <a href="transaction_8c.html#af274d54bdf6f74206feb6c06c2fb6505">More...</a><br /></td></tr>
 <tr class="separator:af274d54bdf6f74206feb6c06c2fb6505"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3814ab0e7eeeec1a1bd47ee9c1d4c2ef"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="transaction_8c.html#a3814ab0e7eeeec1a1bd47ee9c1d4c2ef">flush_pending_transactions</a> (<a class="el" href="struct_transaction.html">Transaction</a> **transactions, size_t nb_transactions)</td></tr>
-<tr class="memdesc:a3814ab0e7eeeec1a1bd47ee9c1d4c2ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete block transactions in pdt if the block is valid.  <a href="transaction_8c.html#a3814ab0e7eeeec1a1bd47ee9c1d4c2ef">More...</a><br /></td></tr>
+<tr class="memdesc:a3814ab0e7eeeec1a1bd47ee9c1d4c2ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete block transactions in the pending transaction (pdt) directory if the block is valid.  <a href="transaction_8c.html#a3814ab0e7eeeec1a1bd47ee9c1d4c2ef">More...</a><br /></td></tr>
 <tr class="separator:a3814ab0e7eeeec1a1bd47ee9c1d4c2ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -138,6 +145,14 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Add a transaction to the pending transaction (pdt) directory. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">transaction</td><td>The transaction to add </td></tr>
+  </table>
+  </dd>
+</dl>
 
 <p class="definition">Definition at line <a class="el" href="transaction_8c_source.html#l00140">140</a> of file <a class="el" href="transaction_8c_source.html">transaction.c</a>.</p>
 <div class="dynheader">
@@ -180,6 +195,15 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Convert serialized TransactionData* to TransactionData*. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">transactiondata</td><td>The returned TransactionData* </td></tr>
+    <tr><td class="paramname">fd</td><td>The serialized <a class="el" href="struct_transaction_data.html">TransactionData</a> FD </td></tr>
+  </table>
+  </dd>
+</dl>
 
 <p class="definition">Definition at line <a class="el" href="transaction_8c_source.html#l00088">88</a> of file <a class="el" href="transaction_8c_source.html">transaction.c</a>.</p>
 <div class="dynheader">
@@ -241,6 +265,20 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
+<p>Create a new transaction. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">infos</td><td>Shared information object </td></tr>
+    <tr><td class="paramname">type</td><td>The type of transaction </td></tr>
+    <tr><td class="paramname">receiver_public_key</td><td>The receiver pkey </td></tr>
+    <tr><td class="paramname">amount</td><td>The amount of PEPITAS </td></tr>
+    <tr><td class="paramname">cause</td><td>The cause (deprecated) </td></tr>
+    <tr><td class="paramname">asset</td><td>The asset (deprecated) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="struct_transaction.html">Transaction</a> </dd></dl>
+
 <p class="definition">Definition at line <a class="el" href="transaction_8c_source.html#l00157">157</a> of file <a class="el" href="transaction_8c_source.html">transaction.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
@@ -283,7 +321,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Delete block transactions in pdt if the block is valid. </p>
+<p>Delete block transactions in the pending transaction (pdt) directory if the block is valid. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">transactions</td><td>block.blockdata.transactions </td></tr>
@@ -318,7 +356,7 @@ Here is the caller graph for this function:</div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">size_t *&#160;</td>
-          <td class="paramname"><em>size</em>&#160;</td>
+          <td class="paramname"><em>index</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -328,16 +366,16 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Convert transactions to char * buffer. </p>
+<p>Get the transaction data object. </p>
+<p>Converts transactions to char * buffer.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">transactions</td><td>The transaction array </td></tr>
-    <tr><td class="paramname">buff</td><td>The buffer that receives the transactions </td></tr>
-    <tr><td class="paramname">size</td><td>The number of transactions in the array</td></tr>
+    <tr><td class="paramname">trans</td><td>The returned transaction </td></tr>
+    <tr><td class="paramname">buff</td><td>The buffer with the serialized data </td></tr>
+    <tr><td class="paramname">index</td><td>The buffer starting offset </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The buffer allocated (Must be freed) </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="transaction_8c_source.html#l00040">40</a> of file <a class="el" href="transaction_8c_source.html">transaction.c</a>.</p>
 <div class="dynheader">
@@ -364,6 +402,15 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Load a transaction in the pending transaction (pdt) directory. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">timestamp</td><td>The timestamp of the transaction </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Transaction* </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="transaction_8c_source.html#l00127">127</a> of file <a class="el" href="transaction_8c_source.html">transaction.c</a>.</p>
 <div class="dynheader">
@@ -407,6 +454,15 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
+<p>Load a serialized Transaction* structure. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">transaction</td><td>The returned Transaction* </td></tr>
+    <tr><td class="paramname">fd</td><td>The serialized <a class="el" href="struct_transaction.html">Transaction</a> FD </td></tr>
+  </table>
+  </dd>
+</dl>
+
 <p class="definition">Definition at line <a class="el" href="transaction_8c_source.html#l00117">117</a> of file <a class="el" href="transaction_8c_source.html">transaction.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
@@ -449,6 +505,15 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
+<p>Serialize a Transaction* structure. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">transaction</td><td>The Transaction* structure to serialize </td></tr>
+    <tr><td class="paramname">fd</td><td>The output file FD </td></tr>
+  </table>
+  </dd>
+</dl>
+
 <p class="definition">Definition at line <a class="el" href="transaction_8c_source.html#l00034">34</a> of file <a class="el" href="transaction_8c_source.html">transaction.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
@@ -490,6 +555,15 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Serialize a TransactionData* structure. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">transaction</td><td>The TransactionData* structure to serialize </td></tr>
+    <tr><td class="paramname">fd</td><td>The output file FD </td></tr>
+  </table>
+  </dd>
+</dl>
 
 <p class="definition">Definition at line <a class="el" href="transaction_8c_source.html#l00003">3</a> of file <a class="el" href="transaction_8c_source.html">transaction.c</a>.</p>
 <div class="dynheader">

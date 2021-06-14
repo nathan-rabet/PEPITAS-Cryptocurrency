@@ -2,25 +2,50 @@
 .ad l
 .nh
 .SH NAME
-md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__r_e_a_d_m_e \- PEPITAS, a C cryptocurrency 
-PEPITAS is an EPITA project made for the last semester of the preparatory cycle\&. This cryptocurrency is based on the \fIproof of stake\fP, the new validation concensus (used in Etherum 2\&.0)
+md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__r_e_a_d_m_e \- README 
+ 
+.SH "PEPITAS, a C cryptocurrency"
+.PP
+PEPITAS is an EPITA project made for the last semester of the preparatory cycle\&. This cryptocurrency is based on the \fIproof of stake\fP, the new validation concensus (used in Etherum 2\&.0)\&.
+.SH "Requirements"
+.PP
+.IP "\(bu" 2
+A Linux system (Ubuntu, Arch,\&.\&.\&.)
+.IP "\(bu" 2
+GNU Make
+.IP "\(bu" 2
+OpenSSL
+.IP "\(bu" 2
+GTK
+.PP
 .SH "How to use the project"
 .PP
 .SS "Installation"
 .IP "1." 4
 Download the last version of the project : \fCPEPITAS-Cryptocurrency\fP\&.
 .IP "2." 4
-In the terminal, type \fCmake\fP
+Exctract the archive and go to the exctraction directory
 .IP "3." 4
-Change to the directory \fCbuild\fP
+Open a terminal in the current directory, type \fCmake\fP
 .IP "4." 4
-Execute \fCclient\&.elf\fP
+Go to the \fCbuild\fP directory
+.IP "5." 4
+Execute \fCclient\&.elf\fP, with an argument : the IP address of an existing client, or without argument if you are the first node of the network
 .PP
+.SH "Some explainations about how the program works"
+.PP
+When launched, the client will try to connect to the host you provided as an argument (if provided)\&. In the case where no argument are given to the ELF program, the client will try to etablish a connect to a \fIserverdoor\fP (a node which have executed the program \fCserverdoor\&.elf\fP)\&. A serverdoor is a program that provides IP adresses to a node in order to let him have a connection with the corresponding hosts\&.
+.PP
+\fINB : serverdoors IP adresses are stored in the C \fCMACRO HARD_CODED_ADDR\fP in \fC\fBsrc/core/network/network\&.c\fP\fP and may not work if Maxence and/or Nathan decide to close the non-localhost serverdoor (currently hosted in the Google Cloud Platform)\&. If you really want to use a serverdoor, you also can refactor the \fCMACRO HARD_CODED_ADDR\fP macro and then run the program \fCserverdoor\&.elf\fP\fP
+.PP
+If you want more information about the peer-to-peer or the validation protocol, you also can read the \fBP2P_PROTOCOL\&.md\fP) or the \fBVALIDATION_PROTOCOL\&.md\fP documentation\&.
+.PP
+Also, don't hesitate to check our Doxygen \fCcode documentation\fP\&.
 .SS "Contributors"
 .IP "\(bu" 2
 Nathan RABET, project leader, in charge of the blockchain and the validation protocol\&.
 .IP "\(bu" 2
-Maxence ODEN, in charge of the networking and cryptographic part of the project\&.
+Maxence ODEN, in charge of the networking and cryptographic part of this project\&.
 .IP "\(bu" 2
 Souleymane SENTICI, in charge of the user interface\&.
 .IP "\(bu" 2

@@ -19,9 +19,11 @@
 .ti -1c
 .RI "char \fBplebe_verify_block\fP (\fBBlock\fP *block)"
 .br
+.RI "For the plèbe, check block validity\&. "
 .ti -1c
 .RI "int \fBcomital_validate_block\fP (\fBBlock\fP *block)"
 .br
+.RI "For the comital, check block validity\&. "
 .ti -1c
 .RI "int \fBsend_verdict\fP (\fBBlock\fP *block, char verdict)"
 .br
@@ -32,8 +34,36 @@
 .SS "int comital_validate_block (\fBBlock\fP * block)"
 
 .PP
+For the comital, check block validity\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIblock\fP The block to check 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+int 
+.RE
+.PP
+
+.PP
 Definition at line 242 of file validation_engine\&.c\&.
 .SS "char plebe_verify_block (\fBBlock\fP * block)"
+
+.PP
+For the plèbe, check block validity\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIblock\fP The block to check 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+int 
+.RE
+.PP
 
 .PP
 Definition at line 199 of file validation_engine\&.c\&.

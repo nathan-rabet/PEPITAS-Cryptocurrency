@@ -104,8 +104,10 @@ Functions</h2></td></tr>
 <tr class="memitem:a0096ca7d050954ee9a259ebdcd787519"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="blockchain__header_8c.html#a0096ca7d050954ee9a259ebdcd787519">write_block_header</a> (FILE *fd, <a class="el" href="struct_block.html">Block</a> *block, size_t height)</td></tr>
 <tr class="separator:a0096ca7d050954ee9a259ebdcd787519"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1011109fa5281e4b6406c390393cd051"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="blockchain__header_8c.html#a1011109fa5281e4b6406c390393cd051">gen_blockchain_header</a> (<a class="el" href="structinfos__st.html">infos_st</a> *infos)</td></tr>
+<tr class="memdesc:a1011109fa5281e4b6406c390393cd051"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate block shared information.  <a href="blockchain__header_8c.html#a1011109fa5281e4b6406c390393cd051">More...</a><br /></td></tr>
 <tr class="separator:a1011109fa5281e4b6406c390393cd051"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a535ef7a9f8d2749d92cf31c98c6ac293"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="blockchain__header_8c.html#a535ef7a9f8d2749d92cf31c98c6ac293">get_receiver_remaining_money</a> (<a class="el" href="structinfos__st.html">infos_st</a> *infos, RSA *receiver_public_key)</td></tr>
+<tr class="memdesc:a535ef7a9f8d2749d92cf31c98c6ac293"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the receiver remaining money.  <a href="blockchain__header_8c.html#a535ef7a9f8d2749d92cf31c98c6ac293">More...</a><br /></td></tr>
 <tr class="separator:a535ef7a9f8d2749d92cf31c98c6ac293"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -124,6 +126,15 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Generate block shared information. </p>
+<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000002">Deprecated:</a></b></dt><dd></dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">infos</td><td>The information </td></tr>
+  </table>
+  </dd>
+</dl>
 
 <p class="definition">Definition at line <a class="el" href="blockchain__header_8c_source.html#l00009">9</a> of file <a class="el" href="blockchain__header_8c_source.html">blockchain_header.c</a>.</p>
 <div class="dynheader">
@@ -166,6 +177,16 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Get the receiver remaining money. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">infos</td><td>Threads shared information </td></tr>
+    <tr><td class="paramname">receiver_public_key</td><td>The RSA public key of the receiver </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>size_t </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="blockchain__header_8c_source.html#l00040">40</a> of file <a class="el" href="blockchain__header_8c_source.html">blockchain_header.c</a>.</p>
 <div class="dynheader">

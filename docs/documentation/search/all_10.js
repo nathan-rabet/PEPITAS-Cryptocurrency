@@ -1,9 +1,8 @@
 var searchData=
 [
-  ['pepitas_20network_20protocol_254',['PEPITAS NETWORK PROTOCOL',['../md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__p2_p__protocol.html',1,'']]],
-  ['pepitas_2c_20a_20c_20cryptocurrency_255',['PEPITAS, a C cryptocurrency',['../md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__r_e_a_d_m_e.html',1,'']]],
-  ['pepitas_20validation_20protocol_256',['PEPITAS VALIDATION PROTOCOL',['../md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__v_a_l_i_d_a_t_i_o_n__protocol.html',1,'']]],
-  ['p2p_5fprotocol_2emd_257',['P2P_Protocol.md',['../_p2_p___protocol_8md.html',1,'']]],
+  ['pepitas_20network_20protocol_255',['PEPITAS NETWORK PROTOCOL',['../md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__p2_p__p_r_o_t_o_c_o_l.html',1,'']]],
+  ['pepitas_20validation_20protocol_256',['PEPITAS VALIDATION PROTOCOL',['../md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__v_a_l_i_d_a_t_i_o_n__p_r_o_t_o_c_o_l.html',1,'']]],
+  ['p2p_5fprotocol_2emd_257',['P2P_PROTOCOL.md',['../_p2_p___p_r_o_t_o_c_o_l_8md.html',1,'']]],
   ['p_5fversion_258',['P_VERSION',['../network_8h.html#ab85b8d668595989b505586b7b46e6f88',1,'network.h']]],
   ['password_5fentry1_259',['password_entry1',['../ui_8c.html#ad339cc79acfe1685a9cc695347628fed',1,'ui.c']]],
   ['password_5fentry2_260',['password_entry2',['../ui_8c.html#aa345dbc39b26d7892d6b987c3b7dd280',1,'ui.c']]],

@@ -15,51 +15,102 @@
 .ti -1c
 .RI "void \fBwrite_transactiondata\fP (\fBTransactionData\fP *transaction, int fd)"
 .br
+.RI "Serialize a TransactionData* structure\&. "
 .ti -1c
 .RI "void \fBwrite_transaction\fP (\fBTransaction\fP *transaction, int fd)"
 .br
+.RI "Serialize a Transaction* structure\&. "
 .ti -1c
 .RI "void \fBget_transaction_data\fP (\fBTransaction\fP *trans, char **buff, size_t *index)"
 .br
-.RI "Convert transactions to char * buffer\&. "
+.RI "Get the transaction data object\&. "
 .ti -1c
 .RI "void \fBconvert_data_to_transactiondata\fP (\fBTransactionData\fP *transactiondata, int fd)"
 .br
+.RI "Convert serialized TransactionData* to TransactionData*\&. "
 .ti -1c
 .RI "void \fBload_transaction\fP (\fBTransaction\fP *transaction, int fd)"
 .br
+.RI "Load a serialized Transaction* structure\&. "
 .ti -1c
 .RI "\fBTransaction\fP * \fBload_pending_transaction\fP (time_t timestamp)"
 .br
+.RI "Load a transaction in the pending transaction (pdt) directory\&. "
 .ti -1c
 .RI "void \fBadd_pending_transaction\fP (\fBTransaction\fP *transaction)"
 .br
+.RI "Add a transaction to the pending transaction (pdt) directory\&. "
 .ti -1c
 .RI "\fBTransaction\fP \fBcreate_new_transaction\fP (\fBinfos_st\fP *infos, char type, RSA *receiver_public_key, size_t amount, char cause[512], char asset[512])"
 .br
+.RI "Create a new transaction\&. "
 .ti -1c
 .RI "void \fBflush_pending_transactions\fP (\fBTransaction\fP **transactions, size_t nb_transactions)"
 .br
-.RI "Delete block transactions in pdt if the block is valid\&. "
+.RI "Delete block transactions in the pending transaction (pdt) directory if the block is valid\&. "
 .in -1c
 .SH "Function Documentation"
 .PP 
 .SS "void add_pending_transaction (\fBTransaction\fP * transaction)"
 
 .PP
+Add a transaction to the pending transaction (pdt) directory\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fItransaction\fP The transaction to add 
+.RE
+.PP
+
+.PP
 Definition at line 140 of file transaction\&.c\&.
 .SS "void convert_data_to_transactiondata (\fBTransactionData\fP * transactiondata, int fd)"
+
+.PP
+Convert serialized TransactionData* to TransactionData*\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fItransactiondata\fP The returned TransactionData* 
+.br
+\fIfd\fP The serialized \fBTransactionData\fP FD 
+.RE
+.PP
 
 .PP
 Definition at line 88 of file transaction\&.c\&.
 .SS "\fBTransaction\fP create_new_transaction (\fBinfos_st\fP * infos, char type, RSA * receiver_public_key, size_t amount, char cause[512], char asset[512])"
 
 .PP
+Create a new transaction\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIinfos\fP Shared information object 
+.br
+\fItype\fP The type of transaction 
+.br
+\fIreceiver_public_key\fP The receiver pkey 
+.br
+\fIamount\fP The amount of PEPITAS 
+.br
+\fIcause\fP The cause (deprecated) 
+.br
+\fIasset\fP The asset (deprecated) 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+\fBTransaction\fP 
+.RE
+.PP
+
+.PP
 Definition at line 157 of file transaction\&.c\&.
 .SS "void flush_pending_transactions (\fBTransaction\fP ** transactions, size_t nb_transactions)"
 
 .PP
-Delete block transactions in pdt if the block is valid\&. 
+Delete block transactions in the pending transaction (pdt) directory if the block is valid\&. 
 .PP
 \fBParameters\fP
 .RS 4
@@ -71,23 +122,18 @@ Delete block transactions in pdt if the block is valid\&.
 
 .PP
 Definition at line 204 of file transaction\&.c\&.
-.SS "void get_transaction_data (\fBTransaction\fP * trans, char ** buff, size_t * size)"
+.SS "void get_transaction_data (\fBTransaction\fP * trans, char ** buff, size_t * index)"
 
 .PP
-Convert transactions to char * buffer\&. 
+Get the transaction data object\&. Converts transactions to char * buffer\&.
 .PP
 \fBParameters\fP
 .RS 4
-\fItransactions\fP The transaction array 
+\fItrans\fP The returned transaction 
 .br
-\fIbuff\fP The buffer that receives the transactions 
+\fIbuff\fP The buffer with the serialized data 
 .br
-\fIsize\fP The number of transactions in the array
-.RE
-.PP
-\fBReturns\fP
-.RS 4
-The buffer allocated (Must be freed) 
+\fIindex\fP The buffer starting offset 
 .RE
 .PP
 
@@ -96,16 +142,63 @@ Definition at line 40 of file transaction\&.c\&.
 .SS "\fBTransaction\fP* load_pending_transaction (time_t timestamp)"
 
 .PP
+Load a transaction in the pending transaction (pdt) directory\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fItimestamp\fP The timestamp of the transaction 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Transaction* 
+.RE
+.PP
+
+.PP
 Definition at line 127 of file transaction\&.c\&.
 .SS "void load_transaction (\fBTransaction\fP * transaction, int fd)"
+
+.PP
+Load a serialized Transaction* structure\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fItransaction\fP The returned Transaction* 
+.br
+\fIfd\fP The serialized \fBTransaction\fP FD 
+.RE
+.PP
 
 .PP
 Definition at line 117 of file transaction\&.c\&.
 .SS "void write_transaction (\fBTransaction\fP * transaction, int fd)"
 
 .PP
+Serialize a Transaction* structure\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fItransaction\fP The Transaction* structure to serialize 
+.br
+\fIfd\fP The output file FD 
+.RE
+.PP
+
+.PP
 Definition at line 34 of file transaction\&.c\&.
 .SS "void write_transactiondata (\fBTransactionData\fP * transaction, int fd)"
+
+.PP
+Serialize a TransactionData* structure\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fItransaction\fP The TransactionData* structure to serialize 
+.br
+\fIfd\fP The output file FD 
+.RE
+.PP
 
 .PP
 Definition at line 3 of file transaction\&.c\&.

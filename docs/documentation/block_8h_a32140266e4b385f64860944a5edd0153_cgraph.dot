@@ -6,11 +6,11 @@ digraph "get_block"
   rankdir="LR";
   Node1 [label="get_block",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Get a block object."];
   Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node2 [label="convert_data_to_block",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$block_8c.html#ada1355f8610cc450d7c8f662dc6a7aef",tooltip=" "];
+  Node2 [label="convert_data_to_block",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$block_8c.html#ada1355f8610cc450d7c8f662dc6a7aef",tooltip="Convert serialized data to Block*."];
   Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node3 [label="convert_data_to_blockdata",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$block_8c.html#afcda50ce8deb3b381aeb5b88689f919f",tooltip=" "];
   Node3 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node4 [label="load_transaction",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$transaction_8h.html#a4f4e33641ff7466e848182ce420827b6",tooltip=" "];
+  Node4 [label="load_transaction",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$transaction_8h.html#a4f4e33641ff7466e848182ce420827b6",tooltip="Load a serialized Transaction* structure."];
   Node4 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node5 [label="convert_data_to_transactiondata",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$transaction_8c.html#a8649ee7d98b5b34c64efa31e274f2534",tooltip=" "];
+  Node5 [label="convert_data_to_transactiondata",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$transaction_8c.html#a8649ee7d98b5b34c64efa31e274f2534",tooltip="Convert serialized TransactionData* to TransactionData*."];
 }

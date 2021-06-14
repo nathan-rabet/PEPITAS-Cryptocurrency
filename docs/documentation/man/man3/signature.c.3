@@ -49,28 +49,30 @@
 .ti -1c
 .RI "void \fBsign_block\fP (\fBBlock\fP *block)"
 .br
-.RI "Signs a block\&. "
+.RI "Signs a block with my private key\&. "
 .ti -1c
 .RI "void \fBsign_block_with_key\fP (\fBBlock\fP *block, RSA *key)"
 .br
+.RI "Signs a block\&. "
 .ti -1c
 .RI "void \fBsign_transaction\fP (\fBTransaction\fP *transaction)"
 .br
+.RI "Signs a transaction with my private key\&. "
 .ti -1c
 .RI "void \fBsign_transaction_with_key\fP (\fBTransaction\fP *transaction, RSA *key)"
 .br
-.RI "Sign a transaction\&. "
+.RI "Signs a transaction\&. "
 .ti -1c
 .RI "void \fBsign_block_transactions\fP (\fBBlock\fP *block)"
 .br
-.RI "Signs transactions of a block\&. "
+.RI "Signs all transactions of a block with my private key\&. "
 .in -1c
 .SH "Function Documentation"
 .PP 
 .SS "void sign_block (\fBBlock\fP * block)"
 
 .PP
-Signs a block\&. 
+Signs a block with my private key\&. 
 .PP
 \fBParameters\fP
 .RS 4
@@ -83,7 +85,7 @@ Definition at line 108 of file signature\&.c\&.
 .SS "void sign_block_transactions (\fBBlock\fP * block)"
 
 .PP
-Signs transactions of a block\&. 
+Signs all transactions of a block with my private key\&. 
 .PP
 \fBParameters\fP
 .RS 4
@@ -94,6 +96,17 @@ Signs transactions of a block\&.
 .PP
 Definition at line 138 of file signature\&.c\&.
 .SS "void sign_block_with_key (\fBBlock\fP * block, RSA * key)"
+
+.PP
+Signs a block\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIblock\fP The block to sign 
+.br
+\fIkey\fP The key to use for the signature 
+.RE
+.PP
 
 .PP
 Definition at line 115 of file signature\&.c\&.
@@ -146,15 +159,26 @@ Definition at line 34 of file signature\&.c\&.
 .SS "void sign_transaction (\fBTransaction\fP * transaction)"
 
 .PP
-Definition at line 122 of file signature\&.c\&.
-.SS "void sign_transaction_with_key (\fBTransaction\fP * transaction, RSA * key)"
-
-.PP
-Sign a transaction\&. 
+Signs a transaction with my private key\&. 
 .PP
 \fBParameters\fP
 .RS 4
 \fItransaction\fP The transaction to sign 
+.RE
+.PP
+
+.PP
+Definition at line 122 of file signature\&.c\&.
+.SS "void sign_transaction_with_key (\fBTransaction\fP * transaction, RSA * key)"
+
+.PP
+Signs a transaction\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fItransaction\fP The transaction to sign 
+.br
+\fIkey\fP The key to use for the signature 
 .RE
 .PP
 

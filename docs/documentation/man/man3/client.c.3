@@ -41,10 +41,11 @@
 .ti -1c
 .RI "int \fBis_in_neighbours\fP (char who, char *hostname)"
 .br
+.RI "Check if \fChostname\fP is in \fCclient\&.neightbours\fP "
 .ti -1c
 .RI "int \fBnumber_neighbours\fP (char who)"
 .br
-.RI "return the nb of neighbour in the client\&.neightbours section "
+.RI "Return the nb of neighbour in the client\&.neightbours section\&. "
 .ti -1c
 .RI "\fBconnection\fP * \fBlisten_to\fP (\fBinfos_st\fP *infos, \fBNeighbour\fP neighbour, char *connection_type, \fBconnection\fP *\fBconnection\fP)"
 .br
@@ -52,9 +53,11 @@
 .ti -1c
 .RI "int \fBfind_empty_connection\fP (int max, \fBconnection\fP *connections)"
 .br
+.RI "Find if connection has any empty field\&. "
 .ti -1c
 .RI "void * \fBclient_thread\fP (void *args)"
 .br
+.RI "Create a client thread\&. "
 .in -1c
 .SS "Variables"
 
@@ -68,8 +71,38 @@
 .SS "void* client_thread (void * args)"
 
 .PP
+Create a client thread\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIargs\fP 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+void* 
+.RE
+.PP
+
+.PP
 Definition at line 268 of file client\&.c\&.
-.SS "int find_empty_connection (int max, \fBconnection\fP * connections)"
+.SS "int find_empty_connection (int max, \fBconnection\fP * connection)"
+
+.PP
+Find if connection has any empty field\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fImax\fP The number of maximum connections 
+.br
+\fIconnection\fP The connection* buffer 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+int 
+.RE
+.PP
 
 .PP
 Definition at line 258 of file client\&.c\&.
@@ -77,6 +110,11 @@ Definition at line 258 of file client\&.c\&.
 
 .PP
 Get the my node object\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIwho\fP Tells if it is the server or the client side 
+.RE
 .PP
 \fBReturns\fP
 .RS 4
@@ -89,6 +127,22 @@ Definition at line 6 of file client\&.c\&.
 .SS "int is_in_neighbours (char who, char * hostname)"
 
 .PP
+Check if \fChostname\fP is in \fCclient\&.neightbours\fP 
+.PP
+\fBParameters\fP
+.RS 4
+\fIwho\fP Tells if it is the server or the client side 
+.br
+\fIhostname\fP The IP adress to check 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+int 
+.RE
+.PP
+
+.PP
 Definition at line 149 of file client\&.c\&.
 .SS "\fBconnection\fP* listen_to (\fBinfos_st\fP * infos, \fBNeighbour\fP neighbour, char * connection_type, \fBconnection\fP * connection)"
 
@@ -97,7 +151,13 @@ Tries to connect to the peer-to-peer network via a node in the \fBNode\fP struct
 .PP
 \fBParameters\fP
 .RS 4
+\fIinfos\fP Some shared information 
+.br
 \fIneighbour\fP The neighbour to connect with 
+.br
+\fIconnection_type\fP The type of connection 
+.br
+\fIconnection\fP The connection* structure 
 .RE
 .PP
 \fBReturns\fP
@@ -113,11 +173,25 @@ Definition at line 172 of file client\&.c\&.
 .PP
 Load neighbours list from \&.neighbours/neighbours\&. 
 .PP
+\fBParameters\fP
+.RS 4
+\fIwho\fP Tells if it is the server or the client side 
+.RE
+.PP
+
+.PP
 Definition at line 113 of file client\&.c\&.
 .SS "int number_neighbours (char who)"
 
 .PP
-return the nb of neighbour in the client\&.neightbours section 
+Return the nb of neighbour in the client\&.neightbours section\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIwho\fP Tells if it is the server or the client side 
+.RE
+.PP
+
 .PP
 Definition at line 160 of file client\&.c\&.
 .SS "void print_neighbours (char who, char mask)"
@@ -125,11 +199,29 @@ Definition at line 160 of file client\&.c\&.
 .PP
 Print neighbours list\&. 
 .PP
+\fBParameters\fP
+.RS 4
+\fIwho\fP Tells if it is the server or the client side 
+.br
+\fImask\fP 
+.RE
+.PP
+
+.PP
 Definition at line 58 of file client\&.c\&.
 .SS "void remove_neighbour (char who, int index)"
 
 .PP
 Remove a neighbour in the client\&.neightbours section\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIwho\fP Tells if it is the server or the client side 
+.br
+\fIindex\fP The index of the neigbour to remove in client\&.neightbours 
+.RE
+.PP
+
 .PP
 Definition at line 47 of file client\&.c\&.
 .SS "void save_neighbours (char who)"
@@ -137,11 +229,27 @@ Definition at line 47 of file client\&.c\&.
 .PP
 Save neighbours list in \&.neighbours/neighbours\&. 
 .PP
+\fBParameters\fP
+.RS 4
+\fIwho\fP Tells if it is the server or the client side 
+.RE
+.PP
+
+.PP
 Definition at line 74 of file client\&.c\&.
 .SS "int set_neighbour (char who, char * hostname, int family)"
 
 .PP
 Sets a neighbour in the client\&.neightbours section\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIwho\fP Tells if it is the server or the client side 
+.br
+\fIhostname\fP The neighbour IP adress 
+.br
+\fIfamily\fP The type of IP adress 
+.RE
 .PP
 \fBReturns\fP
 .RS 4

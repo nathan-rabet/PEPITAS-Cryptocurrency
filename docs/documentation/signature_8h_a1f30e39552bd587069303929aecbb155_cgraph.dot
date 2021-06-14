@@ -6,7 +6,7 @@ digraph "verify_transaction_signature"
   rankdir="LR";
   Node1 [label="verify_transaction\l_signature",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Verifies if a transaction signature is valid."];
   Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node2 [label="get_transaction_data",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$transaction_8h.html#a16588449d977a2d5052be7b3639768a8",tooltip=" "];
+  Node2 [label="get_transaction_data",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$transaction_8h.html#a16588449d977a2d5052be7b3639768a8",tooltip="Get the transaction data object."];
   Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node3 [label="verify_signature",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$signature_8c.html#abb24ef32c40711494e34d7639e64f8a3",tooltip="Verifies if SHA384(data) == decrypt(signature,pub_key)"];
   Node3 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];

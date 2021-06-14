@@ -6,7 +6,7 @@ digraph "write_blockdata"
   rankdir="LR";
   Node1 [label="write_blockdata",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Writes blockdata in a file."];
   Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node2 [label="write_transaction",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$transaction_8h.html#a5bff0131aa50faf1cd0236e0b44169eb",tooltip=" "];
+  Node2 [label="write_transaction",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$transaction_8h.html#a5bff0131aa50faf1cd0236e0b44169eb",tooltip="Serialize a Transaction* structure."];
   Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node3 [label="write_transactiondata",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$transaction_8c.html#a0bd00440f3c97bf7dace6c4e26ea17be",tooltip=" "];
+  Node3 [label="write_transactiondata",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$transaction_8c.html#a0bd00440f3c97bf7dace6c4e26ea17be",tooltip="Serialize a TransactionData* structure."];
 }

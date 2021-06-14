@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>PEPITAS CRYPTOCURRENCY: PEPITAS, a C cryptocurrency</title>
+<title>PEPITAS CRYPTOCURRENCY: README</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -84,25 +84,43 @@ $(document).ready(function(){initNavTree('md__home_runner_work__p_e_p_i_t_a_s-_c
 
 <div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">PEPITAS, a C cryptocurrency </div>  </div>
+<div class="title">README </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>PEPITAS is an EPITA project made for the last semester of the preparatory cycle. This cryptocurrency is based on the <em>proof of stake</em>, the new validation concensus (used in Etherum 2.0)</p>
+<div class="textblock"><p><img src="https://user-images.githubusercontent.com/13369175/121909610-60bb2800-cd2e-11eb-9510-6aef81d91b16.png" alt="Pepitas image" class="inline"/> </p>
+<h1><a class="anchor" id="autotoc_md18"></a>
+PEPITAS, a C cryptocurrency</h1>
+<p>PEPITAS is an EPITA project made for the last semester of the preparatory cycle. This cryptocurrency is based on the <em>proof of stake</em>, the new validation concensus (used in Etherum 2.0).</p>
 <h1><a class="anchor" id="autotoc_md19"></a>
+Requirements</h1>
+<ul>
+<li>A Linux system (Ubuntu, Arch,...)</li>
+<li>GNU Make</li>
+<li>OpenSSL</li>
+<li>GTK</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md20"></a>
 How to use the project</h1>
-<h2><a class="anchor" id="autotoc_md20"></a>
+<h2><a class="anchor" id="autotoc_md21"></a>
 Installation</h2>
 <ol type="1">
 <li>Download the last version of the project : <a href="https://github.com/nathan-rabet/PEPITAS-Cryptocurrency/archive/refs/heads/master.zip">PEPITAS-Cryptocurrency</a>.</li>
-<li>In the terminal, type <code>make</code></li>
-<li>Change to the directory <code>build</code></li>
-<li>Execute <code>client.elf</code></li>
+<li>Exctract the archive and go to the exctraction directory</li>
+<li>Open a terminal in the current directory, type <code>make</code></li>
+<li>Go to the <code>build</code> directory</li>
+<li>Execute <code>client.elf</code>, with an argument : the IP address of an existing client, or without argument if you are the first node of the network</li>
 </ol>
-<h2><a class="anchor" id="autotoc_md21"></a>
+<h1><a class="anchor" id="autotoc_md22"></a>
+Some explainations about how the program works</h1>
+<p>When launched, the client will try to connect to the host you provided as an argument (if provided). In the case where no argument are given to the ELF program, the client will try to etablish a connect to a <em>serverdoor</em> (a node which have executed the program <code>serverdoor.elf</code>). A serverdoor is a program that provides IP adresses to a node in order to let him have a connection with the corresponding hosts.</p>
+<p><em>NB : serverdoors IP adresses are stored in the C <code>MACRO HARD_CODED_ADDR</code> in <code><a class="el" href="network_8c.html">src/core/network/network.c</a></code> and may not work if Maxence and/or Nathan decide to close the non-localhost serverdoor (currently hosted in the Google Cloud Platform). If you really want to use a serverdoor, you also can refactor the <code>MACRO HARD_CODED_ADDR</code> macro and then run the program <code>serverdoor.elf</code></em></p>
+<p>If you want more information about the peer-to-peer or the validation protocol, you also can read the <a class="el" href="_p2_p___p_r_o_t_o_c_o_l_8md.html">P2P_PROTOCOL.md</a>) or the <a class="el" href="_p2_p___p_r_o_t_o_c_o_l_8md.html">VALIDATION_PROTOCOL.md</a> documentation.</p>
+<p>Also, don't hesitate to check our Doxygen <a href="docs/documentation/index.html">code documentation</a>.</p>
+<h2><a class="anchor" id="autotoc_md23"></a>
 Contributors</h2>
 <ul>
 <li>Nathan RABET, project leader, in charge of the blockchain and the validation protocol.</li>
-<li>Maxence ODEN, in charge of the networking and cryptographic part of the project.</li>
+<li>Maxence ODEN, in charge of the networking and cryptographic part of this project.</li>
 <li>Souleymane SENTICI, in charge of the user interface.</li>
 <li>Luca SAINGIER, in charge of the web implementation. </li>
 </ul>

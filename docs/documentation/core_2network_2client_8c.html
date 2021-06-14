@@ -122,16 +122,19 @@ Functions</h2></td></tr>
 <tr class="memdesc:a641a9d3cb0669b127493779eefc8b56c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load neighbours list from .neighbours/neighbours.  <a href="core_2network_2client_8c.html#a641a9d3cb0669b127493779eefc8b56c">More...</a><br /></td></tr>
 <tr class="separator:a641a9d3cb0669b127493779eefc8b56c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0dc5c7ebcc87bb9c0fc1b2dcb69596c7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="core_2network_2client_8c.html#a0dc5c7ebcc87bb9c0fc1b2dcb69596c7">is_in_neighbours</a> (char who, char *hostname)</td></tr>
+<tr class="memdesc:a0dc5c7ebcc87bb9c0fc1b2dcb69596c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if <code>hostname</code> is in <code>client.neightbours</code>  <a href="core_2network_2client_8c.html#a0dc5c7ebcc87bb9c0fc1b2dcb69596c7">More...</a><br /></td></tr>
 <tr class="separator:a0dc5c7ebcc87bb9c0fc1b2dcb69596c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acec8d99c29599378ad06a91d4911587f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="core_2network_2client_8c.html#acec8d99c29599378ad06a91d4911587f">number_neighbours</a> (char who)</td></tr>
-<tr class="memdesc:acec8d99c29599378ad06a91d4911587f"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the nb of neighbour in the client.neightbours section  <a href="core_2network_2client_8c.html#acec8d99c29599378ad06a91d4911587f">More...</a><br /></td></tr>
+<tr class="memdesc:acec8d99c29599378ad06a91d4911587f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the nb of neighbour in the client.neightbours section.  <a href="core_2network_2client_8c.html#acec8d99c29599378ad06a91d4911587f">More...</a><br /></td></tr>
 <tr class="separator:acec8d99c29599378ad06a91d4911587f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7be5d0a5ee88cfd1a654fc4813273708"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structconnection.html">connection</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="core_2network_2client_8c.html#a7be5d0a5ee88cfd1a654fc4813273708">listen_to</a> (<a class="el" href="structinfos__st.html">infos_st</a> *infos, <a class="el" href="struct_neighbour.html">Neighbour</a> neighbour, char *connection_type, <a class="el" href="structconnection.html">connection</a> *<a class="el" href="structconnection.html">connection</a>)</td></tr>
 <tr class="memdesc:a7be5d0a5ee88cfd1a654fc4813273708"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tries to connect to the peer-to-peer network via a node in the <a class="el" href="struct_node.html">Node</a> structure.  <a href="core_2network_2client_8c.html#a7be5d0a5ee88cfd1a654fc4813273708">More...</a><br /></td></tr>
 <tr class="separator:a7be5d0a5ee88cfd1a654fc4813273708"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac6f2cb10ccd85dd8e65b4523d734bcfe"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="core_2network_2client_8c.html#ac6f2cb10ccd85dd8e65b4523d734bcfe">find_empty_connection</a> (int max, <a class="el" href="structconnection.html">connection</a> *connections)</td></tr>
+<tr class="memdesc:ac6f2cb10ccd85dd8e65b4523d734bcfe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find if connection has any empty field.  <a href="core_2network_2client_8c.html#ac6f2cb10ccd85dd8e65b4523d734bcfe">More...</a><br /></td></tr>
 <tr class="separator:ac6f2cb10ccd85dd8e65b4523d734bcfe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a351b786eb662460f254da2ff204fcfcc"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="core_2network_2client_8c.html#a351b786eb662460f254da2ff204fcfcc">client_thread</a> (void *args)</td></tr>
+<tr class="memdesc:a351b786eb662460f254da2ff204fcfcc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a client thread.  <a href="core_2network_2client_8c.html#a351b786eb662460f254da2ff204fcfcc">More...</a><br /></td></tr>
 <tr class="separator:a351b786eb662460f254da2ff204fcfcc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
@@ -155,6 +158,15 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Create a client thread. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">args</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>void* </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="core_2network_2client_8c_source.html#l00268">268</a> of file <a class="el" href="core_2network_2client_8c_source.html">client.c</a>.</p>
 <div class="dynheader">
@@ -188,7 +200,7 @@ Here is the caller graph for this function:</div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="structconnection.html">connection</a> *&#160;</td>
-          <td class="paramname"><em>connections</em>&#160;</td>
+          <td class="paramname"><em>connection</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -197,6 +209,16 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Find if connection has any empty field. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">max</td><td>The number of maximum connections </td></tr>
+    <tr><td class="paramname">connection</td><td>The connection* buffer </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>int </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="core_2network_2client_8c_source.html#l00258">258</a> of file <a class="el" href="core_2network_2client_8c_source.html">client.c</a>.</p>
 <div class="dynheader">
@@ -225,6 +247,12 @@ Here is the caller graph for this function:</div>
 </div><div class="memdoc">
 
 <p>Get the my node object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">who</td><td>Tells if it is the server or the client side </td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="section return"><dt>Returns</dt><dd>Node* </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="core_2network_2client_8c_source.html#l00006">6</a> of file <a class="el" href="core_2network_2client_8c_source.html">client.c</a>.</p>
@@ -262,6 +290,16 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Check if <code>hostname</code> is in <code>client.neightbours</code> </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">who</td><td>Tells if it is the server or the client side </td></tr>
+    <tr><td class="paramname">hostname</td><td>The IP adress to check </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>int </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="core_2network_2client_8c_source.html#l00149">149</a> of file <a class="el" href="core_2network_2client_8c_source.html">client.c</a>.</p>
 <div class="dynheader">
@@ -320,7 +358,10 @@ Here is the caller graph for this function:</div>
 <p>Tries to connect to the peer-to-peer network via a node in the <a class="el" href="struct_node.html">Node</a> structure. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
+    <tr><td class="paramname">infos</td><td>Some shared information </td></tr>
     <tr><td class="paramname">neighbour</td><td>The neighbour to connect with </td></tr>
+    <tr><td class="paramname">connection_type</td><td>The type of connection </td></tr>
+    <tr><td class="paramname">connection</td><td>The connection* structure </td></tr>
   </table>
   </dd>
 </dl>
@@ -359,6 +400,12 @@ Here is the caller graph for this function:</div>
 </div><div class="memdoc">
 
 <p>Load neighbours list from .neighbours/neighbours. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">who</td><td>Tells if it is the server or the client side </td></tr>
+  </table>
+  </dd>
+</dl>
 
 <p class="definition">Definition at line <a class="el" href="core_2network_2client_8c_source.html#l00113">113</a> of file <a class="el" href="core_2network_2client_8c_source.html">client.c</a>.</p>
 <div class="dynheader">
@@ -392,7 +439,13 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>return the nb of neighbour in the client.neightbours section </p>
+<p>Return the nb of neighbour in the client.neightbours section. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">who</td><td>Tells if it is the server or the client side </td></tr>
+  </table>
+  </dd>
+</dl>
 
 <p class="definition">Definition at line <a class="el" href="core_2network_2client_8c_source.html#l00160">160</a> of file <a class="el" href="core_2network_2client_8c_source.html">client.c</a>.</p>
 <div class="dynheader">
@@ -437,6 +490,13 @@ Here is the caller graph for this function:</div>
 </div><div class="memdoc">
 
 <p>Print neighbours list. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">who</td><td>Tells if it is the server or the client side </td></tr>
+    <tr><td class="paramname">mask</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
 
 <p class="definition">Definition at line <a class="el" href="core_2network_2client_8c_source.html#l00058">58</a> of file <a class="el" href="core_2network_2client_8c_source.html">client.c</a>.</p>
 <div class="dynheader">
@@ -481,6 +541,13 @@ Here is the caller graph for this function:</div>
 </div><div class="memdoc">
 
 <p>Remove a neighbour in the client.neightbours section. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">who</td><td>Tells if it is the server or the client side </td></tr>
+    <tr><td class="paramname">index</td><td>The index of the neigbour to remove in client.neightbours </td></tr>
+  </table>
+  </dd>
+</dl>
 
 <p class="definition">Definition at line <a class="el" href="core_2network_2client_8c_source.html#l00047">47</a> of file <a class="el" href="core_2network_2client_8c_source.html">client.c</a>.</p>
 <div class="dynheader">
@@ -509,6 +576,12 @@ Here is the call graph for this function:</div>
 </div><div class="memdoc">
 
 <p>Save neighbours list in .neighbours/neighbours. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">who</td><td>Tells if it is the server or the client side </td></tr>
+  </table>
+  </dd>
+</dl>
 
 <p class="definition">Definition at line <a class="el" href="core_2network_2client_8c_source.html#l00074">74</a> of file <a class="el" href="core_2network_2client_8c_source.html">client.c</a>.</p>
 <div class="dynheader">
@@ -559,6 +632,14 @@ Here is the caller graph for this function:</div>
 </div><div class="memdoc">
 
 <p>Sets a neighbour in the client.neightbours section. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">who</td><td>Tells if it is the server or the client side </td></tr>
+    <tr><td class="paramname">hostname</td><td>The neighbour IP adress </td></tr>
+    <tr><td class="paramname">family</td><td>The type of IP adress </td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="section return"><dt>Returns</dt><dd>0 if sucess, -1 otherwise if full </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="core_2network_2client_8c_source.html#l00019">19</a> of file <a class="el" href="core_2network_2client_8c_source.html">client.c</a>.</p>

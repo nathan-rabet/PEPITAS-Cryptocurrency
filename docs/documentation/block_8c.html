@@ -113,12 +113,13 @@ Functions</h2></td></tr>
 <tr class="memitem:afcda50ce8deb3b381aeb5b88689f919f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="block_8c.html#afcda50ce8deb3b381aeb5b88689f919f">convert_data_to_blockdata</a> (<a class="el" href="struct_block_data.html">BlockData</a> *blockdata, int fd)</td></tr>
 <tr class="separator:afcda50ce8deb3b381aeb5b88689f919f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ada1355f8610cc450d7c8f662dc6a7aef"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="block_8c.html#ada1355f8610cc450d7c8f662dc6a7aef">convert_data_to_block</a> (<a class="el" href="struct_block.html">Block</a> *block, int fd)</td></tr>
+<tr class="memdesc:ada1355f8610cc450d7c8f662dc6a7aef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert serialized data to Block*.  <a href="block_8c.html#ada1355f8610cc450d7c8f662dc6a7aef">More...</a><br /></td></tr>
 <tr class="separator:ada1355f8610cc450d7c8f662dc6a7aef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a32140266e4b385f64860944a5edd0153"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_block.html">Block</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="block_8c.html#a32140266e4b385f64860944a5edd0153">get_block</a> (size_t <a class="el" href="ui_8c.html#ac58136f7a44535d618d5cc333265f7c5">block_height</a>)</td></tr>
 <tr class="memdesc:a32140266e4b385f64860944a5edd0153"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a block object.  <a href="block_8c.html#a32140266e4b385f64860944a5edd0153">More...</a><br /></td></tr>
 <tr class="separator:a32140266e4b385f64860944a5edd0153"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3eb417f7cce88e8ec69d6974cd25e49f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="block_8c.html#a3eb417f7cce88e8ec69d6974cd25e49f">free_block</a> (<a class="el" href="struct_block.html">Block</a> *block)</td></tr>
-<tr class="memdesc:a3eb417f7cce88e8ec69d6974cd25e49f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Free a block struct.  <a href="block_8c.html#a3eb417f7cce88e8ec69d6974cd25e49f">More...</a><br /></td></tr>
+<tr class="memdesc:a3eb417f7cce88e8ec69d6974cd25e49f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Free a block structure.  <a href="block_8c.html#a3eb417f7cce88e8ec69d6974cd25e49f">More...</a><br /></td></tr>
 <tr class="separator:a3eb417f7cce88e8ec69d6974cd25e49f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5a63c778922af92cc7cca82db0aa7642"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_block.html">Block</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="block_8c.html#a5a63c778922af92cc7cca82db0aa7642">get_next_block</a> (<a class="el" href="struct_block.html">Block</a> *block)</td></tr>
 <tr class="memdesc:a5a63c778922af92cc7cca82db0aa7642"><td class="mdescLeft">&#160;</td><td class="mdescRight">For a block of height <code>h</code>, returns the block of height <code>h+1</code>  <a href="block_8c.html#a5a63c778922af92cc7cca82db0aa7642">More...</a><br /></td></tr>
@@ -136,12 +137,16 @@ Functions</h2></td></tr>
 <tr class="memdesc:a58b3466ce733938859f0651b2a756e95"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes a block in a file.  <a href="block_8c.html#a58b3466ce733938859f0651b2a756e95">More...</a><br /></td></tr>
 <tr class="separator:a58b3466ce733938859f0651b2a756e95"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa460be06109601a5626d1acb251e1602"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="block_8c.html#aa460be06109601a5626d1acb251e1602">update_wallet_with_block</a> (<a class="el" href="struct_block.html">Block</a> block)</td></tr>
+<tr class="memdesc:aa460be06109601a5626d1acb251e1602"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the Wallet* structure with the transactions in a block.  <a href="block_8c.html#aa460be06109601a5626d1acb251e1602">More...</a><br /></td></tr>
 <tr class="separator:aa460be06109601a5626d1acb251e1602"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a26d68c21f6e7bedeb73586554f4a9526"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="block_8c.html#a26d68c21f6e7bedeb73586554f4a9526">delete_epochs</a> (size_t height)</td></tr>
+<tr class="memdesc:a26d68c21f6e7bedeb73586554f4a9526"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete specific epoches (draft blocks)  <a href="block_8c.html#a26d68c21f6e7bedeb73586554f4a9526">More...</a><br /></td></tr>
 <tr class="separator:a26d68c21f6e7bedeb73586554f4a9526"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae323b374e9ca8c490d4f0b8ff04df0ba"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_block.html">Block</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="block_8c.html#ae323b374e9ca8c490d4f0b8ff04df0ba">get_epoch</a> (int id, size_t height)</td></tr>
+<tr class="memdesc:ae323b374e9ca8c490d4f0b8ff04df0ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the epoch object.  <a href="block_8c.html#ae323b374e9ca8c490d4f0b8ff04df0ba">More...</a><br /></td></tr>
 <tr class="separator:ae323b374e9ca8c490d4f0b8ff04df0ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3beaf10afd57aec50225774ba2a21680"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="block_8c.html#a3beaf10afd57aec50225774ba2a21680">clear_block</a> (<a class="el" href="struct_block.html">Block</a> *block)</td></tr>
+<tr class="memdesc:a3beaf10afd57aec50225774ba2a21680"><td class="mdescLeft">&#160;</td><td class="mdescRight">Free block data, without deleting it structure.  <a href="block_8c.html#a3beaf10afd57aec50225774ba2a21680">More...</a><br /></td></tr>
 <tr class="separator:a3beaf10afd57aec50225774ba2a21680"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -160,6 +165,14 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Free block data, without deleting it structure. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">block</td><td>The block to free </td></tr>
+  </table>
+  </dd>
+</dl>
 
 <p class="definition">Definition at line <a class="el" href="block_8c_source.html#l00337">337</a> of file <a class="el" href="block_8c_source.html">block.c</a>.</p>
 <div class="dynheader">
@@ -196,6 +209,15 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Convert serialized data to Block*. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">block</td><td>The return Block* </td></tr>
+    <tr><td class="paramname">fd</td><td>The file descriptor where data are serialized </td></tr>
+  </table>
+  </dd>
+</dl>
 
 <p class="definition">Definition at line <a class="el" href="block_8c_source.html#l00103">103</a> of file <a class="el" href="block_8c_source.html">block.c</a>.</p>
 <div class="dynheader">
@@ -271,6 +293,15 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
+<p>Delete specific epoches (draft blocks) </p>
+<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000001">Deprecated:</a></b></dt><dd></dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">height</td><td>The height of the epochs </td></tr>
+  </table>
+  </dd>
+</dl>
+
 <p class="definition">Definition at line <a class="el" href="block_8c_source.html#l00301">301</a> of file <a class="el" href="block_8c_source.html">block.c</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
@@ -297,7 +328,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Free a block struct. </p>
+<p>Free a block structure. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">block</td><td>The block to free </td></tr>
@@ -439,6 +470,16 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Get the epoch object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>The ID of the epoch </td></tr>
+    <tr><td class="paramname">height</td><td>The height of the epoch </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Block* </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="block_8c_source.html#l00316">316</a> of file <a class="el" href="block_8c_source.html">block.c</a>.</p>
 <div class="dynheader">
@@ -601,7 +642,7 @@ Here is the caller graph for this function:</div>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>ChunkBlockchain* </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>ChunkBlockchain*, NULL if the <a class="el" href="struct_chunk_blockchain.html">ChunkBlockchain</a> is empty after switching </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="block_8c_source.html#l00047">47</a> of file <a class="el" href="block_8c_source.html">block.c</a>.</p>
 <div class="dynheader">
@@ -634,6 +675,14 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Update the Wallet* structure with the transactions in a block. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">block</td><td>The block to fetch update from </td></tr>
+  </table>
+  </dd>
+</dl>
 
 <p class="definition">Definition at line <a class="el" href="block_8c_source.html#l00236">236</a> of file <a class="el" href="block_8c_source.html">block.c</a>.</p>
 <div class="dynheader">

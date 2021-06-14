@@ -25,17 +25,49 @@
 .ti -1c
 .RI "void \fBgen_blockchain_header\fP (\fBinfos_st\fP *infos)"
 .br
+.RI "Generate block shared information\&. "
 .ti -1c
 .RI "size_t \fBget_receiver_remaining_money\fP (\fBinfos_st\fP *infos, RSA *receiver_public_key)"
 .br
+.RI "Get the receiver remaining money\&. "
 .in -1c
 .SH "Function Documentation"
 .PP 
 .SS "void gen_blockchain_header (\fBinfos_st\fP * infos)"
 
 .PP
+Generate block shared information\&. 
+.PP
+\fBDeprecated\fP
+.RS 4
+
+.RE
+.PP
+\fBParameters\fP
+.RS 4
+\fIinfos\fP The information 
+.RE
+.PP
+
+.PP
 Definition at line 9 of file blockchain_header\&.c\&.
 .SS "size_t get_receiver_remaining_money (\fBinfos_st\fP * infos, RSA * receiver_public_key)"
+
+.PP
+Get the receiver remaining money\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIinfos\fP Threads shared information 
+.br
+\fIreceiver_public_key\fP The RSA public key of the receiver 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+size_t 
+.RE
+.PP
 
 .PP
 Definition at line 40 of file blockchain_header\&.c\&.
