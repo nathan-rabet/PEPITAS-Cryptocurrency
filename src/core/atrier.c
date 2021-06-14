@@ -146,10 +146,16 @@ void Validate(){
 }
 
 void new_transaction(char type, char *rc_pk, size_t amount, char cause[512], char asset[512]){
-    BIO *pubkey2 = BIO_new(BIO_s_mem());
-    BIO_write(pubkey2, rc_pk, strlen(rc_pk));
-    RSA* key = PEM_read_bio_RSAPublicKey(pubkey2, NULL, 0, NULL);
-    BIO_free(pubkey2);
+    RSA* key;
+    if (rc_pk == NULL) {
+        key = get_my_wallet()->pub_key;
+    }
+    else {
+        BIO *pubkey2 = BIO_new(BIO_s_mem());
+        BIO_write(pubkey2, rc_pk, strlen(rc_pk));
+        key = PEM_read_bio_RSAPublicKey(pubkey2, NULL, 0, NULL);
+        BIO_free(pubkey2);
+    }
     if (!key)
     {
         MANAGERMSG

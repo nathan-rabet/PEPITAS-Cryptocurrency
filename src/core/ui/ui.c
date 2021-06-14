@@ -536,9 +536,20 @@ gboolean on_invest_button2_press(__attribute__ ((unused)) GtkWidget *widget,
                     __attribute__ ((unused)) gpointer user_data)
 {
     //Call to the invest function
+    const time_t date = time(NULL);
+    char *time_str = ctime(&date);
+    double amount = strtod(gtk_entry_get_text(invest_entry), NULL);
+    add_transaction_with_pkey(amount, "Add Stake", time_str);
+#ifndef TEST
+    char *asset = calloc(1, 512);
+    char *cause = calloc(1, 512);
+    new_transaction(T_TYPE_ADD_STAKE, NULL, (size_t)(amount * 10e5), asset, cause);
+    free(asset);
+    free(cause);
+#endif
+
     gtk_widget_hide(invest_window);
     gtk_entry_set_text(invest_entry, "");
-
     return TRUE;
 }
 gboolean on_recover_button1_press(__attribute__ ((unused)) GtkWidget *widget,
@@ -555,6 +566,17 @@ gboolean on_recover_button2_press(__attribute__ ((unused)) GtkWidget *widget,
                     __attribute__ ((unused)) gpointer user_data)
 {
     //Call to the recover function
+    const time_t date = time(NULL);
+    char *time_str = ctime(&date);
+    double amount = strtod(gtk_entry_get_text(recover_entry), NULL);
+    add_transaction_with_pkey(amount, "Withdrow Stake", time_str);
+#ifndef TEST
+    char *asset = calloc(1, 512);
+    char *cause = calloc(1, 512);
+    new_transaction(T_TYPE_WITHDRAW_STAKE, NULL, (size_t)(amount * 10e5), asset, cause);
+    free(asset);
+    free(cause);
+#endif
     gtk_widget_hide(recover_window);
     gtk_entry_set_text(recover_entry, "");
 

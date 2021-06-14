@@ -1,16 +1,17 @@
-# PEPITAS
+# PEPITAS, a C cryptocurrency
+PEPITAS is an EPITA project made for the last semester of the preparatory cycle.
+This cryptocurrency is based on the *proof of stake*, the new validation concensus (used in Etherum 2.0)
 
-C cryptocurrency.
+# How to use the project
 
-[![Unit testing](https://github.com/nathan-rabet/PEPITAS-Cryptocurrency/actions/workflows/unit_testing.yml/badge.svg)](https://github.com/nathan-rabet/PEPITAS-Cryptocurrency/actions/workflows/unit_testing.yml)
+## Installation
+1. Download the last version of the project : [PEPITAS-Cryptocurrency](https://github.com/nathan-rabet/PEPITAS-Cryptocurrency/archive/refs/heads/master.zip).
+2. In the terminal, type `make`
+3. Change to the directory `build`
+4. Execute `client.elf`
 
-## CODING STYLE
-### Coding case
-- *Functions*, *variables* and *filenames* must be written in `snake_case`.
-- *Structures* must be written in `PascalCase`.
-- *Constants* or *MACRO* must be written in `UPPER_SNAKE_CASE`.
-
-### Tests
-Each function must be tested before **marked as done**. To create a test function, you must write it in the `test/` directory and call the file `filename_test.c` and its functions `functionname_test`. Note that the test file must be at the same relative place than his real function
-
-exemple : if you want to test `init_server()` in the file `network/client.c`, you must write the test in `test/network/client_test.c` and call the test function `init_server_test()`
+## Contributors
+- Nathan RABET, project leader, in charge of the blockchain and the validation protocol.
+- Maxence ODEN, in charge of the networking and cryptographic part of the project.
+- Souleymane SENTICI, in charge of the user interface.
+- Luca SAINGIER, in charge of the web implementation.
