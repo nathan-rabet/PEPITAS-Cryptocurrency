@@ -1,4 +1,4 @@
-.TH "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__r_e_a_d_m_e" 3 "Mon Jun 14 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
+.TH "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__r_e_a_d_m_e" 3 "Tue Jun 15 2021" "PEPITAS CRYPTOCURRENCY" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -6,9 +6,9 @@ md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurren
  
 .SH "PEPITAS, a C cryptocurrency"
 .PP
-PEPITAS is an EPITA project made in the last semester of the preparatory cycle\&. This cryptocurrency is based on the \fIproof of stake\fP, the new validation concensus (used in Etherum 2\&.0)\&.
+PEPITAS is an EPITA project which was done during the last semester of the preparatory cycle\&. This cryptocurrency is based on the \fIproof of stake\fP, a newer and more eco-friendly validation consensus (used in Etherum 2\&.0)\&.
 .PP
-With PEPITAS, you can test whatever a modern proof of stake based money can do :
+With PEPITAS, you can do whatever a modern proof of stake based money can also do :
 .IP "\(bu" 2
 Send money
 .IP "\(bu" 2
@@ -21,7 +21,7 @@ Validate transactions
 Earn transactions fees
 .PP
 .PP
-All of these features are obviously secured by a 2048-bits RSA based protocol\&.
+All of these features are obviously based on a 2048-bits RSA protocol\&.
 .SS "Requirements"
 .IP "\(bu" 2
 A Linux system (Ubuntu, Arch,\&.\&.\&.)
@@ -32,31 +32,31 @@ OpenSSL
 .IP "\(bu" 2
 GTK
 .PP
-.SS "Installation"
+.SS "Installation & execution"
 .IP "1." 4
 Download the last version of the project : \fCPEPITAS-Cryptocurrency\fP\&.
 .IP "2." 4
-Exctract the archive and go to the exctracted directory
-.IP "3." 4
-Open a terminal in the current directory, type \fCmake\fP
+Exctract the archive
 .IP "4." 4
-Go to the \fCbuild\fP directory
+Open a terminal in the exctracted directory and type \fCmake\fP (or \fCmake client\fP if you just want to execute the client)
 .IP "5." 4
+Go to the \fCbuild\fP directory
+.IP "6." 4
 Execute \fCclient\&.elf\fP, with an argument : the IP address of an existing client, or without argument if you are the first node of the network
 .PP
-.SS "Some explainations about how the program works"
-When launched, the client will try to connect to the host you provided as an argument (if provided)\&. In the case where no argument are given to the ELF program, the client will try to etablish a connect to a \fIserverdoor\fP (a node which have executed the program \fCserverdoor\&.elf\fP)\&. A serverdoor is a program that provides IP adresses to a node in order to let him have a connection with the corresponding hosts\&.
+.SS "Some explainations about how the client works"
+When launched, the client will try to connect to the host you provided as an argument (if provided)\&. In the case where no argument are given to the ELF program, the client will try to etablish a connect with a \fIserverdoor\fP (a node which have executed the program \fCserverdoor\&.elf\fP)\&. A serverdoor is a program that provides IP adresses to a node in order to let him have a connection with the corresponding hosts\&.
 .PP
-\fINB : serverdoors IP adresses are stored in the \fCHARD_CODED_ADDR\fP macro in \fC\fBsrc/core/network/network\&.c\fP\fP and may not work if Maxence and/or Nathan decide to close the non-localhost serverdoor (currently hosted in a Google Cloud instance)\&. If you really want to use a serverdoor, you also can refactor the \fCHARD_CODED_ADDR\fP macro and then run the program \fCserverdoor\&.elf\fP\fP
+\fINB : serverdoors IP adresses are stored in the \fCHARD_CODED_ADDR\fP macro in \fCheaders/network/network\&.h\fP and may not work if Maxence and/or Nathan decide to close the non-localhost serverdoor (currently hosted in a Google Cloud instance)\&. If you really want to use a serverdoor, you also can refactor the \fCHARD_CODED_ADDR\fP macro and then run the program \fCserverdoor\&.elf\fP\fP
+.SS "More information"
+If you want more information about how the peer-to-peer network or the validation protocol works, you can also read the \fBP2P_PROTOCOL\&.md\fP or the \fBVALIDATION_PROTOCOL\&.md\fP documentation\&.
 .PP
-If you want more information about the peer-to-peer or the validation protocol, you also can read the \fBP2P_PROTOCOL\&.md\fP) or the \fBVALIDATION_PROTOCOL\&.md\fP documentation\&.
-.PP
-Also, don't hesitate to check our Doxygen \fCcode documentation\fP!
+Also, don't hesitate to check our Doxygen code documentation (\fCweb\fP/\fCpdf\fP)\&.
 .SS "Contributors"
 .IP "\(bu" 2
-\fBNathan RABET\fP, project leader, in charge of the blockchain and the validation protocol\&.
+\fBNathan RABET\fP, project leader, in charge of the validation protocol and the blockchain implementation\&.
 .IP "\(bu" 2
-\fBMaxence ODEN\fP, in charge of the networking and cryptographic part of this project\&.
+\fBMaxence ODEN\fP, in charge of the networking, the multithreading and the cryptographic part of this project\&.
 .IP "\(bu" 2
 \fBSouleymane SENTICI\fP, responsible for the user interface\&.
 .IP "\(bu" 2

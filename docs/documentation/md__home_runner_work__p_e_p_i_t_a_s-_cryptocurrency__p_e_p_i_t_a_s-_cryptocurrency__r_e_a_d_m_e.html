@@ -90,15 +90,15 @@ $(document).ready(function(){initNavTree('md__home_runner_work__p_e_p_i_t_a_s-_c
 <div class="textblock"><p><img src="https://user-images.githubusercontent.com/13369175/121909610-60bb2800-cd2e-11eb-9510-6aef81d91b16.png" alt="Pepitas image" class="inline"/> </p>
 <h1><a class="anchor" id="autotoc_md18"></a>
 PEPITAS, a C cryptocurrency</h1>
-<p>PEPITAS is an EPITA project made in the last semester of the preparatory cycle. This cryptocurrency is based on the <em>proof of stake</em>, the new validation concensus (used in Etherum 2.0).</p>
-<p>With PEPITAS, you can test whatever a modern proof of stake based money can do :</p><ul>
+<p>PEPITAS is an EPITA project which was done during the last semester of the preparatory cycle. This cryptocurrency is based on the <em>proof of stake</em>, a newer and more eco-friendly validation consensus (used in Etherum 2.0).</p>
+<p>With PEPITAS, you can do whatever a modern proof of stake based money can also do :</p><ul>
 <li>Send money</li>
 <li>Receive money</li>
 <li>Invest on the stake</li>
 <li>Validate transactions</li>
 <li>Earn transactions fees</li>
 </ul>
-<p>All of these features are obviously secured by a 2048-bits RSA based protocol.</p>
+<p>All of these features are obviously based on a 2048-bits RSA protocol.</p>
 <h2><a class="anchor" id="autotoc_md19"></a>
 Requirements</h2>
 <ul>
@@ -108,25 +108,27 @@ Requirements</h2>
 <li>GTK</li>
 </ul>
 <h2><a class="anchor" id="autotoc_md20"></a>
-Installation</h2>
+Installation &amp; execution</h2>
 <ol type="1">
 <li>Download the last version of the project : <a href="https://github.com/nathan-rabet/PEPITAS-Cryptocurrency/archive/refs/heads/master.zip">PEPITAS-Cryptocurrency</a>.</li>
-<li>Exctract the archive and go to the exctracted directory</li>
-<li>Open a terminal in the current directory, type <code>make</code></li>
+<li>Exctract the archive</li>
+<li>Open a terminal in the exctracted directory and type <code>make</code> (or <code>make client</code> if you just want to execute the client)</li>
 <li>Go to the <code>build</code> directory</li>
 <li>Execute <code>client.elf</code>, with an argument : the IP address of an existing client, or without argument if you are the first node of the network</li>
 </ol>
 <h2><a class="anchor" id="autotoc_md21"></a>
-Some explainations about how the program works</h2>
-<p>When launched, the client will try to connect to the host you provided as an argument (if provided). In the case where no argument are given to the ELF program, the client will try to etablish a connect to a <em>serverdoor</em> (a node which have executed the program <code>serverdoor.elf</code>). A serverdoor is a program that provides IP adresses to a node in order to let him have a connection with the corresponding hosts.</p>
-<p><em>NB : serverdoors IP adresses are stored in the <code>HARD_CODED_ADDR</code> macro in <code><a class="el" href="network_8c.html">src/core/network/network.c</a></code> and may not work if Maxence and/or Nathan decide to close the non-localhost serverdoor (currently hosted in a Google Cloud instance). If you really want to use a serverdoor, you also can refactor the <code>HARD_CODED_ADDR</code> macro and then run the program <code>serverdoor.elf</code></em></p>
-<p>If you want more information about the peer-to-peer or the validation protocol, you also can read the <a class="el" href="_p2_p___p_r_o_t_o_c_o_l_8md.html">P2P_PROTOCOL.md</a>) or the <a class="el" href="_p2_p___p_r_o_t_o_c_o_l_8md.html">VALIDATION_PROTOCOL.md</a> documentation.</p>
-<p>Also, don't hesitate to check our Doxygen <a href="docs/documentation/index.html">code documentation</a>!</p>
+Some explainations about how the client works</h2>
+<p>When launched, the client will try to connect to the host you provided as an argument (if provided). In the case where no argument are given to the ELF program, the client will try to etablish a connect with a <em>serverdoor</em> (a node which have executed the program <code>serverdoor.elf</code>). A serverdoor is a program that provides IP adresses to a node in order to let him have a connection with the corresponding hosts.</p>
+<p><em>NB : serverdoors IP adresses are stored in the <code>HARD_CODED_ADDR</code> macro in <a href="headers/network/network.h">headers/network/network.h</a> and may not work if Maxence and/or Nathan decide to close the non-localhost serverdoor (currently hosted in a Google Cloud instance). If you really want to use a serverdoor, you also can refactor the <code>HARD_CODED_ADDR</code> macro and then run the program <code>serverdoor.elf</code></em></p>
 <h2><a class="anchor" id="autotoc_md22"></a>
+More information</h2>
+<p>If you want more information about how the peer-to-peer network or the validation protocol works, you can also read the <a class="el" href="_p2_p___p_r_o_t_o_c_o_l_8md.html">P2P_PROTOCOL.md</a> or the <a class="el" href="_v_a_l_i_d_a_t_i_o_n___p_r_o_t_o_c_o_l_8md.html">VALIDATION_PROTOCOL.md</a> documentation.</p>
+<p>Also, don't hesitate to check our Doxygen code documentation (<a href="https://nathan-rabet.github.io/PEPITAS-Cryptocurrency/documentation/">web</a>/<a href="docs/manual.pdf">pdf</a>).</p>
+<h2><a class="anchor" id="autotoc_md23"></a>
 Contributors</h2>
 <ul>
-<li><b>Nathan RABET</b>, project leader, in charge of the blockchain and the validation protocol.</li>
-<li><b>Maxence ODEN</b>, in charge of the networking and cryptographic part of this project.</li>
+<li><b>Nathan RABET</b>, project leader, in charge of the validation protocol and the blockchain implementation.</li>
+<li><b>Maxence ODEN</b>, in charge of the networking, the multithreading and the cryptographic part of this project.</li>
 <li><b>Souleymane SENTICI</b>, responsible for the user interface.</li>
 <li><b>Luca SAINGIER</b>, responsible for the web implementation. </li>
 </ul>
