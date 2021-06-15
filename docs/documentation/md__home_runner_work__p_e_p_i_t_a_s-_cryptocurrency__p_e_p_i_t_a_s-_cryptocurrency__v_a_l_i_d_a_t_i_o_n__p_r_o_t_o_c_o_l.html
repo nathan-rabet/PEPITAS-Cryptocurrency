@@ -97,41 +97,42 @@ Introduction</h1>
 Definitions</h1>
 <h2><a class="anchor" id="autotoc_md28"></a>
 VALIDATOR</h2>
-<p>Members of the network who can validate and create block. Each of there <b>STAKE</b> must contains at least $50$ PEPITAS. </p>
+<p>Members of the network who can validate and create block. Each of there <b>STAKE</b> must contains at least <b>50</b> PEPITAS. </p>
 <h2><a class="anchor" id="autotoc_md29"></a>
 COMMITTEE</h2>
 <p>A list containing public keys, correpsonding to some accounts on the network. Each account in this list is allowed to participate to the validation and the creation of a new block for the blockchain network. A committee is pseudo-randomly selected and is known by every node of the network. It changes every time a block is added to the blockchain. The more a user puts money in his stake, the more he has a chance to appear and have a low ID in a committee. </p>
 <h2><a class="anchor" id="autotoc_md30"></a>
 EPOCH MAN</h2>
-<p>The committee (list) ID of the block creator. The EPOCH MAN is selected by priority order in a committee with this rule : $min(awaken_validator_ID)$ For example if the committee contains 10 members and the first awaken member is the third, EPOCH MAN is the third member of this comitte. An awaken member is a committee member who broadcast a block to the network or a committee member that send a verdict on a broadcasted block.</p>
+<p>The committee (list) ID of the block creator. The EPOCH MAN is selected by priority order in a committee with this rule : <b>min(awaken_validator_ID)</b> For example if the committee contains 10 members and the first awaken member is the third, EPOCH MAN is the third member of this comitte. An awaken member is a committee member who broadcast a block to the network or a committee member that send a verdict on a broadcasted block.</p>
 <h2><a class="anchor" id="autotoc_md31"></a>
 COMITAL</h2>
-<p>If the committee contains $n$ members and the selected EPOCH MAN is the validator with the ID $m$, the comital members ID are from $0$ to $m$ (excluded) and from $m+1$ to $n$ (excluded).</p>
+<p>If the committee contains <b>n</b> members and the selected EPOCH MAN is the validator with the ID <b>m</b>, the comital members ID are from <b>0</b> to <b>m</b> (excluded) and from <b>m+1</b> to <b>n</b> (excluded).</p>
+<p><img src="docs/images/WTHisCOMITAL.png" alt="WTHisEPOCHandCOMITAL" class="inline"/></p>
 <h2><a class="anchor" id="autotoc_md32"></a>
 VOTE</h2>
-<p>A vote is a validator judgment about a the validity of a certain block. If a validator think that a block is valid, he will send a <b>postive</b> vote, otherwise, he will send a <b>negative</b> one. Note that the block at height $0$ (genesis block) is considered as valid by default.</p>
+<p>A vote is a validator judgment about a the validity of a certain block. If a validator think that a block is valid, he will send a <b>postive</b> vote, otherwise, he will send a <b>negative</b> one. Note that the block at height <b>0</b> (genesis block) is considered as valid by default.</p>
 <h2><a class="anchor" id="autotoc_md33"></a>
 PLÈBE</h2>
-<p>All non-validators members. Each of there <b>STAKE</b> are under $50$ PEPITAS.</p>
+<p>All non-validators members. Each of there <b>STAKE</b> are under <b>50</b> PEPITAS.</p>
 <h2><a class="anchor" id="autotoc_md34"></a>
 MEMPOOL</h2>
 <p>A directory where all pending transactions (transactions that are not in a block) are stocked.</p>
 <h1><a class="anchor" id="autotoc_md35"></a>
 How EPOCH MAN creates a block</h1>
-<p>Lets admit that the current validated block is at height $n$.</p>
+<p>Lets admit that the current validated block is at height <b>n</b>.</p>
 <p>To create a block, EPOCH MAN do several things : </p>
 <h2><a class="anchor" id="autotoc_md36"></a>
 Last block validity checking</h2>
 <ul>
-<li>First, he creates a new empty block (at height $n+1$).</li>
-<li>Then, he check if the validators votes ratio of the block at height $n$.<ul>
-<li>If the block at height $n$ has more positive than negative votes.<ul>
-<li>Writes on the block at height $n+1$ that the block at height $n$ is valid.</li>
-<li>Flushes the transactions in the block at height $n$ from the mempool.</li>
+<li>First, he creates a new empty block (at height <b>n+1</b>).</li>
+<li>Then, he check if the validators votes ratio of the block at height <b>n</b>.<ul>
+<li>If the block at height <b>n</b> has more positive than negative votes.<ul>
+<li>Writes on the block at height <b>n+1</b> that the block at height <b>n</b> is valid.</li>
+<li>Flushes the transactions in the block at height <b>n</b> from the mempool.</li>
 </ul>
 </li>
 <li>Else<ul>
-<li>Writes on the block at height $n+1$ that the block at height $n$ is not valid.</li>
+<li>Writes on the block at height <b>n+1</b> that the block at height <b>n</b> is not valid.</li>
 </ul>
 </li>
 </ul>
@@ -139,7 +140,7 @@ Last block validity checking</h2>
 </ul>
 <h2><a class="anchor" id="autotoc_md37"></a>
 Rewards and punishments attribution</h2>
-<p>To motivate the network to do the job correctly (without corruption), EPOCH MAN will create new special transactions called <em>rewards</em> and <em>punishments</em>. Rewards are transactions that "*send*" money to a validator (actually this transaction creates money) and punishments that <em>take of</em> money from a validator (this transaction delete money from an account). Before this step, EPOCH MAN checked the validators votes ratio of the block at height $n$, then, he will create rewards transactions for the majority and punishments for the others. If there is equality on votes, the block is considered as non-valid and the same rule is applied.</p>
+<p>To motivate the network to do the job correctly (without corruption), EPOCH MAN will create new special transactions called <em>rewards</em> and <em>punishments</em>. Rewards are transactions that "*send*" money to a validator (actually this transaction creates money) and punishments that <em>take of</em> money from a validator (this transaction delete money from an account). Before this step, EPOCH MAN checked the validators votes ratio of the block at height <b>n</b>, then, he will create rewards transactions for the majority and punishments for the others. If there is equality on votes, the block is considered as non-valid and the same rule is applied.</p>
 <h2><a class="anchor" id="autotoc_md38"></a>
 Broadcast</h2>
 <p>After all these steps, EPOCH MAN broadcasts his new block.</p>
