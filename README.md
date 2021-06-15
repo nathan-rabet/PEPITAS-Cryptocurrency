@@ -30,7 +30,7 @@ All of these features are obviously based on a 2048-bits RSA protocol.
 ## Some explainations about how the client works
 When launched, the client will try to connect to the host you provided as an argument (if provided). In the case where no argument are given to the ELF program, the client will try to etablish a connect with a *serverdoor* (a node which have executed the program `serverdoor.elf`). A serverdoor is a program that provides IP adresses to a node in order to let him have a connection with the corresponding hosts.
 
-*NB : serverdoors IP adresses are stored in the `HARD_CODED_ADDR` macro in [headers/network/network.h](headers/network/network.h) and may not work if Maxence and/or Nathan decide to close the non-localhost serverdoor (currently hosted in a Google Cloud instance). If you really want to use a serverdoor, you also can refactor the `HARD_CODED_ADDR` macro and then run the program `serverdoor.elf`*
+*NB : serverdoors IP adresses are stored in the `HARD_CODED_ADDR` constant in [src/core/network/network.c](src/core/network/network.c) and may not work if Maxence and/or Nathan decide to close the non-localhost serverdoor (currently hosted in a Google Cloud instance). If you really want to use a serverdoor, you also can refactor the `HARD_CODED_ADDR` constant and then run the program `serverdoor.elf`*
 
 ## More information
 If you want more information about how the peer-to-peer network or the validation protocol works, you can also read the [P2P_PROTOCOL.md](P2P_PROTOCOL.md) or the [VALIDATION_PROTOCOL.md](VALIDATION_PROTOCOL.md) documentation.
