@@ -44,7 +44,7 @@ var NAVTREE =
       ] ]
     ] ],
     [ "README", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__r_e_a_d_m_e.html", [
-      [ "PEPITAS, a C cryptocurrency", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__r_e_a_d_m_e.html#autotoc_md18", [
+      [ "PEPITAS, C-based cryptocurrency", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__r_e_a_d_m_e.html#autotoc_md18", [
         [ "Requirements", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__r_e_a_d_m_e.html#autotoc_md19", null ],
         [ "Installation & execution", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__r_e_a_d_m_e.html#autotoc_md20", null ],
         [ "Some explainations about how the client works", "md__home_runner_work__p_e_p_i_t_a_s-_cryptocurrency__p_e_p_i_t_a_s-_cryptocurrency__r_e_a_d_m_e.html#autotoc_md21", null ],
