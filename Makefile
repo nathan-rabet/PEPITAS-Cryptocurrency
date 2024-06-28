@@ -10,7 +10,7 @@ GUI_OUT := $(OUTPUTFOLDER)/data/pepitas.glade
 GENESIS_OUT := $(OUTPUTFOLDER)/data/blockchain/block0
 
 # Compilation flags
-CFLAGS := -I"headers" -I"tests/headers" -I"tests" `pkg-config --cflags gtk+-3.0` `pkg-config --cflags openssl` -Wall -Wextra -Wno-deprecated-declarations -g -pthread
+CFLAGS := -I"headers" -I"tests/headers" -I"tests" `pkg-config --cflags gtk+-3.0` `pkg-config --cflags openssl` -Wall -Wextra -Wno-deprecated-declarations -Wno-stringop-overflow -g -pthread
 PCFLAGS := `pkg-config --libs gtk+-3.0` `pkg-config --libs openssl`
 LDPARAMS := -lssl -lcrypto -lrt -lpthread
 
