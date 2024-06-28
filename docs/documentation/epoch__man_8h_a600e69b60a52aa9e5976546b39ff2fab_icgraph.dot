@@ -6,5 +6,5 @@ digraph "get_epoch_man_pkey"
   rankdir="RL";
   Node1 [label="get_epoch_man_pkey",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Give the pkey of the creator of a block."];
   Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node2 [label="verify_block_signature",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$signature_8c.html#a197fbff013d305c63a9699922eb438f6",tooltip="Verifies if a block signature is valid."];
+  Node2 [label="verify_block_signature",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$signature_8h.html#a197fbff013d305c63a9699922eb438f6",tooltip="Verifies if a block signature is valid."];
 }

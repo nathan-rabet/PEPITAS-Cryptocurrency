@@ -6,7 +6,13 @@ digraph "get_receiver_remaining_money"
   rankdir="RL";
   Node1 [label="get_receiver_remaining\l_money",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Get the receiver remaining money."];
   Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node2 [label="create_new_transaction",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$transaction_8c.html#af274d54bdf6f74206feb6c06c2fb6505",tooltip="Create a new transaction."];
+  Node2 [label="create_new_transaction",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$transaction_8h.html#af274d54bdf6f74206feb6c06c2fb6505",tooltip="Create a new transaction."];
   Node2 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node3 [label="new_transaction",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$genesis_8c.html#a597346567fc95cf305a94063df3e86c3",tooltip=" "];
+  Node3 [label="new_transaction",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$client_8h.html#a597346567fc95cf305a94063df3e86c3",tooltip=" "];
+  Node3 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="on_invest_button2_press",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$ui_8c.html#ae8893501fa8a537ec50cc272353fca19",tooltip=" "];
+  Node3 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="on_recover_button2\l_press",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$ui_8c.html#ad8f99ac51861be5da7d885cdd2e26ea0",tooltip=" "];
+  Node3 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="on_transaction_button\l_press",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$ui_8c.html#a5e22e78adc3ccb25f63ee84836cc83e4",tooltip=" "];
 }

@@ -5,7 +5,7 @@ digraph "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/src" {
   subgraph clusterdir_68267d1309a1af8e8297ef4c3efbcdba {
     graph [ bgcolor="#eeeeff", pencolor="black", label="" URL="dir_68267d1309a1af8e8297ef4c3efbcdba.html"];
     dir_68267d1309a1af8e8297ef4c3efbcdba [shape=plaintext label="src"];
-    dir_aebb8dcc11953d78e620bbef0b9e2183 [shape=box label="core" color="red" fillcolor="white" style="filled" URL="dir_aebb8dcc11953d78e620bbef0b9e2183.html"];
+  dir_aebb8dcc11953d78e620bbef0b9e2183 [shape=box label="core" fillcolor="white" style="filled" color="red" URL="dir_aebb8dcc11953d78e620bbef0b9e2183.html"];
   }
   dir_7f57b1e41c5acd0e859ae5f3a2b075a9 [shape=box label="headers" fillcolor="white" style="filled" color="red" URL="dir_7f57b1e41c5acd0e859ae5f3a2b075a9.html"];
   dir_aebb8dcc11953d78e620bbef0b9e2183->dir_7f57b1e41c5acd0e859ae5f3a2b075a9 [headlabel="35", labeldistance=1.5 headhref="dir_000008_000000.html"];

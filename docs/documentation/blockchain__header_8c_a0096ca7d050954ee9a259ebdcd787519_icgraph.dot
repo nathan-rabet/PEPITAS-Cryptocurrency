@@ -6,7 +6,7 @@ digraph "write_block_header"
   rankdir="RL";
   Node1 [label="write_block_header",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
   Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node2 [label="gen_blockchain_header",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$blockchain__header_8c.html#a1011109fa5281e4b6406c390393cd051",tooltip="Generate block shared information."];
+  Node2 [label="gen_blockchain_header",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$blockchain__header_8h.html#a1011109fa5281e4b6406c390393cd051",tooltip="Generate block shared information."];
   Node2 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node3 [label="main",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$client_8c.html#a3c04138a5bfe5d72780bb7e82a18e627",tooltip=" "];
 }

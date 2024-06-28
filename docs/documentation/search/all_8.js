@@ -20,6 +20,6 @@ var searchData=
   ['hd_5fsend_5fpending_5ftransaction_5flist_172',['HD_SEND_PENDING_TRANSACTION_LIST',['../network_8h.html#a0127f8ea1c6510aea2fab39c5f87c59a',1,'network.h']]],
   ['hd_5fsend_5fvote_173',['HD_SEND_VOTE',['../network_8h.html#a104605ca6805e99de02371954243e8a5',1,'network.h']]],
   ['header_5fvalidators_5fstate_5fsize_174',['HEADER_VALIDATORS_STATE_SIZE',['../validators_8c.html#a05aa8039c995a645fa816cdb194d41b0',1,'validators.c']]],
-  ['height_175',['height',['../struct_block_data.html#a02afeaaf8574e7a78d6b466ff2695052',1,'BlockData::height()'],['../structblockinfo.html#a02afeaaf8574e7a78d6b466ff2695052',1,'blockinfo::height()']]],
+  ['height_175',['height',['../structblockinfo.html#a02afeaaf8574e7a78d6b466ff2695052',1,'blockinfo::height()'],['../struct_block_data.html#a02afeaaf8574e7a78d6b466ff2695052',1,'BlockData::height()']]],
   ['hostname_176',['hostname',['../struct_neighbour.html#af203df082d5c6dcaa0c88b07cf86466d',1,'Neighbour']]]
 ];

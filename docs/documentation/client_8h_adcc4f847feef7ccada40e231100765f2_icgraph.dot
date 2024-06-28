@@ -8,5 +8,5 @@ digraph "clear_transactions"
   Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node2 [label="main",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$client_8c.html#a3c04138a5bfe5d72780bb7e82a18e627",tooltip=" "];
   Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node3 [label="update_pending_transactions_list",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$atrier_8c.html#a22202ffd77ff472dddbec2ac501025f4",tooltip=" "];
+  Node3 [label="update_pending_transactions_list",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$client_8h.html#a22202ffd77ff472dddbec2ac501025f4",tooltip=" "];
 }

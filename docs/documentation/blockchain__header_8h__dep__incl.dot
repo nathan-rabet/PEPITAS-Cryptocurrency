@@ -17,7 +17,6 @@ digraph "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/headers
   Node6 [label="/home/runner/work/PEPITAS\l-Cryptocurrency/PEPITAS\l-Cryptocurrency/headers\l/network/get_data.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$get__data_8h.html",tooltip=" "];
   Node6 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node7 [label="/home/runner/work/PEPITAS\l-Cryptocurrency/PEPITAS\l-Cryptocurrency/headers\l/network/client.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$network_2client_8h.html",tooltip=" "];
-  Node7 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node7 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node7 -> Node8 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node8 [label="/home/runner/work/PEPITAS\l-Cryptocurrency/PEPITAS\l-Cryptocurrency/headers\l/network/server.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$server_8h.html",tooltip=" "];
@@ -46,7 +45,6 @@ digraph "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/headers
   Node8 -> Node16 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node16 [label="/home/runner/work/PEPITAS\l-Cryptocurrency/PEPITAS\l-Cryptocurrency/src/serverdoor.c",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$serverdoor_8c.html",tooltip=" "];
   Node8 -> Node14 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node7 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node7 -> Node10 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node7 -> Node11 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node7 -> Node17 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
@@ -112,8 +110,8 @@ digraph "/home/runner/work/PEPITAS-Cryptocurrency/PEPITAS-Cryptocurrency/headers
   Node3 -> Node8 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node3 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node3 -> Node20 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node3 -> Node19 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node3 -> Node27 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 -> Node19 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node3 -> Node10 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node3 -> Node11 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node3 -> Node36 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];

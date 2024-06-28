@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['validate_408',['Validate',['../client_8h.html#a6a17e4539f5b0c67dbd36bae0c2c0c8a',1,'Validate():&#160;atrier.c'],['../atrier_8c.html#a6a17e4539f5b0c67dbd36bae0c2c0c8a',1,'Validate():&#160;atrier.c']]],
-  ['validate_5ftransactions_409',['validate_transactions',['../validation__engine_8h.html#a9134934f42952ee3fd7a73aea892858c',1,'validate_transactions(Transaction **transaction_to_validate, size_t nb_transactions, size_t *nb_returned_transactions):&#160;validation_engine.c'],['../validation__engine_8c.html#a9134934f42952ee3fd7a73aea892858c',1,'validate_transactions(Transaction **transaction_to_validate, size_t nb_transactions, size_t *nb_returned_transactions):&#160;validation_engine.c']]],
+  ['validate_408',['Validate',['../atrier_8c.html#a6a17e4539f5b0c67dbd36bae0c2c0c8a',1,'Validate():&#160;atrier.c'],['../client_8h.html#a6a17e4539f5b0c67dbd36bae0c2c0c8a',1,'Validate():&#160;atrier.c']]],
+  ['validate_5ftransactions_409',['validate_transactions',['../validation__engine_8c.html#a9134934f42952ee3fd7a73aea892858c',1,'validate_transactions(Transaction **transaction_to_validate, size_t nb_transactions, size_t *nb_returned_transactions):&#160;validation_engine.c'],['../validation__engine_8h.html#a9134934f42952ee3fd7a73aea892858c',1,'validate_transactions(Transaction **transaction_to_validate, size_t nb_transactions, size_t *nb_returned_transactions):&#160;validation_engine.c']]],
   ['validation_5fengine_2ec_410',['validation_engine.c',['../validation__engine_8c.html',1,'']]],
   ['validation_5fengine_2eh_411',['validation_engine.h',['../validation__engine_8h.html',1,'']]],
   ['validation_5fprotocol_2emd_412',['VALIDATION_PROTOCOL.md',['../_v_a_l_i_d_a_t_i_o_n___p_r_o_t_o_c_o_l_8md.html',1,'']]],
