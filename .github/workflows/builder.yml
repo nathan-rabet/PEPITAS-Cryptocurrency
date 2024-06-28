@@ -1,0 +1,55 @@
+name: Builder
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  doc:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
+        fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
+    - name: Installing doxygen
+      run: sudo apt-get install doxygen
+    - name: Removing old documentation
+      run: cd docs ; rm -rf documentation ; rm manual.pdf
+    - name: Generating man & HTML documentation
+      run: cd docs ; doxygen doxygen.conf
+    - name: Moving 'man' folder
+      run: mv docs/man docs/documentation/man
+    - name: Installing pdflatex
+      run: sudo apt-get install texlive-latex-base texlive-latex-extra
+    - name: Generating PDF documentation
+      run: cd docs/latex ; make pdf ; cp refman.pdf ../manual.pdf
+    - name: Cleaning useless files
+      run: cd docs ; rm -r latex
+    - name: Commit files
+      run: |
+        git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
+        git add *
+        git commit -m "CI validation push"
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: ${{ github.ref }}
+
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Installing GTK
+      run: sudo apt install libgtk-3-dev
+    - name: Compile all + unit testing
+      run: make
+    - name: Cleaning the repository
+      run: make clean
+    
