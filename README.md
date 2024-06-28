@@ -1,6 +1,6 @@
 ![Pepitas image](https://user-images.githubusercontent.com/13369175/121909610-60bb2800-cd2e-11eb-9510-6aef81d91b16.png)
 # PEPITAS, C-based cryptocurrency
-[![Build](https://github.com/nathan-rabet/PEPITAS-Cryptocurrency/actions/workflows/build.yml/badge.svg)](https://github.com/nathan-rabet/PEPITAS-Cryptocurrency/actions/workflows/build.yml)
+[![Builder](https://github.com/nathan-rabet/PEPITAS-Cryptocurrency/actions/workflows/builder.yml/badge.svg)](https://github.com/nathan-rabet/PEPITAS-Cryptocurrency/actions/workflows/builder.yml)
 
 PEPITAS is an EPITA project which was done during the last semester of the preparatory cycle.
 This cryptocurrency is based on the *proof of stake*, a newer and more eco-friendly validation consensus (used in Etherum 2.0).
