@@ -12,7 +12,7 @@
 
 
 extern connection *client_connections;
-infos_st *ac_infos;
+extern infos_st *ac_infos;
 
 infos_st* get_infos();
 

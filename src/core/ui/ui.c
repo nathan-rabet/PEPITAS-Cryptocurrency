@@ -1,5 +1,7 @@
 #include "ui/ui.h"
 
+struct blockinfo blocksinfo[3];
+
 static GtkWidget *window;
 static GtkWidget *invest_window;
 static GtkWidget *recover_window;
@@ -724,7 +726,6 @@ gboolean on_create_key_but2_press(__attribute__ ((unused)) GtkWidget *widget,
 
         if (fwrite(buffkey, keylen, 1, rsa_private_file) == 0)
             err(errno, "Impossible to write data in 'data/keys/rsa'");
-        fclose(rsa_private_file);
 
         if (fwrite(buffkey, keylen, 1, rsa_private_file) == 0)
             err(errno, "Impossible to write data in 'data/keys/rsa.pub'");

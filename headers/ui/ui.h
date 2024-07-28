@@ -29,9 +29,6 @@ struct blockinfo
     size_t transactions;
 };
 
-struct blockinfo blocksinfo[3];
-
-
 /**
  * @brief Setups the gtk widgets for the GUI
  * @return int Returns 1 if there is an error, 0 otherwise

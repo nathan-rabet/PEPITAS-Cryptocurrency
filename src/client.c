@@ -12,8 +12,7 @@
 
 extern connection *client_connections;
 static pthread_t server_t;
-infos_st *ac_infos;
-
+extern infos_st *ac_infos;
 
 int main(int argc, char **argv)
 {
