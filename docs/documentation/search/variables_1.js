@@ -11,5 +11,5 @@ var searchData=
   ['block_5fsignature_701',['block_signature',['../struct_block.html#af74f4943494e179408bedd4841fadc1b',1,'Block']]],
   ['block_5ftime_5flabel_702',['block_time_label',['../ui_8c.html#a5ab062c2a9ac5540ab89253fdacfedd6',1,'ui.c']]],
   ['block_5ftimestamp_703',['block_timestamp',['../struct_block_data.html#a35920c7529ccc1863e3fd10f39bb1015',1,'BlockData']]],
-  ['blocksinfo_704',['blocksinfo',['../ui_8h.html#a46ad7408bf2f0e142f3c124e26bd4b19',1,'ui.h']]]
+  ['blocksinfo_704',['blocksinfo',['../ui_8c.html#a46ad7408bf2f0e142f3c124e26bd4b19',1,'ui.c']]]
 ];

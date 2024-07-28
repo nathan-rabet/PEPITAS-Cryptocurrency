@@ -32,7 +32,6 @@ var ui_8h =
     [ "balance_1", "ui_8h.html#ab43804688ba42c6200ce731eb35c5dc8", null ],
     [ "balance_2", "ui_8h.html#a868e43b57c30e358fe58e0deb101f42a", null ],
     [ "block_amount_label", "ui_8h.html#aef72f064f1fc788edba39ced4f4735d5", null ],
-    [ "blocksinfo", "ui_8h.html#a46ad7408bf2f0e142f3c124e26bd4b19", null ],
     [ "connections_label", "ui_8h.html#ae197a17a69bd4320a69c3945369d802e", null ],
     [ "mempool_label", "ui_8h.html#a48095bf105fef9a39a872144a56e23ab", null ],
     [ "stake_label1", "ui_8h.html#a4722da076b88ed9d7695ae3d38945692", null ],

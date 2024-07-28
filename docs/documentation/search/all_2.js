@@ -25,5 +25,5 @@ var searchData=
   ['blockchain_5fheader_2eh_45',['blockchain_header.h',['../blockchain__header_8h.html',1,'']]],
   ['blockdata_46',['BlockData',['../struct_block_data.html',1,'BlockData'],['../block_8h.html#ab646e46d4921a145d9da06d96f9f8534',1,'BlockData():&#160;block.h']]],
   ['blockinfo_47',['blockinfo',['../structblockinfo.html',1,'']]],
-  ['blocksinfo_48',['blocksinfo',['../ui_8h.html#a46ad7408bf2f0e142f3c124e26bd4b19',1,'ui.h']]]
+  ['blocksinfo_48',['blocksinfo',['../ui_8c.html#a46ad7408bf2f0e142f3c124e26bd4b19',1,'ui.c']]]
 ];

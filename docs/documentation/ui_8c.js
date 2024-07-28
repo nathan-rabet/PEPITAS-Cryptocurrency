@@ -36,6 +36,7 @@ var ui_8c =
     [ "block_height", "ui_8c.html#ac58136f7a44535d618d5cc333265f7c5", null ],
     [ "block_height_label", "ui_8c.html#a9a98b342050f650b678b3f482e70923d", null ],
     [ "block_time_label", "ui_8c.html#a5ab062c2a9ac5540ab89253fdacfedd6", null ],
+    [ "blocksinfo", "ui_8c.html#a46ad7408bf2f0e142f3c124e26bd4b19", null ],
     [ "cause_entry", "ui_8c.html#a2bccfa5ba7901a302e24e5c4d6122b04", null ],
     [ "connections_label", "ui_8c.html#ae197a17a69bd4320a69c3945369d802e", null ],
     [ "contacts_combo", "ui_8c.html#a64f8a04199f203429b42fe1d10d4ed6f", null ],
